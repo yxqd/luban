@@ -1,0 +1,15 @@
+You can install luban in different ways.
+
+For luban users:
+ * Install using easy_install
+
+   $ easy_install -U luban
+
+
+For luban developers:
+
+ * Install using releaser
+   Please read http://dev.danse.us/trac/luban/wiki/Install_using_releaser
+
+ * Install from source directly
+   Please read http://dev.danse.us/trac/luban/wiki/Install_from_svn

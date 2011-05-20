@@ -1,0 +1,85 @@
+# -*- Python -*-
+# -*- coding: utf-8 -*-
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                   Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2010  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+import luban.content as lc
+from luban.content import select, alert, load
+
+
+def visual(director=None, cols=None,
+           editable=True, sortable=True,
+           Class='diffrpeaks-table', id=None):
+    if cols is None:
+        cols = ['h', 'k', 'l', 'twotheta', 'theta', 'chi', 'phi']
+
+    if not isinstance(editable, dict):
+        editable = FakeDict(editable)
+
+    # to construct a table, a model, a view, and a list of data are needed
+    from luban.content.table import Model, View, Table
+    # first the model
+    class model(Model):
+
+        selected = Model.descriptors.bool(name='selected')
+        h = Model.descriptors.float(name='h')
+        k = Model.descriptors.float(name='k')
+        l = Model.descriptors.float(name='l')
+        twotheta = Model.descriptors.float(name='twotheta')
+        theta = Model.descriptors.float(name='theta')
+        omega = Model.descriptors.float(name='omega')
+        chi = Model.descriptors.float(name='chi')
+        phi = Model.descriptors.float(name='phi')
+
+    # then the view
+    columns = [
+        View.Column(label='', measure='selected'),
+        View.Column(label='h', measure='h', editable=editable['h'], sortable=sortable),
+        View.Column(label='k', measure='k', editable=editable['k'], sortable=sortable),
+        View.Column(label='l', measure='l', editable=editable['l'], sortable=sortable),
+        View.Column(label=u'2\u03b8', measure='twotheta', editable=editable['twotheta'], sortable=sortable),
+        View.Column(label=u'\u03b8', measure='theta', editable=editable['theta'], sortable=sortable),
+        View.Column(label=u'\u03c9', measure='omega', editable=editable['omega'], sortable=sortable),
+        View.Column(label=u'\u03c7', measure='chi', editable=editable['chi'], sortable=sortable),
+        View.Column(label=u'\u03c6', measure='phi', editable=editable['phi'], sortable=sortable),
+        ]
+    columns = filter(lambda c: c.measure in cols, columns)
+    view = View(columns = columns, editable = bool(editable), sortable = bool(sortable))
+
+    # data: a list of rows. each row is a tuple of values for all cells in the row
+    # hack: fake data
+    data = [ [0]*len(columns) for i in range(2) ]
+    
+    # now the table
+    ret = Table(model=model, data=data, view=view, id=id)
+    ret.Class = Class
+    return ret
+
+
+
+class FakeDict(object):
+
+    
+    def __init__(self, v):
+        self.v = v
+
+        
+    def __getitem__(self, k):
+        return self.v
+
+    
+
+# version
+__id__ = "$Id$"
+
+# End of file 

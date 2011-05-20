@@ -1,0 +1,153 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                 Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2009  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+import luban.content
+from luban.content import select, load, alert
+
+from aokuang.components.WidgetDemoActor import Actor as base, panel, example, quickpanel
+class Actor(base):
+
+    from luban.content.CodeEditor import CodeEditor as widget
+    
+
+    class Inventory(base.Inventory):
+
+        import pyre.inventory
+        content = pyre.inventory.str('content')
+
+
+    introduction = '''
+This is a demo of widget "codeeditor".
+
+'''
+
+    @quickpanel(
+        title = 'Basic usages',
+        description =  [
+          ],
+        examples = ['basic_usage%s' % (i+1) for i in range(1)],
+        )
+    def basic_usages(self): pass
+
+
+    @example(
+        title='A basic editor',
+        description = [
+        'Try type some python code in the editor',
+          ]
+        )
+    def basic_usage1(self, director):
+        editor = luban.content.codeeditor()
+        editor.syntax = 'python'
+        editor.text = '\n'.join([
+            "# comment",
+            'def abc():',
+            '    return',
+            ])
+        return editor
+
+
+    @quickpanel(
+        title = 'Events',
+        description =  [
+          ],
+        examples = ['event_onsave', 'event_onchange']
+        )
+    def events(self): pass
+
+
+    @example(
+        title='onsave event handler',
+        description = [
+          "Try type some code and the click the save button.",
+          ],
+        deps = ['onSave']
+        )
+    def event_onsave(self, director):
+        editor = luban.content.codeeditor()
+        editor.syntax = 'python'
+        editor.text = '#...'
+        editor.onsave = select(element=editor).notify(
+            event = 'save', actor=self.name, routine='onSave')
+        return editor
+    
+    
+    def onSave(self, director):
+        content = self.inventory.content
+        return alert(content)
+        
+
+    @example(
+        title='onchange event handler',
+        description = [
+          "Try type some code and switch focus away from the editor (by clicking outside the editor, for example)",
+          ],
+        deps = ['onChange']
+        )
+    def event_onchange(self, director):
+        editor = luban.content.codeeditor()
+        editor.syntax = 'python'
+        editor.text = '#...'
+        editor.onchange = select(element=editor).notify(
+            event = 'change', actor=self.name, routine='onChange')
+        return editor
+    
+    
+    def onChange(self, director):
+        content = self.inventory.content
+        return alert(content)
+        
+
+    @quickpanel(
+        title = 'Others',
+        description =  [
+          ],
+        examples = ['showondemand'],
+        )
+    def others(self): pass
+
+
+    @example(
+        title='Show on demand',
+        description = [
+          'This test shows a code editor when a link is clicked.',
+          ]
+        )
+    def showondemand(self, director):
+        container = luban.content.document()
+        
+        editor = luban.content.codeeditor()
+        editor.syntax = 'python'
+        editor.text = '\n'.join([
+            "# comment",
+            'def abc():',
+            '    return',
+            ])
+
+        link = luban.content.link(label='click me to show an editor')
+        container.add(link)
+        link.onclick = select(element=container).replaceContent(editor)
+        
+        return container
+        
+
+
+def actor():
+    return Actor('codeeditor')
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 

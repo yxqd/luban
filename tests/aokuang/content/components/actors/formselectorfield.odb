@@ -1,0 +1,232 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                 Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2009  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+import luban.content as lc
+from luban.content import select, load, alert
+
+from luban.components.Actor import Actor as base
+class Actor(base):
+
+    class Inventory(base.Inventory):
+
+        import pyre.inventory
+
+        selectorvar = pyre.inventory.str(name='selectorvar')
+        oldvalue = pyre.inventory.str(name='oldvalue')
+        value = pyre.inventory.str(name='value')
+
+
+    def default(self, director):
+        return self.testselectioninctor(director)
+    
+
+    def testselectioninctor(self, director):
+        from luban.content.Page import Page
+        page = Page(title='title')
+        
+        document = page.document(title='test form', id='maindoc')
+
+        document.paragraph(text = [
+            'This demos how to set initial "selection" of formselectorfield.',
+            'You can either specify the index or the label.',
+            'But the label is preferred if there is ambiguity.',
+            ])
+        form = document.form(title='test form')
+
+        sel1 = form.selector(
+            label='"two" should be selected.', name='sel1',
+            entries=enumerate(['one','two']),
+            selection=1, tip='a tip')
+        
+        sel2 = form.selector(
+            label='"two" should be selected.', name='sel2',
+            entries=enumerate(['one','two']),
+            selection='two', tip='a tip')
+        
+        sel3 = form.selector(
+            label='"two" should be selected.', name='sel3',
+            entries=enumerate(['one', 'two', 'onetwo']),
+            selection='two', tip='a tip')
+        
+        sel4 = form.selector(
+            label='"7" should be selected.', name='sel4',
+            entries=enumerate([3,5,7,8]),
+            selection=2, tip='a tip')
+        
+        sel5 = form.selector(
+            label='"3" should be selected.', name='sel5',
+            entries=enumerate([3,5,7,8]),
+            selection=3, tip='a tip')
+        
+        sel6 = form.selector(
+            label='"5" should be selected.', name='sel6',
+            entries=enumerate([3,5,7,8]),
+            selection=5, tip='a tip')
+        
+        return page
+    
+
+    def testvalueinactor(self, director):
+        from luban.content.Page import Page
+        page = Page(title='title')
+        
+        document = page.document(title='test form', id='maindoc')
+
+        document.paragraph(text = [
+            'This demos how to set initial "value" of formselectorfield.',
+            'Value=index.',
+            ])
+        form = document.form(title='test form')
+
+        sel1 = form.selector(
+            label='"two" should be selected.', name='sel1',
+            entries=enumerate(['one','two']),
+            value=1, tip='a tip')
+        
+        return page
+    
+
+    def changeSelection(self, director):
+        from luban.content.Page import Page
+        page = Page(title='title')
+        
+        document = page.document(title='test form', id='maindoc')
+
+        document.paragraph(text = [
+            'This demos how to change selection of formselectorfield.',
+            'This can be done with setAttr(selection=...) or setAttr(value=...).',
+            'In case of using setAttr(selection=...),',
+            'You can either specify the index or the label,',
+            'but the label is preferred if there is ambiguity.',
+            'In case of using setAttr(value=...),',
+            'please remember value is the index of the option.',
+            ])
+        form = document.form(title='test form')
+
+        sel1 = form.selector(
+            label='selector', name='sel1',
+            entries=enumerate([3,5,7,8]),
+            selection=7, tip='a tip')
+
+        l1 = lc.link(
+            label='click to switch to "3"',
+            onclick=select(element=sel1).setAttr(selection=3),
+            );
+        form.add(l1)
+
+        form.paragraph()
+        
+        l2 = lc.link(
+            label='click to switch to "8"',
+            onclick=select(element=sel1).setAttr(value=3),
+            );
+        form.add(l2)
+
+        return page
+
+
+    def getValue(self, director):
+        from luban.content.Page import Page
+        page = Page(title='title')
+        
+        document = page.document(title='test form', id='maindoc')
+
+        document.paragraph(text = [
+            'This demos how to get the selected option of formselectorfield.',
+            ])
+        form = document.form(title='test form')
+
+        sel1 = form.selector(
+            label='getAttr("value")', name='sel1',
+            entries=enumerate([3,5,7,8]),
+            selection=7, tip='a tip',
+            )
+        sel1.onchange = alert(select(element=sel1).getAttr('value'))
+
+        sel2 = form.selector(
+            label='getAttr("selection")', name='sel2',
+            entries=enumerate([3,5,7,8]),
+            selection=7, tip='a tip',
+            )
+        sel2.onchange = alert(select(element=sel2).getAttr('selection'))
+
+        return page
+        
+
+    def addOption(self, director):
+        from luban.content.Page import Page
+        page = Page(title='title')
+        
+        document = page.document(title='test form', id='maindoc')
+
+        document.paragraph(text = [
+            'This demos how to add an option to formselectorfield.',
+            ])
+        form = document.form(title='test form')
+
+        sel1 = form.selector(
+            label='selector', name='sel1',
+            entries=enumerate(['a','b','c']),
+            selection=7, tip='a tip')
+
+        l1 = lc.link(
+            label='click to add a new option',
+            onclick=select(element=sel1).formfield('addOption', label='d'),
+            );
+        form.add(l1)
+
+        return page
+
+
+    def notifychange(self, director):
+        from luban.content.Page import Page
+        page = Page(title='title')
+        
+        document = page.document(title='test form', id='maindoc')
+
+        document.paragraph(text = [
+            'This demo shows one way to notify actor the change',
+            'to the selector. this method of notification let actor',
+            'knows about the old value so could be quite useful.',
+            ])
+        form = document.form(title='test form')
+
+        options = ['a', 'b', 'c', 'd']
+        entries = zip(options, options)
+        sel1 = form.selector(
+            label='selector', name='sel1',
+            entries=entries,
+            selection='b', tip='a tip')
+        sel1.onchange = select(element=sel1).notify(
+            'changed',
+            actor='testformselectorfield', routine='onchange')
+
+        return page
+
+
+    def onchange(self, director):
+        oldvalue = self.inventory.oldvalue
+        value = self.inventory.value
+        return alert('old: %s, new %s' % (oldvalue, value))
+
+
+
+def actor():
+    return Actor('formselectorfield')
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 

@@ -1,0 +1,61 @@
+.luban-frame {
+    font-size:1em;
+}
+
+.luban-formfield input {
+    width: 5em;
+}
+
+h1.luban-document-title {
+    font-family:verdana;
+    font-size:0.9em;
+}
+
+.luban-document.window {
+    border:1px solid blue;
+    background-color:#99aaee;
+}
+
+.luban-document.window h1.luban-document-title {
+    background-color:#aabbff;
+    margin:0;
+}
+
+.luban-splitter td[luban-element-type='splitsection'] {
+    vertical-align:top;
+}
+
+#observations {
+    width:35em;
+}
+
+.diffrpeaks-table {
+    width:34em;
+}
+
+#desired-res-doc {
+    margin-left:1em;
+}
+
+#mode_selector {
+    font-size:0.8em;
+    width:25em;
+}
+
+#ubmatrix-doc {
+    width:25em;
+}
+
+
+.luban-uploader {
+    background-color:#758273;
+    border-color:white #888888 #333333 white;
+    border-style:solid;
+    border-width:1px;
+    color:white;
+    cursor:pointer;
+    font-size:100%;
+    padding:1px 5px;
+    width:6em;
+    margin:1em;
+}

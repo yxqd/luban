@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html> <head>
+
+<script src="../javascripts/jquery/jquery.js"> </script>
+<script src="../javascripts/jquery/excanvas.min.js"> </script>
+<script src="../javascripts/jquery/jquery.rightClick.js"> </script>
+<script src="../javascripts/jquery/jquery.bgiframe.js"> </script>
+<script src="../javascripts/jquery/jquery.flot.js"> </script>
+<script src="../javascripts/jquery/jquery.flot.selection.js"> </script>
+<script src="../javascripts/luban/luban-core.js"> </script>
+<script src="../javascripts/luban/luban-controller.js"> </script>
+<script src="../javascripts/luban/luban-compiler-preloader.js"> </script>
+<script src="../javascripts/luban/luban-actioncompiler.js"> </script>
+<script src="../javascripts/luban/luban-documentmill.js"> </script>
+<script src="../javascripts/luban/luban-widgets-basic.js"> </script>
+<script src="../javascripts/luban/widgets/plot2d.js"> </script>
+
+
+<script>
+$(function (){
+
+  luban.configuration.javascripts_base = "../javascripts";
+
+  var framedesc = {
+    'type': 'frame',
+    'title': "Test frame",
+    lubanelement:1
+  };
+    
+  var plot2d = {
+    'type': 'plot2d'
+  };
+  framedesc.contents = [plot2d];
+
+  curve1 = {
+    type: 'curve',
+    x: [1,2,3],
+    y: [1,2,3]
+  }
+  plot2d.curves = [curve1];
+
+
+  var mill = luban.docmill;  
+  var frame = mill.render(framedesc);
+    
+});
+</script>
+</head>
+
+<body>
+
+<div id="body-wrapper"> </div>
+
+<!-- hhmts start --> Last modified: Wed Jul 21 17:24:09 PDT 2010 <!-- hhmts end -->
+</body> </html>

@@ -1,0 +1,84 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                 Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2009  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+import luban.content as lc
+from luban.content import select, load, alert
+
+from luban.components.Actor import Actor as base
+class Actor(base):
+
+    class Inventory(base.Inventory):
+
+        import pyre.inventory
+
+
+    def default(self, director):
+        page = director.retrieveVisual('default')
+        document = page.maindoc.document(title='Test dock')
+
+        dock = lc.dock(id='dock')
+        page.add(dock)
+
+        doc1 = document.document(title='document 1')
+        l = lc.link(
+            label='click me',
+            onclick=select(element=dock).dock('attach', select(element=doc1)),
+            )
+        doc1.add(l)
+        
+        doc2 = document.document(title='document 2')
+        l = lc.link(
+            label='click me',
+            onclick=select(element=dock).dock('attach', select(element=doc2)),
+            )
+        doc2.add(l)
+        
+        return page
+
+
+    def dockable(self, director):
+        page = lc.page()
+        document = page.document(title='Test dock', closable=True)
+
+        dock = lc.dock(id='dock')
+        page.add(dock)
+
+        doc1 = document.document(title='document 1', dockable=True, collapsable=True)
+        doc1.paragraph(text=['pppppp'])
+        
+        doc2 = document.document(title='document 2', dockable=True, collapsable=True, closable=True)
+        doc2.paragraph(text=['pppppp'])
+        
+        doc3 = document.document(title='document 3', dockable=True, closable=True)
+        doc3.paragraph(text=['pppppp'])
+        
+        doc4 = document.document(title='document 4', dockable=True)
+        doc4.paragraph(text=['pppppp'])
+
+        doc5 = page.document(
+            title='"float" that is directly attached to "page"',
+            dockable=True)
+        
+        return page
+
+
+
+def actor():
+    return Actor('dock')
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 

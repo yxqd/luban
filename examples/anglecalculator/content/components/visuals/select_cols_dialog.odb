@@ -1,0 +1,56 @@
+# -*- Python -*-
+# -*- coding: utf-8 -*-
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                   Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2010  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+import luban.content as lc
+from luban.content import select, alert, load
+
+
+def visual(
+    director=None,
+    cols=None, table=None,
+    Class='cols-table', id=None,
+    ):
+    
+    dialog = lc.dialog(title='Select columns to show', autoopen=True, id='select-cols-dialog')
+
+    if table == 'desiredresults-table':
+        cols = ['selected', 'h', 'k', 'l', 'twotheta', 'theta', 'omega', 'chi', 'phi']
+    elif table == 'observations-table':
+        cols = ['h', 'k', 'l', 'twotheta', 'theta', 'chi', 'phi']
+    else:
+        raise NotImplementedError
+    
+    cols_table = director.retrieveVisual('cols_table', cols=cols, Class=Class, id=id)
+    dialog.add(cols_table)
+
+    # add a button
+    okbutton = lc.button(
+        label='OK',
+        onclick= load(
+            actor='cols_selector', routine='processSelection',
+            table=table,
+            selection = select(element=cols_table).table(
+              'getIdentifiersForCheckedRows', colname='selected'),
+            )
+        )
+    dialog.add(okbutton)
+
+    return dialog
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 

@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<script src="../javascripts/jquery/jquery.js"> </script>
+<script src="../javascripts/luban/luban-core.js"> </script>
+<script src="../javascripts/luban/luban-controller.js"> </script>
+<script src="../javascripts/luban/luban-compiler-preloader.js"> </script>
+<script src="../javascripts/luban/luban-actioncompiler.js"> </script>
+<script src="../javascripts/luban/luban-documentmill.js"> </script>
+<script src="../javascripts/luban/luban-widgets-basic.js"> </script>
+
+<script>
+$(function (){
+
+  luban.configuration.javascripts_base = "../javascripts";
+
+  var framedesc = {
+  lubanelement: 1,
+  type: 'frame',
+  title: "Test frame",
+  contents: [{'type': 'document',
+	      'title': 'Test document'},
+	     ],
+  };
+
+  var mill = luban.docmill;
+  
+  var frame = mill.render(framedesc);
+
+});
+</script>
+</head>
+
+<body>
+
+<div id="body-wrapper"> </div>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                 Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2009  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+#
+import luban.content as lc
+from luban.content import select, load, alert
+
+
+#
+from aokuang.dom import Tree3
+#
+from luban.components.Actor import Actor
+import luban.orm
+base = luban.orm.abstractbase2actor(Tree3.AbstractNode3, Tree3.nodetypes, ActorBase=Actor)
+class Actor(base):
+
+    pass
+
+
+def actor():
+    return Actor('orm/abstractnode3')
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 

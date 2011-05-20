@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html> <head>
+
+<style media="all" rel="stylesheet">
+@import url(../css/luban.css);
+</style>
+
+<script src="../javascripts/jquery/jquery.js"> </script>
+<script src="../javascripts/jquery/tableFactory.js"> </script>
+<script src="../javascripts/jquery/tabulator.js"> </script>
+<script src="../javascripts/luban/luban-core.js"> </script>
+<script src="../javascripts/luban/luban-controller.js"> </script>
+<script src="../javascripts/luban/luban-compiler-preloader.js"> </script>
+<script src="../javascripts/luban/luban-actioncompiler.js"> </script>
+<script src="../javascripts/luban/luban-documentmill.js"> </script>
+<script src="../javascripts/luban/luban-widgets-basic.js"> </script>
+<script src="../javascripts/luban/widgets/table.js"> </script>
+
+
+<script>
+$(function (){
+
+  luban.configuration.javascripts_base = "../javascripts";
+
+  var framedesc = {
+    'type': 'frame',
+    'title': "Test frame",
+    lubanelement:1
+  };
+  
+  var doc= {
+  type: 'document',
+  collapsable: 1,
+  title: 'title'
+  }
+
+  framedesc.contents = [doc];
+  
+  var mill = luban.docmill;  
+  var frame = mill.render(framedesc);
+  
+  });
+</script>
+</head>
+
+<body>
+
+<div id="body-wrapper"> </div>
+
+<!-- hhmts start --> Last modified: Wed Jul 21 18:38:12 PDT 2010 <!-- hhmts end -->
+</body> </html>

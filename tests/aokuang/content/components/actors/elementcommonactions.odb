@@ -1,0 +1,284 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                 Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2009  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+import luban.content
+from luban.content import select, load, alert
+
+
+from aokuang.components.DemoActor import Actor as base, panel, example, quickpanel
+class Actor(base):
+
+    class Inventory(base.Inventory):
+
+        import pyre.inventory
+
+
+    introduction = '''
+This is a demo of common actions for luban UI elements.
+'''
+
+    @quickpanel(
+        title = 'enable/disable',
+        description =  [
+          ],
+        examples = ['enabledisable%s' % (i+1) for i in range(1)],
+        )
+    def enabledisable(self): pass
+
+
+    @example(
+        title='Example 1',
+        description = [
+          ]
+        )
+    def enabledisable1(self, director):
+        lc = luban.content
+
+        sp = lc.splitter()
+        left = sp.section()
+        right = sp.section(); right.Class = 'align-top'
+        
+        form = lc.form(id='target', title='a form'); left.add(form)
+        form.text(label='text input', id='targetfield')
+        form.password(label='password input')
+        form.textarea(label='comments')
+        form.selector(label='select', entries=enumerate(['a','b','c']))
+        form.radio(label='radiobox', entries=enumerate(['a','b','c']))
+        form.checkbox(label='check me')
+        form.submitbutton(label='ok')
+
+        controls = right.document(); controls.Class = 'padding'
+        button = lc.button(label='enable the form')
+        button.onclick=select(id='target').enable()
+        controls.add(button)
+
+        controls.paragraph()
+        
+        button = lc.button(label='disable the form')
+        button.onclick=select(id='target').disable()
+        controls.add(button)
+        
+        controls.paragraph()
+
+        button = lc.button(label='enable the text input field')
+        button.onclick=select(id='targetfield').enable()
+        controls.add(button)
+
+        controls.paragraph()
+        
+        button = lc.button(label='disable the text input field')
+        button.onclick=select(id='targetfield').disable()
+        controls.add(button)
+        
+        return sp
+
+
+    @quickpanel(
+        title = 'show/hide',
+        description =  [
+          ],
+        examples = ['showhide%s' % (i+1) for i in range(2)],
+        )
+    def showhide(self): pass
+
+
+    @example(
+        title='Example 1: Show/hide paragraph',
+        description = [
+          'Click the links to show/hide the paragraph',
+          ]
+        )
+    def showhide1(self, director):
+        lc = luban.content
+        
+        document = lc.document()
+        
+        p = document.paragraph(text='show/hide this paragraph', id='p1')
+        
+        link = lc.link(label='show')
+        link.onclick=select(id='p1').show()
+        document.add(link)
+
+        document.paragraph()
+        
+        link = lc.link(label='hide')
+        link.onclick=select(id='p1').hide()
+        document.add(link)
+        
+        return document
+
+
+    @example(
+        title='Example 2: show/hide menu item',
+        description = [
+          'Click the links to show/hide a menu item.',
+          'You will need to expand the menu to see the effects.',
+          ]
+        )
+    def showhide2(self, director):
+        lc = luban.content
+        
+        document = lc.document()
+
+        menubar = lc.appmenubar(); document.add(menubar)
+        filemenu = menubar.menu(label='File')
+        filemenu.item(label='open', id='fileopen', onclick=alert('file open'))
+        filemenu.item(label='save', onclick=alert('file save'))
+        
+        link = lc.link(label='show')
+        link.onclick=select(id='fileopen').show()
+        document.add(link)
+
+        document.paragraph()
+        
+        link = lc.link(label='hide')
+        link.onclick=select(id='fileopen').hide()
+        document.add(link)
+        
+        return document
+
+
+    @quickpanel(
+        title = 'empty',
+        description =  [
+          ],
+        examples = ['empty%s' % (i+1) for i in range(1)],
+        )
+    def empty(self): pass
+
+
+    @example(
+        title='Example 1',
+        description = [
+          'Click the link to see the effect.',
+          ]
+        )
+    def empty1(self, director):
+        lc = luban.content
+        
+        document = lc.document(title='A document')
+
+        interior = document.document(title='interior', id='interior')
+        p = interior.paragraph()
+        p.text = ['all stuff in this interior section will be removed. including the link']
+
+        link = lc.link(label='empty')
+        link.onclick=select(element=document).empty()
+        document.add(link)
+
+        return document
+    
+
+    @quickpanel(
+        title = 'replaceContent',
+        description =  [
+          ],
+        examples = ['replaceContent%s' % (i+1) for i in range(1)],
+        )
+    def replaceContent(self): pass
+
+
+    @example(
+        title='Example 1',
+        description = [
+          'Click the link to see the effect.',
+          ]
+        )
+    def replaceContent1(self, director):
+        lc = luban.content
+        
+        document = lc.document(title='container document')
+
+        interior = document.document(title='interior', id='interior')
+        p = interior.paragraph()
+        p.text = ['all stuff in this interior section will be replaced by a new document']
+
+        newdoc = lc.document(title='new document')
+
+        link = lc.link(label='replace')
+        link.onclick=select(element=document).replaceContent(newdoc)
+        document.add(link)
+
+        return document
+    
+
+    @quickpanel(
+        title = 'append',
+        description =  [
+          'Action "append" append a new UI elemnt to the selected UI element',
+          ],
+        examples = ['append%s' % (i+1) for i in range(1)],
+        )
+    def append(self): pass
+
+
+    @example(
+        title='Example 1',
+        description = [
+          'Click the link to see the effect.',
+          ]
+        )
+    def append1(self, director):
+        lc = luban.content
+        
+        document = lc.document(title='container')
+
+        newdoc = lc.document(title='new document')
+
+        link = lc.link(label='append')
+        link.onclick=select(element=document).append(newdoc)
+        document.add(link)
+
+        p = document.paragraph()
+        p.text = ['new document will be added when the above link is clicked']
+
+        return document
+    
+
+    @quickpanel(
+        title = 'destroy',
+        description =  [
+          'Action "destroy" destroy the selected UI element',
+          ],
+        examples = ['destroy%s' % (i+1) for i in range(1)],
+        )
+    def destroy(self): pass
+
+
+    @example(
+        title='Example 1',
+        description = [
+          'Click the link to see the effect.',
+          ]
+        )
+    def destroy1(self, director):
+        lc = luban.content
+        
+        document = lc.document(title='container')
+
+        killme = document.document(title='click me to kill me')
+        killme.onclick = select(element=killme).destroy()
+
+        return document
+
+
+
+def actor():
+    return Actor('elementcommonactions')
+
+
+# version
+__id__ = "$Id$"
+
+# End of file    
+        

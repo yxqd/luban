@@ -1,0 +1,225 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                 Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2009  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+import luban.content
+from luban.content import select, alert, load
+
+
+from aokuang.components.WidgetDemoActor import Actor as base, panel, example, quickpanel
+class Actor(base):
+
+    from luban.content.Document import Document as widget
+
+    class Inventory(base.Inventory):
+
+        import pyre.inventory
+
+
+    demo_panels = ['basic_usages', 'collapsable', 'misc']
+
+    @quickpanel(
+        title = 'Basic usages',
+        description =  [
+          'Demos here show basic usages of "document" widget, ',
+          'such as creating documents and subdocuments, "onclick" event,',
+          'and creating documents of special attributes.',
+          ],
+        examples = ['basic_document%d' % i for i in range(1,4)],
+        )
+    def basic_usages(self): pass
+
+
+    @example(
+        title='Plain document with title',
+        description = [
+          'A basic document can be created with or without a title.',
+          'Subdocuments can be added as children of a document',
+          ]
+        )
+    def basic_document1(self, director):
+        document = luban.content.document(title='document title')
+
+        # add a paragraph
+        p = document.paragraph()
+        p.text = [
+            'Hello world!',
+            ]
+
+        # add a sub document
+        subdoc = document.document(title='Subdocument')
+        
+        return document
+
+    @example(
+        title='Event "click"',
+        description = [
+          'A basic document with a onclick event handler.',
+          'Click the document to see an alert.',
+          ]
+        )
+    def basic_document2(self, director):
+        document = luban.content.document(title='click me')
+        document.onclick = alert('clicked')
+        return document
+
+    @example(
+        title='Hidden document',
+        description = [
+          'A hidden document. It will show up when you click the button',
+          ]
+        )
+    def basic_document3(self, director):
+        # a container
+        container = luban.content.document()
+
+        # the hidden document
+        document = container.document(title='I am hidden', hidden=True)
+
+        # button to show the docuemnt
+        b = luban.content.button(label='click to show the hidden document')
+        container.add(b)
+        b.onclick = [
+            select(element=document).setAttr(title='I am visible'),
+            select(element=document).show(),
+            ]
+        
+        return container
+
+
+    @quickpanel(
+        title = 'Collapsable document',
+        description =  [
+          'Demos here are about "collapsable" document and related events.',
+          ],
+        examples = ['collapsable%s' % (i+1) for i in range(3)]
+        )
+    def collapsable(self): pass
+
+
+    @example(
+        title='Simplest collapsable document without event handler',
+        description = [
+          'A collapsable document can be collapsed',
+          ]
+        )
+    def collapsable1(self, director):
+        document = luban.content.document(title='collapsable', collapsable=True)
+        document.document(title='sub document 1')
+        document.document(title='sub document 2')
+        return document
+
+    
+    @example(
+        title='Collapsable document with onexpand and oncollapse handlers',
+        description = [
+          'Event handlers "onexpand" and "oncollapse" can be used to',
+          'create more sophisticated behavior, such as replacing',
+          'old content with new content loaded from controller.',
+          ],
+        deps = ['getNewContent'],
+        )
+    def collapsable2(self, director):
+        document = luban.content.document()
+        
+        document1 = document.document(title='collapsable', collapsable=True)
+        document1.document(title='content')
+
+        document1.onexpand = select(element=document1).replaceContent(
+            load(actor=self.name, routine='getNewContent')
+            )
+
+        document1.oncollapse = select(element=document1).replaceContent(
+            luban.content.document(title='collapsed')
+            )
+
+        document2 = document.document(title='document 2')
+        return document
+
+
+    @example(
+        title='Collapsable document (initial state is collapsed) with onexpand and oncollapse handlers',
+        description = [
+          'This example differs from the previous one: ',
+          'the initial state of the document is collapsed.',
+          ],
+        deps = ['getNewContent'],
+        )
+    def collapsable3(self, director):
+        document = luban.content.document()
+        
+        document1 = document.document(title='collapsable', collapsable=True, collapsed=True)
+        document1.document(title='content')
+        
+        document1.onexpand = select(element=document1).replaceContent(
+            load(actor=self.name, routine='getNewContent')
+            )
+
+        document1.oncollapse = select(element=document1).replaceContent(
+            luban.content.document(title='collapsed')
+            )
+
+        document2 = document.document(title='document 2')
+        return document
+
+
+    def getNewContent(self, director):
+        return luban.content.document(title='new content')
+
+
+    @quickpanel(
+        title = 'Other',
+        description =  [
+          'Misc. usages.',
+          ],
+        examples = ['misc%d' % i for i in range(1,2)],
+        )
+    def misc(self): pass
+
+
+    @example(
+        title='Action "disable/enable"',
+        description = [
+          ],
+        deps = [],
+        )
+    def misc1(self, director):
+        container = luban.content.document()
+
+        from luban.content.FormTextField import FormTextField
+        field = FormTextField(label='a text field')
+        container.add(field)
+
+        from luban.content.FormTextArea import FormTextArea
+        field = FormTextArea(label='a text area')
+        container.add(field)
+
+        b = luban.content.button(label='disable the input field(s)')
+        container.add(b)
+        b.onclick = select(element=container).disable()
+        
+        b = luban.content.button(label='enable the input field(s)')
+        container.add(b)
+        b.onclick = select(element=container).enable()
+        
+        return container
+
+
+def actor():
+    return Actor('document')
+
+
+# version
+__id__ = "$Id$"
+
+# End of file    
+        

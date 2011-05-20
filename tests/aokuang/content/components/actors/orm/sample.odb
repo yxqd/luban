@@ -1,0 +1,107 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                 Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2009  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+# test orm-generated view of a data object with a owned, polymorphic reference
+
+
+
+#
+import luban.content as lc
+from luban.content import select, load, alert
+
+
+from dsaw.model.descriptors import validators
+
+#
+from aokuang.dom.Sample import Sample
+from aokuang.dom import shapes
+
+from luban.components.Actor import Actor
+import luban.orm
+base = luban.orm.object2actor(Sample, ActorBase=Actor)
+class Actor(base):
+
+    class Inventory(base.Inventory):
+
+        import luban.inventory
+
+        
+    Inventory.weight.validator = validators.positive
+    
+        
+    def default(self, director):
+        frame = lc.frame(title='title')
+        
+        document = frame.document(title='test', id='maindoc')
+
+        sample = Sample()
+        sample.shape = shapes.Cylinder()
+
+        orm = director.clerk.orm
+        orm.save(sample)
+
+        self.inventory.id = orm(sample).id
+        view = self.edit(director)
+        
+        document.add(view)
+            
+        return frame
+
+
+    def none(self, director):
+        frame = lc.frame(title='title')
+        
+        document = frame.document(title='test', id='maindoc')
+
+        sample = Sample()
+        sample.shape = None
+
+        orm = director.clerk.orm
+        orm.save(sample)
+
+        self.inventory.id = orm(sample).id
+        view = self.edit(director)
+        
+        document.add(view)
+            
+        return frame
+
+
+    def display_sample_with_noshape(self, director):
+        frame = lc.frame(title='title')
+        
+        document = frame.document(title='test', id='maindoc')
+
+        sample = Sample()
+        sample.shape = None
+
+        orm = director.clerk.orm
+        orm.save(sample)
+
+        self.inventory.id = orm(sample).id
+        view = self.display(director)
+        
+        document.add(view)
+            
+        return frame
+
+
+def actor():
+    return Actor('orm/sample')
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 

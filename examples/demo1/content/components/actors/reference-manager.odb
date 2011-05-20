@@ -1,0 +1,201 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                 Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2009  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+from luban.content import select
+
+
+from luban.components.Actor import Actor as base
+class Actor(base):
+
+    class Inventory(base.Inventory):
+
+        import pyre.inventory
+
+        id = pyre.inventory.str('id')
+        title = pyre.inventory.str('title')
+        abstract = pyre.inventory.str('abstract')
+        journalindex = pyre.inventory.int('journalindex')
+
+
+    def default(self, director):
+        page = director.retrieveVisual('reference-manager')
+        maindoc = page.maindoc
+        
+        greet = director.retrieveVisual('greet')
+        maindoc.add(greet)
+        
+        return page
+
+
+    def greet(self, director):
+        greet = director.retrieveVisual('greet')
+        return select(id='maindoc').replaceContent(greet)
+
+
+    def listall(self, director):
+        from luban.content.Document import Document
+        document = Document(title="All references")
+
+        for key, publication in director.clerk.getRecords(Publication):
+            p = document.paragraph()
+            p.text = ['%s: %s' % (key, publication.title)]
+            continue
+
+        return select(id='maindoc').replaceContent(document)
+
+
+    def edit(self, director):
+        id = self.inventory.id
+        if id:
+            record = director.clerk.getRecordByID(Publication, id)
+            title = 'Edit reference %s' % id
+        else:
+            record = Publication()
+            title = 'New reference'
+
+        from luban.content.Document import Document
+        document = Document(title=title)
+
+        # the form
+        form = document.form()
+
+        t = form.text(
+            label='Title',
+            value=record.title,
+            name='title',
+            id = 'titleinput',
+            )
+        
+        entries=enumerate(journals)
+        try:
+            index = journals.index(record.journaltitle)
+        except:
+            index = 0
+        s = form.selector(
+            label='Journal',
+            entries=entries,
+            selection=0,
+            name='journalindex')
+
+        ta = form.textarea(
+            label='Abstract',
+            #cols=80, rows=20,
+            value=record.abstract,
+            name='abstract',
+            id = 'abstractinput',
+            )
+        
+        # submit button
+        submit = form.submitbutton(label="Update")
+
+        # action when form is submitted
+        form.onsubmit = select(element=form).submit(
+            actor = 'reference-manager',
+            routine = 'processForm',
+            id = id,
+            )
+        return select(id='maindoc').replaceContent(document)
+
+
+    def processForm(self, director):
+        errors = {}
+        
+        title = self.inventory.title
+        if not title:
+            errors['title'] = 'Title cannot be empty'
+            
+        abstract = self.inventory.abstract
+        if not abstract:
+            errors['abstract'] = 'Abstract cannot be empty'
+
+        if errors:
+            return self.formError(director, errors=errors)
+
+        self.store(director)
+        return self.report(director)        
+        
+        
+    def formError(self, director, errors=None):
+        from luban.content import select
+        return [
+            select(id='%sinput' % name).showError(text)
+            for name, text in errors.iteritems()
+            ]
+    
+    
+    def store(self, director):
+        publication = Publication()
+        
+        id = self.inventory.id
+        if not id:
+            self.inventory.id = id = director.getGUID()
+        publication.id = id
+        
+        publication.title = self.inventory.title
+        publication.abstract = self.inventory.abstract
+        publication.journaltitle = journals[self.inventory.journalindex]
+
+        self._debug.log(str(publication))
+        
+        director.clerk.updateRecord(publication)
+        return publication
+
+
+    def report(self, director):
+        id = self.inventory.id
+        if not id: raise RuntimeError
+        
+        publication = director.clerk.getRecordByID(Publication, id)
+
+        from luban.content.Document import Document
+        document = Document(title=publication.title)
+
+        p = document.paragraph()
+        p.text = [publication.journaltitle]
+
+        p = document.paragraph()
+        p.text = publication.abstract.split('\n')
+        return select(id='maindoc').replaceContent(document)
+
+
+    def __init__(self, *args, **kwds):
+        super(Actor, self).__init__(*args, **kwds)
+        return
+
+
+    def _init(self):
+        super(Actor, self)._init()
+        return
+
+
+
+#
+journals=[
+    'Physical Review Letter',
+    'Physical Review B',
+    'Zeitschrift fur Physik A Hadrons and Nuclei',
+    ]
+
+
+from lubandemo1.dom.Publication import Publication
+
+
+def actor():
+    return Actor('reference-manager')
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 

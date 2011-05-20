@@ -1,0 +1,191 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                 Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2009  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+from luban.content import select, load, alert
+import luban.content
+
+
+from aokuang.components.DemoActor import Actor as base, panel, example, quickpanel
+class Actor(base):
+
+
+    introduction = '''
+In this demo, we explain the most fundamental luban "actions".
+
+Luban actions are actions to
+
+* manipulate UI elements
+* communicate with UI controller
+
+The widget-specific actions will be explained in demos
+for the widgets. Here our focus is the basic and common
+actions.
+
+'''
+    
+    
+    class Inventory(base.Inventory):
+        
+        import pyre.inventory
+
+
+    @quickpanel(
+        title = 'Action "load"',
+        description =  [
+          '"load" is an action of fundamental importance.',
+          'It loads some information from the UI controller.',
+          ],
+        examples = ['load_example%s' % (i+1) for i in range(3)],
+        )
+    def load(self, director): pass
+    
+
+    # example 1: load a simple value from controller
+    @example(
+        title='Example 1: load a simple value',
+        description=[
+          'A simple value can be loaded from the controller and used to',
+          'update the UI.',
+        ],
+        deps=['onloadsimplevalue'])
+    def load_example1(self, director):
+        container = luban.content.document()
+        p1 = container.paragraph(text=['the text to replace'])
+        b1 = luban.content.button(label = 'click me', id='load_example1_button')
+        b1.onclick = select(element = p1).replaceContent(
+            load(actor = self.name, routine = 'onloadsimplevalue')
+            )
+        container.add(b1)
+        return container
+
+    
+    # example 2: load a new UI element from controller
+    @example(
+        title='Example 2: load a new UI element',
+        description=[
+          'The example shows that a UI element can be loaded from the controller,',
+          'to replace a part of the existing UI.',
+        ],
+        deps=['onloadnewdocument'])
+    def load_example2(self, director):
+        container = luban.content.document()
+        d2 = container.document(title = 'the document to replace')
+        b2 = luban.content.button(label = 'click me')
+        b2.onclick = select(element = d2).replaceBy(
+            load(actor = self.name, routine = 'onloadnewdocument')
+            )
+        container.add(b2)
+        return container
+
+
+    # example 3: load an action
+    @example(
+        title='Example 3: load an action',
+        description=[
+          'In this example, an action is loaded from the controller,',
+          'and that action is then executed.',
+          'Here the loaded action is adding a class to a document.',
+        ],
+        deps=['onloadaction'])
+    def load_example3(self, director):
+        container = luban.content.document()
+        d3 = container.document(
+            title = 'The document to change',
+            id = 'document-to-change',
+            )
+        b3 = luban.content.button(label = 'click me')
+        b3.onclick = load(actor = self.name, routine = 'onloadaction')
+        container.add(b3)
+        return container
+
+
+    @panel
+    def alert(self, director):
+        container = luban.content.document(title='Action "alert"')
+        p = container.paragraph(text = [
+            '"alert" is a simple action that pops up an alert window.',
+            ])
+
+        container.add(self.createExampleDocument(self.alert_example1, director))
+        return container
+
+
+    @example(
+        title = 'Example 1',
+        description = [
+          'Click the following button to see an alert.',
+        ],
+        )
+    def alert_example1(self, director):
+        b1 = luban.content.button(label = 'click me')
+        b1.onclick = alert('hi, there')
+        return b1
+
+
+    @panel
+    def select(self, director):
+        container = luban.content.document(title='Action "select"')
+        p = container.paragraph(text = [
+            '"select" action selects a UI element. ',
+            'This action must be combined with other actions, ',
+            'otherwise it does not have any effect.',
+            ])
+
+        container.add(self.createExampleDocument(self.select_example1, director))
+        return container
+
+
+    @example(
+        title = 'Example 1: select and change value for an input',
+        description = [
+          'This example shows how to use "select" action to select',
+          'a UI element and make changes to it',
+          ],
+        )
+    def select_example1(self, director):
+        container = luban.content.document()
+        
+        from luban.content.FormTextField import FormTextField
+        tf = FormTextField(label='comment'); container.add(tf)
+        
+        b1 = luban.content.button(label = 'click me')
+        b1.onclick = select(element=tf).setAttr(value='my comment')
+        container.add(b1)
+        
+        return container
+
+
+    # handlers
+    def onloadsimplevalue(self, director):
+        return 'newvalue'
+
+
+    def onloadnewdocument(self, director):
+        newdoc = luban.content.document(title='new document')
+        return newdoc
+
+
+    def onloadaction(self, director):
+        return select(id='document-to-change').addClass('green-border')
+
+
+
+def actor():
+    return Actor('actions')
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 

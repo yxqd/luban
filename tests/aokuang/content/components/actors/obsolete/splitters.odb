@@ -1,0 +1,65 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                 Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2009  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+from luban.content import select, load
+
+from luban.components.Actor import Actor as base
+class Actor(base):
+
+    class Inventory(base.Inventory):
+
+        import pyre.inventory
+
+    
+    def default(self, director):
+        from luban.content.Page import Page
+        page = Page(title='Testing Splitter')
+        document = page.document(title='Testing Splitter')
+
+        from luban.content.Splitter import Splitter, SplitSection
+
+        """Resulting layout for the below code:
+
+-----------------------------------------------------
+| top left         | middle            | right      |
+|------------------|                   |            |
+| bottom left      |                   |            |
+-----------------------------------------------------
+"""
+        frames = Splitter()
+        frames.orientation = 'horizontal'
+        frameleft = frames.section()
+        framemiddle = frames.section(size=3)
+        framemiddle.paragraph(text=['using Splitter: middle: size = 3'])
+        frames.section().paragraph(text=['using Splitter: right'])
+        insideframe = Splitter()
+        insideframe.orientation = 'vertical'
+        insideframe.section().paragraph(text=['using Splitter: top left'])
+        insideframe.section().paragraph(text=['using Splitter: bottom left'])
+        frameleft.add(insideframe)
+        from luban.content.Button import Button
+        button = Button(label='testing buttons')
+        frameleft.add(button)
+        document.add(frames)
+
+        return page
+
+def actor():
+    return Actor('testsplitters')
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 

@@ -1,0 +1,200 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                 Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2009  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+import luban.content
+from luban.content import select, load, alert
+
+
+from aokuang.components.WidgetDemoActor import Actor as base, panel, example, quickpanel
+class Actor(base):
+
+
+    from luban.content.Tabs import Tabs as widget
+
+
+    class Inventory(base.Inventory):
+
+        import pyre.inventory
+
+
+    demo_panels = 'basic_usages', 'advanced'
+
+    introduction = '''
+This is a demo of widget "tabs".
+'''
+
+    @quickpanel(
+        title = 'Basic usages',
+        description =  [
+          ],
+        examples = ['basic_usage%s' % (i+1) for i in range(1)],
+        )
+    def basic_usages(self): pass
+
+
+    @example(
+        title='A basic "tabs" widget',
+        description = [
+          'A tabs container widget can be created using "tabs" factory method,',
+          'and then tabs can be added to the container.',
+          'Please click on the tabs to see it working.',
+          ]
+        )
+    def basic_usage1(self, director):
+        lc = luban.content
+        tabs = lc.tabs()
+        tabs.tab('tab1').paragraph(text=['tab1 texts'])
+        tabs.tab('tab2', selected=1).paragraph(text=['tab2 texts'])
+        tabs.tab('tab3').paragraph(text=['tab3 texts'])
+        return tabs
+
+
+    @quickpanel(
+        title = 'Advanced',
+        description =  [
+          ],
+        examples = ['advanced%s' % (i+1) for i in range(4)],
+        )
+    def advanced(self): pass
+
+    
+    @example(
+        title='Created tabs dynamically',
+        description = [
+          'Click on the button to see new tabs being created',
+          ]
+        )
+    def advanced1(self, director):
+        lc = luban.content
+        # container 
+        container = lc.document()
+        # tabs
+        tabs = lc.tabs(); container.add(tabs)
+        tabs.tab('tab1').paragraph(text=['tab1 texts'])
+        # ctrls
+        from luban.content.Tabs import Tab
+        button = lc.button(
+            label='create new tab',
+            onclick=select(element=tabs).append(Tab(label='new tab')),
+            )
+        container.add(button)
+        #
+        return container
+        
+
+    @example(
+        title='Destroy tabs',
+        description = [
+          'Click the buttons to see tabs being destroyed',
+          ]
+        )
+    def advanced2(self, director):
+        lc = luban.content
+
+        # container
+        container = lc.document()
+        # tabs
+        tabs = lc.tabs()
+        container.add(tabs)
+        #
+        for i in range(1,4):
+            # tab
+            name = 'tab%s' % i
+            tab = tabs.tab(name)
+            tab.paragraph(text=['%s: a paragraph' % name])
+            # button
+            button = lc.button(label='delete tab %s' % i)
+            button.onclick=[
+                select(element=tab).destroy(),
+                select(element=button).destroy(),
+                ]
+            container.add(button)
+            continue
+        
+        return container
+
+
+    @example(
+        title='Select a tab programmatically',
+        description = [
+          'Click the buttons to select tabs',
+          ]
+        )
+    def advanced3(self, director):
+        lc = luban.content
+        # container
+        container = lc.document()
+        #
+        p = container.paragraph()
+        # tabs
+        tabs = lc.tabs(); container.add(tabs)
+        #   tab 1
+        tab1 = tabs.tab(label='tab1')
+        tab1.onselect = select(element=p).setAttr(text='tab1 selected')
+        #   tab 2
+        tab2 = tabs.tab(label='tab2')
+        tab2.onselect = select(element=p).setAttr(text='tab2 selected')
+        # controls
+        #   button1
+        button1 = lc.button(
+            label='click to choose tab1',
+            onclick = select(element=tab1).tab('select')
+            )
+        container.add(button1)
+        #   button2
+        button2 = lc.button(
+            label='click to choose tab2',
+            onclick = select(element=tab2).tab('select')
+            )
+        container.add(button2)
+        return container
+
+
+    @example(
+        title='Enable/disable a tab',
+        description = [
+          'Click the buttons to enable/disable tab 2',
+          ]
+        )
+    def advanced4(self, director):
+        lc = luban.content
+        # container
+        container = lc.document()
+        # tabs
+        tabs = lc.tabs(); container.add(tabs)
+        tab1 = tabs.tab(label='tab1'); tab1.paragraph(text=['tab1 texts'])
+        tab2 = tabs.tab(label='tab2'); tab2.paragraph(text=['tab2 texts'])
+        # ctrls
+        button1 = lc.button(
+            label='disable tab2',
+            onclick=select(element=tab2).disable()
+            )
+        container.add(button1)
+        button2 = lc.button(
+            label='enable tab2',
+            onclick=select(element=tab2).enable()
+            )
+        container.add(button2)
+        return container
+        
+
+
+def actor():
+    return Actor('tabs')
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 

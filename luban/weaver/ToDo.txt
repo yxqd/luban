@@ -1,0 +1,26 @@
+(this is not everything, of course; just stuff I noticed)
+
+To Do for luban wx weaver:
+- 'icon' for treeview, etc. are not implemented
+- tip for treeview is a little weird, won't go away
+
+wx actions that don't work/aren't implemented:
+- onNotification() -- works for table ('row-changed') and
+ accordion('changed') now. 
+test accordion's with testaccordion --routine=testonchange in aokuang
+- setAttribute() -- works for document title
+
+in wx, onAppend() now works for:
+- accordion
+- appmenubar, appmenu, etc.
+- forms
+- tabs
+- splitter
+- toolbar
+- treeview
+
+in wx, onAppend() does not work for:
+- portlet
+
+luban web/javascript weaver:
+- 'selection' doesn't do anything in formradiobox

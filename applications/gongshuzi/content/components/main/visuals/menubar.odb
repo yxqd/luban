@@ -1,0 +1,73 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                 Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2009  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+from luban.content import load
+import luban.content as lc
+
+
+def visual(director):
+
+    session_id = director.actor.inventory.session_id
+    
+    menubar = lc.appmenubar(id='menubar')
+
+    projectmenu = menubar.menu(label='Project', id='projectmenu')
+    projectnew = projectmenu.item(
+        label='New', tip = 'create new project',
+        onclick=load('gongshuzi', routine='presentNewProjectForm', session_id=session_id))
+    projectopen = projectmenu.item(
+        label='Open', tip = 'open a project',
+        onclick=load('gongshuzi', routine='presentExistingProjectsForSelectionToOpen', session_id=session_id))
+    projectsavefiles = projectmenu.item(
+       label='Save', tip = 'save this project', id='menuitem_projectsavefiles',
+       onclick=load('gongshuzi', routine='saveToFiles', session_id=session_id))    
+    projectserve = projectmenu.item(
+        label='Serve', tip = 'serve this project as a http site', id='menuitem_projectserve',
+        onclick=load('gongshuzi', routine='serveProject', session_id=session_id))
+    projectrun = projectmenu.item(
+        label='Run', tip = 'run this project as a native application', id='menuitem_projectrun',
+        onclick=load('gongshuzi', routine='runProject', session_id=session_id))
+    projectdelete = projectmenu.item(
+        label='Delete', tip = 'delete this project', id = 'menuitem_projectdelete',
+        onclick=load('gongshuzi', routine='deleteProject', session_id=session_id))
+
+    visualmenu = menubar.menu(label='Visual', id='visualmenu')
+    visualnew = visualmenu.item(
+        label='New', tip = 'create a new visual',
+        onclick=load('gongshuzi', routine='newVisual', session_id=session_id))
+    
+    visualdelete = visualmenu.item(
+        label='Delete', tip = 'delete this visual',
+        onclick=load('gongshuzi', routine='deleteVisual', session_id=session_id))
+    
+
+    widgetmenu = director.retrieveVisual('widgetmenu')
+    #menubar.add(widgetmenu)
+    visualmenu.add(widgetmenu)
+    
+    actormenu = menubar.menu(label='Actor', id='actormenu')
+    actornew = actormenu.item(
+        label='New', tip = 'create a new actor',
+        onclick=load('gongshuzi', routine='newActor', session_id=session_id))
+    
+    actordelete = actormenu.item(
+        label='Delete', tip = 'delete this actor',
+        onclick=load('gongshuzi', routine='deleteActor', session_id=session_id))
+
+    return menubar
+
+# version
+__id__ = "$Id$"
+
+# End of file 

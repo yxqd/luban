@@ -1,0 +1,139 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                 Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2009  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+import luban.content
+from luban.content import select, load, alert
+
+
+from aokuang.components.WidgetDemoActor import Actor as base, panel, example, quickpanel
+class Actor(base):
+
+
+    from luban.content.ProgressBar import ProgressBar as widget
+
+
+    class Inventory(base.Inventory):
+
+        import pyre.inventory
+
+
+    introduction = '''
+This is a demo of widget "progressbar".
+'''
+
+    @quickpanel(
+        title = 'Basic usages',
+        description =  [
+          ],
+        examples = ['basic_usage%s' % (i+1) for i in range(1)],
+        )
+    def basic_usages(self): pass
+
+
+    @example(
+        title='A basic progress bar',
+        description = [
+        'Watch the progress bar proceeds and finishes. ',
+          ],
+        deps = [
+          'setProgress',
+          'getProgress',
+          'check',
+          'done',
+          'canceled',
+          ]
+        )
+    def basic_usage1(self, director):
+        lc = luban.content
+
+        # container
+        document = lc.document(title='test progressbar', id='maindoc')
+
+        # progress bar
+        pbar = lc.progressbar(
+            id = 'pbar',
+            status = 'status?',
+            percentage = 10
+            )
+        document.add(pbar)
+        # events
+        pbar.onchecking = load(
+            actor=self.name,
+            routine='check',
+            )
+        pbar.onfinished = load(
+            actor=self.name,
+            routine='done',
+            )
+        pbar.oncanceled = load(
+            actor=self.name,
+            routine='canceled',
+            )
+            
+        # ctrls
+        l = lc.button(
+            label='cancel', id='cancelbutton',
+            onclick=select(element=pbar).progressbar('cancel'))
+        document.add(l)
+
+        #
+        self.setProgress(0)
+        return document
+
+
+    filename = '../content/data/testprogressbar.dat'
+    def setProgress(self, value):
+        # this is only a demo implementation
+        open(self.filename, 'w').write(str(value))
+        return
+
+
+    def getProgress(self):
+        filename = self.filename
+        import os
+        if not os.path.exists(filename): return 0
+        return int(open(filename).read())
+
+
+    def check(self, director):
+        status = 'working...'
+        p = self.getProgress()
+        p += 10
+        if p>=100:
+            p=100
+            status = 'done.'
+        self.setProgress(p)
+        return select(id='pbar').setAttr(
+            percentage = p, status = status)
+
+
+    def done(self, director):
+        return [select(id='cancelbutton').destroy(), alert('done')]
+
+
+    def canceled(self, director):
+        newdoc = luban.content.document()
+        newdoc.paragraph().text = ['canceled']
+        return select(id='maindoc').replaceContent(newdoc)
+
+
+def actor():
+    return Actor('progressbar')
+
+
+# version
+__id__ = "$Id$"
+
+# End of file    
+        

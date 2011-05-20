@@ -1,0 +1,143 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                  Jiao Lin
+#                     California Institute of Technology
+#                     (C) 2007-2009  All Rights Reserved
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+from luban.content import select
+
+
+from luban.components.Actor import Actor
+
+
+class CreateProject(Actor):
+
+    class Inventory(Actor.Inventory):
+
+        import pyre.inventory
+        name = pyre.inventory.str('name')
+
+        session_id = pyre.inventory.str('session_id')
+
+
+    def verify(self, director):
+        errors = {}
+        
+        name = self.inventory.name
+        if not name:
+            errors['name'] = 'Name cannot be empty'
+            
+        if errors:
+            return self.formError(director, errors=errors)
+
+        return self.create(director)
+
+
+    def create(self, director):
+        from luban.project.Project import Project
+        ProjectTable = director.clerk.orm.getTable(Project)
+        project = director.clerk.insertNewOwnedRecord(ProjectTable)
+
+        project.projectname = name = self.inventory.name
+        director.clerk.updateRecordWithID(project)
+
+        # give this project a default visual and a default actor
+        #  visual
+        from luban.project.Visual import Visual
+        VisualTable = director.clerk.orm.getTable(Visual)
+        defaultvisual = director.clerk.insertNewOwnedRecord(VisualTable)
+        defaultvisual.visualname = name
+
+        from luban.content.Frame import Frame
+        FrameTable = director.clerk.orm.getTable(Frame)
+        p = director.clerk.insertNewOwnedRecord(FrameTable)
+        p.title = 'default frame for %s' % name
+        director.clerk.updateRecordWithID(p)
+        
+        from luban.content.Document import Document
+        DocumentTable = director.clerk.orm.getTable(Document)
+        d = director.clerk.insertNewOwnedRecord(DocumentTable)
+        d.title = 'Hello world'
+        director.clerk.updateRecordWithID(d)
+        p.contents.add(d, director.clerk.db)
+        
+        defaultvisual.visualinstance = p
+        director.clerk.updateRecordWithID(defaultvisual)
+        
+        project.visuals.add(defaultvisual, director.clerk.db)
+
+        #  actor
+        from luban.project.Actor import Actor
+        ActorTable = director.clerk.orm.getTable(Actor)
+        defaultactor = director.clerk.insertNewOwnedRecord(ActorTable)
+        defaultactor.actorname = name
+        defaultactor.content = _actorTemplate(name)
+        director.clerk.updateRecordWithID(defaultactor)
+        
+        project.actors.add(defaultactor, director.clerk.db)
+
+        return director.redirect(
+            actor='gongshuzi', routine='loadProject',
+            session_id = self.inventory.session_id,
+            project_id = project.id,
+            )
+
+
+    def formError(self, director, errors=None):
+        from luban.content import select
+        return [
+            select(id='newproject-form-%s-input' % name).showError(text)
+            for name, text in errors.iteritems()
+            ]
+    
+    
+    def __init__(self, name=None):
+        if name is None:
+            name = "createProject"
+        super(CreateProject, self).__init__(name)
+        return
+
+
+    pass # end of CreateProject
+
+
+
+def actor():
+    return CreateProject()
+
+
+def _actorTemplate(name):
+    return '''# -*- python -*-
+
+from luban.content import select, load, alert
+
+
+from luban.components.Actor import Actor as base
+
+class Actor(base):
+
+
+    class Inventory(base.Inventory):
+
+        import pyre.inventory
+
+        
+    def default(self, director):
+        return director.retrieveVisual("%s")
+
+
+def actor():
+    return Actor("%s")
+''' % (name, name)
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 

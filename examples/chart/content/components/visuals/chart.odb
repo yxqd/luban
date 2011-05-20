@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+
+
+def visual(director):
+    from luban.content.Frame import Frame
+    frame = Frame(title='test frame')
+
+    doc = frame.document(title='Hello world!')
+    doc.paragraph().text = ['This is a test frame.']
+
+    from chart.content.Chart import Chart
+    chart = Chart(caption='test chart')
+    doc.add(chart)
+
+    N = 20
+    chart.xrange = [0, N]
+    chart.yrange = [0, N]
+    chart.zrange = [0, N/10.]
+
+    x = range(N)
+    z = [t/10. for t in x] # error bar
+    chart.curve(x=x, y=x, z=z)
+    
+    return frame

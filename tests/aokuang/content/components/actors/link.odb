@@ -1,0 +1,95 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                 Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2009  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+import luban.content
+from luban.content import select, load, alert
+
+
+from aokuang.components.WidgetDemoActor import Actor as base, panel, example, quickpanel
+class Actor(base):
+
+
+    from luban.content.Link import Link as widget
+
+    
+    introduction = '''
+This is a demo of widget "link".
+
+"link" is a piece of text when cliked, leads to an action.
+'''
+
+    @quickpanel(
+        title = 'Basic usages',
+        description =  [
+          ],
+        examples = ['basic_usage%s' % (i+1) for i in range(1)],
+        )
+    def basic_usages(self): pass
+
+
+    @example(
+        title='Links to show/hide widget',
+        description = [
+          'Click the links to see a "details" document show/hide',
+          ],
+        deps = ['createDetailsDocument',]
+        )
+    def basic_usage1(self, director):
+        lc = luban.content
+
+        # container document
+        document = lc.document(title='A document', id='maindoc')
+        document.paragraph(text='Here is a brief introduction')
+        
+        # links
+        linktoshow = lc.link(label='show details...')
+        document.add(linktoshow)
+        linktohide = lc.link(label='hide details...', hidden=True)
+        document.add(linktohide)
+
+        # the details
+        detailsdoc = self.createDetailsDocument(director)
+        detailsdoc.hidden = True
+        document.add(detailsdoc)
+        
+        # actions
+        linktoshow.onclick=[
+            select(element=linktoshow).hide(),
+            select(element=linktohide).show(),
+            select(element=detailsdoc).show(),
+            ]
+        linktohide.onclick=[
+            select(element=linktoshow).show(),
+            select(element=linktohide).hide(),
+            select(element=detailsdoc).hide(),
+            ]
+        #
+        return document
+
+
+    def createDetailsDocument(self, director):
+        doc = luban.content.document(title='Details')
+        doc.paragraph(text=['Here are the details ...'])
+        return doc
+        
+
+
+def actor():
+    return Actor('link')
+
+
+# version
+__id__ = "$Id$"
+
+# End of file    
+        

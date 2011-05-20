@@ -1,0 +1,81 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                 Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2009  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+import luban.content
+from luban.content import select, load, alert
+
+from aokuang.components.WidgetDemoActor import Actor as base, panel, example, quickpanel
+class Actor(base):
+
+
+    from luban.content.Dialog import Dialog as widget
+
+
+    class Inventory(base.Inventory):
+
+        import pyre.inventory
+
+
+    introduction = '''
+This is a demo of widget "dialog".
+'''
+
+    @quickpanel(
+        title = 'Basic usage',
+        description =  [
+          ],
+        examples = ['basic_usage%s' % (i+1) for i in range(1)],
+        )
+    def basic_usages(self): pass
+
+
+    @example(
+        title='A simple dialog to show a message',
+        description = [
+          'click the button to see a dialog. Click the "OK" button of the dialog to close it.',
+          ]
+        )
+    def basic_usage1(self, director):
+        document = luban.content.document()
+        
+        # create dialog
+        dialog = luban.content.dialog(title='title of dialog', autoopen=True)
+        # add a paragraph
+        dialog.paragraph(text='content of dialog')
+
+        # add a button
+        okbutton = luban.content.button(
+            label='OK',
+            onclick=select(element=dialog).destroy()
+            )
+        dialog.add(okbutton)
+
+        # add a button to open the dialog
+        button = luban.content.button(
+            label='click me to open a dialog',
+            onclick=select(element=document).append(dialog),
+            )
+        document.add(button)
+        
+        return document
+
+
+def actor():
+    return Actor('dialog')
+
+
+# version
+__id__ = "$Id$"
+
+# End of file    
+        

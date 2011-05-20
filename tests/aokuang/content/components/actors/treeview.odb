@@ -1,0 +1,288 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                 Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2009  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+from luban.content.TreeView import TreeView, TreeViewBranch, TreeViewLeaf
+
+import luban.content as lc
+from luban.content import select, load, alert
+
+from luban.components.Actor import Actor as base
+class Actor(base):
+
+    class Inventory(base.Inventory):
+
+        import pyre.inventory
+
+
+    def default(self, director):
+        frame = director.retrieveVisual('default')
+        document = frame.maindoc.document(title='Test treeview')
+
+        treeview = TreeView(label='treeview')
+
+        root = treeview.setRoot(label='root')
+        
+        branch1 = root.branch(label='branch1', tip='branch1')
+        branch1.leaf(label='leaf11')
+
+        leaf2 = root.leaf(label='leaf2: click me', onclick=alert('leaf2 clicked'))
+
+        branch3 = root.branch(label='branch3')
+        branch3.leaf(label='leaf31')
+        branch32 = branch3.branch(label='branch32')
+
+        leaf321 = branch32.leaf(label='leaf321')
+        leaf322 = branch32.leaf(label='leaf322')
+        branch322 = branch32.branch(label='branch322')
+        leaf3221 = branch322.leaf(label='leaf3221')
+        
+        document.add(treeview)
+        return frame
+
+
+    def test_add_removeTreeViewNode(self, director):
+        frame = director.retrieveVisual('default')
+        maindoc = frame.maindoc
+        maindoc.title = 'Test treeview'
+
+        # split to left and right
+        splitter = lc.splitter(orientation='horizontal')
+        left = splitter.section(id='left')
+        right = splitter.section(id='right')
+        maindoc.add(splitter)
+
+        # left: treeview
+        treeview = TreeView(label='treeview', id='treeview')
+        root = treeview.setRoot(label='root', id='treeviewroot')
+        leaf1 = root.leaf(label='leaf1', id = 'leaf1')
+        left.add(treeview)
+
+        # right: buttons
+        button = lc.button(
+            label='select root node',
+            onclick=select(element=treeview)\
+            .treeview('selectNode', node=select(id='treeviewroot'))
+            )
+        right.add(button)
+
+        button = lc.button(
+            label='create new leaf',
+            onclick=load(actor=self.name, routine='createNode')
+            )
+        right.add(button)
+
+        button = lc.button(
+            label='delete node',
+            onclick=load(actor=self.name, routine='deleteNode')
+            )
+        right.add(button)
+
+        #
+        return frame
+
+
+    # helpers for test_add_removeTreeViewNode
+    def deleteNode(self, director):
+        treeview = select(id='treeview')
+        return treeview.treeview('removeNode', node = treeview.treeview('getSelection'))
+
+
+    def createNode(self, director):
+        treeview = select(id='treeview')
+        referencenode = treeview.treeview('getSelection')
+
+        self._useIDDasLubanGUIDGenerator(director)
+        newnode = TreeViewBranch()
+        newnode.label = 'new branch ' + newnode.id
+        
+        return treeview.treeview(
+            'addBranch',
+            referencenode = referencenode,
+            newnode = newnode,
+            position = 0,
+            )
+
+
+    def test_add_removeTreeViewNode_deprecatedmethods(self, director):
+        frame = director.retrieveVisual('default')
+        maindoc = frame.maindoc
+        maindoc.title = 'Test treeview'
+
+        # split to left and right
+        splitter = lc.splitter(orientation='horizontal')
+        left = splitter.section(id='left')
+        right = splitter.section(id='right')
+        maindoc.add(splitter)
+
+        # left: treeview
+        treeview = TreeView(label='treeview', id='treeview')
+        root = treeview.setRoot(label='root', id='treeviewroot')
+        leaf1 = root.leaf(label='leaf1', id = 'leaf1')
+        left.add(treeview)
+
+        # right: buttons
+        button = lc.button(
+            label='select root node',
+            onclick=select(element=treeview)\
+            .treeview('select', node='treeviewroot')
+            )
+        right.add(button)
+
+        button = lc.button(
+            label='create new leaf',
+            onclick=load(actor=self.name, routine='createNode_testdeprecatedmethods')
+            )
+        right.add(button)
+
+        button = lc.button(
+            label='delete node',
+            onclick=load(actor=self.name, routine='deleteNode_testdeprecatedmethods')
+            )
+        right.add(button)
+
+        #
+        return frame
+
+
+    # helpers for test_add_removeTreeViewNode
+    def deleteNode_testdeprecatedmethods(self, director):
+        treeview = select(id='treeview')
+        return treeview.removeTreeViewNode(node = treeview.treeview('getSelection'))
+
+
+    def createNode_testdeprecatedmethods(self, director):
+        treeview = select(id='treeview')
+        referencenode = treeview.treeview('getSelection')
+
+        self._useIDDasLubanGUIDGenerator(director)
+        newnode = TreeViewBranch()
+        newnode.label = 'new branch ' + newnode.id
+        
+        return treeview.addTreeViewBranch(
+            referencenode = referencenode,
+            newnode = newnode,
+            position = 0,
+            )
+
+
+    def test_newBranch(self, director):
+        frame = director.retrieveVisual('default')
+        document = frame.maindoc.document(title='Test treeview')
+
+        treeview = TreeView(label='treeview')
+        
+        root = treeview.setRoot(label='root')
+        
+        branch1 = root.branch(label='branch1')
+        branch1.leaf(label='leaf11')
+
+        leaf2 = root.leaf(label='leaf2')
+
+        branch3 = root.branch(label='branch3')
+        branch3.leaf(label='leaf31')
+        branch32 = branch3.branch(label='branch32')
+
+        leaf321 = branch32.leaf(label='leaf321')
+        leaf322 = branch32.leaf(label='leaf322')
+        branch322 = branch32.branch(label='branch322')
+        leaf3221 = branch322.leaf(label='leaf3221')
+        
+        document.add(treeview)
+
+        button = lc.button(
+            label='create new branch',
+            onclick=select(element=treeview).append(TreeViewBranch(label='new branch')),
+            )
+        document.add(button)
+        
+        return frame
+    
+
+    def testonnodemoving(self, director):
+        frame = lc.frame(title='Test treeview')
+        document = frame.document(title='Test Treeview -- drag and drop')
+
+        from luban.content import alert
+        action = alert('dragged!')
+
+        treeview = TreeView(draggable=True, onnodemoving=action)
+        
+        root = treeview.setRoot(label='root')
+        
+        branch1 = root.branch(label='branch1')
+        branch1.leaf(label='leaf11')
+
+        leaf2 = root.leaf(label='leaf2')
+
+        branch3 = root.branch(label='branch3')
+        branch3.leaf(label='leaf31')
+        branch32 = branch3.branch(label='branch32')
+
+        leaf321 = branch32.leaf(label='leaf321')
+        leaf322 = branch32.leaf(label='leaf322')
+        branch322 = branch32.branch(label='branch322')
+        leaf3221 = branch322.leaf(label='leaf3221')
+        
+        document.add(treeview)
+
+        return frame
+    
+
+    def testclicks(self, director):
+        frame = lc.frame(title='test treeview onclick')
+        document = frame.document(title='test treeview onclick')
+
+        from luban.content import alert
+        action_alert = alert('clicked!')
+
+        treeview = TreeView()
+        
+        root = treeview.setRoot(label='root')
+        
+        branch1 = root.branch(label='branch1', tip='branch1 tip')
+        branch1.leaf(label='leaf11', tip='leaf11 tip')
+
+        leaf2 = root.leaf(label='leaf2', onclick = action_alert)
+
+        branch3 = root.branch(label='branch3', onclick=action_alert)
+        branch3.leaf(label='leaf31')
+        branch32 = branch3.branch(label='branch32')
+
+        leaf321 = branch32.leaf(label='leaf321')
+        leaf322 = branch32.leaf(label='leaf322')
+        branch322 = branch32.branch(label='branch322')
+        leaf3221 = branch322.leaf(label='leaf3221')
+        
+        document.add(treeview)
+
+        document.paragraph(text=['clicking leaf2 or branch3 will trigger an alert'])
+        return frame
+
+
+    def _useIDDasLubanGUIDGenerator(self, director):
+        super(Actor, self)._init()
+        from luban.content import GUID
+        GUID.GUID = lambda(dummy): director.getGUID()
+        return
+        
+
+
+def actor():
+    return Actor('treeview')
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 

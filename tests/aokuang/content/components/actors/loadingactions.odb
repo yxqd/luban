@@ -1,0 +1,193 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                 Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2009  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+# test actions to load from controller
+
+
+import luban.content as lc
+from luban.content import select, load, alert
+
+from luban.components.Actor import Actor as base
+class Actor(base):
+
+    class Inventory(base.Inventory):
+
+        import pyre.inventory
+
+        textinput1 = pyre.inventory.str('textinput1')
+        textinput2 = pyre.inventory.str('textinput2')
+
+
+    def default(self, director):
+        page = lc.page(title='test laoding')
+        document = page.document(title='test loading', id='maindoc')
+        p = document.paragraph(text=['content to be replaced'])
+        link = lc.link(
+            label='click me to get new content',
+            onclick=select(id='maindoc').replaceContent(
+                load(actor=self.name, routine='newdoc'),
+            ))
+        document.add(link)
+        return page
+
+
+    def newdoc(self, director):
+        return lc.paragraph(text=['new content'])
+
+
+    def testloadingalert(self, director):
+        '''this test sleep a while before return, in order to test the
+        "in loading" alert
+        '''
+        p = lc.page()
+        d = p.document()
+        action = select(element=d).append(load(actor=self.name, routine='sleep'))
+        l = lc.link(label='click me', onclick=action)
+        d.add(l)
+        return p
+
+
+    def sleep(self, director):
+        import time
+        time.sleep(3)
+        return lc.document(title='new document')
+
+
+    def test2(self, director):
+        page = lc.page(title='test laoding')
+        document = page.document(title='test loading', id='maindoc')
+
+        form = document.form()
+        field = form.text(
+            label = 'text input',
+            )
+
+        link = lc.link(
+            label='click me to display new content',
+            onclick=select(id='maindoc').replaceContent(
+                load(actor=self.name, routine='newdoc2',
+                     textinput1=select(element=field).getAttr('value')),
+            ))
+        document.add(link)
+        return page
+
+
+    def newdoc2(self, director):
+        textinput1 = self.inventory.textinput1
+        return lc.paragraph(text=['your input:', textinput1])
+
+
+    def test3(self, director):
+        page = lc.page(title='test laoding')
+        document = page.document(title='test loading', id='maindoc')
+
+        link = lc.link(
+            label='click me',
+            onclick=select(id='maindoc').append(
+                load(actor=self.name, routine='newdoc3',
+                     textinput1=load(actor=self.name, routine='getNumber')
+                     )
+            ))
+        document.add(link)
+        return page
+
+
+    def newdoc3(self, director):
+        textinput1 = self.inventory.textinput1
+        return lc.paragraph(text=['new input:', textinput1])
+
+
+    def test4(self, director):
+        page = lc.page(title='test laoding')
+        document = page.document(title='test loading', id='maindoc')
+
+        link = lc.link(
+            label='click me',
+            onclick=select(id='maindoc').append(
+                load(actor=self.name, routine='newdoc4',
+                     textinput1=load(actor=self.name, routine='getNumber'),
+                     textinput2=load(actor=self.name, routine='getNumber'),
+                     )
+            ))
+        document.add(link)
+        return page
+
+
+    def newdoc4(self, director):
+        doc = lc.document()
+
+        textinput1 = self.inventory.textinput1
+        doc.paragraph(text=['new input 1:', textinput1])
+
+        textinput2 = self.inventory.textinput2
+        doc.paragraph(text=['new input 2:', textinput2])
+
+        return doc
+
+
+    def _test5(self, director):
+        """this is not a test. this showcases a wrong way of combining action
+        with document. action cannot be assign to attributes of ui elements
+        """
+        page = lc.page(title='test laoding')
+        document = page.document(title='test loading', id='maindoc')
+        form = document.form()
+        t = form.text()
+        t.value = load(actor=self.name, routine='getNumber')
+        return page
+
+
+    def test6(self, director):
+        page = lc.page(title='test laoding')
+        document = page.document(title='test loading', id='maindoc')
+        form = document.form()
+        s = form.selector()
+        s.oncreate = select(element=s).setAttr(
+            entries=load(actor=self.name, routine='getEntries')
+            )
+        return page
+
+
+    def getEntries(self, director):
+        items = ['a','b','c']
+        return list(zip(items, items))
+    
+
+    def getNumber(self, director):
+        import random
+        return random.randint(0,1000)
+
+
+    def test7(self, director):
+        'load two actions'
+        page = lc.page(title='load two actions')
+        doc = page.document()
+        b = lc.button(label='click me', onclick=load(actor=self.name, routine='twoactions'))
+        doc.add(b)
+        return page
+
+
+    def twoactions(self, director):
+        return [alert('1'), alert('2')]
+
+
+def actor():
+    return Actor('loadingactions')
+
+
+# version
+__id__ = "$Id$"
+
+# End of file    
+        

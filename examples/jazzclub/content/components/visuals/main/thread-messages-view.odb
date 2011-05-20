@@ -1,0 +1,63 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                  Jiao Lin
+#                     California Institute of Technology
+#                       (C) 2009  All Rights Reserved
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+from jazzclub.dom.Thread import Thread
+from jazzclub.dom.Message import Message
+from jazzclub.dom.User import User
+from jazzclub.dom.Registrant import Registrant
+
+
+def visual(threadid, director):
+    thread = director.clerk.getRecordByID(Thread, threadid)
+
+    import luban.content
+    document = luban.content.document(title='Thread %s' % threadid)
+        
+    form = document.form()
+                             
+    messages = director.clerk.getRecords(Message)
+
+    ms = []
+    for message in messages:
+        if message.thread.id != threadid: continue
+        ms.append(message)
+        continue
+
+    def cmp(m1, m2):
+        from time import mktime
+        return int(mktime(m1.created.timetuple())-mktime(m2.created.timetuple()))
+
+    ms.sort(cmp)
+
+    for message in ms:
+        authorid = message.author.id
+        author = director.clerk.getRecordByID(User, authorid)
+        authorinfo = director.clerk.getUserInfo(author.username)
+
+        authorname = authorinfo.firstname or authorinfo.lastname or authorinfo.username
+        created = message.created
+        label = '%s at %s' % (authorname, created)
+        ta = form.textarea(
+            label = label,
+            value = message.content,
+            readonly = True,
+            )
+        continue
+
+    return document
+
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 

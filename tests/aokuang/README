@@ -1,0 +1,18 @@
+To try out
+
+0. Install luban (see ../../INSTALL)
+
+1. start luban services
+ start-luban-services.sh
+ 
+for wx: 
+2. go to a directory where the configuration files are in the path, such as $EXPORT_ROOT/aokuang/config and type
+$ wxmain.py --actor=helloworld --routine=default
+ 
+for web: 
+2. start webserver
+ cd $EXPORT_ROOT/aokuang/html
+ SimpleHttpServer.py
+3. http://localhost:8002/cgi-bin/main.cgi
+
+

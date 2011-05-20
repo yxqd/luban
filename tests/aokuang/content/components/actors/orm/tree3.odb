@@ -1,0 +1,88 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                 Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2009  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+# test orm-generated view of a data object with a not-owned, polymorphic referenceset
+
+
+
+#
+import luban.content as lc
+from luban.content import select, load, alert
+
+
+#
+from aokuang.dom import Tree3
+
+from luban.components.Actor import Actor
+import luban.orm
+base = luban.orm.object2actor(Tree3.Tree3, ActorBase=Actor)
+class Actor(base):
+    
+    class Inventory(base.Inventory):
+        
+        import luban.inventory
+        
+        
+    def default(self, director):
+        orm = director.clerk.orm
+        db = orm.db
+
+        # fetch two leaves from db or create some
+        LeafTable = orm(Tree3.Leaf3)
+        q = db.query(LeafTable)
+        n = q.count()
+        if n<2:
+            leaves = [Tree3.Leaf3() for i in range(2-n)]
+            for leaf in leaves: orm.save(leaf)
+            if n==1:
+                # make sure we have two leaves
+                leaf_record = q.one()
+                leaf = orm.record2object(leaf_record)
+                leaves.append(leaf)
+        else:
+            leaf_records = q.limit(2).all()
+            leaves = [orm.record2object(l) for l in leaf_records]
+
+        # create root
+        root = Tree3.Branch3(
+            name='root',
+            nodes=leaves,
+            )
+
+        # create tree
+        tree = Tree3.Tree3(root=root)
+
+        # save tree
+        orm.save(tree)
+
+        # create view
+        self.inventory.id = orm(tree).id
+        view = self.edit(director)
+
+        # add view into skeleton
+        frame = lc.frame(title='title')
+        document = frame.document(title='test', id='maindoc')
+        document.add(view)
+        
+        return frame
+
+
+def actor():
+    return Actor('orm/tree3')
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 

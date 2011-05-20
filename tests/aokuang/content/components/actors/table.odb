@@ -1,0 +1,404 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                 Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2009  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+import luban.content
+from luban.content import select, load, alert
+
+
+from aokuang.components.WidgetDemoActor import Actor as base, panel, example, quickpanel
+class Actor(base):
+
+
+    from luban.content.table.Table import Table as widget
+    
+
+    class Inventory(base.Inventory):
+
+        import pyre.inventory
+
+        username = pyre.inventory.str('username')
+        email = pyre.inventory.str('email')
+
+        checked = pyre.inventory.list('checked')
+        selected = pyre.inventory.str('selected')
+
+
+    introduction = '''
+This is a demo of widget "table".
+
+Table is different from grid.
+'''
+
+    demo_panels = ['basic_usages', 'advanced_usages']
+
+    
+    @quickpanel(
+        title = 'Basic usages',
+        description =  [
+          ],
+        examples = ['basic_usage%s' % (i+1) for i in range(3)],
+        )
+    def basic_usages(self): pass
+
+
+    @example(
+        title='Table connected to db. Editable cells. Get checked rows.',
+        description = [
+        'A simple example of a table connected with a database backend.',
+        '',
+        'The data in the table are retrieved from a database table.'
+        'Double click the email cell(s) allow users to edit email column in the db table.',
+        'The update will happen when an edit widget lost focus, ',
+        'and you will be alerted that the email was updated.',
+        '',
+        'The last column in the table contains check boxes.',
+        'Check/uncheck the checkbox(s) and click the "get checked rows" button to',
+        'see how you can obtain the checked rows.',
+          ],
+        deps = [
+          'showCheckedRows',
+          'processRowChange',
+          '_createUserTable',
+          ],
+        )
+    def basic_usage1(self, director):
+        lc = luban.content
+
+        # container
+        document = lc.document()
+
+        # get records of users
+        users = self._retrieveUserRecords(director)
+
+        # now construct the table widget
+        editable = {'username': False, 'email': True}
+        sortable = {'username': True, 'email': True}
+        table = self._createUserTable(
+            users=users, editable=editable, sortable=sortable, director=director)
+        # the oncellchanged event handler handles user-editing of a cell in the table
+        table.oncellchanged = select(element=table).notify(
+            event='row-changed', actor=self.name, routine='processRowChange')
+        # add table
+        document.add(table)
+
+        # add a button to get the rows that are checked
+        button = lc.button(label='get checked rows')
+        button.onclick = load(
+            actor=self.name, routine='showCheckedRows',
+            checked=select(element=table).table('getIdentifiersForCheckedRows', colname='selected'),
+            )
+        document.add(button)
+
+        return document
+
+
+    @example(
+        title='No db. Editable cells. Append row.',
+        description = [
+          'This example shows a table without db backend.',
+          'You can edit both the "username" and the "email" columns by',
+          'double clickinng.',
+          '',
+          'You can append a row to the table by clicking the "append a new row" button.',
+          ],
+        deps = [
+          '_createUserTable',
+          
+          ],
+        )
+    def basic_usage2(self, director):
+        lc = luban.content
+
+        # container
+        document = lc.document()
+
+        # get records of users
+        demouser = User(); demouser.username = 'demo'; demouser.email = 'demo@demo.com'
+        users = [demouser,]
+
+        # now construct the table widget
+        editable = {'username': True, 'email': True}
+        sortable = {'username': True, 'email': False}
+        table = self._createUserTable(
+            id = 'example2-table', users=users,
+            cols = ['username', 'email'],
+            editable=editable, sortable=sortable,
+            director=director)
+        # add table
+        document.add(table)
+        
+        # button to add a row to the table
+        button = lc.button(label='append a new row')
+        button.onclick = select(element=table).table(
+            'appendrow', row=['newuser', 'newuser@company.com'])
+        document.add(button)
+            
+        return document
+
+
+    @example(
+        title='A column of radio buttons',
+        description = [
+          'A table with a column being radio buttons to select one row from the table.',
+          '',
+          'The last column contains radio buttons. ',
+          'You can use it to allow users to select just one row from the table.',
+          ],
+        deps = [
+          '_createUserTable',
+          '_retrieveUserRecords',
+          ],
+        )
+    def basic_usage3(self, director):
+        lc = luban.content
+        document = lc.document()
+
+        # records
+        users = self._retrieveUserRecords(director)
+
+        # table
+        editable = False; sortable = False
+        table = self._createUserTable(
+            id = 'singlechoice-user-table',
+            users=users,
+            editable=editable, sortable=sortable,
+            director=director,
+            cols=['username', 'email', 'selectone']
+            )        
+        document.add(table)
+
+        button = lc.button(label='get selected row')
+        button.onclick = load(
+            actor=self.name, routine='showSelectedRow',
+            selected=select(element=table).table(
+              'getIdentifierForSelectedRow', colname='selectone'),
+            )
+        document.add(button)
+        return document
+
+
+    @quickpanel(
+        title = 'Advanced usages',
+        description =  [
+          ],
+        examples = ['advanced_usage%s' % (i+1) for i in range(2)],
+        )
+    def advanced_usages(self): pass
+
+
+    @example(
+        title='Add/delete row(s)',
+        description = [
+          'This example shows a table without db backend.',
+          'You can add a new row to the table, and you can delete checked rows.'
+          ],
+        deps = [
+          '_createUserTable',
+          ],
+        )
+    def advanced_usage1(self, director):
+        lc = luban.content
+
+        # container
+        document = lc.document()
+
+        # get records of users
+        demouser = User(); demouser.username = 'demo'; demouser.email = 'demo@demo.com'
+        users = [demouser,]
+
+        # now construct the table widget
+        editable = {'username': True, 'email': True}
+        sortable = {'username': True, 'email': True}
+        table = self._createUserTable(
+            id = 'advanced1-table', users=users,
+            cols = ['selected', 'username', 'email'],
+            editable=editable, sortable=sortable,
+            director=director)
+        # add table
+        document.add(table)
+        
+        # button to add a row to the table
+        button = lc.button(label='append a new row')
+        selecttable = select(element=table)
+        button.onclick = selecttable.table(
+            'appendrow', row=[0, 'newuser', 'newuser@company.com'])
+        document.add(button)
+            
+        # button to remove checked rows
+        button = lc.button(label='remove selected rows')
+        
+        removerows = selecttable.table(
+            'deleterows',
+            rows=selecttable.table('getIdentifiersForCheckedRows', colname='selected')
+            )
+        button.onclick = removerows
+        document.add(button)
+        return document
+
+
+    @example(
+        title='Show/hide col(s)',
+        description = [
+          'This example shows a table without db backend.',
+          'Click the button to see columns hide/show.'
+          ],
+        deps = [
+          '_createUserTable',
+          ],
+        )
+    def advanced_usage2(self, director):
+        lc = luban.content
+
+        # container
+        document = lc.document()
+
+        # get records of users
+        demouser = User(); demouser.username = 'demo'; demouser.email = 'demo@demo.com'
+        users = [demouser,]
+
+        # now construct the table widget
+        editable = {'username': True, 'email': True}
+        sortable = {'username': True, 'email': True}
+        table = self._createUserTable(
+            id = 'advanced2-table', users=users,
+            cols = ['selected', 'username', 'email'],
+            editable=editable, sortable=sortable,
+            director=director)
+        # add table
+        document.add(table)
+        
+        # button to show username column
+        button = lc.button(label='hide email column')
+        selecttable = select(element=table)
+        button.onclick = selecttable.table(
+            'setVisibleCols', cols=['selected', 'username'])
+        document.add(button)
+            
+        # button to show email column
+        button = lc.button(label='hide username column')
+        selecttable = select(element=table)
+        button.onclick = selecttable.table(
+            'setVisibleCols', cols=['selected', 'email'])
+        document.add(button)
+            
+        # button to show all
+        button = lc.button(label='show all')
+        selecttable = select(element=table)
+        button.onclick = selecttable.table(
+            'setVisibleCols', cols=['selected', 'username', 'email'])
+        document.add(button)
+            
+        return document
+
+
+    def showCheckedRows(self, director):
+        checked = self.inventory.checked
+        return alert('checked usernames: %s' % (checked,))
+
+
+    def showSelectedRow(self, director):
+        selected = self.inventory.selected
+        return alert('select username: %s' % (selected,))
+    
+
+    def processRowChange(self, director):
+        username = self.inventory.username
+        email = self.inventory.email
+        user = director.clerk.db.query(User).filter_by(username=username).one()
+        user.email = email
+        director.clerk.db.updateRecord(user)
+        return alert('email updated')
+
+
+    def _createUserTable(self, users, editable, sortable, director, cols=None, id=None):
+        if cols is None:
+            cols = ['selected', 'username', 'email']
+
+        # to construct a table, a model, a view, and a list of data are needed
+        from luban.content.table import Model, View, Table
+        # first the model
+        class model(Model):
+
+            username = Model.descriptors.str(name='username')
+            email = Model.descriptors.str(name='email')
+            selected = Model.descriptors.bool(name='selected')
+            selectone = Model.descriptors.radio_button(name='selectone')
+            row_identifiers = ['username']
+
+        # then the view
+        columns = [
+            View.Column(label='Selected', measure='selected'),
+            View.Column(label='Username',  measure='username',
+                        editable=editable and editable['username'],
+                        sortable=sortable and sortable['username'],
+                        ),
+            View.Column(label='Email', measure='email',
+                        editable=editable and editable['email'],
+                        sortable=sortable and sortable['email'],
+                        ),
+            View.Column(label='Select', sortable=False, measure='selectone'),
+            ]
+        columns = filter(lambda c: c.measure in cols, columns)
+        view = View(columns = columns, editable = bool(editable), sortable=sortable)
+
+        # data: a list of rows. each row is a tuple of values for all cells in the row
+        def getRow(user):
+            return [getAttr(col, user) for col in cols]
+        def getAttr(name, obj):
+            if name in ['selected', 'selectone']: return False
+            return getattr(obj, name)
+        data = [getRow(user) for user in users]
+        
+        # now the table
+        id = id or 'user-table'
+        return Table(model=model, data=data, view=view, id=id)
+
+
+    def _retrieveUserRecords(self, director):
+        db = director.clerk.db
+        db.registerTable(User)
+        db.createAllTables()
+        db.commit()
+
+        users = db.query(User).all()
+        if not users:
+            def new(*args):
+                user = newUser(*args)
+                db.insertRow(user)
+                users.append(user)
+                return
+            new(1, 'demo', 'demo@demo.com')
+            new(2, 'bob', 'bob@builder.com')
+
+        return users
+
+
+def newUser(id, username, email):
+    user = User()
+    user.id = id
+    user.username = username
+    user.email = email
+    return user
+
+from aokuang.dom.User import User
+
+
+def actor():
+    return Actor('table')
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 

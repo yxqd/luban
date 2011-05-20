@@ -1,0 +1,73 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                 Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2009  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+import luban.content
+from luban.content import select, load, alert
+
+
+from aokuang.components.WidgetDemoActor import Actor as base, panel, example, quickpanel
+class Actor(base):
+
+
+    from luban.content.Toolbar import Toolbar as widget
+
+
+    class Inventory(base.Inventory):
+
+        import pyre.inventory
+
+
+    introduction = '''
+This is a demo of widget "toolbar".
+'''
+
+    @quickpanel(
+        title = 'Basic usages',
+        description =  [
+          ],
+        examples = ['basic_usage%s' % (i+1) for i in range(1)],
+        )
+    def basic_usages(self): pass
+
+
+    @example(
+        title='A basic toolbar',
+        description = [
+        'click the buttons to see effects.'
+          ]
+        )
+    def basic_usage1(self, director):
+        lc = luban.content
+        # container
+        container = lc.document()
+        # toolbar
+        toolbar = lc.toolbar(); container.add(toolbar)
+        # add buttons
+        toolbar.button(label='button1', onclick=alert('button1 clicked'))
+        toolbar.button(label='button2', onclick=alert('button2 clicked'))
+        toolbar.spacer()
+        toolbar.button(label='button3', onclick=alert('button3 clicked'))
+        #
+        return container
+
+
+
+def actor():
+    return Actor('toolbar')
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 

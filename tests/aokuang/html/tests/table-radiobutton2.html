@@ -1,0 +1,96 @@
+<!-- 
+table
+-->
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+
+<style media="all" rel="stylesheet">
+@import url(../javascripts/jquery/tabulator/tabulator.css);
+  </style>
+<style media="all" rel="stylesheet">
+@import url(../javascripts/jquery/tabulator/tabulator-color.css);
+  </style>
+
+<script src="../javascripts/jquery/jquery.js"> </script>
+<script src="../javascripts/jquery/tableFactory.js"> </script>
+<script src="../javascripts/jquery/tabulator.js"> </script>
+<script src="../javascripts/luban/luban-core.js"> </script>
+<script src="../javascripts/luban/luban-controller.js"> </script>
+<script src="../javascripts/luban/luban-compiler-preloader.js"> </script>
+<script src="../javascripts/luban/luban-actioncompiler.js"> </script>
+<script src="../javascripts/luban/luban-documentmill.js"> </script>
+<script src="../javascripts/luban/luban-widgets-basic.js"> </script>
+<script src="../javascripts/luban/widgets/table.js"> </script>
+
+
+<script>
+$(function (){
+
+  luban.configuration.javascripts_base = "../javascripts";
+
+  var framedesc = {
+    'type': 'frame',
+    'title': "Test frame",
+    lubanelement:1
+  };
+  
+  var form = {
+  type: 'form'
+  }
+
+  framedesc.contents = [form];
+  
+  var table = {
+    'type': 'table'
+  };
+  form.contents = [table];
+
+  table.id = 'table';
+  
+  table.model = {
+    'select': {'type': 'radio_button',
+	       'name': 'select'
+    },
+    'id': {'type': 'str',
+	   'name': 'id'
+    },
+    'name': {'type': 'str',
+	     'name': 'name'
+    },
+    'row_identifiers': ['id']
+  };
+  
+  table.view = {
+  columns : [
+    {'measure': 'select',
+     'label': 'select'
+    },
+    {'measure': 'id',
+     'label': 'ID'
+    },
+    {'measure': 'name',
+     'label': 'Name',
+     'editable': 1
+    },
+	     ],
+  editable: 1
+  };
+  
+  table.data = [
+		[0, '001', 'alice'],
+		[1, '002', 'bob']
+		];
+  
+  var mill = luban.docmill;  
+  var frame = mill.render(framedesc);
+  
+  });
+</script>
+</head>
+
+<body>
+
+<div id="body-wrapper"> </div>
+
+<!-- hhmts start --> Last modified: Wed Jul 21 18:38:12 PDT 2010 <!-- hhmts end -->
+</body> </html>

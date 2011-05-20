@@ -1,0 +1,386 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                 Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2009  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+import luban.content as lc
+
+from luban.content import select, load
+
+from luban.components.Actor import Actor as base
+class Actor(base):
+
+    class Inventory(base.Inventory):
+
+        import pyre.inventory
+
+        widget = pyre.inventory.str('widget')
+        
+        str_var = pyre.inventory.str('str_var')
+
+        listvar_asstr = pyre.inventory.str('listvar_asstr')
+
+
+    def default(self, director):
+        page = lc.page(title='luban test')
+
+        splitter = lc.splitter(); page.add(splitter)
+        left = splitter.section(id='left')
+        right = splitter.section(id='right')
+        right.document(id='maindoc')
+        
+        portlet = lc.portlet()
+        left.add(portlet)
+
+        from aokuang.lubanelements import Widgets
+        for Widget in Widgets:
+            name = Widget.__name__
+            portlet.item(
+                label=name,
+                onclick=load(actor=self.name, routine='loadTestPanel', widget=name),
+                )
+            continue
+
+        return page
+
+
+    def loadTestPanel(self, director):
+        widgetname = self.inventory.widget
+        from aokuang.lubanelements import name2type
+        Widget = name2type[widgetname]
+
+        from aokuang.lubanelements import ElementNotRoot
+        if issubclass(Widget, ElementNotRoot):
+            # skip for now
+            doc = lc.paragraph(text=['no test available yet'])
+            return select(id='maindoc').replaceContent(doc)
+        
+        doc = lc.document(title='test %s' % widgetname)
+
+        handler = '_testPanelFor%s' % widgetname
+        if hasattr(self, handler):
+            handler = getattr(self, handler)
+        else:
+            handler = self._defaultTestPanel
+        handler(doc, Widget)
+
+        return select(id='maindoc').replaceContent(doc)
+
+
+    def _testPanelForDialog(self, doc, Widget):
+        # dialog is special. not implementedd at this moment
+
+        widgetname = Widget.__name__
+        
+        # add the widget for test
+        # widget = Widget(id='target')
+        # doc.add(widget)
+
+        # form to hold input fields, not really have any real form effects
+        # form = doc.form()
+        # self._buildAttributeEditingForm(Widget, form, widget)
+        doc.paragraph().text = ['Not implemented']
+        return
+
+
+    def _testPanelForPage(self, doc, Widget):
+        # page is special. not implementedd at this moment
+        
+        widgetname = Widget.__name__
+        
+        # add the widget for test
+        # widget = Widget(id='target')
+        # doc.add(widget)
+
+        # form to hold input fields, not really have any real form effects
+        # form = doc.form()
+        # self._buildAttributeEditingForm(Widget, form, widget)
+        doc.paragraph().text = ['Not implemented']
+        return
+
+
+    def _testPanelForProgressBar(self, doc, Widget):
+        # progressbar is special. not implementedd at this moment
+
+        widgetname = Widget.__name__
+        
+        # add the widget for test
+        # widget = Widget(id='target')
+        # doc.add(widget)
+
+        # form to hold input fields, not really have any real form effects
+        # form = doc.form()
+        # self._buildAttributeEditingForm(Widget, form, widget)
+        doc.paragraph().text = ['Not implemented']
+        return
+
+
+    def _testPanelForReStructuredTextDocument(self, doc, Widget):
+        # two difficulties:
+        # 1. attribute "text" is a list. don't have a widget for list input yet
+        # 2. there is no real ReStructuredTextDocument widget on js renderer
+        #    the current implementation converts rst doc to html on the server
+        #    side and send only html to client. so the js widget on the client side
+        #    don't know how to interpret text in rst.
+
+        widgetname = Widget.__name__
+        
+        # add the widget for test
+        # widget = Widget(id='target')
+        # doc.add(widget)
+
+        # form to hold input fields, not really have any real form effects
+        # form = doc.form()
+        # self._buildAttributeEditingForm(Widget, form, widget)
+        doc.paragraph().text = ['Not implemented']
+        return
+
+
+    def _testPanelForReSTDocument(self, doc, Widget):
+        # obsolete
+
+        widgetname = Widget.__name__
+        
+        # add the widget for test
+        # widget = Widget(id='target')
+        # doc.add(widget)
+
+        # form to hold input fields, not really have any real form effects
+        # form = doc.form()
+        # self._buildAttributeEditingForm(Widget, form, widget)
+        doc.paragraph().text = ['ReSTDocument is obsolete, pls use ReStructuredTextDocument']
+        return
+
+
+    def _testPanelForDocument(self, doc, Widget):
+        widgetname = Widget.__name__
+        
+        # add the widget for test
+        widget = Widget(id='target', title='Title')
+        widget.paragraph().text = ['A paragraph']
+        widget.document(title = 'a sub document')
+        doc.add(widget)
+
+        # form to hold input fields, not really have any real form effects
+        form = doc.form()
+        self._buildAttributeEditingForm(Widget, form, widget)
+        return
+
+
+    def _testPanelForImage(self, doc, Widget):
+        widgetname = Widget.__name__
+        
+        # add the widget for test
+        path = 'luban.jpg'
+        widget = Widget(path=path)
+        doc.add(widget)
+
+        # form to hold input fields, not really have any real form effects
+        form = doc.form()
+        self._buildAttributeEditingForm(Widget, form, widget)
+        return
+
+
+    def _testPanelForFormSelectorField(self, doc, Widget):
+        widgetname = Widget.__name__
+
+        # add the widget for test
+        widget = Widget(id='target')
+        widget.entries=enumerate(['a','b','c'])
+        widget.label='%s for test' % widgetname
+        doc.add(widget)
+
+        # form to hold input fields, not really have any real form effects
+        form = doc.form()
+        self._buildAttributeEditingForm(Widget, form, widget)
+            
+        return
+    
+
+    def _testPanelForSplitter(self, doc, Widget):
+        widgetname = Widget.__name__
+
+        # add the widget for test
+        widget = Widget(id='target')
+        widget.section().document(title='section 1')
+        widget.section().document(title='section 2')
+        widget.section().document(title='section 3')
+        doc.add(widget)
+
+        # form to hold input fields, not really have any real form effects
+        form = doc.form()
+        self._buildAttributeEditingForm(Widget, form, widget)
+            
+        return
+    
+
+    def _testPanelForTreeView(self, doc, Widget):
+        widgetname = Widget.__name__
+
+        # add the widget for test
+        widget = Widget(id='target', label='treeview label')
+        doc.add(widget)
+
+        # form to hold input fields, not really have any real form effects
+        form = doc.form()
+        builder = AttributeFormBuilder(
+            Widget,
+            # label is obsolete
+            # draggable is not officially supported
+            excluded_attrs = AttributeFormBuilder.excluded_attrs + ['label', 'draggable'],
+            )
+        builder.build(form, widget)
+        
+        return
+    
+
+    def _testPanelForParagraph(self, doc, Widget):
+        widgetname = Widget.__name__
+
+        # add the widget for test
+        widget = Widget(id='target', text=['paragraph for text'])
+        doc.add(widget)
+
+        # form to hold input fields, not really have any real form effects
+        form = doc.form()
+
+        # "text" attr
+        field = form.textarea(label='text', id='paragraph-text-input')
+        field.onchange = load(
+            actor=self.name, routine='_parseParagraphText',
+            listvar_asstr = select(element=field).getAttr('value')
+            )
+        return
+
+
+    def _parseParagraphText(self, director):
+        value = self.inventory.listvar_asstr
+        value = value.split('\n')
+        return select(id='target').setAttr(text=value)
+    
+
+    def _testPanelForHtmlDocument(self, doc, Widget):
+        widgetname = Widget.__name__
+
+        # add the widget for test
+        widget = Widget(id='target', text=['htmldocument for text'])
+        doc.add(widget)
+
+        # form to hold input fields, not really have any real form effects
+        form = doc.form()
+
+        # "text" attr
+        field = form.textarea(label='text', id='htmldocument-text-input')
+        field.onchange = load(
+            actor=self.name, routine='_parseHtmlDocumentText',
+            listvar_asstr = select(element=field).getAttr('value')
+            )
+        return
+
+
+    def _parseHtmlDocumentText(self, director):
+        value = self.inventory.listvar_asstr
+        value = value.split('\n')
+        return select(id='target').setAttr(text=value)
+    
+
+    def _defaultTestPanel(self, doc, Widget):
+        widgetname = Widget.__name__
+
+        # add the widget for test
+        widget = Widget(id='target')
+        try:
+            widget.label='%s for test' % widgetname
+        except:
+            pass
+        doc.add(widget)
+
+        # form to hold input fields, not really have any real form effects
+        form = doc.form()
+
+        #
+        self._buildAttributeEditingForm(Widget, form, widget)
+            
+        return
+    
+
+    def _buildAttributeEditingForm(self, AttributeContainer, form, targetwidget):
+        builder = AttributeFormBuilder(AttributeContainer)
+        builder.build(form, targetwidget)
+        return
+
+
+
+class AttributeFormBuilder(object):
+
+    excluded_attrs = ['id', 'hidden', 'Class', 'name']
+
+    def __init__(self, AttributeContainer, excluded_attrs=None):
+        self.AttributeContainer = AttributeContainer
+
+        excluded_attrs = excluded_attrs or self.__class__.excluded_attrs
+        # have not think thru this, temporarily make it excluded: "required"
+        excluded_attrs.append('required')
+        
+        self.excluded_attrs = excluded_attrs
+        return
+    
+
+    def build(self, form, targetwidget):
+        AttributeContainer = self.AttributeContainer
+        excluded_attrs = self.excluded_attrs
+        
+        # go thru the attributes and build input fields
+        for descriptor in AttributeContainer.getDescriptors():
+            name = descriptor.name
+
+            # skip over some special attrs
+            if name in excluded_attrs: continue
+            
+            default = descriptor.default
+            value = getattr(targetwidget, name)
+            type = descriptor.type
+            
+            if type == 'str' or type == 'int':
+                field = form.text(label=name, value=value)
+                
+            elif type == 'bool':
+                field = form.checkbox(label=name, value=value)
+                
+            elif type in ['lists', 'dict', 'list']:
+                # skip for now
+                continue
+            
+            elif type in ['reference', 'referenceset']:
+                continue
+
+            else:
+                raise NotImplementedError, type
+
+            params = {name: select(element=field).getAttr('value')}
+            field.onchange = select(element=targetwidget).setAttr(**params)
+            continue
+
+        if len(form.contents)==0:
+            form.paragraph(text='not attributes to set')
+            
+        return
+
+
+def actor():
+    return Actor('getsetattr')
+
+
+# version
+__id__ = "$Id$"
+
+# End of file    
+        

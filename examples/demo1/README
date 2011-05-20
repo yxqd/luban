@@ -1,0 +1,12 @@
+To try out
+
+0. Install luban (see ../../INSTALL)
+1. start luban services
+ start-luban-services.sh
+2. start gongshuzi services
+ cd $EXPORT_ROOT/luban-demo1/bin
+ ./startservices.sh
+3. start webserver
+ cd $EXPORT_ROOT/luban-demo1/html
+ SimpleHttpServer.py
+4. http://localhost:8001/cgi-bin/main.cgi

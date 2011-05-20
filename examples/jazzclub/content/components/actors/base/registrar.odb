@@ -1,0 +1,153 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                             Michael A.G. Aivazis
+#                               Orthologue, Ltd.
+#                      (C) 2004-2008  All Rights Reserved
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+
+from luban.content import select
+
+
+from luban.components.Actor import Actor
+
+
+class Registrar(Actor):
+
+
+    class Inventory(Actor.Inventory):
+
+        import pyre.inventory
+
+        firstname = pyre.inventory.str(name='firstname')
+        lastname = pyre.inventory.str(name='lastname')
+        username = pyre.inventory.str(name='username')
+        email = pyre.inventory.str(name="email")
+        password = pyre.inventory.str(name="password")
+        confirmation = pyre.inventory.str(name="confirmation")
+        organization = pyre.inventory.str(name='organization')
+
+
+    def default(self, director):
+        return self.interview(director)
+
+
+    def interview(self, director, errors=None):
+        doc = director.retrieveVisual('base/registrar-interview')
+        return select(id='maindoc').replaceContent(doc)
+    
+
+    def register(self, director):
+        # save into the database
+        from jazzclub.dom.Registrant import Registrant as Table
+        registrant = Table()
+        registrant.id = director.getGUID()
+        registrant.firstname = self.firstname
+        registrant.lastname = self.lastname
+        registrant.username = self.username
+        registrant.email = self.email
+        registrant.organization = self.organization
+        registrant.password = self._encode(director, self.password)
+
+        director.clerk.newRecord(registrant)
+
+        # approve registrant right away
+        # not a good thing to do, but this is just a demo
+        from jazzclub.dom.User import User
+        user = User()
+        user.id = user.username = registrant.username
+        user.password = registrant.password
+        director.clerk.newRecord(user)
+
+        return select(id='maindoc').replaceContent(
+            director.retrieveVisual("base/registration-complete")
+            )
+
+
+    def validateState(self, director):
+        errors = {}
+        if self.password != self.confirmation:
+            errors['password'] = (
+                'Password and confirmation you entered do not match.'
+                )
+
+        from jazzclub.dom.Registrant import Registrant as Table
+        username = self.username
+        all = director.clerk.db.query(Table).filter_by(username=username).all()
+        if len(all):
+            errors['username'] = ''.join([
+                'Username %r has been registered.' % username,
+                'Please choose a different one.',
+                ])
+
+        min_username_len = 6
+        if len(self.username) < min_username_len:
+            msg = 'Username %s too short. Must be at least %d characters.' % (
+                self.username, min_username_len)
+            e = errors.get('username')
+            if e: e+=msg
+            else: errors['username'] = msg
+
+        min_password_len = 8
+        if len(self.password) < min_password_len:
+            msg = 'Password too short. Must be at least %d characters.' % (
+                min_password_len,)
+            e = errors.get('password')
+            if e: e+=msg
+            else: errors['password'] = msg
+            
+        if errors:
+            return self.formError(director, errors=errors)
+        
+        return self.register(director)
+ 
+
+    def formError(self, director, errors=None):
+        from luban.content import select
+        return [
+            select(id='registrar-%s-input' % name).formfield('showError', message=text)
+            for name, text in errors.iteritems()
+            ]
+
+
+    def __init__(self, name=None):
+        if name is None:
+            name = "registrar"
+        super(Registrar, self).__init__(name)
+        return
+
+
+    def _configure(self):
+        super(Registrar, self)._configure()
+
+        self.firstname = self.inventory.firstname
+        self.lastname = self.inventory.lastname
+        self.username = self.inventory.username
+        self.email = self.inventory.email
+        self.password = self.inventory.password
+        self.confirmation = self.inventory.confirmation
+        self.organization = self.inventory.organization
+
+        return
+
+
+    def _encode(self, director, password):
+        method = 'md5'
+        
+        from pyre.ipa.UserManager import UserManager
+        encoder = UserManager('__tmp')._encoders[method]
+
+        return encoder(password)
+
+
+def actor(): return Registrar()
+
+# version
+__id__ = "$Id$"
+
+# End of file 

@@ -1,0 +1,4 @@
+from plotfx.Sin import Sin
+import luban.orm
+Actor = luban.orm.object2actor(Sin, needauthorization=False)
+def actor(): return Actor('orm/sin')

@@ -1,0 +1,2 @@
+from aokuang.components.DemoClerk import Clerk
+def clerk(): return Clerk('democlerk')

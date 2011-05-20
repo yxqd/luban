@@ -1,0 +1,73 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                 Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2009  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+import luban.content
+from luban.content import select, load, alert
+
+
+from aokuang.components.WidgetDemoActor import Actor as base, panel, example, quickpanel
+class Actor(base):
+
+
+    from luban.content.Grid import Grid as widget
+    
+
+    introduction = '''
+This is a demo of widget "grid".
+'''
+
+    @quickpanel(
+        title = 'Basic examples',
+        description =  [
+          ],
+        examples = ['basic_example%s' % (i+1) for i in range(1)],
+        )
+    def basic_examples(self): pass
+
+
+    @example(
+        title='A grid',
+        description = [
+          ]
+        )
+    def basic_example1(self, director):
+        doc = luban.content.document(title='test grid')
+
+        doc.paragraph(text=['start grid'])
+        
+        grid = luban.content.grid(); doc.add(grid)
+
+        row0 = grid.row()
+        row0.cell().document(title='row 0, col 0', collapsable=True)
+        row0.cell().document(title='row 0, col 1')
+        
+        row1 = grid.row()
+        row1.cell().document(title='row 1, col 0')
+        row1.cell().add('row 1, col 1')
+        row1.cell().document(title='row 1, col 2', collapsable=True)
+        row1.cell().add(luban.content.paragraph(text=['row1, col3']))
+        
+        doc.paragraph(text=['end grid'])
+        
+        return doc
+
+
+def actor():
+    return Actor('grid')
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 

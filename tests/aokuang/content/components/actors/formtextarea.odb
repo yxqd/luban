@@ -1,0 +1,75 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                 Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2009  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+import luban.content
+from luban.content import select, load, alert
+from luban.content.FormTextArea import FormTextArea
+
+
+from aokuang.components.WidgetDemoActor import Actor as base, panel, example, quickpanel
+class Actor(base):
+
+
+    widget = FormTextArea
+
+    class Inventory(base.Inventory):
+
+        import pyre.inventory
+
+        text = pyre.inventory.str('text')
+
+
+    @quickpanel(
+        title = 'Basic',
+        description =  [
+          ],
+        examples = ['basic_example%s' % (i+1) for i in range(1)],
+        )
+    def basic(self): pass
+
+
+    @example(
+        title='Basic example 1',
+        description = [
+          '',
+          ]
+        )
+    def basic_example1(self, director):
+        doc = luban.content.document()
+
+        form = doc.form(title='form')
+        
+        f = form.textarea(label='area', name='text')
+
+        form.submitbutton(label='submit')
+        
+        form.onsubmit = select(element=form).submit(actor=self.name, routine='onsubmit')
+        
+        return doc
+
+
+    def onsubmit(self, director):
+        text = self.inventory.text
+        return alert(text)
+
+    
+
+def actor():
+    return Actor('formtextarea')
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 

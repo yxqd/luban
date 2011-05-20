@@ -1,0 +1,148 @@
+.luban-frame {
+    font-size:1em;
+    width: 61em;
+}
+
+.luban-frame .ui-tabs .ui-tabs-panel {
+    background-color:#f0f0f0;
+}
+
+.luban-formfield input {
+    width: 5em;
+}
+
+h1.luban-document-title {
+    font-family:verdana;
+    font-size:0.9em;
+}
+
+.luban-document.window {
+    border:1px solid #888888;
+    background-color:#dddddd;
+}
+
+.luban-document.window h1.luban-document-title {
+    background-color: lightGrey;
+    margin:0;
+}
+
+.luban-splitter td[luban-element-type='splitsection'] {
+    vertical-align:top;
+}
+
+#observations {
+    width:37em;
+}
+
+#observations-table-container {
+    max-height:18.3em;
+    min-height:2em;
+    overflow-x:hidden;
+    /* overflow-y:scroll; */
+}
+
+#observations-table-container-cell {
+    background-color:white;
+    height:18.4em;
+    vertical-align:top;
+}
+
+#desired-res-doc {
+    width:37em;
+}
+
+#desiredresults-table {
+    width: 35em;
+}
+
+#desiredresults-table-container {
+    max-height:11.5em;
+    min-height:2em;
+    overflow-x:hidden;
+    /* overflow-y:scroll; */
+}
+
+#desiredresults-table-container-cell {
+    background-color:white;
+    height:12em;
+    vertical-align:top;
+}
+
+.luban-toolbar.table-toolbar {
+    font-size:0.89em;
+}
+.luban-toolbar.table-toolbar > table > tbody > tr > td {
+    border-right:1px solid black;
+    padding:0.1em 0.4em;
+}
+
+.diffrpeaks-table {
+    width:34em;
+}
+
+#desired-res-doc {
+    margin-left:1em;
+}
+
+#mode-selector-doc {
+    font-size:1em;
+    width:25em;
+}
+
+#mode-selector-doc .ui-accordion .ui-accordion-header a {
+    background-color: #eeeeee;
+}
+
+#mode-selector-doc .luban-document.window {
+background-color:transparent;
+}
+
+#ubmatrix-doc {
+    width:25em;
+}
+
+.luban-uploader {
+    /*background-color:#758273;
+    border-color:white #888888 #333333 white;*/
+    border-style:solid;
+    border-width:1px;
+    color:white;
+    cursor:pointer;
+    font-size:100%;
+    padding:1px 5px;
+    /*width:6em;*/
+    margin:1em;
+}
+
+.luban-uploader-button {
+    padding:0.3em 1em;
+}
+
+.pickcols-button {
+    text-align: right;
+}
+.pickcols-button .luban-button {
+    border:1px outset #555555;
+    padding:0.1em 0.2em;
+}
+.pickcols-button .luban-button span {
+    color: #55aa55;
+}
+
+#select-cols-dialog {
+    width:15em;
+}
+table.tabulated.cols-table tr {
+    background-color:transparent;
+    border:none;
+}
+table.tabulated.cols-table td {
+    border:none;
+    background-color:transparent;
+}
+table.tabulated.cols-table {
+    text-align:center;
+    border:none;
+    margin-left:auto;
+    margin-right:auto;
+}

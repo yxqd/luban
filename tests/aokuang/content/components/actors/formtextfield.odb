@@ -1,0 +1,71 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                 Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2009  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+import luban.content
+from luban.content import select, load, alert
+from luban.content.FormTextField import FormTextField
+
+
+from aokuang.components.WidgetDemoActor import Actor as base, panel, example, quickpanel
+class Actor(base):
+
+
+    widget = FormTextField
+
+    class Inventory(base.Inventory):
+
+        import pyre.inventory
+
+
+    @quickpanel(
+        title = 'Experimental usages',
+        description =  [
+          ],
+        examples = ['experimental_usage%s' % (i+1) for i in range(1)],
+        )
+    def experimental_usages(self): pass
+
+
+    @example(
+        title='Keystroke',
+        description = [
+          'Type in the text field to see an alert show up with the key code',
+          ]
+        )
+    def experimental_usage1(self, director):
+        doc = luban.content.document()
+        
+        f = FormTextField(label='field')
+        f.onkeypress = select(element=f).notify(
+            'keypress', actor=self.name, routine='onKeypress')
+        doc.add(f)
+        
+        return doc
+
+
+    def onKeypress(self, director):
+        keycode = self.inventory.keycode
+        return alert('key pressed: %s' % (keycode,))
+
+
+    
+
+def actor():
+    return Actor('formtextfield')
+
+
+# version
+__id__ = "$Id$"
+
+# End of file 

@@ -1,0 +1,77 @@
+# -*- Python -*-
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                   Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2010  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+import luban.content as lc
+from luban.content import select, alert, load
+
+
+def visual(director):
+    doc = lc.document(title='Desired results', id='desired-res-doc')
+    doc.Class = 'window'
+
+    grid = lc.grid(); doc.add(grid)
+    row0 = grid.row(); cell0 = row0.cell(id='desiredresults-top-ctrls-container')
+    row1 = grid.row(); cell1 = row1.cell(id='desiredresults-table-container-cell')
+    row2 = grid.row(); cell2 = row2.cell(id='desiredresults-ctrls-container')
+
+    pickcolsbutton = lc.button(
+        id= 'pick-desiredresults-cols',
+        label = 'columns',
+        tip = 'click to choose columns',
+        onclick=load(actor='cols_selector', routine='showDialog', table='desiredresults-table'))
+    pickcolsbutton.Class = 'pickcols-button'
+    cell0.add(pickcolsbutton)
+
+    container = lc.document(id='desiredresults-table-container')
+    cell1.add(container)
+    cols = ['selected', 'h', 'k', 'l', 'twotheta', 'theta', 'omega', 'chi', 'phi']
+    editable = {}
+    for c in cols:
+        if c in ['h', 'k', 'l']: editable[c] = True
+        else: editable[c] = False
+    table = director.retrieveVisual(
+        'diffrpeaks_table', id='desiredresults-table', editable=editable, cols=cols)
+    container.add(table)
+    
+    toolbar = lc.toolbar(id='desiredresults-toolbar');
+    toolbar.Class = 'table-toolbar'
+    cell2.add(toolbar)
+    
+    selecttable = select(element=table)
+    appendnewrow = selecttable.table(
+        'appendrow',
+        row=[False, 0,0,0,0,0,0,0,0])
+    removerows = selecttable.table(
+        'deleterows',
+        rows=selecttable.table('getIdentifiersForCheckedRows', colname='selected')
+        )
+    toolbar.button(
+        id='desiredresults-addrow-button',
+        label='Add New Row',
+        onclick = appendnewrow,
+        )
+    toolbar.button(
+        id='desiredresults-removerows-button',
+        label=u'Remove Selected Rows',
+        onclick = removerows,
+        )
+    toolbar.button(id='desiredresults-calcres-button', label='***CALCULATE RESULTS***')
+
+    return doc
+    
+
+# version
+__id__ = "$Id$"
+
+# End of file 

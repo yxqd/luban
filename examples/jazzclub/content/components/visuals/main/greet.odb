@@ -1,0 +1,42 @@
+#!/usr/bin/env python
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                                 Jiao Lin
+#                      California Institute of Technology
+#                      (C) 2006-2009  All Rights Reserved
+#
+# {LicenseText}
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+
+
+def visual(director):
+    import luban.content
+    document = luban.content.document(title="Jazz club")
+
+    user = director.clerk.getUserInfo(director.sentry.username)
+    p = document.paragraph()
+    p.text = [
+        'Welcome, %s' % (user.firstname or user.lastname or user.username),
+        ]
+
+    from jazzclub.dom.Thread import Thread
+    threads = director.clerk.getRecords(Thread)
+
+    table = director.retrieveComponent(
+        'main/threads',
+        factory="table", args=[threads, director],
+        vault=['visuals'])
+
+    document.add(table)
+
+    return document
+
+
+    
+# version
+__id__ = "$Id$"
+
+# End of file 

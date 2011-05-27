@@ -12,10 +12,14 @@
 #
 
 
-from Parser import Parser
-default_parser = Parser()
+default_parser = None
 
-def parse(stream): return default_parser.parse(stream)
+def parse(stream): 
+    global default_parser
+    if default_parser is None:
+        from Parser import Parser
+        default_parser = Parser()
+    return default_parser.parse(stream)
 
 def parse_file(filename): return parse(open(filename))
 

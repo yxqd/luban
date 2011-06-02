@@ -12,3 +12,4 @@ rules.append(
     )
 
 
+recurse_entries = []

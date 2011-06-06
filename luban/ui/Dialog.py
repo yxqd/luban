@@ -12,10 +12,10 @@
 #
 
 
-from DocumentFactory import DocumentFactory
-from ParagraphFactory import ParagraphFactory
-from LinkFactory import LinkFactory
-from SimpleContainer import SimpleContainer as elembase
+from .DocumentFactory import DocumentFactory
+from .ParagraphFactory import ParagraphFactory
+from .LinkFactory import LinkFactory
+from .SimpleContainer import SimpleContainer as elembase
 
 
 class Dialog(DocumentFactory, ParagraphFactory, LinkFactory, elembase):
@@ -47,7 +47,7 @@ class DialogActions(object):
 
 
     def dialog(self, actionname, **kwds):
-        from SimpleElementAction import SimpleElementAction
+        from .SimpleElementAction import SimpleElementAction
         return SimpleElementAction(self, actionname, **kwds)
 
 

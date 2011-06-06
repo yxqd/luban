@@ -11,7 +11,7 @@
 #
 
 
-from SimpleContainer import SimpleContainer
+from .SimpleContainer import SimpleContainer
 
 
 class HtmlDocument(SimpleContainer):

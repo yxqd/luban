@@ -12,7 +12,7 @@
 #
 
 
-from ElementContainer import ElementContainer, elementfactory
+from .ElementContainer import ElementContainer, elementfactory
 
 
 class Toolbar(ElementContainer):
@@ -38,7 +38,7 @@ class Toolbar(ElementContainer):
 
     @elementfactory
     def button(self, *args, **kwds):
-        from Button import Button
+        from .Button import Button
         b = Button(*args, **kwds)
         self.add(b)
         return b
@@ -55,7 +55,7 @@ class Toolbar(ElementContainer):
 
 
 
-from Element import Element
+from .Element import Element
 class ToolbarSpacer(Element):
 
     def identify(self, inspector):

@@ -12,7 +12,7 @@
 #
 
 
-from Action import Action as base
+from .Action import Action as base
 
 class SimpleAction(base):
 

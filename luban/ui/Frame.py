@@ -12,8 +12,8 @@
 #
 
 
-from DocumentFactory import DocumentFactory
-from SimpleContainer import SimpleContainer
+from .DocumentFactory import DocumentFactory
+from .SimpleContainer import SimpleContainer
 
 
 class Frame(DocumentFactory, SimpleContainer):

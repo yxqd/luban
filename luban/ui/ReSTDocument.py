@@ -12,7 +12,7 @@
 #
 
 
-from Element import Element
+from .Element import Element
 
 
 class ReSTDocument(Element):

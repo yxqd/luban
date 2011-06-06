@@ -12,10 +12,9 @@
 #
 
 
-from pyre.inventory import *
-
 def reference(**kwds):
     return Reference(**kwds)
+
 
 def referenceSet(**kwds):
     return ReferenceSet(**kwds)
@@ -45,7 +44,12 @@ def str(*args, **kwds):
 _builtin_str = __builtins__['str']
 
 
-from pyre.inventory.Property import Property
+
+
+class Property(object):
+
+    pass
+DescriptorBase = Property
 
 
 
@@ -103,7 +107,7 @@ class Lists(Property):
                 continue
 
         except:
-            raise RuntimeError, 'cannot cast %s' % (value,)
+            raise RuntimeError('cannot cast %s' % (value,))
 
         return ret
 
@@ -143,7 +147,7 @@ class Date(Property):
         if not value: return datetime.date.today()
         
         # cast from string
-        if isinstance(value, basestring):
+        if isinstance(value, str):
             import time
             t = time.strptime(value, self.format)
             return datatime.date(t[:3])
@@ -177,8 +181,7 @@ class  Link(Property):
         return value or Link()
 
 
-from pyre.inventory.properties.String import String as StringBase
-class String(StringBase):
+class String(Property):
 
     def _cast(self, v):
         try:
@@ -186,11 +189,12 @@ class String(StringBase):
         except:
             # import traceback
             # debug.log(traceback.format_exc())
-            return unicode(v)
+            return str(v)
 
 
-import journal
+import luban._journal as journal
 debug = journal.debug('luban.content.descriptors')
+
 
 # version
 __id__ = "$Id$"

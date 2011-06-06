@@ -12,14 +12,14 @@
 #
 
 
-from ElementContainer import ElementContainer
+from .ElementContainer import ElementContainer
 
 class TeleContainer(ElementContainer):
 
     pass
 
 
-from ElementNotRoot import ElementNotRoot
+from .ElementNotRoot import ElementNotRoot
 class TeleSection(ElementContainer, ElementNotRoot):
 
     selected = ElementContainer.descriptors.bool(name='selected', default=False)

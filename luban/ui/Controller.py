@@ -45,7 +45,7 @@ class Method(object):
     
     
     def __call__(self, **kwds):
-        if self._called: raise RuntimeError, 'can only be called once'
+        if self._called: raise RuntimeError('can only be called once')
         self.kwds = kwds
         self._called = True
         return

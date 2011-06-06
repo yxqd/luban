@@ -21,7 +21,7 @@ warnings.warn('''
   ''')
 
 
-from Frame import Frame as Page
+from .Frame import Frame as Page
     
 
 # version

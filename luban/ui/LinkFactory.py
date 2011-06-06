@@ -16,7 +16,7 @@ class LinkFactory(object):
 
 
     def link(self, **kwds):
-        from Link import Link
+        from .Link import Link
         link = Link(**kwds)
 
         self.add(link)

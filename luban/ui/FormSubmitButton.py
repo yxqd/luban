@@ -12,7 +12,7 @@
 #
 
 
-from Element import Element as base
+from .Element import Element as base
 
 
 class FormSubmitButton(base):

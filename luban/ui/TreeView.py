@@ -13,9 +13,9 @@
 
 
 
-from Element import Element
+from .Element import Element
 
-from ElementNotRoot import ElementNotRoot
+from .ElementNotRoot import ElementNotRoot
 class TreeViewLeaf(Element, ElementNotRoot):
 
     abstract = False
@@ -35,7 +35,7 @@ class TreeViewLeaf(Element, ElementNotRoot):
         return visitor.onTreeViewLeaf( self )
 
 
-from ElementContainer import ElementContainer
+from .ElementContainer import ElementContainer
 
 class TreeViewBranch(ElementContainer, ElementNotRoot):
 
@@ -87,7 +87,7 @@ class TreeView(ElementContainer):
     label = ElementContainer.descriptors.str(name='label')
     
     def __init__(self, **kwds):
-        if kwds.has_key('label'):
+        if 'label' in kwds:
             warnings.warn("Attribute 'label' is no longer supported", DeprecationWarning)
         ElementContainer.__init__(self, **kwds)
         return
@@ -103,7 +103,7 @@ class TreeView(ElementContainer):
 
 
 
-from Action import Action
+from .Action import Action
 class TreeViewSetRoot(Action):
 
     abstract = False
@@ -175,7 +175,7 @@ class TreeViewActions:
 
     def addTreeViewBranch(self, referencenode, newnode, position=None):
         warnings.warn("element.addTreeViewBranch is obsolete, please use element.treeview('addBranche', referencenode=..., newnode=..., position=...)", DeprecationWarning)
-        if isinstance(referencenode, basestring):
+        if isinstance(referencenode, str):
             warnings.warn("element.addTreeViewBranch(..., referencenode=<reference id>, ...) is obsolete, please use element.treeview('addBranch', referencenode=<reference node selector>, newnode=<new branch instance>, position=<position string>)", DeprecationWarning)
             from luban.content import select
             referencenode = select(id=referencenode)
@@ -184,7 +184,7 @@ class TreeViewActions:
 
     def removeTreeViewNode(self, node):
         warnings.warn("element.removeTreeViewNode is obsolete, please use element.treeview('removeNode', node=...)", DeprecationWarning)
-        if isinstance(node, basestring):
+        if isinstance(node, str):
             warnings.warn("element.removeTreeViewNode(node=<node id>) is obsolete, please use element.treeview('removeNode', node=<node selector>)", DeprecationWarning)
             from luban.content import select
             node = select(id=node)
@@ -213,13 +213,13 @@ class TreeViewActions:
             actionname = 'selectNode'
 
             node = kwds['node']
-            if isinstance(node, basestring):
+            if isinstance(node, str):
                 warnings.warn("element.treeview('select', node/branch=<node id>) is obsolete, please use element.treeview('selectNode', node=<node selector>)", DeprecationWarning)
                 from luban.content import select
                 kwds['node'] = select(id=node)
             return self.treeview(actionname, **kwds)
         
-        from SimpleElementAction import SimpleElementAction
+        from .SimpleElementAction import SimpleElementAction
         return SimpleElementAction(self, actionname, **kwds)
     
     

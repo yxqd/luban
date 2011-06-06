@@ -12,7 +12,7 @@
 #
 
 
-from ElementContainer import ElementContainer
+from .ElementContainer import ElementContainer
 
 class PortletItem(ElementContainer):
 
@@ -45,7 +45,7 @@ class PortletItem(ElementContainer):
 class PortletItemActions:
 
     def portlet(self, actionname, **kwds):
-        from SimpleElementAction import SimpleElementAction
+        from .SimpleElementAction import SimpleElementAction
         return SimpleElementAction(self, actionname, **kwds)
 
 

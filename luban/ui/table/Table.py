@@ -42,11 +42,11 @@ class Table(Element):
     pass # end of Table
 
 
-import TableActions
+from . import TableActions
 
 
 def example():
-    from model.Model import Model
+    from .model.Model import Model
     class model(Model):
         
         title = Model.descriptors.str(name='title')
@@ -57,7 +57,7 @@ def example():
         ( 'hi', '05/05/2005' ),
         ]
 
-    from view.View import View as View
+    from .view.View import View as View
     view = View(
         columns = [
         View.Column(name='col1',label='Title', measure='title'),
@@ -67,7 +67,7 @@ def example():
         )
 
     table = Table(model, data, view)
-    print table.id
+    print(table.id)
     return table
 
 

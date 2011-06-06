@@ -12,8 +12,8 @@
 #
 
 
-from Element import Element
-from ElementContainer import ElementContainer, elementfactory
+from .Element import Element
+from .ElementContainer import ElementContainer, elementfactory
 
 
 

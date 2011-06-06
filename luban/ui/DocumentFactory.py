@@ -12,13 +12,13 @@
 #
 
 
-from ElementContainer import elementfactory
+from .ElementContainer import elementfactory
 
 class DocumentFactory(object):
 
     @elementfactory
     def document(self, **kwds):
-        from Document import Document
+        from .Document import Document
         document = Document(**kwds)
 
         self.add(document)

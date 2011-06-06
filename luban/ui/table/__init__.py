@@ -12,9 +12,9 @@
 #
 
 
-from Table import Table
-from model.Model import Model
-from view.View import View
+from .Table import Table
+from .model.Model import Model
+from .view.View import View
 
 # version
 __id__ = "$Id$"

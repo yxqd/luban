@@ -12,7 +12,7 @@
 #
 
 
-from ElementContainer import ElementContainer
+from .ElementContainer import ElementContainer
 
 class Grid(ElementContainer):
 
@@ -60,7 +60,7 @@ class GridRow(ElementContainer):
         return visitor.onGridRow(self)
     
 
-from DocumentFactory import DocumentFactory
+from .DocumentFactory import DocumentFactory
 class GridCell(DocumentFactory, ElementContainer):
 
     def identify(self, visitor):

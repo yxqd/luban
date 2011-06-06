@@ -16,11 +16,8 @@ import journal
 debug = journal.debug('luban.content.Element')
 
 
-from AttributeContainer import AttributeContainer
-
-
-
-class Element(AttributeContainer):
+from .AttributeContainer import AttributeContainer
+class Element(AttributeContainer, metaclass=AttributeContainer.__metaclass__):
 
     abstract = True
 
@@ -76,7 +73,7 @@ class Element(AttributeContainer):
 
         self._setID(kwds)
 
-        for k, v in kwds.iteritems():
+        for k, v in kwds.items():
             debug.log('setting attribute %r to %s' % (k,v))
             self.setAttribute(k,v)
 
@@ -95,15 +92,26 @@ class Element(AttributeContainer):
 
         # verify
         if id.find('.') != -1:
-            raise RuntimeError, "id cannot contain '.': %s" % id
+            raise RuntimeError("id cannot contain '.': %s" % id)
 
         attributes['id'] = id
         return
 
-    __metaclass__ = AttributeContainer.__metaclass__
+
+    def getCtorDocStr(cls, descriptors=None):
+        if not descriptors:
+            descriptors = cls.getDescriptors()
+        l = []
+        for descriptor in descriptors:
+            name = descriptor.name
+            value = descriptor.default
+            l.append('%s=%r' % (name, value))
+            continue
+        return '%s(%s)' % (cls.__name__, ', '.join(l))
+    getCtorDocStr = classmethod(getCtorDocStr)
     
 
-import GUID
+from . import GUID
 
 # version
 __id__ = "$Id$"

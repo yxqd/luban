@@ -17,7 +17,7 @@ class FormActions:
 
     def submit(self, actor=None, routine=None, **params):
         # the action that submit this form
-        from Submission import Submission
+        from .Submission import Submission
         return Submission(self, actor, routine=routine, **params)
 
 

@@ -13,8 +13,8 @@
 
 
 
-from TeleContainer import TeleContainer, TeleSection
-from ElementContainer import elementfactory
+from .TeleContainer import TeleContainer, TeleSection
+from .ElementContainer import elementfactory
 
 
 class Tabs(TeleContainer):
@@ -51,8 +51,8 @@ class Tabs(TeleContainer):
 
 
 
-from DocumentFactory import DocumentFactory
-from ParagraphFactory import ParagraphFactory
+from .DocumentFactory import DocumentFactory
+from .ParagraphFactory import ParagraphFactory
 class Tab(DocumentFactory, ParagraphFactory, TeleSection):
 
 
@@ -78,7 +78,7 @@ Tabs.allowed_element_types = [Tab]
 class TabActions:
 
     def tab(self, actionname, **kwds):
-        from SimpleElementAction import SimpleElementAction
+        from .SimpleElementAction import SimpleElementAction
         return SimpleElementAction(self, actionname, **kwds)
 
 

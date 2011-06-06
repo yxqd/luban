@@ -12,14 +12,14 @@
 #
 
 
-from ElementContainer import elementfactory
+from .ElementContainer import elementfactory
 
 
 class ParagraphFactory(object):
 
     @elementfactory
     def paragraph(self, **kwds):
-        from Paragraph import Paragraph
+        from .Paragraph import Paragraph
         paragraph = Paragraph(**kwds)
 
         self.add(paragraph)

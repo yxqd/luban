@@ -2,37 +2,37 @@
 extensions = []
 
 
-from FormActions import FormActions
+from .FormActions import FormActions
 extensions.append(FormActions)
 
 
-from FormFieldActions import FormFieldActions
+from .FormFieldActions import FormFieldActions
 extensions.append(FormFieldActions)
 
 
-from TreeView import TreeViewActions
+from .TreeView import TreeViewActions
 extensions.append(TreeViewActions)
 
 
-from Accordion import AccordionActions
+from .Accordion import AccordionActions
 extensions.append(AccordionActions)
 
 
-from ProgressBar import ProgressBarActions
+from .ProgressBar import ProgressBarActions
 extensions.append(ProgressBarActions)
 
 
-from Dialog import DialogActions
+from .Dialog import DialogActions
 extensions.append(DialogActions)
 
 
-from Tabs import TabActions
+from .Tabs import TabActions
 extensions.append(TabActions)
 
 
-from PortletItem import PortletItemActions
+from .PortletItem import PortletItemActions
 extensions.append(PortletItemActions)
 
 
-from Dock import DockActions
+from .Dock import DockActions
 extensions.append(DockActions)

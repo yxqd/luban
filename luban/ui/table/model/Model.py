@@ -19,7 +19,7 @@ class Model(base):
     #name = None ?
     row_identifiers = [] #measures that, when combined together, can be used to uniquely identify a row
 
-    import descriptors
+    from . import descriptors
     
     pass
 

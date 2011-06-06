@@ -26,7 +26,7 @@ containertype2elementtype = {
     }
 
 
-containertypes = containertype2elementtype.iterkeys()
+containertypes = iter(containertype2elementtype.keys())
 
 
 # version

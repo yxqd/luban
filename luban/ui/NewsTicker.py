@@ -12,7 +12,7 @@
 #
 
 
-from SimpleContainer import SimpleContainer as base
+from .SimpleContainer import SimpleContainer as base
 
 
 class NewsTicker(base):
@@ -54,7 +54,7 @@ class NewsTicker(base):
 
 
 
-from Element import Element
+from .Element import Element
 
 class NewsTickerItem(Element):
 

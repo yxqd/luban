@@ -12,7 +12,7 @@
 #
 
 
-from Action import Action as base
+from .Action import Action as base
 
 
 # replace an element with a new element

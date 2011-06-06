@@ -12,7 +12,7 @@
 #
 
 
-from SimpleContainer import SimpleContainer as base
+from .SimpleContainer import SimpleContainer as base
 
 
 class Portlet(base):
@@ -29,7 +29,7 @@ class Portlet(base):
     abstract = False
 
     def item(self, **kwds):
-        from PortletItem import PortletItem
+        from .PortletItem import PortletItem
         pi = PortletItem(**kwds)
         self.add(pi)
         return pi

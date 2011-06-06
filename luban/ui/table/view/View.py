@@ -12,11 +12,11 @@
 #
 
 
-from AttributeContainer import AttributeContainer as base
+from .AttributeContainer import AttributeContainer as base
 
 class View(base):
 
-    from Column import Column
+    from .Column import Column
     
     columns = base.descriptors.referenceSet(name='columns')
     

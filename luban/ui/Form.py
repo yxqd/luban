@@ -12,9 +12,9 @@
 #
 
 
-from DocumentFactory import DocumentFactory
-from ParagraphFactory import ParagraphFactory
-from SimpleContainer import SimpleContainer
+from .DocumentFactory import DocumentFactory
+from .ParagraphFactory import ParagraphFactory
+from .SimpleContainer import SimpleContainer
 
 
 class Form(ParagraphFactory, DocumentFactory, SimpleContainer):
@@ -30,49 +30,49 @@ class Form(ParagraphFactory, DocumentFactory, SimpleContainer):
     abstract = False
 
     def text(self, **kwds):
-        from FormTextField import FormTextField as factory
+        from .FormTextField import FormTextField as factory
         element = factory(**kwds)
         self.add(element)
         return element
 
 
     def password(self, **kwds):
-        from FormPasswordField import FormPasswordField as factory
+        from .FormPasswordField import FormPasswordField as factory
         element = factory(**kwds)
         self.add(element)
         return element
 
 
     def selector(self, **kwds):
-        from FormSelectorField import FormSelectorField as factory
+        from .FormSelectorField import FormSelectorField as factory
         element = factory(**kwds)
         self.add(element)
         return element
 
 
     def textarea(self, **kwds):
-        from FormTextArea import FormTextArea as factory
+        from .FormTextArea import FormTextArea as factory
         element = factory(**kwds)
         self.add(element)
         return element
 
 
     def radio(self, **kwds):
-        from FormRadioBox import FormRadioBox as factory
+        from .FormRadioBox import FormRadioBox as factory
         element = factory(**kwds)
         self.add(element)
         return element
 
 
     def checkbox(self, **kwds):
-        from FormCheckBox import FormCheckBox as factory
+        from .FormCheckBox import FormCheckBox as factory
         element = factory(**kwds)
         self.add(element)
         return element
 
 
     def submitbutton(self, **kwds):
-        from FormSubmitButton import FormSubmitButton as factory
+        from .FormSubmitButton import FormSubmitButton as factory
         element = factory(**kwds)
         self.add(element)
         return element

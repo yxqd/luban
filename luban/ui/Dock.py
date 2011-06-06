@@ -12,7 +12,7 @@
 #
 
 
-from Element import Element as base
+from .Element import Element as base
 
 
 class Dock(base):
@@ -27,7 +27,7 @@ class Dock(base):
 
 
 
-from Action import Action as base
+from .Action import Action as base
 
 class DockAction(base):
 

@@ -12,7 +12,7 @@
 #
 
 
-from FormField import FormField as base
+from .FormField import FormField as base
 
 
 class FormRadioBox(base):

@@ -12,7 +12,7 @@
 #
 
 
-from SimpleElement import SimpleElement as base
+from .SimpleElement import SimpleElement as base
 
 
 class Button(base):

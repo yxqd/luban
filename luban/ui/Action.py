@@ -14,7 +14,7 @@
 
 # base class of all actions
 
-from AttributeContainer import AttributeContainer
+from .AttributeContainer import AttributeContainer
 from pyre.parsing.locators.Traceable import Traceable
 
 class Action(AttributeContainer, Traceable):
@@ -41,7 +41,7 @@ class Action(AttributeContainer, Traceable):
         AttributeContainer.__init__(self, name)
         self.name = name
 
-        for k, v in kwds.iteritems():
+        for k, v in kwds.items():
             self.setAttribute(k,v)
 
         return
@@ -49,9 +49,9 @@ class Action(AttributeContainer, Traceable):
 
     def elementSelector(self, element):
         # factory to select an element
-        from Element import Element
+        from .Element import Element
         if isinstance(element, Element):
-            from SelectByElement import SelectByElement
+            from .SelectByElement import SelectByElement
             return SelectByElement(element)
         if isinstance(element, Action):
             return element

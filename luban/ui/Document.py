@@ -12,10 +12,10 @@
 #
 
 
-from DocumentFactory import DocumentFactory
-from ParagraphFactory import ParagraphFactory
-from LinkFactory import LinkFactory
-from SimpleContainer import SimpleContainer
+from .DocumentFactory import DocumentFactory
+from .ParagraphFactory import ParagraphFactory
+from .LinkFactory import LinkFactory
+from .SimpleContainer import SimpleContainer
 
 
 class Document(DocumentFactory, ParagraphFactory, LinkFactory, SimpleContainer):
@@ -30,14 +30,14 @@ class Document(DocumentFactory, ParagraphFactory, LinkFactory, SimpleContainer):
     abstract = False
 
     def splitter(self, **kwds):
-        from Splitter import Splitter as factory
+        from .Splitter import Splitter as factory
         element = factory(**kwds)
         self.add(element)
         return element
 
 
     def form(self, **kwds):
-        from Form import Form
+        from .Form import Form
         form = Form(**kwds)
         self.add(form)
         return form
@@ -76,7 +76,7 @@ class Document(DocumentFactory, ParagraphFactory, LinkFactory, SimpleContainer):
     
 
 
-from Frame import Frame
+from .Frame import Frame
 Document.disallowed_element_types = [Frame]
 del Frame
 

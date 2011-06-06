@@ -12,65 +12,47 @@
 #
 
 
-# use pyre inventory to implement attributecontainer.
-# we can reimplement this later
+import pyre
 
+from .AbstractAttributeContainer import AbstractAttributeContainer
+class AttributeContainer(pyre.component, AbstractAttributeContainer):
 
-from pyre.inventory.Inventory import Inventory
-class AttributeContainer( Inventory):
+    from . import descriptors
+    from .descriptors import DescriptorBase
 
-    import descriptors
-
+    @classmethod
     def getDescriptors(cls):
         # return a list of descriptors
-        return cls._traitRegistry.values()
-    getDescriptors = classmethod(getDescriptors)
+        return [item for item in cls.__dict__.values()
+                if isinstance(item, cls.DescriptorBase)]
 
 
+    
+    @classmethod
+    def getDescriptor(cls, name):
+        return getattr(cls, name)
+    
+    
+    
     def setAttribute(self, name, value):
-        trait = self.getTrait(name)
-        trait._set(self, value, locator)
+        trait = self.getDescriptor(name)
+        trait.__set__(self, value)
         return
 
 
-    def iterAttributeKeyValPairs(self):
+    def getAttribute(self, name):
+        trait = self.getDescriptor(name)
+        return trait.__get__(self)
+
+
+    def iterAttributes(self):
         for descriptor in self.getDescriptors():
             name = descriptor.name
             value = descriptor.__get__(self)
             yield name, value
 
 
-    def __init__(self, name=None):
-        name = name or (self.__class__.__name__ + str(id(self)) )
-        Inventory.__init__(self, name)
-        return
-
-    
-    def getCtorDocStr(cls, descriptors=None):
-        if not descriptors:
-            descriptors = cls.getDescriptors()
-        l = []
-        for descriptor in descriptors:
-            name = descriptor.name
-            value = descriptor.default
-            l.append('%s=%r' % (name, value))
-            continue
-        return '%s(%s)' % (cls.__name__, ', '.join(l))
-    getCtorDocStr = classmethod(getCtorDocStr)
-
-
-    # XXX: this does not work for self referencing entities.
-    # XXX: need to think about this sometime
-    # def __str__(self):
-    #    props = ['%s=%s' % (k,v) for k,v in self.iterAttributeKeyValPairs()]
-    #    props = ', '.join(props)
-    #    return '%s(%s)' % (self.__class__.__name__, props)
-
     pass
-
-
-import pyre.parsing.locators
-locator = pyre.parsing.locators.simple('luban.AttributeContainer')
 
 
 # version

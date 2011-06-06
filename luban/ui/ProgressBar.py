@@ -12,7 +12,7 @@
 #
 
 
-from Element import Element
+from .Element import Element
 
 
 class ProgressBar(Element):
@@ -48,7 +48,7 @@ class ProgressBar(Element):
 class ProgressBarActions:
 
     def progressbar(self, actionname, **kwds):
-        from SimpleElementAction import SimpleElementAction
+        from .SimpleElementAction import SimpleElementAction
         return SimpleElementAction(self, actionname, **kwds)
     
 

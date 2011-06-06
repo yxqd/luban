@@ -12,8 +12,8 @@
 #
 
 
-from ElementActions import ElementActions
-from Action import Action as base
+from .ElementActions import ElementActions
+from .Action import Action as base
 
 class SelectByID(ElementActions, base):
 

@@ -74,10 +74,10 @@ def getElementClasses(package='luban.content'):
         return mod.__dict__
 
     # classes
-    symboldicts = map(lambda name: _importSymbols(packagename, name), modules)
+    symboldicts = [_importSymbols(packagename, name) for name in modules]
     candidates = []
     for symboldict in symboldicts:
-        for v in symboldict.itervalues():
+        for v in symboldict.values():
             if v not in candidates: candidates.append(v)
 
     def _filter(candidate):
@@ -86,7 +86,7 @@ def getElementClasses(package='luban.content'):
         if not isattributecontainer: return False
         if hasattr(candidate, 'abstract'): return not candidate.abstract
         return True
-    return filter(_filter, candidates)
+    return list(filter(_filter, candidates))
 
 
 def isDerivedFromAttributeContainer(klass):

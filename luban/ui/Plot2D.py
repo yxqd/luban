@@ -10,7 +10,7 @@
 #
 
 
-from Element import Element
+from .Element import Element
 class Plot2D(Element):
 
     simple_description = 'Plot x-y curve(s)'

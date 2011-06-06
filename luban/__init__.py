@@ -23,9 +23,9 @@ def parse(stream):
 
 def parse_file(filename): return parse(open(filename))
 
-import interface
+from . import ui
 # XXX: do we need to keep backward compatibility?
-content = interface
+content = ui
 
 # version
 __id__ = "$Id$"

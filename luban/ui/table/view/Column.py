@@ -12,7 +12,7 @@
 #
 
 
-from AttributeContainer import AttributeContainer as base
+from .AttributeContainer import AttributeContainer as base
 
 # Descriptor of a column
 class Column(base):

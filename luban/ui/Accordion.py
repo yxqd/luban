@@ -13,8 +13,8 @@
 
 
 
-from TeleContainer import TeleContainer, TeleSection
-from ElementContainer import elementfactory
+from .TeleContainer import TeleContainer, TeleSection
+from .ElementContainer import elementfactory
 
 
 class Accordion(TeleContainer):
@@ -44,8 +44,8 @@ class Accordion(TeleContainer):
 
 
 
-from DocumentFactory import DocumentFactory
-from ParagraphFactory import ParagraphFactory
+from .DocumentFactory import DocumentFactory
+from .ParagraphFactory import ParagraphFactory
 class AccordionSection(DocumentFactory, ParagraphFactory, TeleSection):
 
     simple_description = 'one of the panes that can expand or collapse in an accordion'
@@ -63,7 +63,7 @@ class AccordionSection(DocumentFactory, ParagraphFactory, TeleSection):
 class AccordionActions:
 
     def accordion(self, actionname, **kwds):
-        from SimpleElementAction import SimpleElementAction
+        from .SimpleElementAction import SimpleElementAction
         return SimpleElementAction(self, actionname, **kwds)
 
 

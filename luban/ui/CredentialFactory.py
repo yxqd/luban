@@ -16,7 +16,7 @@ class CredentialFactory(object):
 
 
     def credential(self, **kwds):
-        from Credential import Credential
+        from .Credential import Credential
         credential = Credential(**kwds)
 
         self.add(credential)

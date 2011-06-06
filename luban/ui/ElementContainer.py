@@ -12,24 +12,24 @@
 #
 
 
-from CredentialFactory import CredentialFactory
-from Element import Element
+from .CredentialFactory import CredentialFactory
+from .Element import Element
 
 
 class ElementContainer(CredentialFactory, Element):
 
 
     def add(self, item):
-        if isinstance(item, basestring):
+        if isinstance(item, str):
             self.contents.append(item)
             return self
         
         if item.name in self.name2item:
-            raise RuntimeError, 'item of same name has been added, please consider change the name: %r(%s)' % (item.name, item)
+            raise RuntimeError('item of same name has been added, please consider change the name: %r(%s)' % (item.name, item))
 
         # this should be in the meta class
         if hasattr(self, 'allowed_element_types') and hasattr(self, 'disallowed_element_types'):
-            raise RuntimeError, "an element type cannot have both allowed_element_types and disallowed_element_types"
+            raise RuntimeError("an element type cannot have both allowed_element_types and disallowed_element_types")
         
         if hasattr(self, 'allowed_element_types'):
             allowed = self.allowed_element_types
@@ -38,11 +38,11 @@ class ElementContainer(CredentialFactory, Element):
                 if isinstance(item, t): good = True; break;
                 continue
             if not good:
-                raise ValueError, 'element %s is not allowed to be subelement of %s. allowed element types are %s' % (
+                raise ValueError('element %s is not allowed to be subelement of %s. allowed element types are %s' % (
                     item.__class__.__name__,
                     self.__class__.__name__,
                     ','.join([t.__name__ for t in allowed]),
-                    )
+                    ))
         if hasattr(self, 'disallowed_element_types'):
             disallowed = self.disallowed_element_types
             good = True
@@ -50,11 +50,11 @@ class ElementContainer(CredentialFactory, Element):
                 if isinstance(item, t): good = False; break;
                 continue
             if not good:
-                raise ValueError, 'element %s is not allowed to be subelement of %s. Disallowed element types are %s' % (
+                raise ValueError('element %s is not allowed to be subelement of %s. Disallowed element types are %s' % (
                     item.__class__.__name__,
                     self.__class__.__name__,
                     ','.join([t.__name__ for t in disallowed]),
-                    )
+                    ))
             
         self.contents.append(item)
         self._registerChild(item)

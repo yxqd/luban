@@ -13,7 +13,7 @@
 
 
 def registerElementProvider(provider):
-    from _accountant import element_providers as providers
+    from ._accountant import element_providers as providers
     providers.append(provider)
     return providers
 
@@ -58,9 +58,9 @@ def %s(*args, **kwds):
     return %s(*args, **kwds)
 ''' % (name.lower(), name, name, name)
     try:
-        exec code
+        exec(code)
     except:
-        raise RuntimeError, 'faield to execute %s' % code
+        raise RuntimeError('faield to execute %s' % code)
 
 
 # alias
@@ -72,25 +72,25 @@ rstdoc = restructuredtextdocument
 def createCredential(**kwds):
     '''createCredential(username=..., ticket=...)
     '''
-    from SimpleAction import SimpleAction
+    from .SimpleAction import SimpleAction
     return SimpleAction('credentialCreation', **kwds)
 
 
 def updateCredential(**kwds):
     '''updateCredential(username=..., ticket=...)
     '''
-    from SimpleAction import SimpleAction
+    from .SimpleAction import SimpleAction
     return SimpleAction('credentialUpdate', **kwds)
 
 
 def removeCredential():
-    from SimpleAction import SimpleAction
+    from .SimpleAction import SimpleAction
     return SimpleAction('credentialRemoval')
 
 
 #  for controller access
 def load(*args, **kwds):
-    from Loading import Loading
+    from .Loading import Loading
     return Loading(*args, **kwds)
 
 
@@ -115,12 +115,12 @@ an action to destroy a document
   
 '''
     if id is not None:
-        from SelectByID import SelectByID
+        from .SelectByID import SelectByID
         return SelectByID(id=id)
     if element is not None:
-        from SelectByElement import SelectByElement
+        from .SelectByElement import SelectByElement
         return SelectByElement(element=element)
-    raise NotImplementedError, "id=%s, element=%s" % (id, element)
+    raise NotImplementedError("id=%s, element=%s" % (id, element))
 
 
 #  alert
@@ -132,7 +132,7 @@ Examples::
   >>> alert("please input your password")
   
 '''
-    from SimpleAction import SimpleAction
+    from .SimpleAction import SimpleAction
     return SimpleAction(actionname='alert', message=message)
 
 

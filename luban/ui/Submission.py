@@ -12,7 +12,7 @@
 #
 
 
-from Loading import Loading as base
+from .Loading import Loading as base
 
 class Submission(base):
 

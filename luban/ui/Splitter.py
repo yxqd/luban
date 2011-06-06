@@ -13,8 +13,8 @@
 
 
 
-from SimpleContainer import SimpleContainer
-from ElementContainer import ElementContainer, elementfactory
+from .SimpleContainer import SimpleContainer
+from .ElementContainer import ElementContainer, elementfactory
 
 
 class Splitter(SimpleContainer):
@@ -59,9 +59,9 @@ class Splitter(SimpleContainer):
     orientation.tip = 'Orientation of the splitter'
 
 
-from DocumentFactory import DocumentFactory
-from ParagraphFactory import ParagraphFactory
-from ElementNotRoot import ElementNotRoot
+from .DocumentFactory import DocumentFactory
+from .ParagraphFactory import ParagraphFactory
+from .ElementNotRoot import ElementNotRoot
 class SplitSection(DocumentFactory, ParagraphFactory, ElementContainer, ElementNotRoot):
 
     simple_description = 'A section in a splitter'

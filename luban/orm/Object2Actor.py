@@ -29,7 +29,7 @@ class Object2Actor(object):
     def __call__(self, Object, ActorBase=AuthorizedActor, descriptors=None):
         from dsaw.model.visitors import getDataObjectClassInventory as getInventory
         Inventory = getInventory(Object)
-        descriptors = descriptors or Inventory.getDescriptors()
+        descriptors = descriptors or Inventory.iterDescriptors()
 
         class _(FormProcessorInterface, ActorBase):
 
@@ -675,7 +675,7 @@ class Object2Actor(object):
 
     # create the inventory class for the actor
     def _createComponentInventory(self, Inventory, ActorBase):
-        descriptors = self._createDescriptors(Inventory.getDescriptors())
+        descriptors = self._createDescriptors(Inventory.iterDescriptors())
         class _(FormProcessorInterface.Inventory, ActorBase.Inventory):
 
             for name, descriptor in descriptors.iteritems():

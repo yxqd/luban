@@ -48,7 +48,7 @@ class UIElement2Dict(Extension, object):
         kls = element.__class__
         d = {'type': kls.__name__.lower()}
         
-        descriptors = element.getDescriptors()
+        descriptors = element.iterDescriptors()
         for descriptor in descriptors:
             type = descriptor.type
             name = descriptor.name

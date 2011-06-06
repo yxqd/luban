@@ -51,7 +51,7 @@ class Table2Dict:
 
     def onTableModel(self, model):
         ret = {}
-        measures = model.getDescriptors()
+        measures = model.iterDescriptors()
         for measure in measures:
             name = measure.name
             type = measure.type

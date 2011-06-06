@@ -31,7 +31,7 @@ class Object2Form(object):
         form = lc.form(title=title)
 
         if not fieldsequence:
-            fieldsequence = [d.name for d in obj.Inventory.getDescriptors()]
+            fieldsequence = [d.name for d in obj.Inventory.iterDescriptors()]
 
         expert_fields = []
         for name in fieldsequence:

@@ -100,7 +100,7 @@ class Element(AttributeContainer, metaclass=AttributeContainer.__metaclass__):
 
     def getCtorDocStr(cls, descriptors=None):
         if not descriptors:
-            descriptors = cls.getDescriptors()
+            descriptors = cls.iterDescriptors()
         l = []
         for descriptor in descriptors:
             name = descriptor.name

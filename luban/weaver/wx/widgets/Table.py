@@ -32,7 +32,7 @@ class Table(wx.grid.Grid, CommonInterface):
 
         # measures
         measures = {}
-        for descriptor in model.getDescriptors():
+        for descriptor in model.iterDescriptors():
             measures[descriptor.name] = descriptor
             continue
 

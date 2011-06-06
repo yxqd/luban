@@ -104,7 +104,7 @@ class UIElement2PyFuncCall(object):
         myfunc.body.append('instance = %s()' % kls.__name__)
 
         # loop over descriptors
-        descriptors = element.getDescriptors()
+        descriptors = element.iterDescriptors()
         for descriptor in descriptors:
             type = descriptor.type
             name = descriptor.name

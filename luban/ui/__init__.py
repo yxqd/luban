@@ -12,15 +12,6 @@
 #
 
 
-import unittest
-class TestCase(unittest.TestCase):
-     
-    def test1(self):
-        return
-     
-    
-if __name__ == "__main__": unittest.main()
-    
 # version
 __id__ = "$Id$"
 

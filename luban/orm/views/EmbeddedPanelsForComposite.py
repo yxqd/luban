@@ -320,7 +320,7 @@ class EmbeddedPanelsForComposite(base):
 
     def makeSequence(self, obj):
         s = ['properties']
-        for descriptor in obj.Inventory.getDescriptors():
+        for descriptor in obj.Inventory.iterDescriptors():
             if descriptor.type in ['reference', 'referenceset']:
                 s.append(descriptor.name)
             continue

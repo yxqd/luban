@@ -14,30 +14,39 @@
 
 import pyre
 
-from .AbstractAttributeContainer import AbstractAttributeContainer
-class AttributeContainer(pyre.component, AbstractAttributeContainer):
 
-    from . import descriptors
+# metaclass
+from pyre.components.Actor import Actor as _metabase
+class Meta(_metabase):
+
+    @classmethod
+    def __prepare__(cls, *args, **kwds):
+        d = super().__prepare__(*args, **kwds)
+        d['p'] = d['properties'] = pyre.properties
+        return d
+
+
+
+from .AbstractAttributeContainer import AbstractAttributeContainer
+class AttributeContainer(pyre.component, AbstractAttributeContainer, metaclass=Meta):
+
     from .descriptors import DescriptorBase
 
     @classmethod
-    def getDescriptors(cls):
-        # return a list of descriptors
-        return [item for item in cls.__dict__.values()
-                if isinstance(item, cls.DescriptorBase)]
-
+    def iterDescriptors(cls):
+        return cls.pyre_getTraitDescriptors()
 
     
     @classmethod
     def getDescriptor(cls, name):
-        return getattr(cls, name)
+        return cls.pyre_getTraitDescriptor(cls, name)
     
     
     
     def setAttribute(self, name, value):
         trait = self.getDescriptor(name)
         trait.__set__(self, value)
-        return
+        return value
 
 
     def getAttribute(self, name):
@@ -46,11 +55,12 @@ class AttributeContainer(pyre.component, AbstractAttributeContainer):
 
 
     def iterAttributes(self):
-        for descriptor in self.getDescriptors():
+        for descriptor in self.iterDescriptors():
             name = descriptor.name
             value = descriptor.__get__(self)
             yield name, value
-
+            continue
+        return
 
     pass
 

@@ -35,7 +35,7 @@ class Object2FormFields(object):
     def __call__(self, obj):
         record = self.orm.object2record(obj)
         visuals = {}
-        for descriptor in obj.Inventory.getDescriptors():
+        for descriptor in obj.Inventory.iterDescriptors():
             type = descriptor.type
             handler = '_on%s' % type.capitalize()
             handler = getattr(self, handler)

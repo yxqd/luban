@@ -146,7 +146,7 @@ class ObjectPropertiesMold(MoldBase):
     def _getSequence(self, obj):
         sequence = self.sequence
         if not sequence:
-            sequence = [d.name for d in obj.Inventory.getDescriptors()]
+            sequence = [d.name for d in obj.Inventory.iterDescriptors()]
         return sequence
 
 

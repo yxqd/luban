@@ -15,20 +15,26 @@
 class AbstractAttributeContainer(object):
 
     @classmethod
-    def getDescriptors(cls):
+    def iterDescriptors(cls):
+        "iterates over descriptors"
         raise NotImplementedError
 
 
     @classmethod
     def getDescriptor(cls, name):
+        "get descriptor of given name"
         raise NotImplementedError
 
 
+    # XXX: should not we just use setattr ?
     def setAttribute(self, name, value):
+        "set attribute of given name to the give value"
         raise NotImplementedError
 
 
+    # XXX: should not we just use getattr ?
     def getAttribute(self, name):
+        "get attribute of given name"
         raise NotImplementedError
 
 

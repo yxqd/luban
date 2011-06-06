@@ -60,7 +60,7 @@ class Factory(base):
         # form fields
         fields = self.tools.obj2formfields(obj)
         if not sequence:
-            sequence = [d.name for d in obj.Inventory.getDescriptors()]
+            sequence = [d.name for d in obj.Inventory.iterDescriptors()]
 
         # iterate over all items
         for item in sequence:

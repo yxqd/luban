@@ -147,7 +147,7 @@ class PreRenderer(object):
     
 
     def default(self, element):
-        descriptors = element.getDescriptors()
+        descriptors = element.iterDescriptors()
         for descriptor in descriptors:
             type = descriptor.type
             name = descriptor.name

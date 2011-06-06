@@ -52,11 +52,11 @@ class MatterBuilder(SimpleContainer):
     experimental = True
     abstract = False
 
-#    matter = Element.descriptors.referenceSet(name='matter')
+#    matter = descriptors.referenceSet(name='matter')
 
     # this is temporary. need to think about this more
-    lattice = SimpleContainer.descriptors.lists(name='lattice')
-    atoms = SimpleContainer.descriptors.lists(name='atoms')
+    lattice = descriptors.lists(name='lattice')
+    atoms = descriptors.lists(name='atoms')
     
     # make it so it can accept Structure data objects--do this in the actor for now
     # create an actor in luban for matter builder..

@@ -17,8 +17,8 @@ from AttributeContainer import AttributeContainer
 class Visual(AttributeContainer):
 
 
-    visualname = AttributeContainer.descriptors.str(name='visualname')
-    visualinstance = AttributeContainer.descriptors.reference(name='visualinstance')
+    visualname = descriptors.str(name='visualname')
+    visualinstance = descriptors.reference(name='visualinstance')
     
 
     def identify(self, inspector):

@@ -22,7 +22,7 @@ class TeleContainer(ElementContainer):
 from .ElementNotRoot import ElementNotRoot
 class TeleSection(ElementContainer, ElementNotRoot):
 
-    selected = ElementContainer.descriptors.bool(name='selected', default=False)
+    selected = descriptors.bool(name='selected', default=False)
     
     pass
 

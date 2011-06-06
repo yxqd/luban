@@ -29,7 +29,7 @@ class Accordion(TeleContainer):
 
     abstract = False
     
-    onchange = TeleContainer.descriptors.eventHandler(name='onchange')
+    onchange = descriptors.eventHandler(name='onchange')
     onchange.tip = 'event handler that triggers when a different section was selected'
 
     @elementfactory
@@ -52,7 +52,7 @@ class AccordionSection(DocumentFactory, ParagraphFactory, TeleSection):
     full_description = ''
     abstract = False
 
-    label = TeleSection.descriptors.str(name='label')
+    label = descriptors.str(name='label')
     label.tip = 'label of the accordion section'
 
     def identify(self, inspector):

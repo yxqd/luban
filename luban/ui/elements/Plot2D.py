@@ -28,16 +28,16 @@ class Plot2D(Element):
         '''
         ]
 
-    curves = Element.descriptors.referenceSet(name='curves')
+    curves = descriptors.referenceSet(name='curves')
     curves.tip = 'The x-y curves to display'
     
-    xticks = Element.descriptors.list(name='xticks')
+    xticks = descriptors.list(name='xticks')
     xticks.tip = 'ticks for x axis'
     
-    yticks = Element.descriptors.list(name='yticks')
+    yticks = descriptors.list(name='yticks')
     yticks.tip = 'ticks for y axis'
     
-    caption = Element.descriptors.str(name='caption')
+    caption = descriptors.str(name='caption')
     caption.tip = 'caption of the plot'
 
     abstract = False
@@ -55,9 +55,9 @@ class Plot2D(Element):
 
 class Curve(Element):
 
-    x = Element.descriptors.array(name='x')
-    y = Element.descriptors.array(name='y')
-    label = Element.descriptors.str(name='label')
+    x = descriptors.array(name='x')
+    y = descriptors.array(name='y')
+    label = descriptors.str(name='label')
 
     def identify(self, visitor):
         return visitor.onPlot2DCurve(self)

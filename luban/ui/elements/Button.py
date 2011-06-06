@@ -25,13 +25,13 @@ class Button(base):
 
     abstract = False
 
-    label = base.descriptors.str(name='label')
+    label = descriptors.str(name='label')
     label.tip = 'label of the button'
 
-    icon = base.descriptors.str(name='icon')
+    icon = descriptors.str(name='icon')
     icon.tip = 'icon of the button'
 
-    tip = base.descriptors.str(name='tip')
+    tip = descriptors.str(name='tip')
     tip.tip = 'tip for the button that shows up when hovered'
 
     def identify(self, inspector):

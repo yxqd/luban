@@ -52,9 +52,9 @@ class Splitter(SimpleContainer):
         return inspector.onSplitter(self)
 
 
-    orientation = SimpleContainer.descriptors.str(
+    orientation = descriptors.str(
         name='orientation', default='horizontal',
-        validator=SimpleContainer.descriptors.choice(['vertical', 'horizontal']),
+        validator=descriptors.choice(['vertical', 'horizontal']),
         )
     orientation.tip = 'Orientation of the splitter'
 
@@ -79,7 +79,7 @@ class SplitSection(DocumentFactory, ParagraphFactory, ElementContainer, ElementN
     def identify(self, inspector):
         return inspector.onSplitSection(self)
 
-    size = ElementContainer.descriptors.str(name='size', default=None)
+    size = descriptors.str(name='size', default=None)
     size.tip = 'deprecated'
     
 

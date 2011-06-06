@@ -21,7 +21,7 @@ class Action(AttributeContainer, Traceable):
 
     abstract = True
     
-    callback = AttributeContainer.descriptors.reference(name='callback')
+    callback = descriptors.reference(name='callback')
     callback.experimental = True
     callback.tip = 'A callback action that will be performed when the current action is finished'
     

@@ -25,20 +25,20 @@ class PortletItem(ElementContainer):
     def identify(self, inspector):
         return inspector.onPortletItem(self)
 
-    label = ElementContainer.descriptors.str(name='label')
+    label = descriptors.str(name='label')
     label.tip = 'label of the portlet item'
     
-    icon = ElementContainer.descriptors.str(name='icon')
+    icon = descriptors.str(name='icon')
     icon.tip = 'icon of the portlet item'
     
-    tip = ElementContainer.descriptors.str(name='tip')
+    tip = descriptors.str(name='tip')
     tip.tip = 'tip for this portlet item that shows up when hovered'
     tip.experimental = True
 
-    selected = ElementContainer.descriptors.bool(name='selected', default=False)
+    selected = descriptors.bool(name='selected', default=False)
     selected.tip = 'if True, this item is selected'
     
-    onselect = ElementContainer.descriptors.eventHandler(name='onselect')
+    onselect = descriptors.eventHandler(name='onselect')
     onselect.tip = 'event handler that triggers when this portlet item is selected. usually this event handler is preferred over "onclick" event handler for this widget'
 
 

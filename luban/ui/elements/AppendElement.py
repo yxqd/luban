@@ -22,8 +22,8 @@ class AppendElement(base):
         return inspector.onAppendElement(self)
     
 
-    element = base.descriptors.reference(name='element')
-    container = base.descriptors.reference(name='container')
+    element = descriptors.reference(name='element')
+    container = descriptors.reference(name='container')
 
     
     def __init__(self, element=None, container=None):

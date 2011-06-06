@@ -28,16 +28,16 @@ class CodeEditor(Element):
     def identify(self, inspector):
         return inspector.onCodeEditor(self)
 
-    syntax = Element.descriptors.str(name='syntax')
+    syntax = descriptors.str(name='syntax')
     syntax.tip = 'Syntax of the code. python, c++, etc'
     
-    text = Element.descriptors.str(name='text')
+    text = descriptors.str(name='text')
     text.tip = 'Text of the code'
 
-    onsave = Element.descriptors.eventHandler(name='onsave')
+    onsave = descriptors.eventHandler(name='onsave')
     onsave.tip = 'event handler that triggers when user clicks the save button of the widget'
     
-    onchange = Element.descriptors.eventHandler(name='onchange')
+    onchange = descriptors.eventHandler(name='onchange')
     onchange.tip = 'event handler that triggers when user changes the text in the widget and the widget lost focus'
     
 

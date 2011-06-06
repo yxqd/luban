@@ -24,7 +24,7 @@ class Image(base):
 
     abstract = False
 
-    path = base.descriptors.str(name='path')
+    path = descriptors.str(name='path')
     path.tip = 'path to the image'
     
 

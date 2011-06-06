@@ -39,7 +39,7 @@ class Portlet(base):
         return inspector.onPortlet(self)
 
 
-    title = base.descriptors.str(name='title')
+    title = descriptors.str(name='title')
     title.tip = 'Title of the portlet'
 
 

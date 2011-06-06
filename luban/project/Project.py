@@ -17,10 +17,10 @@ from AttributeContainer import AttributeContainer
 class Project(AttributeContainer):
 
 
-    visuals = AttributeContainer.descriptors.referenceSet(name='visuals')
-    actors = AttributeContainer.descriptors.referenceSet(name='actors')
+    visuals = descriptors.referenceSet(name='visuals')
+    actors = descriptors.referenceSet(name='actors')
 
-    name = AttributeContainer.descriptors.str(name='name')
+    name = descriptors.str(name='name')
 
 
     def identify(self, inspector):

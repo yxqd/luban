@@ -98,7 +98,7 @@ class ElementContainer(CredentialFactory, Element):
         return self.getChildByName(name)
     
 
-    contents = Element.descriptors.referenceSet(name='contents')
+    contents = descriptors.referenceSet(name='contents')
     
     def __init__(self, **kwds):
         Element.__init__(self, **kwds)

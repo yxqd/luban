@@ -27,10 +27,10 @@ class Table(Element):
 
     abstract = False
     
-    model = Element.descriptors.reference(name='model')
-    view = Element.descriptors.reference(name='view')
-    data = Element.descriptors.lists(name='data')
-    oncellchanged = Element.descriptors.reference(name='oncellchanged')
+    model = descriptors.reference(name='model')
+    view = descriptors.reference(name='view')
+    data = descriptors.lists(name='data')
+    oncellchanged = descriptors.reference(name='oncellchanged')
 
 
     def __init__(self, model=None, data=None, view=None, **kwds):
@@ -49,8 +49,8 @@ def example():
     from .model.Model import Model
     class model(Model):
         
-        title = Model.descriptors.str(name='title')
-        date = Model.descriptors.date(name='date')
+        title = descriptors.str(name='title')
+        date = descriptors.date(name='date')
 
     data = [
         ( 'abc', '06/06/2006' ),

@@ -20,10 +20,10 @@ class Uploader(Element):
     def identify(self, visitor):
         return visitor.onUploader(self)
 
-    label = Element.descriptors.str(name='label')
+    label = descriptors.str(name='label')
 
-    onsubmit = Element.descriptors.eventHandler(name='onsubmit')
-    oncomplete = Element.descriptors.eventHandler(name='oncomplete')
+    onsubmit = descriptors.eventHandler(name='onsubmit')
+    oncomplete = descriptors.eventHandler(name='oncomplete')
 
 
 # version

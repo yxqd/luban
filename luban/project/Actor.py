@@ -17,8 +17,8 @@ from AttributeContainer import AttributeContainer
 class Actor(AttributeContainer):
 
 
-    actorname = AttributeContainer.descriptors.str(name='actorname')
-    content = AttributeContainer.descriptors.str(name='content')
+    actorname = descriptors.str(name='actorname')
+    content = descriptors.str(name='content')
     
 
     def identify(self, inspector):

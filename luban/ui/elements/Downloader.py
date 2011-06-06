@@ -27,10 +27,10 @@ class Downloader(Element):
     def identify(self, visitor):
         return visitor.onDownloader(self)
     
-    label = Element.descriptors.str(name='label')
+    label = descriptors.str(name='label')
     label.tip = 'label for the downloader'
     
-    ondownload = Element.descriptors.eventHandler(name='ondownload')
+    ondownload = descriptors.eventHandler(name='ondownload')
     ondownload.tip = (
         'The loading action that loads the resource from the controller. '
         'The ondownload property must be assigned a loading action, '

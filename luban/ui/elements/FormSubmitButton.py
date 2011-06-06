@@ -20,9 +20,9 @@ class FormSubmitButton(base):
     abstract = False
 
 
-    label = base.descriptors.str(name='label', default='Submit')
-    help = base.descriptors.str(name='help')
-    tip = base.descriptors.str(name='tip')
+    label = descriptors.str(name='label', default='Submit')
+    help = descriptors.str(name='help')
+    tip = descriptors.str(name='tip')
 
     def identify(self, inspector):
         return inspector.onFormSubmitButton(self)

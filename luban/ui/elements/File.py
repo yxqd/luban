@@ -20,8 +20,8 @@ class File(base):
     def identify(self, visitor):
         return visitor.onFile(self)
 
-    filename = base.descriptors.str('filename')
-    content = base.descriptors.str('content')
+    filename = descriptors.str('filename')
+    content = descriptors.str('content')
     
 
 # version

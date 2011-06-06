@@ -18,10 +18,10 @@ class View(base):
 
     from .Column import Column
     
-    columns = base.descriptors.referenceSet(name='columns')
+    columns = descriptors.referenceSet(name='columns')
     
-    editable = base.descriptors.bool(name='editable')
-    sortable = base.descriptors.bool(name='sortable')
+    editable = descriptors.bool(name='editable')
+    sortable = descriptors.bool(name='sortable')
 
 
     def __init__(self, columns, editable=None, sortable=None):

@@ -31,10 +31,10 @@ class Paragraph(base):
     def identify(self, inspector):
         return inspector.onParagraph(self)
 
-    text = base.descriptors.list(name='text')
+    text = descriptors.list(name='text')
     text.tip = 'a list of sentences in the paragraph'
     
-    contents = base.descriptors.referenceSet(name='contents')
+    contents = descriptors.referenceSet(name='contents')
     contents.tip = 'deprecated'
     
 

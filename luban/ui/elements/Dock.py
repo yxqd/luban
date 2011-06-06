@@ -39,9 +39,9 @@ class DockAction(base):
         return inspector.onDockAction(self)
     
 
-    dock = base.descriptors.reference(name='dock')
-    widget = base.descriptors.reference(name='widget')
-    actionname = base.descriptors.str(name='actionname')
+    dock = descriptors.reference(name='dock')
+    widget = descriptors.reference(name='widget')
+    actionname = descriptors.str(name='actionname')
 
 
 

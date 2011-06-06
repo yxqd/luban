@@ -20,9 +20,9 @@ class TestCase(unittest.TestCase):
         class A(AttributeContainer):
             
             # s = AttributeContainer.descriptors.str('a')
-            s1 = properties.str('s1')
-            a2 = p.str('a2')
-            a1 = p.str('a1')
+            s1 = descriptors.str('s1')
+            a2 = d.str('a2')
+            a1 = d.str('a1')
             
             pass
         

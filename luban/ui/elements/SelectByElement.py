@@ -29,7 +29,7 @@ class SelectByElement(ElementActions, base):
         return self.element.__class__.__name__
     
 
-    element = base.descriptors.reference(name='element')
+    element = descriptors.reference(name='element')
     
     def __init__(self, element=None):
         base.__init__(self, name='selectbyelement')

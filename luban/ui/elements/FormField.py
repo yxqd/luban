@@ -17,16 +17,16 @@ from .Element import Element
 
 class FormField(Element):
 
-    label = Element.descriptors.str(name='label')
-    help = Element.descriptors.str(name='help')
-    tip = Element.descriptors.str(name='tip')
-    error = Element.descriptors.str(name='error')
-    value = Element.descriptors.str(name='value')
-    required = Element.descriptors.bool(name='required')
+    label = descriptors.str(name='label')
+    help = descriptors.str(name='help')
+    tip = descriptors.str(name='tip')
+    error = descriptors.str(name='error')
+    value = descriptors.str(name='value')
+    required = descriptors.bool(name='required')
 
-    onchange = Element.descriptors.eventHandler(name='onchange')
-    onfocus = Element.descriptors.eventHandler(name='onfocus')
-    onblur = Element.descriptors.eventHandler(name='onblur')
+    onchange = descriptors.eventHandler(name='onchange')
+    onfocus = descriptors.eventHandler(name='onfocus')
+    onblur = descriptors.eventHandler(name='onblur')
 
 # version
 __id__ = "$Id$"

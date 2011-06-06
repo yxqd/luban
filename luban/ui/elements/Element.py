@@ -21,27 +21,27 @@ class Element(AttributeContainer, metaclass=AttributeContainer.__metaclass__):
 
     abstract = True
 
-    id = AttributeContainer.descriptors.str(name='id')
+    id = descriptors.str(name='id')
     id.tip = 'Identifier of this element. If left blank, a unique one will be generated automatically'
     
-    Class = AttributeContainer.descriptors.str(name='Class')
+    Class = descriptors.str(name='Class')
     Class.tip = 'Class of this element. Useful for styling the element'
     
-    onclick = AttributeContainer.descriptors.eventHandler(name='onclick')
+    onclick = descriptors.eventHandler(name='onclick')
     onclick.tip = 'event handler that triggers when a mouse click happens on this element'
     
-    oncreate = AttributeContainer.descriptors.eventHandler(name='oncreate')
+    oncreate = descriptors.eventHandler(name='oncreate')
     oncreate.tip = 'event handler that triggers when the widget is created on the interface'
     oncreate.experimental = True
     
-    onkeypress = AttributeContainer.descriptors.eventHandler(name='onkeypress')
+    onkeypress = descriptors.eventHandler(name='onkeypress')
     onkeypress.tip = 'event handler that triggers when user stroke a key and this element is on focus'
     onkeypress.experimental = True
     
-    hidden = AttributeContainer.descriptors.bool(name='hidden', default=False)
+    hidden = descriptors.bool(name='hidden', default=False)
     hidden.tip = 'If true, this element is hidden'
     
-    name = AttributeContainer.descriptors.str(name='name')
+    name = descriptors.str(name='name')
     name.tip = 'Name of this element. must be unique among siblings'
 
     

@@ -33,10 +33,10 @@ class Dialog(DocumentFactory, ParagraphFactory, LinkFactory, elembase):
     
     abstract = False
 
-    autoopen = elembase.descriptors.bool(name='autoopen', default=False)
+    autoopen = descriptors.bool(name='autoopen', default=False)
     autoopen.tip = 'If true, the dialog is opened when created'
     
-    title = elembase.descriptors.str(name='title')
+    title = descriptors.str(name='title')
     title.tip = 'Title of the dialog'
 
     def identify(self, inspector):

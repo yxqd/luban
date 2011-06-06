@@ -26,13 +26,13 @@ class Loading(base):
     abstract = False
 
 
-    actor = base.descriptors.reference(name='actor')
+    actor = descriptors.reference(name='actor')
     actor.tip = 'The actor that will handle this load action'
     
-    routine = base.descriptors.reference(name='routine')
+    routine = descriptors.reference(name='routine')
     routine.tip = 'The routine of the actor that will be called to handle this load action'
 
-    params = base.descriptors.dict(name='params')
+    params = descriptors.dict(name='params')
     params.tip = 'Addtional parameters as a dictionary'
     
 

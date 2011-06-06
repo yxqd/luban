@@ -21,8 +21,8 @@ class FormRadioBox(base):
     def identify(self, inspector):
         return inspector.onFormRadioBox(self)
 
-    entries = base.descriptors.lists(name='entries')
-    selection = base.descriptors.str(name='selection')
+    entries = descriptors.lists(name='entries')
+    selection = descriptors.str(name='selection')
     
     
 

@@ -54,24 +54,24 @@ class Document(DocumentFactory, ParagraphFactory, LinkFactory, SimpleContainer):
         return inspector.onDocument(self)
 
 
-    title = SimpleContainer.descriptors.str(name='title')
+    title = descriptors.str(name='title')
     title.tip = 'Title of the document'
     
-    collapsable = SimpleContainer.descriptors.bool(name='collapsable', default=False)
+    collapsable = descriptors.bool(name='collapsable', default=False)
     collapsable.tip = 'If true, the document will have a collapse/expand control and it will be collapsable'
     
-    collapsed = SimpleContainer.descriptors.bool(name='collapsed', default=False)
+    collapsed = descriptors.bool(name='collapsed', default=False)
     collapsed.tip = 'If true, the document is collapsed initially. "collapsable" must be true for this option to work'
-    dockable = SimpleContainer.descriptors.bool(name='dockable', default=False)
+    dockable = descriptors.bool(name='dockable', default=False)
     dockable.tip = 'If true, the document will have a "dock" control. By clicking the "dock" control, a user can minimize the document to the dock. For this option to work, a "dock" widget must have already existed in your application frame.'
     
-    closable = SimpleContainer.descriptors.bool(name='closable', default=False)
+    closable = descriptors.bool(name='closable', default=False)
     closable.tip = 'If true, the document will have a "close" control which, when clicked, will close (destroy) the document'
 
     # following are in effect only if collapsable is True
-    onexpand = SimpleContainer.descriptors.eventHandler(name='onexpand')
+    onexpand = descriptors.eventHandler(name='onexpand')
     onexpand.tip = 'event handler for event "expand". The "expand" event happens when a user expand the document. Only valid if the document is collapsable'
-    oncollapse = SimpleContainer.descriptors.eventHandler(name='oncollapse')
+    oncollapse = descriptors.eventHandler(name='oncollapse')
     oncollapse.tip = 'event handler for event "collapse". The "collapse" event happens when a user collapse the document. Only valid if the document is collapsable'
     
 

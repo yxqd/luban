@@ -17,31 +17,34 @@ debug = journal.debug('luban.content.Element')
 
 
 from .AttributeContainer import AttributeContainer
-class Element(AttributeContainer, metaclass=AttributeContainer.__metaclass__):
-
+class Element(AttributeContainer):
+    
+    # indicate this is abstract and cannot be instantiated
     abstract = True
-
-    id = descriptors.str(name='id')
+    
+    
+    # standard ui element properties
+    id = descriptors.str()
     id.tip = 'Identifier of this element. If left blank, a unique one will be generated automatically'
     
-    Class = descriptors.str(name='Class')
+    Class = descriptors.str()
     Class.tip = 'Class of this element. Useful for styling the element'
     
-    onclick = descriptors.eventHandler(name='onclick')
+    onclick = descriptors.eventHandler()
     onclick.tip = 'event handler that triggers when a mouse click happens on this element'
     
-    oncreate = descriptors.eventHandler(name='oncreate')
+    oncreate = descriptors.eventHandler()
     oncreate.tip = 'event handler that triggers when the widget is created on the interface'
     oncreate.experimental = True
     
-    onkeypress = descriptors.eventHandler(name='onkeypress')
+    onkeypress = descriptors.eventHandler()
     onkeypress.tip = 'event handler that triggers when user stroke a key and this element is on focus'
     onkeypress.experimental = True
     
-    hidden = descriptors.bool(name='hidden', default=False)
+    hidden = descriptors.bool(default=False)
     hidden.tip = 'If true, this element is hidden'
     
-    name = descriptors.str(name='name')
+    name = descriptors.str()
     name.tip = 'Name of this element. must be unique among siblings'
 
     

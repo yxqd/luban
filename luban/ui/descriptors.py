@@ -12,15 +12,11 @@
 #
 
 
-def reference(**kwds):
-    return Reference(**kwds)
-
-
-def referenceSet(**kwds):
-    return ReferenceSet(**kwds)
+from pyre.components.properties import *
 
 
 def eventHandler(**kwds):
+    return Property()
     return EventHandler(**kwds)
 
 
@@ -46,9 +42,6 @@ _builtin_str = __builtins__['str']
 
 
 
-class Property(object):
-
-    pass
 DescriptorBase = Property
 
 

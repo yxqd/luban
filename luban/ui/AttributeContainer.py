@@ -22,7 +22,8 @@ class Meta(_metabase):
     @classmethod
     def __prepare__(cls, *args, **kwds):
         d = super().__prepare__(*args, **kwds)
-        d['d'] = d['descriptors'] = pyre.properties
+        from . import descriptors
+        d['d'] = d['descriptors'] = descriptors
         return d
 
 

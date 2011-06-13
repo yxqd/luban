@@ -16,7 +16,6 @@ from pyre.components.properties import *
 
 
 def eventHandler(**kwds):
-    return Property()
     return EventHandler(**kwds)
 
 
@@ -46,36 +45,7 @@ DescriptorBase = Property
 
 
 
-class ReferenceSet(Property):
-
-    
-    def __init__(self, name=None, default=None, meta=None, validator=None):
-        default = self._cast(default)
-        Property.__init__(self, name, "referenceset", default, meta, validator)
-        return
-
-
-    def _cast(self, value):
-        value = value or []
-        return value
-
-
-
-class Reference(Property):
-
-
-    def __init__(self, name=None, default=None, meta=None, targettype=None, validator=None):
-        Property.__init__(self, name, "reference", default, meta, validator)
-        return
-
-
-    def _cast(self, value):
-        # 
-        return value
-
-
-
-class EventHandler(Reference):
+class EventHandler(Facility):
     
     pass
 

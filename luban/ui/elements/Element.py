@@ -61,7 +61,7 @@ class Element(AttributeContainer):
 
 
     def __init__(self, name=None, attributes=None, **kwds):
-        Traceable.__init__(self)
+        super().__init__(name)
 
         # name is used by my parent to find me
         name = name or (self.__class__.__name__ + str(id(self)) )

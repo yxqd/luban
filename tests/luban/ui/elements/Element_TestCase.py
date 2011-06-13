@@ -24,8 +24,15 @@ class TestCase(unittest.TestCase):
     def test2(self):
         from luban.ui.elements.Element import Element
         name = "e1"
+        
         e1 = Element(name=name)
         self.assertEqual(e1.name, name)
+        
+        Class = "class"
+        e2 = Element(name=name, Class=Class)
+        self.assertEqual(e2.Class, Class)
+        
+        print(list(e2.iterAttributes()))
         return
      
     

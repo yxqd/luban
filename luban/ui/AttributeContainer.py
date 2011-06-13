@@ -40,7 +40,7 @@ class AttributeContainer(pyre.component, AbstractAttributeContainer, metaclass=M
     
     @classmethod
     def getDescriptor(cls, name):
-        return cls.pyre_getTraitDescriptor(cls, name)
+        return cls.pyre_getTraitDescriptor(name)
     
     
     
@@ -52,13 +52,13 @@ class AttributeContainer(pyre.component, AbstractAttributeContainer, metaclass=M
 
     def getAttribute(self, name):
         trait = self.getDescriptor(name)
-        return trait.__get__(self)
+        return trait.__get__(self, self.__class__)
 
 
     def iterAttributes(self):
         for descriptor in self.iterDescriptors():
             name = descriptor.name
-            value = descriptor.__get__(self)
+            value = descriptor.__get__(self, self.__class__)
             yield name, value
             continue
         return

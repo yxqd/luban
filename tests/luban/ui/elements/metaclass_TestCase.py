@@ -29,7 +29,7 @@ class TestCase(unittest.TestCase):
             
             self.assertEqual(hey, 1)
 
-        print(A.hey)
+        # print(A.hey)
         return
      
     

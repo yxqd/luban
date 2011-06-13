@@ -25,7 +25,9 @@ class ElementContainer(CredentialFactory, Element):
             return self
         
         if item.name in self.name2item:
-            raise RuntimeError('item of same name has been added, please consider change the name: %r(%s)' % (item.name, item))
+            e = 'item of same name has been added, please consider change the name: %r(%s)' \
+                % (item.name, item)
+            raise RuntimeError(e)
 
         # this should be in the meta class
         if hasattr(self, 'allowed_element_types') and hasattr(self, 'disallowed_element_types'):
@@ -115,6 +117,10 @@ class ElementContainer(CredentialFactory, Element):
         Element.__init__(self, **kwds)
         self.name2item = {}
         self.id2item = {}
+        
+        # pyre machinery should be all done here
+        # so we should have configured sub elements
+        # it should be safe to add sub elements to my store
         for elem in list(self._iterDeclaredSubElements()):
             self.append(elem)
             continue

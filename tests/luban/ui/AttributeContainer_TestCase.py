@@ -16,6 +16,8 @@ import unittest
 class TestCase(unittest.TestCase):
      
     def test1(self):
+        """ order of descriptors
+        """
         from luban.ui.elements.AttributeContainer import AttributeContainer
         class A(AttributeContainer):
             

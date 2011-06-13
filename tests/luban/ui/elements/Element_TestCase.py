@@ -21,6 +21,14 @@ class TestCase(unittest.TestCase):
         return
      
     
+    def test2(self):
+        from luban.ui.elements.Element import Element
+        name = "e1"
+        e1 = Element(name=name)
+        self.assertEqual(e1.name, name)
+        return
+     
+    
 if __name__ == "__main__": unittest.main()
 
     

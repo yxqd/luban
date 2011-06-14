@@ -16,7 +16,12 @@ from pyre.components.properties import *
 
 
 def eventHandler(**kwds):
+    return Property()
     return EventHandler(**kwds)
+
+
+def reference(**kwds):
+    return Property()
 
 
 def lists(**kwds):

@@ -12,13 +12,12 @@
 #
 
 
-# base class of all actions
 
 from .AttributeContainer import AttributeContainer
-from pyre.parsing.locators.Traceable import Traceable
+class Action(AttributeContainer):
 
-class Action(AttributeContainer, Traceable):
-
+    # base class of all actions
+    
     abstract = True
     
     callback = descriptors.reference(name='callback')
@@ -31,14 +30,8 @@ class Action(AttributeContainer, Traceable):
 
 
     def __init__(self, name=None, **kwds):
-        Traceable.__init__(self)
-
-        # name should be unecessary. this is due to the implementation limit of AttributeContainer class
-        name = name or (self.__class__.__name__ + str(id(self)) )
-
-        # this should not be necessary if we are not using pyre Inventory
-        # to implement AttributeContainer
-        AttributeContainer.__init__(self, name)
+        AttributeContainer.__init__(self)
+        
         self.name = name
 
         for k, v in kwds.items():
@@ -48,8 +41,9 @@ class Action(AttributeContainer, Traceable):
 
 
     def elementSelector(self, element):
-        # factory to select an element
-        from .Element import Element
+        """create element selector for the given element
+        """
+        from ..elements.Element import Element
         if isinstance(element, Element):
             from .SelectByElement import SelectByElement
             return SelectByElement(element)

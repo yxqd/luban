@@ -61,14 +61,7 @@ class Element(AttributeContainer):
 
 
     def __init__(self, name=None, attributes=None, **kwds):
-        super().__init__(name)
-
-        # name is used by my parent to find me
-        name = name or (self.__class__.__name__ + str(id(self)) )
-
-        # this should not be necessary if we are not using pyre Inventory
-        # to implement AttributeContainer
-        AttributeContainer.__init__(self, name)
+        AttributeContainer.__init__(self)
         self.name = name
 
         attributes = attributes or {}

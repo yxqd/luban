@@ -12,6 +12,18 @@
 #
 
 
+"""
+methods here create instances of action classes
+
+Each action class describe one type of action.
+Keep in mind that in luban.ui.actions we are using data objects to 
+hold information about actions, instead of actually
+performing actions.
+The desriptions here will later be translated by renderers
+to actual actions in different media.
+"""
+
+
 #  for credentials
 def createCredential(**kwds):
     '''createCredential(username=..., ticket=...)

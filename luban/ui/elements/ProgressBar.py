@@ -34,9 +34,9 @@ class ProgressBar(Element):
     abstract = False
 
     skip = descriptors.int(name='skip')
-    onchecking = descriptors.eventHandler(name='onchecking')
-    onfinished = descriptors.eventHandler(name='onfinished')
-    oncanceled = descriptors.eventHandler(name='oncanceled')
+    onchecking = descriptors.action()
+    onfinished = descriptors.action()
+    oncanceled = descriptors.action()
     
     status = descriptors.str(name='status')
     percentage = descriptors.int(name='percentage')

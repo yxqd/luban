@@ -24,9 +24,9 @@ class FormField(Element):
     value = descriptors.str(name='value')
     required = descriptors.bool(name='required')
 
-    onchange = descriptors.eventHandler(name='onchange')
-    onfocus = descriptors.eventHandler(name='onfocus')
-    onblur = descriptors.eventHandler(name='onblur')
+    onchange = descriptors.action()
+    onfocus = descriptors.action()
+    onblur = descriptors.action()
 
 # version
 __id__ = "$Id$"

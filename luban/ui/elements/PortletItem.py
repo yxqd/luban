@@ -38,7 +38,7 @@ class PortletItem(ElementContainer):
     selected = descriptors.bool(name='selected', default=False)
     selected.tip = 'if True, this item is selected'
     
-    onselect = descriptors.eventHandler(name='onselect')
+    onselect = descriptors.action()
     onselect.tip = 'event handler that triggers when this portlet item is selected. usually this event handler is preferred over "onclick" event handler for this widget'
 
 

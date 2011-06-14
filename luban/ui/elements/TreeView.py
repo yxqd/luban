@@ -24,7 +24,7 @@ class TreeViewLeaf(Element, ElementNotRoot):
     label = descriptors.str(name='label')
     icon = descriptors.str(name='icon')
     tip = descriptors.str(name='tip')
-    onclick = descriptors.eventHandler(name='onclick')
+    onclick = descriptors.action()
     
     def __init__(self, *args, **kwds):
         Element.__init__(self, *args, **kwds)
@@ -45,7 +45,7 @@ class TreeViewBranch(ElementContainer, ElementNotRoot):
     label = descriptors.str(name='label')
     icon = descriptors.str(name='icon')
     tip = descriptors.str(name='tip')
-    onclick = descriptors.eventHandler(name='onclick')
+    onclick = descriptors.action()
 
 
     def __init__(self, *args, **kwds):
@@ -80,8 +80,8 @@ class TreeView(ElementContainer):
 
     draggable = descriptors.bool(name='draggable')
     
-    onclick = descriptors.eventHandler(name='onclick')
-    onnodemoving = descriptors.eventHandler(name='onnodemoving')
+    onclick = descriptors.action()
+    onnodemoving = descriptors.action()
 
     # obsolete
     label = descriptors.str(name='label')

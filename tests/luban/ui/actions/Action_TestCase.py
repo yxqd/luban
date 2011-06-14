@@ -31,6 +31,18 @@ class TestCase(unittest.TestCase):
         return
      
     
+    def test3(self):
+        from luban.ui.actions.Action import Action
+        a1 = Action(name='a1')
+        a2 = Action(name='a2')
+        import pyre
+        self.assertRaises(
+            pyre.schema.exceptions.CastingError,
+            setattr, a1, 'onfinish', 3)
+        a1.onfinish = a2
+        return
+     
+    
 if __name__ == "__main__": unittest.main()
 
     

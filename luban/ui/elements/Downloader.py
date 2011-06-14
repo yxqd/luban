@@ -30,7 +30,7 @@ class Downloader(Element):
     label = descriptors.str(name='label')
     label.tip = 'label for the downloader'
     
-    ondownload = descriptors.eventHandler(name='ondownload')
+    ondownload = descriptors.action()
     ondownload.tip = (
         'The loading action that loads the resource from the controller. '
         'The ondownload property must be assigned a loading action, '

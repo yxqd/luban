@@ -69,9 +69,9 @@ class Document(DocumentFactory, ParagraphFactory, LinkFactory, SimpleContainer):
     closable.tip = 'If true, the document will have a "close" control which, when clicked, will close (destroy) the document'
 
     # following are in effect only if collapsable is True
-    onexpand = descriptors.eventHandler(name='onexpand')
+    onexpand = descriptors.action()
     onexpand.tip = 'event handler for event "expand". The "expand" event happens when a user expand the document. Only valid if the document is collapsable'
-    oncollapse = descriptors.eventHandler(name='oncollapse')
+    oncollapse = descriptors.action()
     oncollapse.tip = 'event handler for event "collapse". The "collapse" event happens when a user collapse the document. Only valid if the document is collapsable'
     
 

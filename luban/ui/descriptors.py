@@ -13,15 +13,17 @@
 
 
 from pyre.components.properties import *
+import pyre
+
+class ActionInterface(pyre.interface, family="luban.ui.actions"):
+
+    """
+    Interface declarator for actions
+    """
 
 
-def eventHandler(**kwds):
-    return Property()
-    return EventHandler(**kwds)
-
-
-def reference(**kwds):
-    return Property()
+def action():
+    return facility(interface=ActionInterface)
 
 
 def lists(**kwds):

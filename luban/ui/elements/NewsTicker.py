@@ -39,7 +39,7 @@ class NewsTicker(base):
     refreshtime = descriptors.int(name='refreshtime')
     refreshtime.tip = 'time elapsed before the refresh event fires. unit: seconds'
 
-    onrefresh = descriptors.eventHandler(name='onrefresh')
+    onrefresh = descriptors.action()
     onrefresh.tip = 'event handler that triggers at refresh event'
     
 

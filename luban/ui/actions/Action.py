@@ -16,13 +16,14 @@
 from .AttributeContainer import AttributeContainer
 class Action(AttributeContainer):
 
-    # base class of all actions
+    """base class of all actions
+    """
     
     abstract = True
     
-    callback = descriptors.reference(name='callback')
-    callback.experimental = True
-    callback.tip = 'A callback action that will be performed when the current action is finished'
+    onfinish = descriptors.action()
+    onfinish.experimental = True
+    onfinish.tip = 'A callback action that will be performed when the current action is finished'
     
 
     def identify(self, inspector):

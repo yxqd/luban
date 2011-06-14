@@ -85,7 +85,7 @@ class Form(ParagraphFactory, DocumentFactory, SimpleContainer):
     title = descriptors.str(name='title')
     title.tip = 'Title of the form'
 
-    onsubmit = descriptors.eventHandler(name='onsubmit')
+    onsubmit = descriptors.action()
     onsubmit.tip = 'event handler that triggers when the form is submitted'
 
 

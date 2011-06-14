@@ -30,14 +30,14 @@ class Element(AttributeContainer):
     Class = descriptors.str()
     Class.tip = 'Class of this element. Useful for styling the element'
     
-    onclick = descriptors.eventHandler()
+    onclick = descriptors.action()
     onclick.tip = 'event handler that triggers when a mouse click happens on this element'
     
-    oncreate = descriptors.eventHandler()
+    oncreate = descriptors.action()
     oncreate.tip = 'event handler that triggers when the widget is created on the interface'
     oncreate.experimental = True
     
-    onkeypress = descriptors.eventHandler()
+    onkeypress = descriptors.action()
     onkeypress.tip = 'event handler that triggers when user stroke a key and this element is on focus'
     onkeypress.experimental = True
     

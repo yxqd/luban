@@ -22,8 +22,8 @@ class Uploader(Element):
 
     label = descriptors.str(name='label')
 
-    onsubmit = descriptors.eventHandler(name='onsubmit')
-    oncomplete = descriptors.eventHandler(name='oncomplete')
+    onsubmit = descriptors.action()
+    oncomplete = descriptors.action()
 
 
 # version

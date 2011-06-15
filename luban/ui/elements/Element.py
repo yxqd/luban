@@ -24,7 +24,7 @@ class Element(AttributeContainer):
     
     
     # standard ui element properties
-    id = descriptors.str()
+    id = descriptors.guid()
     id.tip = 'Identifier of this element. If left blank, a unique one will be generated automatically'
     
     # XXX: class is reserved. what would be a better name?
@@ -63,30 +63,10 @@ class Element(AttributeContainer):
         attributes = attributes or {}
         kwds.update(attributes)
 
-        self._setID(kwds)
-
         for k, v in kwds.items():
             debug.log('setting attribute %r to %s' % (k,v))
             self.setAttribute(k,v)
 
-        return
-
-
-    def _setID(self, attributes):
-        id = attributes.get('id')
-
-        # no id, generate one
-        if not id:
-            id = GUID.GUID(self)
-
-        # make sure id is a string
-        id = str(id)
-
-        # verify
-        if id.find('.') != -1:
-            raise RuntimeError("id cannot contain '.': %s" % id)
-
-        attributes['id'] = id
         return
 
 
@@ -102,8 +82,6 @@ class Element(AttributeContainer):
         return '%s(%s)' % (cls.__name__, ', '.join(l))
     getCtorDocStr = classmethod(getCtorDocStr)
     
-
-from . import GUID
 
 # version
 __id__ = "$Id$"

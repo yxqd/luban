@@ -29,6 +29,10 @@ class TestCase(unittest.TestCase):
         self.assertEqual(e1.name, name)
         
         attrs = list(e1.iterAttributes())
+
+        self.assertEqual(e1.id, str(id(e1)))
+
+        self.assertRaises(ValueError, setattr, e1, 'id', "a.b")
         return
      
     

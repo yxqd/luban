@@ -42,6 +42,14 @@ def dict(default=None):
     return d
 
 
+def guid(default=None):
+    d = GUID()
+    from pyre.schema import str
+    d.type = str
+    d.default = default
+    return d
+
+
 def lists(**kwds):
     return Lists(**kwds)
 
@@ -55,20 +63,35 @@ def link(**kwds):
     return Link(**kwds)
 
 
-def str(*args, **kwds):
-    return String(*args, **kwds)
-_builtin_str = __builtins__['str']
-
-
-
 
 DescriptorBase = Property
 
+class GUID(Property):
 
 
-class EventHandler(Facility):
-    
-    pass
+    def __get__(self, instance, cls):
+        id = super().__get__(instance, cls)
+        if id is None:
+            from .GUID import GUID as getguid
+            id = getguid(instance)
+            instance.id = id
+        return id
+
+
+    def __set__(self, instance, value):
+        if value is not None:
+            value = self._check(value)
+        return super().__set__(instance, value)
+
+
+    def _check(self, value):
+        value = __builtins__['str'](value)
+
+        # verify
+        if value.find('.') != -1:
+            raise ValueError("id cannot contain '.': %s" % value)
+        
+        return value
 
 
 class Lists(Property):
@@ -148,17 +171,6 @@ class  Link(Property):
     def _cast(self, value):
         from luban.content.Link import Link
         return value or Link()
-
-
-class String(Property):
-
-    def _cast(self, v):
-        try:
-            return _builtin_str(v)
-        except:
-            # import traceback
-            # debug.log(traceback.format_exc())
-            return str(v)
 
 
 import luban._journal as journal

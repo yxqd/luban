@@ -70,6 +70,7 @@ class Element(AttributeContainer):
         return
 
 
+    @classmethod
     def getCtorDocStr(cls, descriptors=None):
         if not descriptors:
             descriptors = cls.iterDescriptors()
@@ -80,7 +81,6 @@ class Element(AttributeContainer):
             l.append('%s=%r' % (name, value))
             continue
         return '%s(%s)' % (cls.__name__, ', '.join(l))
-    getCtorDocStr = classmethod(getCtorDocStr)
     
 
 # version

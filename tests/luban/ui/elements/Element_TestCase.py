@@ -18,6 +18,7 @@ class TestCase(unittest.TestCase):
 
     def test1(self):
         from luban.ui.elements.Element import Element
+        # print (Element.getCtorDocStr())
         return
      
     

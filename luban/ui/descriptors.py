@@ -26,6 +26,14 @@ def action():
     return facility(interface=ActionInterface)
 
 
+def list(default=None):
+    d = Property()
+    from ._schema import List
+    d.type = List
+    d.default = default if default is not None else ()
+    return d
+
+
 def lists(**kwds):
     return Lists(**kwds)
 

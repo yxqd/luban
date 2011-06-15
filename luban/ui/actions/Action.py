@@ -26,10 +26,6 @@ class Action(AttributeContainer):
     onfinish.tip = 'A callback action that will be performed when the current action is finished'
     
 
-    def identify(self, inspector):
-        raise NotImplementedError("class %r should implement 'identify'" % self.__class__.__name__)
-
-
     def __init__(self, name=None, **kwds):
         AttributeContainer.__init__(self)
         

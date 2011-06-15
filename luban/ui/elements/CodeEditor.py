@@ -35,10 +35,10 @@ class CodeEditor(Element):
     text.tip = 'Text of the code'
 
     onsave = descriptors.action()
-    onsave.tip = 'event handler that triggers when user clicks the save button of the widget'
+    onsave.tip = 'action when user clicks the save button of the widget'
     
     onchange = descriptors.action()
-    onchange.tip = 'event handler that triggers when user changes the text in the widget and the widget lost focus'
+    onchange.tip = 'action when user changes the text in the widget and the widget lost focus'
     
 
 # version

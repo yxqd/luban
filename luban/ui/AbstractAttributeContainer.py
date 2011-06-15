@@ -14,6 +14,16 @@
 
 class AbstractAttributeContainer(object):
 
+    """This defines the interface of the attribute containers
+    that are used to store specifications of ui elements and
+    ui actions.
+
+    The implementation makes heavy use of descriptors so that
+    it is easy to introspect the elements/actions to do different
+    things.
+    """
+
+    # interface to descriptors are the important for inspectors
     @classmethod
     def iterDescriptors(cls):
         "iterates over descriptors"
@@ -42,6 +52,12 @@ class AbstractAttributeContainer(object):
         """iterates over key,value pairs of all attributes
         """
         raise NotImplementedError
+
+    
+    # double dispatching for inspector
+    def identify(self, inspector):
+        e = "class %r should implement 'identify'" % self.__class__.__name__
+        raise NotImplementedError(e)
     
 
     def __init__(self, name=None):

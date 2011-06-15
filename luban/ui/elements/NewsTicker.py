@@ -40,7 +40,7 @@ class NewsTicker(base):
     refreshtime.tip = 'time elapsed before the refresh event fires. unit: seconds'
 
     onrefresh = descriptors.action()
-    onrefresh.tip = 'event handler that triggers at refresh event'
+    onrefresh.tip = 'action on refresh event'
     
 
     def item(self, **kwds):

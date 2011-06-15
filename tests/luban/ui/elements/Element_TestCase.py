@@ -28,11 +28,16 @@ class TestCase(unittest.TestCase):
         e1 = Element(name=name)
         self.assertEqual(e1.name, name)
         
-        Class = "class"
+        attrs = list(e1.iterAttributes())
+        return
+     
+    
+    def test3(self):
+        from luban.ui.elements.Element import Element
+        name = "e1"
+        Class = "a b c"
         e2 = Element(name=name, Class=Class)
-        self.assertEqual(e2.Class, Class)
-        
-        print(list(e2.iterAttributes()))
+        self.assertEqual(e2.Class, ("a", "b", "c"))
         return
      
     

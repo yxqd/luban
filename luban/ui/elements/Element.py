@@ -27,18 +27,19 @@ class Element(AttributeContainer):
     id = descriptors.str()
     id.tip = 'Identifier of this element. If left blank, a unique one will be generated automatically'
     
-    Class = descriptors.str()
+    # XXX: class is reserved. what would be a better name?
+    Class = descriptors.list()
     Class.tip = 'Class of this element. Useful for styling the element'
     
     onclick = descriptors.action()
-    onclick.tip = 'event handler that triggers when a mouse click happens on this element'
+    onclick.tip = 'action when a mouse click happens on this element'
     
     oncreate = descriptors.action()
-    oncreate.tip = 'event handler that triggers when the widget is created on the interface'
+    oncreate.tip = 'action when the widget is created on the interface'
     oncreate.experimental = True
     
     onkeypress = descriptors.action()
-    onkeypress.tip = 'event handler that triggers when user stroke a key and this element is on focus'
+    onkeypress.tip = 'action when user stroke a key and this element is on focus'
     onkeypress.experimental = True
     
     hidden = descriptors.bool(default=False)
@@ -48,10 +49,6 @@ class Element(AttributeContainer):
     name.tip = 'Name of this element. must be unique among siblings'
 
     
-    def identify(self, inspector):
-        raise NotImplementedError("class %r should implement 'identify'" % self.__class__.__name__)
-
-
     def addClass(self, kls):
         classes = self.Class.split(' ')
         if kls in classes: return

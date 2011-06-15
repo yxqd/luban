@@ -64,7 +64,7 @@ class Tab(DocumentFactory, ParagraphFactory, TeleSection):
     label.tip = 'label of this tab'
 
     onselect = descriptors.action() # happen when this tab got selected
-    onselect.tip = 'event handler that triggers when this tab is selected'
+    onselect.tip = 'action when this tab is selected'
 
     def identify(self, inspector):
         return inspector.onTab(self)

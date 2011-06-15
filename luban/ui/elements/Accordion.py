@@ -30,7 +30,7 @@ class Accordion(TeleContainer):
     abstract = False
     
     onchange = descriptors.action()
-    onchange.tip = 'event handler that triggers when a different section was selected'
+    onchange.tip = 'action when a different section was selected'
 
     @elementfactory
     def section(self, label=None, **kwds):

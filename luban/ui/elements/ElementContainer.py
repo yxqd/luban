@@ -98,7 +98,18 @@ class ElementContainer(CredentialFactory, Element):
         return self.getChildByName(name)
     
 
-    contents = descriptors.referenceSet()
+    def _iterDeclaredSubElements(self):
+        from .Element import Element
+        for trait in self.pyre_getTraitDescriptors():
+            if trait not in self.pyre_inventory:
+                continue
+            slot = self.pyre_inventory[trait]
+            value = slot.value
+            if isinstance(value, Element):
+                yield value
+            continue
+        return
+    
     
     def __init__(self, **kwds):
         Element.__init__(self, **kwds)

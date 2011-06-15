@@ -22,8 +22,19 @@ class ActionInterface(pyre.interface, family="luban.ui.actions"):
     """
 
 
+class ElementInterface(pyre.interface, family="luban.ui.elements"):
+
+    """
+    Interface declarator for elements
+    """
+
+
 def action():
     return facility(interface=ActionInterface)
+
+
+def element(default=None):
+    return facility(interface=ElementInterface, default=default)
 
 
 def list(default=None):

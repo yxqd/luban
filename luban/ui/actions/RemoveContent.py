@@ -24,7 +24,7 @@ class RemoveContent(base):
         return inspector.onRemoveContent(self)
     
 
-    element = descriptors.reference(name='element')
+    element = descriptors.reference()
 
 
 

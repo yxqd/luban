@@ -28,7 +28,7 @@ class SelectByID(ElementActions, base):
 
     abstract = False
 
-    id = descriptors.str(name='id')
+    id = descriptors.str()
 
 
     def identify(self, inspector):

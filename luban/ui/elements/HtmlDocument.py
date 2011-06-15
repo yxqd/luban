@@ -28,10 +28,10 @@ class HtmlDocument(SimpleContainer):
     def identify(self, inspector):
         return inspector.onHtmlDocument(self)
 
-    text = descriptors.list(name='text')
+    text = descriptors.list()
     text.tip = 'Content of the html document'
     
-    title = descriptors.str(name='title')
+    title = descriptors.str()
     title.title = 'Title of the document'
 
 

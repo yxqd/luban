@@ -23,8 +23,8 @@ class CodeViewer(Element):
     def identify(self, inspector):
         return inspector.onCodeViewer(self)
 
-    syntax = descriptors.str(name='syntax')
-    text = descriptors.str(name='text')
+    syntax = descriptors.str()
+    text = descriptors.str()
 
 
 # version

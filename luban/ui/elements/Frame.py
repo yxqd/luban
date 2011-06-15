@@ -32,7 +32,7 @@ class Frame(DocumentFactory, SimpleContainer):
         return inspector.onFrame(self)
 
 
-    title = descriptors.str(name='title')
+    title = descriptors.str()
     title.tip = 'Title of the frame'
     
 

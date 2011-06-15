@@ -25,17 +25,17 @@ class PortletItem(ElementContainer):
     def identify(self, inspector):
         return inspector.onPortletItem(self)
 
-    label = descriptors.str(name='label')
+    label = descriptors.str()
     label.tip = 'label of the portlet item'
     
-    icon = descriptors.str(name='icon')
+    icon = descriptors.str()
     icon.tip = 'icon of the portlet item'
     
-    tip = descriptors.str(name='tip')
+    tip = descriptors.str()
     tip.tip = 'tip for this portlet item that shows up when hovered'
     tip.experimental = True
 
-    selected = descriptors.bool(name='selected', default=False)
+    selected = descriptors.bool()
     selected.tip = 'if True, this item is selected'
     
     onselect = descriptors.action()

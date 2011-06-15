@@ -24,14 +24,14 @@ class AppMenuItem(Element):
     abstract = False
     experimental = True
 
-    label = descriptors.str(name='label')
+    label = descriptors.str()
     label.tip = 'label of the menu item'
     
-    icon = descriptors.str(name='icon')
+    icon = descriptors.str()
     icon.tip = 'icon of the menu item'
     icon.experimental = True
     
-    tip = descriptors.str(name='tip')
+    tip = descriptors.str()
     tip.tip = 'tip for the menu item that shows up when hovered'
     tip.experimental = True
 
@@ -47,14 +47,14 @@ class AppMenu(ElementContainer):
     abstract = False
 
 
-    label = descriptors.str(name='label')
+    label = descriptors.str()
     label.tip = 'label of the menu'
     
-    icon = descriptors.str(name='icon')
+    icon = descriptors.str()
     icon.tip = 'icon of the menu'
     icon.experimental = True
     
-    tip = descriptors.str(name='tip')
+    tip = descriptors.str()
     tip.tip = 'tip for the menu that shows up when hovered'
     tip.experimental = True
 

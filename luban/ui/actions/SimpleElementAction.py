@@ -21,9 +21,9 @@ class SimpleElementAction(ElementActions, base):
     abstract = False
 
 
-    element = descriptors.reference(name='element')
-    actionname = descriptors.str(name='actionname')
-    params = descriptors.dict(name='params')
+    element = descriptors.reference()
+    actionname = descriptors.str()
+    params = descriptors.dict()
     
     def __init__(self, element, actionname, **params):
         super(SimpleElementAction, self).__init__(element=element, actionname=actionname, params=params)

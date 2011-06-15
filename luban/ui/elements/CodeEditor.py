@@ -28,10 +28,10 @@ class CodeEditor(Element):
     def identify(self, inspector):
         return inspector.onCodeEditor(self)
 
-    syntax = descriptors.str(name='syntax')
+    syntax = descriptors.str()
     syntax.tip = 'Syntax of the code. python, c++, etc'
     
-    text = descriptors.str(name='text')
+    text = descriptors.str()
     text.tip = 'Text of the code'
 
     onsave = descriptors.action()

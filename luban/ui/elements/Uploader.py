@@ -20,7 +20,7 @@ class Uploader(Element):
     def identify(self, visitor):
         return visitor.onUploader(self)
 
-    label = descriptors.str(name='label')
+    label = descriptors.str()
 
     onsubmit = descriptors.action()
     oncomplete = descriptors.action()

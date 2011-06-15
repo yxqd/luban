@@ -18,11 +18,11 @@ from .AttributeContainer import AttributeContainer as base
 class Column(base):
 
 
-    measure = descriptors.str(name='measure')
-    editable = descriptors.bool(name='editable')
-    sortable = descriptors.bool(name='sortable')
-    hidden = descriptors.bool(name='hidden')
-    label = descriptors.str(name='label')
+    measure = descriptors.str()
+    editable = descriptors.bool()
+    sortable = descriptors.bool()
+    hidden = descriptors.bool()
+    label = descriptors.str()
 
 
     def __init__(self, name=None, measure=None, label=None, editable=None, sortable=None, hidden=None):

@@ -29,14 +29,14 @@ class NewsTicker(base):
     abstract = False
     experimental = True
 
-    title = descriptors.str(name='title')
+    title = descriptors.str()
     title.tip = 'Title of the widget'
     
-    delay = descriptors.int(name='delay')
+    delay = descriptors.int()
     delay.tip = 'idle time before the next news item shows up. unit: seconds'
 
     
-    refreshtime = descriptors.int(name='refreshtime')
+    refreshtime = descriptors.int()
     refreshtime.tip = 'time elapsed before the refresh event fires. unit: seconds'
 
     onrefresh = descriptors.action()
@@ -61,7 +61,7 @@ class NewsTickerItem(Element):
 
     abstract = False
     
-    text = descriptors.list(name='text')
+    text = descriptors.list()
     
     def identify(self, inspector):
         return inspector.onNewsTickerItem(self)

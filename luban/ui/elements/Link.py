@@ -29,15 +29,15 @@ class Link(base):
         return inspector.onLink(self)
 
 
-    label = descriptors.str(name='label')
+    label = descriptors.str()
     label.tip = 'label of the link'
 
     # if there is url, then there should probably be
     # no onclick action. how do we enforce that?
-    url = descriptors.str(name='url')
+    url = descriptors.str()
     url.tip = 'url of the link will bring us to'
     
-    tip = descriptors.str(name='tip')
+    tip = descriptors.str()
     tip.tip = 'tip for the link that shows up when hovered'
     tip.experimental = True
     

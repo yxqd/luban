@@ -26,8 +26,8 @@ class Model(base):
 
 def test():
     class MyModel(Model):
-        a = descriptors.time(name='a')
-        b = descriptors.str(name='b')
+        a = descriptors.time()
+        b = descriptors.str()
     return
 
 

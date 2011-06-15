@@ -27,7 +27,7 @@ class Downloader(Element):
     def identify(self, visitor):
         return visitor.onDownloader(self)
     
-    label = descriptors.str(name='label')
+    label = descriptors.str()
     label.tip = 'label for the downloader'
     
     ondownload = descriptors.action()

@@ -21,9 +21,9 @@ class TreeViewLeaf(Element, ElementNotRoot):
     abstract = False
 
 
-    label = descriptors.str(name='label')
-    icon = descriptors.str(name='icon')
-    tip = descriptors.str(name='tip')
+    label = descriptors.str()
+    icon = descriptors.str()
+    tip = descriptors.str()
     onclick = descriptors.action()
     
     def __init__(self, *args, **kwds):
@@ -42,9 +42,9 @@ class TreeViewBranch(ElementContainer, ElementNotRoot):
     abstract = False
 
 
-    label = descriptors.str(name='label')
-    icon = descriptors.str(name='icon')
-    tip = descriptors.str(name='tip')
+    label = descriptors.str()
+    icon = descriptors.str()
+    tip = descriptors.str()
     onclick = descriptors.action()
 
 
@@ -76,15 +76,15 @@ class TreeView(ElementContainer):
     abstract = False
 
 
-    root = descriptors.reference(name='root')
+    root = descriptors.reference()
 
-    draggable = descriptors.bool(name='draggable')
+    draggable = descriptors.bool()
     
     onclick = descriptors.action()
     onnodemoving = descriptors.action()
 
     # obsolete
-    label = descriptors.str(name='label')
+    label = descriptors.str()
     
     def __init__(self, **kwds):
         if 'label' in kwds:
@@ -109,8 +109,8 @@ class TreeViewSetRoot(Action):
     abstract = False
 
 
-    treeview = descriptors.reference(name='treeview')
-    root = descriptors.reference(name='root')
+    treeview = descriptors.reference()
+    root = descriptors.reference()
     
     
 class TreeViewRemoveNode(Action):
@@ -118,8 +118,8 @@ class TreeViewRemoveNode(Action):
     abstract = False
 
 
-    treeview = descriptors.reference(name='treeview')
-    node = descriptors.reference(name='node')
+    treeview = descriptors.reference()
+    node = descriptors.reference()
     
 
     def identify(self, inspector):
@@ -132,8 +132,8 @@ class TreeViewSelectNode(Action):
     abstract = False
 
 
-    treeview = descriptors.reference(name='treeview')
-    node = descriptors.reference(name='node')
+    treeview = descriptors.reference()
+    node = descriptors.reference()
     
     def identify(self, inspector):
         return inspector.onTreeViewSelectNode(self)
@@ -145,10 +145,10 @@ class TreeViewAddBranch(Action):
     abstract = False
 
 
-    treeview = descriptors.reference(name='treeview')
-    referencenode = descriptors.reference(name='referencenode')
-    newnode = descriptors.reference(name='newnode')
-    position = descriptors.str(name='position')
+    treeview = descriptors.reference()
+    referencenode = descriptors.reference()
+    newnode = descriptors.reference()
+    position = descriptors.str()
 
     def __init__(self, treeview=None, referencenode=None, newnode=None, position=None):
         Action.__init__(self)

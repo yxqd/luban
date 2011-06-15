@@ -17,8 +17,8 @@ from .Action import Action as base
 class SimpleAction(base):
 
 
-    actionname = descriptors.str(name='actionname')
-    params = descriptors.dict(name='params')
+    actionname = descriptors.str()
+    params = descriptors.dict()
 
 
     def identify(self, inspector):

@@ -82,7 +82,7 @@ class Form(ParagraphFactory, DocumentFactory, SimpleContainer):
         return inspector.onForm(self)
 
 
-    title = descriptors.str(name='title')
+    title = descriptors.str()
     title.tip = 'Title of the form'
 
     onsubmit = descriptors.action()

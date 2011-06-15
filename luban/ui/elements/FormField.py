@@ -17,12 +17,12 @@ from .Element import Element
 
 class FormField(Element):
 
-    label = descriptors.str(name='label')
-    help = descriptors.str(name='help')
-    tip = descriptors.str(name='tip')
-    error = descriptors.str(name='error')
-    value = descriptors.str(name='value')
-    required = descriptors.bool(name='required')
+    label = descriptors.str()
+    help = descriptors.str()
+    tip = descriptors.str()
+    error = descriptors.str()
+    value = descriptors.str()
+    required = descriptors.bool()
 
     onchange = descriptors.action()
     onfocus = descriptors.action()

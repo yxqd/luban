@@ -52,7 +52,7 @@ class AccordionSection(DocumentFactory, ParagraphFactory, TeleSection):
     full_description = ''
     abstract = False
 
-    label = descriptors.str(name='label')
+    label = descriptors.str()
     label.tip = 'label of the accordion section'
 
     def identify(self, inspector):

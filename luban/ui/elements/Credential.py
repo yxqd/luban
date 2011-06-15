@@ -19,8 +19,8 @@ class Credential(Element):
 
     abstract = False
 
-    username = descriptors.str(name='username')
-    ticket = descriptors.str(name='ticket')
+    username = descriptors.str()
+    ticket = descriptors.str()
 
 
     def identify(self, visitor):

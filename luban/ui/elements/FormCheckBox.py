@@ -21,8 +21,8 @@ class FormCheckBox(base):
     abstract = False
 
 
-    checked = descriptors.bool(name='checked')
-    value = descriptors.bool(name='value')
+    checked = descriptors.bool()
+    value = descriptors.bool()
     
     
     def identify(self, inspector):

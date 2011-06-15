@@ -79,7 +79,7 @@ class SplitSection(DocumentFactory, ParagraphFactory, ElementContainer, ElementN
     def identify(self, inspector):
         return inspector.onSplitSection(self)
 
-    size = descriptors.str(name='size', default=None)
+    size = descriptors.str(default=None)
     size.tip = 'deprecated'
     
 

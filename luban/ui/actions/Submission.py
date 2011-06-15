@@ -19,7 +19,7 @@ class Submission(base):
     abstract = False
 
 
-    form = descriptors.reference(name='form')
+    form = descriptors.reference()
 
     def __init__(self, form=None, actor=None, routine=None, **params):
         super(Submission, self).__init__(actor=actor, routine=routine, **params)

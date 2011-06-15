@@ -20,11 +20,11 @@ class Notification(base):
     abstract = False
 
 
-    element = descriptors.reference(name='element')
-    event = descriptors.str(name='event')
-    actor = descriptors.str(name='actor')
-    routine = descriptors.str(name='routine')
-    params = descriptors.dict(name='params')
+    element = descriptors.reference()
+    event = descriptors.str()
+    actor = descriptors.str()
+    routine = descriptors.str()
+    params = descriptors.dict()
     
     
     def __init__(self, element, event, actor, routine=None, **params):

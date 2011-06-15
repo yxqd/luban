@@ -22,7 +22,7 @@ class ReSTDocument(Element):
     def identify(self, inspector):
         return inspector.onReSTDocument(self)
 
-    text = descriptors.list(name='text')
+    text = descriptors.list()
 
     def __init__(self, *args, **kwds):
         import warnings

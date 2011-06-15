@@ -60,7 +60,7 @@ class Tab(DocumentFactory, ParagraphFactory, TeleSection):
     full_description = ''
     abstract = False
 
-    label = descriptors.str(name='label', default='tab')
+    label = descriptors.str(default='tab')
     label.tip = 'label of this tab'
 
     onselect = descriptors.action() # happen when this tab got selected

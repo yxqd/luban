@@ -29,7 +29,7 @@ class ReStructuredTextDocument(Element):
     def identify(self, inspector):
         return inspector.onReStructuredTextDocument(self)
 
-    text = descriptors.list(name='text')
+    text = descriptors.list()
     text.tip = 'Content of the document'
 
 

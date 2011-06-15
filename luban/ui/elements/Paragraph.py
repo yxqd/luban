@@ -31,11 +31,8 @@ class Paragraph(base):
     def identify(self, inspector):
         return inspector.onParagraph(self)
 
-    text = descriptors.list(name='text')
+    text = descriptors.list()
     text.tip = 'a list of sentences in the paragraph'
-    
-    contents = descriptors.referenceSet(name='contents')
-    contents.tip = 'deprecated'
     
 
 # version

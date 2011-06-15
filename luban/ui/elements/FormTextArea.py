@@ -25,7 +25,7 @@ class FormTextArea(base):
     abstract = False
 
 
-    readonly = descriptors.bool(name='readonly')
+    readonly = descriptors.bool()
 
 
     def identify(self, inspector):

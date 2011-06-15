@@ -36,8 +36,17 @@ class TestCase(unittest.TestCase):
         from luban.ui.elements.Element import Element
         name = "e1"
         Class = "a b c"
-        e2 = Element(name=name, Class=Class)
-        self.assertEqual(e2.Class, ("a", "b", "c"))
+        e1 = Element(name=name, Class=Class)
+        self.assertEqual(e1.Class, ("a", "b", "c"))
+        return
+     
+    
+    def test4(self):
+        from luban.ui.elements.Element import Element
+        from luban.ui.actions import load
+        verify = load(actor="login", routine="verify")
+        e1 = Element(onclick=verify)
+        self.assertEqual(e1.onclick, verify)
         return
      
     

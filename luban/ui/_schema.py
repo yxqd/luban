@@ -19,7 +19,7 @@ from pyre.schema.Type import Type
 class List(Type):
     """
     The List type declarator
-    List: a list of strings (save as tuple)
+    List: a list of strings
     """
 
     # interface
@@ -32,10 +32,10 @@ class List(Type):
 
         # split the string
         if isinstance(value, str):
-            value = tuple(value.split())
-        # if {value} is an iterable, convert it to a tuple and return it
+            value = list(value.split())
+        # if {value} is an iterable, convert it to a list and return it
         if  isinstance(value, collections.Iterable):
-            return tuple(str(v) for v in value)
+            return list(str(v) for v in value)
         # otherwise flag it as bad input
         raise cls.CastingError(value=value, description="unknown type: value={!r}".format(value))
 

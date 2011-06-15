@@ -50,13 +50,12 @@ class Element(AttributeContainer):
 
     
     def addClass(self, kls):
-        classes = self.Class.split(' ')
+        classes = self.Class
         if kls in classes: return
         classes.append(kls)
-        self.Class = ' '.join(classes)
-        return
-
-
+        return self
+    
+    
     def __init__(self, name=None, attributes=None, **kwds):
         AttributeContainer.__init__(self)
         self.name = name

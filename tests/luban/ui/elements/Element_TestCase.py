@@ -37,7 +37,11 @@ class TestCase(unittest.TestCase):
         name = "e1"
         Class = "a b c"
         e1 = Element(name=name, Class=Class)
-        self.assertEqual(e1.Class, ("a", "b", "c"))
+        self.assertEqual(e1.Class, ["a", "b", "c"])
+
+        e1.addClass('d')
+        self.assertEqual(e1.Class, ["a", "b", "c", "d"])
+        
         return
      
     

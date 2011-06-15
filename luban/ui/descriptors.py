@@ -34,11 +34,17 @@ def list(default=None):
     return d
 
 
+def dict(default=None):
+    d = Property()
+    from ._schema import Dict
+    d.type = Dict
+    d.default = default if default is not None else {}
+    return d
+
+
 def lists(**kwds):
     return Lists(**kwds)
 
-def dict(**kwds):
-    return Dict(**kwds)
 
 def date(**kwds):
     return Date(**kwds)
@@ -88,21 +94,6 @@ class Lists(Property):
             raise RuntimeError('cannot cast %s' % (value,))
 
         return ret
-
-
-class Dict(Property):
-
-    # dictionary
-
-    def __init__(self, name=None, default=None, meta=None, validator=None):
-        default = self._cast(default)
-        Property.__init__(self, name, "dict", default, meta, validator)
-        return
-
-
-    def _cast(self, value):
-        # 
-        return value or {}
 
 
 

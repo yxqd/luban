@@ -12,7 +12,10 @@
 #
 
 
+# base class
 from pyre.schema.Type import Type
+
+
 class List(Type):
     """
     The List type declarator
@@ -33,6 +36,29 @@ class List(Type):
         # if {value} is an iterable, convert it to a tuple and return it
         if  isinstance(value, collections.Iterable):
             return tuple(str(v) for v in value)
+        # otherwise flag it as bad input
+        raise cls.CastingError(value=value, description="unknown type: value={!r}".format(value))
+
+
+
+class Dict(Type):
+    """
+    The Dict type declarator
+    Dict: a dictionary
+    """
+
+    # interface
+    @classmethod
+    def pyre_cast(cls, value, **kwds):
+        """
+        Convert {value} into a list of strings
+        """
+        # split the string
+        if isinstance(value, str):
+            value = eval(value)
+        # if {value} is an dict, good
+        if  isinstance(value, dict):
+            return value
         # otherwise flag it as bad input
         raise cls.CastingError(value=value, description="unknown type: value={!r}".format(value))
 

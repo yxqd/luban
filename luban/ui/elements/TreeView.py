@@ -55,13 +55,13 @@ class TreeViewBranch(ElementContainer, ElementNotRoot):
 
     def branch(self, *args, **kwds):
         b = TreeViewBranch(*args, **kwds)
-        self.add(b)
+        self.append(b)
         return b
 
 
     def leaf(self, *args, **kwds):
         l = TreeViewLeaf(*args, **kwds)
-        self.add(l)
+        self.append(l)
         return l
 
 

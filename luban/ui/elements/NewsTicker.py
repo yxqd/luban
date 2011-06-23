@@ -45,7 +45,7 @@ class NewsTicker(base):
 
     def item(self, **kwds):
         pi = NewsTickerItem(**kwds)
-        self.add(pi)
+        self.append(pi)
         return pi
 
 

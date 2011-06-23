@@ -44,7 +44,7 @@ class Splitter(SimpleContainer):
     @elementfactory
     def section(self, **kwds):
         section = SplitSection(**kwds)
-        self.add(section)
+        self.append(section)
         return section
 
 
@@ -72,7 +72,7 @@ class SplitSection(DocumentFactory, ParagraphFactory, ElementContainer, ElementN
 
     def splitter(self, **kwds):
         element = Splitter(**kwds)
-        self.add(element)
+        self.append(element)
         return element
 
 

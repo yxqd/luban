@@ -19,7 +19,7 @@ from .Element import Element
 class ElementContainer(CredentialFactory, Element):
 
 
-    def add(self, item):
+    def append(self, item):
         if isinstance(item, str):
             self.contents.append(item)
             return self
@@ -115,6 +115,9 @@ class ElementContainer(CredentialFactory, Element):
         Element.__init__(self, **kwds)
         self.name2item = {}
         self.id2item = {}
+        for elem in list(self._iterDeclaredSubElements()):
+            self.append(elem)
+            continue
         return
 
 

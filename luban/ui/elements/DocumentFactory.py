@@ -21,7 +21,7 @@ class DocumentFactory(object):
         from .Document import Document
         document = Document(**kwds)
 
-        self.add(document)
+        self.append(document)
 
         return document
 

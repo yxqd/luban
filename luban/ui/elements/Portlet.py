@@ -31,7 +31,7 @@ class Portlet(base):
     def item(self, **kwds):
         from .PortletItem import PortletItem
         pi = PortletItem(**kwds)
-        self.add(pi)
+        self.append(pi)
         return pi
 
 

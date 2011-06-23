@@ -32,21 +32,21 @@ class Document(DocumentFactory, ParagraphFactory, LinkFactory, SimpleContainer):
     def splitter(self, **kwds):
         from .Splitter import Splitter as factory
         element = factory(**kwds)
-        self.add(element)
+        self.append(element)
         return element
 
 
     def form(self, **kwds):
         from .Form import Form
         form = Form(**kwds)
-        self.add(form)
+        self.append(form)
         return form
 
 
     def document(self, **kwds):
         #from Document import Document
         document = Document(**kwds)
-        self.add(document)
+        self.append(document)
         return document
 
 

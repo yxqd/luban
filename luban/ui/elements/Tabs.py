@@ -40,7 +40,7 @@ class Tabs(TeleContainer):
     @elementfactory
     def tab(self, label=None, **kwds):
         tab = Tab(label=label, **kwds)
-        self.add(tab)
+        self.append(tab)
         return tab
 
 

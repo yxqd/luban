@@ -19,7 +19,7 @@ class PortletFactory(object):
         from .Portlet import Portlet
         portlet = Portlet(**kwds)
 
-        self.add(portlet)
+        self.append(portlet)
 
         return portlet
 

@@ -19,7 +19,7 @@ class CredentialFactory(object):
         from .Credential import Credential
         credential = Credential(**kwds)
 
-        self.add(credential)
+        self.append(credential)
 
         return credential
 

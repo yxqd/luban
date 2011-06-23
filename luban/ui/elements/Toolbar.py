@@ -40,13 +40,13 @@ class Toolbar(ElementContainer):
     def button(self, *args, **kwds):
         from .Button import Button
         b = Button(*args, **kwds)
-        self.add(b)
+        self.append(b)
         return b
 
     @elementfactory
     def spacer(self):
         ts = ToolbarSpacer()
-        self.add(ts)
+        self.append(ts)
         return ts
 
 

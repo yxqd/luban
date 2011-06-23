@@ -61,13 +61,13 @@ class AppMenu(ElementContainer):
     @elementfactory
     def menu(self, *args, **kwds):
         b = AppMenu(*args, **kwds)
-        self.add(b)
+        self.append(b)
         return b
 
     @elementfactory
     def item(self, *args, **kwds):
         l = AppMenuItem(*args, **kwds)
-        self.add(l)
+        self.append(l)
         return l
 
 
@@ -86,13 +86,13 @@ class AppMenuBar(ElementContainer):
     @elementfactory
     def menu(self, *args, **kwds):
         b = AppMenu(*args, **kwds)
-        self.add(b)
+        self.append(b)
         return b
 
     @elementfactory
     def item(self, *args, **kwds):
         l = AppMenuItem(*args, **kwds)
-        self.add(l)
+        self.append(l)
         return l
 
 

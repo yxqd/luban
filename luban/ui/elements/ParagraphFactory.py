@@ -22,7 +22,7 @@ class ParagraphFactory(object):
         from .Paragraph import Paragraph
         paragraph = Paragraph(**kwds)
 
-        self.add(paragraph)
+        self.append(paragraph)
 
         return paragraph
 

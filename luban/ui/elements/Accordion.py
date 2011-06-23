@@ -35,7 +35,7 @@ class Accordion(TeleContainer):
     @elementfactory
     def section(self, label=None, **kwds):
         section = AccordionSection(label=label, **kwds)
-        self.add(section)
+        self.append(section)
         return section
 
 

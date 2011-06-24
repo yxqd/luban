@@ -15,15 +15,23 @@
 from ..AttributeContainer import Meta as _metabase
 class Meta(_metabase):
 
-    pass # Meta
+    # the class of dictionay like object to contain 
+    # attributes of a class
+    dictionary_factory = None
+
+    @classmethod
+    def __prepare__(cls, *args, **kwds):
+        df = cls.dictionary_factory
+        if df is None:
+            from ..AttributeContainer import AttributeDict
+            df = AttributeDict
+        return df()
 
 
 from .CredentialFactory import CredentialFactory
 from .Element import Element
-
-
-class ElementContainer(CredentialFactory, Element):
-
+# class ElementContainer(Element, CredentialFactory, metaclass=Meta):
+class ElementContainer(Element, metaclass=Meta):
 
     def append(self, item):
         if isinstance(item, str):
@@ -120,7 +128,7 @@ class ElementContainer(CredentialFactory, Element):
     
     
     def __init__(self, **kwds):
-        Element.__init__(self, **kwds)
+        super().__init__(self, **kwds)
         self.name2item = {}
         self.id2item = {}
         self.contents = []

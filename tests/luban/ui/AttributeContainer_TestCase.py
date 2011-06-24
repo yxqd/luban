@@ -22,9 +22,9 @@ class TestCase(unittest.TestCase):
         class A(AttributeContainer):
             
             # s = AttributeContainer.descriptors.str('a')
-            s1 = descriptors.str('s1')
-            a2 = d.str('a2')
-            a1 = d.str('a1')
+            s1 = descriptors.str()
+            a2 = d.str()
+            a1 = d.str()
             
             pass
         
@@ -34,6 +34,26 @@ class TestCase(unittest.TestCase):
             ['s1', 'a2', 'a1']
             )
         
+        return
+     
+    
+    def test2(self):
+        """ attribute
+        """
+        from luban.ui.AttributeContainer import AttributeContainer
+        class A(AttributeContainer):
+            
+            s1 = descriptors.str()
+            a2 = d.str()
+            a1 = d.str()
+            
+            pass
+        
+        a = A()
+
+        self.assertEqual(a.s1, '')
+        a.s1 = 5
+        self.assertEqual(a.s1, '5')
         return
      
     

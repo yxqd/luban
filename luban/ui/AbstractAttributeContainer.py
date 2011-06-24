@@ -60,8 +60,7 @@ class AbstractAttributeContainer(object):
         raise NotImplementedError(e)
     
 
-    def __init__(self, name=None):
-        self.name = name
+    def __init__(self):
         return
 
     pass

@@ -12,7 +12,7 @@
 #
 
 
-from .ElementContainer import ElementContainer
+from .ElementContainer import ElementContainer, Meta
 
 class SimpleContainer(ElementContainer):
 

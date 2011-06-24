@@ -35,8 +35,8 @@ class TestCase(unittest.TestCase):
 
         self.assertRaises(ValueError, setattr, e1, 'id', "a.b")
         return
-     
-    
+
+
     def test3(self):
         from luban.ui.elements.Element import Element
         name = "e1"

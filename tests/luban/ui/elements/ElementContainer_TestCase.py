@@ -39,6 +39,13 @@ class TestCase(unittest.TestCase):
         return
     
      
+    def test0b(self):
+        from luban.ui.elements.ElementContainer import ElementContainer
+        class E(ElementContainer):
+            d = document()
+        return
+     
+    
     def _test1(self):
         """luban.content.ElementContainer: allowed_element_types: Splitter"""
         splitter = Splitter()

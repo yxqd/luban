@@ -12,42 +12,30 @@
 #
 
 
-from pyre.components.Actor import Actor
-class Meta1(Actor):
+class Meta1(type):
 
     def __prepare__(cls, *args, **kwds):
-        # return dict()
-        from luban.ui.OrderedDictWithPredefinedSymbols import OrderedDictWithPredefinedSymbols
-        d = OrderedDictWithPredefinedSymbols()
-        return d
+        print ("meta1", cls)
+        return dict()
 
-
-import pyre
-class Element(pyre.component, metaclass=Meta1):
-
-    s = pyre.properties.str()
-
-
-class Meta2(Meta1): pass
-class Element2(Element, metaclass=Meta2):
-    
-    a = pyre.properties.float()
-    
 
 
 import unittest
 class TestCase(unittest.TestCase):
      
     def test1(self):
-        e = Element()
-        self.assertEqual(e.s, '')
+        class A(metaclass=Meta1): pass
+        class B(A): pass
         return
      
-    
+
     def test2(self):
-        e = Element2()
-        self.assertEqual(e.a, 0)
+        class A(metaclass=Meta1): pass
+        class B: pass
+        class C(A, B): pass
+        class D(B, A): pass
         return
+     
      
     
 if __name__ == "__main__": unittest.main()

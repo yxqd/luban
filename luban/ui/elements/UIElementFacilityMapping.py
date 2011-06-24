@@ -36,6 +36,8 @@ class UIElementFacilityMapping:
         try:
             module = __import__(cname, fromlist=['.'], globals=globals())
         except:
+            import traceback
+            print (traceback.format_exc())
             raise KeyError(name)
         return getattr(module, cname)
         

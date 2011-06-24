@@ -18,7 +18,7 @@ class TestCase(unittest.TestCase):
     def test1(self):
         """ order of descriptors
         """
-        from luban.ui.elements.AttributeContainer import AttributeContainer
+        from luban.ui.AttributeContainer import AttributeContainer
         class A(AttributeContainer):
             
             # s = AttributeContainer.descriptors.str('a')

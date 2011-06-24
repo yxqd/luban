@@ -12,6 +12,12 @@
 #
 
 
+from ..AttributeContainer import Meta as _metabase
+class Meta(_metabase):
+
+    pass # Meta
+
+
 from .CredentialFactory import CredentialFactory
 from .Element import Element
 
@@ -117,6 +123,7 @@ class ElementContainer(CredentialFactory, Element):
         Element.__init__(self, **kwds)
         self.name2item = {}
         self.id2item = {}
+        self.contents = []
         
         # pyre machinery should be all done here
         # so we should have configured sub elements

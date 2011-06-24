@@ -15,16 +15,29 @@
 import pyre
 
 
+# dict for class attributes
+from .OrderedDictWithPredefinedSymbols import OrderedDictWithPredefinedSymbols as _dictbase
+class AttributeDict(_dictbase):
+
+    from . import descriptors
+    predefined = {'descriptors': descriptors, 'd': descriptors}
+    del descriptors
+    
+
 # metaclass
 from pyre.components.Actor import Actor as _metabase
 class Meta(_metabase):
 
+    # the class of dictionay like object to contain 
+    # attributes of a class
+    dictionary_factory = None
+
     @classmethod
     def __prepare__(cls, *args, **kwds):
-        d = super().__prepare__(*args, **kwds)
-        from . import descriptors
-        d['d'] = d['descriptors'] = descriptors
-        return d
+        df = cls.dictionary_factory
+        if df is None:
+            df = AttributeDict
+        return df()
 
 
 

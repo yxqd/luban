@@ -33,7 +33,10 @@ class UIElementFacilityMapping:
     
     def getElementClass(self, name):
         cname = name.capitalize()
-        module = __import__(cname, fromlist=['.'], globals=globals())
+        try:
+            module = __import__(cname, fromlist=['.'], globals=globals())
+        except:
+            raise KeyError(name)
         return getattr(module, cname)
         
         

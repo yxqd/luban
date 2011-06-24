@@ -16,7 +16,7 @@ import journal
 debug = journal.debug('luban.content.Element')
 
 
-from .AttributeContainer import AttributeContainer
+from ..AttributeContainer import AttributeContainer, Meta
 class Element(AttributeContainer):
     
     # indicate this is abstract and cannot be instantiated

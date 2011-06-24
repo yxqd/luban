@@ -12,26 +12,22 @@
 #
 
 
-from ..AttributeContainer import Meta as _metabase
-class Meta(_metabase):
+from ..PredefinedSymbols import PredefinedSymbols
+class Predefined(PredefinedSymbols):
 
-    # the class of dictionay like object to contain 
-    # attributes of a class
-    dictionary_factory = None
+    def __init__(self, *args, **kwds):
+        super().__init__(*args, **kwds)
+        from .UIElementFacilityMapping import UIElementFacilityMapping
+        self.facility_map = UIElementFacilityMapping('all')
+        return 
 
-    @classmethod
-    def __prepare__(cls, *args, **kwds):
-        df = cls.dictionary_factory
-        if df is None:
-            from ..AttributeContainer import AttributeDict
-            df = AttributeDict
-        return df()
+    def __missing__(self, key):
+        return self.facility_map[key]
 
 
+from .Element import Element, Meta
 from .CredentialFactory import CredentialFactory
-from .Element import Element
-# class ElementContainer(Element, CredentialFactory, metaclass=Meta):
-class ElementContainer(Element, metaclass=Meta):
+class ElementContainer(Element, CredentialFactory, predefined=Predefined()):
 
     def append(self, item):
         if isinstance(item, str):

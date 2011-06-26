@@ -56,8 +56,14 @@ class TestCase(unittest.TestCase):
         self.assertEqual(a.s1, '5')
         return
      
-    
-if __name__ == "__main__": unittest.main()
+
+def main():    
+    import journal
+    journal.debug('metaclass').active = True
+    unittest.main()
+    return
+
+if __name__ == "__main__": main()
     
 # version
 __id__ = "$Id$"

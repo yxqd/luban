@@ -12,42 +12,53 @@
 #
 
 
-class Meta1(type):
+from pyre.components.Actor import Actor as metabase
+class Meta1(metabase):
 
     @classmethod
     def __prepare__(cls, *args, **kwds):
-        import pdb; pdb.set_trace()
         print ("meta1", cls)
         return dict()
 
+
+class SomeClass: pass
+class SomeClass2: pass
 
 
 import unittest
 class TestCase(unittest.TestCase):
      
     def test1(self):
-        class A(metaclass=Meta1): pass
+        import pyre
+        class A(pyre.component, metaclass=Meta1): pass
         class B(A): pass
         return
      
 
     def test2(self):
-        class A(metaclass=Meta1): pass
-        class B: pass
-        class C(A, B): pass
-        class D(B, A): pass
+        import pyre
+        class A(pyre.component, SomeClass, metaclass=Meta1): pass
+        class B(A): 
+            s = pyre.properties.str()
+            pass
+        b = B()
+        self.assertEqual(b.s, '')
         return
      
-     
+
     def test3(self):
-        class A(metaclass=Meta1): pass
-        class B: pass
-        class C(A): pass
-        class D(C, B): pass
+        import pyre
+        class A(pyre.component, SomeClass, metaclass=Meta1): pass
+        class B(A, SomeClass2): pass
+        class C(B):
+            s = pyre.properties.str()
+        c = C()
+        self.assertEqual(c.s, '')
+        c.s = 'a'
+        self.assertEqual(c.s, 'a')
         return
      
-     
-    
+
 if __name__ == "__main__": unittest.main()
     
 # version

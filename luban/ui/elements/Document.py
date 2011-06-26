@@ -17,7 +17,7 @@ from .ParagraphFactory import ParagraphFactory
 from .LinkFactory import LinkFactory
 from .SimpleContainer import SimpleContainer, Meta
 
-class Document(SimpleContainer, DocumentFactory, ParagraphFactory, LinkFactory, metaclass=Meta):
+class Document(SimpleContainer, DocumentFactory, ParagraphFactory, LinkFactory):
 
     simple_description = 'A simple element container with a title'
     full_description = (

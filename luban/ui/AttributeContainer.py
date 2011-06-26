@@ -21,6 +21,10 @@ class Meta(_metabase):
 
     @classmethod
     def __prepare__(cls, name, bases, predefined=None, **kwds):
+        
+        import journal
+        journal.debug("metaclass").log("__prepare__ %s" % cls)
+        
         from luban.ui.OrderedDictWithPredefinedSymbols import OrderedDictWithPredefinedSymbols
         d = OrderedDictWithPredefinedSymbols()
 
@@ -29,6 +33,7 @@ class Meta(_metabase):
             predefined = PredefinedSymbols()
             
         d.predefined = predefined
+        
         return d
 
 

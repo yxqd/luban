@@ -40,8 +40,8 @@ class TestCase(unittest.TestCase):
     
      
     def test0b(self):
-        from luban.ui.elements.ElementContainer import ElementContainer
-        class E(ElementContainer):
+        from luban.ui.elements.ElementContainer import ElementContainer, Predefined
+        class E(ElementContainer, predefined=Predefined()):
             d = document()
         return
      

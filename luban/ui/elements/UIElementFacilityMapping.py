@@ -28,7 +28,9 @@ class UIElementFacilityMapping:
 
     def getElementFacilityFactory(self, name):
         from .. import descriptors 
-        return descriptors.element(default=self.getElementClass(name))
+        def _(**kwds):
+            return descriptors.element(default=self.getElementClass(name), **kwds)
+        return _
 
     
     def getElementClass(self, name):
@@ -37,9 +39,22 @@ class UIElementFacilityMapping:
             module = __import__(cname, fromlist=['.'], globals=globals())
         except:
             import traceback
-            print (traceback.format_exc())
+            tb = traceback.format_exc()
+            msg = "Failed to get class of element %s:\n%s" % (name, tb)
+            import journal
+            journal.debug("ui element lookup").log(msg)
             raise KeyError(name)
-        return getattr(module, cname)
+        
+        try:
+            return getattr(module, cname)
+        except:
+            import traceback
+            tb = traceback.format_exc()
+            msg = "In looking up of element %s" % name
+            msg += "Failed to get attribute %s from module %s:\n%s" % (cname, module, tb)
+            import journal
+            journal.debug("ui element lookup").log(msg)
+            raise KeyError(name)
         
         
 # version

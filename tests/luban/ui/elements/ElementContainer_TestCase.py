@@ -40,47 +40,55 @@ class TestCase(unittest.TestCase):
     
      
     def test0b(self):
-        from luban.ui.elements.ElementContainer import ElementContainer, Predefined
-        class E(ElementContainer, predefined=Predefined()):
+        from luban.ui.elements.ElementContainer import ElementContainer
+        import luban.ui.elements.Document
+        class E(ElementContainer):
             d = document()
         return
      
     
-    def _test1(self):
+    def test1(self):
         """luban.content.ElementContainer: allowed_element_types: Splitter"""
+        from luban.ui.elements.Splitter import Splitter, SplitSection
         splitter = Splitter()
         splitter.section()
 
-        splitter.add(SplitSection())
+        splitter.append(SplitSection())
 
-        self.assertRaises(ValueError, splitter.add, Document())
+        from luban.ui.elements.Document import Document
+        self.assertRaises(ValueError, splitter.append, Document())
         return
      
     
-    def _test2(self):
+    def test2(self):
         """luban.content.ElementContainer: allowed_element_types: Tabs"""
+        from luban.ui.elements.Tabs import Tabs, Tab
         tabs = Tabs()
         tabs.tab()
 
-        tabs.add(Tab())
+        tabs.append(Tab())
 
-        self.assertRaises(ValueError, tabs.add, Document())
+        from luban.ui.elements.Document import Document
+        self.assertRaises(ValueError, tabs.append, Document())
         return
      
     
-    def _test3(self):
+    def test3(self):
         """luban.content.ElementContainer: allowed_element_types: Accordion"""
+        from luban.ui.elements.Accordion import Accordion, AccordionSection
         accordion = Accordion()
         accordion.section()
 
-        accordion.add(AccordionSection())
+        accordion.append(AccordionSection())
 
-        self.assertRaises(ValueError, accordion.add, Document())
+        from luban.ui.elements.Document import Document
+        self.assertRaises(ValueError, accordion.append, Document())
         return
 
 
-    def _test4(self):
+    def test4(self):
         """luban.content.ElementContainer: allowed_element_types: AppMenuBar"""
+        from luban.ui.elements.AppMenuBar import AppMenuBar
         appmenubar = AppMenuBar()
         m1 = appmenubar.menu()
         i1 = appmenubar.item()
@@ -88,16 +96,18 @@ class TestCase(unittest.TestCase):
         m1.menu()
         m1.item()
 
-        self.assertRaises(ValueError, appmenubar.add, Document())
-        self.assertRaises(ValueError, m1.add, Document())
+        from luban.ui.elements.Document import Document
+        self.assertRaises(ValueError, appmenubar.append, Document())
+        self.assertRaises(ValueError, m1.append, Document())
         return
 
 
-    def _test5(self):
-        """luban.content.ElementContainer: disallowed_element_types: Page"""
-        page = Page()
-        document = Document()
-        self.assertRaises(ValueError, document.add, page)
+    def test5(self):
+        """luban.content.ElementContainer: disallowed_element_types: frame"""
+        import luban.ui.elements as lue
+        frame = lue.frame()
+        document = lue.document()
+        self.assertRaises(ValueError, document.append, frame)
         return
      
     

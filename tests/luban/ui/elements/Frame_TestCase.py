@@ -17,17 +17,9 @@ import unittest
 class TestCase(unittest.TestCase):
 
     def test1(self):
-        from luban.ui.elements.Document import Document
+        from luban.ui.elements.Frame import Frame
         return
      
-    
-    def _test2(self):
-        from luban.ui.elements.Document import Document
-        class V(Document):
-            p = paragraph()
-        return
-     
-    
     
 if __name__ == "__main__": unittest.main()
 

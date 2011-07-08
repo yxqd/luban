@@ -17,17 +17,19 @@ import unittest
 class TestCase(unittest.TestCase):
 
     def test1(self):
-        from luban.ui.elements.Document import Document
+        from luban.ui.elements._registry import isElementFacility
+        from luban.ui.descriptors import element
+        e = element()
+        self.assert_(isElementFacility(e))
         return
-     
-    
-    def _test2(self):
-        from luban.ui.elements.Document import Document
-        class V(Document):
-            p = paragraph()
+
+
+    def test2(self):
+        from luban.ui.elements._registry import registerAllElements
+        import luban.ui.elements as lue
+        registerAllElements(lue)
         return
-     
-    
+
     
 if __name__ == "__main__": unittest.main()
 

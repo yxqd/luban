@@ -9,7 +9,7 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-from luban.content.Element import Element
+from luban.ui.elements.Element import Element
 
 class Uploader(Element):
 

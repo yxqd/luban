@@ -13,7 +13,7 @@
 
 
 def registerElementProvider(provider):
-    from ._accountant import element_providers as providers
+    from ._registry import element_providers as providers
     providers.append(provider)
     return providers
 
@@ -49,20 +49,29 @@ elementtypes = [
     'TreeView',
     'Uploader',
     ]
-for name in elementtypes:
-    code = '''
-def %s(*args, **kwds):
-    from .%s import %s
-    return %s(*args, **kwds)
-''' % (name.lower(), name, name, name)
-    try:
-        exec(code)
-    except:
-        raise RuntimeError('faield to execute %s' % code)
+elementtypes = [
+    'Document',
+    ]
+def registerAllElements():
+    modules = elementtypes
+    for name in modules:
+        __import__(name, fromlist=['.'], globals=globals())
+        continue
+    return
+registerAllElements()
+
+
+from ._registry import fundamental_elements
+for name in fundamental_elements:
+    klass = fundamental_elements.getElementClass(name)
+    # make a lower case alias 
+    code = '%s = klass' % name
+    exec(code)
+    continue
 
 
 # alias
-rstdoc = restructuredtextdocument
+# rstdoc = restructuredtextdocument
 
 
 # version

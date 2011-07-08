@@ -17,7 +17,7 @@ from .ParagraphFactory import ParagraphFactory
 from .SimpleContainer import SimpleContainer
 
 
-class Form(ParagraphFactory, DocumentFactory, SimpleContainer):
+class Form(SimpleContainer, ParagraphFactory, DocumentFactory):
 
     simple_description = 'A container of form fields and a submit button'
     full_description = (

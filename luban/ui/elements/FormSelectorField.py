@@ -24,7 +24,7 @@ class FormSelectorField(base):
     def identify(self, inspector):
         return inspector.onFormSelectorField(self)
 
-    entries = descriptors.lists()
+    entries = descriptors.ordered_dict()
     selection = descriptors.str()
     
     

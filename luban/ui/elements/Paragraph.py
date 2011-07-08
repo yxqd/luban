@@ -20,8 +20,8 @@ class Paragraph(base):
     full_description = ''
     examples = [
         '''
-    import luban.content
-    sometext = luban.content.paragraph(text=['text here'])
+    import luban.ui.elements
+    sometext = luban.ui.elements.paragraph(text=['text here'])
         ''',
         ]
     

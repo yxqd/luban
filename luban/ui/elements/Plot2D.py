@@ -19,8 +19,8 @@ class Plot2D(Element):
         )
     examples = [
         '''
-    import luban.content
-    plot = luban.content.plot2d()
+    import luban.ui.elements
+    plot = luban.ui.elements.plot2d()
     x = range(10)
     y1 = x; y2 = [xi*xi for xi in x]
     plot.curve(x=x, y=y1, label='curve1')
@@ -28,7 +28,8 @@ class Plot2D(Element):
         '''
         ]
 
-    curves = descriptors.referenceSet()
+    # curves = descriptors.referenceSet()
+    curves = descriptors.object()
     curves.tip = 'The x-y curves to display'
     
     xticks = descriptors.list()

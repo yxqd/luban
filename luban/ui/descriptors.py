@@ -53,6 +53,15 @@ def dict(default=None):
     return d
 
 
+def ordered_dict(default=None):
+    d = Property()
+    from ._schema import OrderedDict
+    d.type = OrderedDict
+    import collections
+    d.default = default if default is not None else collections.OrderedDict()
+    return d
+
+
 def guid(default=None):
     d = GUID()
     from pyre.schema import str

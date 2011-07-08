@@ -13,10 +13,10 @@
 
 
 from .DocumentFactory import DocumentFactory
-from .SimpleContainer import SimpleContainer, Meta
+from .SimpleContainer import SimpleContainer
 
 
-class Frame(DocumentFactory, SimpleContainer, metaclass=Meta):
+class Frame(SimpleContainer, DocumentFactory):
 
     simple_description = "root node of a luban user interface hierarchy"
     full_description = (

@@ -16,9 +16,9 @@
 # a parent, Tabs.
 
 
-from luban.content.Tabs import Tabs, Tab
-from luban.content.Splitter import Splitter, SplitSection
-from luban.content.Accordion import Accordion, AccordionSection
+from luban.ui.elements.Tabs import Tabs, Tab
+from luban.ui.elements.Splitter import Splitter, SplitSection
+from luban.ui.elements.Accordion import Accordion, AccordionSection
 containertype2elementtype = {
     Splitter: SplitSection,
     Tabs: Tab,

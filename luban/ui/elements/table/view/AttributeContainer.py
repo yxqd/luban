@@ -1,2 +1,2 @@
 
-from luban.content.AttributeContainer import AttributeContainer
+from ....AttributeContainer import AttributeContainer

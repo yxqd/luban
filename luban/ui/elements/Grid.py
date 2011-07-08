@@ -23,17 +23,17 @@ class Grid(ElementContainer):
         )
     examples = [
         '''
-    grid = luban.content.grid()
+    grid = luban.ui.elements.grid()
 
     row0 = grid.row()
     row0.cell().document(title='row 0, col 0: a document')
-    row0.cell().append(luban.content.form(title='row 0, col 1: a form'))
+    row0.cell().append(luban.ui.elements.form(title='row 0, col 1: a form'))
 
     row1 = grid.row()
     row1.cell().document(title='row 1, col 0')
     row1.cell().append('row 1, col 1')
     row1.cell().document(title='row 1, col 2')
-    row1.cell().append(luban.content.paragraph(text=['row1, col3']))
+    row1.cell().append(luban.ui.elements.paragraph(text=['row1, col3']))
     ''',
         ]
         

@@ -1,22 +1,18 @@
-#!/usr/bin/env python
+# -*- python -*-
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
-#                                   Jiao Lin     
+#                                   Jiao Lin
 #                      California Institute of Technology
-#                      (C) 2006-2011  All Rights Reserved
+#                      (C) 2006-2011 All Rights Reserved 
 #
 # {LicenseText}
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
+from ..actions.Action import Action
 
-from .ElementContainer import ElementContainer
-
-class SimpleContainer(ElementContainer):
-
-    pass
 
 # version
 __id__ = "$Id$"

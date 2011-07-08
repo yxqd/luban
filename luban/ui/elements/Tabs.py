@@ -28,8 +28,8 @@ class Tabs(TeleContainer):
         )
     examples = [
         '''
-    import luban.content
-    tabs = luban.content.tabs()
+    import luban.ui.elements
+    tabs = luban.ui.elements.tabs()
     tabs.tab('tab1').paragraph(text=['tab1 text'])
     tabs.tab('tab2').document(title='tab2')
         ''',
@@ -53,7 +53,7 @@ class Tabs(TeleContainer):
 
 from .DocumentFactory import DocumentFactory
 from .ParagraphFactory import ParagraphFactory
-class Tab(DocumentFactory, ParagraphFactory, TeleSection):
+class Tab(TeleSection, DocumentFactory, ParagraphFactory):
 
 
     simple_description = 'A tab in tabs'

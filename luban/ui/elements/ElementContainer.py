@@ -12,22 +12,26 @@
 #
 
 
-from ..PredefinedSymbols import PredefinedSymbols
-class Predefined(PredefinedSymbols):
-
-    def __init__(self, *args, **kwds):
-        super().__init__(*args, **kwds)
-        from .UIElementFacilityMapping import UIElementFacilityMapping
-        self.facility_map = UIElementFacilityMapping('all')
-        return 
-
-    def __missing__(self, key):
-        return self.facility_map[key]
-
-
-from .Element import Element, Meta
+from .Element import Element
 from .CredentialFactory import CredentialFactory
-class ElementContainer(Element, CredentialFactory, predefined=Predefined()):
+class ElementContainer(Element, CredentialFactory):
+
+    
+    @classmethod
+    def __get_subclass_preparation_context__(cls):
+        d = super().__get_subclass_preparation_context__()
+        from .UIElementFacilityMapping import UIElementFacilityMapping
+        m = UIElementFacilityMapping('all')
+        from . import _registry
+        reg = _registry.fundamental_elements
+        names = reg.names()
+        for name in names:
+            cls = reg.getElementClass(name)
+            if not cls.abstract:
+                d[name] = m[name]
+            continue
+        return d
+    
 
     def append(self, item):
         if isinstance(item, str):
@@ -71,6 +75,12 @@ class ElementContainer(Element, CredentialFactory, predefined=Predefined()):
         self.contents.append(item)
         self._registerChild(item)
         return self
+
+
+    def add(self, element):
+        import warnings
+        warnings.warn("method 'add' replaced by 'append'")
+        return self.append(element)
 
 
     def getChildByName(self, name):

@@ -46,7 +46,7 @@ class Accordion(TeleContainer):
 
 from .DocumentFactory import DocumentFactory
 from .ParagraphFactory import ParagraphFactory
-class AccordionSection(DocumentFactory, ParagraphFactory, TeleSection):
+class AccordionSection(TeleSection, DocumentFactory, ParagraphFactory):
 
     simple_description = 'one of the panes that can expand or collapse in an accordion'
     full_description = ''

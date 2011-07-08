@@ -13,7 +13,7 @@
 # it represents the file offered by controller (server)
 # to be downloaded.
 
-from luban.content.ElementContainer import ElementContainer as base
+from luban.ui.elements.ElementContainer import ElementContainer as base
 
 class File(base):
 

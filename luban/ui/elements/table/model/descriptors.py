@@ -12,7 +12,7 @@
 #
 
 
-from luban.content.descriptors import *
+from ....descriptors import *
 
 
 # special descriptors for table

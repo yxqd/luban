@@ -109,7 +109,7 @@ EXPORT_PYTHON_MODULES = \
 	TreeView.py \
 	Uploader.py \
 	__init__.py \
-	_accountant.py \
+	_registry.py \
 	descriptors.py \
 	decorators.py \
 	special_containers.py \

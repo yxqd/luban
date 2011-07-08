@@ -15,26 +15,45 @@
 import pyre
 
 
+
 # metaclass
 from pyre.components.Actor import Actor as _metabase
 class Meta(_metabase):
 
     @classmethod
-    def __prepare__(cls, name, bases, predefined=None, **kwds):
-        
-        import journal
-        journal.debug("metaclass").log("__prepare__ %s" % cls)
-        
-        from luban.ui.OrderedDictWithPredefinedSymbols import OrderedDictWithPredefinedSymbols
-        d = OrderedDictWithPredefinedSymbols()
-
-        if predefined is None:
-            from .PredefinedSymbols import PredefinedSymbols
-            predefined = PredefinedSymbols()
-            
-        d.predefined = predefined
-        
+    def __prepare__(cls, name, bases, **kwds):
+        d = super().__prepare__(name, bases, **kwds)
+        context = cls._collectContextFromBases(bases)
+        d.update(context)
         return d
+
+    
+    @classmethod
+    def _collectContextFromBases(cls, bases):
+        """collect context for preparation of the target class of this meta class
+        from bases of the target class.
+        """
+        context = dict()
+        
+        # import pdb; pdb.set_trace()
+        # only check the closest parent class
+        base = bases[0]
+        
+        method = "__get_subclass_preparation_context__"
+        # first check that parent class itself
+        if hasattr(base, method):
+            c = getattr(base, method)()
+            context.update(c)
+        else:
+            # if not found, check all bases of that parent class
+            for base1 in base.__mro__:
+                if hasattr(base1, method):
+                    c = getattr(base1, method)()
+                    context.update(c)
+                    break # assume all implementation of __get_subclass_preparation_context__ to call super correctly
+                continue
+                
+        return context
 
 
 
@@ -42,6 +61,17 @@ from .AbstractAttributeContainer import AbstractAttributeContainer
 class AttributeContainer(pyre.component, AbstractAttributeContainer, metaclass=Meta):
 
     from .descriptors import DescriptorBase
+
+    @classmethod
+    def __get_subclass_preparation_context__(cls):
+        from . import descriptors, validators
+        return {
+            'descriptors': descriptors,
+            'd': descriptors,
+            'validators': validators,
+            'v': validators,
+            }
+    
 
     @classmethod
     def iterDescriptors(cls):

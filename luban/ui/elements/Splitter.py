@@ -28,8 +28,8 @@ class Splitter(SimpleContainer):
     examples = [
         '''
     # the follwoing code creates a splitter that is oriented horizontally and has 3 sections
-    import luban.content
-    splitter = luban.content.splitter(orientation='horizontal')
+    import luban.ui.elements
+    splitter = luban.ui.elements.splitter(orientation='horizontal')
     left = splitter.section()
     middle = splitter.section()
     right = splitter.section()
@@ -52,17 +52,15 @@ class Splitter(SimpleContainer):
         return inspector.onSplitter(self)
 
 
-    orientation = descriptors.str(
-        name='orientation', default='horizontal',
-        validator=descriptors.choice(['vertical', 'horizontal']),
-        )
+    orientation = descriptors.str(default='horizontal')
+    orientation.validators = [validators.choice(['vertical', 'horizontal'])]
     orientation.tip = 'Orientation of the splitter'
 
 
 from .DocumentFactory import DocumentFactory
 from .ParagraphFactory import ParagraphFactory
 from .ElementNotRoot import ElementNotRoot
-class SplitSection(DocumentFactory, ParagraphFactory, ElementContainer, ElementNotRoot):
+class SplitSection(ElementContainer, DocumentFactory, ParagraphFactory, ElementNotRoot):
 
     simple_description = 'A section in a splitter'
     full_description = ''

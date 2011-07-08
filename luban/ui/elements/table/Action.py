@@ -12,7 +12,7 @@
 #
 
 
-from luban.content.Action import Action
+from ..elements.Action import Action
 
 # version
 __id__ = "$Id$"

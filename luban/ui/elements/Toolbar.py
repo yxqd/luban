@@ -25,8 +25,8 @@ class Toolbar(ElementContainer):
         )
     examples = [
         '''
-    import luban.content
-    toolbar = luban.content.toolbar()
+    import luban.ui.elements
+    toolbar = luban.ui.elements.toolbar()
     b1 = toolbar.button(label='button1')
     b2 = toolbar.button(label='button2')
     toolbar.spacer()

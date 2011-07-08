@@ -9,7 +9,7 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-from luban.content.Element import Element
+from .Element import Element
 
 class Downloader(Element):
 
@@ -37,7 +37,7 @@ class Downloader(Element):
         'which can be constructed using factory luban.content.load. '
         'On the controller side, the routine that reponds to this '
         'loading request must returns a resource, such as an instace '
-        'of luban.content.File.File.'
+        'of luban.ui.elements.File.File.'
         )
 
 # version

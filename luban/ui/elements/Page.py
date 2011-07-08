@@ -16,8 +16,8 @@ import warnings
 warnings.warn('''
   "page" is obsolete, please use "frame":
 
-  >>> import luban.content
-  >>> frame = luban.content.frame(...)
+  >>> import luban.ui.elements
+  >>> frame = luban.ui.elements.frame(...)
   ''')
 
 

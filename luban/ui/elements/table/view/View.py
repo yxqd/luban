@@ -18,7 +18,8 @@ class View(base):
 
     from .Column import Column
     
-    columns = descriptors.referenceSet()
+    # columns = descriptors.referenceSet()
+    columns = descriptors.object()
     
     editable = descriptors.bool()
     sortable = descriptors.bool()

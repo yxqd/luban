@@ -1,8 +1,8 @@
-#!/usr/bin/env python
+# -*- Python -*-
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
-#                                   Jiao Lin     
+#                                   Jiao Lin
 #                      California Institute of Technology
 #                      (C) 2006-2011  All Rights Reserved
 #
@@ -12,11 +12,13 @@
 #
 
 
-from .ElementContainer import ElementContainer
+def choice(items):
+    def _(v):
+        if v in items: return v
+        m = "%s not in %s" % (v, items)
+        raise ValueError(m)
+    return _
 
-class SimpleContainer(ElementContainer):
-
-    pass
 
 # version
 __id__ = "$Id$"

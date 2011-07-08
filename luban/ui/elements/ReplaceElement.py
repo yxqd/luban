@@ -26,8 +26,8 @@ class ReplaceElement(base):
         return inspector.onReplaceElement(self)
     
 
-    element = descriptors.reference()
-    newelement = descriptors.reference()
+    element = descriptors.object()
+    newelement = descriptors.object()
 
     
     def __init__(self, element=None, newelement=None):

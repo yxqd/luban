@@ -76,7 +76,7 @@ class TreeView(ElementContainer):
     abstract = False
 
 
-    root = descriptors.reference()
+    root = descriptors.element()
 
     draggable = descriptors.bool()
     
@@ -109,8 +109,8 @@ class TreeViewSetRoot(Action):
     abstract = False
 
 
-    treeview = descriptors.reference()
-    root = descriptors.reference()
+    treeview = descriptors.object()
+    root = descriptors.object()
     
     
 class TreeViewRemoveNode(Action):
@@ -118,8 +118,8 @@ class TreeViewRemoveNode(Action):
     abstract = False
 
 
-    treeview = descriptors.reference()
-    node = descriptors.reference()
+    treeview = descriptors.object()
+    node = descriptors.object()
     
 
     def identify(self, inspector):
@@ -132,8 +132,8 @@ class TreeViewSelectNode(Action):
     abstract = False
 
 
-    treeview = descriptors.reference()
-    node = descriptors.reference()
+    treeview = descriptors.object()
+    node = descriptors.object()
     
     def identify(self, inspector):
         return inspector.onTreeViewSelectNode(self)
@@ -145,9 +145,9 @@ class TreeViewAddBranch(Action):
     abstract = False
 
 
-    treeview = descriptors.reference()
-    referencenode = descriptors.reference()
-    newnode = descriptors.reference()
+    treeview = descriptors.object()
+    referencenode = descriptors.object()
+    newnode = descriptors.object()
     position = descriptors.str()
 
     def __init__(self, treeview=None, referencenode=None, newnode=None, position=None):

@@ -20,7 +20,7 @@ class FormSubmitButton(base):
     abstract = False
 
 
-    label = descriptors.str(name='label', default='Submit')
+    label = descriptors.str(default='Submit')
     help = descriptors.str()
     tip = descriptors.str()
 

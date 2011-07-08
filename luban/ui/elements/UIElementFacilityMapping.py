@@ -34,28 +34,12 @@ class UIElementFacilityMapping:
 
     
     def getElementClass(self, name):
-        cname = name.capitalize()
-        try:
-            module = __import__(cname, fromlist=['.'], globals=globals())
-        except:
-            import traceback
-            tb = traceback.format_exc()
-            msg = "Failed to get class of element %s:\n%s" % (name, tb)
-            import journal
-            journal.debug("ui element lookup").log(msg)
+        from ._registry import fundamental_elements
+        cls = fundamental_elements.getElementClass(name)
+        if cls is None:
             raise KeyError(name)
-        
-        try:
-            return getattr(module, cname)
-        except:
-            import traceback
-            tb = traceback.format_exc()
-            msg = "In looking up of element %s" % name
-            msg += "Failed to get attribute %s from module %s:\n%s" % (cname, module, tb)
-            import journal
-            journal.debug("ui element lookup").log(msg)
-            raise KeyError(name)
-        
+        return cls
+
         
 # version
 __id__ = "$Id$"

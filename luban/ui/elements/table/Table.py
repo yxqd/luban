@@ -12,7 +12,7 @@
 #
 
 
-from luban.content.Element import Element
+from luban.ui.elements.Element import Element
 
 
 class Table(Element):
@@ -27,10 +27,10 @@ class Table(Element):
 
     abstract = False
     
-    model = descriptors.reference()
-    view = descriptors.reference()
-    data = descriptors.lists()
-    oncellchanged = descriptors.reference()
+    model = descriptors.object()
+    view = descriptors.object()
+    data = descriptors.ordered_dict()
+    oncellchanged = descriptors.object()
 
 
     def __init__(self, model=None, data=None, view=None, **kwds):

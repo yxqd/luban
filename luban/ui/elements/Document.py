@@ -15,7 +15,7 @@
 from .DocumentFactory import DocumentFactory
 from .ParagraphFactory import ParagraphFactory
 from .LinkFactory import LinkFactory
-from .SimpleContainer import SimpleContainer, Meta
+from .SimpleContainer import SimpleContainer
 
 class Document(SimpleContainer, DocumentFactory, ParagraphFactory, LinkFactory):
 

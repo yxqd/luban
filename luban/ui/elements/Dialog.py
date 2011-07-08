@@ -18,7 +18,7 @@ from .LinkFactory import LinkFactory
 from .SimpleContainer import SimpleContainer as elembase
 
 
-class Dialog(DocumentFactory, ParagraphFactory, LinkFactory, elembase):
+class Dialog(elembase, DocumentFactory, ParagraphFactory, LinkFactory):
 
     simple_description = 'A dialog that is a container of luban elements'
     full_description = (

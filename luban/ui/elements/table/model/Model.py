@@ -12,7 +12,7 @@
 #
 
 
-from luban.content.Element import Element as base
+from luban.ui.elements.Element import Element as base
 
 class Model(base):
 

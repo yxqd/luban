@@ -16,7 +16,13 @@ from .Element import Element
 from .CredentialFactory import CredentialFactory
 class ElementContainer(Element, CredentialFactory):
 
+
+    class ElementDefinitionError(Exception): pass
+    class SubelementDisallowedError(Exception): pass
+
     
+    # this helps establish the context in which derived element types
+    # would be defined. see ..AttributeContainer.Meta for more details
     @classmethod
     def __get_subclass_preparation_context__(cls):
         d = super().__get_subclass_preparation_context__()
@@ -43,34 +49,8 @@ class ElementContainer(Element, CredentialFactory):
                 % (item.name, item)
             raise RuntimeError(e)
 
-        # this should be in the meta class
-        if hasattr(self, 'allowed_element_types') and hasattr(self, 'disallowed_element_types'):
-            raise RuntimeError("an element type cannot have both allowed_element_types and disallowed_element_types")
-        
-        if hasattr(self, 'allowed_element_types'):
-            allowed = self.allowed_element_types
-            good = False
-            for t in allowed:
-                if isinstance(item, t): good = True; break;
-                continue
-            if not good:
-                raise ValueError('element %s is not allowed to be subelement of %s. allowed element types are %s' % (
-                    item.__class__.__name__,
-                    self.__class__.__name__,
-                    ','.join([t.__name__ for t in allowed]),
-                    ))
-        if hasattr(self, 'disallowed_element_types'):
-            disallowed = self.disallowed_element_types
-            good = True
-            for t in disallowed:
-                if isinstance(item, t): good = False; break;
-                continue
-            if not good:
-                raise ValueError('element %s is not allowed to be subelement of %s. Disallowed element types are %s' % (
-                    item.__class__.__name__,
-                    self.__class__.__name__,
-                    ','.join([t.__name__ for t in disallowed]),
-                    ))
+        # check if the item can be a subelement of this element
+        self._checkSubElementType(item)
             
         self.contents.append(item)
         self._registerChild(item)
@@ -132,7 +112,64 @@ class ElementContainer(Element, CredentialFactory):
             continue
         return
     
+
+    @classmethod
+    def _isAllowedSubElement(cls, type):
+        if hasattr(cls, 'allowed_element_types') and hasattr(cls, 'disallowed_element_types'):
+            raise cls.ElementDefinitionError("an element type cannot have both allowed_element_types and disallowed_element_types")
+        
+        if hasattr(cls, 'allowed_element_types'):
+            allowed = cls.allowed_element_types
+            for t in allowed:
+                # this line seems redundant but let us keep it here just
+                # in case python behaviour of issubclass changed
+                if type is t: return True
+                if issubclass(type, t): return True
+                continue
+            return False
+        
+        if hasattr(cls, 'disallowed_element_types'):
+            disallowed = cls.disallowed_element_types
+            for t in disallowed:
+                if type is t: return False
+                if issubclass(type, t): return False
+                continue
+            return True
+            
+        return True
+
     
+    def _checkSubElementType(self, subelem):
+        """check the type of the sub element to make sure 
+        it can be appended into this element
+        """
+        
+        #
+        cls = self.__class__
+        
+        if self.__class__._isAllowedSubElement(subelem.__class__):
+            return
+
+
+        # compose error message
+        msg = 'element %s is not allowed to be subelement of %s. '\
+            % (subelem.__class__.__name__, cls.__name__,)
+
+        #
+        allowed = getattr(cls, 'allowed_element_types', None)
+        if allowed:
+            msg += 'allowed element types are %s' % ','.join(t.__name__ for t in allowed),
+
+        #
+        disallowed = getattr(cls, 'disallowed_element_types', None)
+        if disallowed:
+            msg += 'dis-allowed element types are %s' % ','.join(
+                t.__name__ for t in disallowed)
+        
+        #
+        raise cls.SubelementDisallowedError(msg)
+            
+
     def __init__(self, **kwds):
         super().__init__(self, **kwds)
         self.name2item = {}

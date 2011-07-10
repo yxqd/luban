@@ -61,6 +61,7 @@ def registerAllElements():
 registerAllElements()
 
 
+# create element factory methods
 from ._registry import fundamental_elements
 for name in fundamental_elements:
     klass = fundamental_elements.getElementClass(name)

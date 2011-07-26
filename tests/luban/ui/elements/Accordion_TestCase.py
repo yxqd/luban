@@ -34,6 +34,7 @@ class TestCase(unittest.TestCase):
 
 
     def test2(self):
+        "subclass definition: section"
         from luban.ui.elements.Accordion import Accordion
         class Myaccordion(Accordion):
             
@@ -41,6 +42,21 @@ class TestCase(unittest.TestCase):
 
         ma = Myaccordion()
         ma.s1
+        return
+
+
+    def test2a(self):
+        "subclass definition: document disallowed"
+        from luban.ui.elements.Accordion import Accordion
+        class Myaccordion(Accordion):
+            
+            try:
+                d1 = document()
+            except NameError:
+                pass
+            else:
+                raise RuntimeError("should throw NameError")
+
         return
 
 

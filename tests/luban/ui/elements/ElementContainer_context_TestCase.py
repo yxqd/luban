@@ -25,11 +25,6 @@ class TestCase(unittest.TestCase):
         return
 
 
-    def test2(self):
-        from luban.ui.elements.Document import Document
-        return
-
-
     def test3(self):
         from luban.ui.elements.ElementContainer import ElementContainer
         class T(ElementContainer):

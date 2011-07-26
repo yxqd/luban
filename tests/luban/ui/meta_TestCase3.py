@@ -16,7 +16,6 @@ class Meta1(type):
 
     @classmethod
     def __prepare__(cls, *args, **kwds):
-        import pdb; pdb.set_trace()
         print ("meta1", cls)
         return dict()
 

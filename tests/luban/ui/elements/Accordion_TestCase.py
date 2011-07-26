@@ -16,16 +16,31 @@ import unittest
 
 class TestCase(unittest.TestCase):
 
-    def test3(self):
+    def test1(self):
         """luban.content.ElementContainer: allowed_element_types: Accordion"""
         from luban.ui.elements.Accordion import Accordion, AccordionSection
         accordion = Accordion()
         accordion.section()
 
-        accordion.append(AccordionSection())
+        accordion.append(AccordionSection(name='s1'))
 
         from luban.ui.elements.Document import Document
-        self.assertRaises(ValueError, accordion.append, Document())
+        self.assertRaises(
+            accordion.SubelementDisallowedError, 
+            accordion.append, 
+            Document(name="doc"),
+            )
+        return
+
+
+    def test2(self):
+        from luban.ui.elements.Accordion import Accordion
+        class Myaccordion(Accordion):
+            
+            s1 = section()
+
+        ma = Myaccordion()
+        ma.s1
         return
 
 

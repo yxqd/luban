@@ -32,6 +32,16 @@ class Accordion(TeleContainer):
     onchange = descriptors.action()
     onchange.tip = 'action when a different section was selected'
 
+
+    # this helps establish the context in which derived element types
+    # would be defined. see ..AttributeContainer.Meta for more details
+    @classmethod
+    def __get_subclass_preparation_context__(cls):
+        d = super().__get_subclass_preparation_context__()
+        d['section'] = d['accordionsection']
+        return d
+
+
     @elementfactory
     def section(self, label=None, **kwds):
         section = AccordionSection(label=label, **kwds)

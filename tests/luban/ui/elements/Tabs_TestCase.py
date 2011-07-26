@@ -16,7 +16,7 @@ import unittest
 
 class TestCase(unittest.TestCase):
 
-    def test2(self):
+    def test1(self):
         """luban.content.ElementContainer: allowed_element_types: Tabs"""
         from luban.ui.elements.Tabs import Tabs, Tab
         tabs = Tabs()
@@ -26,6 +26,14 @@ class TestCase(unittest.TestCase):
 
         from luban.ui.elements.Document import Document
         self.assertRaises(ValueError, tabs.append, Document())
+        return
+
+
+    def test2(self):
+        """Tabs: definition context"""
+        import luban.ui.elements as lue
+        class MyTabs(lue.tabs):
+            pass
         return
      
     

@@ -32,26 +32,29 @@ class ElementContainer(Element, CredentialFactory):
         reg = _registry.fundamental_elements
         names = reg.names()
         for name in names:
-            cls = reg.getElementClass(name)
-            if not cls.abstract:
+            ecls = reg.getElementClass(name)
+            if not ecls.abstract and cls._isAllowedSubElement(ecls):
                 d[name] = m[name]
             continue
         return d
     
 
     def append(self, item):
+        # if it is a piece of text, just add it
         if isinstance(item, str):
             self.contents.append(item)
             return self
         
+        # check item name
         if item.name in self.name2item:
-            e = 'item of same name has been added, please consider change the name: %r(%s)' \
+            e = 'item of same name has been added, please consider change the name. name=%r, item=%s' \
                 % (item.name, item)
             raise RuntimeError(e)
 
-        # check if the item can be a subelement of this element
+        # check item type
         self._checkSubElementType(item)
-            
+        
+        # append
         self.contents.append(item)
         self._registerChild(item)
         return self
@@ -158,7 +161,7 @@ class ElementContainer(Element, CredentialFactory):
         #
         allowed = getattr(cls, 'allowed_element_types', None)
         if allowed:
-            msg += 'allowed element types are %s' % ','.join(t.__name__ for t in allowed),
+            msg += 'allowed element types are %s' % ','.join(t.__name__ for t in allowed)
 
         #
         disallowed = getattr(cls, 'disallowed_element_types', None)
@@ -171,7 +174,7 @@ class ElementContainer(Element, CredentialFactory):
             
 
     def __init__(self, **kwds):
-        super().__init__(self, **kwds)
+        super().__init__(**kwds)
         self.name2item = {}
         self.id2item = {}
         self.contents = []

@@ -62,11 +62,11 @@ def ordered_dict(default=None):
     return d
 
 
-def guid(default=None):
+def guid():
     d = GUID()
     from pyre.schema import str
     d.type = str
-    d.default = default
+    d.default = ""
     return d
 
 
@@ -91,7 +91,7 @@ class GUID(Property):
 
     def __get__(self, instance, cls):
         id = super().__get__(instance, cls)
-        if id is None:
+        if not id:
             from .GUID import GUID as getguid
             id = getguid(instance)
             instance.id = id
@@ -99,7 +99,7 @@ class GUID(Property):
 
 
     def __set__(self, instance, value):
-        if value is not None:
+        if value:
             value = self._check(value)
         return super().__set__(instance, value)
 

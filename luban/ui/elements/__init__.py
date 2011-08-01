@@ -45,13 +45,15 @@ elementtypes = [
     'ReStructuredTextDocument',
     'Splitter',
     'Tabs',
-    'Toolbar',
     'TreeView',
     'Uploader',
     ]
 elementtypes = [
     'Document',
+    'Frame',
+    'Splitter',
     'Tabs',
+    'Toolbar',
     ]
 def registerAllElements():
     modules = elementtypes

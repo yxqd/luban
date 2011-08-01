@@ -22,7 +22,7 @@ class ElementContainer(CredentialFactory, Element, metaclass=Meta):
 
 
     #
-    contents = descriptors.object()
+    contents = descriptors.object(default=[])
     contents.tip = 'sub elements'
 
     

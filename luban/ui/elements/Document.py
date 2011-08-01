@@ -56,15 +56,16 @@ class Document(DocumentFactory, ParagraphFactory, LinkFactory, SimpleContainer, 
     title = descriptors.str()
     title.tip = 'Title of the document'
     
-    collapsable = descriptors.bool()
+    collapsable = descriptors.bool(default=False)
     collapsable.tip = 'If true, the document will have a collapse/expand control and it will be collapsable'
     
-    collapsed = descriptors.bool()
+    collapsed = descriptors.bool(default=False)
     collapsed.tip = 'If true, the document is collapsed initially. "collapsable" must be true for this option to work'
-    dockable = descriptors.bool()
+    
+    dockable = descriptors.bool(default=False)
     dockable.tip = 'If true, the document will have a "dock" control. By clicking the "dock" control, a user can minimize the document to the dock. For this option to work, a "dock" widget must have already existed in your application frame.'
     
-    closable = descriptors.bool()
+    closable = descriptors.bool(default=False)
     closable.tip = 'If true, the document will have a "close" control which, when clicked, will close (destroy) the document'
 
     # following are in effect only if collapsable is True

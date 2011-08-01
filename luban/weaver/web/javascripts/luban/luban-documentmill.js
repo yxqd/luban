@@ -101,7 +101,8 @@
       // draw shadow correctly without everything already in place
       var kls = doc.Class;
       if (kls) {
-	var classes = kls.split(' ');
+	  //var classes = kls.split(' ');
+	  var classes = kls;
 	if (jQuery.inArray('has-shadow', classes)!=-1) {
 	  var target = ret.jqueryelem;
 	  target.dropShadow({opacity:0.6});

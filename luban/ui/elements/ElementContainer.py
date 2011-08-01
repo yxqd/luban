@@ -20,6 +20,11 @@ class ElementContainer(CredentialFactory, Element, metaclass=Meta):
     class ElementDefinitionError(Exception): pass
     class SubelementDisallowedError(Exception): pass
 
+
+    #
+    contents = descriptors.object()
+    contents.tip = 'sub elements'
+
     
     # this helps establish the context in which derived element types
     # would be defined. see ..AttributeContainer.Meta for more details

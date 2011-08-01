@@ -12,7 +12,7 @@
 #
 
 import wx
-from CommonInterface import CommonInterface
+from .CommonInterface import CommonInterface
 
 
 class Choice(wx.Choice, CommonInterface):

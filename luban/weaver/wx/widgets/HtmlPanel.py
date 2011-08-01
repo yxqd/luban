@@ -12,7 +12,7 @@
 
 import wx
 import wx.html as html
-from CommonInterface import CommonInterface
+from .CommonInterface import CommonInterface
 
 
 
@@ -23,7 +23,7 @@ class HtmlPanel(html.HtmlWindow, CommonInterface):
 
         CommonInterface.__init__(self, parentWindow)
         
-        from globalID import create
+        from .globalID import create
         self.id = create()
         
         html.HtmlWindow.__init__(self, parentWindow, self.id, style=wx.NO_FULL_REPAINT_ON_RESIZE)

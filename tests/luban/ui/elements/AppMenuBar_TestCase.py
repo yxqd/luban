@@ -20,29 +20,26 @@ class TestCase(unittest.TestCase):
         """luban.content.ElementContainer: allowed_element_types: AppMenuBar"""
         from luban.ui.elements.AppMenuBar import AppMenuBar
         appmenubar = AppMenuBar()
-        m1 = appmenubar.menu()
-        i1 = appmenubar.item()
+        m1 = appmenubar.menu(name="m1")
+        i1 = appmenubar.item(name="i1")
 
-        m1.menu()
-        m1.item()
+        m1.menu(name="m11")
+        m1.item(name="i12")
 
         from luban.ui.elements.Document import Document
-        self.assertRaises(ValueError, appmenubar.append, Document())
-        self.assertRaises(ValueError, m1.append, Document())
+        self.assertRaises(
+            appmenubar.SubelementDisallowedError, 
+            appmenubar.append, Document())
+        self.assertRaises(
+            appmenubar.SubelementDisallowedError,
+            m1.append, Document())
         return
 
-
-def pysuite():
-    suite1 = unittest.makeSuite(TestCase)
-    return unittest.TestSuite( (suite1,) )
 
 def main():
     import journal
     # journal.debug('luban.content.ElementContainer').activate()
-
-    pytests = pysuite()
-    alltests = unittest.TestSuite( (pytests, ) )
-    unittest.TextTestRunner(verbosity=2).run(alltests)
+    unittest.main()
     
     
 if __name__ == "__main__":

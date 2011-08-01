@@ -13,7 +13,7 @@
 
 
 import wx
-from CommonInterface import CommonInterface
+from .CommonInterface import CommonInterface
 
 
 class Splitter(wx.SplitterWindow, CommonInterface):
@@ -35,7 +35,7 @@ class Splitter(wx.SplitterWindow, CommonInterface):
         elif orientation == "vertical":
             self.SplitVertically( window1, window2, sliderPosition )
             pass
-        else: raise ValueError , "invalid splitting orientation: %s" % orientation
+        else: raise ValueError("invalid splitting orientation: %s" % orientation)
         
         self.window1 = window1
         self.window2 = window2

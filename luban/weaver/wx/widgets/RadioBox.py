@@ -13,7 +13,7 @@
 
 
 import wx
-from CommonInterface import CommonInterface
+from .CommonInterface import CommonInterface
 
 
 class RadioBox(wx.RadioBox, CommonInterface):

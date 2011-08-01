@@ -20,26 +20,21 @@ class TestCase(unittest.TestCase):
         """Splitter: allowed sub elements"""
         from luban.ui.elements.Splitter import Splitter, SplitSection
         splitter = Splitter()
-        splitter.section()
+        splitter.section(name='sec1')
 
-        splitter.append(SplitSection())
+        splitter.append(SplitSection(name='sec2'))
 
         from luban.ui.elements.Document import Document
-        self.assertRaises(ValueError, splitter.append, Document())
+        self.assertRaises(
+            splitter.SubelementDisallowedError,
+            splitter.append, Document())
         return
      
     
-def pysuite():
-    suite1 = unittest.makeSuite(TestCase)
-    return unittest.TestSuite( (suite1,) )
-
 def main():
     import journal
     # journal.debug('luban.content.ElementContainer').activate()
-
-    pytests = pysuite()
-    alltests = unittest.TestSuite( (pytests, ) )
-    unittest.TextTestRunner(verbosity=2).run(alltests)
+    unittest.main()
     
     
 if __name__ == "__main__":

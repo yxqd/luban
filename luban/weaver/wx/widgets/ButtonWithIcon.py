@@ -13,14 +13,14 @@
 
 import wx
 import wx.lib.buttons as buttons
-from ext import bindCallbacks
+from .ext import bindCallbacks
 
 events = {
     'click': wx.EVT_BUTTON , 
     }
 
 
-from CommonInterface import CommonInterface
+from .CommonInterface import CommonInterface
 
 class ButtonWithIcon(buttons.GenBitmapTextButton, CommonInterface):
 
@@ -53,7 +53,7 @@ def GetBitmap(path):
     if not os.path.exists(path): return
     import Image
     source = Image.open(path, 'r')
-    image = apply( wx.EmptyImage, source.size )
+    image = wx.EmptyImage(*source.size)
     image.SetData( source.convert("RGB").tostring() )
     # if the image has an alpha channel, you can set it with this line:
     image.SetAlphaData(source.convert("RGBA").tostring()[3::4])

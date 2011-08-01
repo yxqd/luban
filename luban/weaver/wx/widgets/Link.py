@@ -13,8 +13,8 @@
 
 
 import wx
-from CommonInterface import CommonInterface
-from ext import bindCallbacks
+from .CommonInterface import CommonInterface
+from .ext import bindCallbacks
 
 events = {
     'click': wx.EVT_HYPERLINK,
@@ -27,7 +27,7 @@ class Link(wx.HyperlinkCtrl, CommonInterface):
         
         CommonInterface.__init__(self, parent)
 
-        from globalID import create
+        from .globalID import create
         id = create()
 
         wx.HyperlinkCtrl.__init__(self, parent, id, label, '')

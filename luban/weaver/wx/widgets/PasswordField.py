@@ -14,7 +14,7 @@
 
 import wx
 
-from TextField import TextField
+from .TextField import TextField
 
 class PasswordField(TextField):
 

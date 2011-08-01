@@ -53,11 +53,11 @@ class HtmlDocumentMill:
         contents = tag.contents
         self.indent()
         for item in contents:
-            if isinstance(item, basestring):
+            if isinstance(item, str):
                 self.texts.append(item)
             else:
                 if not item:
-                    raise RuntimeError, 'item is None in tag %s' % tag
+                    raise RuntimeError('item is None in tag %s' % tag)
                 item.identify(self)
             continue
         self.outdent()
@@ -91,7 +91,7 @@ class HtmlDocumentMill:
 
     def beginTag(self, tag):
         kwds = tag.kwds
-        for k,v in kwds.iteritems():
+        for k,v in kwds.items():
             if k.lower() != k:
                 kwds[k.lower()] = v
                 del kwds[k]
@@ -100,8 +100,8 @@ class HtmlDocumentMill:
         try:
             assignments = kwdsstr(**kwds)
         except:
-            raise RuntimeError, 'failed to convert %s to a string for tag %s' % (
-                kwds, tag)
+            raise RuntimeError('failed to convert %s to a string for tag %s' % (
+                kwds, tag))
 
         text = '<'+type+' '+assignments + '>'
         #if tag.contents:
@@ -125,7 +125,7 @@ class HtmlDocumentMill:
 
 
 def kwdsstr(**kwds):
-    return ' '.join( [k+'="'+str(v)+'"' for k,v in kwds.iteritems()] )
+    return ' '.join( [k+'="'+str(v)+'"' for k,v in kwds.items()] )
 
     
 # version

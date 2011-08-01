@@ -53,7 +53,7 @@ class Client(object):
 
 def formatArgs(args):
     d = {}
-    for k, v in args.iteritems():
+    for k, v in args.items():
         k = str(k)
         d[k] = v
         continue

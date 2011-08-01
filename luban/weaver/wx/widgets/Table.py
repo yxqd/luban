@@ -14,7 +14,7 @@
 import wx
 import wx.grid
 
-from CommonInterface import CommonInterface
+from .CommonInterface import CommonInterface
 
 class Table(wx.grid.Grid, CommonInterface):
 
@@ -38,11 +38,11 @@ class Table(wx.grid.Grid, CommonInterface):
 
         # columns
         allcolumns = view.columns
-        visiblecols = filter(lambda col: not col.hidden, allcolumns)
+        visiblecols = [col for col in allcolumns if not col.hidden]
         self.colnames = [col.measure for col in visiblecols]
 
         # links are special
-        linkcols = filter(lambda col: measures[col.measure].type == 'link', allcolumns)
+        linkcols = [col for col in allcolumns if measures[col.measure].type == 'link']
         self.linkcolindexes = [visiblecols.index(col) for col in linkcols]
 
         # if there are links, we need to create a special renderer

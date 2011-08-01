@@ -75,7 +75,7 @@ class Table2Dict:
 
 
 
-from luban.content.Element import Element
+from luban.ui.elements.Element import Element
 
 # version
 __id__ = "$Id$"

@@ -42,7 +42,7 @@ class Table:
 
 
 def test():
-    from Column import Column
+    from .Column import Column
     cols = [
         Column( 'col1', 'Title', 'text' ),
         Column( 'col2', 'Date', 'date', valid_range = [ '01/01/1977', '01/01/2008' ] ),

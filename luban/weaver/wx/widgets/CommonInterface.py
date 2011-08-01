@@ -13,7 +13,7 @@
 
 
 # event handler extension
-from ext import Extension
+from .ext import Extension
 
 
 class CommonInterface(Extension):
@@ -103,7 +103,7 @@ class CommonInterface(Extension):
     #
     def findFormParent(self):
         '''find the form widget that contains me'''
-        from Form import Form
+        from .Form import Form
         parent = self.getParent()
         if isinstance(parent, Form): return parent
         return parent.findFormParent()

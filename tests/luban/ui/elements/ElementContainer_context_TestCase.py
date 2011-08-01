@@ -35,17 +35,10 @@ class TestCase(unittest.TestCase):
 
 
     
-def pysuite():
-    suite1 = unittest.makeSuite(TestCase)
-    return unittest.TestSuite( (suite1,) )
-
 def main():
     import journal
     # journal.debug('luban.content.ElementContainer').activate()
-
-    pytests = pysuite()
-    alltests = unittest.TestSuite( (pytests, ) )
-    unittest.TextTestRunner(verbosity=2).run(alltests)
+    unittest.main()
     
     
 if __name__ == "__main__":

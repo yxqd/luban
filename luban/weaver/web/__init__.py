@@ -37,7 +37,7 @@ def create(htmlbase='', controller_url='/controller/main.cgi',
         jsbase = '%s/%s' % (statichtmlbase, jsbase)
         imagesbase = '%s/%s' % (statichtmlbase, imagesbase)
     #
-    from HtmlMill import HtmlMill
+    from .HtmlMill import HtmlMill
     mill = HtmlMill()
     #
     mill.htmlbase = htmlbase
@@ -53,7 +53,7 @@ def create(htmlbase='', controller_url='/controller/main.cgi',
     mill.output_as_lines = output_as_lines
 
     # librarian
-    from Librarian import Librarian
+    from .Librarian import Librarian
     mill.librarian = Librarian(cssbase=cssbase, jsbase=jsbase)
     
     # load the library
@@ -72,8 +72,8 @@ def use_library(library, weaver):
            if it is a module, just use it.
 * weaver: the html mill to use the library
 '''
-    if isinstance(library, basestring):
-        from libraries import getLibrary
+    if isinstance(library, str):
+        from .libraries import getLibrary
         library = getLibrary(library)
         
     for k in dir(library):

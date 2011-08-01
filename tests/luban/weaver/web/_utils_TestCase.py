@@ -38,8 +38,8 @@ class TestCase(unittest.TestCase):
         self.assertRaises(RuntimeError, jsonEncode, d)
         try:
             jsonEncode(d)
-        except Exception, msg:
-            print msg
+        except Exception as msg:
+            print(msg)
         return
      
     

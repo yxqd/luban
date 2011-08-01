@@ -12,8 +12,8 @@
 #
 
 
-from Panel import Panel
-from CommonInterface import CommonInterface
+from .Panel import Panel
+from .CommonInterface import CommonInterface
 
 class TreeViewContainer(Panel, CommonInterface):
 

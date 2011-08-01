@@ -14,7 +14,7 @@
 from luban._utils import Inherited
 
 
-from _json import autodetect, getModule
+from ._json import autodetect, getModule
 jsonmod = getModule(autodetect())
 import traceback
 def jsonEncode(o):
@@ -27,7 +27,7 @@ def jsonEncode(o):
         problematic_elements = jsonFindProblematicElements(o)
         probstr = '\n'.join([' * %s' % e for e in problematic_elements])
         msg =  """json cannot encode %s.\n%s\nThe elements that are problematic are: \n%s\n%s""" % (o, tb, probstr, separator)
-        raise RuntimeError, msg
+        raise RuntimeError(msg)
 
 
 def jsonDecode(o):
@@ -35,7 +35,7 @@ def jsonDecode(o):
         return jsonmod.decode(o)
     except:
         tb = traceback.format_exc()
-        raise RuntimeError, 'json cannot decode %s. Original exception:\n%s' % (o, tb)
+        raise RuntimeError('json cannot decode %s. Original exception:\n%s' % (o, tb))
      
 
         
@@ -52,7 +52,7 @@ def jsonFindProblematicElements(o, result_set = None):
             except:
                 jsonFindProblematicElements(element, result_set)
     elif isinstance(o, dict):
-        for key,val in o.items():
+        for key,val in list(o.items()):
             try:
                 jsonEncode(key)
             except:

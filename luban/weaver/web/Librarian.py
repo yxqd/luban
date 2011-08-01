@@ -25,14 +25,14 @@ class Librarian:
 
     def register(self, widget, stylesheets, jslibs):
         self._registry[widget] = {
-            'css': map(self._csspath, stylesheets),
-            'js': map(self._jspath, jslibs),
+            'css': list(map(self._csspath, stylesheets)),
+            'js': list(map(self._jspath, jslibs)),
             }
         return
 
 
     def iterWidgets(self):
-        return self._registry.iterkeys()
+        return iter(self._registry.keys())
         
 
     def getStyleSheets(self, widget=None):

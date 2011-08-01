@@ -24,6 +24,7 @@ import weakref
 
 import matplotlib
 from matplotlib.backend_bases import MouseEvent
+import collections
 matplotlib.use('WXAgg')
 import matplotlib.numerix as Numerix
 from matplotlib.axes import _process_plot_var_args
@@ -1328,7 +1329,7 @@ class PlotFrame(wx.Frame):
 
         pData = wx.PrintData()
         pData.SetPaperId(wx.PAPER_LETTER)
-        if callable(getattr(pData, 'SetPrinterCommand', None)):
+        if isinstance(getattr(pData, 'SetPrinterCommand', None), collections.Callable):
             pData.SetPrinterCommand(LINUX_PRINTING_COMMAND)
         self.printer = FigurePrinter(self, pData)
 
@@ -1416,7 +1417,7 @@ class PlotFrame(wx.Frame):
 
         try:
             self.panel.print_figure(fileName)
-        except IOError, e:
+        except IOError as e:
             if e.strerror:
                 err = e.strerror
             else:
@@ -1866,7 +1867,7 @@ class StripCharter:
             x = y = []
             empty = True
 
-        line = styleGen(x, y).next()
+        line = next(styleGen(x, y))
         line._wxmpl_empty_line = empty
 
         if channel.getColor() is not None:
@@ -1913,7 +1914,7 @@ class StripCharter:
         else:
             if line.get_transform() != axes.transData:
                 xys = axes._get_verts_in_data_coords(
-                    line.get_transform(), zip(x, y))
+                    line.get_transform(), list(zip(x, y)))
                 x = Numerix.array([a for (a, b) in xys])
                 y = Numerix.array([b for (a, b) in xys])
             axes.update_datalim_numerix(x, y)

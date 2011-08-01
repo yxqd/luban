@@ -13,10 +13,10 @@
 
 
 import wx
-from CommonInterface import CommonInterface
+from .CommonInterface import CommonInterface
 
 
-from Panel import borderStyles
+from .Panel import borderStyles
 
 
 #from wx import Notebook as base
@@ -58,7 +58,7 @@ class Notebook(base, CommonInterface):
         # so that the size of the notebook is too small and the
         # titles of notebook are not displayed where
         # here we set maxWidth to about the width of longest title
-        maxWidth = max(map(len, self.labels)) * 20
+        maxWidth = max(list(map(len, self.labels))) * 20
         
         tabHeight = self.GetPageBestSize().height
 

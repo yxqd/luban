@@ -38,7 +38,7 @@ class TestCase(unittest.TestCase):
         
         filename = 'DocumentMill-test1.html'
         out = open(filename, 'w')
-        print >>out, '\n'.join(texts)
+        print('\n'.join(texts), file=out)
         return
      
     
@@ -76,7 +76,7 @@ class TestCase(unittest.TestCase):
 
         filename = 'DocumentMill-test2.html'
         out = open(filename, 'w')
-        print >>out, '\n'.join(texts)
+        print('\n'.join(texts), file=out)
         return
      
     
@@ -115,7 +115,7 @@ class TestCase(unittest.TestCase):
 
         filename = 'DocumentMill-test3.html'
         out = open(filename, 'w')
-        print >>out, '\n'.join(texts)
+        print('\n'.join(texts), file=out)
         return
      
     
@@ -125,7 +125,7 @@ def pysuite():
 
 def main():
     import journal
-    journal.debug('luban.weaver.web').activate()
+    # journal.debug('luban.weaver.web').activate()
 
     pytests = pysuite()
     alltests = unittest.TestSuite( (pytests, ) )

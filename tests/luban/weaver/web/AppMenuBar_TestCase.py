@@ -18,23 +18,23 @@ class TestCase(unittest.TestCase):
      
     def test1(self):
         """luban.weaver.web.DocumentMill: AppMenuBar"""
-        from luban.content.AppMenuBar import AppMenuBar
+        from luban.ui.elements.AppMenuBar import AppMenuBar
         menubar = AppMenuBar()
         document = menubar
 
-        menu1 = menubar.menu(label='menu1')
-        menu1.item(label='item11')
+        menu1 = menubar.menu(label='menu1', name='menu1')
+        menu1.item(label='item11', name='item11')
 
-        item2 = menubar.item(label='item2')
+        item2 = menubar.item(label='item2', name='item2')
 
-        menu3 = menubar.menu(label='menu3')
-        menu3.item(label='item31')
-        menu32 = menu3.menu(label='menu32')
+        menu3 = menubar.menu(label='menu3', name='menu3')
+        menu3.item(label='item31', name='item31')
+        menu32 = menu3.menu(label='menu32', name='menu32')
 
-        item321 = menu32.item(label='item321')
-        item322 = menu32.item(label='item322')
-        menu322 = menu32.menu(label='menu322')
-        item3221 = menu322.item(label='item3221')
+        item321 = menu32.item(label='item321', name='item321')
+        item322 = menu32.item(label='item322', name='item322')
+        menu322 = menu32.menu(label='menu322', name='menu322')
+        item3221 = menu322.item(label='item3221', name='item3221')
 
         from luban.weaver.web.Librarian import Librarian
         librarian = Librarian()
@@ -54,7 +54,7 @@ class TestCase(unittest.TestCase):
         
         filename = 'AppMenuBar-test1.html'
         out = open(filename, 'w')
-        print >>out, '\n'.join(texts)
+        print('\n'.join(texts), file=out)
         return
      
     
@@ -64,7 +64,7 @@ def pysuite():
 
 def main():
     import journal
-    journal.debug('luban.weaver.web').activate()
+    # journal.debug('luban.weaver.web').activate()
     
     pytests = pysuite()
     alltests = unittest.TestSuite( (pytests, ) )

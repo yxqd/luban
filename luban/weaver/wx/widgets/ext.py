@@ -46,7 +46,7 @@ def bindCallbacks( window, events, callbacks, source=None, id=-1, id2=-1):
     events: { event_name : wx event }
     callbacks: { event_name : callback }
     """
-    for type, callback in callbacks.iteritems():
+    for type, callback in callbacks.items():
         if type.endswith('+'):
             todo = "append"
             type = type[:-1]

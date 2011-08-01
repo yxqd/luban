@@ -12,10 +12,10 @@
 #
 
 import wx
-from CommonInterface import CommonInterface
+from .CommonInterface import CommonInterface
 
 
-from ext import bindCallbacks
+from .ext import bindCallbacks
 
 
 class Menu(wx.Menu, CommonInterface):
@@ -37,9 +37,9 @@ class Menu(wx.Menu, CommonInterface):
         help = menuitem.tip
         subMenu = menuitem.submenu 
 
-        assert isinstance(text, basestring ),  ValueError(
+        assert isinstance(text, str ),  ValueError(
             "%s(%s) is not a string" % (text, type(text)) )
-        assert isinstance(help, basestring ),  ValueError(
+        assert isinstance(help, str ),  ValueError(
             "%s(%s) is not a string" % (help, type(help)) )
         
         wxmenuitem =  wx.MenuItem(
@@ -51,7 +51,7 @@ class Menu(wx.Menu, CommonInterface):
             subMenu = subMenu )
         
         callbacks = menuitem.callbacks
-        from MenuItem import events
+        from .MenuItem import events
         #callback = callbacks.get('click')
         #if callback: 
         #    parent = self.parent

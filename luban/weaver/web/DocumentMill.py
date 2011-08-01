@@ -12,8 +12,7 @@
 #
 
 
-# mill for luban.content.Document
-# it renders the ui document into a html document instance and a javascript document
+# renders a ui document into a html document instance and a javascript document
 # instance
 
 class DocumentMill(object):
@@ -39,12 +38,12 @@ class DocumentMill(object):
                ):
 
         if html_target is None:
-            from content.HtmlDocument import HtmlDocument
+            from .content.HtmlDocument import HtmlDocument
             html_target = HtmlDocument()
         self.html_target= html_target
         
         if javascript_target is None:
-            from content.JavaScriptDocument import JavaScriptDocument
+            from .content.JavaScriptDocument import JavaScriptDocument
             javascript_target = JavaScriptDocument()
         self.javascript_target = javascript_target
 
@@ -52,7 +51,7 @@ class DocumentMill(object):
         # check if the target root is a full html document
         # if yes, we need to add a few things to head
         htmlroot = html_target.root
-        from content.HtmlDocument import HtmlDocument
+        from .content.HtmlDocument import HtmlDocument
         self._fullhtmltarget = isinstance(htmlroot, HtmlDocument)
             
         if self._fullhtmltarget:
@@ -120,7 +119,7 @@ class DocumentMill(object):
 
 
 
-from luban.content.AttributeContainer import AttributeContainer
+from luban.ui.elements.AttributeContainer import AttributeContainer
 class PreRenderer(object):
 
     def __init__(self):
@@ -151,7 +150,7 @@ class PreRenderer(object):
         for descriptor in descriptors:
             type = descriptor.type
             name = descriptor.name
-            value = descriptor.__get__(element)
+            value = descriptor.__get__(element, element.__class__)
             value = self._convertValue(value)
             if type == 'referenceset' and value:
                 descriptor.__set__(element, value)
@@ -172,7 +171,7 @@ class PreRenderer(object):
 
 
     def _ondict(self, value):
-        for k, v in value.iteritems():
+        for k, v in value.items():
             v = self._convertValue(v)
             value[k] = v
             continue
@@ -192,8 +191,8 @@ class PreRenderer(object):
     def onSelectByElement(self, selector):
         element = selector.element
         id = element.id
-        from luban.content.SelectByID import SelectByID
-        return SelectByID(id=id)
+        from luban.ui.actions import select
+        return select(id=id)
 
     
     def onReSTDocument(self, restdoc):
@@ -207,8 +206,8 @@ class PreRenderer(object):
 
 
 
-from luban.content.ReSTDocument import ReSTDocument
-from luban.content.HtmlDocument import HtmlDocument
+from luban.ui.elements.ReSTDocument import ReSTDocument
+from luban.ui.elements.HtmlDocument import HtmlDocument
 def reSTdoc2htmldoc(restdoc):
     rest = '\n'.join(restdoc.text)
     html = rest2html(rest)
@@ -221,9 +220,9 @@ def reSTdoc2htmldoc(restdoc):
 
 from luban.utils.rst import rest2html
 
-from _utils import jsonEncode
+from ._utils import jsonEncode
 
-from luban.content.Action import Action
+from luban.ui.actions.Action import Action
 
 import journal
 debug = journal.debug('luban.weaver.web')

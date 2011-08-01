@@ -12,8 +12,8 @@
 #
 
 
-from Panel import Panel as base
-from CommonInterface import CommonInterface
+from .Panel import Panel as base
+from .CommonInterface import CommonInterface
 
 class Form(base):
     
@@ -39,7 +39,7 @@ class Form(base):
 
     def serialize(self):
         d = {}
-        for name, widget in self._input_widgets.iteritems():
+        for name, widget in self._input_widgets.items():
             value = widget.value()
             d[name] = value
             continue
@@ -47,7 +47,7 @@ class Form(base):
 
 
     def clearErrors(self):
-        for name, container in self._input_containers.iteritems():
+        for name, container in self._input_containers.items():
             try:
                 error = container.errorwidget
             except:
@@ -62,7 +62,7 @@ class Form(base):
 
     def disable(self):
         # disable all my fields
-        for field in self._input_widgets.itervalues():
+        for field in self._input_widgets.values():
             field.disable()
             continue
         # disable myself too
@@ -72,7 +72,7 @@ class Form(base):
     
     def enable(self):
         # enable all my fields
-        for field in self._input_widgets.itervalues():
+        for field in self._input_widgets.values():
             field.enable()
             continue
         # enable myself too

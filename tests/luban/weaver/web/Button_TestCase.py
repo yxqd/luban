@@ -39,7 +39,7 @@ class TestCase(unittest.TestCase):
         
         filename = 'Button-test1.html'
         out = open(filename, 'w')
-        print >>out, '\n'.join(texts)
+        print('\n'.join(texts), file=out)
         return
      
     

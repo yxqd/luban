@@ -13,8 +13,8 @@
 
 
 import wx
-from ext import bindCallbacks
-from CommonInterface import CommonInterface
+from .ext import bindCallbacks
+from .CommonInterface import CommonInterface
 
 styles = {
     "single choice": wx.LB_SINGLE,

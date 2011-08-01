@@ -51,6 +51,7 @@ elementtypes = [
     ]
 elementtypes = [
     'Document',
+    'Tabs',
     ]
 def registerAllElements():
     modules = elementtypes

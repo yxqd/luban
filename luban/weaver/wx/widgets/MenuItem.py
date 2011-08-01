@@ -12,7 +12,7 @@
 #
 
 import wx
-from CommonInterface import CommonInterface
+from .CommonInterface import CommonInterface
 
 
 events = {
@@ -28,7 +28,7 @@ class MenuItem(CommonInterface):
         
         CommonInterface.__init__(self, parent)
         
-        from globalID import create
+        from .globalID import create
         id = create()
         
         self.id = id

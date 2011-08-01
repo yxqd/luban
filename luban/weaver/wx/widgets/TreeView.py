@@ -13,8 +13,8 @@
 
 
 import wx
-from CommonInterface import CommonInterface
-from ext import bindCallbacks
+from .CommonInterface import CommonInterface
+from .ext import bindCallbacks
 
 import weakref
 
@@ -80,7 +80,7 @@ class TreeView(wx.TreeCtrl, CommonInterface):
             if not position:
                 # same as None
                 return self.addNode(referencenode, newnode)
-            raise ValueError, 'unknown position: %r(%s)' % (position, type(position))
+            raise ValueError('unknown position: %r(%s)' % (position, type(position)))
 
         else:
             parent = referencenode
@@ -170,7 +170,7 @@ class TreeView(wx.TreeCtrl, CommonInterface):
 
         # Prevent the user from dropping an item inside of itself
         if self.ItemIsChildOf(target, source):
-            print "the tree item can not be moved in to itself! "
+            print("the tree item can not be moved in to itself! ")
             self.Unselect()
             return
 
@@ -210,7 +210,7 @@ class TreeView(wx.TreeCtrl, CommonInterface):
             nc = self.GetChildrenCount(node, 0)
             child, cookie = self.GetFirstChild(node)
             # In wxPython 2.5.4, GetFirstChild only takes 1 argument
-            for i in xrange(nc):
+            for i in range(nc):
                 func(child, depth)
                 TraverseAux(child, depth + 1, func)
                 child, cookie = self.GetNextChild(node, cookie)
@@ -242,7 +242,7 @@ class TreeView(wx.TreeCtrl, CommonInterface):
             for x in range(0,depth):
                 if not type(tmplist[-1]) is dict:
                     tmplist.append({})
-                if not tmplist[-1].has_key('children'):
+                if 'children' not in tmplist[-1]:
                     tmplist[-1]['children'] = []
                 tmplist = tmplist[-1]['children']
 
@@ -289,7 +289,7 @@ class TreeView(wx.TreeCtrl, CommonInterface):
             self.SetItemImage(node, item['icon-selectedexpanded'], wx.TreeItemIcon_SelectedExpanded)
 
             newitems.append(node)
-            if item.has_key('children'):
+            if 'children' in item:
                 self.InsertItemsFromList(item['children'], node, appendafter=True)
         return newitems
 
@@ -315,7 +315,7 @@ class TreeView(wx.TreeCtrl, CommonInterface):
     def bindcallbacks(self, callbackfunc=None):
         self.Bind(wx.EVT_TREE_BEGIN_DRAG, self.OnBeginDrag)
 
-        from ext import bindCallbacks
+        from .ext import bindCallbacks
         events={'drag': wx.EVT_TREE_END_DRAG}
 
         # put self.OnEndDrag and the user's callback function together

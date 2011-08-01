@@ -12,7 +12,7 @@
 #
 
 import wx
-from ext import bindCallbacks
+from .ext import bindCallbacks
 
 events = {
     'click': wx.EVT_BUTTON , 
@@ -24,7 +24,7 @@ ids = {
     }
 
 
-from CommonInterface import CommonInterface
+from .CommonInterface import CommonInterface
 
 class Button(wx.Button, CommonInterface):
 

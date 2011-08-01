@@ -26,7 +26,7 @@ class ActionCompiler(object):
 
     def createClient(self):
         A = self._globals['A']
-        from Client import Client
+        from .Client import Client
         self.client = Client(A)
         return
 
@@ -121,8 +121,8 @@ class ActionCompiler(object):
         actionname = action.actionname
         try:
             method = getattr(element, actionname)
-        except AttributeError, e:
-            raise RuntimeError, "Unable to compile simpleelementaction: actioname=%s, element=%s" % (actionname, element)
+        except AttributeError as e:
+            raise RuntimeError("Unable to compile simpleelementaction: actioname=%s, element=%s" % (actionname, element))
         return method(**action.params)
 
 
@@ -194,7 +194,7 @@ class ActionCompiler(object):
         node = treeview.addNode(referencenode, action.newnode, action.position)
         
 
-from _journals import *
+from ._journals import *
 
 # version
 __id__ = "$Id$"

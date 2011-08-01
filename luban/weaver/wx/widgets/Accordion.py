@@ -13,11 +13,11 @@
 
 import wx
 import wx.lib.agw.foldpanelbar as fpb
-from ext import bindCallbacks
+from .ext import bindCallbacks
 
 events={'click': fpb.EVT_CAPTIONBAR}
 
-from CommonInterface import CommonInterface
+from .CommonInterface import CommonInterface
 
 class Accordion(fpb.FoldPanelBar, CommonInterface):
 

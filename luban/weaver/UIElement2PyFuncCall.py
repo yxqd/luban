@@ -86,8 +86,7 @@ class UIElement2PyFuncCall(object):
         candidate = nonalphanumeric.sub('_', candidate)
         
         if candidate in self._funcnames:
-            raise RuntimeError, \
-                  "unable to generate unqiue function name for element %s" % element
+            raise RuntimeError("unable to generate unqiue function name for element %s" % element)
         
         return candidate
             
@@ -112,7 +111,7 @@ class UIElement2PyFuncCall(object):
             if type == 'referenceset':
                 thelist = []
                 for item in value:
-                    if not isinstance(item, basestring):
+                    if not isinstance(item, str):
                         if not item:
                             debug.log('None item encountered: descriptor %s(%s)' % (type, name))
                             continue
@@ -161,7 +160,7 @@ def test():
     frame = Frame(name='mainframe', title='test')
     doc = frame.document(id='frame', title='test')
     renderer = UIElement2PyFuncCall()
-    print '\n'.join(renderer.render(frame))
+    print('\n'.join(renderer.render(frame)))
 
     return
 

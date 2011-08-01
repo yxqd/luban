@@ -13,10 +13,10 @@
 
 def Inherited(classes):
     if not classes: return object
-    for i, C in enumerate(classes): exec 'C%d=C' % i in locals()
+    for i, C in enumerate(classes): exec('C%d=C' % i)
     code = 'class N(%s): pass' % ', '.join([ 'C%d' % i for i in range(len(classes)) ])
-    exec code in locals()
-    return N
+    exec ( code )
+    return locals()['N']
 
 
 

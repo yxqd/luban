@@ -30,17 +30,17 @@ class WidgetRegistry(object):
 
 
     def __call__(self, selector):
-        if isinstance(selector, basestring):
+        if isinstance(selector, str):
             if selector.startswith('#'):
                 return self._proxy(self._getWidgetById(selector[1:]))
         elif isinstance(selector, wx.Window):
             return self._proxy(selector)
-        raise NotImplementedError, "selector: %s" % selector
+        raise NotImplementedError("selector: %s" % selector)
 
 
     def _getWidgetById(self, id):
         if id not in self._store:
-            raise RuntimeError, "widget %r not registered. registered widgets: %s" % (id, self._store)
+            raise RuntimeError("widget %r not registered. registered widgets: %s" % (id, self._store))
         return self._store[id]
 
 

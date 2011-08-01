@@ -53,12 +53,8 @@ def pysuite():
 
 def main():
     import journal
-    # journal.debug('luban.content.ElementContainer').activate()
+    unittest.main()
 
-    pytests = pysuite()
-    alltests = unittest.TestSuite( (pytests, ) )
-    unittest.TextTestRunner(verbosity=2).run(alltests)
-    
     
 if __name__ == "__main__":
     main()

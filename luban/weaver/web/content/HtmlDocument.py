@@ -52,7 +52,7 @@ class Tag(object):
     def __str__(self):
         return '[%s (%s): %s]' % (
             self.type,
-            ','.join(['%s=%s' % (k,v) for k,v in self.kwds.iteritems()]),
+            ','.join(['%s=%s' % (k,v) for k,v in self.kwds.items()]),
             (self.contents or '') and \
             '\n'.join([str(item) for item in self.contents]),
             )

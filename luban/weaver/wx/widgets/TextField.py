@@ -12,7 +12,7 @@
 #
 
 import wx
-from CommonInterface import CommonInterface
+from .CommonInterface import CommonInterface
 
 
 class TextField(wx.TextCtrl, CommonInterface):

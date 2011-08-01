@@ -31,7 +31,7 @@ class TestCase(unittest.TestCase):
         from luban.weaver.web.weaver import weave
         texts = weave(document, javascriptdoc = jsdoc)
 
-        print '\n'.join(texts)
+        print('\n'.join(texts))
         return
      
     

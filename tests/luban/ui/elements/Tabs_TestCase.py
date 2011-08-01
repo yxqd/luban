@@ -20,12 +20,15 @@ class TestCase(unittest.TestCase):
         """luban.content.ElementContainer: allowed_element_types: Tabs"""
         from luban.ui.elements.Tabs import Tabs, Tab
         tabs = Tabs()
-        tabs.tab()
+        tabs.tab(name='tab1')
 
-        tabs.append(Tab())
+        tabs.append(Tab(name="tab2"))
 
         from luban.ui.elements.Document import Document
-        self.assertRaises(ValueError, tabs.append, Document())
+        self.assertRaises(
+            tabs.SubelementDisallowedError,
+            tabs.append, Document(),
+            )
         return
 
 
@@ -33,22 +36,18 @@ class TestCase(unittest.TestCase):
         """Tabs: definition context"""
         import luban.ui.elements as lue
         class MyTabs(lue.tabs):
+            
+            tab1 = tab()
+            
             pass
         return
      
     
     
-def pysuite():
-    suite1 = unittest.makeSuite(TestCase)
-    return unittest.TestSuite( (suite1,) )
-
 def main():
     import journal
     # journal.debug('luban.content.ElementContainer').activate()
-
-    pytests = pysuite()
-    alltests = unittest.TestSuite( (pytests, ) )
-    unittest.TextTestRunner(verbosity=2).run(alltests)
+    unittest.main()
     
     
 if __name__ == "__main__":

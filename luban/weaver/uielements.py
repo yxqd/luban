@@ -50,13 +50,9 @@ def getElementClasses():
 
     # classes
     packagename = 'luban.content'
-    klasses = map(lambda name: _importElementClass(packagename, name), modules)
-    klasses = filter(
-        lambda klass: klass is not None,
-        klasses)
-    klasses = filter(
-        lambda klass: isAttributeContainer(klass),
-        klasses)
+    klasses = [_importElementClass(packagename, name) for name in modules]
+    klasses = [klass for klass in klasses if klass is not None]
+    klasses = [klass for klass in klasses if isAttributeContainer(klass)]
 
     return klasses
 

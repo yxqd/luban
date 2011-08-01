@@ -28,7 +28,7 @@ def autodetect():
         try:
             import cjson
         except ImportError:
-            raise RuntimeError, 'no json engine available'
+            raise RuntimeError('no json engine available')
         else:
             return 'cjson'
         
@@ -38,7 +38,7 @@ def autodetect():
         if 'write' in json.__dict__:
             return 'json_py'
         
-    raise RuntimeError, 'no json engine available'
+    raise RuntimeError('no json engine available')
 
 
 # version

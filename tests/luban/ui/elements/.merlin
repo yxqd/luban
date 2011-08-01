@@ -22,6 +22,4 @@ rules.append(
 
 
 recurse_entries = [
-    'elements',
-    'actions',
     ]

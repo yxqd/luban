@@ -13,14 +13,14 @@
 
 
 import wx
-import widgets
+from . import widgets
 
 
 class Weaver(object):
 
     def __init__(self, action_compiler=None):
         if action_compiler is None:
-            from ActionCompiler import ActionCompiler
+            from .ActionCompiler import ActionCompiler
             action_compiler = ActionCompiler()
         self.action_compiler = action_compiler
         return
@@ -212,7 +212,7 @@ class Weaver(object):
         title = document.title
         if title:
             wxtext = widgets.text( wxpanel, title)
-            font1 = wx.Font(18, wx.SWISS, wx.NORMAL, wx.NORMAL, True, u'Comic Sans MS')
+            font1 = wx.Font(18, wx.SWISS, wx.NORMAL, wx.NORMAL, True, 'Comic Sans MS')
             wxtext.SetFont(font1)
             wxsizer.add(wxtext, border = 8, flag = wx.BOTTOM)
             wxpanel.titlewidget = wxtext
@@ -484,7 +484,7 @@ class Weaver(object):
         
         # title
         wxtext = widgets.text(wxdialog, title)
-        font1 = wx.Font(16, wx.SWISS, wx.NORMAL, wx.NORMAL, True, u'Comic Sans MS')
+        font1 = wx.Font(16, wx.SWISS, wx.NORMAL, wx.NORMAL, True, 'Comic Sans MS')
         wxtext.SetFont(font1)
         wxelements.append(wxtext)
 
@@ -530,7 +530,7 @@ class Weaver(object):
         
         # title
         wxtext = widgets.text(wxform, title)
-        font1 = wx.Font(16, wx.SWISS, wx.NORMAL, wx.NORMAL, True, u'Comic Sans MS')
+        font1 = wx.Font(16, wx.SWISS, wx.NORMAL, wx.NORMAL, True, 'Comic Sans MS')
         wxtext.SetFont(font1)
         wxelements.append(wxtext)
 
@@ -1112,7 +1112,7 @@ def _compiled(action, compiler):
         return compiler(action)
     return _
 
-from _journals import *
+from ._journals import *
 
 # version
 __id__ = "$Id$"

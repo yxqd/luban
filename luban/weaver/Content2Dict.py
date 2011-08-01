@@ -18,7 +18,7 @@ debug = journal.debug('luban.weaver.Content2Dict')
 
 
 from luban._utils import Inherited
-from Content2Dict_Extensions import extensions
+from .Content2Dict_Extensions import extensions
 Extension = Inherited(extensions)
 
 
@@ -32,7 +32,7 @@ class UIElement2Dict(Extension, object):
     def render(self, element):
         try:
             return element.identify(self)
-        except AttributeError, e:
+        except AttributeError as e:
             return self._onElement(element)
 
 
@@ -52,7 +52,7 @@ class UIElement2Dict(Extension, object):
         for descriptor in descriptors:
             type = descriptor.type
             name = descriptor.name
-            value = descriptor.__get__(element)
+            value = descriptor.__get__(element, element.__class__)
             value = self._convertValue(value)
             d[name] = value
             continue
@@ -73,7 +73,7 @@ class UIElement2Dict(Extension, object):
 
     def _ondict(self, value):
         newvalue = {}
-        for k, v in value.iteritems():
+        for k, v in value.items():
             v = self._convertValue(v)
             newvalue[k] = v
             continue
@@ -88,8 +88,8 @@ class UIElement2Dict(Extension, object):
 
 
     
-from luban.content.AttributeContainer import AttributeContainer
-from luban.content.Action import Action
+from luban.ui.AttributeContainer import AttributeContainer
+from luban.ui.actions.Action import Action
 
 # version
 __id__ = "$Id$"

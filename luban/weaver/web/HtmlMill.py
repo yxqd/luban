@@ -121,7 +121,7 @@ class HtmlMill(base):
 
 
     def _createDocumentMill(self, librarian):
-        from DocumentMill import DocumentMill
+        from .DocumentMill import DocumentMill
         mill = DocumentMill(
             librarian = librarian,
             javascriptsbase = self.javascriptsbase,
@@ -145,7 +145,7 @@ class HtmlMill(base):
         return JavaScriptDocument()
 
 
-from _utils import jsonEncode
+from ._utils import jsonEncode
 
 
 # version

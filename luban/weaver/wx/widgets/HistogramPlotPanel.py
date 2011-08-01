@@ -28,7 +28,7 @@ class HistogramPlotPanel(wx.Panel):
     def __init__(self, parentWindow, size=(4,3), dpi=75):
         wx.Panel.__init__(self, parentWindow, id=-1)
 
-        import wxmpl.wxmpl as wxmpl
+        from . import wxmpl.wxmpl as wxmpl
         self.canvas = wxmpl.PlotPanel(self, -1, size = size, dpi = dpi)
         self.figure = self.canvas.figure
         self.figure.add_subplot(111)

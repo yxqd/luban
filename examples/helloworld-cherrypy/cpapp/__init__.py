@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 
+import os.path
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
 import cherrypy, luban.ui.elements as lue
 
-class HelloWorld:
+class Root:
 
     def __init__(self):
         from luban.weaver.web import create as createWeaver
@@ -11,7 +14,7 @@ class HelloWorld:
             statichtmlbase='static')
         return
 
-
+    @cherrypy.expose
     def welcome(self):
         # the overall frame
         frame = lue.frame(title='my application')
@@ -19,12 +22,11 @@ class HelloWorld:
         doc = frame.document(title='Hello world!', name='doc1')
         # weave to produce html
         return self.weaver.weave(frame)
-    welcome.exposed = True
 
-
+    @cherrypy.expose
     def index(self):
         return "Hello"
     index.exposed = True
 
-cherrypy.quickstart(HelloWorld())
+# cherrypy.quickstart(HelloWorld())
 

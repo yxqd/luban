@@ -37,7 +37,7 @@ class TestCase(unittest.TestCase):
         import luban.ui.elements as lue
         class MyTabs(lue.tabs):
             
-            tab1 = tab()
+            tab1 = Tab()
             
             pass
         return

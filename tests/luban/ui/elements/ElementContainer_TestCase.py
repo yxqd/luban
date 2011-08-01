@@ -43,7 +43,7 @@ class TestCase(unittest.TestCase):
         from luban.ui.elements.ElementContainer import ElementContainer
         import luban.ui.elements.Document
         class E(ElementContainer):
-            d = document()
+            d = Document()
         return
      
     

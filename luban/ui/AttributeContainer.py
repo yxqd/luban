@@ -35,9 +35,8 @@ class Meta(_metabase):
         """
         context = dict()
         
-        # import pdb; pdb.set_trace()
         # only check the closest parent class
-        base = bases[0]
+        base = bases[-1]
         
         method = "__get_subclass_preparation_context__"
         # first check that parent class itself

@@ -13,7 +13,7 @@
 
 
 
-from .SimpleContainer import SimpleContainer
+from .SimpleContainer import SimpleContainer, Meta
 from .ElementContainer import ElementContainer, elementfactory
 
 
@@ -60,7 +60,7 @@ class Splitter(SimpleContainer):
 from .DocumentFactory import DocumentFactory
 from .ParagraphFactory import ParagraphFactory
 from .ElementNotRoot import ElementNotRoot
-class SplitSection(ElementContainer, DocumentFactory, ParagraphFactory, ElementNotRoot):
+class SplitSection(DocumentFactory, ParagraphFactory, ElementNotRoot, ElementContainer, metaclass=Meta):
 
     simple_description = 'A section in a splitter'
     full_description = ''

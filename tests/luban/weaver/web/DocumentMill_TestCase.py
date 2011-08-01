@@ -12,14 +12,16 @@
 #
 
 
+import luban.ui.elements as lue
+
+
 import unittest
 
 class TestCase(unittest.TestCase):
      
     def test1(self):
         """luban.weaver.web.DocumentMill: simplest document"""
-        from luban.content.Document import Document
-        document = Document()
+        document = lue.document(name='document')
 
         from luban.weaver.web.Librarian import Librarian
         librarian = Librarian()
@@ -44,20 +46,19 @@ class TestCase(unittest.TestCase):
     
     def test2(self):
         """luban.weaver.web.DocumentMill: created by hand"""
-        from luban.content.Document import Document
-        document = Document()
+        document = lue.document(name='document')
         splitter = document.splitter()
-        left = splitter.section()
-        right = splitter.section()
+        left = splitter.section(name='left')
+        right = splitter.section(name='right')
 
         p = left.paragraph()
         p.text = ['This is the left side']
 
-        form = right.document().form()
-        t = form.text(label='text file', value='test')
-        ta = form.textarea(label='text area', value='a\nb\nc\n')
+        form = right.document(name='container').form(name='form')
+        t = form.text(label='text file', value='test', name='text')
+        ta = form.textarea(label='text area', value='a\nb\nc\n', name='ta')
         entries=[('1', 'a'), ('2', 'b')]
-        s = form.selector(label='selector', entries=entries, selection='2')
+        s = form.selector(label='selector', entries=entries, selection='2', name='selector')
         
         from luban.weaver.web.Librarian import Librarian
         librarian = Librarian()
@@ -81,22 +82,22 @@ class TestCase(unittest.TestCase):
      
     
     def test3(self):
-        """luban.weaver.web.DocumentMill: page created by hand"""
-        from luban.content.Page import Page
-        page = Page(title='test page')
-        document = page.document()
-        splitter = document.splitter()
-        left = splitter.section()
-        right = splitter.section()
+        """luban.weaver.web.DocumentMill: frame created by hand"""
+        frame = lue.frame(title='test frame', name='frame')
+        document = frame.document(name='document')
+        splitter = document.splitter(name='splitter')
+        left = splitter.section(name='left')
+        right = splitter.section(name='right')
 
-        p = left.paragraph()
+        p = left.paragraph(name='p')
         p.text = ['This is the left side']
 
-        form = right.document().form()
-        t = form.text(label='text file', value='test')
-        ta = form.textarea(label='text area', value='a\nb\nc\n')
-        entries=[('1', 'a'), ('2', 'b')]
-        s = form.selector(label='selector', entries=entries, selection='2')
+        form = right.document(name='container').form(name='form')
+        t = form.text(label='text file', value='test', name='test')
+        ta = form.textarea(label='text area', value='a\nb\nc\n', name='textarea')
+        import collections
+        entries = [('1', 'a'), ('2', 'b')]
+        s = form.selector(label='selector', entries=entries, selection='2', name='selector')
         
         from luban.weaver.web.Librarian import Librarian
         librarian = Librarian()
@@ -108,7 +109,7 @@ class TestCase(unittest.TestCase):
         from luban.weaver.web.content.HtmlDocument import HtmlDocument
         htmldoc = HtmlDocument()
         
-        body, jsdoc = mill.render(page, html_target=htmldoc)
+        body, jsdoc = mill.render(frame, html_target=htmldoc)
         
         from luban.weaver.web.weaver import weave
         texts = weave(htmldoc, javascriptdoc = jsdoc)

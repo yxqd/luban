@@ -13,7 +13,7 @@
 
 
 
-from .TeleContainer import TeleContainer, TeleSection
+from .TeleContainer import TeleContainer, Meta, TeleSection
 from .ElementContainer import elementfactory
 
 
@@ -38,7 +38,7 @@ class Accordion(TeleContainer):
     @classmethod
     def __get_subclass_preparation_context__(cls):
         d = super().__get_subclass_preparation_context__()
-        d['section'] = d['accordionsection']
+        d['Section'] = d['AccordionSection']
         return d
 
 
@@ -56,7 +56,7 @@ class Accordion(TeleContainer):
 
 from .DocumentFactory import DocumentFactory
 from .ParagraphFactory import ParagraphFactory
-class AccordionSection(TeleSection, DocumentFactory, ParagraphFactory):
+class AccordionSection(DocumentFactory, ParagraphFactory, TeleSection, metaclass=Meta):
 
     simple_description = 'one of the panes that can expand or collapse in an accordion'
     full_description = ''

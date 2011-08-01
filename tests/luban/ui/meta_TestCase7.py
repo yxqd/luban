@@ -42,7 +42,7 @@ class TestCase(unittest.TestCase):
         class E(AttributeContainer): 
             s = pyre.properties.str()
             s1 = descriptors.str()
-        class EC(E, SomeClass):
+        class EC(SomeClass, E, metaclass=Meta):
             s2 = descriptors.str()
 
         a = EC()

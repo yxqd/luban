@@ -78,8 +78,11 @@ class OrderedDict(Type):
         # split the string
         if isinstance(value, str):
             raise NotImplementedError
-        # if {value} is an ordered dictionary, good
         import collections
+        # if {value} is a list, assume it can be casted to od
+        if isinstance(value, list):
+            return collections.OrderedDict(value)
+        # if {value} is an ordered dictionary, good
         if  isinstance(value, collections.OrderedDict):
             return value
         # otherwise flag it as bad input

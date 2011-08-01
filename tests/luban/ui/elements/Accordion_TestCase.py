@@ -38,7 +38,7 @@ class TestCase(unittest.TestCase):
         from luban.ui.elements.Accordion import Accordion
         class Myaccordion(Accordion):
             
-            s1 = section()
+            s1 = Section()
 
         ma = Myaccordion()
         ma.s1
@@ -51,7 +51,7 @@ class TestCase(unittest.TestCase):
         class Myaccordion(Accordion):
             
             try:
-                d1 = document()
+                d1 = Document()
             except NameError:
                 pass
             else:

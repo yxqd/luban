@@ -13,7 +13,7 @@
 
 
 
-from .TeleContainer import TeleContainer, TeleSection
+from .TeleContainer import TeleContainer, Meta, TeleSection
 from .ElementContainer import elementfactory
 
 
@@ -53,7 +53,7 @@ class Tabs(TeleContainer):
 
 from .DocumentFactory import DocumentFactory
 from .ParagraphFactory import ParagraphFactory
-class Tab(TeleSection, DocumentFactory, ParagraphFactory):
+class Tab(DocumentFactory, ParagraphFactory, TeleSection, metaclass=Meta):
 
 
     simple_description = 'A tab in tabs'

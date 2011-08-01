@@ -26,10 +26,10 @@ class TestCase(unittest.TestCase):
 
 
     def test3(self):
-        from luban.ui.elements.ElementContainer import ElementContainer
+        from luban.ui.elements.ElementContainer import ElementContainer, Meta
         class T(ElementContainer):
             
-            d = document()
+            d = Document()
 
         return
 

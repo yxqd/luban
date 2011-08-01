@@ -82,7 +82,7 @@ class FundamentalElements:
         if hasattr(target, sig):
             name = getattr(target, sig)
         else:
-            name = target.__name__.lower()
+            name = target.__name__
         return name
 
 

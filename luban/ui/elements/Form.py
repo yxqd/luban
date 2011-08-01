@@ -14,10 +14,10 @@
 
 from .DocumentFactory import DocumentFactory
 from .ParagraphFactory import ParagraphFactory
-from .SimpleContainer import SimpleContainer
+from .SimpleContainer import SimpleContainer, Meta
 
 
-class Form(SimpleContainer, ParagraphFactory, DocumentFactory):
+class Form(ParagraphFactory, DocumentFactory, SimpleContainer, metaclass=Meta):
 
     simple_description = 'A container of form fields and a submit button'
     full_description = (

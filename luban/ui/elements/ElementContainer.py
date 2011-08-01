@@ -12,9 +12,9 @@
 #
 
 
-from .Element import Element
+from .Element import Element, Meta
 from .CredentialFactory import CredentialFactory
-class ElementContainer(Element, CredentialFactory):
+class ElementContainer(CredentialFactory, Element, metaclass=Meta):
 
 
     class ElementDefinitionError(Exception): pass

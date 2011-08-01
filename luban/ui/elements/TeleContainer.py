@@ -12,7 +12,7 @@
 #
 
 
-from .ElementContainer import ElementContainer
+from .ElementContainer import ElementContainer, Meta
 
 class TeleContainer(ElementContainer):
 
@@ -20,7 +20,7 @@ class TeleContainer(ElementContainer):
 
 
 from .ElementNotRoot import ElementNotRoot
-class TeleSection(ElementContainer, ElementNotRoot):
+class TeleSection(ElementNotRoot, ElementContainer, metaclass=Meta):
 
     selected = descriptors.bool()
     

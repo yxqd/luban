@@ -15,7 +15,16 @@
 # use DocumentMill and weaver.HtmlDocumentMill to transform a luban document
 # to a html page
 
-from pyre.weaver.mills.HTMLMill import HTMLMill as base
+# from pyre.weaver.mills.HTMLMill import HTMLMill as base
+# XXX: temp hack
+class base:
+
+    def begin(self):
+        return
+
+    def end(self):
+        return
+
 
 class HtmlMill(base):
 
@@ -58,7 +67,7 @@ class HtmlMill(base):
 
 
     def weave(self, document=None):
-        if not self._options:
+        if not getattr(self, '_options', None):
             self._options = self.__class__.default_base_options
 
         self.begin()
@@ -116,7 +125,7 @@ class HtmlMill(base):
 
 
     def _isFrame(self, document):
-        from luban.content.Frame import Frame
+        from luban.ui.elements.Frame import Frame
         return isinstance(document, Frame)
 
 

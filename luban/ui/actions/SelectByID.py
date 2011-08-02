@@ -13,9 +13,9 @@
 
 
 from .ElementActions import ElementActions
-from .Action import Action as base
+from .Action import Action as base, Meta
 
-class SelectByID(ElementActions, base):
+class SelectByID(ElementActions, base, metaclass=Meta):
 
     simple_description = 'select an element by its ID'
     full_description = (

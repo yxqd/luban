@@ -3,6 +3,7 @@ UIElementFacilityMapping_TestCase.py
 Element_TestCase.py
 ElementContainer_context_TestCase.py
 ElementContainer_TestCase.py
+element_container_contents_TestCase.py
 SimpleContainer_TestCase.py
 Document_TestCase.py
 Frame_TestCase.py
@@ -10,3 +11,4 @@ Accordion_TestCase.py
 AppMenuBar_TestCase.py
 Splitter_TestCase.py
 Tabs_TestCase.py
+Button_onclick_TestCase.py

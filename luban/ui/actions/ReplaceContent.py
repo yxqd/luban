@@ -24,8 +24,8 @@ class ReplaceContent(base):
         return inspector.onReplaceContent(self)
     
 
-    element = descriptors.reference()
-    newcontent = descriptors.reference()
+    element = descriptors.object()
+    newcontent = descriptors.object()
     
 
 

@@ -13,7 +13,7 @@
 
 
 
-from .AttributeContainer import AttributeContainer
+from .AttributeContainer import AttributeContainer, Meta
 class Action(AttributeContainer):
 
     """base class of all actions

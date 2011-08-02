@@ -11,7 +11,7 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-from ..AttributeContainer import AttributeContainer
+from ..AttributeContainer import AttributeContainer, Meta
 
 # version
 __id__ = "$Id$"

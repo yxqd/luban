@@ -13,10 +13,10 @@
 
 
 
-from .Element import Element
+from .Element import Element, Meta
 
 from .ElementNotRoot import ElementNotRoot
-class TreeViewLeaf(Element, ElementNotRoot):
+class TreeViewLeaf(ElementNotRoot, Element, metaclass=Meta):
 
     abstract = False
 
@@ -35,9 +35,9 @@ class TreeViewLeaf(Element, ElementNotRoot):
         return visitor.onTreeViewLeaf( self )
 
 
-from .ElementContainer import ElementContainer
+from .ElementContainer import ElementContainer, Meta as ECMeta
 
-class TreeViewBranch(ElementContainer, ElementNotRoot):
+class TreeViewBranch(ElementNotRoot, ElementContainer, metaclass=ECMeta):
 
     abstract = False
 

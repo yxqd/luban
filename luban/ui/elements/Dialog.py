@@ -15,10 +15,10 @@
 from .DocumentFactory import DocumentFactory
 from .ParagraphFactory import ParagraphFactory
 from .LinkFactory import LinkFactory
-from .SimpleContainer import SimpleContainer as elembase
+from .SimpleContainer import SimpleContainer as elembase, Meta
 
 
-class Dialog(elembase, DocumentFactory, ParagraphFactory, LinkFactory):
+class Dialog(DocumentFactory, ParagraphFactory, LinkFactory, elembase, metaclass=Meta):
 
     simple_description = 'A dialog that is a container of luban elements'
     full_description = (

@@ -10,29 +10,29 @@ from .FormFieldActions import FormFieldActions
 extensions.append(FormFieldActions)
 
 
-from .TreeView import TreeViewActions
+from ..elements.TreeView import TreeViewActions
 extensions.append(TreeViewActions)
 
 
-from .Accordion import AccordionActions
+from ..elements.Accordion import AccordionActions
 extensions.append(AccordionActions)
 
 
-from .ProgressBar import ProgressBarActions
+from ..elements.ProgressBar import ProgressBarActions
 extensions.append(ProgressBarActions)
 
 
-from .Dialog import DialogActions
+from ..elements.Dialog import DialogActions
 extensions.append(DialogActions)
 
 
-from .Tabs import TabActions
+from ..elements.Tabs import TabActions
 extensions.append(TabActions)
 
 
-from .PortletItem import PortletItemActions
+from ..elements.PortletItem import PortletItemActions
 extensions.append(PortletItemActions)
 
 
-from .Dock import DockActions
+from ..elements.Dock import DockActions
 extensions.append(DockActions)

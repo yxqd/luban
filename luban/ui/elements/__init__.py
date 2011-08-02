@@ -22,7 +22,6 @@ def registerElementProvider(provider):
 elementtypes = [
     'Accordion',
     'AppMenuBar',
-    'Button',
     'CodeEditor',
     'CodeViewer',
     'Credential',
@@ -49,6 +48,7 @@ elementtypes = [
     'Uploader',
     ]
 elementtypes = [
+    'Button',
     'Document',
     'Frame',
     'Splitter',

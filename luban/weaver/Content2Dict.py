@@ -41,6 +41,9 @@ class UIElement2Dict(Extension, object):
             return self._onElement
         raise
     
+    
+    def onNoAction(self, element): return
+
 
     #
     def _onElement(self, element):

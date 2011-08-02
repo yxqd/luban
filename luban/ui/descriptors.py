@@ -30,11 +30,18 @@ class ElementInterface(pyre.interface, family="luban.ui.elements"):
 
 
 def action():
-    return facility(interface=ActionInterface)
+    from .actions.NoAction import NoAction
+    return facility(interface=ActionInterface, default=NoAction)
 
 
 def element(default=None):
     return facility(interface=ElementInterface, default=default)
+
+
+def object(default=None):
+    if default is None:
+        from .AttributeContainer import AttributeContainer as default
+    return pyre.components.properties.object(default=default)
 
 
 def list(default=None):

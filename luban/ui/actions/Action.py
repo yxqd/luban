@@ -13,8 +13,8 @@
 
 
 
-from .AttributeContainer import AttributeContainer, Meta
-class Action(AttributeContainer):
+from .ActionBase import ActionBase, Meta
+class Action(ActionBase):
 
     """base class of all actions
     """
@@ -27,7 +27,7 @@ class Action(AttributeContainer):
     
 
     def __init__(self, name=None, **kwds):
-        AttributeContainer.__init__(self)
+        super().__init__()
         
         self.name = name
 

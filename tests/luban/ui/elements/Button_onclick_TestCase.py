@@ -33,7 +33,6 @@ class TestCase(unittest.TestCase):
         self.assert_(b.onclick is not None)
         
         d1 = lue.document(onclick=None)
-        print (b.onclick )
         self.assert_(b.onclick is not None)
         return
      

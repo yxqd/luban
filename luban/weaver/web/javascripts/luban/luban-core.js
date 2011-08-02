@@ -40,7 +40,7 @@ luban.utils = {};
   {
     return "!!! Please note that this site does not support browser's \"Back\" button !!!";
   }
-  window.onbeforeunload = confirmBrowseAway;
+  // window.onbeforeunload = confirmBrowseAway;
 
 
   // declaration of helpers

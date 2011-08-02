@@ -28,7 +28,7 @@ class HtmlDocument(SimpleContainer):
     def identify(self, inspector):
         return inspector.onHtmlDocument(self)
 
-    text = descriptors.list()
+    text = descriptors.str()
     text.tip = 'Content of the html document'
     
     title = descriptors.str()

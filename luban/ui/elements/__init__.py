@@ -33,7 +33,6 @@ elementtypes = [
     'Form',
     'Frame',
     'Grid',
-    'HtmlDocument',
     'Image',
     'Link',
     'NewsTicker',
@@ -41,7 +40,6 @@ elementtypes = [
     'Plot2D',
     'Portlet',
     'ProgressBar',
-    'ReStructuredTextDocument',
     'Splitter',
     'Tabs',
     'TreeView',
@@ -51,6 +49,8 @@ elementtypes = [
     'Button',
     'Document',
     'Frame',
+    'HtmlDocument',
+    'ReStructuredTextDocument',
     'Splitter',
     'Tabs',
     'Toolbar',
@@ -75,7 +75,7 @@ for name in fundamental_elements:
 
 
 # alias
-# rstdoc = restructuredtextdocument
+rstdoc = restructuredtextdocument
 
 
 # version

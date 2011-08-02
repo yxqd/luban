@@ -34,7 +34,8 @@
   ef.htmldocument = function(kwds, docmill, parent) {
     var id = kwds.id;
     var div = tag('div', {"id":id});
-    div.html(kwds.text.join('\n'));
+    // div.html(kwds.text.join('\n'));
+    div.html(kwds.text);
 
     var kls = kwds.Class;
     if (kls) {div.addClass(kls);}

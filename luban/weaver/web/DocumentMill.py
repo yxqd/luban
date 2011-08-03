@@ -209,12 +209,11 @@ class PreRenderer(object):
 from luban.ui.elements.ReSTDocument import ReSTDocument
 from luban.ui.elements.HtmlDocument import HtmlDocument
 def reSTdoc2htmldoc(restdoc):
-    rest = '\n'.join(restdoc.text)
+    rest = restdoc.text
     html = rest2html(rest)
-    kls = restdoc.Class.split()
+    kls = restdoc.Class
     if 'ReST' not in kls: kls.append('ReST')
-    Class = ' '.join(kls)
-    htmldoc = HtmlDocument(text=html, id=restdoc.id or '', Class=Class)
+    htmldoc = HtmlDocument(text=html, id=restdoc.id or '', Class=kls)
     return htmldoc
 
 

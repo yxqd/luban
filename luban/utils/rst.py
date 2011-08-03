@@ -13,17 +13,14 @@
 
 
 def rest2html(rest):
+    """convert rst str to a html str
+    """
     from docutils import core
     
     parts = core.publish_parts(
         source=rest,
         writer_name='html')
-    lines = (parts['body_pre_docinfo']+parts['fragment']).splitlines()
-
-##     # XXX: hack
-##     lines = map(str, lines)
-##     return []
-    return lines
+    return parts['body_pre_docinfo']+parts['fragment']
 
 
 # version

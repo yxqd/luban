@@ -1,1 +1,0 @@
-../../../tests/aokuang/cgi-bin/main.py

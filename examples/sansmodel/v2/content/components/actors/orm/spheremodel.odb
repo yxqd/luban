@@ -1,7 +1,0 @@
-# -*- python -*-
-
-from sansmodel.SphereModel import SphereModel
-from luban.orm import object2actor
-Actor = object2actor(SphereModel, needauthorization=0)
-def actor():
-    return Actor("orm/spheremodel")

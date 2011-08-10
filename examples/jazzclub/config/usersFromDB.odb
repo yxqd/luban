@@ -1,3 +1,0 @@
-def userManager():
-    from jazzclub.components import usersFromDB
-    return usersFromDB()

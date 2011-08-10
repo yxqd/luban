@@ -1,9 +1,0 @@
-json.py
-=======
-json.py is from http://pypi.python.org/pypi/python-json
-
-It is in LGPL license.
-
-This file is necessary for GAE+luban because GAE right now
-only support python 2.5, and json is only supported by python
-after version 2.6.

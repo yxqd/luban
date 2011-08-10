@@ -1,2 +1,0 @@
-from lubandemo1.components.DemoClerk import Clerk
-def clerk(): return Clerk('democlerk')

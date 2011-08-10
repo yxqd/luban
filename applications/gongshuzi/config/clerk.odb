@@ -1,2 +1,0 @@
-from gongshuzi.components.Clerk import Clerk
-def clerk(): return Clerk('clerk')

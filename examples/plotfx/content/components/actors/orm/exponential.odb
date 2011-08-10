@@ -1,4 +1,0 @@
-from plotfx.Exponential import Exponential
-import luban.orm
-Actor = luban.orm.object2actor(Exponential, needauthorization=False)
-def actor(): return Actor('orm/exponential')

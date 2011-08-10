@@ -1,3 +1,0 @@
-def painter():
-    from gongshuzi.components import painter
-    return painter()

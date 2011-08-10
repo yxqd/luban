@@ -1,8 +1,0 @@
-from luban.content import registerElementProvider
-registerElementProvider('chart.content')
-
-from luban.components.weaver.web.LibraryFactory import create, getCategories
-def library():
-    cats = getCategories()
-    Library = create(cats)
-    return Library()

@@ -1,0 +1,4 @@
+Aug 1 2011
+tried a few web frameworks, at this moment only cherrypy
+works for the python3 (python3.1 in ubuntu 10.04)
+environment I have.

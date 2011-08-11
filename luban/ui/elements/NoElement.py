@@ -1,26 +1,32 @@
-# -*- python -*-
+# -*- Python -*-
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 #                                   Jiao Lin
 #                      California Institute of Technology
-#                      (C) 2006-2011 All Rights Reserved 
+#                      (C) 2006-2011  All Rights Reserved
 #
 # {LicenseText}
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-class PredefinedSymbols(dict):
 
-    def __init__(self, *args, **kwds):
-        super().__init__(*args, **kwds)
-        from . import descriptors
-        self['d'] = self['descriptors'] = descriptors
-        return
+from .ElementBase import ElementBase as base, Meta
 
+class NoElement(base):
+
+    simple_description = 'nothing'
+    full_description = ("no element at all")
+
+    abstract = False
+
+    def identify(self, inspector):
+        return inspector.onNoElement(self)
+    
 
 # version
 __id__ = "$Id$"
 
 # End of file 
+

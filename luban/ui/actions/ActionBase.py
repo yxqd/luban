@@ -21,17 +21,6 @@ class ActionBase(AttributeContainer):
     
     abstract = True
     
-    def __init__(self, name=None, **kwds):
-        AttributeContainer.__init__(self)
-        
-        self.name = name
-
-        for k, v in kwds.items():
-            self.setAttribute(k,v)
-
-        return
-
-
 # version
 __id__ = "$Id$"
 

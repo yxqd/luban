@@ -11,8 +11,10 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
+"""
+meta classes
+"""
 
-# version
-__id__ = "$Id$"
+from .SubclassDefinitionContextBuilder import SubclassDefinitionContextBuilder as Meta
 
 # End of file 

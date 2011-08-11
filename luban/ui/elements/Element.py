@@ -16,25 +16,8 @@ import journal
 debug = journal.debug('luban.ui.elements.Element')
 
 
-from ..AttributeContainer import AttributeContainer, Meta as _metabase
-
-
-# meta class
-class Meta(_metabase):
-
-    
-    def __new__(cls, name, *args, **kwds):
-        # call super class to construct the class
-        target = super().__new__(cls, name, *args, **kwds)
-        
-        #
-        from ._registry import register
-        register(target)
-        
-        return target
-        
-
-class Element(AttributeContainer, metaclass=Meta):
+from ElementBase import ElementBase, Meta
+class Element(ElementBase):
     
     # indicate this is abstract and cannot be instantiated
     abstract = True
@@ -74,7 +57,7 @@ class Element(AttributeContainer, metaclass=Meta):
     
     
     def __init__(self, name=None, attributes=None, **kwds):
-        AttributeContainer.__init__(self)
+        super().__init__()
         self.name = name
 
         attributes = attributes or {}

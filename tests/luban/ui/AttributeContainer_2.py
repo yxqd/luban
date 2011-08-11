@@ -24,7 +24,7 @@ class TestCase(unittest.TestCase):
     def test1(self):
         import pyre
         class A(AttributeContainer): 
-            s = pyre.properties.str()
+            s = descriptors.str()
             s1 = descriptors.str()
         a = A()
         self.assertEqual(a.s, '')
@@ -38,9 +38,8 @@ class TestCase(unittest.TestCase):
      
 
     def test2(self):
-        import pyre
         class E(AttributeContainer): 
-            s = pyre.properties.str()
+            s = descriptors.str()
             s1 = descriptors.str()
         class EC(SomeClass, E, metaclass=Meta):
             s2 = descriptors.str()

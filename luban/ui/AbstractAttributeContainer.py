@@ -23,7 +23,24 @@ class AbstractAttributeContainer(object):
     things.
     """
 
-    # interface to descriptors are the important for inspectors
+    # attribute access
+    def setAttribute(self, name, value):
+        "set attribute of given name to the give value"
+        raise NotImplementedError
+
+
+    def getAttribute(self, name):
+        "get attribute of given name"
+        raise NotImplementedError
+
+
+    def iterAttributes(self):
+        """iterates over key,value pairs of all attributes
+        """
+        raise NotImplementedError
+
+    
+    # interface to descriptors are important for inspectors
     @classmethod
     def iterDescriptors(cls):
         "iterates over descriptors"
@@ -36,32 +53,11 @@ class AbstractAttributeContainer(object):
         raise NotImplementedError
 
 
-    # XXX: should not we just use setattr ?
-    def setAttribute(self, name, value):
-        "set attribute of given name to the give value"
-        raise NotImplementedError
-
-
-    # XXX: should not we just use getattr ?
-    def getAttribute(self, name):
-        "get attribute of given name"
-        raise NotImplementedError
-
-
-    def iterAttributes(self):
-        """iterates over key,value pairs of all attributes
-        """
-        raise NotImplementedError
-
-    
     # double dispatching for inspector
     def identify(self, inspector):
-        e = "class %r should implement 'identify'" % self.__class__.__name__
+        e = "class {.__name__!r} should implement 'identify'".format(self.__class__)
         raise NotImplementedError(e)
     
-
-    def __init__(self):
-        return
 
     pass
 

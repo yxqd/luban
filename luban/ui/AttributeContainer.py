@@ -12,54 +12,10 @@
 #
 
 
-import pyre
-
-
-
-# metaclass
-from pyre.components.Actor import Actor as _metabase
-class Meta(_metabase):
-
-    @classmethod
-    def __prepare__(cls, name, bases, **kwds):
-        d = super().__prepare__(name, bases, **kwds)
-        context = cls._collectContextFromBases(bases)
-        d.update(context)
-        return d
-
-    
-    @classmethod
-    def _collectContextFromBases(cls, bases):
-        """collect context for preparation of the target class of this meta class
-        from bases of the target class.
-        """
-        context = dict()
-        
-        # only check the closest parent class
-        base = bases[-1]
-        
-        method = "__get_subclass_preparation_context__"
-        # first check that parent class itself
-        if hasattr(base, method):
-            c = getattr(base, method)()
-            context.update(c)
-        else:
-            # if not found, check all bases of that parent class
-            for base1 in base.__mro__:
-                if hasattr(base1, method):
-                    c = getattr(base1, method)()
-                    context.update(c)
-                    break # assume all implementation of __get_subclass_preparation_context__ to call super correctly
-                continue
-                
-        return context
-
-
-
+from .meta import Meta
 from .AbstractAttributeContainer import AbstractAttributeContainer
-class AttributeContainer(pyre.component, AbstractAttributeContainer, metaclass=Meta):
+class AttributeContainer(AbstractAttributeContainer, metaclass=Meta):
 
-    from .descriptors import DescriptorBase
 
     @classmethod
     def __get_subclass_preparation_context__(cls):
@@ -74,13 +30,13 @@ class AttributeContainer(pyre.component, AbstractAttributeContainer, metaclass=M
 
     @classmethod
     def iterDescriptors(cls):
-        return cls.pyre_getTraitDescriptors()
-
+        from .meta.DescriptorCollector import STORE_NAME
+        return getattr(cls, STORE_NAME).values()
+    
     
     @classmethod
     def getDescriptor(cls, name):
-        return cls.pyre_getTraitDescriptor(name)
-    
+        return getattr(cls, name)    
     
     
     def setAttribute(self, name, value):

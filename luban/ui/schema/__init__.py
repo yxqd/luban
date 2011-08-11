@@ -31,9 +31,10 @@ from .List import List as list
 from .Dict import Dict as dict
 from .OrderedDict import OrderedDict as ordered_dict
 
-# generic luban ui "component" type
+# luban ui "component" types
 from .Object import Object as object
-
+from .Element import Element as element
+from .Action import Action as action
 
 # Implementation:
 # the implementation here were derived from pyre 1.0 pyre.schema

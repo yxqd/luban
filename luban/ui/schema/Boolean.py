@@ -17,7 +17,7 @@ class Boolean(Type):
 
     # interface
     @classmethod
-    def pyre_cast(cls, value, **kwds):
+    def __cast__(cls, value, **kwds):
         """
         Convert {value} into a boolean
         """

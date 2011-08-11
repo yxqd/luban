@@ -71,19 +71,25 @@ def ordered_dict(default=None, dynamic=True):
 # descriptors for ui elements and actions
 def action(default=None):
     p = Property()
-    p.type = schema.object
+    p.type = schema.action
     if default is None:
-        from .actions.NoAction import NoAction
+        from ..actions.NoAction import NoAction
         default = NoAction()
     p.default = default
     return p
 
-def element(default=None):
-    p = Property()
-    p.type = schema.object
+def element(default=None, dynamic=True):
+    p = _prop(dynamic=dynamic)
+    p.type = schema.element
     if default is None:
         from ..elements.NoElement import NoElement
         default = NoElement()
+    p.default = default
+    return p
+
+def object(default=None, dynamic=True):
+    p = _prop(dynamic=dynamic)
+    p.type = schema.object
     p.default = default
     return p
 

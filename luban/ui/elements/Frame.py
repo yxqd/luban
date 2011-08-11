@@ -17,7 +17,7 @@ from .SimpleContainer import SimpleContainer, Meta
 
 
 class Frame(DocumentFactory, SimpleContainer, metaclass=Meta):
-
+    
     simple_description = "root node of a luban user interface hierarchy"
     full_description = (
         'Frame element is the root element of a luban user interface.'
@@ -26,7 +26,7 @@ class Frame(DocumentFactory, SimpleContainer, metaclass=Meta):
         )
 
     abstract = False
-
+    
 
     def identify(self, inspector):
         return inspector.onFrame(self)

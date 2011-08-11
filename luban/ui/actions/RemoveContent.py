@@ -24,7 +24,7 @@ class RemoveContent(base):
         return inspector.onRemoveContent(self)
     
 
-    element = descriptors.reference()
+    element = descriptors.action() # action to select an element
 
 
 

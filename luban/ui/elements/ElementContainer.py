@@ -13,8 +13,7 @@
 
 
 from .Element import Element, Meta
-from .CredentialFactory import CredentialFactory
-class ElementContainer(CredentialFactory, Element, metaclass=Meta):
+class ElementContainer(Element, metaclass=Meta):
 
 
     class ElementDefinitionError(Exception): pass
@@ -26,25 +25,9 @@ class ElementContainer(CredentialFactory, Element, metaclass=Meta):
     contents.tip = 'sub elements'
 
     
-    # this helps establish the context in which derived element types
-    # would be defined. see ..AttributeContainer.Meta for more details
-    @classmethod
-    def __get_subclass_preparation_context__(cls):
-        d = super().__get_subclass_preparation_context__()
-        from .UIElementFacilityMapping import UIElementFacilityMapping
-        m = UIElementFacilityMapping('all')
-        from . import _registry
-        reg = _registry.fundamental_elements
-        names = reg.names()
-        for name in names:
-            ecls = reg.getElementClass(name)
-            if not ecls.abstract and cls._isAllowedSubElement(ecls):
-                d[name] = m[name]
-            continue
-        return d
-    
-
     def append(self, item):
+        """append the given subelement to my contents
+        """
         # if it is a piece of text, just add it
         if isinstance(item, str):
             self.contents.append(item)
@@ -65,28 +48,15 @@ class ElementContainer(CredentialFactory, Element, metaclass=Meta):
         return self
 
 
-    def add(self, element):
-        import warnings
-        warnings.warn("method 'add' replaced by 'append'")
-        return self.append(element)
-
-
     def getChildByName(self, name):
+        """get one of my children by his name
+        """
         return self.name2item[name]
 
 
-    def getDescendentByName(self, name):
-        'find a descendent by its name. the name must be unique among descendents'
-        if name in self.name2item: return self.name2item[name]
-        for item in self.contents:
-            if not isContainer(item): continue
-            candidate = item.getDescendentByName(name)
-            if candidate: return candidate
-            continue
-        return
-
-
     def getDescendentByID(self, id):
+        """get a descendent by its id
+        """
         if not self.id2item and self.contents:
             self._registerChildren(self.contents)
         if id in self.id2item: return self.id2item[id]
@@ -104,22 +74,13 @@ class ElementContainer(CredentialFactory, Element, metaclass=Meta):
         raise NotImplementedError
 
 
-    def __getattr__(self, name):
-        return self.getChildByName(name)
-    
-
-    def _iterDeclaredSubElements(self):
-        from .Element import Element
-        for trait in self.pyre_getTraitDescriptors():
-            if trait not in self.pyre_inventory:
-                continue
-            slot = self.pyre_inventory[trait]
-            value = slot.value
-            if isinstance(value, Element):
-                yield value
-            continue
+    def __init__(self, **kwds):
+        super().__init__(**kwds)
+        self.name2item = {}
+        self.id2item = {}
+        self.contents = []
         return
-    
+
 
     @classmethod
     def _isAllowedSubElement(cls, type):
@@ -177,21 +138,6 @@ class ElementContainer(CredentialFactory, Element, metaclass=Meta):
         #
         raise cls.SubelementDisallowedError(msg)
             
-
-    def __init__(self, **kwds):
-        super().__init__(**kwds)
-        self.name2item = {}
-        self.id2item = {}
-        self.contents = []
-        
-        # pyre machinery should be all done here
-        # so we should have configured sub elements
-        # it should be safe to add sub elements to my store
-        for elem in list(self._iterDeclaredSubElements()):
-            self.append(elem)
-            continue
-        return
-
 
     def _registerChildren(self, children):
         for child in children:

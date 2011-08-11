@@ -24,7 +24,49 @@ class Object(Type):
     # interface
     @classmethod
     def __cast__(cls, value, **kwds):
+        if not isobject(value):
+            msg = "{!r}".format(value)
+            raise ValueError(msg)
+        
         return value
 
+
+elemental_types = str, int, bool
+
+
+def iselemental(candidate):
+    #
+    for et in elemental_types:
+        if isinstance(value, et):
+            return True
+        continue
+    return False
+
+
+def isattributecontainer(candidate):
+    from ..AttributeContainer import AttributeContainer
+    return isinstance(candidate, AttributeContainer)
+
+
+def isobject(candidate):
+    if iselemental(candidate):
+        return True
+    
+    #
+    if isinstance(candidate, list):
+        for e in candidate:
+            if not isobject(e): return False
+            continue
+        return True
+
+    import collections
+    if isinstance(candidate, dict) or isinstance(candidate, collections.OrderedDict):
+        for k,v in candidate.items():
+            if not iselemental(k): return False
+            if not isobject(v): return False
+            continue
+        return True
+
+    return isattributecontainer(candidate)
 
 # end of file 

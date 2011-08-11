@@ -12,6 +12,12 @@
 #
 
 
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+# assumption: any descriptor of element type
+# is regarded as describing a subelement
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
 # public interface
 def register(cls):
     all_element_classes.append(cls)
@@ -91,18 +97,17 @@ fundamental_elements = FundamentalElements()
 
 #
 def hasSubElements(cls):
-    traits = cls.pyre_localTraits + cls.pyre_inheritedTraits
+    traits = cls.iterDescriptors()
     for trait in traits:
-        if isElementFacility(trait):
+        if isSubElementDescriptor(trait):
             return True
         continue
     return False
 
 
-def isElementFacility(trait):
-    from ..descriptors import ElementInterface
-    import pyre
-    return isinstance(trait, pyre.facility) and trait.type is ElementInterface
+def isSubElementDescriptor(trait):
+    from ..schema import element
+    return trait.type is element
 
 
 # version

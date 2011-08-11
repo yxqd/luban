@@ -12,11 +12,11 @@
 #
 
 
-import journal
+from luban import _journal as journal
 debug = journal.debug('luban.ui.elements.Element')
 
 
-from ElementBase import ElementBase, Meta
+from .ElementBase import ElementBase, Meta
 class Element(ElementBase):
     
     # indicate this is abstract and cannot be instantiated
@@ -27,6 +27,9 @@ class Element(ElementBase):
     id = descriptors.guid()
     id.tip = 'Identifier of this element. If left blank, a unique one will be generated automatically'
     
+    name = descriptors.str()
+    name.tip = 'Name of this element. must be unique among siblings'
+
     # XXX: class is reserved. what would be a better name?
     Class = descriptors.list()
     Class.tip = 'Class of this element. Useful for styling the element'
@@ -34,25 +37,11 @@ class Element(ElementBase):
     onclick = descriptors.action()
     onclick.tip = 'action when a mouse click happens on this element'
     
-    oncreate = descriptors.action()
-    oncreate.tip = 'action when the widget is created on the interface'
-    oncreate.experimental = True
-    
-    onkeypress = descriptors.action()
-    onkeypress.tip = 'action when user stroke a key and this element is on focus'
-    onkeypress.experimental = True
-    
-    hidden = descriptors.bool(default=False)
-    hidden.tip = 'If true, this element is hidden'
-    
-    name = descriptors.str()
-    name.tip = 'Name of this element. must be unique among siblings'
-
     
     def addClass(self, kls):
         classes = self.Class
-        if kls in classes: return
-        classes.append(kls)
+        if kls not in classes: 
+            classes.append(kls)
         return self
     
     
@@ -62,7 +51,7 @@ class Element(ElementBase):
 
         attributes = attributes or {}
         kwds.update(attributes)
-
+        
         for k, v in kwds.items():
             debug.log('setting attribute %r to %s' % (k,v))
             self.setAttribute(k,v)

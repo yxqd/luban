@@ -21,7 +21,7 @@ STORE_NAME = '_properties'
 from ..schema.Descriptor import Descriptor
 class Property(Descriptor):
 
-    type = schema.object # my type; most likely one of the pyre.schema type declarators
+    type = schema.object # my type
     default = None # my default value
     
 

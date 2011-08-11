@@ -26,8 +26,8 @@ class InsertBeforeElement(base):
         return inspector.onInsertElement(self)
     
 
-    element = descriptors.reference()
-    newelement = descriptors.reference()
+    element = descriptors.action()
+    newelement = descriptors.element()
 
     
     def __init__(self, element=None, newelement=None):

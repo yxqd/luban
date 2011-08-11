@@ -12,11 +12,11 @@
 #
 
 
-import journal
+from luban import _journal as journal
 debug = journal.debug('luban.ui.elements.Element')
 
 
-from ..AttributeContainer import AttributeContainer, Meta as _metabase
+from .AttributeContainer import AttributeContainer, Meta as _metabase
 
 
 # meta class

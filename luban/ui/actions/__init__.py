@@ -21,6 +21,14 @@ hold information about actions, instead of actually
 performing actions.
 The desriptions here will later be translated by renderers
 to actual actions in different media.
+
+Types of actions:
+
+* selecting: select an element
+* element actions: perform actions on selected element
+* loading: load a luban object from controller. The object allowed -- see ..schema.Object
+* misc actions: there is one such action -- alert
+
 """
 
 
@@ -54,8 +62,7 @@ an action to destroy a document
         from .SelectByID import SelectByID
         return SelectByID(id=id)
     if element is not None:
-        from .SelectByElement import SelectByElement
-        return SelectByElement(element=element)
+        return SelectByID(id=element.id)
     raise NotImplementedError("id=%s, element=%s" % (id, element))
 
 

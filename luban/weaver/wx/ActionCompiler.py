@@ -75,13 +75,6 @@ class ActionCompiler(object):
         return W('#'+str(id))
 
 
-    def onSelectByElement(self, selector):
-        element = selector.element
-        id = element.id
-        W = self._globals['W']
-        return W('#'+str(id))
-
-    
     def onReplaceContent(self, replace):
         element = replace.element
         e = element.identify(self)

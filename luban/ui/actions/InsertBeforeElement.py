@@ -38,7 +38,7 @@ class InsertBeforeElement(base):
         '''
         super(InsertBeforeElement, self).__init__()
         self.newelement = newelement
-        self.element = self.elementSelector(element)
+        self.element = self._elementSelector(element)
         return
 
 

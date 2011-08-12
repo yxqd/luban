@@ -187,13 +187,6 @@ class PreRenderer(object):
             value[value.index(item)] = newitem
         return value
 
-
-    def onSelectByElement(self, selector):
-        element = selector.element
-        id = element.id
-        from luban.ui.actions import select
-        return select(id=id)
-
     
     def onReSTDocument(self, restdoc):
         import warnings

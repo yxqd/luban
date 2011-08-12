@@ -34,7 +34,7 @@ class AppendElement(base):
         '''
         super(AppendElement, self).__init__()
         self.element = element
-        self.container = self.elementSelector(container)
+        self.container = self._elementSelector(container)
         return
 
 

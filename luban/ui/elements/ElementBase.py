@@ -12,7 +12,7 @@
 #
 
 
-from luban import _journal as journal
+from luban import journal
 debug = journal.debug('luban.ui.elements.ElementBase')
 
 

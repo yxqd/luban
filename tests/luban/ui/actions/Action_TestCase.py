@@ -21,23 +21,13 @@ class TestCase(unittest.TestCase):
         return
      
     
-    def test2(self):
-        from luban.ui.actions.Action import Action
-        name = "a1"
-        
-        a1 = Action(name=name)
-        self.assertEqual(a1.name, name)
-        
-        return
-     
-    
     def test3(self):
         from luban.ui.actions.Action import Action
-        a1 = Action(name='a1')
-        a2 = Action(name='a2')
+        a1 = Action()
+        a2 = Action()
         import pyre
         self.assertRaises(
-            pyre.schema.exceptions.CastingError,
+            ValueError,
             setattr, a1, 'onfinish', 3)
         a1.onfinish = a2
         return

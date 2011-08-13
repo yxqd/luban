@@ -205,7 +205,7 @@ class  Link(Property):
         return value or Link()
 
 
-import luban._journal as journal
+from luban import journal
 debug = journal.debug('luban.content.descriptors')
 
 

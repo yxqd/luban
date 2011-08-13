@@ -122,7 +122,7 @@ def _prop(type, dynamic):
     return K()
 
 
-import luban._journal as journal
+from luban import journal
 debug = journal.debug('luban.content.descriptors')
 
 

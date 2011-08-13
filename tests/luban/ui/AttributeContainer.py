@@ -58,7 +58,7 @@ class TestCase(unittest.TestCase):
      
 
 def main():    
-    import journal
+    from luban import journal
     journal.debug('metaclass').active = True
     unittest.main()
     return

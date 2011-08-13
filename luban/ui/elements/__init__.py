@@ -14,6 +14,8 @@
 
 
 """
+luban ui elements
+
 TODO:
 
 * fix registerElementProvider
@@ -50,6 +52,13 @@ for name in fundamental_elements:
     code = '%s = klass' % name.lower()
     exec(code)
     continue
+
+
+__all__ = [
+    'registerElementProvider',
+    ] \
+    + [e.lower() for e in elementtypes]
+# + elementtypes \
 
 
 # version

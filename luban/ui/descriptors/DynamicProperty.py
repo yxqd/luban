@@ -33,7 +33,4 @@ class DynamicProperty(Property):
         return super().__set__(instance, value)
 
 
-# version
-__id__ = "$Id$"
-
 # End of file 

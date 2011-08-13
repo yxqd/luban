@@ -16,22 +16,17 @@ import unittest
 class TestCase(unittest.TestCase):
      
     def test1(self):
-        from luban.ui.AttributeContainer import AttributeContainer
-        class A(AttributeContainer):
-            id = descriptors.guid()
-        a = A()
-        a.id = 3
-        self.assertEqual(a.id, '3')
-        
-        a2 = A()
-        self.assert_(a2.id is not None)
-        self.assert_(len(a2.id))
+        from luban.ui import descriptors
+        names = descriptors.__all__
+        for n in names:
+            D = getattr(descriptors, n)
+            d = D()
+            # help(d)
+            continue
         return
      
 
 def main():    
-    import journal
-    journal.debug('metaclass').active = True
     unittest.main()
     return
 

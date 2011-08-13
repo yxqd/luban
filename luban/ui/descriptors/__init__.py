@@ -16,52 +16,51 @@
 descriptors for luban type system
 """
 
+__all__ = [
+    'str', 'int', 'bool', 'date',
+    'list', 'dict', 'ordered_dict',
+    'action', 'element', 'object',
+    ]
+
 
 from .. import schema
 
 
 # descriptors of simple types
 def str(default="", dynamic=True):
-    p = _prop(dynamic=dynamic)
-    p.type = schema.str
+    p = _prop(schema.str, dynamic=dynamic)
     p.default = default
     return p
 
 def int(default=0, dynamic=True):
-    p = _prop(dynamic=dynamic)
-    p.type = schema.int
+    p = _prop(schema.int, dynamic=dynamic)
     p.default = default
     return p
 
 def bool(default=False, dynamic=True):
-    p = _prop(dynamic=dynamic)
-    p.type = schema.bool
+    p = _prop(schema.bool, dynamic=dynamic)
     p.default = default
     return p
 
 def date(default=None, dynamic=True):
-    p = _prop(dynamic=dynamic)
-    p.type = schema.date
+    p = _prop(schema.date, dynamic=dynamic)
     p.default = default
     return p
 
 
 # descriptors of complex types
 def list(default=None, dynamic=True):
-    p = _prop(dynamic=dynamic)
-    p.type = schema.list
+    p = _prop(schema.list, dynamic=dynamic)
     p.default = default if default is not None else ()
     return p
 
 def dict(default=None, dynamic=True):
-    p = _prop(dynamic=dynamic)
-    p.type = schema.dict
+    p = _prop(schema.dict, dynamic=dynamic)
     p.default = default if default is not None else {}
     return p
 
 def ordered_dict(default=None, dynamic=True):
-    p = _prop(dynamic=dynamic)
-    p.type = schema.ordered_dict
+    p = _prop(schema.ordered_dict, dynamic=dynamic)
     import collections
     p.default = default if default is not None else collections.OrderedDict()
     return p
@@ -70,8 +69,7 @@ def ordered_dict(default=None, dynamic=True):
 
 # descriptors for ui elements and actions
 def action(default=None):
-    p = Property()
-    p.type = schema.action
+    p = _prop(schema.action, dynamic=False)
     if default is None:
         from ..actions.NoAction import NoAction
         default = NoAction()
@@ -79,8 +77,7 @@ def action(default=None):
     return p
 
 def element(default=None, dynamic=True):
-    p = _prop(dynamic=dynamic)
-    p.type = schema.element
+    p = _prop(schema.element, dynamic=dynamic)
     if default is None:
         from ..elements.NoElement import NoElement
         default = NoElement()
@@ -88,8 +85,7 @@ def element(default=None, dynamic=True):
     return p
 
 def object(default=None, dynamic=True):
-    p = _prop(dynamic=dynamic)
-    p.type = schema.object
+    p = _prop(schema.object, dynamic=dynamic)
     p.default = default
     return p
 
@@ -102,10 +98,28 @@ def object(default=None, dynamic=True):
 # implementation details
 from .Property import Property
 from .DynamicProperty import DynamicProperty
-def _prop(dynamic):
+def _prop(type, dynamic):
+    typename = type.__name__
     if dynamic:
-        return DynamicProperty()
-    return Property()
+        base = DynamicProperty
+        descriptor_type_name = "Dynamic" + typename
+        docstr = "Dynamic %s descriptor: value can either be of %s type or an action that evaluates to %s type" % (typename, typename, typename)
+    else:
+        base = Property
+        descriptor_type_name = typename
+        docstr = "%s descriptor" % typename
+    
+    from . import _generated_descriptor_types as store
+    template = "%s%s descriptor"
+    if not hasattr(store, descriptor_type_name):
+        class K(base): 
+            __doc__ = docstr
+            pass
+        K.__name__ = descriptor_type_name
+        K.type = type
+        setattr(store, descriptor_type_name, K)
+    K = getattr(store, descriptor_type_name)
+    return K()
 
 
 import luban._journal as journal

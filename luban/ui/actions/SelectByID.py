@@ -12,10 +12,9 @@
 #
 
 
-from .ElementActions import ElementActions
-from .Action import Action as base, Meta
+from .SelectingActionBase import SelectingActionBase as base, Meta
 
-class SelectByID(ElementActions, base, metaclass=Meta):
+class SelectByID(base, metaclass=Meta):
 
     simple_description = 'select an element by its ID'
     full_description = (
@@ -28,9 +27,10 @@ class SelectByID(ElementActions, base, metaclass=Meta):
 
     abstract = False
 
+    # attributes
     id = descriptors.str()
 
-
+    # for inspector
     def identify(self, inspector):
         return inspector.onSelectByID(self)
     

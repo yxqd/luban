@@ -12,21 +12,21 @@
 #
 
 
-from .ElementActions import ElementActions
 from .Action import Action as base
 
-class SimpleElementAction(ElementActions, base):
+class SimpleElementAction(base):
 
 
     abstract = False
 
 
-    element = descriptors.reference()
-    actionname = descriptors.str()
-    params = descriptors.dict()
+    element = descriptors.action() # action to select an element
+    actionname = descriptors.str() # name of the action
+    params = descriptors.dict() # parameters of the action
     
-    def __init__(self, element, actionname, **params):
-        super(SimpleElementAction, self).__init__(element=element, actionname=actionname, params=params)
+    
+    def __init__(self, element=None, actionname=None, **params):
+        super().__init__(element=element, actionname=actionname, params=params)
         return
 
 

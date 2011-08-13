@@ -12,24 +12,15 @@
 #
 
 
-from .ElementBase import ElementBase as base, Meta
+from .ElementActionFactory import ElementActionFactory
+from .Action import Action as base, Meta
+class SelectingActionBase(ElementActionFactory, base, metaclass=Meta):
 
-class NoElement(base):
-
-    """special type of null element
+    """base class for actions that select an element
     """
-
-    simple_description = 'nothing'
-    full_description = ("no element at all")
-
-    abstract = False
-
-    def identify(self, inspector):
-        return inspector.onNoElement(self)
     
+    abstract = True
 
-# version
-__id__ = "$Id$"
 
 # End of file 
 

@@ -12,19 +12,20 @@
 #
 
 
-from .Action import Action as base, Meta
+class CommonElementActionFactory:
 
-class Selecting(base):
+    """factory of element actions common for all elements
 
+    Here we only implement one as an example
+    """
 
-    simple_description = 'action of selecting an element'
-    full_description = ()
+    def replaceContent(self, newcontent):
+        '''replace my content with the given new content '''
+        from .ReplaceContent import ReplaceContent
+        return ReplaceContent(element=self, newcontent=newcontent)
 
-    abstract = True
+    pass
 
-
-# version
-__id__ = "$Id$"
 
 # End of file 
 

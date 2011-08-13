@@ -12,21 +12,20 @@
 #
 
 
-from .Action import Action as base
+from .ElementActionBase import ElementActionBase as base
 
 class ReplaceContent(base):
 
 
     abstract = False
 
+    # attributes
+    newcontent = descriptors.object()
 
+    # for inspector
     def identify(self, inspector):
         return inspector.onReplaceContent(self)
-    
 
-    element = descriptors.object()
-    newcontent = descriptors.object()
-    
 
 
 # version

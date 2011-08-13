@@ -13,8 +13,6 @@
 
 
 from .SimpleElement import SimpleElement as base
-
-
 class Button(base):
 
     simple_description = 'A clickable button'
@@ -25,6 +23,7 @@ class Button(base):
 
     abstract = False
 
+    # attributes
     label = descriptors.str()
     label.tip = 'label of the button'
 
@@ -34,6 +33,7 @@ class Button(base):
     tip = descriptors.str()
     tip.tip = 'tip for the button that shows up when hovered'
 
+    # for inspector
     def identify(self, inspector):
         return inspector.onButton(self)
 

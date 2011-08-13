@@ -96,12 +96,6 @@ def object(default=None, dynamic=True):
 
 
 # misc descriptors
-def guid():
-    from .GUID import GUID
-    d = GUID()
-    d.type = schema.str
-    d.default = ""
-    return d
 
 
 

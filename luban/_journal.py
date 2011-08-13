@@ -12,8 +12,8 @@
 #
 
 
-from . import use_pyre
-if use_pyre:
+from . import has_pyre
+if has_pyre:
     from journal import *
 else:
     from .minimal_journal import *

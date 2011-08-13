@@ -16,6 +16,8 @@ from .Action import Action as base
 
 class SimpleAction(base):
 
+    """simple actions that can be described by its name and its parameters
+    """
 
     actionname = descriptors.str()
     params = descriptors.dict()

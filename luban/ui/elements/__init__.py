@@ -12,6 +12,14 @@
 #
 
 
+
+"""
+TODO:
+
+* fix registerElementProvider
+"""
+
+
 def registerElementProvider(provider):
     from ._registry import element_providers as providers
     providers.append(provider)

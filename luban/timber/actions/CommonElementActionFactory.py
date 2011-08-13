@@ -12,11 +12,9 @@
 #
 
 
-from .ElementActionExtensions import extensions
-from luban._utils import Inherited
-from .decorators import experimental, allowedWidgets
+from .decorators import experimental
 
-class ElementActions(Inherited(extensions)):
+class CommonElementActionFactory:
 
     def find(self, name=None, type=None):
         '''find descendents by name and/or type and select them '''
@@ -145,9 +143,6 @@ Additional data are specified as keyword arguments.
     
     pass
 
-
-# version
-__id__ = "$Id$"
 
 # End of file 
 

@@ -27,13 +27,14 @@ class Paragraph(base):
     
     abstract = False
 
+    # attributes
+    text = descriptors.list()
+    text.tip = 'a list of sentences in the paragraph'
 
+    # for inspector
     def identify(self, inspector):
         return inspector.onParagraph(self)
 
-    text = descriptors.list()
-    text.tip = 'a list of sentences in the paragraph'
-    
 
 # version
 __id__ = "$Id"

@@ -12,10 +12,11 @@
 #
 
 
+# settings
 import os
-use_pyre = os.environ.get('LUBAN_USE_PYRE')
+# whether pyre is available
+has_pyre = os.environ.get('LUBAN_HAS_PYRE') or os.environ.get('HAS_PYRE')
 
-from . import ui
 
 # End of file 
 

@@ -78,6 +78,10 @@ for name in fundamental_elements:
 rstdoc = restructuredtextdocument
 
 
+# TODO:
+#  id: elementtype cache. cache must be session id dependent
+
+
 # version
 __id__ = "$Id$"
 

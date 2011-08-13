@@ -13,7 +13,7 @@
 
 
 from luban import _journal as journal
-debug = journal.debug('luban.ui.elements.Element')
+debug = journal.debug('luban.ui.elements.ElementBase')
 
 
 from .AttributeContainer import AttributeContainer, Meta as _metabase
@@ -35,6 +35,8 @@ class Meta(_metabase):
         
 
 class ElementBase(AttributeContainer, metaclass=Meta):
+
+    """base class for all ui element types"""
     
     # indicate this is abstract and cannot be instantiated
     abstract = True

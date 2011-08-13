@@ -18,13 +18,16 @@ debug = journal.debug('luban.ui.elements.Element')
 
 from .ElementBase import ElementBase, Meta
 class Element(ElementBase):
+
+    """base class of all element types except null element
+    """
     
     # indicate this is abstract and cannot be instantiated
     abstract = True
     
     
-    # standard ui element properties
-    id = descriptors.guid()
+    # common ui element properties
+    id = descriptors.str()
     id.tip = 'Identifier of this element. If left blank, a unique one will be generated automatically'
     
     name = descriptors.str()
@@ -33,7 +36,8 @@ class Element(ElementBase):
     # XXX: class is reserved. what would be a better name?
     Class = descriptors.list()
     Class.tip = 'Class of this element. Useful for styling the element'
-    
+
+    # many more event handlers can be added. onclick is a common example
     onclick = descriptors.action()
     onclick.tip = 'action when a mouse click happens on this element'
     
@@ -59,6 +63,7 @@ class Element(ElementBase):
         return
 
 
+    # helper methods
     @classmethod
     def getCtorDocStr(cls, descriptors=None):
         if not descriptors:

@@ -27,19 +27,15 @@ class Document(DocumentFactory, ParagraphFactory, SimpleContainer, metaclass=Met
     
     abstract = False
 
-    def document(self, **kwds):
-        document = Document(**kwds)
-        self.append(document)
-        return document
-
-
+    # attributes
+    title = descriptors.str()
+    title.tip = 'Title of the document'
+    
+    # for inspector
     def identify(self, inspector):
         return inspector.onDocument(self)
 
 
-    title = descriptors.str()
-    title.tip = 'Title of the document'
-    
 
 
 from .Frame import Frame

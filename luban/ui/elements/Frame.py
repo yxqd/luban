@@ -27,14 +27,14 @@ class Frame(DocumentFactory, SimpleContainer, metaclass=Meta):
 
     abstract = False
     
-
-    def identify(self, inspector):
-        return inspector.onFrame(self)
-
-
+    # attributes
     title = descriptors.str()
     title.tip = 'Title of the frame'
     
+    # for inspector
+    def identify(self, inspector):
+        return inspector.onFrame(self)
+
 
 # version
 __id__ = "$Id$"

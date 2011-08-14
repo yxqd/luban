@@ -6,7 +6,7 @@
 #
 
 
-from .Object import Object
+from ..schema.Object import Object
 
 
 # declaration

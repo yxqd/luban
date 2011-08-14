@@ -54,7 +54,7 @@ class DescriptorCollector(type):
 
 
 def isdescriptor(candidate):
-    from ..schema.Descriptor import Descriptor
+    from ..descriptors.Descriptor import Descriptor
     return isinstance(candidate, Descriptor)
 
 

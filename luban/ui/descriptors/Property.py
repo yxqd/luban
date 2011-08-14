@@ -18,7 +18,7 @@ from .. import schema
 STORE_NAME = '_properties'
 
 
-from ..schema.Descriptor import Descriptor
+from .Descriptor import Descriptor
 class Property(Descriptor):
 
     type = schema.object # my type

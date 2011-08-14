@@ -40,9 +40,8 @@ class Tabs(RivetedContainer):
     
     @elementfactory
     def tab(self, label=None, **kwds):
-        tab = Tab(label=label, **kwds)
-        self.append(tab)
-        return tab
+        from .SubElementFactory import createSubElement
+        return createSubElement(self, Tab, label=label, **kwds)
 
 
     def identify(self, inspector):

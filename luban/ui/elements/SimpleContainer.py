@@ -12,9 +12,9 @@
 #
 
 
+from .SubElementFactory import SubElementFactory
 from .ElementContainer import ElementContainer, Meta
-
-class SimpleContainer(ElementContainer):
+class SimpleContainer(SubElementFactory, ElementContainer, metaclass=Meta):
 
     pass
 

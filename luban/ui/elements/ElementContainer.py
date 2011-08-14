@@ -12,9 +12,8 @@
 #
 
 
-from .SubElementFactory import SubElementFactory
 from .Element import Element, Meta
-class ElementContainer(SubElementFactory, Element, metaclass=Meta):
+class ElementContainer(Element, metaclass=Meta):
 
 
     class ElementDefinitionError(Exception): pass

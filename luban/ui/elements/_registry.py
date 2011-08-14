@@ -64,6 +64,18 @@ class FundamentalElements:
 
     def register(self, cls):
         name = self._getUniqueName(cls)
+        self._register(name, cls)
+        
+        # all lower case alias
+        self._register(name.lower(), cls)
+        return
+
+
+    def getElementClass(self, name):
+        return self._store.get(name)
+
+
+    def _register(self, name, cls):
         if name in self._store:
             if self._store[name] is cls:
                 # already registered
@@ -76,10 +88,6 @@ class FundamentalElements:
         self._store[name] = cls
         self._cls2name[cls] = name
         return
-
-
-    def getElementClass(self, name):
-        return self._store.get(name)
 
 
     def _getUniqueName(self, target):

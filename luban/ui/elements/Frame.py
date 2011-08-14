@@ -12,6 +12,11 @@
 #
 
 
+"""
+Frame: root of luban UI element hierarchy.
+"""
+
+
 from .DocumentFactory import DocumentFactory
 from .SimpleContainer import SimpleContainer, Meta
 
@@ -26,6 +31,9 @@ class Frame(DocumentFactory, SimpleContainer, metaclass=Meta):
         )
 
     abstract = False
+
+    # means no element can be a frame's parent
+    parent_types = None
     
     # attributes
     title = descriptors.str()

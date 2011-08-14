@@ -24,6 +24,11 @@ class Element(ElementBase):
     
     # indicate this is abstract and cannot be instantiated
     abstract = True
+
+    # what are the possible parent element types?
+    # this is usually any element container types, but
+    # special cases exist. see, for example, Frame and Tabs.Tab
+    parent_types = 'any' 
     
     
     # common ui element properties

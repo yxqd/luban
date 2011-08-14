@@ -12,11 +12,18 @@
 #
 
 
+"""
+Document
+
+An example of a simple container UI element.
+"""
+
+
 from .DocumentFactory import DocumentFactory
 from .ParagraphFactory import ParagraphFactory
 from .SimpleContainer import SimpleContainer, Meta
 
-class Document(DocumentFactory, ParagraphFactory, SimpleContainer, metaclass=Meta):
+class Document(SimpleContainer, metaclass=Meta):
 
     simple_description = 'A simple element container with a title'
     full_description = (
@@ -35,12 +42,6 @@ class Document(DocumentFactory, ParagraphFactory, SimpleContainer, metaclass=Met
     def identify(self, inspector):
         return inspector.onDocument(self)
 
-
-
-
-from .Frame import Frame
-Document.disallowed_element_types = [Frame]
-del Frame
 
 
 # version

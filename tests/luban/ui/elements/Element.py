@@ -18,7 +18,7 @@ from luban.ui.elements.Element import Element
 import unittest
 class TestCase(unittest.TestCase):
 
-    def test1(self):
+    def test0(self):
         "Element: ctor"
         e = Element()
         return

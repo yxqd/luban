@@ -11,6 +11,12 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
+"""
+Paragraph
+
+An example of simple UI element.
+"""
+
 
 from .SimpleElement import SimpleElement as base
 

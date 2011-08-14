@@ -12,8 +12,9 @@
 #
 
 
+from .SubElementFactory import SubElementFactory
 from .Element import Element, Meta
-class ElementContainer(Element, metaclass=Meta):
+class ElementContainer(SubElementFactory, Element, metaclass=Meta):
 
 
     class ElementDefinitionError(Exception): pass
@@ -84,28 +85,20 @@ class ElementContainer(Element, metaclass=Meta):
 
     @classmethod
     def _isAllowedSubElement(cls, type):
-        if hasattr(cls, 'allowed_element_types') and hasattr(cls, 'disallowed_element_types'):
-            raise cls.ElementDefinitionError("an element type cannot have both allowed_element_types and disallowed_element_types")
-        
-        if hasattr(cls, 'allowed_element_types'):
-            allowed = cls.allowed_element_types
-            for t in allowed:
-                # this line seems redundant but let us keep it here just
-                # in case python behaviour of issubclass changed
-                if type is t: return True
-                if issubclass(type, t): return True
-                continue
+        """check whether the given element type 
+        can be a subelement of this element type.
+        """
+        if type.parent_types is None:
             return False
         
-        if hasattr(cls, 'disallowed_element_types'):
-            disallowed = cls.disallowed_element_types
-            for t in disallowed:
-                if type is t: return False
-                if issubclass(type, t): return False
-                continue
+        if type.parent_types == 'any':
             return True
-            
-        return True
+
+        # 
+        for t in type.parent_types:
+            if cls is t:
+                return True
+        return False
 
     
     def _checkSubElementType(self, subelem):

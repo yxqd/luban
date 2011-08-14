@@ -34,6 +34,7 @@ elementtypes = [
     'Frame',
     'Paragraph',
     'Button',
+    'Tabs',
     ]
 def registerAllElements():
     modules = elementtypes
@@ -60,8 +61,5 @@ __all__ = [
     + [e.lower() for e in elementtypes]
 # + elementtypes \
 
-
-# version
-__id__ = "$Id$"
 
 # End of file 

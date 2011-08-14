@@ -22,6 +22,7 @@ class TestCase(unittest.TestCase):
         tabs = lue.tabs()
         tabs.tab().document(title='doc1').paragraph(text='hello')
         tabs.tab().tabs()
+        # print(tabs)
         return
      
     

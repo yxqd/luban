@@ -22,7 +22,7 @@ from .SimpleElement import SimpleElement as base
 
 class Paragraph(base):
 
-    simple_description = 'a paragraph of texts'
+    simple_description = 'a paragraph of text'
     full_description = ''
     examples = [
         '''
@@ -34,8 +34,8 @@ class Paragraph(base):
     abstract = False
 
     # attributes
-    text = descriptors.list()
-    text.tip = 'a list of sentences in the paragraph'
+    text = descriptors.str()
+    text.tip = 'text in the paragraph'
 
     # for inspector
     def identify(self, inspector):

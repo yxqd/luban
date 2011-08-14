@@ -37,7 +37,7 @@ elemental_types = str, int, bool
 def iselemental(candidate):
     #
     for et in elemental_types:
-        if isinstance(value, et):
+        if isinstance(candidate, et):
             return True
         continue
     return False

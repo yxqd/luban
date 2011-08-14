@@ -43,6 +43,7 @@ class Element(ElementBase):
     
     
     def addClass(self, kls):
+        "add a classifier for this element"
         classes = self.Class
         if kls not in classes: 
             classes.append(kls)

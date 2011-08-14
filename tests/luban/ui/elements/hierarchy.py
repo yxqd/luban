@@ -11,13 +11,18 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
+import luban.ui.elements as lue
+
 
 import unittest
-
 class TestCase(unittest.TestCase):
 
     def test1(self):
-        from luban.ui.elements.Frame import Frame
+        frame = lue.frame()
+        d1 = frame.document(name='d1')
+        p1 = d1.paragraph(text="hello")
+        b1 = lue.button(label='b1', name='b1'); d1.append(b1)
+        # print (frame)
         return
      
     

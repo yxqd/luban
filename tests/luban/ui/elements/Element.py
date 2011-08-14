@@ -47,7 +47,8 @@ class TestCase(unittest.TestCase):
         class T2(Element):
             a = descriptors.str()
 
-        print(T2.getCtorDocStr())
+        docstr = T2.getCtorDocStr()
+        # print(docstr)
         return
     
 if __name__ == "__main__": unittest.main()

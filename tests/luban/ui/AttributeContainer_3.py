@@ -17,8 +17,7 @@ import unittest
 class TestCase(unittest.TestCase):
      
     def test1(self):
-        """meta.action
-        """
+        "'action' descriptor"
         class T(AttributeContainer):
             
             a = descriptors.action()

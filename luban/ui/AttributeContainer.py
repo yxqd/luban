@@ -11,6 +11,13 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
+"""
+AttributeContainer: base class of luban objects
+
+TOTHINK:
+* do we want to implement slots like behavior?
+
+"""
 
 from .meta import Meta
 from .AbstractAttributeContainer import AbstractAttributeContainer
@@ -22,8 +29,10 @@ class AttributeContainer(AbstractAttributeContainer, metaclass=Meta):
         from . import descriptors, validators
         return {
             'descriptors': descriptors,
-            'd': descriptors,
             'validators': validators,
+            
+            # XXX: is it really a good idea to have aliases?
+            'd': descriptors,
             'v': validators,
             }
     
@@ -57,6 +66,13 @@ class AttributeContainer(AbstractAttributeContainer, metaclass=Meta):
             yield name, value
             continue
         return
+
+    
+    def __repr__(self):
+        t = self.__class__.__name__
+        ps = list(self.iterAttributes())
+        ps = ', '.join('%s=%s' % (k,v) for k,v in ps)
+        return t + '(' + ps + ')'
 
     pass
 

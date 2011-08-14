@@ -15,6 +15,20 @@
 import unittest
 class TestCase(unittest.TestCase):
      
+    def test0(self):
+        """namespace
+        """
+        from luban.ui.AttributeContainer import AttributeContainer
+        class A(AttributeContainer):
+            
+            self.assert_(descriptors is not None)
+            self.assert_(validators is not None)
+
+            self.assertEqual(d, descriptors)
+            self.assertEqual(v, validators)
+        
+        return
+     
     def test1(self):
         """ order of descriptors
         """
@@ -38,14 +52,12 @@ class TestCase(unittest.TestCase):
      
     
     def test2(self):
-        """ attribute
+        """descriptor: set and get attribute
         """
         from luban.ui.AttributeContainer import AttributeContainer
         class A(AttributeContainer):
             
             s1 = descriptors.str()
-            a2 = d.str()
-            a1 = d.str()
             
             pass
         
@@ -54,6 +66,23 @@ class TestCase(unittest.TestCase):
         self.assertEqual(a.s1, '')
         a.s1 = 5
         self.assertEqual(a.s1, '5')
+        return
+
+
+    def test3(self):
+        "getAttribute, setAttribute"
+        from luban.ui.AttributeContainer import AttributeContainer
+        class A(AttributeContainer):
+            
+            s1 = descriptors.str()
+            
+            pass
+        
+        a = A()
+        
+        self.assertEqual(a.getAttribute('s1'), '')
+        a.setAttribute('s1', 5)
+        self.assertEqual(a.getAttribute('s1'), '5')
         return
      
 

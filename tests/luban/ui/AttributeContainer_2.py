@@ -22,6 +22,7 @@ import unittest
 class TestCase(unittest.TestCase):
      
     def test1(self):
+        "descriptor: get, set"
         import pyre
         class A(AttributeContainer): 
             s = descriptors.str()
@@ -38,6 +39,7 @@ class TestCase(unittest.TestCase):
      
 
     def test2(self):
+        "inheritance and descriptors"
         class E(AttributeContainer): 
             s = descriptors.str()
             s1 = descriptors.str()

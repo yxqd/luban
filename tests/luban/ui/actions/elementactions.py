@@ -12,30 +12,21 @@
 #
 
 
-import unittest
+from luban.ui import actions as lua, elements as lue
 
+import unittest
 class TestCase(unittest.TestCase):
 
     def test1(self):
-        from luban.ui.actions.Action import Action
-        return
-     
-    
-    def test3(self):
-        from luban.ui.actions.Action import Action
-        a1 = Action()
-        a2 = Action()
-        import pyre
-        self.assertRaises(
-            ValueError,
-            setattr, a1, 'onfinish', 3)
-        a1.onfinish = a2
+        new = lue.document(title="new")
+        action = lua.select(id="abc").replaceContent(new)
+        print (action)
         return
      
     
 if __name__ == "__main__": unittest.main()
 
-    
+
 # version
 __id__ = "$Id$"
 

@@ -30,7 +30,7 @@ class ActionBase(AttributeContainer):
         if isinstance(element, Element):
             from . import select
             return select(element=element)
-        if isinstance(element, Action):
+        if isinstance(element, ActionBase):
             return element
         raise NotImplementedError
 

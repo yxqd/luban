@@ -17,11 +17,8 @@ Frame: root of luban UI element hierarchy.
 """
 
 
-from .DocumentFactory import DocumentFactory
 from .SimpleContainer import SimpleContainer, Meta
-
-
-class Frame(DocumentFactory, SimpleContainer, metaclass=Meta):
+class Frame(SimpleContainer, metaclass=Meta):
     
     simple_description = "root node of a luban user interface hierarchy"
     full_description = (

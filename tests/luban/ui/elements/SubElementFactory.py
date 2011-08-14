@@ -40,8 +40,9 @@ class TestCase(unittest.TestCase):
         # tab is not allowed as a sub element
         self.assertRaises(AttributeError, getattr, d, 'tab')
 
-        # tabs is allowd
+        # tabs, paragraph are allowd
         d.tabs
+        d.paragraph
         return
 
     

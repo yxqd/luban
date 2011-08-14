@@ -19,8 +19,6 @@ An example of a simple container UI element.
 """
 
 
-from .DocumentFactory import DocumentFactory
-from .ParagraphFactory import ParagraphFactory
 from .SimpleContainer import SimpleContainer, Meta
 
 class Document(SimpleContainer, metaclass=Meta):

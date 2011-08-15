@@ -16,8 +16,20 @@ from luban import journal
 debug = journal.debug('luban.ui.elements.Element')
 
 
-from .ElementBase import ElementBase, Meta
-class Element(ElementBase):
+from .ElementBase import ElementBase, Meta as MetaBase
+class Meta(MetaBase):
+
+    def __new__(cls, name, bases, attributes, **kwds):
+        # the created class
+        created = super().__new__(cls, name, bases, attributes, **kwds)
+
+        # doc for constructor
+        created.__init__.__doc__ = created.getCtorDocStr()
+
+        return created
+
+
+class Element(ElementBase, metaclass=Meta):
 
     """base class of all element types except null element
     """

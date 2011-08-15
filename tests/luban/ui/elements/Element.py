@@ -49,6 +49,8 @@ class TestCase(unittest.TestCase):
 
         docstr = T2.getCtorDocStr()
         # print(docstr)
+
+        # help(T2.__init__) # should show a good doc string same as "docstr" above
         return
     
 if __name__ == "__main__": unittest.main()

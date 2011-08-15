@@ -12,7 +12,7 @@
 #
 
 
-
+__doc__ = \
 """
 luban ui elements
 """
@@ -22,6 +22,8 @@ from luban.ui import elements as lue
 doc = lue.document(title="Hello")
 p = doc.paragraph(text="world")
 """
+
+__doc__ += "Example1:\n" + example1
 
 
 def registerElementProvider(provider):

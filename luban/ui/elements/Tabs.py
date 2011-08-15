@@ -74,13 +74,4 @@ class Tab(RivetedSubElement, SimpleContainer, metaclass=Meta):
     
 
 
-# TODO: rethink action factory here
-class TabActions:
-
-    def tab(self, actionname, **kwds):
-        from ..actions.SimpleElementAction import SimpleElementAction
-        return SimpleElementAction(self, actionname, **kwds)
-
-
-
 # End of file

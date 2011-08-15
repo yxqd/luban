@@ -12,15 +12,15 @@
 #
 
 
-from .Action import Action as base
 
+from .ElementActionBase import ElementActionBase as base
 class SimpleElementAction(base):
 
 
     abstract = False
 
 
-    element = descriptors.action() # action to select an element
+    # attributes
     actionname = descriptors.str() # name of the action
     params = descriptors.dict() # parameters of the action
     

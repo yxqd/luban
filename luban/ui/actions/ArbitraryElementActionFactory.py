@@ -12,19 +12,18 @@
 #
 
 
-from .CommonElementActionFactory import CommonElementActionFactory
+class ArbitraryElementActionFactory:
 
+    """factory of arbitrary element actions
 
-class ElementActionFactory(CommonElementActionFactory):
-
-    """factory of element actions
+    This could be a mixin base class for SelectingActionBase
     """
     
     def __getattribute__(self, key):
         # the implementation here allows easy extension of
         # luban element actions. 
         # one can just think of a new element action and use it right away;
-        # the following will just work:
+        # the following will aways work:
         #   select(id="abc").<actionname>(**parameters)
         # It will create an instance of SimpleElementAction.
         # One just need to make sure the action is handled by

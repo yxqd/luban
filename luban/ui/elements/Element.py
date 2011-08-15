@@ -43,7 +43,7 @@ class Element(ElementBase):
     Class.tip = 'Class of this element. Useful for styling the element'
 
     # many more event handlers can be added. onclick is a common example
-    onclick = descriptors.action()
+    onclick = descriptors.eventhandler()
     onclick.tip = 'action when a mouse click happens on this element'
     
     
@@ -65,10 +65,11 @@ class Element(ElementBase):
         for k, v in kwds.items():
             debug.log('setting attribute %r to %s' % (k,v))
             self.setAttribute(k,v)
+            continue
 
         return
-
-
+    
+    
     # helper methods
     @classmethod
     def getCtorDocStr(cls, descriptors=None):

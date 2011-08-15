@@ -36,7 +36,7 @@ class Paragraph(base):
     # attributes
     text = descriptors.str()
     text.tip = 'text in the paragraph'
-
+    
     # for inspector
     def identify(self, inspector):
         return inspector.onParagraph(self)

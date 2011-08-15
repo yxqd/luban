@@ -23,9 +23,12 @@ TODO:
 
 
 def registerElementProvider(provider):
-    from ._registry import element_providers as providers
-    providers.append(provider)
-    return providers
+    """register a package as luban ui element provider
+    provider must be a package or a module which defines method "registerAllElements"
+    """
+    from ._registry import registerAllElements
+    registerAllElements(provider)
+    return
 
 
 # elements

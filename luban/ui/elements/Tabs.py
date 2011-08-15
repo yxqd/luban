@@ -65,7 +65,7 @@ class Tab(RivetedSubElement, SimpleContainer, metaclass=Meta):
     label = descriptors.str(default='tab')
     label.tip = 'label of this tab'
 
-    onselect = descriptors.action() # happen when this tab got selected
+    onselect = descriptors.eventhandler() # happen when this tab got selected
     onselect.tip = 'action when this tab is selected'
 
     # for inspectorx
@@ -78,7 +78,7 @@ class Tab(RivetedSubElement, SimpleContainer, metaclass=Meta):
 class TabActions:
 
     def tab(self, actionname, **kwds):
-        from .SimpleElementAction import SimpleElementAction
+        from ..actions.SimpleElementAction import SimpleElementAction
         return SimpleElementAction(self, actionname, **kwds)
 
 

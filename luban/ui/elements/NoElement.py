@@ -12,6 +12,12 @@
 #
 
 
+"""NoElement: null element
+
+TOTHINK: is None good enough?
+"""
+
+
 from .ElementBase import ElementBase as base, Meta
 
 class NoElement(base):

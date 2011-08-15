@@ -75,6 +75,8 @@ def action(default=None):
         default = NoAction()
     p.default = default
     return p
+# eventhandler is an action to be performed when an event happens
+eventhandler = action
 
 def element(default=None, dynamic=True):
     p = _prop(schema.element, dynamic=dynamic)
@@ -88,7 +90,6 @@ def object(default=None, dynamic=True):
     p = _prop(schema.object, dynamic=dynamic)
     p.default = default
     return p
-
 
 
 # misc descriptors

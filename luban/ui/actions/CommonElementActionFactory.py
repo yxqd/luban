@@ -19,10 +19,10 @@ class CommonElementActionFactory:
     Here we only implement one as an example
     """
 
-    def replaceContent(self, newcontent):
-        '''replace my content with the given new content '''
+    def replaceContent(self, newelement):
+        '''replace my content with the given new element (hierarchy)'''
         from .ReplaceContent import ReplaceContent
-        return ReplaceContent(element=self, newcontent=newcontent)
+        return ReplaceContent(element=self, newcontent=newelement)
 
     pass
 

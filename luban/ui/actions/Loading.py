@@ -26,6 +26,7 @@ class Loading(base):
     abstract = False
 
 
+    # attributes
     actor = descriptors.str()
     actor.tip = 'The actor that will handle this load action'
     

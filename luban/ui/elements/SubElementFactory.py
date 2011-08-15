@@ -14,7 +14,7 @@
 
 class SubElementFactory:
 
-    def __getattribute__(self, key):
+    def __getattr__(self, key):
         from ._registry import fundamental_elements
         cls = fundamental_elements.getElementClass(key)
         
@@ -25,7 +25,7 @@ class SubElementFactory:
             _.__name__ = key
             return _
         
-        return super().__getattribute__(key)
+        return super().__getattr__(key)
 
 
 def createMethod(container, cls):

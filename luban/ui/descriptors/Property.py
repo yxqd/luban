@@ -51,7 +51,7 @@ class Property(Descriptor):
 
 
     def _get_prop_store(self, instance):
-        if not hasattr(instance, STORE_NAME):
+        if STORE_NAME not in instance.__dict__:
             setattr(instance, STORE_NAME, {})
         return getattr(instance, STORE_NAME)
 

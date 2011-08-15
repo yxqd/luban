@@ -17,7 +17,7 @@ for f in seq:
 
 rules = []
 rules.append(
-    merlin.rules.testSuite(name="luban.ui", tests = tests)
+    merlin.rules.testSuite(name="luban.ui.actions", tests = tests)
     )
 
 

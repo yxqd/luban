@@ -11,15 +11,17 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
+"""factory of arbitrary element actions
+
+This could be a mixin base class for SelectingActionBase.
+This is however dangerous.
+"""
+
 
 class ArbitraryElementActionFactory:
 
-    """factory of arbitrary element actions
-
-    This could be a mixin base class for SelectingActionBase
-    """
     
-    def __getattribute__(self, key):
+    def __getattr__(self, key):
         # the implementation here allows easy extension of
         # luban element actions. 
         # one can just think of a new element action and use it right away;

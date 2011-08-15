@@ -15,10 +15,12 @@
 
 """
 luban ui elements
+"""
 
-TODO:
-
-* fix registerElementProvider
+example1 = """
+from luban.ui import elements as lue
+doc = lue.document(title="Hello")
+p = doc.paragraph(text="world")
 """
 
 

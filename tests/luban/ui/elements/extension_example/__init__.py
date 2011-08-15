@@ -16,9 +16,12 @@ types = [
     'Form',
     ]
 def registerAllElements():
+    from luban.ui import elements as lue
+    
     modules = types
     for name in modules:
-        __import__(name, fromlist=['.'], globals=globals())
+        m = __import__(name, fromlist=['.'], globals=globals())
+        setattr(lue, name.lower(), getattr(m, name))
         continue
     return
 

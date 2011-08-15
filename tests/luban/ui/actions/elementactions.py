@@ -19,7 +19,8 @@ class TestCase(unittest.TestCase):
 
     def test1(self):
         new = lue.document(title="new")
-        action = lua.select(id="abc").replaceContent(new)
+        from luban.ui.actions import ReplaceContent
+        action = lua.select(id="abc").replaceContent(newcontent=new)
         print (action)
         return
      

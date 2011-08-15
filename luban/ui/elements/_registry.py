@@ -93,10 +93,12 @@ class FundamentalElements:
     def _getUniqueName(self, target):
         # get unique name to identify the element type
         sig  = '__unique_type_name__'
-        if hasattr(target, sig):
-            name = getattr(target, sig)
+        if sig in target.__dict__:
+            name = target.__dict__[sig]
         else:
             name = target.__name__
+            # set it to the class
+            setattr(target, sig, name)
         return name
 
 

@@ -12,13 +12,36 @@
 #
 
 
-from .Action import Action as base, Meta
+from .Action import Action as base, Meta as metabase
+
+
+class Meta(metabase):
+
+    
+    def __new__(cls, name, *args, **kwds):
+        # call super class to construct the class
+        target = super().__new__(cls, name, *args, **kwds)
+        
+        #
+        from ._element_action_registry import register
+        register(target)
+        
+        return target
+        
+
+
 class ElementActionBase(base, metaclass=Meta):
     
     """base class of all actions working on an element
     """
     
     abstract = True
+
+    # type of the element this action can work on
+    elementtype = None # subclass could override this. None means any element
+    
+    # name of the action
+    name = None # subclass must override this.
 
     # attributes
     # .. element action always works on a selected element

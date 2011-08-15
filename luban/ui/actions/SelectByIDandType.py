@@ -12,27 +12,26 @@
 #
 
 
+from .ElementActionFactory import ElementActionFactory
 from .SelectingActionBase import SelectingActionBase as base, Meta
+class SelectByIDandType(ElementActionFactory, base, metaclass=Meta):
 
-class SelectByID(base, metaclass=Meta):
-
-    simple_description = 'select an element by its ID'
+    simple_description = 'select an element by its ID and optionally its type'
     full_description = (
-        "This action selects an element using its ID. "
+        "This action selects an element using its ID and optionally its type. "
         "The constructed selector can be used to perform further "
         "actions on the selected element. Eg. selector.destory(). "
-        "Please refer to each individual element types for those "
-        "actions. "
         )
 
     abstract = False
 
     # attributes
     id = descriptors.str()
+    type = descriptors.str()
 
     # for inspector
     def identify(self, inspector):
-        return inspector.onSelectByID(self)
+        return inspector.onSelectByIDandType(self)
     
 
 # version

@@ -19,6 +19,9 @@ class ReplaceContent(base):
 
     abstract = False
 
+    #
+    name = 'replaceContent'
+
     # attributes
     newcontent = descriptors.object()
 

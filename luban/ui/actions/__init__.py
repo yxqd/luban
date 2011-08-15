@@ -39,16 +39,19 @@ def load(*args, **kwds):
 
 
 #  selector
-def select(id=None, element=None):
-    '''select(id=None, element=None) -> selector
+def select(id=None, type=None, element=None):
+    '''select(id=None, type=None, element=None) -> selector
     
 This method returns an action to select a UI element.
-The argument for this method would be Either the unique id
-of the element or the element itself.
+The argument for this method would be either the unique id
+of the element and optionaly its type, or the element itself.
+
+The "element" parameter is preferred over other two inputs.
 
 Examples::
 
   >>> select(id="okbuttonid")
+  >>> select(id="okbuttonid", type="Button")
   >>> select(element=okbutton)
 
 A selector can be used to further construct action on the
@@ -58,12 +61,15 @@ an action to destroy a document
   >>> select(element=doc).destroy()
   
 '''
-    if id is not None:
-        from .SelectByID import SelectByID
-        return SelectByID(id=id)
     if element is not None:
-        return SelectByID(id=element.id)
-    raise NotImplementedError("id=%s, element=%s" % (id, element))
+        id = element.id
+        type=element.__class__.__unique_type_name__
+    if id is not None:
+        from .SelectByIDandType import SelectByIDandType
+        return SelectByIDandType(id=id, type=type)
+            
+    m = "id=%s, type=%s, element=%s" % (id, type, element)
+    raise NotImplementedError(m)
 
 
 #  alert

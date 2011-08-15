@@ -12,9 +12,8 @@
 #
 
 
-from .ElementActionFactory import ElementActionFactory
 from .Action import Action as base, Meta
-class SelectingActionBase(base, ElementActionFactory, metaclass=Meta):
+class SelectingActionBase(base, metaclass=Meta):
 
     """base class for actions that select an element
     """

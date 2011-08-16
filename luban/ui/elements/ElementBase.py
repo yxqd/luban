@@ -41,6 +41,8 @@ class ElementBase(AttributeContainer, metaclass=Meta):
     # indicate this is abstract and cannot be instantiated
     abstract = True
     
+    from .exceptions import ConflictElement
+
     
 # version
 __id__ = "$Id$"

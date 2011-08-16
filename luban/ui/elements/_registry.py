@@ -76,13 +76,17 @@ class FundamentalElements:
 
 
     def _register(self, name, cls):
-        if name in self._store:
-            if self._store[name] is cls:
-                # already registered
-                return
-            # conflict
-            m = "element type of the same name already registered. name: %s, new element: %s, existing element: %s" % (name, cls, self._store[name])
-            raise RuntimeError(m)
+        # already registered, skip
+        if cls in self._store.values():
+            return
+        
+        import luban
+        if not luban.extension_allow_override:
+            if name in self._store:
+                # conflict
+                m = "element type of the same name already registered. name: %s, new element: %s, existing element: %s" % (name, cls, self._store[name])
+                from .exceptions import ConflictElement
+                raise ConflictElement(m)
 
         # register
         self._store[name] = cls

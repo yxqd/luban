@@ -24,7 +24,7 @@ p = doc.paragraph(text="world")
 """
 
 TODO = """
-* improve _registry similar to ..actions._element_action_registry
+* think about implementing shortcuts to obtain element factories quickly
 """
 
 __doc__ += "Example1:\n" + example1

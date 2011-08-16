@@ -13,7 +13,7 @@
 
 
 
-from .RivetedContainer import RivetedContainer, Meta, RivetedSubElement
+from .Riveted import RivetedContainer, Meta, RivetedSubElement
 from .ElementContainer import elementfactory
 
 

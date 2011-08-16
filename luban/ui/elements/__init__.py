@@ -56,21 +56,9 @@ def registerAllElements():
 registerAllElements()
 
 
-# create element factory methods
-from ._registry import fundamental_elements
-for name in fundamental_elements:
-    klass = fundamental_elements.getElementClass(name)
-    # make a lower case alias 
-    code = '%s = klass' % name.lower()
-    exec(code)
-    continue
-
-
 __all__ = [
     'registerElementProvider',
-    ] \
-    + [e.lower() for e in elementtypes]
-# + elementtypes \
+    ]
 
 
 # End of file 

@@ -28,8 +28,8 @@ class Tabs(RivetedContainer):
         )
     examples = [
         '''
-import luban.ui.elements
-tabs = luban.ui.elements.tabs()
+from luban.ui import e as lue
+tabs = lue.tabs()
 tabs.tab('tab1').paragraph(text='tab1 text')
 tabs.tab('tab2').document(title='tab2')
 ''',

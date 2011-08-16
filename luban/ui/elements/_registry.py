@@ -65,9 +65,6 @@ class FundamentalElements:
     def register(self, cls):
         name = self._getUniqueName(cls)
         self._register(name, cls)
-        
-        # all lower case alias
-        self._register(name.lower(), cls)
         return
 
 
@@ -89,7 +86,7 @@ class FundamentalElements:
                 raise ConflictElement(m)
 
         # register
-        self._store[name] = cls
+        self._store[name] = self._store[name.lower()] = cls
         self._cls2name[cls] = name
         return
 

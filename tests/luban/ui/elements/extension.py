@@ -12,7 +12,7 @@
 #
 
 
-from luban.ui import elements as lue
+from luban.ui import e as lue, registerElementProvider
 
 
 import unittest
@@ -33,7 +33,7 @@ class TestCase(unittest.TestCase):
         self.assertRaises(AttributeError, getattr, lue, 'form')
         
         # register the extension
-        lue.registerElementProvider(extension_example)
+        registerElementProvider(extension_example)
         
         # now we should have form available
         form = doc.form()

@@ -26,9 +26,9 @@ class Paragraph(base):
     full_description = ''
     examples = [
         '''
-    import luban.ui.elements
-    sometext = luban.ui.elements.paragraph(text=['text here'])
-        ''',
+from luban.ui import e as lue
+sometext = lue.paragraph(text=['text here'])
+''',
         ]
     
     abstract = False

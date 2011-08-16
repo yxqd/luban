@@ -12,7 +12,7 @@
 #
 
 
-from luban.ui import actions as lua, elements as lue
+from luban.ui import actions as lua, e as lue
 
 import unittest
 class TestCase(unittest.TestCase):

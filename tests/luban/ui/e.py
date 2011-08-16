@@ -12,19 +12,26 @@
 #
 
 
-types = [
-    'Form',
-    ]
-def registerAllElements():
-    # to register all element types provided by a package
-    # one needs to import all the modules that define element classes
-    from luban.ui import elements as lue
-    
-    modules = types
-    for name in modules:
-        m = __import__(name, fromlist=['.'], globals=globals())
-        continue
+from luban.ui import e, elements as lue
+
+import unittest
+class TestCase(unittest.TestCase):
+     
+    def test0(self):
+        "luban.ui.e"
+        self.assertEqual(e.document, lue.Document.Document)
+        return
+     
+
+def main():    
+    from luban import journal
+    journal.debug('metaclass').active = True
+    unittest.main()
     return
 
+if __name__ == "__main__": main()
     
+# version
+__id__ = "$Id$"
+
 # End of file 

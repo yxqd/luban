@@ -13,7 +13,7 @@
 
 
 from luban.ui.actions.ElementActionBase import ElementActionBase
-from luban.ui import elements as lue, actions as lua
+from luban.ui import e as lue, actions as lua
 
 
 import unittest

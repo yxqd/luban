@@ -12,7 +12,7 @@
 #
 
 
-from luban.ui import elements as lue
+from luban.ui import elements as lue, actions as lua
 
 
 import unittest
@@ -36,6 +36,14 @@ class TestCase(unittest.TestCase):
     def test2(self):
         tabs = lue.tabs()
         self.assertRaises(AttributeError, getattr, tabs, 'document')
+        return
+
+
+    def test3(self):
+        tabs = lue.tabs()
+        tab1 = tabs.tab()
+        selecttab1 = lua.select(element=tab1).select()
+        print(selecttab1)
         return
 
 

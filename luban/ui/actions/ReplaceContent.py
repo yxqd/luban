@@ -20,7 +20,7 @@ class ReplaceContent(base):
     abstract = False
 
     #
-    name = 'replaceContent'
+    factory_method_name = 'replaceContent'
 
     # attributes
     newcontent = descriptors.object()

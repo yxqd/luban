@@ -74,4 +74,14 @@ class Tab(RivetedSubElement, SimpleContainer, metaclass=Meta):
     
 
 
+# to define a new element action, subclass ElementActionBase
+from ..actions.ElementActionBase import ElementActionBase
+class SelectTab(ElementActionBase):
+
+    "select the tab"
+    
+    elementtype = Tab
+    factory_method_name = "select"
+
+
 # End of file

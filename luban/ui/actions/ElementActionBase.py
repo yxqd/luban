@@ -40,13 +40,12 @@ class ElementActionBase(base, metaclass=Meta):
     # type of the element this action can work on
     elementtype = None # subclass could override this. None means any element
     
-    # name of the action
-    name = None # subclass must override this.
+    # name of the element action factory method 
+    factory_method_name = None # subclass must override this.
 
     # attributes
     # .. element action always works on a selected element
     element = descriptors.action() # action to select an element
-
 
     def __init__(self, element=None, **kwds):
         self.element = self._elementSelector(element)

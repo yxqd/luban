@@ -18,7 +18,10 @@
 
 # public interface
 def register(cls):
-    key = cls.elementtype, cls.name
+    elementtype = cls.elementtype
+    if elementtype is not None:
+        elementtype = elementtype.__unique_type_name__
+    key = elementtype, cls.factory_method_name
     if key in all_action_classes:
         registered = all_action_classes[key]
         if registered is cls:

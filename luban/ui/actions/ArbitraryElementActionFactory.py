@@ -15,6 +15,8 @@
 
 This could be a mixin base class for SelectingActionBase.
 This is however dangerous.
+
+This class is currently not in use.
 """
 
 

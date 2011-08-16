@@ -12,6 +12,12 @@
 #
 
 
+"""
+this could be used to describe simple element actions
+in a more arbitrary way, when combined with ArbitraryElementActionFactory.
+This class is not in use at this moment.
+"""
+
 
 from .ElementActionBase import ElementActionBase as base
 class SimpleElementAction(base):

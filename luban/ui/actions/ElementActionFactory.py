@@ -12,11 +12,6 @@
 #
 
 
-from .CommonElementActionFactory import CommonElementActionFactory
-
-
-#class ElementActionFactory(CommonElementActionFactory):
-
 class ElementActionFactory:
 
     """factory of element actions

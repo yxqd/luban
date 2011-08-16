@@ -23,6 +23,11 @@ doc = lue.document(title="Hello")
 p = doc.paragraph(text="world")
 """
 
+TODO = """
+* rename RivetedContainer to Riveted
+* improve _registry similar to ..actions._element_action_registry
+"""
+
 __doc__ += "Example1:\n" + example1
 
 

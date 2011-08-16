@@ -85,6 +85,19 @@ Examples::
     return SimpleAction(actionname='alert', message=message)
 
 
+# common element actions
+action_modules = [
+    'ReplaceContent',
+    ]
+def importAllElementActions():
+    modules = action_modules
+    for name in modules:
+        __import__(name, fromlist=['.'], globals=globals())
+        continue
+    return
+importAllElementActions()
+
+
 # version
 __id__ = "$Id$"
 

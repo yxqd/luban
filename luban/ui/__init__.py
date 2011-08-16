@@ -11,6 +11,18 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
+__doc__ = """ luban.ui
+"""
+
+example1 = """
+import luban.ui as lu
+
+doc = lu.e.document(title="hello")
+doc.onclick = lu.a.select(element=doc).replaceContent(
+    newcontent = lu.e.paragraph(text='world'))
+
+"""
+
 
 class ElementClassProxy:
 
@@ -28,6 +40,7 @@ del ElementClassProxy
 
 
 from . import elements, actions
+a = actions
 
 registerElementProvider = elements.registerElementProvider
 

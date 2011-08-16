@@ -22,6 +22,8 @@ class ActionBase(AttributeContainer):
     abstract = True
 
 
+    from .exceptions import ConflictAction
+
     # helper method for subclasses
     def _elementSelector(self, element):
         """create element selector for the given element

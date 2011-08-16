@@ -80,8 +80,8 @@ class SelectTab(ElementActionBase):
 
     "select the tab"
     
-    elementtype = Tab
-    factory_method_name = "select"
+    element_type = Tab
+    factory_method = "select"
 
 
 # End of file

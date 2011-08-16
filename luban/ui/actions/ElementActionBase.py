@@ -38,10 +38,10 @@ class ElementActionBase(base, metaclass=Meta):
     abstract = True
 
     # type of the element this action can work on
-    elementtype = None # subclass could override this. None means any element
+    element_type = None # subclass could override this. None means any element
     
     # name of the element action factory method 
-    factory_method_name = None # subclass must override this.
+    factory_method = None # subclass must override this.
 
     # attributes
     # .. element action always works on a selected element

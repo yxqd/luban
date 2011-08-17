@@ -12,19 +12,18 @@
 #
 
 
+# to extend luban with all element types provided by this package
+# one needs to import all the modules that define element classes
 types = [
     'Form',
     ]
-def registerAllElements():
-    # to register all element types provided by a package
-    # one needs to import all the modules that define element classes
-    from luban.ui import elements as lue
-    
-    modules = types
-    for name in modules:
+def importAllElements():
+    for name in types:
         m = __import__(name, fromlist=['.'], globals=globals())
         continue
     return
+importAllElements()
+del importAllElements
 
     
 # End of file 

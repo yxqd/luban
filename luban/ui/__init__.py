@@ -30,8 +30,11 @@ TODO = """
   and call it a template. those template classes should have 
   a normal "template" attribute that is True.
   instances of a template is a element hierarchy
+* think about creating a proxy to actions
 """
 
+
+# proxy to elements
 class ElementClassProxy:
 
 
@@ -47,10 +50,10 @@ e = ElementClassProxy()
 del ElementClassProxy
 
 
+# actions
 from . import elements, actions
 a = actions
 
-registerElementProvider = elements.registerElementProvider
 
 
 # version

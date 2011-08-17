@@ -12,7 +12,7 @@
 #
 
 
-from luban.ui import e as lue, registerElementProvider
+from luban import ui as lui
 
 
 import unittest
@@ -21,23 +21,17 @@ class TestCase(unittest.TestCase):
     def test1(self):
 
         # create a document
-        doc = lue.document()
+        doc = lui.e.document()
 
         # form is not available right now
         self.assertRaises(AttributeError, getattr, doc, 'form')
-        self.assertRaises(AttributeError, getattr, lue, 'form')
+        self.assertRaises(AttributeError, getattr, lui.e, 'form')
 
         # extension
         import extension_example
-        self.assertRaises(AttributeError, getattr, doc, 'form')
-        self.assertRaises(AttributeError, getattr, lue, 'form')
-        
-        # register the extension
-        registerElementProvider(extension_example)
-        
         # now we should have form available
         form = doc.form()
-        form2 = lue.form()
+        form2 = lui.e.form()
 
         return
      

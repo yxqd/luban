@@ -15,25 +15,16 @@
 __doc__ = \
 """
 luban ui elements
+
+Users don't use this package directly, rather they use proxy luban.ui.e:
+
+>>> import luban.ui as lui
+>>> document = lui.e.document()
+
+Developers could provide extension of luban elements by subclassing base
+classes provided here.
+
 """
-
-example1 = """
-from luban.ui import elements as lue
-doc = lue.document(title="Hello")
-p = doc.paragraph(text="world")
-"""
-
-__doc__ += "Example1:\n" + example1
-
-
-def registerElementProvider(provider):
-    """register a package as luban ui element provider
-    provider must be a package or a module which defines method "registerAllElements"
-    """
-    from ._registry import registerAllElements
-    registerAllElements(provider)
-    return
-
 
 # elements
 elementtypes = [
@@ -43,18 +34,17 @@ elementtypes = [
     'Button',
     'Tabs',
     ]
-def registerAllElements():
+def importAllElements():
     modules = elementtypes
     for name in modules:
         __import__(name, fromlist=['.'], globals=globals())
         continue
     return
-registerAllElements()
+importAllElements()
+del importAllElements
 
 
-__all__ = [
-    'registerElementProvider',
-    ]
+__all__ = []
 
 
 # End of file 

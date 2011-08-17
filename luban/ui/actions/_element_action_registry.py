@@ -51,11 +51,6 @@ def register(cls):
     return cls
 
 
-def registerAllActions(package):
-    """register all actions in the given package"""
-    return package.registerAllActions()
-
-
 all_action_classes = None
 
 

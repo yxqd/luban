@@ -13,10 +13,6 @@
 
 
 # public interface
-def registerAllElements(package):
-    """register all elements in the given package"""
-    return package.registerAllElements()
-
 element_types = None
 
 

@@ -26,6 +26,10 @@ purpose of this registry:
 # public interface
 def register(cls):
     import luban
+    
+    # skip base classes
+    if cls.abstract:
+        return
 
     # if already registered, do nothing
     if cls in all_action_classes.values():

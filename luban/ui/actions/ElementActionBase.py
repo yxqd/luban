@@ -22,6 +22,14 @@ class Meta(metabase):
         # call super class to construct the class
         target = super().__new__(cls, name, *args, **kwds)
         
+        from .exceptions import ElementActionMissingFactoryMethod
+        target.ElementActionMissingFactoryMethod = ElementActionMissingFactoryMethod
+
+        # 
+        if not target.abstract and target.factory_method is None:
+            m = "{!r} is missing class attribute 'factory_method'".format(target)
+            raise ElementActionMissingFactoryMethod(m)
+
         #
         from ._element_action_registry import register
         register(target)

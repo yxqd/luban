@@ -13,6 +13,7 @@
 
 
 class ActionFactoryMethodConflict(Exception): pass
+class ElementActionMissingFactoryMethod(Exception): pass
 
 
 # End of file 

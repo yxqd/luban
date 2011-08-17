@@ -30,7 +30,6 @@ TODO = """
   and call it a template. those template classes should have 
   a normal "template" attribute that is True.
   instances of a template is a element hierarchy
-* think about creating a proxy to actions
 """
 
 
@@ -50,10 +49,25 @@ e = ElementClassProxy()
 del ElementClassProxy
 
 
-# actions
-from . import elements, actions
-a = actions
+# proxy to actions
+class ActionClassProxy:
 
+    from .actions import __all__ as static_names 
+
+    def __getattr__(self, name):
+        if name in self.static_names:
+            from . import actions
+            return getattr(actions, name)
+        
+        from .actions._registry import action_types
+        e = action_types.getActionClass(name)
+        if e is None:
+            raise AttributeError(name)
+        return e
+
+
+a = ActionClassProxy()
+del ActionClassProxy
 
 
 # version

@@ -97,6 +97,14 @@ def importAllElementActions():
         continue
     return
 importAllElementActions()
+del importAllElementActions
+
+
+__all__ = [
+    'load',
+    'select',
+    'alert',
+    ]
 
 
 # version

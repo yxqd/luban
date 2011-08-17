@@ -23,6 +23,21 @@ from .meta import Meta
 from .AbstractAttributeContainer import AbstractAttributeContainer
 class AttributeContainer(AbstractAttributeContainer, metaclass=Meta):
 
+    """base class of all luban types
+    """
+
+    # exceptions
+    from .meta.exceptions import TypeConflict
+    
+
+    # subclasses of AttributeContainer are either
+    # luban types, or base classes for them
+    # to tell the differences of them, here we define
+    # attribute "abstract" to
+    # indicate whether a class is a base class (abstract is True)
+    # or a real luban type (abstract is False)
+    abstract = True
+    
 
     @classmethod
     def __get_subclass_preparation_context__(cls):

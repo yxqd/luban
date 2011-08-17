@@ -22,7 +22,8 @@ This class is not in use at this moment.
 from .ElementActionBase import ElementActionBase as base
 class SimpleElementAction(base):
 
-
+    # decorations
+    # .. this is a real luban type
     abstract = False
 
 

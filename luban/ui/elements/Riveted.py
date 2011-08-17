@@ -20,6 +20,8 @@ class RivetedContainer(ElementContainer):
     For examples, a tabs container will only have tab elements as children.
     """
 
+    abstract = True
+
     pass
 
 
@@ -27,6 +29,8 @@ class RivetedSubElement:
     
     """mixin class to denote an element is a sub element of a RivetedContainer
     """
+
+    abstract = True
 
     # parent type should be limited to only one type
     # subclass need to overload this

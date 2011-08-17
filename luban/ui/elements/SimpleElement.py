@@ -19,6 +19,8 @@ class SimpleElement(Element):
     """simple element that is not a container.
     """
 
+    abstract = True
+
     pass
 
 

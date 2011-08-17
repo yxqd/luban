@@ -12,8 +12,7 @@
 #
 
 
-from .DescriptorCollector import DescriptorCollector as base
-class SubclassDefinitionContextBuilder(base):
+class SubclassDefinitionContextBuilder:
 
     @classmethod
     def __prepare__(cls, name, bases, **kwds):

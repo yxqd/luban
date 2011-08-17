@@ -15,8 +15,8 @@
 class SubElementFactory:
 
     def __getattr__(self, key):
-        from ._registry import fundamental_elements
-        cls = fundamental_elements.getElementClass(key)
+        from ._registry import element_types
+        cls = element_types.getElementClass(key)
         
         if cls is not None \
                 and self.__class__._isAllowedSubElement(cls):

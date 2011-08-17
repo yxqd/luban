@@ -16,6 +16,8 @@ from .SubElementFactory import SubElementFactory
 from .ElementContainer import ElementContainer, Meta
 class SimpleContainer(SubElementFactory, ElementContainer, metaclass=Meta):
 
+    abstract = True
+    
     pass
 
 # version

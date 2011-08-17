@@ -34,13 +34,13 @@ class ElementActionBase(base, metaclass=Meta):
     
     """base class of all actions working on an element
     """
-    
-    abstract = True
 
-    # type of the element this action can work on
+    # decorations
+    # .. this is a base class, not a real luban type
+    abstract = True
+    # .. type of the element this action can work on
     element_type = None # subclass could override this. None means any element
-    
-    # name of the element action factory method 
+    # .. name of the element action factory method 
     factory_method = None # subclass must override this.
 
     # attributes

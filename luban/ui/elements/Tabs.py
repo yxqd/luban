@@ -20,6 +20,7 @@ from .ElementContainer import elementfactory
 class Tabs(RivetedContainer):
 
 
+    # decorations
     simple_description = 'A container of tabs'
     full_description = (
         "A 'tabs' element is a container of 'tab' elements. "
@@ -38,6 +39,7 @@ tabs.tab('tab2').document(title='tab2')
     abstract = False
 
     
+    # methods
     @elementfactory
     def tab(self, label=None, **kwds):
         from .SubElementFactory import createSubElement
@@ -53,7 +55,8 @@ tabs.tab('tab2').document(title='tab2')
 from .SimpleContainer import SimpleContainer
 class Tab(RivetedSubElement, SimpleContainer, metaclass=Meta):
 
-
+    
+    # decorations
     simple_description = 'A tab in tabs'
     full_description = ''
     abstract = False
@@ -79,7 +82,9 @@ from ..actions.ElementActionBase import ElementActionBase
 class SelectTab(ElementActionBase):
 
     "select the tab"
-    
+
+    # decorations
+    abstract = False
     element_type = Tab
     factory_method = "select"
 

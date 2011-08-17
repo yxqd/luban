@@ -19,10 +19,16 @@ class SimpleAction(base):
     """simple actions that can be described by its name and its parameters
     """
 
+    # decorations
+    # .. this is a real luban type
+    abstract = False
+    
+    # attributes
     actionname = descriptors.str()
     params = descriptors.dict()
 
-
+    
+    # methods
     def identify(self, inspector):
         return inspector.onSimpleAction(self)
 

@@ -12,7 +12,4 @@
 #
 
 
-class ConflictElement(Exception): pass
-
-
 # End of file 

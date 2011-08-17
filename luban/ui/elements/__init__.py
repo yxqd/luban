@@ -23,10 +23,6 @@ doc = lue.document(title="Hello")
 p = doc.paragraph(text="world")
 """
 
-TODO = """
-* think about implementing shortcuts to obtain element factories quickly
-"""
-
 __doc__ += "Example1:\n" + example1
 
 

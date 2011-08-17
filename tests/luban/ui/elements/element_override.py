@@ -24,18 +24,21 @@ class TestCase(unittest.TestCase):
         import luban
         luban.extension_allow_override = False
         
-        class A(Element): pass
+        class A(Element): 
+            abstract = False
 
         def t():
-            class A(Element): pass
+            class A(Element): 
+                abstract = False
             return
-        self.assertRaises(A.ConflictElement, t)
+        self.assertRaises(A.TypeConflict, t)
 
         def t2():
             class B(Element): 
+                abstract = False
                 __unique_type_name__ = 'A'
             return
-        self.assertRaises(A.ConflictElement, t2)
+        self.assertRaises(A.TypeConflict, t2)
         return
      
     
@@ -44,15 +47,18 @@ class TestCase(unittest.TestCase):
         import luban
         luban.extension_allow_override = True
         
-        class A(Element): pass
+        class A(Element): 
+            abstract = False
 
         def t():
-            class A(Element): pass
+            class A(Element): 
+                abstract = False
             return
         t()
 
         def t2():
             class B(Element): 
+                abstract = False
                 __unique_type_name__ = 'A'
             return
         t2()

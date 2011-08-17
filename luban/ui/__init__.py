@@ -24,12 +24,21 @@ doc.onclick = lu.a.select(element=doc).replaceContent(
 """
 
 
+TODO = """
+* implement the idea of "template". 
+  should allow to define "facility" in a subclass of an elementcontainer type,
+  and call it a template. those template classes should have 
+  a normal "template" attribute that is True.
+  instances of a template is a element hierarchy
+* improve .actions._element_action_registry. maybe reuse .meta.TypeRegistryCurator
+"""
+
 class ElementClassProxy:
 
 
     def __getattr__(self, name):
-        from .elements._registry import fundamental_elements
-        e = fundamental_elements.getElementClass(name)
+        from .elements._registry import element_types
+        e = element_types.getElementClass(name)
         if e is None:
             raise AttributeError(name)
         return e

@@ -16,13 +16,12 @@ from .Action import Action as base
 
 class Loading(base):
 
-
+    # decorations
     simple_description = 'load from the UI controller'
     full_description = (
         "A 'load' action loads from the UI controller. "
         "The loaded could be some simple data, a luban element, or an action."
         )
-
     abstract = False
 
 

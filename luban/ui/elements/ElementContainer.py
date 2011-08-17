@@ -15,16 +15,24 @@
 from .Element import Element, Meta
 class ElementContainer(Element, metaclass=Meta):
 
+    """base class of element container types
+    """
 
+    # decorations
+    abstract = True
+
+
+    # exceptions
     class ElementDefinitionError(Exception): pass
     class SubelementDisallowedError(Exception): pass
 
 
-    #
+    # attributes
     contents = descriptors.object(default=[])
     contents.tip = 'sub elements'
 
     
+    # methods
     def append(self, item):
         """append the given subelement to my contents
         """
@@ -82,6 +90,7 @@ class ElementContainer(Element, metaclass=Meta):
         return
 
 
+    # implementation details
     @classmethod
     def _isAllowedSubElement(cls, type):
         """check whether the given element type 

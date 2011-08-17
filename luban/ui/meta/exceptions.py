@@ -11,15 +11,8 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-"""
-meta classes
-"""
 
-from .SubclassDefinitionContextBuilder import SubclassDefinitionContextBuilder
-from .DescriptorCollector import DescriptorCollector
-from .TypeRegistryCurator import TypeRegistryCurator
-class Meta(SubclassDefinitionContextBuilder, TypeRegistryCurator, DescriptorCollector):
-    pass
+class TypeConflict(Exception): pass
 
 
 # End of file 

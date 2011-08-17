@@ -16,23 +16,8 @@ from luban import journal
 debug = journal.debug('luban.ui.elements.ElementBase')
 
 
-from .AttributeContainer import AttributeContainer, Meta as _metabase
+from .AttributeContainer import AttributeContainer, Meta
 
-
-# meta class
-class Meta(_metabase):
-
-    
-    def __new__(cls, name, *args, **kwds):
-        # call super class to construct the class
-        target = super().__new__(cls, name, *args, **kwds)
-        
-        #
-        from ._registry import register
-        register(target)
-        
-        return target
-        
 
 class ElementBase(AttributeContainer, metaclass=Meta):
 
@@ -41,9 +26,7 @@ class ElementBase(AttributeContainer, metaclass=Meta):
     # indicate this is abstract and cannot be instantiated
     abstract = True
     
-    from .exceptions import ConflictElement
 
-    
 # version
 __id__ = "$Id$"
 

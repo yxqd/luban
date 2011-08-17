@@ -15,6 +15,7 @@
 from luban.ui.elements.SimpleContainer import SimpleContainer, Meta
 class Form(SimpleContainer, metaclass=Meta):
 
+    # decorations
     simple_description = 'A container of form fields and a submit button'
     full_description = (
         'Form is a container of form fields and a submit button. '

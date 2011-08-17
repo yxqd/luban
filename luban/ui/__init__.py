@@ -17,7 +17,7 @@ __doc__ = """ luban.ui
 example1 = """
 import luban.ui as lu
 
-doc = lu.e.document(title="hello")
+doc = lu.e.document(title="hello", id="mydoc")
 doc.onclick = lu.a.select(element=doc).replaceContent(
     newcontent = lu.e.paragraph(text='world'))
 

@@ -27,7 +27,7 @@ from .. import schema
 
 
 # descriptors of simple types
-def str(default="", dynamic=True):
+def str(default=None, dynamic=True):
     p = _prop(schema.str, dynamic=dynamic)
     p.default = default
     return p
@@ -51,18 +51,17 @@ def date(default=None, dynamic=True):
 # descriptors of complex types
 def list(default=None, dynamic=True):
     p = _prop(schema.list, dynamic=dynamic)
-    p.default = default if default is not None else ()
+    p.default = default
     return p
 
 def dict(default=None, dynamic=True):
     p = _prop(schema.dict, dynamic=dynamic)
-    p.default = default if default is not None else {}
+    p.default = default
     return p
 
 def ordered_dict(default=None, dynamic=True):
     p = _prop(schema.ordered_dict, dynamic=dynamic)
-    import collections
-    p.default = default if default is not None else collections.OrderedDict()
+    p.default = default
     return p
 
 

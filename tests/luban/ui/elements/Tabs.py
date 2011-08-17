@@ -41,7 +41,7 @@ class TestCase(unittest.TestCase):
 
     def test3(self):
         tabs = lue.tabs()
-        tab1 = tabs.tab()
+        tab1 = tabs.tab(id='tab1')
         selecttab1 = lua.select(element=tab1).select()
         print(selecttab1)
         return

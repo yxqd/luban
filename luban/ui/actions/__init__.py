@@ -64,12 +64,13 @@ an action to destroy a document
     if element is not None:
         id = element.id
         type=element.__class__.__unique_type_name__
-    if id is not None:
-        from .SelectByIDandType import SelectByIDandType
-        return SelectByIDandType(id=id, type=type)
-            
-    m = "id=%s, type=%s, element=%s" % (id, type, element)
-    raise NotImplementedError(m)
+
+    if id is None:
+        m = "element %s does not have an id" % (element,)
+        raise RuntimeError(m)
+
+    from .SelectByIDandType import SelectByIDandType
+    return SelectByIDandType(id=id, type=type)
 
 
 #  alert

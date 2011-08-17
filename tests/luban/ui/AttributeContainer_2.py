@@ -28,11 +28,11 @@ class TestCase(unittest.TestCase):
             s = descriptors.str()
             s1 = descriptors.str()
         a = A()
-        self.assertEqual(a.s, '')
+        self.assertEqual(a.s, None)
         a.s = 's'
         self.assertEqual(a.s, 's')
 
-        self.assertEqual(a.s1, '')
+        self.assertEqual(a.s1, None)
         a.s1 = 's1'
         self.assertEqual(a.s1, 's1')
         return
@@ -47,15 +47,15 @@ class TestCase(unittest.TestCase):
             s2 = descriptors.str()
 
         a = EC()
-        self.assertEqual(a.s, '')
+        self.assertEqual(a.s, None)
         a.s = 's'
         self.assertEqual(a.s, 's')
 
-        self.assertEqual(a.s1, '')
+        self.assertEqual(a.s1, None)
         a.s1 = 's1'
         self.assertEqual(a.s1, 's1')
 
-        self.assertEqual(a.s2, '')
+        self.assertEqual(a.s2, None)
         a.s2 = 's2'
         self.assertEqual(a.s2, 's2')
         return

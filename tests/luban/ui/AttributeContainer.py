@@ -63,7 +63,7 @@ class TestCase(unittest.TestCase):
         
         a = A()
 
-        self.assertEqual(a.s1, '')
+        self.assertEqual(a.s1, None)
         a.s1 = 5
         self.assertEqual(a.s1, '5')
         return
@@ -80,7 +80,7 @@ class TestCase(unittest.TestCase):
         
         a = A()
         
-        self.assertEqual(a.getAttribute('s1'), '')
+        self.assertEqual(a.getAttribute('s1'), None)
         a.setAttribute('s1', 5)
         self.assertEqual(a.getAttribute('s1'), '5')
         return

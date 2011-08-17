@@ -12,17 +12,12 @@
 #
 
 
-import journal
-debug = journal.debug('luban.weaver.JsonDict2UIElement')
+from luban import journal
+debug = journal.debug('luban.weaver.Dict2Object')
 #debug.activate()
 
 
-from luban._utils import Inherited
-from .JsonDict2UIElement_Extensions import extensions
-Extension = Inherited(extensions)
-
-
-class JsonDict2UIElement(Extension): #, object):
+class Dict2Object:
 
 
     def __init__(self):
@@ -53,14 +48,14 @@ class JsonDict2UIElement(Extension): #, object):
 
 def test1():
     d = {'type': 'document', 'title': 'hello'}
-    print(JsonDict2UIElement().render(d))
+    print(Dict2Object().render(d))
     return
 
 
 def test2():
     d = {'type': 'document', 'title': 'hello', 'content':
          [{'type': 'document', 'title': 'subdoc'}]}
-    doc = JsonDict2UIElement().render(d)
+    doc = Dict2Object().render(d)
     print(doc.content)
     return
 

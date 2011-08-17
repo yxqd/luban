@@ -19,12 +19,12 @@ import unittest
 class TestCase(unittest.TestCase):
      
     def test1(self):
-        """luban.weaver.web.DocumentMill: simplest document"""
+        """luban.weaver.Object2Dict: simplest document"""
         document = lu.e.document(name='document')
         from luban.weaver.Object2Dict import Object2Dict
         o2d = Object2Dict()
         d = o2d.convert(document)
-        print (d)
+        # print (d)
         return
      
     

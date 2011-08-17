@@ -14,16 +14,18 @@
 
 # to extend luban with all element types provided by this package
 # one needs to import all the modules that define element classes
-types = [
+# and action classes
+modules = [
     'Form',
+    'Reboot',
     ]
-def importAllElements():
-    for name in types:
+def importAllModules():
+    for name in modules:
         m = __import__(name, fromlist=['.'], globals=globals())
         continue
     return
-importAllElements()
-del importAllElements
+importAllModules()
+del importAllModules
 
     
 # End of file 

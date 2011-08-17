@@ -12,7 +12,7 @@
 #
 
 
-class ConflictAction(Exception): pass
+class ActionFactoryMethodConflict(Exception): pass
 
 
 # End of file 

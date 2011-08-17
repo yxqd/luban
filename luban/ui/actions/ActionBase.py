@@ -22,7 +22,7 @@ class ActionBase(AttributeContainer):
     abstract = True
 
 
-    from .exceptions import ConflictAction
+    from .exceptions import ActionFactoryMethodConflict
 
     # helper method for subclasses
     def _elementSelector(self, element):

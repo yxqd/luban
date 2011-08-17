@@ -30,7 +30,6 @@ TODO = """
   and call it a template. those template classes should have 
   a normal "template" attribute that is True.
   instances of a template is a element hierarchy
-* improve .actions._element_action_registry. maybe reuse .meta.TypeRegistryCurator
 """
 
 class ElementClassProxy:

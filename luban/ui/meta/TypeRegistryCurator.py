@@ -12,6 +12,10 @@
 #
 
 
+# the signature of the class attribute to define unique name of a luban type
+UNIQUE_TYPE_NAME_SIGNAUTURE = '__unique_type_name__'
+
+
 class TypeRegistryCurator:
 
     def __new__(cls, name, bases, attributes, **kwds):
@@ -19,7 +23,6 @@ class TypeRegistryCurator:
         created = super().__new__(cls, name, bases, attributes, **kwds)
         registry.register(created)
         return created
-
 
 
 # registry of real luban types (no base classes, no templates)
@@ -85,7 +88,7 @@ class Registry:
 
     def _getUniqueName(self, target):
         # get unique name to identify the element type
-        sig  = '__unique_type_name__'
+        sig  = UNIQUE_TYPE_NAME_SIGNAUTURE
         if sig in target.__dict__:
             name = target.__dict__[sig]
         else:

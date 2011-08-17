@@ -13,7 +13,14 @@
 
 
 """registry of element action types
+
+purpose of this registry:
+
+* make sure we can recover an action type from (selected element type, action factory name)
+* detect conflicts 
+  two actions cannot have the same element type and the action factory name
 """
+
 
 
 # public interface
@@ -29,28 +36,17 @@ def register(cls):
     if element_type is not None:
         element_type = element_type.__unique_type_name__
     factory = cls.factory_method
-    actionclassname = cls.__name__
     key = element_type, factory
 
-    # init container if necessary
-    if element_type not in element2actionclassnames:
-        element2actionclassnames[element_type] = []
-    
     if not luban.extension_allow_override:
-        # if class name already used, we have a problem
-        if actionclassname in element2actionclassnames[element_type]:
-            m = "failed to regsiter {0.__name__!r}: action factory name {1!r} already used.".format(cls, factory)
-            raise ConflictAction(m)
-        
         # if the key already exists, we have a problem
         if key in all_action_classes:
             registered = all_action_classes[key]
             m = "{.__name__!r} is in conflict with {.__name__!r}".format(
                 cls, registered)
-            raise ConflictAction(m)
+            raise ActionFactoryMethodConflict(m)
     
     all_action_classes[key] = cls
-    element2actionclassnames[element_type].append(actionclassname)
     
     return cls
 
@@ -60,15 +56,15 @@ def registerAllActions(package):
     return package.registerAllActions()
 
 
+all_action_classes = None
+
+
 # implementations
 
 # (element_type, action factory method name) -> action class 
 all_action_classes = {}
 
-# element_type -> list of action class names
-element2actionclassnames = {}
-
 # misc
-from .exceptions import ConflictAction
+from .exceptions import ActionFactoryMethodConflict
 
 # End of file 

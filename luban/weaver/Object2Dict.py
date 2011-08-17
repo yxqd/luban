@@ -58,7 +58,7 @@ class Object2Dict:
     def _onObject(self, obj):
         # debug.log('_onObject: %s' % (obj.__class__.__name__))
         kls = obj.__class__
-        d = {'type': kls.__name__.lower()}
+        d = {'type': kls.__unique_type_name__}
         
         descriptors = obj.iterDescriptors()
         for descriptor in descriptors:

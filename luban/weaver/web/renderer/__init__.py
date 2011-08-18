@@ -12,7 +12,7 @@
 #
 
 
-def weave(htmldoc, javascriptdoc=None):
+def render(htmldoc, javascriptdoc=None):
     if javascriptdoc:
         from .JavaScriptDocument2HtmlDocument import Mill
         mill = Mill()

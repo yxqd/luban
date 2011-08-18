@@ -4,16 +4,15 @@
 #
 #                                   Jiao Lin
 #                      California Institute of Technology
-#                      (C) 2006-2009  All Rights Reserved
+#                      (C) 2006-2011  All Rights Reserved
 #
 # {LicenseText}
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-# version
-__id__ = "$Id$"
 
-# Generated automatically by PythonMill on Thu May 21 13:18:22 2009
+# data model of web page content
+
 
 # End of file 

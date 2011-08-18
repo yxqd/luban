@@ -31,3 +31,8 @@ methods.
 
 
 In this research we propose to conduct research on the semantics of generic UI specification formally, extend our implementation to mobile-device applications and desktop applications, further reduce the complexity of UI building by providing a UI builder (prototype: http://docs.danse.us/pyre/luban/dev/sphinx/Gongshuzi.html), and provide more mechanisms for UI specification such as xml and other text-based structural documents.
+
+
+
+Potentially, debugging can be done with native UI. This will simplify UI
+debugging a lot.

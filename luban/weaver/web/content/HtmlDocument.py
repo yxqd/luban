@@ -61,8 +61,8 @@ class Tag(object):
 class HtmlDocument(Tag):
 
     def __init__(self, **kwds):
-        super(HtmlDocument, self).__init__('html', **kwds)
-
+        super().__init__('html', **kwds)
+        
         self.head = Head(); self.head.root = self
         self.body = Body(); self.body.root = self
 
@@ -91,7 +91,7 @@ class HtmlDocument(Tag):
 class PartialHtmlDocument(Tag):
 
     def __init__(self):
-        super(PartialHtmlDocument, self).__init__('div')
+        super().__init__('div')
         return
     
 
@@ -106,13 +106,13 @@ class Head(Tag):
         return t
 
     def __init__(self):
-        super(Head, self).__init__('head')
+        super().__init__('head')
         return
 
 
 class Body(Tag):
     def __init__(self):
-        super(Body, self).__init__('body')
+        super().__init__('body')
         return
     
 

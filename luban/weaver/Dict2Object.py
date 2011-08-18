@@ -21,8 +21,8 @@ class Dict2Object:
 
 
     def __init__(self):
-        from .uielements import typename2typeMap
-        self.typename2type = typename2typeMap()
+        from ..ui.meta.TypeRegistryCurator import registry
+        self.typename2type = registry
         return
 
 
@@ -34,7 +34,7 @@ class Dict2Object:
         if 'type' not in d: return d
         
         type = d['type']
-        type = self.typename2type[type]
+        type = self.typename2type.get(type)
         obj = type()
         
         for k, v in d.items():
@@ -44,29 +44,6 @@ class Dict2Object:
         
         return obj
 
-
-
-def test1():
-    d = {'type': 'document', 'title': 'hello'}
-    print(Dict2Object().render(d))
-    return
-
-
-def test2():
-    d = {'type': 'document', 'title': 'hello', 'content':
-         [{'type': 'document', 'title': 'subdoc'}]}
-    doc = Dict2Object().render(d)
-    print(doc.content)
-    return
-
-
-def main():
-    test1()
-    test2()
-    return
-
-
-if __name__ == '__main__': main()
 
 
 # version

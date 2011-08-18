@@ -32,6 +32,7 @@ class UIElement2PyFuncCall(object):
         self._imports = []
         self._funcnames = []
         self._funcs = []
+        self._addImport()
         funcname = self._onElement(element)
         self._createVisualFunc(funcname)
         return self._generateTexts()
@@ -68,12 +69,8 @@ class UIElement2PyFuncCall(object):
         return text
     
 
-    def _addImport(self, kls):
-        m = kls.__module__
-        name = kls.__name__
-        statement = 'from %s import %s' % (m, name)
-        if statement not in self._imports:
-            self._imports.append(statement)
+    def _addImport(self):
+        self._imports.append("import luban.ui as lui")
         return
 
 
@@ -93,21 +90,20 @@ class UIElement2PyFuncCall(object):
 
     def _onElement(self, element):
         kls = element.__class__
-        self._addImport(kls)
         
         myfunc = _func()
         myfunc.name = self._createElementName(element)
         myfunc.body = []
 
         # code to create an instance
-        myfunc.body.append('instance = %s()' % kls.__name__)
+        myfunc.body.append('instance = lui.e.%s()' % kls.__unique_type_name__)
 
         # loop over descriptors
         descriptors = element.iterDescriptors()
         for descriptor in descriptors:
             type = descriptor.type
             name = descriptor.name
-            value = descriptor.__get__(element)
+            value = descriptor.__get__(element, element.__class__)
             if type == 'referenceset':
                 thelist = []
                 for item in value:
@@ -156,8 +152,8 @@ class _func:
 
 
 def test():
-    from luban.content.Frame import Frame
-    frame = Frame(name='mainframe', title='test')
+    import luban.ui as lui
+    frame = lui.e.frame(name='mainframe', title='test')
     doc = frame.document(id='frame', title='test')
     renderer = UIElement2PyFuncCall()
     print('\n'.join(renderer.render(frame)))

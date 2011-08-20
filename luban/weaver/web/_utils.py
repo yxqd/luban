@@ -11,9 +11,6 @@
 
 
 
-from luban._utils import Inherited
-
-
 from ._json import autodetect, getModule
 jsonmod = getModule(autodetect())
 import traceback

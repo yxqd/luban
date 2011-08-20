@@ -12,12 +12,43 @@
 #
 
 
-# use DocumentMill and weaver.HtmlDocumentMill to transform a luban document
-# to a html page
+# use .DocumentMill and .renderer.HtmlDocumentMill to transform 
+# a luban object to a html page
 
-# from pyre.weaver.mills.HTMLMill import HTMLMill as base
-# XXX: temp hack
 class base:
+
+    # default set of options for HTMLMill base class
+    class default_base_options:
+        
+        author = 'Author'
+        organization = 'Organization'
+        copyright = 'Copyright'
+
+        bannerWidth = 70
+        bannerCharacter = '~'
+
+        creator = ''
+        timestamp = 0
+
+        lastLine = ' End of file '
+        copyrightLine = '(C) {!s}  All Rights Reserved'
+        licenseText = ["{LicenseText}"]
+        
+        timestampLine = "Generated automatically by {!s}"
+
+        
+    def __init__(self, options=None):
+        if not options:
+            options = self.default_base_options
+        return
+
+        
+    def weave(self, document=None):
+        self._text = []
+        self.begin()
+        self.end()
+        return self._output()
+
 
     def begin(self):
         return
@@ -28,29 +59,6 @@ class base:
 
 class HtmlMill(base):
 
-    # default set of options for HTMLMill base class
-    class default_base_options:
-        
-        author = ''
-        organization = ''
-        copyright = ''
-
-        bannerWidth = 70
-        bannerCharacter = '~'
-
-        creator = ''
-        timestamp = 0
-
-        lastLine = ' End of file '
-        copyrightLine = '(C) %s  All Rights Reserved'
-        licenseText = ["{LicenseText}"]
-        
-        timestampLine = " Generated automatically by %s on %s"
-
-        versionId = ' $' + 'Id' + '$'
-
-
-        
     # properties of this luban html mill
     htmlbase = 'http://site/url/'
     javascriptsbase = 'javascripts'
@@ -66,19 +74,13 @@ class HtmlMill(base):
     output_as_lines = True
 
 
-    def weave(self, document=None):
-        if not getattr(self, '_options', None):
-            self._options = self.__class__.default_base_options
-
-        self.begin()
+    def renderBody(self):
         if document:
             self._renderDocument(document)
             if not self._isFrame(document):
                 return self._output()
-        self.end()
-        return self._output()
 
-
+            
     def _output(self):
         if self.output_as_lines:
             return self._rep
@@ -105,14 +107,14 @@ class HtmlMill(base):
             librarian = librarian
             )
         
-        from luban.weaver.web.weaver import weave
+        from luban.weaver.web.renderer import render
         if self._isFrame(document):
             htmldoc, jsdoc = mill.render(
                 document,
                 html_target = html_target,
                 javascript_target = js_target,
                 )
-            texts = weave(htmldoc, javascriptdoc = jsdoc)
+            texts = render(htmldoc, javascriptdoc = jsdoc)
             self._rep = texts
         else:
             docinjson = mill.render(
@@ -140,7 +142,7 @@ class HtmlMill(base):
 
 
     def _createHtmlTarget(self, document):
-        from luban.weaver.web.content.HtmlDocument import HtmlDocument, PartialHtmlDocument
+        from .renderer.HtmlDocument import HtmlDocument, PartialHtmlDocument
         if self._isFrame(document):
             doc =  HtmlDocument()
             doc.base(url=self.htmlbase)

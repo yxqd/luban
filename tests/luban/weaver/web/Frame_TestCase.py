@@ -18,34 +18,22 @@ class TestCase(unittest.TestCase):
      
     def test1(self):
         """luban.weaver.web.DocumentMill: Frame"""
-        import luban.ui.elements as lue
-        frame = lue.frame(name='frame')
+        import luban.ui as lui
+        frame = lui.e.frame(name='frame')
         document = frame.document(name='document')
         
-        from luban.weaver.web.Librarian import Librarian
-        librarian = Librarian()
-        librarian.register('base', ['myproject.css'], ['luban-base.js'])
-        librarian.register('appmenubar', ['appmenubar.css'], ['appmenubar.js'])
-        
-        from luban.weaver.web.DocumentMill import DocumentMill
-        mill = DocumentMill(librarian=librarian)
-
-        from luban.weaver.web.content.HtmlDocument import HtmlDocument
-        htmldoc = HtmlDocument()
-        
-        body, jsdoc = mill.render(frame, html_target=htmldoc)
-        
-        from luban.weaver.web.weaver import weave
-        texts = weave(htmldoc, javascriptdoc = jsdoc)
+        from luban.weaver.web import create
+        weaver = create(htmlbase="http://my.url.com/")
+        text = weaver.weave(frame)
         
         filename = 'Frame-test1.html'
         out = open(filename, 'w')
-        print('\n'.join(texts), file=out)
+        print(text, file=out)
         return
      
     
 def main():
-    import journal
+    from luban import journal
     # journal.debug('luban.weaver.web').activate()
     
     unittest.main()

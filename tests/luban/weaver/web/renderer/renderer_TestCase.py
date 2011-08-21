@@ -1,10 +1,10 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 #                                   Jiao Lin
 #                      California Institute of Technology
-#                      (C) 2006-2009 All Rights Reserved 
+#                      (C) 2006-2011 All Rights Reserved 
 #
 # {LicenseText}
 #
@@ -28,27 +28,20 @@ class TestCase(unittest.TestCase):
         from luban.weaver.web.content.JavaScriptDocument import JavaScriptDocument
         jsdoc = JavaScriptDocument()
         
-        from luban.weaver.web.weaver import weave
-        texts = weave(document, javascriptdoc = jsdoc)
+        from luban.weaver.web.renderer import render
+        texts = render(document, javascriptdoc = jsdoc)
 
-        print('\n'.join(texts))
+        # print('\n'.join(texts))
         return
      
     
-def pysuite():
-    suite1 = unittest.makeSuite(TestCase)
-    return unittest.TestSuite( (suite1,) )
-
 def main():
-    pytests = pysuite()
-    alltests = unittest.TestSuite( (pytests, ) )
-    unittest.TextTestRunner(verbosity=2).run(alltests)
+    import unittest
+    unittest.main()
+    return
     
     
 if __name__ == "__main__":
     main()
     
-# version
-__id__ = "$Id$"
-
 # End of file 

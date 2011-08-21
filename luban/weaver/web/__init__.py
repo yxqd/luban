@@ -37,31 +37,31 @@ def create(htmlbase='', controller_url='/controller/main.cgi',
         jsbase = '%s/%s' % (statichtmlbase, jsbase)
         imagesbase = '%s/%s' % (statichtmlbase, imagesbase)
     #
-    from .HtmlMill import HtmlMill
-    mill = HtmlMill()
+    from .Weaver import Weaver
+    weaver = Weaver()
     #
-    mill.htmlbase = htmlbase
-    mill.javascriptsbase = jsbase
-    mill.cssbase = cssbase
-    mill.imagesbase = imagesbase
+    weaver.obj2html.htmlbase = htmlbase
+    weaver.obj2html.javascriptsbase = jsbase
+    weaver.obj2html.cssbase = cssbase
+    weaver.obj2html.imagesbase = imagesbase
     #
-    mill.controller_url = controller_url
+    weaver.obj2html.controller_url = controller_url
     #
-    mill.cookie_path = cookie_path
-    mill.use_cookie = use_cookie
+    weaver.obj2html.cookie_path = cookie_path
+    weaver.obj2html.use_cookie = use_cookie
     #
-    mill.output_as_lines = output_as_lines
+    weaver.obj2html.output_as_lines = output_as_lines
 
     # librarian
     from .Librarian import Librarian
-    mill.librarian = Librarian(cssbase=cssbase, jsbase=jsbase)
+    weaver.obj2html.librarian = Librarian(cssbase=cssbase, jsbase=jsbase)
     
     # load the library
     library = library or 'default'
-    use_library(library, mill)
+    use_library(library, weaver)
 
     #
-    return mill
+    return weaver
 
 
 
@@ -85,7 +85,7 @@ def use_library(library, weaver):
         stylesheets = v.get('stylesheets') or []
         javascripts = v.get('javascripts') or []
         #
-        weaver.librarian.register(k, stylesheets, javascripts)
+        weaver.obj2html.librarian.register(k, stylesheets, javascripts)
         continue
     return
 

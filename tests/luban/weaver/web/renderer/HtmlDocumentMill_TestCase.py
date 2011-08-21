@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
@@ -24,7 +24,7 @@ class TestCase(unittest.TestCase):
         mill = HtmlDocumentMill()
         texts = mill.render(document)
 
-        print('\n'.join(texts))
+        # print('\n'.join(texts))
         return
      
     

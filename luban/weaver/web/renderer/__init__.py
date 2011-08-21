@@ -12,6 +12,11 @@
 #
 
 
+"""
+render text from html document (instance of ..content.* objects)
+"""
+
+
 def render(htmldoc, javascriptdoc=None):
     if javascriptdoc:
         from .JavaScriptDocument2HtmlDocument import Mill

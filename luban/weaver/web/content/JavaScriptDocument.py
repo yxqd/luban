@@ -45,7 +45,7 @@ class JavaScriptDocument:
     pass  # end of JavaScriptDocument
 
 
-import journal
+from luban import journal
 debug = journal.debug('javascriptdocument')
         
 

@@ -17,10 +17,11 @@ for f in seq:
 
 rules = []
 rules.append(
-    merlin.rules.testSuite(name="luban.weaver", tests = tests)
+    merlin.rules.testSuite(name="luban.weaver.web", tests = tests)
     )
 
 
 recurse_entries = [
-    'web',
+    '_json',
+    'renderer',
     ]

@@ -12,7 +12,7 @@
 #
 
 
-"""
+__doc__ = """
 luban: generic user interface specification
 
 packages:
@@ -20,7 +20,6 @@ packages:
 * ui: luban core. type system. element and action representations
 * weaver: convert luban ui representation to implementations such as javascript
 * utils: miscellaneous tools
-* timber: default extension of luban core
 
 """
 

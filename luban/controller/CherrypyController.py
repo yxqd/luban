@@ -33,13 +33,21 @@ class CherrypyController:
     
 
     @cherrypy.expose
-    def index(self):
+    def index(self, actor=None, routine=None, **kwds):
+        if not actor:
+            raise RuntimeError
         
+        actor_name = actor
+        mod_name = '%s.%s' % (self.actor_package, actor_name)
         actor_module = __import__(
-            "Actor", fromlist=[self.actor_package]
+            mod_name, 
+            fromlist=[''],
             )
-        actor = actor_module.Actor
+        actor = actor_module.Actor()
+        actor.name = actor_name
+        actor.director = self
         
+        obj = actor.perform(routine=routine, **kwds)
         return self.weaver.weave(obj)
 
 

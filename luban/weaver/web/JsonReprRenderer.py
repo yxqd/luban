@@ -39,7 +39,7 @@ class JsonReprRenderer:
 
     
     def render(self, obj):
-        asdict = self._obj2dict.render(obj)
+        asdict = self._obj2dict.convert(obj)
         injson = jsonEncode(asdict)
         return injson
 

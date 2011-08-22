@@ -1,0 +1,15 @@
+# -*- python -*-
+
+import merlin.rules, os
+from merlin.Context import create
+context = create()
+context.code.project = 'aokuang'
+
+
+rules = []
+rules.append(
+    merlin.rules.pythonPackage(package = 'aokuang')
+    )
+
+
+recurse_entries = []

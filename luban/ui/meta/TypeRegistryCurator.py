@@ -13,6 +13,8 @@
 
 
 # the signature of the class attribute to define unique name of a luban type
+# NOTE: name is case-insensitive. all names will be converted to lower case as
+#       the key to the name:type store
 UNIQUE_TYPE_NAME_SIGNAUTURE = '__unique_type_name__'
 
 
@@ -74,6 +76,7 @@ class Registry:
         import luban
         if not luban.extension_allow_override:
             
+            # find if the name or its lower case already registered
             registered = None
             if name in self._store:
                 registered = self._store[name]

@@ -34,9 +34,7 @@ class CherrypyController:
 
     @cherrypy.expose
     def index(self, actor=None, routine=None, **kwds):
-        if not actor:
-            raise RuntimeError
-        
+        actor = actor or 'default'
         actor = self._retrieveActor(actor)
         obj = actor.perform(routine=routine, **kwds)
         return self.weaver.weave(obj)

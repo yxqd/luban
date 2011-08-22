@@ -5,7 +5,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 
 import cherrypy, luban.ui as lui
 
-from aokuang.controller.CherrypyController import CherrypyController
+from luban.controller.CherrypyController import CherrypyController
 class Root(CherrypyController):
 
     def __init__(self):

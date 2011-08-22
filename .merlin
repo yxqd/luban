@@ -1,2 +1,2 @@
 
-recurse_entries = ['luban']
+recurse_entries = ['core']

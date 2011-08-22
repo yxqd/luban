@@ -23,8 +23,8 @@ base = {
     'javascripts':
     (
     'jquery/jquery.js',
-    'jquery/jquery.rightClick.js',
-    'jquery/jquery.bgiframe.js',
+    #'jquery/jquery.rightClick.js',
+    #'jquery/jquery.bgiframe.js',
     'jquery/ui/ui.core.js',
     'jquery/ui/ui.draggable.js',
     'jquery/ui/ui.resizable.js',

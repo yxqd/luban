@@ -3,7 +3,7 @@
 import os.path
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
-import cherrypy, luban.ui.elements as lue
+import cherrypy, luban.ui as lui
 
 class Root:
 
@@ -17,7 +17,7 @@ class Root:
     @cherrypy.expose
     def welcome(self):
         # the overall frame
-        frame = lue.frame(title='my application')
+        frame = lui.e.frame(title='my application')
         # a document in the frame
         doc = frame.document(title='Hello world!', name='doc1')
         # weave to produce html

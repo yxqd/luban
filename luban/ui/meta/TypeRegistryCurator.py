@@ -73,9 +73,15 @@ class Registry:
         
         import luban
         if not luban.extension_allow_override:
-            if name in self._store or name.lower() in self._store:
-                # conflict
+            
+            registered = None
+            if name in self._store:
                 registered = self._store[name]
+            if name.lower() in self._store:
+                registered = self._store[name.lower()]
+
+            if registered:
+                # conflict
                 m = "type of the same name already registered. name: %s, new element: %s, existing element: %s" % (name, cls, registered)
                 from .exceptions import TypeConflict
                 raise TypeConflict(m)
@@ -92,7 +98,7 @@ class Registry:
         if sig in target.__dict__:
             name = target.__dict__[sig]
         else:
-            name = target.__name__
+            name = target.__name__.lower()
             # set it to the class
             setattr(target, sig, name)
         return name

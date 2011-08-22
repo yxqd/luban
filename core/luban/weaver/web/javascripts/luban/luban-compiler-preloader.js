@@ -61,7 +61,7 @@
     },
 
     'findLoadingActions': function(element) {
-      if (!element.lubanelement) {return [];}
+      if (!element.lubanelement && !element.lubanaction) {return [];}
       return _getLoadingActions(element).reverse();
     },
 

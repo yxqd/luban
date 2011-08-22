@@ -18,10 +18,14 @@ class ActionBase(AttributeContainer):
 
     """base class of all actions
     """
-    
+
+    # decorations
     abstract = True
 
+    # don't override this
+    lubanaction = descriptors.bool(default=True)
 
+    # exceptions
     from .exceptions import ActionFactoryMethodConflict
 
     # helper method for subclasses

@@ -17,7 +17,7 @@ luban: generic user interface specification
 
 packages:
 
-* ui: luban core. type system. element and action representations
+* ui: type system; element and action representations
 * weaver: convert luban ui representation to implementations such as javascript
 * utils: miscellaneous tools
 

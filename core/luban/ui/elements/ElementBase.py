@@ -25,6 +25,9 @@ class ElementBase(AttributeContainer, metaclass=Meta):
     
     # indicate this is abstract and cannot be instantiated
     abstract = True
+
+    # don't override this
+    lubanelement = descriptors.bool(default=True)
     
 
 # version

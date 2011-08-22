@@ -37,18 +37,26 @@ class CherrypyController:
         if not actor:
             raise RuntimeError
         
+        actor = self._retrieveActor(actor)
+        obj = actor.perform(routine=routine, **kwds)
+        return self.weaver.weave(obj)
+
+
+    def _retrieveActor(self, actor):
         actor_name = actor
         mod_name = '%s.%s' % (self.actor_package, actor_name)
         actor_module = __import__(
             mod_name, 
             fromlist=[''],
             )
-        actor = actor_module.Actor()
+        factory = actor_module.Actor
+        if not hasattr(factory, 'expose') or not factory.expose:
+            raise RuntimeError("actor %s not exposed" % factory)
+        
+        actor = factory()
         actor.name = actor_name
         actor.director = self
-        
-        obj = actor.perform(routine=routine, **kwds)
-        return self.weaver.weave(obj)
+        return actor
 
 
 

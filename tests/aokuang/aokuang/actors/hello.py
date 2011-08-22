@@ -27,6 +27,8 @@ from luban.controller.Actor import Actor as base
 
 class Actor(base):
 
+    expose = 1
+
     
     def default(self):
         return self.frame()

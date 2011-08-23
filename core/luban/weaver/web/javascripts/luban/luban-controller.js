@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2009 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -14,9 +14,7 @@
 
 // controller object
 C = luban.Controller = {
-  // the following two global parameters necessary for correct operations of luban
   'url': null, // controller's url: eg http://your.web.site/main.py
-  'credential': {}, // credential dictionary
   'cookie_settings': {
     'use_cookie': false,
     'path': '/cgi-bin/', // path of cookie
@@ -32,89 +30,13 @@ C = luban.Controller = {
   var ef = luban.elementFactory;
   var C  = luban.Controller;
   var widgets = luban.widgets;
-  
+
 
   // helpers declaration
   var argsStr;
 
-  
-  // *** "widgets" ***
-  //
-  // credential
-  ef.credential = function (kwds) {
-    C.createCredential(kwds);
-    // a invisible div
-    var div = $('<div></div>').hide();
-    return div.lubanElement('credential');
-  };
-  widgets.credential = function(elem) {
-    this.super1 = widgets.base;
-    this.super1(elem);
-  };
-  widgets.credential.prototype = new widgets.base();
-  
-  
-  // 
-  C.createCredential = function (kwds) {
-    C.credential = {username: kwds.username, ticket: kwds.ticket};
-    
-    // save credential to cookie as well
-    var cookie_settings = C.cookie_settings;
-    if (cookie_settings.use_cookie) {
-      try {
-	$.cookie('sentry.username', kwds.username, cookie_settings);
-	$.cookie('sentry.ticket', kwds.ticket, cookie_settings);
-      } catch (e) {
-	// cookie error
-      }
-    }
-  };
-  //
-  C.updateCredential = C.createCredential;
-  C.removeCredential = function() {
-    C.credential = {};
-    var cookie_settings = C.cookie_settings;
-    if (cookie_settings.use_cookie) {
-      try {
-	$.cookie('sentry.username', null, cookie_settings);
-	$.cookie('sentry.ticket', null, cookie_settings);
-      } catch (e) {
-	// cookie error
-      }
-    }
-  };
-  // create the credentail data to be send to the server
-  C.getCredentialArgs = function() {
-    var credential = C.credential;
-    var username, ticket;
-    if (!credential || !credential.username) {
-      // try cookie
-      //   if cookie is forbidden, just quit
-      if (!C.cookie_settings.use_cookie) {return {};}
-      //
-      try {
-	username = $.cookie('sentry.username');
-	ticket = $.cookie('sentry.ticket');
-      } catch (e) {
-	// no way to get cookie
-      }
-      if (!username || !ticket)
-	{ return {}; }
-      credential.username = username;
-      credential.ticket = ticket;
-    }
 
-    var ret = {};
-    username = credential.username;
-    if (username) {ret['sentry.username'] = username;}
-    
-    ticket = credential.ticket;
-    if (ticket) {ret['sentry.ticket'] = ticket;}
 
-    return ret;
-  };
-    
-  
   // method to submit form (this) to the given actor and routine
   // actor and routine are specified in kwds
   // kwds:
@@ -141,18 +63,18 @@ C = luban.Controller = {
     else {datastr = argsStr(data);}
 
     var sentrystr = argsStr(C.getCredentialArgs());
-    
+
     var args = {'actor': actor,
 		'routine': routine};
     var allargsstr = [argsStr(args), sentrystr, datastr, formdatastr].join('&');
 
     // jquery ajax post
     $.post(controller, allargsstr, callback, responsetype);
-    
+
     return $(this);
   };
 
-  
+
   // replace the content of "this" widget
   // data: a dict
   //   html: new html content
@@ -177,7 +99,7 @@ C = luban.Controller = {
     }
     return assignments.join('&');
   };
-  
+
   // prepend 'actor.' to keys
   function prependActorStr(args) {
     var d = {};
@@ -229,9 +151,9 @@ C = luban.Controller = {
     };
     // for debug
     f.url = url; f.allargs = allargs;
-    
+
     C.runWithLoadingAlert(f, callback);
-    
+
     return;
   };
 
@@ -257,9 +179,9 @@ C = luban.Controller = {
     var loadingdiv = C.getLoadingDiv();
 
     var f = function () {
-	  
+
       // if this loading is already finished, this function won't be triggered
-      
+
       // so, if we reach here, this means the loading is not yet finished,
       // we need to remove the stored timeout, because this timeout is happening
       delete loadingdiv.data('timeouts')[func];
@@ -274,7 +196,7 @@ C = luban.Controller = {
       // this means the loading alert is not running. we need to get it running
       // first claim the owner ship of the loading alert
       loadingdiv.data('owner', func);
-      
+
       // then start the alert
       C.startLoadingAlert();
 
@@ -299,7 +221,7 @@ C = luban.Controller = {
       C.stopLoadingAlert();
       return;
     }
-    
+
     // otherwise, we should clear the timeout if it is there
     var timeouts = loadingdiv.data('timeouts');
     var timeout = timeouts[func];
@@ -317,7 +239,7 @@ C = luban.Controller = {
   };
   C.stopLoadingAlert = function() {
     var loadingdiv = C.getLoadingDiv();
-    
+
     // hide the visual
     loadingdiv.hide();
     loadingdiv.data('running', 0);
@@ -338,7 +260,7 @@ C = luban.Controller = {
       div = $('<div id="'+id+'"/>');
       //div.text('loading...');
       div.hide();
-      
+
       // attach to page
       $('body').append(div);
 

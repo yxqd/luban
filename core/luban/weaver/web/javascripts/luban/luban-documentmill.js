@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2009 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -17,7 +17,7 @@
 
 
 (function(luban, $) {
-  
+
   luban.documentmill = function (actioncompiler, preloader) {
     if (preloader == null) {
       preloader = new luban.compiler_preloader();
@@ -32,7 +32,7 @@
 
     preloader.actioncompiler = actioncompiler;
   };
-  
+
   luban.documentmill.prototype = {
 
     'compile': function(action) {
@@ -52,7 +52,7 @@
 	return this.dispatch(doc);
       }
     },
-    
+
     'dispatch': function (doc) {
       var parent = this._parent;
       if (typeof(doc) == 'string') {
@@ -72,7 +72,7 @@
       var name = doc.name;
       if (name)
 	{ret.jqueryelem.attr('luban-element-name', name);}
-      
+
       // hide if necessary
       if (doc.hidden) {ret.hide();}
 
@@ -82,7 +82,7 @@
 	ret.jqueryelem.keypress(function(event) {
 	    var $this = $(this);
 	    $this.data('keypress-data', {'keycode': event.which});
-	    docmill.compile(doc.onkeypress); return false; 
+	    docmill.compile(doc.onkeypress); return false;
 	  });
       }
 
@@ -97,7 +97,7 @@
 	//this.compile(doc.oncreate);
       }
       // shadow?
-      // this has to be here because jquery.shadow can not 
+      // this has to be here because jquery.shadow can not
       // draw shadow correctly without everything already in place
       var kls = doc.Class;
       if (kls) {
@@ -133,7 +133,7 @@
 
       var contents = container.contents;
       if (contents != null) {
-	
+
 	for (var i in contents) {
 	  this._parent = elem;
 	  var subdoc = contents[i];
@@ -147,18 +147,13 @@
       }
       return elem;
     },
-    
+
     '_onElement': function(element) {
       var type = element.type;
       var factory = luban.elementFactory[type];
       var elem = factory(element, this, this._parent);
       return elem;
     },
-    
-    'oncredential': function(credential) {
-      return this._onElement(credential);
-    },
-
 
     'createEvtHandler': function(action) {
       var self = this;

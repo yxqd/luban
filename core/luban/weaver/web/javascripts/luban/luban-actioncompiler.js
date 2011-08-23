@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2011 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -28,10 +28,13 @@
     if (docmill == null) {docmill = new luban.documentmill();}
     this.docmill = docmill;
   };
-  
+
   luban.actioncompiler.prototype = {
-    
+
     'compile': function(actions) {
+      // ***********************************************
+      // Do we really care to support a list of actions?
+      // ***********************************************
       // check if it is an action of a list
       if (isArray(actions)) {
 	var ret = [];
@@ -52,7 +55,7 @@
 	// we assume that it is not a luban action, but a normal value (str, number, etc)
 	return action;
       }
-      // 
+      //
       action = deepCopy(action);
       var toload = this.preloader.findThingsToLoad(action);
       if (toload) {
@@ -70,7 +73,7 @@
 	};
 	this.preloader.load(toload, callback);
       } else {
-	return this.dispatch(action);
+        return this.dispatch(action);
       }
     },
 

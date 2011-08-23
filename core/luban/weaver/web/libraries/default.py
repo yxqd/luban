@@ -34,7 +34,7 @@ base = {
     'luban/luban-compiler-preloader.js',
     'luban/luban-actioncompiler.js',
     'luban/luban-documentmill.js',
-    'luban/luban-widgets-basic.js',
+    'luban/luban-widget-core.js',
     ),
     }
 

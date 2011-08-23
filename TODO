@@ -1,34 +1,7 @@
-Director:
 
+core:
+  move current docs to timber/docs, and write the docs for luban core
 
-Widgets
- * clean up the "notification" types. (search for $(...).data('...-data', ...) in javascripts/luban/widgets
- * SplitSection:
-  * should remove the "size" property. size should be set with style sheets
- * Table:
-  * improve tabulator.js to reduce the amount of data passing from server to client
- * Form:
-  * FormSubmitButton: consider rename "help" to "tip"
- * tip: should make tip a luban widget
+think about notification -- "event" global?
 
-Actions:
- * check all element-actions for all element types
- * (partially done for form fields) new actions: enable/disable
-
-Compatibility:
- * IE (not urgent, but still important)
-
-Docs:
- * tutorial of using credential
-
-Javascript implementation:
- * should improve implemenation of "destroy" to destroy the jquery ui widgets.
- * should change implementation of "replaceContent" should use destroy to destroy all children and then add new child.
-
-Think about these problems:
-
- * (partially done) Plugin-like structure. to make it easier to extend luban
- * Action to find children by name (preliminary implementation exists) 
-   and find descendent by path (<name1>/<name2>/.../)
- * Validator rendering in javascript
- * python-based server, sessions, etc
+move to most recent jquery so we can remove the alert on msie/opera

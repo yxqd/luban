@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2011 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -17,7 +17,7 @@
 
 
 // namespace luban
-luban = {  
+luban = {
   'elementFactory': {},
   'widgets': {},
   'configuration': {
@@ -45,7 +45,7 @@ luban.utils = {};
 
   // declaration of helpers
   var _loadJSCmd;
-  
+
 
   $.fn.lubanElement = function (type) {
     if (type == null) {
@@ -70,40 +70,7 @@ luban.utils = {};
     'type': function () {
       return this.jqueryelem.attr('luban-element-type');
     },
-    // find descendents by name
-    'find': function (name, type) {
-      var rt = this.jqueryelem;
-      if (name) rt = rt.find('[luban-element-name='+name+']');
-      if (type) rt = rt.find('[luban-element-type='+type+']');
-      rt = rt.lubanElement();
-      return rt;
-    },
-    // find descendents and return their ids
-    'findDescendentIDs': function(params) {
-      var type = params.type;
-      var found = this.jqueryelem.find('[luban-element-type='+ type + ']');
-      var ids = [];
-      for (var i=0; i<found.length; i++) {
-	ids.push($(found[i]).attr('id'));
-      }
-      return ids;
-    },
-    'show': function (callback) {
-      return this.jqueryelem.show(callback);
-    },
-    'hide': function (callback) {
-      return this.jqueryelem.hide(callback);
-    },
-    'disable': function () {
-      this.jqueryelem.find('input').attr('disabled', 'disabled');
-      this.jqueryelem.find('select').attr('disabled', 'disabled');
-      this.jqueryelem.find('textarea').attr('disabled', 'disabled');
-    },
-    'enable': function () {
-      this.jqueryelem.find('input').removeAttr('disabled');
-      this.jqueryelem.find('select').removeAttr('disabled');
-      this.jqueryelem.find('textarea').removeAttr('disabled');
-    },
+
     'add': function (subelem) {
       if (typeof(subelem) == 'string') {
 	this.jqueryelem.append(subelem);
@@ -111,37 +78,16 @@ luban.utils = {};
 	this.jqueryelem.append(subelem.jqueryelem);
       }
     },
-    'destroy': function() {
-      this.broadcastEvent('destroy');
-      this.jqueryelem.trigger('destroy');
-      this.jqueryelem.remove();
+
+    'show': function (callback) {
+      return this.jqueryelem.show(callback);
     },
-    'focus': function() {
-      this.jqueryelem.focus();
-    },
-    'setAttribute': function(args) {
-      throw 'widgets.base.setAttribute:' + this.type() + ' notimplementederror';
-    },
-    
-    // retrieve data related to the specified event
-    'getEventData': function (event) {
-      return this.jqueryelem.data(event+'-data');
-    },
-    // save data related to the specified event
-    'setEventData': function (event, data) {
-      return this.jqueryelem.data(event+'-data', data);
+    'hide': function (callback) {
+      return this.jqueryelem.hide(callback);
     },
 
-    // empty my content
-    'empty': function (event) {
-      this.broadcastEvent('destroy');
-      this._je.empty();
-      //throw 'widgets.base.empty:' + this.type() +' notimplementederror';
-    },
-    
-    // broadcast event to all my descendents
-    'broadcastEvent': function(event) {
-      this._je.find('[luban-element-type]').trigger(event);
+    'setAttribute': function(args) {
+      throw 'widgets.base.setAttribute:' + this.type() + ' notimplementederror';
     },
 
     // addClass
@@ -153,23 +99,6 @@ luban.utils = {};
     'removeClass': function(Class) {
       if (this.jqueryelem.hasClass(Class)) {
 	this.jqueryelem.removeClass(Class);
-      }
-    },
-
-    // set id:
-    'setID': function(id) {
-      this.jqueryelem.attr('id', id);
-    },
-
-    // set tip
-    'setTip': function(tip) {
-      if (tip) {
-	var je = this._je;
-	// set attribute "title". this could conflict other use of "title" attribute
-	je.attr('title', tip);
-	je.tooltip({
-	  showURL: false
-        });
       }
     },
 
@@ -220,7 +149,7 @@ luban.utils = {};
       //      var se = $('script[src="'+script+'"]');
       //se.load(callback);
   };
-  
+
   luban.utils.loadCSS = function(css, media) {
       if(document.createStyleSheet) {
 	  document.createStyleSheet(css);
@@ -248,7 +177,7 @@ luban.utils = {};
     }
     dmgr.start(callback);
   };
-  
+
   //
   luban.utils.jsDownloadManager = function () {
     this.downloads = [];
@@ -272,7 +201,7 @@ luban.utils = {};
       luban.utils.runCmds(cmds);
     }
   };
-  
+
   _loadJSCmd = function (d) {
     function cmd(callback) {
       var url = d.url;
@@ -307,14 +236,14 @@ luban.utils = {};
   luban.utils.tag = function(name, kwds) {
 
     var assignments = [];
-    
+
     for (var key in kwds) {
       var value = kwds[key];
       assignments.push( key + '=' + '"' + value + '"' );
     }
-    
+
     var  s = "<" + name + ' ' + assignments.join(' ') + ">" + "</"+name+">";
-    
+
     return $(s);
   };
 
@@ -326,7 +255,7 @@ luban.utils = {};
     } catch (e) {
     }
   };
-  
+
   // convert string to a boolean
   luban.utils.str2bool = function(s) {
     var v = s.toLowerCase();
@@ -369,18 +298,18 @@ luban.utils = {};
     var next = elem.next();
     return {parent:parent, next:next};
   };
-  // restore an element to the saved position 
+  // restore an element to the saved position
   luban.utils.restorePosition = function(elem, positionaliinfo) {
     var originalparent = positionaliinfo.parent;
     var originalnext = positionaliinfo.next;
-    
+
     // current parent
     var parent = elem.parent();
     var next = elem.next();
-    
+
     // if position has not changed, skip
     if (parent[0]==originalparent[0] && next[0]==originalnext[0]) {return;}
-    
+
     if (originalnext) {
       originalnext.before(elem);
     } else {

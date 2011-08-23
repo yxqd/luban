@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2009 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -22,92 +22,10 @@
   var ef = luban.elementFactory;
   var widgets = luban.widgets;
   var tag = luban.utils.tag;
-
-  // helpers
-  // check if a widget extension is loaded ok.
-  // it is always attached to a "download" object with has a "widget" property
-  // giving the name of the widget.
-  // the check is done by checking
-  //   * whether the document mill handler is defined
-  //   * whether the widget factory is defined
-  //   * whether the selfcheck method of the widget object passes
-  function widget_extension_check() {
-    var w = this.widget;
-
-    var f=eval('luban.docmill.on'+w);
-    var wc=eval('luban.widgets.'+w);
-    if (f==null || wc==null) {return 1;}
-    if (wc.selfcheck==null) {return;}
-    return wc.selfcheck();
-  }
-
-  //
-  luban.widgets.implementationRegistry = {};
-  luban.widgets.loadWidgetsImplementation = function( widgets, callback ) {  
-    //
-    var lw = luban.widgets, lu = luban.utils;
-    var jdm = new lu.jsDownloadManager();
-    //
-    var check = widget_extension_check;
-
-    var pass = function() {return 0;};
-
-    for (var i in widgets) {
-      var j;
-      
-      var w= widgets[i];
-      var files = lw.getWidgetLibFiles(w);
-
-      //
-      for (j in files.css) {lu.loadCSS(files.css[j]);}
-
-      // 
-      var impl_js_sig = '/widgets/'+w+'.js';
-
-      for (j in files.js) {
-	var js = files.js[j], c;
-	if (js.search(impl_js_sig)!=-1) {c = check;}
-	else {c = pass;}
-	var d = {url: js, 'check': c, widget: w};
-	jdm.addDownload(d);
-      }
-    }
-    jdm.start(callback);
-  };
-
-  luban.widgets.getWidgetLibFiles = function (widget) {
-    var def_impl_js = 'luban/widgets/'+widget+'.js', found;
-    var jsbase = luban.configuration.javascripts_base;
-
-    var impl = luban.widgets.implementationRegistry[widget];
-    if (!impl) {
-      impl = luban.widgets.implementationRegistry[widget] = {
-	'javascripts': [jsbase+'/'+def_impl_js],
-	'stylesheets': []
-      };
-    }
-
-    // look for default implementation file and establish the list of
-    // js files to load
-    var jslist=[], js;
-    for (var i in impl.javascripts) {
-      js = impl.javascripts[i];
-      jslist.push(js);
-      if (js.search('/'+widget+'.js')!=-1) {found = 1;}
-    }
-    // if not found load it
-    if (!found) {
-      js = jsbase+'/'+def_impl_js;
-      jslist.push(js);
-    }
-
-    return {'js': jslist, 'css': impl.stylesheets};
-  };
-
+  var lap = luban.actioncompiler.prototype;
+   
 
   // form-related action handlers
-  //  shortcut
-  var lap = luban.actioncompiler.prototype;
   lap.onformfieldshowerrormessage = function(action) {
     return this.onformfieldshowerror(action);
   };
@@ -119,14 +37,14 @@
     element._je.find('.error-sign').show();
     element._je.find('.error-sign').click();
   };
-  
-  
+
+
   // common utility functions for default implementation of form fields
   // formfield
   widgets.formfield = function( kwds, docmill) {
     var id = kwds.id;
-    
-    var div = tag('div', {'id': id}); 
+
+    var div = tag('div', {'id': id});
 
     div.addClass('luban-formfield');
     // the next line is for backward compatibility
@@ -150,9 +68,9 @@
 
     var help = kwds.help;
     if (help == null) {help = '';}
-    var helpa = tag('a'); 
+    var helpa = tag('a');
     div.append(helpa);
-    
+
     helpa.addClass('help');
     // this is for backward compatibility
     helpa.addClass('formfieldHelp');
@@ -166,8 +84,8 @@
     var row = tag('tr'); tbody.append(row);
     var cell1 = tag('td'); row.append(cell1); cell1.addClass('input-container');
     var cell2 = tag('td'); row.append(cell2);
-    
-    var p = tag('span'); p.text('!'); cell2.append(p);  
+
+    var p = tag('span'); p.text('!'); cell2.append(p);
     p.addClass('error-sign');
 
     var error = kwds.error;
@@ -194,7 +112,7 @@
       });
 
     var onclick = kwds.onclick;
-    if (onclick) 
+    if (onclick)
       { div.click( function() { docmill.compile(onclick); return false; } ); }
 
     return div;
@@ -212,7 +130,7 @@
       var inputs = formfield.find('input');
       inputs.attr('name', widgets.prependActor(name));
     }
-    
+
     var Class = attrs.Class;
     if (Class) {
       formfield.removeClass();
@@ -252,7 +170,7 @@
     }
   };
 
-  
+
   widgets.formfield_getAttribute = function(formfield, name) {
     if (name=='Class') {return formfield.attr('class');}
     if (name=='help') {
@@ -268,8 +186,10 @@
       var labeldiv = labelcontainerdiv.children('div');
       return labeldiv.text();
     }
+    return null;
   };
-  
+
+
   // helpers
   // prepend 'actor.' to keys
   widgets.prependActor = function (s) {

@@ -30,6 +30,7 @@ base = {
     'jquery/ui/ui.resizable.js',
     'luban/luban-core.js',
     'luban/luban-controller.js',
+    'luban/luban-credential.js',
     'luban/luban-compiler-preloader.js',
     'luban/luban-actioncompiler.js',
     'luban/luban-documentmill.js',

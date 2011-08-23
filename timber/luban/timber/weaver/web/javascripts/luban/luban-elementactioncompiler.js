@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2009 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -13,19 +13,19 @@
 
 
 // requires:
-//    * luban-core.js
-//    * luban-controller.js
+//    * luban-actioncompiler.js
 
 
 (function(luban, $) {
 
-  luban.actioncompiler.prototype = {
-    
+  // actioncompiler extension
+  var actioncompiler_ext = {
+
     'onreplacecontent': function(action) {
       var e = action.element;
       var element = this.dispatch(e);
       element.empty();
-      
+
       var newdoc = action.newcontent;
       this.docmill.render(newdoc, element);
 
@@ -35,12 +35,12 @@
     'oninsertbeforeelement': function(action) {
       var e = action.element;
       var element = this.dispatch(e);
-      
+
       var parent = element.getParent();
 
       var newdoc = action.newelement;
       var newelementrendered = this.docmill.render(newdoc, parent);
-      
+
       newelementrendered._je.insertBefore(element._je);
 
       element.jqueryelem.trigger('resize');
@@ -54,11 +54,11 @@
       // if element is the root (frame), special treatment is needed
       if (element.type() === 'frame')
 	return element.replaceBy(newdoc, this.docmill);
-      
+
       var parent = element.getParent();
 
       var newelementrendered = this.docmill.render(newdoc, parent);
-      
+
       newelementrendered._je.insertBefore(element._je);
       element.destroy();
     },
@@ -84,7 +84,7 @@
       var element = action.element;
       element = this.dispatch(element);
       switch(action.actionname) {
-	
+
       case 'find':
 	return element.find(action.params.name, action.params.type);
 
@@ -93,13 +93,13 @@
 
       case 'show':
 	return element.show();
-	
+
       case 'hide':
 	return element.hide();
-	
+
       case 'disable':
 	return element.disable();
-	
+
       case 'enable':
 	return element.enable();
 
@@ -115,10 +115,10 @@
       case 'removeClass':
 	return element.removeClass(action.params.Class);
 
-      case 'setAttribute': 
+      case 'setAttribute':
 	return this.onsimpleelementaction_setAttribute(action);
 
-      case 'getAttribute': 
+      case 'getAttribute':
 	return element.getAttribute(action.params.name);
 
       default:
@@ -138,11 +138,13 @@
       // set id
       var id = params.id;
       if (id!=null) {element.setID(id);}
-	
+
       return element.setAttribute(params);
     }
 
   };
+
+  $.extend(luban.actioncompiler.prototype, actioncompiler_ext);
 
  })(luban, jQuery);
 

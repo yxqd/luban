@@ -52,7 +52,6 @@ class DescriptorCollector(type):
         return created
 
 
-
 def isdescriptor(candidate):
     from ..descriptors.Descriptor import Descriptor
     return isinstance(candidate, Descriptor)

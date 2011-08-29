@@ -11,7 +11,7 @@ class TestCase(unittest.TestCase):
     
     def test(self):
         root = Root()
-        root.index(actor='hello')
+        print(root.index(actor='hello'))
         return
 
 

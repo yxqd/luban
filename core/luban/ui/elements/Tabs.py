@@ -38,7 +38,7 @@ tabs.tab('tab2').document(title='tab2')
     
     abstract = False
 
-    
+
     # methods
     @elementfactory
     def tab(self, label=None, **kwds):
@@ -68,14 +68,33 @@ class Tab(RivetedSubElement, SimpleContainer, metaclass=Meta):
     label = descriptors.str(default='tab')
     label.tip = 'label of this tab'
 
-    onselect = descriptors.eventhandler() # happen when this tab got selected
-    onselect.tip = 'action when this tab is selected'
+    # events -- must have one-one correspondence with event handler
+    from ..Event import Event
+    class select(Event):
+        # decorations
+        simple_description = "event happens when this tab is selected"
+        abstract = False
+        __unique_type_name__ = 'tabselect'
+        # attributes
+        oldtab = descriptors.str()
+        newtab = descriptors.str()
+    del Event
+
+    # ************************************************************
+    # event handlers
+    # event handlers will be automatically defined using event types
+    # defined here (like "select" event above will cause a "onselect"
+    # event handler automatically)
+    # here is just an example in case one has to define a custom 
+    # event handler descriptor
+    # onselect = descriptors.eventhandler() # happen when this tab got selected
+    # onselect.tip = 'action when this tab is selected'
+    # ************************************************************
 
     # for inspectorx
     def identify(self, inspector):
         return inspector.onTab(self)
     
-
 
 # to define a new element action, subclass ElementActionBase
 from ..actions.ElementActionBase import ElementActionBase

@@ -20,6 +20,23 @@ from .ElementBase import ElementBase, Meta as MetaBase
 class Meta(MetaBase):
 
     def __new__(cls, name, bases, attributes, **kwds):
+        # collect event types and add event handlers
+        from ..Event import Event
+        from ..descriptors import eventhandler
+        for k, v in attributes.items():
+            try: 
+                isevent = issubclass(v, Event)
+            except TypeError:
+                continue
+            if not isevent:
+                continue
+            key = 'on' + k
+            descriptor = eventhandler()
+            # don't override
+            if key not in attributes:
+                attributes[key] = descriptor
+            continue
+
         # the created class
         created = super().__new__(cls, name, bases, attributes, **kwds)
 

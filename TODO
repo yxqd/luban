@@ -2,10 +2,5 @@
 core:
 * move current docs to timber/docs, and write the docs for luban core
 * move to most recent jquery so we can remove the alert on msie/opera
-
-
-Proposal about events:
-* make event handler a special descriptor type that can check for the
-  assigned action and make sure event.<x> is valid
-* autogenerate event handler descriptor from event classes for 
-  an element
+* checking of event handler assigment probably should be configurable
+  to be omitted -- see luban.ui.descriptors.EventHandler

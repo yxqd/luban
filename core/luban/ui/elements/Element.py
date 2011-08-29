@@ -31,7 +31,7 @@ class Meta(MetaBase):
             if not isevent:
                 continue
             key = 'on' + k
-            descriptor = eventhandler()
+            descriptor = eventhandler(eventtype=v)
             # don't override
             if key not in attributes:
                 attributes[key] = descriptor

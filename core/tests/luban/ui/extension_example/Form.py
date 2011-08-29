@@ -58,6 +58,9 @@ class Submission(ElementActionBase):
     params.tip = 'Addtional parameters as a dictionary'
     
 
+    def identify(self, inspector):
+        return inspector.onSubmission(self)
+
 
 # version
 __id__ = "$Id$"

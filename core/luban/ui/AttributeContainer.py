@@ -59,6 +59,12 @@ class AttributeContainer(AbstractAttributeContainer, metaclass=Meta):
     
     
     @classmethod
+    def iterDescriptorNames(cls):
+        from .meta.DescriptorCollector import STORE_NAME
+        return getattr(cls, STORE_NAME).keys()
+    
+    
+    @classmethod
     def getDescriptor(cls, name):
         return getattr(cls, name)    
     

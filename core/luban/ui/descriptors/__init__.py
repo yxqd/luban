@@ -74,8 +74,19 @@ def action(default=None):
         default = NoAction()
     p.default = default
     return p
+
+
 # eventhandler is an action to be performed when an event happens
-eventhandler = action
+def eventhandler(default=None, eventtype=None):
+    if default is None:
+        from ..actions.NoAction import NoAction
+        default = NoAction()
+    from .EventHandler import EventHandler
+    h = EventHandler()
+    h.default = default
+    h.eventtype = eventtype
+    return h
+
 
 def element(default=None, dynamic=True):
     p = _prop(schema.element, dynamic=dynamic)

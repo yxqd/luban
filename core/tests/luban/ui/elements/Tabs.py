@@ -58,6 +58,19 @@ class TestCase(unittest.TestCase):
         return
 
 
+    def test5(self):
+        tabs = lui.e.tabs()
+        tab1 = tabs.tab(id='tab1')
+        from luban.ui.descriptors.EventHandler import EventAttributeError
+        try:
+            tab1.onselect = lui.a.load(actor="actor", param1=lui.event.x)
+        except EventAttributeError:
+            pass
+        else:
+            raise RuntimeError("should raise EventAttributeError")
+        return
+
+
     
 if __name__ == "__main__": unittest.main()
 

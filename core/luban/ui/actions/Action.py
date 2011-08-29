@@ -28,15 +28,6 @@ class Action(ActionBase):
     onfinish.tip = 'A callback action that will be performed when the current action is finished'
     
 
-    def __init__(self, **kwds):
-        super().__init__()
-        
-        for k, v in kwds.items():
-            self.setAttribute(k,v)
-
-        return
-
-
 # version
 __id__ = "$Id$"
 

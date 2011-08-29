@@ -292,27 +292,6 @@ C = luban.Controller = {
   };
 
 
-  // notify the server the event happened to an element,
-  // and execute commands in the response
-  // element: the element where event happened
-  // event: the name of the event
-  // kwds: a dict
-  //   actor: the name of the actor
-  //   routine: the name of the routine
-  //   data: a dictionary of additional parameters to send to the server
-  C.notify = function(element, event, kwds, callback) {
-    var evtdata = element.getEventData(event);
-    var data = kwds.data;
-    var tmp = $.extend({}, data, evtdata);
-    tmp = prependActorStr(tmp);
-    kwds.data = tmp;
-
-    kwds.callback = callback;
-
-    C.call(kwds);
-  };
-
-
   // submit form to server and get response and execute commands in the response
   // form: the form to submit
   // kwds: a dict

@@ -42,6 +42,13 @@ base = {
 application = {
     }
 
+tabs = {
+    'javascripts':
+    (
+    'jquery/ui/ui.tabs.js',
+    ),
+    }
+
 
 # version
 __id__ = "$Id$"

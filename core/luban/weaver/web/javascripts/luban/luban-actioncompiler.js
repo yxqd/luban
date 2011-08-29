@@ -102,6 +102,15 @@
       return eval('this.'+method+'(action.params)');
     },
 
+    'ongetattr': function(action) {
+      var entity = action.entity;
+      if (entity.type=='event') {
+	entity = this.docmill.render(entity);
+	return entity[action.name];
+      }
+      return null;
+    },
+
     //
     'onalert': function(params) {
       params = this._compileparams(params);

@@ -125,6 +125,10 @@
       return ret;
     },
 
+    'onevent': function(event) {
+      return this.event;
+    },
+
     '_onContainer': function(container) {
       var parent = this._parent;
       var type = container.type;

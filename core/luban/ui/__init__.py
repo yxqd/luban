@@ -70,10 +70,14 @@ a = ActionClassProxy()
 del ActionClassProxy
 
 
-#
+# event (global instance)
+from .Event import Event
+event = Event()
+del Event
+
+
+# import all element types and action types
 from . import elements, actions
 
-# version
-__id__ = "$Id$"
 
 # End of file 

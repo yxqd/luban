@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2011 All Rights Reserved  
+//                       (C) 2008-2011 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -27,7 +27,7 @@
   };
 
   luban.compiler_preloader.prototype = {
-    
+
     'findThingsToLoad': function(doc) {
       var doctypes = this.findDocTypesToLoad(doc);
       var loading_actions = this.findLoadingActions(doc);
@@ -51,7 +51,7 @@
       if (loading_actions.length) {this.performLoadingActions(loading_actions, callback);}
       if (doctypes.length) {this.loadDocTypeImplementations(doctypes, callback);}
     },
-    
+
     'findDocTypesToLoad': function(element) {
       if (typeof(element) != 'object' || element==null) {return [];}
       if (element.lubanaction) {return this.findDocTypesToLoadInAction(element);}
@@ -167,7 +167,7 @@
 	'routine': action.routine,
 	'data': this._compileparams(action.params)
       };
-      
+
       var C = luban.Controller;
       C.load(kwds, callback);
     },
@@ -175,7 +175,7 @@
     'onsubmission': function(action, callback) {
       var form = action.form;
       form = this.actioncompiler.dispatch(form);
-      
+
       var kwds = {
 	'actor': action.actor,
 	'routine': action.routine,
@@ -185,19 +185,6 @@
       form.clearErrors();
 
       var C = luban.Controller; C.submit(form._je, kwds, callback);
-    },
-
-    'onnotification': function(action, callback) {
-      var element = this.actioncompiler.dispatch(action.element);
-      var event = action.event;
-      var kwds = {
-	'actor': action.actor,
-	'routine': action.routine,
-	'data': this._compileparams(action.params)
-      };
-      
-      var C = luban.Controller;
-      C.notify(element, event, kwds, callback);
     },
 
     '_compileparams': function(args) {
@@ -213,7 +200,7 @@
     if (!ret) {ret = [];}
     if (doc.type && $.inArray(doc.type, ret)==-1) {ret.push(doc.type);}
     var c = doc.contents;
-    if (c==null ||c.length==0) 
+    if (c==null ||c.length==0)
       {return ret;}
     for (var i in c) {
       var t = c[i];
@@ -223,15 +210,15 @@
   }
 
   // get all loading actions
-  var loading_action_types = ['loading', 'notification', 'submission'];
-			      
+  var loading_action_types = ['loading', 'submission'];
+
   // find actions that are loading actions
   // return a list
   // each element is a list of [action, context, name_of_action_in_context]
   function _getLoadingActions(doc, ret, parentdoc, key) {
     if (typeof(doc)!='object' || doc == null) {return;}
     if (!ret) {ret = [];}
-    if (doc.lubanaction && 
+    if (doc.lubanaction &&
 	$.inArray(doc.type, loading_action_types)!=-1 &&
 	$.inArray(doc, ret)==-1)
       {ret.push([doc, parentdoc, key]);}
@@ -241,10 +228,10 @@
       if (k == 'type' || k=='lubanelement' || k == 'lubanaction') {continue;}
       // on<> are event handlers, should not load things there
       // this also means other attributes cannot use 'on' as the first two characters.
-      // probably should find a better way to do this (for example tagging 
+      // probably should find a better way to do this (for example tagging
       // event handlers with "lubaneventhandler"
       if (k.slice(0,2) == 'on') {continue;}
-      
+
       var t = doc[k];
       _getLoadingActions(t, ret, doc, k);
     }

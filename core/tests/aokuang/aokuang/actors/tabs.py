@@ -13,7 +13,7 @@
 
 
 """
-button
+tabs
 """
 
 import luban.ui as lui
@@ -29,21 +29,21 @@ class Actor(base):
     
 
     def frame(self):
-        frame = lui.e.frame(title="luban test: button")
-        doc = frame.document(title="Click the following button")
-        b = doc.button(
-            label = 'button 1',
-            onclick = lui.a.alert('clicked button 1'),
-            )
-        b2 = doc.button(
-            label = 'button 2',
-            onclick = lui.a.load(actor=self.name, routine='onb2'),
+        frame = lui.e.frame(title="luban test: tabs")
+        doc = frame.document(title="Tabs")
+        tabs = doc.tabs()
+        tab1 = tabs.tab(label="tab1")
+        tab2 = tabs.tab(label="tab2")
+        tab1.onselect = lui.a.load(
+            actor=self.name, routine='onchangetab',
+            old = lui.event.oldtab,
+            new = lui.event.newtab,
             )
         return frame
 
 
-    def onb2(self, **kwds):
-        return lui.a.alert("clicked button 2")
+    def onchangetab(self, **kwds):
+        return lui.a.alert(str(kwds))
 
 
 

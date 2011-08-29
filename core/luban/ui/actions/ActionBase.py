@@ -25,20 +25,14 @@ class ActionBase(AttributeContainer):
     # don't override this
     lubanaction = descriptors.bool(default=True)
 
-    # exceptions
-    from .exceptions import ActionFactoryMethodConflict
 
-    # helper method for subclasses
-    def _elementSelector(self, element):
-        """create element selector for the given element
-        """
-        from ..elements.Element import Element
-        if isinstance(element, Element):
-            from . import select
-            return select(element=element)
-        if isinstance(element, ActionBase):
-            return element
-        raise NotImplementedError
+    def __init__(self, **kwds):
+        super().__init__()
+        
+        for k, v in kwds.items():
+            self.setAttribute(k,v)
+
+        return
 
 
 # version

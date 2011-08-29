@@ -55,6 +55,24 @@ class ElementActionBase(base, metaclass=Meta):
     # .. element action always works on a selected element
     element = descriptors.action() # action to select an element
 
+    # exceptions
+    from .exceptions import ActionFactoryMethodConflict
+
+    # helper method for subclasses
+    def _elementSelector(self, element):
+        """create element selector for the given element
+        """
+        from ..elements.Element import Element
+        if isinstance(element, Element):
+            from . import select
+            return select(element=element)
+        
+        from .ActionBase import ActionBase
+        if isinstance(element, ActionBase):
+            return element
+        raise NotImplementedError
+
+
     def __init__(self, element=None, **kwds):
         self.element = self._elementSelector(element)
         super().__init__(**kwds)

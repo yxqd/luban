@@ -34,7 +34,7 @@ class Actor:
                 self.name, routine)
             raise self.RoutineNotFound(msg)
 
-        return behavior()
+        return behavior(**kwds)
     
     pass # end of Actor
 

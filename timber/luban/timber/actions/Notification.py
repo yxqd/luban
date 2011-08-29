@@ -15,11 +15,11 @@
 from .Action import Action as base
 
 class Notification(base):
-
-
+    
+    
     abstract = False
-
-
+    
+    
     element = descriptors.reference()
     event = descriptors.str()
     actor = descriptors.str()

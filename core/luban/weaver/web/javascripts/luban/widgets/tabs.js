@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2009 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -36,7 +36,7 @@
     tab.select();
   };
 
-  
+
   // tabs
   //  factory
   ef.tabs = function(kwds, docmill, parent) {
@@ -55,22 +55,29 @@
     }
     var ret = div.lubanElement('tabs');
     if (parent) {parent.add(ret);}
-    
+
     // call jquery tabs ctor
     div.tabs();
 
     //
-    div.bind('tabsselect', function(event, ui) {
+    div.bind('tabsselect', function(event, ui)
+      {
 	var panel = $(ui.panel);
 	var tabsdiv = panel.parent();
 	if (tabsdiv.attr('id') != $(this).attr('id')) {return;}
 	var panels = tabsdiv.children('div');
 	var index = panels.index(panel);
 	var selected = tabsdiv.tabs('option', 'selected');
-	if (index!=selected)
-	  {panel.trigger('luban-tabselect');}
+	if (index!=selected) {
+	  var extra = {
+	    oldtab: panels[selected].id,
+	    newtab: ui.panel.id
+	  };
+	  panel.trigger('luban-tabselect', extra);
+	}
+	return;
       });
-    
+
     return ret;
   };
   //  object
@@ -79,19 +86,36 @@
     this.super1(elem);
   };
   widgets.tabs.prototype = new widgets.base ();
+  function createOnSelectCallback(onselect) {
+    var callback2 = function(event, extra) {
+      if (onselect) {
+	var docmill1 = new luban.documentmill();
+	docmill1.event = extra;
+	docmill1.compile(onselect);
+      }
+      return false;
+    };
+    return callback2;
+  }
   widgets.tabs.prototype.createTab = function(tab, docmill) {
-    var id = tab.id;
-    var url = '#'+id;
     var label = tab.label;
+    if (!label) {
+	throw "tab label not defined";
+    }
+    var id = tab.id;
+    if (!id) {
+	id = "tab-" + label;
+    }
+    var url = '#'+id;
     this._je.tabs('add', url, label);
     var tabdiv = $(url);
 
     var Class = tab.Class;
     if (Class) {tabdiv.addClass(Class);}
-    
+
     // click
     var onclick = tab.onclick;
-    var callback = function() { 
+    var callback = function() {
       if (onclick)
 	{docmill.compile(onclick);}
       //return false;
@@ -101,24 +125,20 @@
 
     // select
     var onselect = tab.onselect;
-    var callback2 = function() { 
-      if (onselect)
-	{docmill.compile(onselect);}
-      return false;
-    };
+    var callback2 = createOnSelectCallback(onselect);
     tabdiv.bind('luban-tabselect', callback2);
 
-    // 
+    //
     tabdiv.bind('luban-tabselect', function() {$(this).trigger('resize');});
 
     // the last li corresponds to this tab
     var lis = this._je.children('ul').children('li');
     var lastli = $(lis[lis.length-1]);
     lastli.attr('target', id);
-    
+
     //
     if (tab.selected) {this._je.tabs('select', lis.length-1);}
-    
+
     return tabdiv.lubanElement('tab');
   };
   widgets.tabs.prototype.add = function (subelem) {
@@ -154,7 +174,7 @@
     var parent = div.parent();
     var ul = parent.children('ul');
     var id = div.attr('id');
-    
+
     var label = attrs.label;
     if (label) {
       var li = ul.find("li[target='"+id+"']");

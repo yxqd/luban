@@ -19,7 +19,8 @@ C = luban.Controller = {
     'use_cookie': false,
     'path': '/cgi-bin/', // path of cookie
     'expires': 1
-  }
+  },
+  'parameter_prefix': ''
 };
 
 
@@ -101,15 +102,15 @@ C = luban.Controller = {
   };
 
   // prepend 'actor.' to keys
-  function prependActorStr(args) {
+  function prependParameterPrefix(args) {
     var d = {};
     for (var k in args) {
-      var k1 = 'actor.'+k;
+      var k1 = C.parameter_prefix+k;
       d[k1] = String(args[k]);
     }
     return d;
   }
-  C.prependActorStr = prependActorStr;
+  C.prependParameterPrefix = prependParameterPrefix;
 
 
   // controller methods
@@ -287,7 +288,7 @@ C = luban.Controller = {
   C.load = function(kwds, callback) {
     kwds.callback = callback;
     var data = kwds.data;
-    kwds.data = prependActorStr(data);
+    kwds.data = prependParameterPrefix(data);
     C.call(kwds);
   };
 
@@ -300,7 +301,7 @@ C = luban.Controller = {
   //   data: a dictionary of additional parameters to send to the server
   C.submit = function(form, kwds, callback) {
     kwds.callback = callback;
-    kwds.data = prependActorStr(kwds.data);
+    kwds.data = prependParameterPrefix(kwds.data);
     form.submitTo(kwds);
   };
 

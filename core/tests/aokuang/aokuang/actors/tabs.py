@@ -32,8 +32,8 @@ class Actor(base):
         frame = lui.e.frame(title="luban test: tabs")
         doc = frame.document(title="Tabs")
         tabs = doc.tabs()
-        tab1 = tabs.tab(label="tab1")
-        tab2 = tabs.tab(label="tab2")
+        tab1 = tabs.tab(label="tab1", id='tab1')
+        tab2 = tabs.tab(label="tab2", id='tab2')
         tab1.onselect = lui.a.load(
             actor=self.name, routine='onchangetab',
             old = lui.event.oldtab,
@@ -42,7 +42,12 @@ class Actor(base):
         return frame
 
 
-    def onchangetab(self, **kwds):
+    def onchangetab(self, old=None, new=None, **kwds):
+        msg = "tab switched from %r to %r" % (old, new)
+        return lui.a.alert(msg)
+
+
+    def onchangetab_debug(self, **kwds):
         return lui.a.alert(str(kwds))
 
 

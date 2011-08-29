@@ -22,6 +22,7 @@ class Frame2HtmlDocument(object):
         self, 
         librarian=None, 
         javascriptsbase = 'javascripts', imagesbase='images',
+        controller_parameter_prefix = '',  # 'actor.' if use pyre like component structure
         obj2json = None,
         ):
         if librarian is None: raise RuntimeError
@@ -29,6 +30,8 @@ class Frame2HtmlDocument(object):
 
         self.javascriptsbase = javascriptsbase
         self.imagesbase = imagesbase
+
+        self.controller_parameter_prefix = controller_parameter_prefix
 
         if obj2json is None: raise RuntimeError
         self.obj2json = obj2json
@@ -69,6 +72,7 @@ class Frame2HtmlDocument(object):
             'luban.configuration.javascripts_base = "%s";' % self.javascriptsbase,
             'luban.configuration.images_base = "%s";' % self.imagesbase,
             'luban.configuration.icons_base = "%s/icons";' % self.imagesbase,
+            'luban.Controller.parameter_prefix = "%s";' % self.controller_parameter_prefix,
             ]
 
         #

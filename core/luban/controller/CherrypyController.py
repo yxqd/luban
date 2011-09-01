@@ -16,7 +16,12 @@ import cherrypy, luban.ui as lui
 
 class CherrypyController:
 
-    def __init__(self, url, static_html_base='static', actor_package=None):
+    def __init__(
+        self, url,
+        static_html_base='static', 
+        actor_package=None,
+        web_weaver_library = None,
+        ):
         
         self.url = url
         self.static_html_base = static_html_base
@@ -25,10 +30,14 @@ class CherrypyController:
             raise ValueError("must provide actor package name")
         self.actor_package = actor_package
         
-        from luban.weaver.web import create as createWeaver
-        self.weaver = createWeaver(
+        from luban.weaver.web import create as createWeaver, use_library
+        weaver = self.weaver = createWeaver(
             controller_url = url,
             statichtmlbase=static_html_base)
+        # in case a custom web weaver library is supplied
+        # use it
+        if web_weaver_library:
+            use_library(web_weaver_library, weaver)
         return
     
 

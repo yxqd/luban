@@ -22,12 +22,12 @@ class TestCase(unittest.TestCase):
         import pyre
         class C(pyre.component):
             
-            a = pyre.components.properties.object()
+            a = pyre.properties.object()
 
-        c1 = C(); c1.a = 'a'
+        c1 = C('c1'); c1.a = 'a'
         self.assertEqual(c1.a, 'a')
 
-        c2 = C(); c2.a = None
+        c2 = C('c2'); c2.a = None
         
         self.assertEqual(c1.a, 'a')
         self.assertEqual(c2.a, None)

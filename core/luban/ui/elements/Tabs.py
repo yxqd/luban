@@ -91,7 +91,7 @@ class Tab(RivetedSubElement, SimpleContainer, metaclass=Meta):
     # onselect.tip = 'action when this tab is selected'
     # ************************************************************
 
-    # for inspectorx
+    # for inspector
     def identify(self, inspector):
         return inspector.onTab(self)
     

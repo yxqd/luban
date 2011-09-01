@@ -1,6 +1,6 @@
 
 core:
-* move current docs to timber/docs, and write the docs for luban core
+* docs for luban core
 * move to most recent jquery so we can remove the alert on msie/opera
 * checking of event handler assigment probably should be configurable
   to be omitted -- see luban.ui.descriptors.EventHandler

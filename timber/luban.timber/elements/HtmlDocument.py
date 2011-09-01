@@ -2,6 +2,7 @@
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #  
+#                                  Jiao Lin
 #                      California Institute of Technology
 #                      (C) 2006-2011  All Rights Reserved
 #
@@ -11,28 +12,26 @@
 #
 
 
-from .SimpleContainer import SimpleContainer
+from luban.ui.elements.SimpleElement import SimpleElement
 
 
-class HtmlDocument(SimpleContainer):
+class HtmlDocument(SimpleElement):
 
-
+    # decorators
     simple_description = 'A simple container of html text'
     full_description = (
         'A htmldocument widget can be used to display simple html-based content. '
         'It cannot handle complex html document with javascript, etc.'
         )
-
     abstract = False
 
-    def identify(self, inspector):
-        return inspector.onHtmlDocument(self)
-
+    # properties
     text = descriptors.str()
     text.tip = 'Content of the html document'
     
-    title = descriptors.str()
-    title.title = 'Title of the document'
+    # for inspector
+    def identify(self, inspector):
+        return inspector.onHtmlDocument(self)
 
 
 # version

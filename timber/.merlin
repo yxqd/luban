@@ -1,0 +1,3 @@
+# -*- python -*-
+
+recurse_entries = ['luban.timber']

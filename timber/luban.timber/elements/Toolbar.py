@@ -12,12 +12,12 @@
 #
 
 
-from .ElementContainer import ElementContainer, elementfactory
+from luban.ui.elements.ElementContainer import ElementContainer
 
 
 class Toolbar(ElementContainer):
 
-
+    # decorators
     simple_description = 'A simple container of buttons'
     full_description = (
         "A toolbar is a simple, horizontal container. "
@@ -25,42 +25,23 @@ class Toolbar(ElementContainer):
         )
     examples = [
         '''
-    import luban.ui.elements
-    toolbar = luban.ui.elements.toolbar()
+    import luban.ui as lui
+    toolbar = lui.e.toolbar()
     b1 = toolbar.button(label='button1')
     b2 = toolbar.button(label='button2')
-    toolbar.spacer()
     b3 = toolbar.button(label='button3')
     ''',
         ]
-
+    # .. this is a real luban type
     abstract = False
+    
 
-    @elementfactory
-    def button(self, *args, **kwds):
-        from .Button import Button
-        b = Button(*args, **kwds)
-        self.append(b)
-        return b
-
-    @elementfactory
-    def spacer(self):
-        ts = ToolbarSpacer()
-        self.append(ts)
-        return ts
-
-
+    # methods
+    # .. for inspector
     def identify(self, inspector):
         return inspector.onToolbar(self)
 
 
-
-from .Element import Element
-class ToolbarSpacer(Element):
-
-    def identify(self, inspector):
-        return inspector.onToolbarSpacer(self)
-    
 
 # version
 __id__ = "$Id$"

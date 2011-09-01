@@ -1,2 +1,7 @@
+# -*- python -*-
 
-recurse_entries = ['core']
+recurse_entries = [
+    'core', 
+    'timber',
+    ]
+

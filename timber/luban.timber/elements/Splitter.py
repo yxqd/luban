@@ -13,13 +13,13 @@
 
 
 
-from .SimpleContainer import SimpleContainer, Meta
-from .ElementContainer import ElementContainer, elementfactory
+from luban.ui.elements.Riveted import RivetedContainer, Meta, RivetedSubElement
+from luban.ui.elements.ElementContainer import elementfactory
 
 
-class Splitter(SimpleContainer):
+class Splitter(RivetedContainer):
 
-
+    # decorators
     simple_description = 'A container of vertically or horizontally aligned sections'
     full_description = (
         "A 'splitter' splits a space into sections vertically or horizontally. "
@@ -28,8 +28,8 @@ class Splitter(SimpleContainer):
     examples = [
         '''
     # the follwoing code creates a splitter that is oriented horizontally and has 3 sections
-    import luban.ui.elements
-    splitter = luban.ui.elements.splitter(orientation='horizontal')
+    import luban.ui as lui
+    splitter = lui.e.splitter(orientation='horizontal')
     left = splitter.section()
     middle = splitter.section()
     right = splitter.section()
@@ -38,51 +38,45 @@ class Splitter(SimpleContainer):
     right.paragraph(text=['right'])
     ''',
         ]
-
+    
     abstract = False
     
+    # properties
+    orientation = descriptors.str(default='horizontal')
+    orientation.validators = [validators.choice(['vertical', 'horizontal'])]
+    orientation.tip = 'Orientation of the splitter'
+    
+    
+    # methods
     @elementfactory
     def section(self, **kwds):
         section = SplitSection(**kwds)
         self.append(section)
         return section
 
-
+    # .. for inspector
     def identify(self, inspector):
         return inspector.onSplitter(self)
 
 
-    orientation = descriptors.str(default='horizontal')
-    orientation.validators = [validators.choice(['vertical', 'horizontal'])]
-    orientation.tip = 'Orientation of the splitter'
+from luban.ui.elements.SimpleContainer import SimpleContainer
+class SplitSection(RivetedSubElement, SimpleContainer, metaclass=Meta):
 
-
-from .DocumentFactory import DocumentFactory
-from .ParagraphFactory import ParagraphFactory
-from .ElementNotRoot import ElementNotRoot
-class SplitSection(DocumentFactory, ParagraphFactory, ElementNotRoot, ElementContainer, metaclass=Meta):
-
+    # decorators
     simple_description = 'A section in a splitter'
     full_description = ''
-
     abstract = False
+    #
+    parent_types = [Splitter]
 
-
-    def splitter(self, **kwds):
-        element = Splitter(**kwds)
-        self.append(element)
-        return element
-
-
+    # attributes
+    
+    # methods
+    # .. for inspector
     def identify(self, inspector):
         return inspector.onSplitSection(self)
-
-    size = descriptors.str(default=None)
-    size.tip = 'deprecated'
     
 
-# only allow splitsection to be children of spltters
-Splitter.allowed_element_types = [SplitSection]
 
 # version
 __id__ = "$Id$"

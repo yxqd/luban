@@ -20,66 +20,46 @@ def registerElementProvider(provider):
 
 # elements
 elementtypes = [
-    'Accordion',
-    'AppMenuBar',
-    'CodeEditor',
-    'CodeViewer',
-    'Credential',
-    'Dialog',
-    'Dock',
-    'Document',
-    'Downloader',
-    'File', 
-    'Form',
-    'Frame',
-    'Grid',
-    'Image',
-    'Link',
-    'NewsTicker',
-    'Paragraph',
-    'Plot2D',
-    'Portlet',
-    'ProgressBar',
-    'Splitter',
-    'Tabs',
-    'TreeView',
-    'Uploader',
-    ]
-elementtypes = [
-    'Button',
-    'Document',
-    'Frame',
+    # 'Accordion',
+    # 'AppMenuBar',
+    # 'CodeEditor',
+    # 'CodeViewer',
+    # 'Credential',
+    # 'Dialog',
+    # 'Dock',
+    # 'Document',
+    # 'Downloader',
+    # 'File', 
+    # 'Form',
+    # 'Frame',
+    # 'Grid',
     'HtmlDocument',
+    # 'Image',
+    # 'Link',
+    # 'NewsTicker',
+    # 'Paragraph',
+    # 'Plot2D',
+    # 'Portlet',
+    # 'ProgressBar',
     'ReStructuredTextDocument',
     'Splitter',
-    'Tabs',
     'Toolbar',
+    # 'TreeView',
+    # 'Uploader',
     ]
-def registerAllElements():
+def importAllElements():
     modules = elementtypes
     for name in modules:
         __import__(name, fromlist=['.'], globals=globals())
         continue
     return
-registerAllElements()
-
-
-# create element factory methods
-from ._registry import fundamental_elements
-for name in fundamental_elements:
-    klass = fundamental_elements.getElementClass(name)
-    # make a lower case alias 
-    code = '%s = klass' % name.lower()
-    exec(code)
-    continue
+importAllElements()
+del importAllElements
 
 
 # alias
-rstdoc = restructuredtextdocument
-
-
-# TODO:
-#  id: elementtype cache. cache must be session id dependent
+from luban.ui import e
+e.rstdoc = e.restructuredtextdocument
 
 
 # version

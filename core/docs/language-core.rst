@@ -267,14 +267,15 @@ Summary
 Up until now, all discusions don't assume any implementation
 of the luban specification "language". 
 You can see that the core of luban only consists of
-luban types that is enough to describe UI elements, actions,
-and events. 
+luban types to describe UI elements, actions,
+and events, and their connections through attributes and also
+controller.
 
 In the next section, we will discuss to how to 
 program luban with python. 
 
 
 
-next: :ref:`programming-luban-with-python`
+next: :ref:`core-implementation-python`
 
 

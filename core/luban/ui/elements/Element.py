@@ -71,10 +71,26 @@ class Element(ElementBase, metaclass=Meta):
     Class = descriptors.list()
     Class.tip = 'Class of this element. Useful for styling the element'
 
-    # many more event handlers can be added. onclick is a common example
-    onclick = descriptors.eventhandler()
-    onclick.tip = 'action when a mouse click happens on this element'
+    # events -- must have one-one correspondence with event handler
+    from ..Event import Event
+    class click(Event):
+        # decorations
+        simple_description = "event happens when a ui element is clicked"
+        abstract = False
+        __unique_type_name__ = 'click'
+        # no attributes
+    del Event
     
+    # ************************************************************
+    # event handlers
+    # event handlers will be automatically defined using event types
+    # defined here (like "click" event above will cause a "onclick"
+    # event handler automatically)
+    # here is just an example in case one has to define a custom 
+    # event handler descriptor
+    # onclick = descriptors.eventhandler()
+    # onclick.tip = 'action when a mouse click happens on this element'
+    # ************************************************************    
     
     def addClass(self, kls):
         "add a classifier for this element"

@@ -57,7 +57,7 @@ class Tab(RivetedSubElement, SimpleContainer, metaclass=Meta):
 
     
     # decorations
-    simple_description = 'A tab in tabs'
+    simple_description = 'A tab in a "tabs" container'
     full_description = ''
     abstract = False
 

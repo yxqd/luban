@@ -262,8 +262,19 @@ For example::
 is a type of event happens when a tab is selected.
 
 
+Summary
+-------
+Up until now, all discusions don't assume any implementation
+of the luban specification "language". 
+You can see that the core of luban only consists of
+luban types that is enough to describe UI elements, actions,
+and events. 
+
+In the next section, we will discuss to how to 
+program luban with python. 
 
 
-Programming luban with python
------------------------------
+
+next: :ref:`programming-luban-with-python`
+
 

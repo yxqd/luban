@@ -21,3 +21,4 @@ Getting Started
 ---------------
 
 * :ref:`Language core <language-core>`
+* :ref:`programming-luban-with-python`

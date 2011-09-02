@@ -76,7 +76,6 @@ class Element(ElementBase, metaclass=Meta):
     class click(Event):
         # decorations
         simple_description = "event happens when a ui element is clicked"
-        abstract = False
         __unique_type_name__ = 'click'
         # no attributes
     del Event

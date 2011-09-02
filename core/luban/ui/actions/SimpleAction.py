@@ -20,8 +20,7 @@ class SimpleAction(base):
     """
 
     # decorations
-    # .. this is a real luban type
-    abstract = False
+
     
     # attributes
     actionname = descriptors.str()

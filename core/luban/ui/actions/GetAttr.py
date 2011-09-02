@@ -20,9 +20,6 @@ from .ActionBase import ActionBase
 class GetAttr(ActionBase):
 
     # decorations
-    # .. this is a real luban type
-    abstract = False
-
 
     # attributes
     entity = descriptors.object(dynamic=False) # entity the attribute is about

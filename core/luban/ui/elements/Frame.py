@@ -27,7 +27,6 @@ class Frame(SimpleContainer, metaclass=Meta):
         'needs to be established.'
         )
 
-    abstract = False
 
     # means no element can be a frame's parent
     parent_types = None

@@ -19,7 +19,7 @@ class NoAction(base):
     # decorations
     simple_description = 'nothing'
     full_description = ("no action at all")
-    abstract = False
+    
 
     def identify(self, inspector):
         return inspector.onNoAction(self)

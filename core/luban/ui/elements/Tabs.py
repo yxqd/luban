@@ -36,8 +36,6 @@ tabs.tab('tab2').document(title='tab2')
 ''',
         ]
     
-    abstract = False
-
 
     # methods
     @elementfactory
@@ -59,8 +57,7 @@ class Tab(RivetedSubElement, SimpleContainer, metaclass=Meta):
     # decorations
     simple_description = 'A tab in a "tabs" container'
     full_description = ''
-    abstract = False
-
+    
     #
     parent_types = [Tabs]
 
@@ -72,8 +69,7 @@ class Tab(RivetedSubElement, SimpleContainer, metaclass=Meta):
     from ..Event import Event
     class select(Event):
         # decorations
-        simple_description = "event happens when this tab is selected"
-        abstract = False
+        simple_description = "event happens when this tab is selected"        
         __unique_type_name__ = 'tabselect'
         # attributes
         oldtab = descriptors.str()
@@ -103,7 +99,6 @@ class SelectTab(ElementActionBase):
     "select the tab"
 
     # decorations
-    abstract = False
     element_type = Tab
     factory_method = "select"
 

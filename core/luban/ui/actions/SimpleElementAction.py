@@ -23,9 +23,7 @@ from .ElementActionBase import ElementActionBase as base
 class SimpleElementAction(base):
 
     # decorations
-    # .. this is a real luban type
-    abstract = False
-
+    
 
     # attributes
     actionname = descriptors.str() # name of the action

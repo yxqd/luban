@@ -16,9 +16,7 @@ from .ElementActionBase import ElementActionBase as base
 
 class ReplaceContent(base):
 
-    # decorations
-    # .. this is a real luban type
-    abstract = False
+    # decorations    
     # .. name of action factory method
     factory_method = 'replaceContent'
 

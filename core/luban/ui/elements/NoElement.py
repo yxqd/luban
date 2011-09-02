@@ -28,7 +28,6 @@ class NoElement(base):
     simple_description = 'nothing'
     full_description = ("no element at all")
 
-    abstract = False
 
     def identify(self, inspector):
         return inspector.onNoElement(self)

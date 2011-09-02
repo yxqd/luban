@@ -35,6 +35,8 @@ class TestCase(unittest.TestCase):
         from luban.ui.AttributeContainer import AttributeContainer
         class A(AttributeContainer):
             
+            __unique_type_name__ = "A_test1"
+
             # s = AttributeContainer.descriptors.str('a')
             s1 = descriptors.str()
             a2 = d.str()
@@ -57,6 +59,8 @@ class TestCase(unittest.TestCase):
         from luban.ui.AttributeContainer import AttributeContainer
         class A(AttributeContainer):
             
+            __unique_type_name__ = "A_test2"
+            
             s1 = descriptors.str()
             
             pass
@@ -73,6 +77,8 @@ class TestCase(unittest.TestCase):
         "getAttribute, setAttribute"
         from luban.ui.AttributeContainer import AttributeContainer
         class A(AttributeContainer):
+            
+            __unique_type_name__ = "A_test3"
             
             s1 = descriptors.str()
             

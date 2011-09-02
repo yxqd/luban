@@ -20,8 +20,6 @@ class Event(AttributeContainer):
 
     # decorators
     
-    abstract = False # this is a real luban type
-    
 
     def __getattr__(self, key):
         from .actions.GetAttr import GetAttr

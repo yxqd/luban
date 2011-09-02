@@ -20,8 +20,7 @@ class Button(base):
         'A button is clickable. When clicked, an action will be triggered. '
         'A button has a label.'
         )
-
-    abstract = False
+    
 
     # attributes
     label = descriptors.str()

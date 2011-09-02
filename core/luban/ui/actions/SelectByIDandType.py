@@ -23,7 +23,7 @@ class SelectByIDandType(ElementActionFactory, base, metaclass=Meta):
         "The constructed selector can be used to perform further "
         "actions on the selected element. Eg. selector.destory(). "
         )
-    abstract = False
+    
 
     # attributes
     id = descriptors.str()

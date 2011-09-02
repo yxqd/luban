@@ -31,7 +31,6 @@ sometext = lue.paragraph(text=['text here'])
 ''',
         ]
     
-    abstract = False
 
     # attributes
     text = descriptors.str()

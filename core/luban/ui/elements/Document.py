@@ -30,7 +30,6 @@ class Document(SimpleContainer, metaclass=Meta):
         "A document widget has a title which can be empty. "
         )
     
-    abstract = False
 
     # attributes
     title = descriptors.str()

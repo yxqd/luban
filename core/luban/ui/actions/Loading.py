@@ -22,9 +22,8 @@ class Loading(base):
         "A 'load' action loads from the UI controller. "
         "The loaded could be some simple data, a luban element, or an action."
         )
-    abstract = False
 
-
+    
     # attributes
     actor = descriptors.str()
     actor.tip = 'The actor that will handle this load action'

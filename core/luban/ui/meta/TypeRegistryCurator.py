@@ -53,11 +53,8 @@ class Registry:
         # no templates
         if 'template' in cls.__dict__ and cls.template:
             return
-        # must have "abstract" decoration
-        if 'abstract' not in cls.__dict__:
-            return
-        # no base classes
-        if cls.abstract:
+        # if it has "abstract" decoration, skip
+        if 'abstract' in cls.__dict__ and cls.abstract:
             return
             
         name = self._getUniqueName(cls)

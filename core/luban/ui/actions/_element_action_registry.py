@@ -28,7 +28,7 @@ def register(cls):
     import luban
     
     # skip base classes
-    if cls.abstract:
+    if 'abstract' in cls.__dict__ and cls.abstract:
         return
 
     # if already registered, do nothing

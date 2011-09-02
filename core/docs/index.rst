@@ -22,3 +22,13 @@ Getting Started
 
 * :ref:`Language core <language-core>`
 * :ref:`core-implementation-python`
+
+
+Borrowed technologies
+---------------------
+
+* python
+* cherrypy
+* jquery
+* jquery ui
+

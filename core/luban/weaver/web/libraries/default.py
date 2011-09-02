@@ -12,42 +12,7 @@
 #
 
 
-base = {
-    'stylesheets': 
-    (
-    'jquery/ui/smoothness/ui.all.css',
-    'jquery/jquery.tooltip.css',
-    'luban.css',
-    ),
-    
-    'javascripts':
-    (
-    'jquery/jquery.js',
-    #'jquery/jquery.rightClick.js',
-    #'jquery/jquery.bgiframe.js',
-    'jquery/ui/ui.core.js',
-    'jquery/ui/ui.draggable.js',
-    'jquery/ui/ui.resizable.js',
-    'luban/luban-core.js',
-    'luban/luban-controller.js',
-    'luban/luban-credential.js',
-    'luban/luban-compiler-preloader.js',
-    'luban/luban-actioncompiler.js',
-    'luban/luban-documentmill.js',
-    'luban/luban-widget-core.js',
-    ),
-    }
-
-
-application = {
-    }
-
-tabs = {
-    'javascripts':
-    (
-    'jquery/ui/ui.tabs.js',
-    ),
-    }
+from .jquery1_6_2_debug import *
 
 
 # version

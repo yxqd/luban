@@ -12,7 +12,7 @@
 #
 
 
-import cherrypy, luban.ui as lui
+import cherrypy
 
 
 from .ControllerBase import ControllerBase

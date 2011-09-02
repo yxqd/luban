@@ -36,10 +36,6 @@ Example code to create a simple element type that is not a container::
      simple_description = 'a paragraph of text'
      full_description = ''
      
-     # meaning this is a real luban type (not an abstract one)
-     # so that the luban type registry will register this type
-     abstract = False
-     
      # attributes
      # .. properties
      text = descriptors.str()
@@ -53,7 +49,6 @@ Example code to create a simple element type that is not a container::
      class click(Event):
          # decorations
          simple_description = "event happens when a ui element is clicked"
-         abstract = False 
          __unique_type_name__ = 'click'
          # no attributes
      del Event # no need to keep the event base class in the name space
@@ -79,8 +74,6 @@ Example code to create a simple element type that is not a container::
  class Destroy(ElementActionBase):
  
      # decorations
-     # .. this is a real luban type
-     abstract = False
      # .. name of action factory method. so we can do select(element=<element>).destroy()
      factory_method = 'destroy'
  
@@ -129,7 +122,6 @@ An example of generic action types is the Loading action::
      # decorations
      simple_description = 'load from the UI controller'
      full_description = '...'
-     abstract = False
  
      # attributes
      actor = descriptors.str()
@@ -172,7 +164,6 @@ Example luban.ui.elements.Tabs.Tab.select ::
      class select(Event):
          # decorations
          simple_description = "event happens when this tab is selected"
-         abstract = False
          __unique_type_name__ = 'tabselect'
          # attributes
          oldtab = descriptors.str()

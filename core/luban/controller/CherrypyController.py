@@ -14,7 +14,9 @@
 
 import cherrypy, luban.ui as lui
 
-class CherrypyController:
+
+from .ControllerBase import ControllerBase
+class CherrypyController(ControllerBase):
 
     def __init__(
         self, url,
@@ -22,14 +24,14 @@ class CherrypyController:
         actor_package=None,
         web_weaver_library = None,
         ):
+        # init bases
+        super().__init__(actor_package)
         
+        #
         self.url = url
         self.static_html_base = static_html_base
 
-        if not actor_package:
-            raise ValueError("must provide actor package name")
-        self.actor_package = actor_package
-        
+        # weaver
         from luban.weaver.web import create as createWeaver, use_library
         weaver = self.weaver = createWeaver(
             controller_url = url,
@@ -43,27 +45,8 @@ class CherrypyController:
 
     @cherrypy.expose
     def index(self, actor=None, routine=None, **kwds):
-        actor = actor or 'default'
-        actor = self._retrieveActor(actor)
-        obj = actor.perform(routine=routine, **kwds)
+        obj = self.run(actor=actor, routine=routine, **kwds)
         return self.weaver.weave(obj)
-
-
-    def _retrieveActor(self, actor):
-        actor_name = actor
-        mod_name = '%s.%s' % (self.actor_package, actor_name)
-        actor_module = __import__(
-            mod_name, 
-            fromlist=[''],
-            )
-        factory = actor_module.Actor
-        if not hasattr(factory, 'expose') or not factory.expose:
-            raise RuntimeError("actor %s not exposed" % factory)
-        
-        actor = factory()
-        actor.name = actor_name
-        actor.director = self
-        return actor
 
 
 

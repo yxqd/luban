@@ -92,6 +92,9 @@ class Tab(RivetedSubElement, SimpleContainer, metaclass=Meta):
         return inspector.onTab(self)
     
 
+Tabs.child_types = [Tab]
+
+
 # to define a new element action, subclass ElementActionBase
 from ..actions.ElementActionBase import ElementActionBase
 class SelectTab(ElementActionBase):

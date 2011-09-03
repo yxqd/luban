@@ -70,7 +70,35 @@ class TestCase(unittest.TestCase):
             raise RuntimeError("should raise EventAttributeError")
         return
 
+    
+    def test6(self):
+        """luban.content.ElementContainer: allowed_element_types: Tabs"""
+        from luban.ui.elements.Tabs import Tabs, Tab
+        tabs = Tabs()
+        tabs.tab(name='tab1')
 
+        tabs.append(Tab(name="tab2"))
+
+        from luban.ui.elements.Document import Document
+        self.assertRaises(
+            tabs.SubelementDisallowedError,
+            tabs.append, Document(),
+            )
+        return
+
+
+    def test7(self):
+        """Tabs: definition context"""
+        import luban
+        if luban.has_pyre:
+            class MyTabs(lui.e.tabs):
+
+                tab1 = Tab()
+
+                pass
+        return
+     
+    
     
 if __name__ == "__main__": unittest.main()
 

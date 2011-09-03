@@ -101,6 +101,9 @@ class ElementContainer(Element, metaclass=Meta):
         """check whether the given element type 
         can be a subelement of this element type.
         """
+        if cls.child_types != 'any' and type not in cls.child_types:
+            return False
+            
         if type.parent_types is None:
             return False
         

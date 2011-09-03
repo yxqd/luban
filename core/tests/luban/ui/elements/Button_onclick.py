@@ -11,7 +11,7 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-from luban.ui import elements as lue, actions as lua
+from luban.ui import e as lue, a as lua
 
 
 import unittest
@@ -38,8 +38,6 @@ class TestCase(unittest.TestCase):
      
 
     def test3(self):
-        import luban.ui.elements as lue
-        
         doc1 = lue.document(name='doc1')
         doc1.onclick = lua.alert('a')
         self.assert_(doc1.onclick is not None)

@@ -22,6 +22,11 @@ class EventHandler(Property):
     
     
     def __set__(self, instance, value):
+        # None -> NoAction
+        if value is None:
+            from ..actions.NoAction import NoAction
+            value = NoAction()
+
         # value has to be an action
         from ..actions.ActionBase import ActionBase
         if not isinstance(value, ActionBase):

@@ -58,7 +58,9 @@ class Element(ElementBase, metaclass=Meta):
     # this is usually any element container types, but
     # special cases exist. see, for example, Frame and Tabs.Tab
     parent_types = 'any' 
-    
+
+    # what are the possible child element types?
+    child_types = 'any'
     
     # common ui element properties
     id = descriptors.id()

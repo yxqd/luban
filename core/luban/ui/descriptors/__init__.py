@@ -103,7 +103,9 @@ def object(default=None, dynamic=True):
 
 
 # misc descriptors
-
+def id():
+    from .ID import ID
+    return ID()
 
 
 # implementation details

@@ -53,6 +53,40 @@ class TestCase(unittest.TestCase):
         # help(T2.__init__) # should show a good doc string same as "docstr" above
         return
     
+
+    def test3(self):
+        name = "e1"
+        
+        e1 = Element(name=name, id='e1')
+        self.assertEqual(e1.name, name)
+        
+        attrs = list(e1.iterAttributes())
+
+        self.assertEqual(e1.id, 'e1')
+        self.assertRaises(ValueError, setattr, e1, 'id', "a.b")
+        return
+
+
+    def test4(self):
+        name = "e1"
+        Class = "a b c"
+        e1 = Element(name=name, Class=Class)
+        self.assertEqual(e1.Class, ["a", "b", "c"])
+
+        e1.addClass('d')
+        self.assertEqual(e1.Class, ["a", "b", "c", "d"])
+        
+        return
+     
+
+    def test5(self):
+        from luban.ui.actions import load
+        verify = load(actor="login", routine="verify")
+        e1 = Element(onclick=verify)
+        self.assertEqual(e1.onclick, verify)
+        return
+     
+    
 if __name__ == "__main__": unittest.main()
 
     

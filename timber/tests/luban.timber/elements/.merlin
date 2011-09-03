@@ -3,7 +3,7 @@
 import merlin.rules, os
 from merlin.Context import create
 context = create()
-context.code.project = 'luban'
+context.code.project = 'luban.timber'
 
 
 tests = []
@@ -17,7 +17,7 @@ for f in seq:
 
 rules = []
 rules.append(
-    merlin.rules.testSuite(name="luban.ui", tests = tests)
+    merlin.rules.testSuite(name="luban.timber.elements", tests = tests)
     )
 
 

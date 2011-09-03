@@ -61,8 +61,8 @@ class Element(ElementBase, metaclass=Meta):
     
     
     # common ui element properties
-    id = descriptors.str()
-    id.tip = 'Identifier of this element. If left blank, a unique one will be generated automatically'
+    id = descriptors.id()
+    id.tip = 'Identifier of this element. need to be unique among all elements'
     
     name = descriptors.str()
     name.tip = 'Name of this element. must be unique among siblings'

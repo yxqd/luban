@@ -34,7 +34,7 @@
   ef.paragraph = function(kwds, docmill, parent) {
     var id = kwds.id;
     var p = tag('p', {"id":id});
-    p.text(kwds.text.join('\n'));
+    p.text(kwds.text);
 
     var kls = kwds.Class;
     if (kls) {p.addClass(kls);}

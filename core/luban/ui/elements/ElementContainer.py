@@ -16,6 +16,11 @@ from .Element import Element, Meta
 class ElementContainer(Element, metaclass=Meta):
 
     """base class of element container types
+
+    Usually one should not subclass this class directly 
+    to create new types of element containers. 
+    One should subclass either SimpleContainer.SimpleContainer
+    or Riveted.RivetedContainer.
     """
 
     # decorations

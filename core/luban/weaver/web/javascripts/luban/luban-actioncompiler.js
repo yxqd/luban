@@ -83,7 +83,7 @@
       return eval(code);
     },
 
-    'onselectbyid': function(action) {
+    'onselectbyidandtype': function(action) {
       var id = action.id;
       if (!id) {
         // assume that no id means the frame

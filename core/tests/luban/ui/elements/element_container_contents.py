@@ -12,18 +12,18 @@
 #
 
 
-import unittest
+from luban import ui as lui
 
+
+import unittest
 class TestCase(unittest.TestCase):
 
 
     def test(self):
-        import luban.ui.elements as lue
-        
-        frame = lue.frame(name='frame', title="title")
+        frame = lui.e.frame(name='frame', title="title")
         
         header = frame.document(name='header')
-        sp = lue.splitter(name="sp"); header.append(sp)
+        subdoc = lui.e.document(name="subdoc"); header.append(subdoc)
         self.assert_(len(header.contents) == 1)
         
         body = frame.document(name='body', title="body")

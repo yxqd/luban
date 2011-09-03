@@ -16,6 +16,7 @@
 
 class HtmlRenderer:
 
+
     # properties
     htmlbase = 'http://site/url/'
     javascriptsbase = 'javascripts'

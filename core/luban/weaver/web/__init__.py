@@ -57,37 +57,16 @@ def create(htmlbase='', controller_url='/controller/main.cgi',
     weaver.obj2html.librarian = Librarian(cssbase=cssbase, jsbase=jsbase)
     
     # load the library
-    library = library or 'default'
-    use_library(library, weaver)
+    weaver.use_library(library)
 
     #
     return weaver
 
 
+def set_default_library_for_weaver(library):
+    from .Weaver import Weaver
+    Weaver.default_library = library
+    return library
 
-def use_library(library, weaver):
-    '''make use of a library for the given weaver
 
-* library: if it is a string, load the library from subpackage "libraries"
-           if it is a module, just use it.
-* weaver: the html mill to use the library
-'''
-    if isinstance(library, str):
-        from .libraries import getLibrary
-        library = getLibrary(library)
-        
-    for k in dir(library):
-        # skip private props
-        if k.startswith('_'): continue
-        # 
-        v = getattr(library, k)
-        #
-        stylesheets = v.get('stylesheets') or []
-        javascripts = v.get('javascripts') or []
-        #
-        weaver.obj2html.librarian.register(k, stylesheets, javascripts)
-        continue
-    return
-
-    
 # End of file 

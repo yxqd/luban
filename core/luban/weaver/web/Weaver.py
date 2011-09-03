@@ -67,4 +67,47 @@ class Weaver:
         return self.obj2json.render(specification)
 
     
+    def use_library(self, library):
+        '''make use of the given library 
+        a library contains information regarding javascript module
+        and css module for luban base, widgets, and the application
+
+        * library: an object. each attribute of the object needs 
+          to be a dictionary 
+          of {'stylesheets': <list>, 'javascripts': <list>}
+        '''
+        library = library or self.default_library
+        for k in dir(library):
+            # skip private props
+            if k.startswith('_'): continue
+            # 
+            v = getattr(library, k)
+            try:
+                v.get
+            except AttributeError:
+                m = "%s=%r" % (k,v)
+                m += "is not a valid entry in a luban web weaver library."
+                m += "it must be dict-like."
+                m += "The problematic library is %r" % (library,)
+                raise RuntimeError(m)
+            #
+            stylesheets = v.get('stylesheets') or []
+            javascripts = v.get('javascripts') or []
+            #
+            self.obj2html.librarian.register(k, stylesheets, javascripts)
+            continue
+        return
+    from .libraries import default as default_library
+
+
+    def customize_application(self, stylesheets=None, javascripts=None):
+        """tell the weaver where to find the css modules
+        specific for the current application
+        """
+        self.obj2html.librarian.register(
+            'application',
+            stylesheets, javascripts,
+            )
+
+
 # End of file 

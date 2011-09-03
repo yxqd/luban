@@ -32,7 +32,9 @@ for element in elements:
     continue
 
 
+
 __all__ = elements
+del element, elements
 
 
 # version

@@ -12,6 +12,16 @@
 #
 
 
+"""
+manage mapping from {feature} to css and javascript modules.
+
+{feature} could be 
+* base: luban base
+* application: luban application
+* {widget}
+
+"""
+
 class Librarian:
 
     def __init__(self, cssbase='css', jsbase='javascripts'):
@@ -23,8 +33,8 @@ class Librarian:
         return
 
 
-    def register(self, widget, stylesheets, jslibs):
-        self._registry[widget] = {
+    def register(self, feature, stylesheets, jslibs):
+        self._registry[feature] = {
             'css': list(map(self._csspath, stylesheets)),
             'js': list(map(self._jspath, jslibs)),
             }

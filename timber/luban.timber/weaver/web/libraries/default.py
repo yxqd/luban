@@ -12,171 +12,27 @@
 #
 
 
-base = {
-    'stylesheets': 
-    (
-    'jquery/ui/smoothness/ui.all.css',
-    'jquery/jquery.tooltip.css',
-    'luban.css',
-    ),
-    
-    'javascripts':
-    (
-    'other/sprintf.js',
-    'jquery/excanvas.min.js',
-    'jquery/jquery.js',
-    'jquery/jquery.rightClick.js',
-    'jquery/jquery.bgiframe.js',
-    'jquery/jquery.tooltip.js',
-    'jquery/ui/ui.core.js',
-    'jquery/ui/ui.draggable.js',
-    'jquery/ui/ui.resizable.js',
-    'luban/luban-core.js',
-    'luban/luban-controller.js',
-    'luban/luban-compiler-preloader.js',
-    'luban/luban-actioncompiler.js',
-    'luban/luban-documentmill.js',
-    'luban/luban-widgets-basic.js',
+from luban.weaver.web.libraries.default import *
 
-    'other/editarea/edit_area/edit_area_full.js', # hack. edit_area does not seem to work when dynamically loaded
-    ),
-    }
+base['javascripts'] += [
+    'luban.timber/elementactioncompiler.js',
+    'luban.timber/widget-base.js',
+    ]
 
 
-application = {
-    }
+elements = [
+    'splitter', 'splitsection', 
+    'htmldocument',
+    'toolbar',
+    ]
+            
+for element in elements:
+    d = {'javascripts': ('luban.timber/widgets/%s.js' % element,)}
+    exec ("%s=d" % element)
+    continue
 
 
-dialog = {
-    'javascripts':
-    (
-    'jquery/ui/ui.dialog.js',
-    ),
-    }
-
-
-uploader = {
-    'javascripts':
-    (
-    'jquery/ajaxupload.3.0.js',
-    ),
-    }
-
-
-table = {
-    'stylesheets':
-    (
-    'tabulator/datePicker.css',
-    'tabulator/tabulator.css',
-    'tabulator/tabulator-color.css',
-    ),
-    'javascripts':
-    (
-    'jquery/date.js',
-    'jquery/jquery.datePicker.js',
-    'jquery/tabulator.js',
-    'jquery/elementFactory.js',
-    'jquery/tableFactory.js',
-    )
-    }
-
-treeview = {
-    'javascripts':
-    (
-    'jquery/jsTree/jquery.tree.js',
-    ),
-    }
-
-newsticker = {
-    'javascripts':
-    (
-    'jquery/jquery.newsticker.js',
-    ),
-    }
-
-tabs = {
-    'javascripts':
-    (
-    'jquery/ui/ui.tabs.js',
-    ),
-    }
-
-appmenubar = {
-    'stylesheets':
-    (
-    'jquery/jquery.jdMenu.css',
-    ),
-    'javascripts':
-    (
-    'jquery/jdMenu-1.4.1/jquery.jdMenu.js',
-    'jquery/jdMenu-1.4.1/jquery.positionBy.js',
-    ),
-    }
-
-accordion = {
-    'javascripts':
-    (
-    'jquery/ui/ui.accordion.js',
-    ),
-    }
-
-progressbar = {
-    'javascripts':
-    (
-    'jquery/ui/ui.progressbar.js',
-    ),
-    }
-
-plot2d = {
-    'javascripts':
-    (
-    'jquery/jquery.flot.js',
-    'jquery/jquery.flot.selection.js',
-    ),
-    }
-
-codeeditor = {
-    }
-
-codeviewer = {
-    'stylesheets':
-    (
-    'other/prettifier/prettify.css',
-    ),
-    'javascripts':
-    (
-    'other/prettifier/prettify.js',
-    ),
-    }
-
-matterbuilder = {
-    'javascripts':
-    (
-    'other/o3djs/base.js',
-    'other/o3djs/math.js',
-    'other/o3djs/error.js',
-    'other/o3djs/dump.js',
-    'other/o3djs/primitives.js',
-    'other/o3djs/texture.js',
-    'other/o3djs/event.js',
-    'other/o3djs/quaternions.js',
-    'other/o3djs/rendergraph.js',
-    'other/o3djs/debug.js',
-    'other/o3djs/io.js',
-    'other/o3djs/util.js',
-    'other/o3djs/picking.js', 
-    'other/o3djs/effect.js',
-    'other/o3djs/material.js',
-    'other/o3djs/element.js',
-    'other/o3djs/shape.js',
-    'other/o3djs/pack.js',     
-    'other/o3djs/arcball.js',
-    'other/o3djs/serialization.js',
-    'other/o3djs/scene.js',
-    'other/viewer/atomInfo.js',
-    'other/viewer/lattice16.js',
-    ),
-    }
+__all__ = elements
 
 
 # version

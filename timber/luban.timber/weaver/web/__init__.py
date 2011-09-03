@@ -12,16 +12,4 @@
 #
 
 
-# ************************************************************
-# bad bad
-import luban
-luban.__doc__ += """* timber: default extension of luban core
-"""
-# ************************************************************
-
-
-# activate extensions
-from . import elements, actions
-
-
 # End of file 

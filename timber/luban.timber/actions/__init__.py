@@ -44,10 +44,19 @@ def removeCredential():
     return SimpleAction('credentialRemoval')
 
 
-#  for controller access
-def load(*args, **kwds):
-    from .Loading import Loading
-    return Loading(*args, **kwds)
+
+# common element actions
+action_modules = [
+    'ReplaceElement',
+    ]
+def importAllElementActions():
+    modules = action_modules
+    for name in modules:
+        __import__(name, fromlist=['.'], globals=globals())
+        continue
+    return
+importAllElementActions()
+del importAllElementActions
 
 
 # version

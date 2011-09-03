@@ -23,8 +23,7 @@ class ReStructuredTextDocument(SimpleElement):
         'A ReStructuredTextDocument widget can be used to display text'
         'in ReStructuredText format. '
         )
-    # .. this is a real luban type
-    abstract = False
+    experimental = True
     
     # properties
     text = descriptors.str()
@@ -45,15 +44,17 @@ def reSTdoc2htmldoc(restdoc):
     from ..utils.rst import rest2html
     html = rest2html(rest)
     kls = restdoc.Class
+    if kls is None:
+        kls = []
     if 'ReST' not in kls: kls.append('ReST')
     from luban import ui as lui
-    htmldoc = lui.htmldocument(text=html, id=restdoc.id or '', Class=kls)
+    htmldoc = lui.e.htmldocument(text=html, id=restdoc.id or '', Class=kls)
     return htmldoc
-def onReStructuredText(self, doc):
+def onReStructuredTextDocument(self, doc):
     htmldoc = reSTdoc2htmldoc(doc)
     return self.render(htmldoc)
 from luban.weaver.Object2Dict import Object2Dict
-Object2Dict.onReStructuredText = onReStructuredText
+Object2Dict.onReStructuredTextDocument = onReStructuredTextDocument
 
 
 # version

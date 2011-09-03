@@ -23,7 +23,6 @@ class HtmlDocument(SimpleElement):
         'A htmldocument widget can be used to display simple html-based content. '
         'It cannot handle complex html document with javascript, etc.'
         )
-    abstract = False
 
     # properties
     text = descriptors.str()

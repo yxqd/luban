@@ -12,10 +12,10 @@
 #
 
 
-from luban.ui.elements.ElementContainer import ElementContainer
+from luban.ui.elements.SimpleContainer import SimpleContainer
 
 
-class Toolbar(ElementContainer):
+class Toolbar(SimpleContainer):
 
     # decorators
     simple_description = 'A simple container of buttons'
@@ -32,8 +32,6 @@ class Toolbar(ElementContainer):
     b3 = toolbar.button(label='button3')
     ''',
         ]
-    # .. this is a real luban type
-    abstract = False
     
 
     # methods

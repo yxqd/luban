@@ -39,7 +39,6 @@ class Splitter(RivetedContainer):
     ''',
         ]
     
-    abstract = False
     
     # properties
     orientation = descriptors.str(default='horizontal')

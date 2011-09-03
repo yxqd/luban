@@ -12,9 +12,10 @@
 #
 
 
-import luban.ui.elements as lue
-
+from luban.ui import e as lue
+import luban.timber # timber extension
 import unittest
+
 
 class TestCase(unittest.TestCase):
 
@@ -24,16 +25,25 @@ class TestCase(unittest.TestCase):
 
 
     def test2(self):
-        doc = lue.rstdoc(text="abc")
+        text = """
+Title
+=====
+
+List:
+* a
+* b
+* c
+"""
+        doc = lue.rstdoc(text=text)
         from luban.weaver.web import create as createWeaver
         weaver = createWeaver()
         s = weaver.weave(doc)
-        # print (s)
+        print (s)
         return
 
 
 def main():
-    import journal
+    from luban import journal
     journal.debug('luban.content.ElementContainer').active = 1
     journal.debug('luban.weaver.web.prerenderer').active = 1
     unittest.main()

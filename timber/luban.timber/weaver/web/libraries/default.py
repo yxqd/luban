@@ -33,7 +33,6 @@ for element in elements:
 
 
 
-__all__ = elements
 del element, elements
 
 

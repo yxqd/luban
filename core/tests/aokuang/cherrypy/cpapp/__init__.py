@@ -12,7 +12,7 @@ class Root(CherrypyController):
         super().__init__(
             url = '/',
             static_html_base = 'static',
-            actor_package = 'aokuang.actors',
+            actor_package = 'aokuang.core.actors',
             )
         return
 

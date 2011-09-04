@@ -13,8 +13,9 @@
 
 
 """
-namespace for test applications of luban and luban extensions
+test application of luban core
 """
+
 
 # End of file 
 

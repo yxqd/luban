@@ -1,3 +1,3 @@
 # -*- python -*-
 
-recurse_entries = ['luban.timber']
+recurse_entries = ['luban.timber', 'aokuang.timber']

@@ -12,17 +12,7 @@
 #
 
 
-"""
-hello: trivial test
-
-example urls:
-
-* http://localhost:8080
-* http://localhost:8080?routine=str
-* http://localhost:8080?routine=frame
-"""
-
-from .hello import Actor
+from .helloworld import Actor
 
 
 # End of file 

@@ -13,13 +13,13 @@
 
 
 """
-hello: trivial test
+helloworld: trivial test
 
 example urls:
 
-* http://localhost:8080/?actor=hello
-* http://localhost:8080/?actor=hello&routine=str
-* http://localhost:8080/?actor=hello&routine=frame
+* http://localhost:8080/?actor=helloworld
+* http://localhost:8080/?actor=helloworld&routine=str
+* http://localhost:8080/?actor=helloworld&routine=frame
 """
 
 

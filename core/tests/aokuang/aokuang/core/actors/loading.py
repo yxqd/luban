@@ -18,27 +18,23 @@ button
 
 import luban.ui as lui
 
-from ...ObjectActor import Actor as base
-class Actor(base):
-
-    expose = True
-    
-    def __init__(self):
-        title = "action 'loading'"
-        interface_factory = InterfaceFactory()
-        interface_factory.actor = self.name
-        super().__init__(title=title, interface_factory = interface_factory)
-        return
-    
-    pass # Actor
-
-
 from ...ObjectInterface import Factory as base
 class InterfaceFactory(base):
 
     from luban.ui.actions.Loading import Loading as object_type
+    skip_descriptors = ['lubanaction']
     
     pass # InterfaceFactory
+
+
+from ...ObjectActor import Actor as base
+class Actor(base):
+
+    expose = True
+    frame_title = "luban action: loading"
+    interface_factory = InterfaceFactory()
+    
+    pass # Actor
 
 
 __all__ = ['Actor']

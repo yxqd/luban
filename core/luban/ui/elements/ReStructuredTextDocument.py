@@ -40,13 +40,19 @@ class ReStructuredTextDocument(SimpleElement):
 # we should have a better way to handle ReStructuredText
 # but for now we just convert it to html
 def reSTdoc2htmldoc(restdoc):
+    # convert to html
     rest = restdoc.text
-    from ...utils.rst import rest2html
-    html = rest2html(rest)
+    if rest:
+        from ...utils.rst import rest2html
+        html = rest2html(rest)
+    else:
+        html = ''
+    # class
     kls = restdoc.Class
     if kls is None:
         kls = []
     if 'ReST' not in kls: kls.append('ReST')
+    # html document
     from luban import ui as lui
     htmldoc = lui.e.htmldocument(text=html, id=restdoc.id or '', Class=kls)
     return htmldoc

@@ -129,7 +129,7 @@ class Factory:
         # explanation
         descdoc = lui.e.restructuredtextdocument(); container.append(descdoc)
         descdoc.Class = 'demo-description'
-        descdoc.text = 'expand an item for details'
+        # descdoc.text = 'expand an item for details'
         
         for d in props:
             if hasattr(d, 'tip'): tip = d.tip
@@ -172,6 +172,7 @@ class Factory:
         return container
 
 
+    skip_descriptors = []
     def _categorizeDescriptors(self, descriptors):
         'put descriptors into different categories such as properties, eventhandlers'
         r = {
@@ -179,7 +180,7 @@ class Factory:
             }
 
         # contents is not really directly settable
-        skip = []
+        skip = self.skip_descriptors
 
         for d in descriptors:
             if d.name in skip: continue

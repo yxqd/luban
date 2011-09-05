@@ -38,7 +38,7 @@ class Splitter(RivetedContainer):
     right.paragraph(text=['right'])
     ''',
         ]
-    
+
     
     # properties
     orientation = descriptors.str(default='horizontal')
@@ -76,6 +76,8 @@ class SplitSection(RivetedSubElement, SimpleContainer, metaclass=Meta):
         return inspector.onSplitSection(self)
     
 
+Splitter.child_types = [SplitSection]
+    
 
 # version
 __id__ = "$Id$"

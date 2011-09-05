@@ -101,35 +101,6 @@ class Element(ElementBase, metaclass=Meta):
         return self
     
     
-    def __init__(self, name=None, attributes=None, **kwds):
-        super().__init__()
-        self.name = name
-
-        attributes = attributes or {}
-        kwds.update(attributes)
-        
-        for k, v in kwds.items():
-            debug.log('setting attribute %r to %s' % (k,v))
-            self.setAttribute(k,v)
-            continue
-
-        return
-    
-    
-    # helper methods
-    @classmethod
-    def getCtorDocStr(cls, descriptors=None):
-        if not descriptors:
-            descriptors = cls.iterDescriptors()
-        l = []
-        for descriptor in descriptors:
-            name = descriptor.name
-            value = descriptor.default
-            l.append('%s=%r' % (name, value))
-            continue
-        return '%s(%s)' % (cls.__name__, ', '.join(l))
-    
-
 # version
 __id__ = "$Id$"
 

@@ -89,6 +89,44 @@ class AttributeContainer(AbstractAttributeContainer, metaclass=Meta):
         return
 
     
+    # default ctor implementation
+    def __init__(self, attributes=None, **kwds):
+        """AttributeContainer(<attributes>, **attributes)
+
+        Eg:
+        AttributeContainer(key1=val1, key2=val2, ...)
+        AttributeContainer({key1:val1, key2:val2})
+        AttributeContainer({key1:val1, key2:val2}, key3=val3)
+        
+        attributes has higher priority over kwds
+        """
+        super().__init__()
+
+        attributes = attributes or {}
+        kwds.update(attributes)
+        
+        for k, v in kwds.items():
+            debug.log('setting attribute %r to %s' % (k,v))
+            self.setAttribute(k,v)
+            continue
+
+        return
+    
+    
+    # helper methods
+    @classmethod
+    def getCtorDocStr(cls, descriptors=None):
+        if not descriptors:
+            descriptors = cls.iterDescriptors()
+        l = []
+        for descriptor in descriptors:
+            name = descriptor.name
+            value = descriptor.default
+            l.append('%s=%r' % (name, value))
+            continue
+        return '%s(%s)' % (cls.__name__, ', '.join(l))
+    
+
     def __repr__(self):
         t = self.__class__.__name__
         ps = list(self.iterAttributes())
@@ -96,6 +134,11 @@ class AttributeContainer(AbstractAttributeContainer, metaclass=Meta):
         return t + '(' + ps + ')'
 
     pass
+
+
+
+from luban import journal
+debug = journal.debug('luban.ui.AttributeContainer')
 
 
 # version

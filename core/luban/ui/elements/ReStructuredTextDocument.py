@@ -41,7 +41,7 @@ class ReStructuredTextDocument(SimpleElement):
 # but for now we just convert it to html
 def reSTdoc2htmldoc(restdoc):
     rest = restdoc.text
-    from ..utils.rst import rest2html
+    from ...utils.rst import rest2html
     html = rest2html(rest)
     kls = restdoc.Class
     if kls is None:

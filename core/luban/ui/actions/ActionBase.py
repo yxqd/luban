@@ -26,15 +26,6 @@ class ActionBase(AttributeContainer):
     lubanaction = descriptors.bool(default=True)
 
 
-    def __init__(self, **kwds):
-        super().__init__()
-        
-        for k, v in kwds.items():
-            self.setAttribute(k,v)
-
-        return
-
-
 # version
 __id__ = "$Id$"
 

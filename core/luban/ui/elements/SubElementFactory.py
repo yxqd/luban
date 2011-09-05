@@ -25,7 +25,7 @@ class SubElementFactory:
             _.__name__ = key
             return _
         
-        return super().__getattr__(key)
+        raise AttributeError(key)
 
 
 def createMethod(container, cls):

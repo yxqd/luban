@@ -3,8 +3,6 @@
 import os.path
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
-import cherrypy, luban.ui as lui
-
 from luban.controller.CherrypyController import CherrypyController
 class Root(CherrypyController):
 
@@ -13,8 +11,7 @@ class Root(CherrypyController):
             url = '/',
             static_html_base = 'static',
             actor_package = 'aokuang.core.actors',
+            stylesheets = ['aokuang.core.css'],
             )
         return
-
-    
 

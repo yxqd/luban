@@ -28,10 +28,13 @@ classes provided here.
 
 # elements
 elementtypes = [
-    'Document',
     'Frame',
-    'Paragraph',
     'Button',
+    'Paragraph',
+    'Document',
+    'HtmlDocument',
+    'ReStructuredTextDocument',
+    'Splitter',
     'Tabs',
     ]
 def importAllElements():

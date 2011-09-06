@@ -102,6 +102,18 @@ luban.utils = {};
       }
     },
 
+    // empty my content
+    'empty': function (event) {
+      this.broadcastEvent('destroy');
+      this._je.empty();
+      //throw 'widgets.base.empty:' + this.type() +' notimplementederror';
+    },
+
+    // broadcast event to all my descendents
+    'broadcastEvent': function(event) {
+      this._je.find('[luban-element-type]').trigger(event);
+    },
+
     'getParent': function() {
       return this.jqueryelem.data('luban-parent');
     },
@@ -122,6 +134,14 @@ luban.utils = {};
   };
 
 
+  // luban.utils
+  // .. uid
+  luban.utils.uid = function() {
+      return arguments.callee.prefix + arguments.callee.count++;
+  };
+  luban.utils.uid.prefix = 'luban-uid-';
+  luban.utils.uid.count = 0;
+  // .. load 
   luban.utils.loadJS = function(script, callback) {
       try{
 	  var selem = document.createElement("script");

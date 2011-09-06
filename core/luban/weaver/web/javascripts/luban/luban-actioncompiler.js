@@ -50,7 +50,7 @@
 
     'compile1': function (action) {
       if (action==null) {return;}
-      if (!action.type) {
+      if (!action.luban_type) {
 	// if action does not have a "type" attribute,
 	// we assume that it is not a luban action, but a normal value (str, number, etc)
 	return action;
@@ -78,7 +78,7 @@
     },
 
     'dispatch': function (action) {
-      var type = action.type;
+      var type = action.luban_type;
       var code = 'this.on'+type+"(action)";
       return eval(code);
     },
@@ -104,7 +104,7 @@
 
     'ongetattr': function(action) {
       var entity = action.entity;
-      if (entity.type=='event') {
+      if (entity.luban_type=='event') {
 	entity = this.docmill.render(entity);
 	return entity[action.name];
       }

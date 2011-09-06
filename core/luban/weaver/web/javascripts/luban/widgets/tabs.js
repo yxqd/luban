@@ -104,7 +104,7 @@
     }
     var id = tab.id;
     if (!id) {
-	id = "tab-" + label;
+	id = luban.utils.uid();
     }
     var url = '#'+id;
     this._je.tabs('add', url, label);

@@ -155,7 +155,7 @@
 	  c(loaded);
 	};
       }
-      var type = action.type;
+      var type = action.luban_type;
       var f = assignLoadedData(parentdoc, key, callback);
       var code = 'this.on'+type+'(action, f)';
       eval(code);
@@ -198,7 +198,7 @@
   // get all document types in a doc
   function _getTypes(doc, ret) {
     if (!ret) {ret = [];}
-    if (doc.type && $.inArray(doc.type, ret)==-1) {ret.push(doc.type);}
+    if (doc.luban_type && $.inArray(doc.luban_type, ret)==-1) {ret.push(doc.luban_type);}
     var c = doc.contents;
     if (c==null ||c.length==0)
       {return ret;}
@@ -219,7 +219,7 @@
     if (typeof(doc)!='object' || doc == null) {return;}
     if (!ret) {ret = [];}
     if (doc.lubanaction &&
-	$.inArray(doc.type, loading_action_types)!=-1 &&
+	$.inArray(doc.luban_type, loading_action_types)!=-1 &&
 	$.inArray(doc, ret)==-1)
       {ret.push([doc, parentdoc, key]);}
 

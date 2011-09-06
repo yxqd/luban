@@ -58,7 +58,7 @@ class Object2Dict:
     def _onObject(self, obj):
         # debug.log('_onObject: %s' % (obj.__class__.__name__))
         kls = obj.__class__
-        d = {'type': kls.__unique_type_name__}
+        d = {'luban_type': kls.__unique_type_name__}
         
         descriptors = obj.iterDescriptors()
         for descriptor in descriptors:
@@ -72,11 +72,6 @@ class Object2Dict:
             d[name] = value
             continue
 
-        # mark actions
-        if issubclass(kls, ActionBase):
-            d['lubanaction'] = 1
-        if issubclass(kls, ElementBase):
-            d['lubanelement'] = 1
         return d
 
 

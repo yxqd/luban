@@ -30,6 +30,7 @@ base = {
     'luban/luban-actioncompiler.js',
     'luban/luban-documentmill.js',
     'luban/luban-widget-core.js',
+    'luban/luban-elementactioncompiler.js',
     ),
     }
 

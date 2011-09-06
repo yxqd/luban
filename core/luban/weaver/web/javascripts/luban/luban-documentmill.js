@@ -59,7 +59,7 @@
 	parent._je.append(doc);
 	return doc;
       }
-      var type = doc.type;
+      var type = doc.luban_type;
       var handler = 'on'+type;
 
       code = 'this.'+handler+"(doc)";
@@ -131,7 +131,7 @@
 
     '_onContainer': function(container) {
       var parent = this._parent;
-      var type = container.type;
+      var type = container.luban_type;
       var factory = luban.elementFactory[type];
       var elem = factory(container, this, parent);
 
@@ -153,7 +153,7 @@
     },
 
     '_onElement': function(element) {
-      var type = element.type;
+      var type = element.luban_type;
       var factory = luban.elementFactory[type];
       var elem = factory(element, this, this._parent);
       return elem;

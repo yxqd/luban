@@ -62,7 +62,7 @@ class Factory:
             # use inner document's title as tab's label
             label = panel.title
             # create tab 
-            tab = tabs.tab(label=label)#,id='demo-tab-%s' % i)
+            tab = tabs.tab(label=label, id='demo-tab-%s' % i)
             # 
             actor = panel.actor_name
             routine = "createInterface"
@@ -70,10 +70,10 @@ class Factory:
             if i == 0:
                 inner = self.controller.call(actor=actor, routine=routine)
                 tab.append(inner)
-            else:
-                tab.onselect = select(element=tab).replaceContent(
-                    load(actor=actor, routine=routine)
-                    )
+                
+            tab.onselect = lui.a.select(element=tab).replaceContent(
+                newcontent=lui.a.load(actor=actor, routine=routine)
+                )
             continue
 
         return container

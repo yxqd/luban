@@ -23,7 +23,7 @@ class Actor(base):
         ]
     
 
-    def createInterface(self, **kwds):
+    def createDemoPanel(self, **kwds):
         container = lui.e.document(title="hey")
         p1 = container.paragraph(
             text='the text to replace', 

@@ -23,7 +23,7 @@ class Actor(base):
         'The loaded action is adding a class to a document.',
         ]
 
-    def createInterface(self, **kwds):
+    def createDemoPanel(self, **kwds):
         container = lui.e.document()
         doc = container.document(
             title = 'The document to change',
@@ -42,7 +42,8 @@ class Actor(base):
         # In web application, this class is rendered as css class,
         # the ".green-border" was defined to have a green border in
         # aokuang.css
-        return lui.a.select(id='document-to-change').addClass(cls='green-border')
+        return lui.a.select(id='document-to-change')\
+            .addClass(cls='green-border')
 
 
 # End of file 

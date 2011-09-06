@@ -23,7 +23,7 @@ class Actor(base):
         ]
 
 
-    def createInterface(self, **kwds):
+    def createDemoPanel(self, **kwds):
         container = lui.e.document(id='container')
         doc = container.document(title = 'the document to replace')
         button = container.button(label = 'click me', id='load_example2_button')

@@ -39,8 +39,8 @@ class ID(base):
             return super().__set__(instance, value)
             
         if not isinstance(value, str):
-            raise ValueError("%r is not a str type" % value)
-
+            value = str(value)
+            
         if bad_id(value):
             raise ValueError("not a valid id: %s" % value)
         

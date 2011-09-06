@@ -34,7 +34,25 @@ class ID(base):
             m = "id for element %s is already set to %s" % (
                 instance, old)
             raise ValueError(m)
+        
+        if value is None:
+            return super().__set__(instance, value)
+            
+        if not isinstance(value, str):
+            raise ValueError("%r is not a str type" % value)
+
+        if bad_id(value):
+            raise ValueError("not a valid id: %s" % value)
+        
         return super().__set__(instance, value)
+
+
+
+# no space, no special characters, only alphanumeric characters
+import re
+pattern = re.compile('[^a-zA-Z0-9_-]')
+def bad_id(id):
+    return bool(pattern.search(id))
 
 
 # End of file 

@@ -28,6 +28,7 @@ class Factory:
 
     object_type = None # target object type this factory will build interface for
     actor = None # name of the actor for this interface
+    demo_panels = None # a list of demo panels, each an instance of DemoPanel
     
 
     def create(self):
@@ -38,8 +39,7 @@ class Factory:
             p = container.paragraph(text='This is still experimental')
 
         # the demo document
-        panels = self.createDemoPanels()
-        doc = self._createDemoDocument(panels)
+        doc = self._createDemoDocument()
         doc.title = 'Demos'
         doc.Class = 'demo-document'
         container.append(doc)
@@ -51,33 +51,28 @@ class Factory:
         return container
 
 
-    def createDemoPanels(self):
-        return []
-
-
-    def _createDemoDocument(self, panels):
-        """create demo document from a bunch of panels
-        
-        each panel should be an instance of DemoPanel
+    def _createDemoDocument(self):
+        """create demo document 
         """
         # container
         container = lui.e.document(name='demo-document')
-        tabs = container.tabs()
+        tabs = container.tabs(id="demo-document-tabs")
 
-        for i,panel in enumerate(panels):
-            # method to get inner document
-            method = panel.create
+        for i,panel in enumerate(self.demo_panels):
             # use inner document's title as tab's label
             label = panel.title
             # create tab 
-            tab = tabs.tab(label=label)
+            tab = tabs.tab(label=label)#,id='demo-tab-%s' % i)
+            # 
+            actor = panel.actor_name
+            routine = "createInterface"
             # add the first document
             if i == 0:
-                inner = method()
+                inner = self.controller.call(actor=actor, routine=routine)
                 tab.append(inner)
             else:
                 tab.onselect = select(element=tab).replaceContent(
-                    load(actor=self.actor, routine=panel.name)
+                    load(actor=actor, routine=routine)
                     )
             continue
 
@@ -199,8 +194,7 @@ class Factory:
     class DemoPanel:
 
         title = None # title of the panel
-        create = None # method to create the panel
-        name = None # identifier
+        actor_name = None # name of the actor. a demo actor needs to subclass .DemoPanelActor
 
 
 

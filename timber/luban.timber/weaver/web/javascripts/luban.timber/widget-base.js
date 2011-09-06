@@ -43,6 +43,8 @@
       }
       return ids;
     },
+
+    /*
     // retrieve data related to the specified event
     'getEventData': function (event) {
       return this.jqueryelem.data(event+'-data');
@@ -51,18 +53,7 @@
     'setEventData': function (event, data) {
       return this.jqueryelem.data(event+'-data', data);
     },
-
-    // broadcast event to all my descendents
-    'broadcastEvent': function(event) {
-      this._je.find('[luban-element-type]').trigger(event);
-    },
-
-    // empty my content
-    'empty': function (event) {
-      this.broadcastEvent('destroy');
-      this._je.empty();
-      //throw 'widgets.base.empty:' + this.type() +' notimplementederror';
-    },
+    */
 
     'disable': function () {
       this.jqueryelem.find('input').attr('disabled', 'disabled');

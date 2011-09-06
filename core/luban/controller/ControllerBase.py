@@ -22,7 +22,7 @@ class ControllerBase:
         return
     
 
-    def run(self, actor=None, routine=None, **kwds):
+    def call(self, actor=None, routine=None, **kwds):
         actor = actor or 'default'
         actor = self._retrieveActor(actor)
         obj = actor.perform(routine=routine, **kwds)
@@ -31,18 +31,24 @@ class ControllerBase:
 
     def _retrieveActor(self, actor):
         actor_name = actor
-        mod_name = '%s.%s' % (self.actor_package, actor_name)
-        actor_module = __import__(
-            mod_name, 
-            fromlist=[''],
-            )
+        tokens = actor_name.split('.')
+
+        if len(tokens) > 1:
+            pkg = self.actor_package + '.' + '.'.join(tokens[:-1])
+            module = tokens[-1]
+        else:
+            pkg = self.actor_package
+            module = actor_name            
+        from ..utils.importer import import_module
+        actor_module = import_module(module, pkg=pkg)
+        
         factory = actor_module.Actor
         if not hasattr(factory, 'expose') or not factory.expose:
             raise RuntimeError("actor %s not exposed" % factory)
         
         actor = factory()
         actor.name = actor_name
-        actor.director = self
+        actor.controller = self
         return actor
 
 

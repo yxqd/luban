@@ -16,7 +16,7 @@ class Actor:
 
     # properties
     name = None # name of the actor
-    director = None # the controller
+    controller = None # the controller
 
     # exceptions
     from .exceptions import RoutineNotFound

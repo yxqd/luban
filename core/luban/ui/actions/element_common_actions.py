@@ -29,8 +29,32 @@ class ReplaceContent(base):
 
 
 
-# version
-__id__ = "$Id$"
+class AddClass(base):
+
+    # decorations
+    # .. name of action factory method
+    factory_method = 'addClass'
+
+    # attributes
+    cls = descriptors.object()
+
+    # for inspector
+    def identify(self, inspector):
+        return inspector.onAddClass(self)
+
+
+class RemoveClass(base):
+
+    # decorations
+    # .. name of action factory method
+    factory_method = 'removeClass'
+
+    # attributes
+    cls = descriptors.object()
+
+    # for inspector
+    def identify(self, inspector):
+        return inspector.onRemoveClass(self)
+
 
 # End of file 
-

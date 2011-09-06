@@ -79,7 +79,12 @@
 
     'dispatch': function (action) {
       var type = action.luban_type;
-      var code = 'this.on'+type+"(action)";
+      var code = "this.on"+type;
+      var handler = eval(code);
+      if (!handler) {
+	  throw "compiler handler not defined for action type " + type;
+      }
+      code = code + '(action)';
       return eval(code);
     },
 

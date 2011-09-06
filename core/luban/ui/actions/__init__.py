@@ -88,7 +88,7 @@ Examples::
 
 # common element actions
 action_modules = [
-    'ReplaceContent',
+    'element_common_actions',
     ]
 def importAllElementActions():
     modules = action_modules

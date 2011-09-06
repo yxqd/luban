@@ -89,18 +89,6 @@ Additional data are specified as keyword arguments.
         return SimpleElementAction(element=self, actionname='getAttribute', name=name)
 
 
-    def addClass(self, Class):
-        '''add a Class to me'''
-        from .SimpleElementAction import SimpleElementAction
-        return SimpleElementAction(element=self, actionname='addClass', Class=Class)
-
-
-    def removeClass(self, Class):
-        '''remove a Class from me'''
-        from .SimpleElementAction import SimpleElementAction
-        return SimpleElementAction(element=self, actionname='removeClass', Class=Class)
-
-
     def show(self):
         '''show me. If a widget was hidden originally, this action makes it show up'''
         from .SimpleElementAction import SimpleElementAction

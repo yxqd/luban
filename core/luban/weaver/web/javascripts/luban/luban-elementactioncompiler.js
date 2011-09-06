@@ -24,12 +24,29 @@
     'onreplacecontent': function(action) {
       var e = action.element;
       var element = this.dispatch(e);
+
       element.empty();
 
       var newdoc = action.newcontent;
       this.docmill.render(newdoc, element);
 
       element.jqueryelem.trigger('resize');
+    }
+
+    ,'onaddclass': function(action) {
+      var e = action.element;
+      var element = this.dispatch(e);
+
+      element.addClass(action.cls);
+      
+    }
+
+    ,'onremoveclass': function(action) {
+      var e = action.element;
+      var element = this.dispatch(e);
+
+      element.removeClass(action.cls);
+      
     }
 
   };

@@ -21,7 +21,4 @@ class TestCase(unittest.TestCase):
     
 if __name__ == "__main__": unittest.main()
     
-# version
-__id__ = "$Id$"
-
 # End of file 

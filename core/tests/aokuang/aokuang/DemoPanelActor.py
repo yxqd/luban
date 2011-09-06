@@ -29,6 +29,18 @@ class Actor(base):
 
 
     def createInterface(self, **kwds):
+        doc = lui.e.document(title = self.title)
+        doc.append(self._createDemoAndCodeViewTabs())
+        
+        p = doc.restructuredtextdocument()
+        p.Class = 'demo-description'
+        p.text = '\n'.join(self.description)
+        p.text+= '\n'
+        p.text+= 'Please click on the "Code" tab to see how this demo is implemented.'
+        return doc
+
+
+    def _createDemoAndCodeViewTabs(self, **kwds):
         func = self.createDemoPanel
         deps = []
         dontcount = ['createDemoPanel', 'createInterface', 'perform']
@@ -58,7 +70,7 @@ class Actor(base):
     def _createTabsForDemoPanelAndCodeViewer(self, func, deps=None):
         '''create a "tabs" widget with one tab for demo, another tab for code
 
-        func: the function that creates a docuemnt for the demo
+        func: the function that creates a document for the demo
         deps: the functions that "func" depends on. we need to show code for
           all of them to give a complet view. It is good that func and deps
           are in the same actor.

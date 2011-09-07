@@ -42,7 +42,7 @@
 }
 
 /* code */
-pre {
+pre,p.signature {
     width: 65em;
     overflow-x: auto;
     padding-bottom: 1em;
@@ -50,14 +50,10 @@ pre {
     padding: 0.5em;
     background-color: #ffffdd;
     line-height: 1em;
-}
-
-p.signature {
-    font-family: monospace;
-    border: 1px solid lightGray;
-    padding: 0.5em;
-    background-color: #ffffdd;
-    line-height: 1em;
+    font-family: monaco,monospace;
+    font-size: 0.78em;
+    border-radius: 0.3em;
+    -moz-border-radius: 0.3em;
 }
 
 /* ReST */

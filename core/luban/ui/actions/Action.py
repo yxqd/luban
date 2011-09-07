@@ -23,7 +23,7 @@ class Action(ActionBase):
     abstract = True
     
     # attributes
-    onfinish = descriptors.action()
+    onfinish = descriptors.eventhandler()
     onfinish.experimental = True
     onfinish.tip = 'A callback action that will be performed when the current action is finished'
     

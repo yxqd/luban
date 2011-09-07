@@ -90,8 +90,15 @@ class Factory:
         tab1 = tabs.tab(label='Introduction')
         d = self._createIntroductionDocument(descriptors); tab1.append(d)
         #
-        tab2 = tabs.tab(label='Properties')
-        d = self._createPropertiesDocument(descriptors['properties']); tab2.append(d)
+        categories = ['properties', 'events', 'actions']
+        for cat in categories:
+            if cat in descriptors and descriptors[cat]:
+                tab2 = tabs.tab(label=cat.capitalize())
+                handler = '_create%sDocument' % (cat.capitalize(),)
+                handler = getattr(self, handler)
+                d = handler(descriptors[cat])
+                tab2.append(d)
+            continue
         #
         return doc
     
@@ -167,19 +174,94 @@ class Factory:
         return container
 
 
+    def _createEventsDocument(self, events):
+        container = lui.e.document()
+        
+        descriptiontext = """You can specify what actions occur when an event happens in a luban element. The event handlers listed below are attributes of the luban element. If you set an event handler to be an action(or a list of actions), then that action(s) will be performed whenever the event occurs. """
+        description = lui.e.restructuredtextdocument(); container.append(description)
+        description.Class = 'demo-description'
+        description.text = descriptiontext
+
+        for d in events:
+            if hasattr(d, 'tip'): tip = d.tip
+            else: tip = 'Please give a tip of property %s' % d.name
+            
+            title = d.name
+            if hasattr(d, 'experimental') and d.experimental:
+                title += '(experimental)'
+            doc = container.document(title=title)
+            doc.Class = 'api-item'
+
+            instancename = self.object_type.__name__.lower()
+            examplecode = instancename + '.' + d.name + ' = some_action'
+            ex = doc.paragraph(text=examplecode)
+            ex.Class = 'signature'
+            
+            p = doc.paragraph()
+            p.text = tip
+            p.Class = 'description' 
+            continue
+        return container
+
+
+    def _createActionsDocument(self, actions):
+        container = lui.e.document()
+
+        descriptions = [
+            'The following are methods to create actions for a widget.',
+            'Any of these methods has to be called by a selector that selects the widget.',
+            'For example the method "destroy" below can be used to create an',
+            'action to destroy a button widget by ::',
+            '',
+            '  select(id="buttonid").destroy()',
+            '',
+            'Pleaset note that the above method returns an action, and the action',
+            'can be assigned to an event handler.',
+            '',
+            'Expand any section below for details of each action.',
+            ]
+        descdoc = lui.e.restructuredtextdocument(); container.append(descdoc)
+        descdoc.Class = 'demo-description'
+        descdoc.text = descriptions
+
+        for name, method in actions:
+            sig, content = getMethodInfo(method)
+
+            title = name
+            if hasattr(method, 'experimental') and method.experimental:
+                title += '(experimental)'
+            doc = container.document(title=title, collapsable=True, collapsed=True)
+            doc.Class = 'api-item'
+            
+            sigp = doc.paragraph(text=[sig])
+            sigp.Class = 'signature'
+            p = doc.paragraph()
+            p.text = content
+            p.Class = 'description'
+            continue
+        return container
+
+
     skip_descriptors = []
     def _categorizeDescriptors(self, descriptors):
         'put descriptors into different categories such as properties, eventhandlers'
         r = {
             'properties': [],
+            'events': [],
             }
 
         # contents is not really directly settable
         skip = self.skip_descriptors
 
+        #
+        from luban.ui.descriptors.EventHandler import EventHandler
+        #
         for d in descriptors:
             if d.name in skip: continue
-            r['properties'].append(d)
+            if isinstance(d, EventHandler):
+                r['events'].append(d)
+            else:
+                r['properties'].append(d)
             continue
 
         return r

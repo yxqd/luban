@@ -11,6 +11,16 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
+
+"""
+This is the actor responsible for one demo of "loading" action
+that shows how to load a simple value from the controller.
+
+Note to developer: 
+  one needs to subclass ....DemoPanelActor.Actor
+  and implement method "createDemoPanel".
+"""
+
 from luban import ui as lui
 
 from ....DemoPanelActor import Actor as base

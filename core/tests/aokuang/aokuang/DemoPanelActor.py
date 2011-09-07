@@ -13,7 +13,10 @@
 
 
 """
-actor base class for one demo panel
+actor base class for one demo panel.
+
+see aokuang.core.actors.loading.SimpleValue for an example of
+how this is used.
 """
 
 

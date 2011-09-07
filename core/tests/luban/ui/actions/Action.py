@@ -25,14 +25,10 @@ class TestCase(unittest.TestCase):
         #
         from luban.ui.actions.Action import Action
         a1 = Action()
-        a2 = Action()
         import pyre
         self.assertRaises(
             ValueError,
             setattr, a1, 'onfinish', 3)
-        
-        # set onfinish to another action
-        a1.onfinish = a2
         return
      
     

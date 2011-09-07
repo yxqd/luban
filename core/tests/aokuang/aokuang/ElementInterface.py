@@ -65,11 +65,11 @@ class Factory(base):
             ctordoc = getActionFactorySignature(action)
             sig = "selector.%s" % ctordoc
             sigp = doc.paragraph(text=sig)
-            sigp.Class = 'signature'
+            sigp.Class = ['signature']
             
             p = doc.paragraph()
             p.text = action.__doc__
-            p.Class = 'description'
+            p.Class = ['description']
             continue
         return container
 

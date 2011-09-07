@@ -29,7 +29,7 @@ class Actor(base):
         import luban.ui as lui
         frame = lui.e.frame(title="aokuang: luban API demo")
         sp = frame.splitter(orientation='horizontal')
-        left = sp.section(name='left')
+        left = sp.section(name='left', id='menu-container')
         right = sp.section(name='right', id='demo-container')
         left.append(self.createMenu())
         return frame

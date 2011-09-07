@@ -121,6 +121,8 @@ class AttributeContainer(AbstractAttributeContainer, metaclass=Meta):
         l = []
         for descriptor in descriptors:
             name = descriptor.name
+            if name.startswith('luban'):
+                continue
             value = descriptor.default
             l.append('%s=%r' % (name, value))
             continue

@@ -338,6 +338,17 @@ luban.utils = {};
     parent.children('#'+elem.attr('id')).remove();
   };
 
+  // jQuery overrides
+  $.fn.addClass_str = $.fn.addClass;
+  $.fn.addClass = function (value) {
+      if (value == null) return;
+      if (typeof value !== 'string') {
+	  // assume it is an array
+	  value = value.join(' ');
+      }
+      return $(this).addClass_str(value);
+  };
+
  })(luban, jQuery);
 
 

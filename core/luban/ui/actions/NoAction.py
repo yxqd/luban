@@ -23,6 +23,10 @@ class NoAction(base):
 
     def identify(self, inspector):
         return inspector.onNoAction(self)
+
+    
+    def __repr__(self):
+        return "NoAction()"
     
 
 # version

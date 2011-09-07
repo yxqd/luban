@@ -1,3 +1,59 @@
+/* skeleton */
+#menu-container {
+    padding-top: 1em;
+    vertical-align: top;
+    width: 10em;
+}
+#menu-container .luban-button-container {
+    margin-top: 1em;
+}
+#menu-container .luban-button {
+    width: 6em;
+    display: block;
+    text-align: center;
+}
+
+#demo-container {
+    width: 50em;
+    max-width: 50em;
+}
+
+.luban-button {
+    -moz-border-radius: 0.2em;
+    border: 2px solid #d0d0d0;
+    background-color: #e0e0e0;
+    padding: 0.2em;
+}
+.luban-button span {
+    color: #1C94C4;
+    font-size: 1.2em;
+}
+.luban-button span:hover {
+    color: #E78F08;
+}
+.luban-button:hover {
+    border:  2px solid #e78f1b;
+}
+
+pre {
+    width: 65em;
+    overflow-x: auto;
+    padding-bottom: 1em;
+    border: 1px solid lightGray;
+    padding: 0.2em;
+    background-color: #ffffdd;
+    line-height: 1em;
+}
+
+p.signature {
+    font-family: monospace;
+    border: 1px solid lightGray;
+    padding: 0.2em;
+    background-color: #ffffdd;
+    line-height: 1em;
+}
+
+/* loading demo */
 .green-border {
   border: 1px solid green;
 }

@@ -115,7 +115,7 @@ class AttributeContainer(AbstractAttributeContainer, metaclass=Meta):
     
     # helper methods
     @classmethod
-    def getCtorDocStr(cls, descriptors=None):
+    def getCtorDocStr(cls, ctor_name=None, descriptors=None):
         if not descriptors:
             descriptors = cls.iterDescriptors()
         l = []
@@ -124,7 +124,8 @@ class AttributeContainer(AbstractAttributeContainer, metaclass=Meta):
             value = descriptor.default
             l.append('%s=%r' % (name, value))
             continue
-        return '%s(%s)' % (cls.__name__, ', '.join(l))
+        ctor_name = ctor_name or cls.__name__
+        return '%s(%s)' % (ctor_name, ', '.join(l))
     
 
     def __repr__(self):

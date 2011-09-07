@@ -152,14 +152,14 @@ class Factory:
             subdoc = lui.e.restructuredtextdocument(); doc.append(subdoc)
             subdoc.Class = 'description'
             subdoc_text = []
-
+            
             # tip
             subdoc_text += tip.splitlines()
-
+            
             # type
             subdoc_text.append('')
-            subdoc_text.append('* type: %s' % d.type)
-
+            subdoc_text.append('* type: %s' % d.type.__name__)
+            
             # validator
             try:
                 validator = d.validator

@@ -41,6 +41,11 @@
     border:  2px solid #e78f1b;
 }
 
+/* demo */
+.ui-tabs .ui-tabs-panel.demo {
+    background-color: white;
+}
+
 /* code */
 pre,p.signature {
     width: 65em;
@@ -56,6 +61,22 @@ pre,p.signature {
     -moz-border-radius: 0.3em;
 }
 
+/* description */
+.demo-description pre {
+    font-style: normal;
+}
+.demo-description {
+    font-style: italic;
+}
+
+/* api */
+.api-item {
+    background-color: #e5e5e0;
+    padding: 0.1em 1em;
+    margin: 0.5em 0;
+    -moz-border-radius: 0.5em;
+}
+
 /* ReST */
 .ReST h1 {
     font-size: 1.4em;
@@ -64,4 +85,10 @@ pre,p.signature {
 /* loading demo */
 .green-border {
   border: 1px solid green;
+}
+/* splitter demo */
+#demo-container .luban-splitter [luban-element-type='splitsection'] {
+    border: 1px solid gray;
+    padding: 0.5em 1em;
+    margin: 0.5em;
 }

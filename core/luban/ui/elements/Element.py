@@ -41,7 +41,8 @@ class Meta(MetaBase):
         created = super().__new__(cls, name, bases, attributes, **kwds)
 
         # doc for constructor
-        created.__init__.__doc__ = created.getCtorDocStr()
+        if '__init__' in created.__dict__:
+            created.__init__.__doc__ = created.getCtorDocStr()
 
         return created
 

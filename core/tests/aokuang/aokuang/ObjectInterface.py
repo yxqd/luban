@@ -112,17 +112,16 @@ class Factory:
         title = '%s\n%s\n' % (title, '-'*len(title))
         description = object_type.full_description
 
-        ctordoctitle = 'signature'
-        ctordoctitle = '%s\n%s\n' % (ctordoctitle, '^'*len(ctordoctitle))
-        lines = object_type.__init__.__doc__
-        lines = lines and lines.splitlines()
-        if not lines:
-            props = descriptors['properties']
-            lines = self._getCtorDocString(object_type, props).splitlines()
-        ctordoc = [' '+line for line in lines]
-        ctordoc = ['::\n'] + ctordoc
+        ctordoctitle = 'signature::'
+        if '__init__' in object_type.__dict__:
+            ctordocstr = object_type.__init__.__doc__
+        else:
+            ctordocstr = ''
+        if not ctordocstr:
+            # props = descriptors['properties']
+            ctordocstr = object_type.getCtorDocStr() # descriptors=props
         
-        text = [title, description, '', ctordoctitle]+ ctordoc
+        text = [title, description, '', ctordoctitle, '', ' '+ctordocstr]
         d.text = '\n'.join(text)
         return d
 
@@ -229,14 +228,9 @@ class Factory:
             continue
 
         return r
-
-
-
-    def _getCtorDocString(self, object_type, descriptors):
-        return object_type.getCtorDocStr(descriptors)
     
-
-
+    
+    
     class DemoPanel:
 
         title = None # title of the panel

@@ -18,7 +18,7 @@ class Actor(base):
 
     title='A simple example'
     description = [
-        """The layout ::
+        """This demo creates the following layout ::
 
   -----------------------------------------------------
   | top left         | middle            | right      |
@@ -39,15 +39,15 @@ class Actor(base):
         # left, middle, right
         frameleft = frames.section(name='left')
         framemiddle = frames.section(name='middle')
-        framemiddle.paragraph(text='using Splitter: middle')
-        frames.section(name='right').paragraph(text='using Splitter: right')
+        framemiddle.paragraph(text='middle')
+        frames.section(name='right').paragraph(text='right')
 
         # split left to two parts
         insideframe = le.splitter()
         frameleft.append(insideframe)
         insideframe.orientation = 'vertical'
-        insideframe.section(name='topleft').paragraph(text='using Splitter: top left')
-        insideframe.section(name='bottomleft').paragraph(text='using Splitter: bottom left')
+        insideframe.section(name='topleft').paragraph(text='top left')
+        insideframe.section(name='bottomleft').paragraph(text='bottom left')
         
         return frames
 

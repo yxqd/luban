@@ -38,7 +38,7 @@ class Actor(base):
         p = doc.restructuredtextdocument()
         p.Class = 'demo-description'
         p.text = '\n'.join(self.description)
-        p.text+= '\n'
+        p.text+= '\n\n'
         p.text+= 'Please click on the "Code" tab to see how this demo is implemented.'
         return doc
 

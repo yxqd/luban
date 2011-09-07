@@ -34,13 +34,18 @@ class Actor(base):
         f = lui.e.frame(title = title)
         
         # interior
-        self.interface_factory.controller = self.controller
-        self.interface_factory.actor = self.name
-        self.interface_factory.demo_panels = self._findDemoPanels()
-        d = self.interface_factory.create()
+        d = self.createInterface()
         
         f.append(d)
         return f
+
+
+    def createInterface(self, **kwds):
+        # interior
+        self.interface_factory.controller = self.controller
+        self.interface_factory.actor = self.name
+        self.interface_factory.demo_panels = self._findDemoPanels()
+        return self.interface_factory.create()
 
 
     def _findDemoPanels(self):

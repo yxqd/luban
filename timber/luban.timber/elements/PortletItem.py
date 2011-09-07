@@ -12,12 +12,12 @@
 #
 
 
-from .ElementContainer import ElementContainer
+from luban.ui.elements.Riveted import RivetedContainer, Meta, RivetedSubElement
 
-class PortletItem(ElementContainer):
+class PortletItem(RivetedContainer):
 
 
-    abstract = False
+    # decorations
     simple_description = 'An item in a portlet'
     full_description = ''
 

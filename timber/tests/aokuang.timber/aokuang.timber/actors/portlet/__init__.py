@@ -17,7 +17,7 @@ import luban.ui as lui
 from ....ElementInterface import Factory as base
 class InterfaceFactory(base):
 
-    from luban.ui.elements.Splitter import Splitter as object_type
+    from luban.timber.elements.Portlet import Portlet as object_type
     
     pass # InterfaceFactory
 
@@ -26,7 +26,7 @@ from ....ObjectActor import Actor as base
 class Actor(base):
 
     expose = True
-    frame_title = "luban element: splitter"
+    frame_title = "luban element: portlet"
     interface_factory = InterfaceFactory()
     py_pkg_name = __name__
     py_pkg_path = __file__

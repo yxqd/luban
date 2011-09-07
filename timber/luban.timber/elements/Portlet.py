@@ -12,11 +12,12 @@
 #
 
 
-from .SimpleContainer import SimpleContainer as base
+from luban.ui.elements.Riveted import RivetedContainer, Meta, RivetedSubElement
 
 
 class Portlet(base):
 
+    # decorations
     simple_description = 'provides users access to dynamic content'
     full_description = (
         'A portlet usually is a small window. It contains items that, '
@@ -25,22 +26,49 @@ class Portlet(base):
         'are of type PortletItem.'
         )
     
-    
-    abstract = False
+    # properties
+    title = descriptors.str()
+    title.tip = 'Title of the portlet'
 
-    def item(self, **kwds):
-        from .PortletItem import PortletItem
-        pi = PortletItem(**kwds)
-        self.append(pi)
-        return pi
-
-
+    # methods
     def identify(self, inspector):
         return inspector.onPortlet(self)
 
 
-    title = descriptors.str()
-    title.tip = 'Title of the portlet'
+
+class PortletItem(RivetedSubElement):
+    
+    # decorations
+    simple_description = 'An item in a portlet'
+    full_description = ''
+
+    # properties
+    label = descriptors.str()
+    label.tip = 'label of the portlet item'
+    
+    icon = descriptors.str()
+    icon.tip = 'icon of the portlet item'
+    
+    tip = descriptors.str()
+    tip.tip = 'tip for this portlet item that shows up when hovered'
+    tip.experimental = True
+
+    selected = descriptors.bool()
+    selected.tip = 'if True, this item is selected'
+    
+    # events
+    from luban.ui.Event import Event
+    class select(Event):
+        # decorations
+        simple_description = "event happens when this portlet is selected" 
+        __unique_type_name__ = 'portletselect'
+        # attributes
+    del Event
+    
+    # methods
+    def identify(self, inspector):
+        return inspector.onPortletItem(self)
+
 
 
 # version

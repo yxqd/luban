@@ -1,8 +1,8 @@
-#!/usr/bin/env python
+# -*- Python -*-
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
-#                                   Jiao Lin     
+#                                   Jiao Lin
 #                      California Institute of Technology
 #                      (C) 2006-2011  All Rights Reserved
 #
@@ -12,19 +12,5 @@
 #
 
 
-class LinkFactory(object):
-
-
-    def link(self, **kwds):
-        from .Link import Link
-        link = Link(**kwds)
-
-        self.append(link)
-
-        return link
-
-
-# version
-__id__ = "$Id$"
-
 # End of file 
+

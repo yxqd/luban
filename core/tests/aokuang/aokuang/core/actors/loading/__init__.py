@@ -18,7 +18,6 @@ from ....ActionInterface import Factory as base
 class InterfaceFactory(base):
 
     from luban.ui.actions.Loading import Loading as object_type
-    skip_descriptors = ['lubanaction']
     
     pass # InterfaceFactory
 

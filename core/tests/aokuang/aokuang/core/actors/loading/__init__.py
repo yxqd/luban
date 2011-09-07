@@ -14,7 +14,7 @@
 
 import luban.ui as lui
 
-from ....ObjectInterface import Factory as base
+from ....ActionInterface import Factory as base
 class InterfaceFactory(base):
 
     from luban.ui.actions.Loading import Loading as object_type

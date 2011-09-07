@@ -16,6 +16,8 @@ from .ElementActionBase import ElementActionBase as base
 
 class ReplaceContent(base):
 
+    'replace content of the selected element with new content'
+
     # decorations    
     # .. name of action factory method
     factory_method = 'replaceContent'
@@ -31,6 +33,8 @@ class ReplaceContent(base):
 
 class AddClass(base):
 
+    'add a class to the selected element'
+
     # decorations
     # .. name of action factory method
     factory_method = 'addClass'
@@ -44,6 +48,8 @@ class AddClass(base):
 
 
 class RemoveClass(base):
+
+    'remove a class from the selected element'
 
     # decorations
     # .. name of action factory method

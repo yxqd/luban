@@ -14,7 +14,7 @@
 
 import luban.ui as lui
 
-from ....ObjectInterface import Factory as base
+from ....ElementInterface import Factory as base
 class InterfaceFactory(base):
 
     from luban.ui.elements.Splitter import Splitter as object_type

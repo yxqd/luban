@@ -29,6 +29,7 @@ class Factory:
     object_type = None # target object type this factory will build interface for
     actor = None # name of the actor for this interface
     demo_panels = None # a list of demo panels, each an instance of DemoPanel
+    api_categories = ['properties', 'events']
     
 
     def create(self):
@@ -90,7 +91,7 @@ class Factory:
         tab1 = tabs.tab(label='Introduction')
         d = self._createIntroductionDocument(descriptors); tab1.append(d)
         #
-        categories = ['properties', 'events', 'actions']
+        categories = self.api_categories
         for cat in categories:
             if cat in descriptors and descriptors[cat]:
                 tab2 = tabs.tab(label=cat.capitalize())
@@ -200,44 +201,6 @@ class Factory:
             p = doc.paragraph()
             p.text = tip
             p.Class = 'description' 
-            continue
-        return container
-
-
-    def _createActionsDocument(self, actions):
-        container = lui.e.document()
-
-        descriptions = [
-            'The following are methods to create actions for a widget.',
-            'Any of these methods has to be called by a selector that selects the widget.',
-            'For example the method "destroy" below can be used to create an',
-            'action to destroy a button widget by ::',
-            '',
-            '  select(id="buttonid").destroy()',
-            '',
-            'Pleaset note that the above method returns an action, and the action',
-            'can be assigned to an event handler.',
-            '',
-            'Expand any section below for details of each action.',
-            ]
-        descdoc = lui.e.restructuredtextdocument(); container.append(descdoc)
-        descdoc.Class = 'demo-description'
-        descdoc.text = descriptions
-
-        for name, method in actions:
-            sig, content = getMethodInfo(method)
-
-            title = name
-            if hasattr(method, 'experimental') and method.experimental:
-                title += '(experimental)'
-            doc = container.document(title=title, collapsable=True, collapsed=True)
-            doc.Class = 'api-item'
-            
-            sigp = doc.paragraph(text=[sig])
-            sigp.Class = 'signature'
-            p = doc.paragraph()
-            p.text = content
-            p.Class = 'description'
             continue
         return container
 

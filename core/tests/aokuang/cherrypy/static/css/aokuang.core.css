@@ -14,10 +14,16 @@
 }
 
 #demo-container {
-    width: 50em;
-    max-width: 50em;
+    width: 55em;
+    max-width: 55em;
 }
 
+.demo-document,.api-document {
+    background-color: #f5f5f5;
+    padding: 0.1em 1em 1em;
+}
+
+/* button */
 .luban-button {
     -moz-border-radius: 0.2em;
     border: 2px solid #d0d0d0;
@@ -35,12 +41,13 @@
     border:  2px solid #e78f1b;
 }
 
+/* code */
 pre {
     width: 65em;
     overflow-x: auto;
     padding-bottom: 1em;
     border: 1px solid lightGray;
-    padding: 0.2em;
+    padding: 0.5em;
     background-color: #ffffdd;
     line-height: 1em;
 }
@@ -48,9 +55,14 @@ pre {
 p.signature {
     font-family: monospace;
     border: 1px solid lightGray;
-    padding: 0.2em;
+    padding: 0.5em;
     background-color: #ffffdd;
     line-height: 1em;
+}
+
+/* ReST */
+.ReST h1 {
+    font-size: 1.4em;
 }
 
 /* loading demo */

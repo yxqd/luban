@@ -48,6 +48,7 @@ class Factory:
         # the api document
         doc = self._createAPIDocument()
         doc.title = 'API'
+        doc.Class = 'api-document'
         container.append(doc)
         return container
 

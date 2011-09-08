@@ -33,7 +33,7 @@ elementtypes = [
     # 'Form',
     # 'Frame',
     # 'Grid',
-    # 'Image',
+    'Image',
     # 'Link',
     # 'NewsTicker',
     # 'Paragraph',

@@ -33,6 +33,9 @@
   //  factory
   ef.image = function(kwds, docmill, parent) {
     var id = kwds.id;
+    if (id==null) {
+      id = luban.utils.uid();
+    }
     var div = tag('div', {"id": id}); div.addClass('luban-image-container');
 
     var tip = kwds.tip;

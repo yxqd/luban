@@ -12,22 +12,22 @@
 #
 
 
-from .SimpleElement import SimpleElement as base
+from luban.ui.elements.SimpleElement import SimpleElement as base
 
 
 class Image(base):
 
+    # decorations
     simple_description = 'An image'
     full_description = (
         'An image widget displays an image'
         )
 
-    abstract = False
-
+    # properties
     path = descriptors.str()
     path.tip = 'path to the image'
     
-
+    # methods
     def identify(self, inspector):
         return inspector.onImage(self)
 

@@ -23,6 +23,7 @@ base['javascripts'] += [
 elements = [
     'toolbar',
     'portlet', 'portletitem',
+    'image',
     ]
             
 for element in elements:

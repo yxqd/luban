@@ -1,0 +1,86 @@
+/* orm */
+.object-editor.luban-document.panel {
+    border: 2px solid #555555;
+    background-color:#E5E5E5;
+}
+/* apply to all document inside object editor*/
+.object-editor .luban-document {
+    margin: 0.5em 0;
+    border: 1px solid lightgrey;
+}
+.object-editor .luban-document-body{
+    margin-left:0;
+    padding: 0.5em 0.2em 0.5em 1em;
+}
+/* apply to all document title inside object editor */
+.object-editor .luban-document > .luban-document-title {
+    padding:0.1em;
+    margin:0;
+    background-color:lightGrey;
+}
+/* apply to all document tilte text */
+.object-editor .luban-document-title-text {
+    font-size: 100%;
+    font-weight: normal;
+}
+/* properties */
+.object-properties.luban-document {
+    background-color:#fafafa;
+}
+.object-properties.luban-document > .luban-document-title {
+    background-color:lightGrey;
+}
+/* reference */
+.referred-object.luban-document {
+    background-color:lightYellow;
+}
+.referred-object.luban-document > .luban-document-title {
+    background-color:lightGrey;
+}
+/* reference set */
+.object-referenceset.luban-document {
+    background-color:#eeffff;
+}
+.object-referenceset.luban-document > .luban-document-title {
+    background-color:lightGrey;
+}
+.object-referenceset-item.luban-document {
+    background-color:#ffffff;
+}
+/* */
+.object-editor .container.luban-document {
+    margin:0;
+    padding:0;
+    border: none;
+}
+.object-editor .container.luban-document > .luban-document-body {
+    margin:0;
+    padding:0;
+}
+.object-editor .container.luban-document > .luban-document-body > .luban-document {
+    margin:0 0 0.5em 0;
+}
+/* form */
+.object-editor form.luban-form > fieldset {
+    border: none;
+    margin:1em 0 0;
+    padding:0 1em;
+}
+.object-editor form.luban-form .luban-formfield {
+    margin:0;
+}
+
+/* for polymorphic reference */
+.object-editor .luban-document-title .luban-formfield {
+    margin: 0;
+}
+.object-editor .luban-document-title table {
+    border-collapse:collapse;
+}
+
+.object-editor .luban-document .body {
+    padding:0;
+    margin:0;
+    border:none;
+}
+

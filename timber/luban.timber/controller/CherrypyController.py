@@ -12,5 +12,8 @@
 #
 
 
+from luban.controller.CherrypyController import CherrypyController
+
+
 # End of file 
 

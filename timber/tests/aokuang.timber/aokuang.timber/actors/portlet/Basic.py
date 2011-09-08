@@ -25,12 +25,12 @@ class Actor(base):
         portlet = lui.e.portlet(title='portlet')
 
         # item 1
-        item1 = portlet.item(label='item1', tip='item1 tip')
-        item1.onclick = alert('item1 clicked')
+        item1 = portlet.item(label='item1') #, tip='item1 tip')
+        item1.onclick = lui.a.alert('item1 clicked')
 
         # item 2
-        item2 = portlet.item(label='item2', tip='item2 tip')
-        item2.onclick = alert('item2 clicked')
+        item2 = portlet.item(label='item2') #, tip='item2 tip')
+        item2.onclick = lui.a.alert('item2 clicked')
 
         return portlet
 

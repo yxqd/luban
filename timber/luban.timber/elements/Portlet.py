@@ -13,9 +13,10 @@
 
 
 from luban.ui.elements.Riveted import RivetedContainer, Meta, RivetedSubElement
+from luban.ui.elements.ElementContainer import elementfactory
 
 
-class Portlet(base):
+class Portlet(RivetedContainer):
 
     # decorations
     simple_description = 'provides users access to dynamic content'
@@ -31,16 +32,25 @@ class Portlet(base):
     title.tip = 'Title of the portlet'
 
     # methods
+    @elementfactory
+    def item(self, **kwds):
+        from luban.ui.elements.SubElementFactory import createSubElement
+        return createSubElement(self, PortletItem, **kwds)
+    
+    
     def identify(self, inspector):
         return inspector.onPortlet(self)
 
 
-
-class PortletItem(RivetedSubElement):
+from luban.ui.elements.SimpleElement import SimpleElement
+class PortletItem(RivetedSubElement, SimpleElement, metaclass=Meta):
     
     # decorations
     simple_description = 'An item in a portlet'
     full_description = ''
+
+    #
+    parent_types = [Portlet]
 
     # properties
     label = descriptors.str()
@@ -70,6 +80,7 @@ class PortletItem(RivetedSubElement):
         return inspector.onPortletItem(self)
 
 
+Portlet.child_types = [PortletItem]
 
 # version
 __id__ = "$Id$"

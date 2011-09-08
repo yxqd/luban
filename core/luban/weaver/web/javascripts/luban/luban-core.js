@@ -51,7 +51,7 @@ luban.utils = {};
     if (type == null) {
       type = this.attr('luban-element-type');
       if (type == null) {
-	throw String(this) + ':' + $(this).attr('id') + ': ' + 'no element type';
+	throw "luban-core: " + String(this) + ':' + $(this).attr('id') + ': ' + 'no element type';
       }
     } else {
       this.attr('luban-element-type', type);
@@ -228,7 +228,7 @@ luban.utils = {};
       var f = function () {
 	if (d.check) {
 	  if (d.check()) {
-	    var s = "failed to load " + url;
+	    var s = "luban-core: failed to load " + url;
 	    throw s;
 	  }
 	}

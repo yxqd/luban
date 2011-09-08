@@ -3,7 +3,8 @@
 import os.path
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
-from luban.controller.CherrypyController import CherrypyController
+# aokuang.timber relies on luban.timber
+from luban.timber.controller.CherrypyController import CherrypyController
 class Root(CherrypyController):
 
     def __init__(self):

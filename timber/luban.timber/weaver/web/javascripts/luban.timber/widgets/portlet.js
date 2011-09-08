@@ -103,8 +103,11 @@
 
   // portletitem
   ef.portletitem = function(kwds, docmill, parent) {
-
-    var visualpadding = tag('div', {id: kwds.id}); 
+    var id = kwds.id;
+    if (id==null) {
+	id = luban.utils.uid();
+    }
+    var visualpadding = tag('div', {'id': id}); 
     visualpadding.addClass('luban-portletitem-container');
 
     var containerdiv = tag('div'); visualpadding.append(containerdiv);
@@ -139,7 +142,7 @@
 
     // callbacks
     // click
-    var onclick = kwds.onclick; var id = kwds.id;
+    var onclick = kwds.onclick;
     a.click( function() { 
 	var item = $('#'+id).lubanElement();
 	item.select();

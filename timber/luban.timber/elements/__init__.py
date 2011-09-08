@@ -38,7 +38,7 @@ elementtypes = [
     # 'NewsTicker',
     # 'Paragraph',
     # 'Plot2D',
-    # 'Portlet',
+    'Portlet',
     # 'ProgressBar',
     'Toolbar',
     # 'TreeView',

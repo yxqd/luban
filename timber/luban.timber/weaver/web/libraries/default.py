@@ -22,6 +22,7 @@ base['javascripts'] += [
 
 elements = [
     'toolbar',
+    'portlet', 'portletitem',
     ]
             
 for element in elements:
@@ -31,7 +32,7 @@ for element in elements:
 
 
 
-del element, elements
+del d, element, elements
 
 
 # version

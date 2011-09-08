@@ -12,10 +12,4 @@
 #
 
 
-from luban.controller.CherrypyController import CherrypyController as base
-from .ActorRetrieverMixin import ActorRetrieverMixin
-class CherrypyController(ActorRetrieverMixin, base): pass
-
-
 # End of file 
-

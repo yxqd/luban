@@ -1,0 +1,2 @@
+aokuang: aokuang python package
+cherrypy: cherrypy fixture to serve aokuang.core

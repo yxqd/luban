@@ -74,7 +74,6 @@ class Factory(base):
         return container
 
 
-    skip_descriptors = []
     def _categorizeDescriptors(self, descriptors):
         'put descriptors into different categories such as properties, eventhandlers'
         r = super()._categorizeDescriptors(descriptors)

@@ -24,6 +24,7 @@ elements = [
     'toolbar',
     'portlet', 'portletitem',
     'image',
+    'grid', 'gridrow', 'gridcell',
     ]
             
 for element in elements:

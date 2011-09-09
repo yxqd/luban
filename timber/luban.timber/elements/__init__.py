@@ -32,7 +32,7 @@ elementtypes = [
     # 'File', 
     # 'Form',
     # 'Frame',
-    # 'Grid',
+    'Grid',
     'Image',
     # 'Link',
     # 'NewsTicker',

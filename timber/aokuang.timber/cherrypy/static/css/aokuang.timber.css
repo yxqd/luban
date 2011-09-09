@@ -1,0 +1,6 @@
+/* grid demo */
+#demo-container .luban-grid [luban-element-type='gridcell'] {
+    border: 1px solid gray;
+    padding: 0.5em 1em;
+    margin: 0.5em;
+}

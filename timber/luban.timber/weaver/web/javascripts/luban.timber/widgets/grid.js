@@ -33,6 +33,7 @@
   ef.grid = function (kwds, docmill, parent) {
     var Class = kwds.Class;
     var id = kwds.id;
+    if (id==null) {id=luban.utils.uid();}
     var ret = tag('div', {'id': id});
 
     ret.addClass(Class);

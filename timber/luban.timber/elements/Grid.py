@@ -12,32 +12,38 @@
 #
 
 
-from .ElementContainer import ElementContainer
+from luban.ui.elements.Riveted import RivetedContainer, Meta, RivetedSubElement
+from luban.ui.elements.ElementContainer import elementfactory
 
-class Grid(ElementContainer):
 
+class Grid(RivetedContainer):
+
+    # decorations
     simple_description = 'In essence, a table used for positioning objects in rows and columns'
     full_description = (
-        'A grid divides a space into cells. Widgets can be placed into a grid to achieve '
+        'A grid divides a space into cells. '
+        'Widgets can be placed into a grid to achieve '
         'better control the positioning.'
         )
     examples = [
         '''
-    grid = luban.ui.elements.grid()
+    grid = luban.ui.e.grid()
 
     row0 = grid.row()
     row0.cell().document(title='row 0, col 0: a document')
-    row0.cell().append(luban.ui.elements.form(title='row 0, col 1: a form'))
+    row0.cell().append(luban.ui.e.form(title='row 0, col 1: a form'))
 
     row1 = grid.row()
     row1.cell().document(title='row 1, col 0')
     row1.cell().append('row 1, col 1')
     row1.cell().document(title='row 1, col 2')
-    row1.cell().append(luban.ui.elements.paragraph(text=['row1, col3']))
+    row1.cell().append(luban.ui.e.paragraph(text=['row1, col3']))
     ''',
         ]
         
 
+    # methods
+    @elementfactory
     def row(self, **kwds):
         r = GridRow(**kwds)
         self.append(r)
@@ -49,7 +55,7 @@ class Grid(ElementContainer):
     
 
 
-class GridRow(ElementContainer):
+class GridRow(RivetedContainer):
 
     def cell(self, **kwds):
         c = GridCell(**kwds)
@@ -60,8 +66,10 @@ class GridRow(ElementContainer):
         return visitor.onGridRow(self)
     
 
-from .DocumentFactory import DocumentFactory
-class GridCell(DocumentFactory, ElementContainer):
+from luban.ui.elements.SimpleContainer import SimpleContainer
+class GridCell(SimpleContainer):
+
+    parent_types = [GridRow]
 
     def identify(self, visitor):
         return visitor.onGridCell(self)
@@ -70,10 +78,10 @@ class GridCell(DocumentFactory, ElementContainer):
     
 
 # only allow GridRow to be children of Grid
-Grid.allowed_element_types = [GridRow]
+Grid.child_types = [GridRow]
 
 # only allow GridCell to be children of GridRow
-GridRow.allowed_element_types = [GridCell]
+GridRow.child_types = [GridCell]
 
 
 # version

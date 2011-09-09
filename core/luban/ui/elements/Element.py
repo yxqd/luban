@@ -100,6 +100,13 @@ class Element(ElementBase, metaclass=Meta):
         if kls not in classes: 
             classes.append(kls)
         return self
+
+
+    def __init__(self, name=None, id=None, **kwds):
+        if name is None and id is not None:
+            name = id
+        super().__init__(name=name, id=id, **kwds)
+        return
     
     
 # version

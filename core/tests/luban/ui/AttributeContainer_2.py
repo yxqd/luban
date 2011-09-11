@@ -23,7 +23,6 @@ class TestCase(unittest.TestCase):
      
     def test1(self):
         "descriptor: get, set"
-        import pyre
         class A(AttributeContainer): 
             s = descriptors.str()
             s1 = descriptors.str()

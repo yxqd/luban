@@ -170,6 +170,7 @@
   };
 
 
+  /*
   if (jQuery.browser.msie) {
     alert('This site works best with firefox, safari, and google chrome. You may want to use one of them instead of Microsoft internet explorer.');
   }
@@ -181,7 +182,7 @@
       body.append(div);
     };
   }
-
+  */
 
   luban.docmill = new luban.documentmill();
 

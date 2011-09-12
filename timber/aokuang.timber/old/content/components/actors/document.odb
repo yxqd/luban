@@ -40,27 +40,6 @@ class Actor(base):
 
 
     @example(
-        title='Plain document with title',
-        description = [
-          'A basic document can be created with or without a title.',
-          'Subdocuments can be added as children of a document',
-          ]
-        )
-    def basic_document1(self, director):
-        document = luban.content.document(title='document title')
-
-        # add a paragraph
-        p = document.paragraph()
-        p.text = [
-            'Hello world!',
-            ]
-
-        # add a sub document
-        subdoc = document.document(title='Subdocument')
-        
-        return document
-
-    @example(
         title='Event "click"',
         description = [
           'A basic document with a onclick event handler.',

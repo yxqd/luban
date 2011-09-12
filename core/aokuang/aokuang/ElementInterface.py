@@ -38,7 +38,7 @@ class Factory(base):
         container = lui.e.document()
 
         descriptions = [
-            'The following are methods to create actions for a widget.',
+            'The following are methods to create actions for an element(widget).',
             'Any of these methods has to be called by a selector that selects the widget.',
             'For example the method "addClass" below can be used to create an',
             'action to add a class to a button widget by ::',

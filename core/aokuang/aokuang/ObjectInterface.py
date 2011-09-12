@@ -178,8 +178,8 @@ class Factory:
     def _createEventsDocument(self, events):
         container = lui.e.document()
         
-        descriptiontext = """You can specify what actions occur when an event happens in a luban element. The event handlers listed below are attributes of the luban element. If you set an event handler to be an action(or a list of actions), then that action(s) will be performed whenever the event occurs. """
-        description = lui.e.restructuredtextdocument(); container.append(description)
+        descriptiontext = """You can specify what actions to take when an event happens to a luban element. The event handlers listed below are attributes of the luban element. If you set an event handler to be an action, then that action will be performed whenever the event occurs. """
+        description = container.restructuredtextdocument()
         description.Class = 'demo-description'
         description.text = descriptiontext
 

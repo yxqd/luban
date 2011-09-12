@@ -48,7 +48,7 @@ class TestCase(unittest.TestCase):
         texts = render(htmldoc, javascriptdoc = jsdoc)
         
         #
-        filename = 'HtmlRenderer-breakdown-test.html'
+        filename = 'out-HtmlRenderer-breakdown-test.html'
         out = open(filename, 'w')
         print('\n'.join(texts), file=out)
         

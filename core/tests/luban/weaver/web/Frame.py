@@ -26,7 +26,7 @@ class TestCase(unittest.TestCase):
         weaver = create(htmlbase="http://my.url.com/")
         text = weaver.weave(frame)
         
-        filename = 'Frame-test1.html'
+        filename = 'out-Frame-test1.html'
         out = open(filename, 'w')
         print(text, file=out)
         return

@@ -40,18 +40,6 @@ class Actor(base):
 
 
     @example(
-        title='Event "click"',
-        description = [
-          'A basic document with a onclick event handler.',
-          'Click the document to see an alert.',
-          ]
-        )
-    def basic_document2(self, director):
-        document = luban.content.document(title='click me')
-        document.onclick = alert('clicked')
-        return document
-
-    @example(
         title='Hidden document',
         description = [
           'A hidden document. It will show up when you click the button',

@@ -29,7 +29,7 @@ class TestCase(unittest.TestCase):
             ValueError,
             setattr, a1, 'onfinish', 3)
         return
-     
+    
     
 if __name__ == "__main__": unittest.main()
 

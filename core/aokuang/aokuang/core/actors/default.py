@@ -36,7 +36,7 @@ class Actor(base):
 
 
     def createMenu(self, **kwds):
-        doc = lui.e.document()
+        doc = lui.e.document(title="select an item from the following")
         choices = self._findChoices()
         for choice in choices:
             b = doc.button(label=choice)

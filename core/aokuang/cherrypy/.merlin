@@ -1,0 +1,52 @@
+# -*- python -*-
+
+import merlin.rules, os
+from merlin.Context import create
+context = create()
+context.code.project = project = 'aokuang.core'
+
+package = "web"
+
+
+def rsync(src, target):
+    cmd = "rsync -a %s/ %s/" % (src, target)
+
+    from merlin import osutils
+    rt, out, err = osutils.execute(cmd)
+
+    if rt:
+        raise OSError("%s failed" % cmd)
+    return
+
+
+def syncroot():
+    src = "."
+    target = os.path.join(context.export_tree.root, project, package)
+    
+    if not os.path.exists(target):
+        os.makedirs(target)
+        
+    rsync(src, target)
+    return
+
+
+def syncstatic():
+    target = os.path.join(context.export_tree.root, project, package, 'static')
+    
+    if not os.path.exists(target):
+        os.makedirs(target)
+
+    src = "../../../luban/core/luban/weaver/web/javascripts"
+    rsync(src, target + '/javascripts')
+
+    src = "../../../luban/core/luban/weaver/web/css"
+    rsync(src, target + '/css')
+
+    src = "../../../luban/timber/luban.timber/weaver/web/javascripts/luban.timber"
+    rsync(src, target + '/javascripts/luban.timber')
+
+    return
+
+
+# syncroot()
+# syncstatic()

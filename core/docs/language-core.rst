@@ -19,8 +19,8 @@ part has a clean API.
 can still be separable.*
 
 Note: to those who have studied quantum field theory, 
-this is like renormalization. One can always find the
-right way to renormalize a part of the field to make it
+this is like renormalization. One can always find one
+way to renormalize a part of the field to make it
 not divergent (to encapsulate the possibly divergent
 interactions inside one entity).
 
@@ -31,7 +31,7 @@ Principles
 
 Minimalist approach
 """""""""""""""""""
-Try to find the most compact conceptual structure
+We strived to find the most compact conceptual structure
 sufficient to describe a sophisticated, dynamic, and mordern
 user interface.
 
@@ -47,7 +47,7 @@ for building user interface.
 
 We are only concern with the most essential aspects of user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Visual appeals (eye candys) are not the essential part of UI.
+Visual appeals (eye candies) are not the essential part of UI.
 
 
 
@@ -60,50 +60,65 @@ many complex types are unecessary.
 * primitive types: bool, str, int, float
 * list: a list of instances of luban types
 * dictionary: key value pairs. key: str type. value: instance of any luban type
-* object: generic luban object that defines attributes (name: str, value: instance of any luban type)
- * element (specialized luban object types that describes UI elements)
- * action
- * event
+* object: generic luban object that defines attributes (name: str, value: instance of any luban type). The following are specialized types derived from this generic object type.
+ * element: UI elements (widgets)
+ * action: actions to update UI or to communicate with controller
+ * event: events triggered by user interactions with the UI
+
+Instances of luban object types can be regarded as specialized dictionaries that has fixed set of keys, and the corresponding values may be limited to be of one specific luban type. Luban object type does not have methods, but only has attributes.
 
 
 Basic concepts and structure
 ----------------------------
-A user interface is described using a hierarchy structure
-consisting of ui elements.
+A *user interface* is described using a hierarchy structure
+consisting of ui *elements*.
 
-A controller is responsible for constructing and returning
-instances of luban types upon request. 
+A *controller* is responsible for constructing and returning
+instances of luban types upon *request*. 
 
-A request is identified by its parameters (e.g. "actor", "routine", ...)
+A *request* is identified by its parameters (e.g. "actor", "routine", ...)
 
 There is no real reason that there could not be more than 1
 controller. But here we assume only one controller exists, 
 for simplicity of this discussion.
 
-A user interface starts by a request to the UI controller
-whose response is a UI element
+A *user interface* starts by a *request* to the UI *controller*
+whose response is a UI *element*
 hierarchy with a root node being of the "Frame" type.
 "Frame" is a special UI element type.
 
-User interactions with the UI results in events.
+User interactions with the UI results in *events*.
 
-An event will trigger an associated action.
+An *event* will trigger an associated *action*.
+The association of an *action* with an *event* is done by assigning the
+*action* to the *event handler* (an attribute) of an *element*.
 
-An action could be changing visual representation of
-a UI element, or loading some data from the controller
-to update a UI element, or loading another action from
-controller to execute.
+An *action* could be changing visual representation of
+a UI *element*, or loading some data from the *controller*
+to update a UI *element*, or loading another *action* from
+*controller* to execute.
 
 
 Controller
 """"""""""
-The controller has access to many actors.
-When requested for response, the controller delegates
-to one of its actors to perform a routine.
-This routine will produce a response depending
-on whatever extra parameters given to it.
+When receiving a request, the controller must
+prepare a response according to the request,
+and send the response back to the UI.
 
-The response always is an instance of a luban type.
+A response always is an instance of a luban type.
+
+A scheme is proposed to bring in a structure to
+the controller:
+
+* A request always contains the following two parameters
+  * actor: name of the actor
+  * routine: name of the routine of the actor
+* A controller handles a set of "actors"
+* Whenever requested, it delegates
+  to the specified actor to perform the specified routine
+  with additional parameters.
+* This routine will produce a response depending
+  on whatever extra parameters given to it.
 
 
 Elements

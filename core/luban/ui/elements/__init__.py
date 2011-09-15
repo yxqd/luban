@@ -18,8 +18,8 @@ luban ui elements
 
 Users don't use this package directly, rather they use proxy luban.ui.e:
 
->>> import luban.ui as lui
->>> document = lui.e.document()
+>>> import luban
+>>> document = luban.e.document()
 
 Developers could provide extension of luban elements by subclassing base
 classes provided here.

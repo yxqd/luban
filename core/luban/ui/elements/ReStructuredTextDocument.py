@@ -53,8 +53,8 @@ def reSTdoc2htmldoc(restdoc):
         kls = []
     if 'ReST' not in kls: kls.append('ReST')
     # html document
-    from luban import ui as lui
-    htmldoc = lui.e.htmldocument(text=html, id=restdoc.id or '', Class=kls)
+    import luban
+    htmldoc = luban.e.htmldocument(text=html, id=restdoc.id or '', Class=kls)
     return htmldoc
 def onReStructuredTextDocument(self, doc):
     htmldoc = reSTdoc2htmldoc(doc)

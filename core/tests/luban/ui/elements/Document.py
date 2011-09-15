@@ -12,7 +12,7 @@
 #
 
 
-from luban import ui as lui
+import luban
 
 import unittest
 class TestCase(unittest.TestCase):
@@ -24,8 +24,8 @@ class TestCase(unittest.TestCase):
     
     def test2(self):
         """luban.content.ElementContainer: disallowed_element_types: frame"""
-        frame = lui.e.frame()
-        document = lui.e.document()
+        frame = luban.e.frame()
+        document = luban.e.document()
         self.assertRaises(
             document.SubelementDisallowedError, 
             document.append, frame,

@@ -11,7 +11,7 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-from luban import ui as lui
+import luban
 
 from ....DemoPanelActor import Actor as base
 class Actor(base):
@@ -22,7 +22,7 @@ class Actor(base):
         'Subdocuments can be added as children of a document',
         ]
     def createDemoPanel(self, **kwds):
-        document = lui.e.document(title='document title')
+        document = luban.e.document(title='document title')
 
         # add a paragraph
         p = document.paragraph()

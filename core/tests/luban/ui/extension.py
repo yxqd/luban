@@ -12,9 +12,9 @@
 #
 
 
-from luban import ui as lui
+import luban
 try:
-    lui.e.form
+    luban.e.form
 except AttributeError:
     pass
 else:
@@ -22,7 +22,7 @@ else:
     raise RuntimeError(m)
 
 try:
-    lui.a.reboot
+    luban.a.reboot
 except AttributeError:
     pass
 else:
@@ -32,9 +32,9 @@ else:
 # extension kicks in
 import extension_example
 # and form is available
-lui.e.form
+luban.e.form
 # and reboot is available
-lui.a.reboot
+luban.a.reboot
 
 
 import unittest
@@ -42,14 +42,14 @@ class TestCase(unittest.TestCase):
 
     def test1(self):
         # create a form
-        form = lui.e.form(id='login')
+        form = luban.e.form(id='login')
         # the submit event handler
-        form.onsubmit = lui.a.select(element=form).submit(actor="login", routine="verify")
+        form.onsubmit = luban.a.select(element=form).submit(actor="login", routine="verify")
         return
 
     
     def test2(self):
-        r = lui.a.reboot()
+        r = luban.a.reboot()
         # print(r)
         return
      

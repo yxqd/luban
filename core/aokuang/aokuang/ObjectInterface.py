@@ -20,7 +20,7 @@ decorations to inspect:
 """
 
 
-from luban import ui as lui
+import luban
 
 
 class Factory:
@@ -33,7 +33,7 @@ class Factory:
     
 
     def create(self):
-        container = lui.e.document()
+        container = luban.e.document()
 
         object_type = self.object_type
         if hasattr(object_type, 'experimental') and object_type.experimental:
@@ -57,7 +57,7 @@ class Factory:
         """create demo document 
         """
         # container
-        container = lui.e.document(name='demo-document')
+        container = luban.e.document(name='demo-document')
         tabs = container.tabs(id="demo-document-tabs")
 
         for i,panel in enumerate(self.demo_panels):
@@ -73,8 +73,8 @@ class Factory:
                 inner = self.controller.call(actor=actor, routine=routine)
                 tab.append(inner)
                 
-            tab.onselect = lui.a.select(element=tab).replaceContent(
-                newcontent=lui.a.load(actor=actor, routine=routine)
+            tab.onselect = luban.a.select(element=tab).replaceContent(
+                newcontent=luban.a.load(actor=actor, routine=routine)
                 )
             continue
 
@@ -86,8 +86,8 @@ class Factory:
         descriptors = object_type.iterDescriptors()
         descriptors = self._categorizeDescriptors(descriptors)
         
-        doc = lui.e.document(name='api-document')
-        tabs = lui.e.tabs(); doc.append(tabs)
+        doc = luban.e.document(name='api-document')
+        tabs = luban.e.tabs(); doc.append(tabs)
         #
         tab1 = tabs.tab(label='Introduction')
         d = self._createIntroductionDocument(descriptors); tab1.append(d)
@@ -106,7 +106,7 @@ class Factory:
     
 
     def _createIntroductionDocument(self, descriptors):
-        d = lui.e.restructuredtextdocument()
+        d = luban.e.restructuredtextdocument()
         object_type = self.object_type
         title = "%s: %s" % (object_type.__name__, object_type.simple_description)
         title = '%s\n%s\n' % (title, '-'*len(title))
@@ -127,10 +127,10 @@ class Factory:
 
 
     def _createPropertiesDocument(self, props):
-        container = lui.e.document()
+        container = luban.e.document()
 
         # explanation
-        descdoc = lui.e.restructuredtextdocument(); container.append(descdoc)
+        descdoc = luban.e.restructuredtextdocument(); container.append(descdoc)
         descdoc.Class = 'demo-description'
         # descdoc.text = 'expand an item for details'
         
@@ -149,7 +149,7 @@ class Factory:
             doc.title = title
 
             # subdocument
-            subdoc = lui.e.restructuredtextdocument(); doc.append(subdoc)
+            subdoc = luban.e.restructuredtextdocument(); doc.append(subdoc)
             subdoc.Class = 'description'
             subdoc_text = []
             
@@ -176,7 +176,7 @@ class Factory:
 
 
     def _createEventsDocument(self, events):
-        container = lui.e.document()
+        container = luban.e.document()
         
         descriptiontext = """You can specify what actions to take when an event happens to a luban element. The event handlers listed below are attributes of the luban element. If you set an event handler to be an action, then that action will be performed whenever the event occurs. """
         description = container.restructuredtextdocument()

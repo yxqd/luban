@@ -18,8 +18,8 @@ class TestCase(unittest.TestCase):
      
     def test1(self):
         """luban.weaver.web.DocumentMill: Frame"""
-        import luban.ui as lui
-        frame = lui.e.frame(name='frame')
+        import luban
+        frame = luban.e.frame(name='frame')
         document = frame.document(name='document')
         
         from luban.weaver.web import create

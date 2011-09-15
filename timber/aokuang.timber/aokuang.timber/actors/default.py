@@ -12,7 +12,7 @@
 #
 
 
-from luban import ui as lui
+import luban
 
 
 from luban.controller.Actor import Actor as base
@@ -26,8 +26,8 @@ class Actor(base):
     
 
     def frame(self, **kwds):
-        import luban.ui as lui
-        frame = lui.e.frame(title="aokuang: luban API demo")
+        import luban
+        frame = luban.e.frame(title="aokuang: luban API demo")
         sp = frame.splitter(orientation='horizontal')
         left = sp.section(name='left', id='menu-container')
         right = sp.section(name='right', id='demo-container')
@@ -36,15 +36,15 @@ class Actor(base):
 
 
     def createMenu(self, **kwds):
-        doc = lui.e.document()
+        doc = luban.e.document()
         choices = self._findChoices()
         for choice in choices:
             b = doc.button(label=choice)
-            newcontent = lui.a.load(
+            newcontent = luban.a.load(
                 actor = self.name.replace('default', choice),
                 routine='createInterface',
             )
-            b.onclick = lui.a.select(id="demo-container")\
+            b.onclick = luban.a.select(id="demo-container")\
                 .replaceContent(newcontent=newcontent)
             continue
         return doc

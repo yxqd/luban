@@ -25,8 +25,8 @@ class Toolbar(SimpleContainer):
         )
     examples = [
         '''
-    import luban.ui as lui
-    toolbar = lui.e.toolbar()
+    import luban
+    toolbar = luban.e.toolbar()
     b1 = toolbar.button(label='button1')
     b2 = toolbar.button(label='button2')
     b3 = toolbar.button(label='button3')

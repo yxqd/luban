@@ -11,7 +11,7 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-from luban import ui as lui
+import luban
 
 from ....DemoPanelActor import Actor as base
 class Actor(base):
@@ -21,7 +21,7 @@ class Actor(base):
         ]
 
     def createDemoPanel(self, **kwds):
-        doc = lui.e.document(title='test grid')
+        doc = luban.e.document(title='test grid')
 
         doc.paragraph(text='start grid')
         

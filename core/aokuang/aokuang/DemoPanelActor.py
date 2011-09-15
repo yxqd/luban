@@ -20,7 +20,7 @@ how this is used.
 """
 
 
-from luban import ui as lui
+import luban
 
 
 from luban.controller.Actor import Actor as base
@@ -32,7 +32,7 @@ class Actor(base):
 
 
     def createInterface(self, **kwds):
-        doc = lui.e.document(title = self.title)
+        doc = luban.e.document(title = self.title)
         doc.append(self._createDemoAndCodeViewTabs())
         
         p = doc.restructuredtextdocument()
@@ -78,13 +78,13 @@ class Actor(base):
           all of them to give a complet view. It is good that func and deps
           are in the same actor.
         '''
-        tabs = lui.e.tabs()
+        tabs = luban.e.tabs()
         demotab = tabs.tab(label='Demo')
         demotab.id = id(demotab)
         demotab.Class = 'demo'
         funcname = func.__func__.__name__
-        demotab.onselect = lui.a.select(element=demotab).replaceContent(
-            newcontent=lui.a.load(actor=self.name, routine=funcname))
+        demotab.onselect = luban.a.select(element=demotab).replaceContent(
+            newcontent=luban.a.load(actor=self.name, routine=funcname))
         
         codetab = tabs.tab(label='Code')
         codetab.Class = 'code'
@@ -113,10 +113,10 @@ def createCodeDoc(blocks):
         lines += ['    '] * 2
 
     text = '\n'.join(['::', '']+ [' '+ l for l in lines])
-    hdoc = lui.e.restructuredtextdocument(text=text)
+    hdoc = luban.e.restructuredtextdocument(text=text)
     return hdoc
 
-    viewer = lui.e.codeviewer()
+    viewer = luban.e.codeviewer()
     viewer.syntax = 'python'
     viewer.text = '\n'.join(lines)
     return viewer

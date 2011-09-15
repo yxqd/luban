@@ -20,7 +20,7 @@ decorations to inspect:
 """
 
 
-from luban import ui as lui
+import luban
 
 
 from .ObjectInterface import Factory as base
@@ -35,7 +35,7 @@ class Factory(base):
     
 
     def _createActionsDocument(self, actions):
-        container = lui.e.document()
+        container = luban.e.document()
 
         descriptions = [
             'The following are methods to create actions for an element(widget).',
@@ -51,7 +51,7 @@ class Factory(base):
             # 'Expand any section below for details of each action.',
             ]
         descriptions = '\n'.join(descriptions)
-        descdoc = lui.e.restructuredtextdocument(); container.append(descdoc)
+        descdoc = luban.e.restructuredtextdocument(); container.append(descdoc)
         descdoc.Class = 'demo-description'
         descdoc.text = descriptions
 

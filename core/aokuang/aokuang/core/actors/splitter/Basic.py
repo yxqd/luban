@@ -11,7 +11,7 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-from luban import ui as lui
+import luban
 
 from ....DemoPanelActor import Actor as base
 class Actor(base):
@@ -30,7 +30,7 @@ class Actor(base):
         ]
 
     def createDemoPanel(self, **kwds):
-        le = lui.e
+        le = luban.e
 
         #
         frames = le.splitter()

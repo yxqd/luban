@@ -20,7 +20,7 @@ decorations to inspect:
 """
 
 
-from luban import ui as lui
+import luban
 
 
 from .ObjectInterface import Factory as base

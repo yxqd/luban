@@ -12,7 +12,7 @@
 #
 
 
-import luban.ui as lui
+import luban
 
 from ....ActionInterface import Factory as base
 class InterfaceFactory(base):

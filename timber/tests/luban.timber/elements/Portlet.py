@@ -12,7 +12,7 @@
 #
 
 
-import luban.ui as lui
+import luban
 
 
 import unittest

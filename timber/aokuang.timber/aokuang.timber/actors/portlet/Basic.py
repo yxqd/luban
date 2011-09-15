@@ -11,7 +11,7 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-from luban import ui as lui
+import luban
 
 from ....DemoPanelActor import Actor as base
 class Actor(base):
@@ -22,15 +22,15 @@ class Actor(base):
         ]
 
     def createDemoPanel(self, **kwds):
-        portlet = lui.e.portlet(title='portlet')
+        portlet = luban.e.portlet(title='portlet')
 
         # item 1
         item1 = portlet.item(label='item1') #, tip='item1 tip')
-        item1.onclick = lui.a.alert('item1 clicked')
+        item1.onclick = luban.a.alert('item1 clicked')
 
         # item 2
         item2 = portlet.item(label='item2') #, tip='item2 tip')
-        item2.onclick = lui.a.alert('item2 clicked')
+        item2.onclick = luban.a.alert('item2 clicked')
 
         return portlet
 

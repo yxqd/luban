@@ -21,7 +21,7 @@ Note to developer:
   and implement method "createDemoPanel".
 """
 
-from luban import ui as lui
+import luban
 
 from ....DemoPanelActor import Actor as base
 class Actor(base):
@@ -34,7 +34,7 @@ class Actor(base):
     
 
     def createDemoPanel(self, **kwds):
-        container = lui.e.document(title="hey")
+        container = luban.e.document(title="hey")
         p1 = container.paragraph(
             text='the text to replace', 
             id='load_example1_toreplace',
@@ -46,8 +46,8 @@ class Actor(base):
         # The action is to select the paragraph element defined above
         # and replace it with a text string loaded from
         # routine "onloadsimplevalue" of this actor.
-        b1.onclick = lui.a.select(element = p1).replaceContent(
-            newcontent = lui.a.load(
+        b1.onclick = luban.a.select(element = p1).replaceContent(
+            newcontent = luban.a.load(
                 actor = self.name, 
                 routine = 'onloadsimplevalue')
             )

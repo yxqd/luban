@@ -28,8 +28,8 @@ class Splitter(RivetedContainer):
     examples = [
         '''
     # the follwoing code creates a splitter that is oriented horizontally and has 3 sections
-    import luban.ui as lui
-    splitter = lui.e.splitter(orientation='horizontal')
+    import luban
+    splitter = luban.e.splitter(orientation='horizontal')
     left = splitter.section()
     middle = splitter.section()
     right = splitter.section()

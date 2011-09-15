@@ -11,7 +11,7 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-from luban import ui as lui
+import luban
 
 from ....DemoPanelActor import Actor as base
 class Actor(base):
@@ -21,9 +21,9 @@ class Actor(base):
         'Click the button to see an alert',
         ]
     def createDemoPanel(self, **kwds):
-        button = lui.e.button(
+        button = luban.e.button(
             label = 'click me',
-            onclick = lui.a.alert('clicked button'),
+            onclick = luban.a.alert('clicked button'),
             )
         return button
 

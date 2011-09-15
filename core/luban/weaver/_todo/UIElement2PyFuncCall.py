@@ -70,7 +70,7 @@ class UIElement2PyFuncCall(object):
     
 
     def _addImport(self):
-        self._imports.append("import luban.ui as lui")
+        self._imports.append("import luban")
         return
 
 
@@ -96,7 +96,7 @@ class UIElement2PyFuncCall(object):
         myfunc.body = []
 
         # code to create an instance
-        myfunc.body.append('instance = lui.e.%s()' % kls.__unique_type_name__)
+        myfunc.body.append('instance = luban.e.%s()' % kls.__unique_type_name__)
 
         # loop over descriptors
         descriptors = element.iterDescriptors()
@@ -152,8 +152,8 @@ class _func:
 
 
 def test():
-    import luban.ui as lui
-    frame = lui.e.frame(name='mainframe', title='test')
+    import luban
+    frame = luban.e.frame(name='mainframe', title='test')
     doc = frame.document(id='frame', title='test')
     renderer = UIElement2PyFuncCall()
     print('\n'.join(renderer.render(frame)))

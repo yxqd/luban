@@ -11,7 +11,7 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-from luban import ui as lui
+import luban
 
 from ....DemoPanelActor import Actor as base
 class Actor(base):
@@ -24,7 +24,7 @@ class Actor(base):
         ]
 
     def createDemoPanel(self, **kwds):
-        container = lui.e.document()
+        container = luban.e.document()
         doc = container.document(
             title = 'The document to change',
             id = 'document-to-change',
@@ -32,7 +32,7 @@ class Actor(base):
         button = container.button(label = 'click me', id='load_example3_button')
         # click the button will load from routine onloadaction of this actor.
         # since the loaded is an action, that action will then be performed.
-        button.onclick = lui.a.load(actor = self.name, routine = 'onloadaction')
+        button.onclick = luban.a.load(actor = self.name, routine = 'onloadaction')
         return container
     
     
@@ -42,7 +42,7 @@ class Actor(base):
         # In web application, this class is rendered as css class,
         # the ".green-border" was defined to have a green border in
         # aokuang.css
-        return lui.a.select(id='document-to-change')\
+        return luban.a.select(id='document-to-change')\
             .addClass(cls='green-border')
 
 

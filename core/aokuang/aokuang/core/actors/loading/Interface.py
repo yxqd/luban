@@ -11,7 +11,7 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-from luban import ui as lui
+import luban
 
 from ....DemoPanelActor import Actor as base
 class Actor(base):
@@ -24,7 +24,7 @@ class Actor(base):
 
 
     def createDemoPanel(self, **kwds):
-        container = lui.e.document(id='container')
+        container = luban.e.document(id='container')
         doc = container.document(title = 'the document to replace')
         button = container.button(label = 'click me', id='load_example2_button')
         # Here we set the "onclick" handler of the button to an action,
@@ -32,8 +32,8 @@ class Actor(base):
         # The action is to select the document element defined above
         # and replace it with a document loaded from
         # routine "onloadnewdocument" of this actor.
-        button.onclick = lui.a.select(element = container).replaceContent(
-            newcontent = lui.a.load(
+        button.onclick = luban.a.select(element = container).replaceContent(
+            newcontent = luban.a.load(
                 actor = self.name, 
                 routine = 'onloadnewdocument',
                 )
@@ -42,7 +42,7 @@ class Actor(base):
 
 
     def onloadnewdocument(self, **kwds):
-        newdoc = lui.e.document(title='new document')
+        newdoc = luban.e.document(title='new document')
         return newdoc
     
 

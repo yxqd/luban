@@ -11,7 +11,7 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-from luban import ui as lui
+import luban
 
 from ....DemoPanelActor import Actor as base
 class Actor(base):
@@ -29,7 +29,7 @@ Some more items
 * a
 * b
         '''
-        return lui.e.restructuredtextdocument(text=text)
+        return luban.e.restructuredtextdocument(text=text)
 
 
 # End of file 

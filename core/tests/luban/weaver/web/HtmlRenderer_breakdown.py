@@ -12,7 +12,7 @@
 #
 
 
-import luban.ui as lui
+import luban
 
 
 import unittest
@@ -22,7 +22,7 @@ class TestCase(unittest.TestCase):
     def test(self):
         """luban.weaver.web: Frame2HtmlDocument + renderer.render"""
         # luban ui object
-        frame = lui.e.frame(title='test frame', name='frame')
+        frame = luban.e.frame(title='test frame', name='frame')
         document = frame.document(name='document')
         p = document.paragraph(name='p')
         

@@ -12,21 +12,21 @@
 #
 
 
-import luban.ui as lui
+import luban
 
 
 import unittest
 class TestCase(unittest.TestCase):
 
     def test0(self):
-        examples = lui.e.tabs.examples
+        examples = luban.e.tabs.examples
         code = '\n'.join(examples)
         exec(code)
         return
     
      
     def test1(self):
-        tabs = lui.e.tabs()
+        tabs = luban.e.tabs()
         tabs.tab().document(title='doc1').paragraph(text='hello')
         tabs.tab().tabs()
         # print(tabs)
@@ -34,36 +34,36 @@ class TestCase(unittest.TestCase):
 
 
     def test2(self):
-        tabs = lui.e.tabs()
+        tabs = luban.e.tabs()
         self.assertRaises(AttributeError, getattr, tabs, 'document')
         return
 
 
     def test3(self):
-        tabs = lui.e.tabs()
+        tabs = luban.e.tabs()
         tab1 = tabs.tab(id='tab1')
-        selecttab1 = lui.a.select(element=tab1).select()
+        selecttab1 = luban.a.select(element=tab1).select()
         print(selecttab1)
         return
 
 
     def test4(self):
-        tabs = lui.e.tabs()
+        tabs = luban.e.tabs()
         tab1 = tabs.tab(id='tab1')
         from luban.ui.descriptors.Descriptor import Descriptor
         self.assert_(isinstance(tab1.__class__.onselect, Descriptor))
-        tab1.onselect = lui.a.alert("hello")
+        tab1.onselect = luban.a.alert("hello")
         from luban.ui.actions.Action import Action
         self.assert_(isinstance(tab1.onselect, Action))
         return
 
 
     def test5(self):
-        tabs = lui.e.tabs()
+        tabs = luban.e.tabs()
         tab1 = tabs.tab(id='tab1')
         from luban.ui.descriptors.EventHandler import EventAttributeError
         try:
-            tab1.onselect = lui.a.load(actor="actor", param1=lui.event.x)
+            tab1.onselect = luban.a.load(actor="actor", param1=luban.event.x)
         except EventAttributeError:
             pass
         else:
@@ -91,7 +91,7 @@ class TestCase(unittest.TestCase):
         """Tabs: definition context"""
         import luban
         if luban.has_pyre:
-            class MyTabs(lui.e.tabs):
+            class MyTabs(luban.e.tabs):
 
                 tab1 = Tab()
 

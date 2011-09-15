@@ -12,16 +12,16 @@
 #
 
 
-import luban.ui as lui
+import luban
 
 
 import unittest
 class TestCase(unittest.TestCase):
 
     def test0a(self):
-        print (lui.e.splitter.getCtorDocStr())
-        print (lui.e.splitter.__init__.__doc__)
-        print (lui.e.document.__init__.__doc__)
+        print (luban.e.splitter.getCtorDocStr())
+        print (luban.e.splitter.__init__.__doc__)
+        print (luban.e.document.__init__.__doc__)
         return
     
      

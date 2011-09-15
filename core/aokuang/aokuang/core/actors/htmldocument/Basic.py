@@ -11,7 +11,7 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-from luban import ui as lui
+import luban
 
 from ....DemoPanelActor import Actor as base
 class Actor(base):
@@ -36,7 +36,7 @@ Some more items
 
 <p>&copy</p>
         '''
-        return lui.e.htmldocument(text=text)
+        return luban.e.htmldocument(text=text)
 
 
 # End of file 

@@ -12,7 +12,7 @@
 #
 
 
-from luban import ui as lui
+import luban 
 
 
 import unittest
@@ -20,10 +20,10 @@ class TestCase(unittest.TestCase):
 
 
     def test(self):
-        frame = lui.e.frame(name='frame', title="title")
+        frame = luban.e.frame(name='frame', title="title")
         
         header = frame.document(name='header')
-        subdoc = lui.e.document(name="subdoc"); header.append(subdoc)
+        subdoc = luban.e.document(name="subdoc"); header.append(subdoc)
         self.assert_(len(header.contents) == 1)
         
         body = frame.document(name='body', title="body")

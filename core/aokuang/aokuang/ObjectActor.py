@@ -17,7 +17,7 @@ actor base class for luban ui objects
 """
 
 
-from luban import ui as lui
+import luban
 from .DemoPanelActor import Actor as DemoPanelActor
 from .ObjectInterface import Factory as ObjectInterfaceFactory
 
@@ -31,7 +31,7 @@ class Actor(base):
     def default(self):
         # frame
         title = self.frame_title
-        f = lui.e.frame(title = title)
+        f = luban.e.frame(title = title)
         
         # interior
         d = self.createInterface()

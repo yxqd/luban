@@ -109,11 +109,11 @@ def createCodeDoc(blocks):
     for block in blocks:
         if not block: continue
         # add to lines
-        lines += [l for i,l in block]
-        lines += [''] * 2
+        lines += [l.rstrip() for i,l in block]
+        lines += ['    '] * 2
 
-    hdoc = lui.e.htmldocument()
-    hdoc.text = '\n'.join(['<pre>']+ lines + ['</pre>'])
+    text = '\n'.join(['::', '']+ [' '+ l for l in lines])
+    hdoc = lui.e.restructuredtextdocument(text=text)
     return hdoc
 
     viewer = lui.e.codeviewer()

@@ -2,7 +2,7 @@
 #menu-container {
     padding-top: 1em;
     vertical-align: top;
-    width: 10em;
+    width: 20em;
 }
 #menu-container .luban-button-container {
     margin-top: 1em;
@@ -14,7 +14,7 @@
     color:gray;
 }
 #menu-container .luban-button {
-    width: 6em;
+    width: 13.2em;
     display: block;
     text-align: center;
 }
@@ -60,7 +60,7 @@ pre,p.signature {
     border: 1px solid lightGray;
     padding: 0.5em;
     background-color: #ffffdd;
-    line-height: 1em;
+    line-height: 1.6em;
     font-family: monaco,monospace;
     font-size: 0.78em;
     border-radius: 0.3em;

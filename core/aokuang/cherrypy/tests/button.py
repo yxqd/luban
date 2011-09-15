@@ -11,7 +11,13 @@ class TestCase(unittest.TestCase):
     
     def test(self):
         root = Root()
-        print(root.index(actor='helloworld'))
+        print (root.index(actor='button.Basic', routine='createDemoPanel'))
+        return
+
+
+    def test(self):
+        root = Root()
+        print (root.index(actor='button.Basic', routine='createInterface'))
         return
 
 

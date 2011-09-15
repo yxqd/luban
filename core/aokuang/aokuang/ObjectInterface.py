@@ -37,7 +37,7 @@ class Factory:
 
         object_type = self.object_type
         if hasattr(object_type, 'experimental') and object_type.experimental:
-            p = container.paragraph(text='This is still experimental')
+            p = container.paragraph(text='This is still experimental', Class='warning')
 
         # the demo document
         doc = self._createDemoDocument()

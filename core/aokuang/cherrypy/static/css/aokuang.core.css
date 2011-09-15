@@ -14,19 +14,27 @@
     color:gray;
 }
 #menu-container .luban-button {
-    width: 13.2em;
+    width: 15.2em;
+    min-width: 15.2em;
     display: block;
     text-align: center;
 }
 
 #demo-container {
+    background-color: #f5f5f5;
+    border: 1px solid #eee;
     width: 55em;
     max-width: 55em;
+    min-width: 55em;
 }
 
 .demo-document,.api-document {
-    background-color: #f5f5f5;
     padding: 0.1em 1em 1em;
+}
+
+.warning {
+    color: #dd0000;
+    font-style: italic;
 }
 
 /* button */

@@ -111,6 +111,8 @@ class Factory:
         title = "%s: %s" % (object_type.__name__, object_type.simple_description)
         title = '%s\n%s\n' % (title, '-'*len(title))
         description = object_type.full_description
+        if not isinstance(description, str):
+            raise ValueError("full_description of a luban type must be a str, not %r" % (description, ))
 
         ctordoctitle = 'signature::'
         if '__init__' in object_type.__dict__:

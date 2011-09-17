@@ -1,6 +1,9 @@
 How to add a new element type in a luban extension
 ==================================================
 
+Here we use luban.timber extension as the example.
+
+
 * define the element type by deriving from an appropriate
   base class. choose from 
 
@@ -13,6 +16,7 @@ How to add a new element type in a luban extension
   see luban.timber/elements/__init__.py how it is done
 
 * for each type of media, add support for this new element type
+
 
 Web weaver
 ----------

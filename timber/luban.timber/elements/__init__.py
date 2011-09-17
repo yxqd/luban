@@ -42,7 +42,7 @@ elementtypes = [
     # 'ProgressBar',
     'Toolbar',
     # 'TreeView',
-    # 'Uploader',
+    'Uploader',
     ]
 def importAllElements():
     modules = elementtypes

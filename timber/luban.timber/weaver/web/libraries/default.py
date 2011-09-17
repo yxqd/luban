@@ -25,6 +25,7 @@ elements = [
     'portlet', 'portletitem',
     'image',
     'grid', 'gridrow', 'gridcell',
+    'uploader',
     ]
             
 for element in elements:

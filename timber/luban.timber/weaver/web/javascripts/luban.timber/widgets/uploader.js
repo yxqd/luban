@@ -44,7 +44,7 @@
 
     var onsubmit = kwds.onsubmit;
     // onsubmit must be a simple load action
-    if (onsubmit.type!='loading') {throw 'uploader.onsubmit must be a load action';}
+    if (onsubmit.luban_type!='loading') {throw 'uploader.onsubmit must be a load action';}
     var actor = onsubmit.actor; var routine = onsubmit.routine; var data = onsubmit.params;
     var C = luban.Controller;
     var credArgs = C.getCredentialArgs();

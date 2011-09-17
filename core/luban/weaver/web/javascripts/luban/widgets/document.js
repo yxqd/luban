@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2011 All Rights Reserved  
+//                       (C) 2008-2011 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -26,23 +26,26 @@
   var widgets = luban.widgets;
   var tag = luban.utils.tag;
 
-  
+
   // documentmill handler
   var dmp = luban.documentmill.prototype;
   dmp.ondocument = dmp._onContainer;
-  
-  
+
+
   // document
   ef.document = function (kwds, docmill, parent) {
     var id = kwds.id;
-    
+    if (!id) {
+      id = luban.utils.uid();
+    }
+
     // create the overall container
     var div = tag('div', {'id': id});
 
     //
     var lubanelem = div.lubanElement('document');
     if (parent) { parent.add(lubanelem); }
-    
+
     return createSkeleton(kwds, docmill, parent, div);
   };
 
@@ -51,13 +54,13 @@
   // given the container div.
   createSkeleton = function(kwds, docmill, parent, div) {
     var ret = div.lubanElement('document');
-    
+
     var Class = kwds.Class;
 
     // keep the args that create this document. maybe should make this universal
     ret._setCtorArgs(kwds);
-    
-    // 
+
+    //
     div.addClass(Class);
     div.addClass('luban-document');
 
@@ -72,7 +75,7 @@
 
     // events
     var onclick = kwds.onclick;
-    if (onclick) 
+    if (onclick)
       {ret.jqueryelem.click( function() { docmill.compile(onclick); return false; } );}
 
     //
@@ -84,7 +87,7 @@
     this.super1(elem);
   };
   widgets.document.prototype = new widgets.base ();
-  widgets.document.prototype.title_class = 'luban-document-title';  
+  widgets.document.prototype.title_class = 'luban-document-title';
   widgets.document.prototype.title_text_class = 'luban-document-title-text';
   widgets.document.prototype.body_class = 'luban-document-body';
   widgets.document.prototype.getTitleText = function() {
@@ -99,7 +102,7 @@
     }
     var body = this._getBody();
     body.append(t);
-    
+
   };
   widgets.document.prototype.empty = function() {
     this.broadcastEvent('destroy');
@@ -108,7 +111,7 @@
   widgets.document.prototype.setAttribute = function(attrs) {
     var div = this._je;
     var ctorargs = this._getCtorArgs();
-    
+
     // title
     var title = attrs.title;
     if (title!=null) {

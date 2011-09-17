@@ -13,12 +13,13 @@
 
 
 
-from .TeleContainer import TeleContainer, Meta, TeleSection
-from .ElementContainer import elementfactory
+from luban.ui.elements.Riveted import RivetedContainer, Meta, RivetedSubElement
+from luban.ui.elements.ElementContainer import elementfactory
 
 
-class Accordion(TeleContainer):
+class Accordion(RivetedContainer):
 
+    # decorations
     simple_description = 'An accordion widget that shows one selected AccordionSection and collapse others'
     full_description = (
         "An accordion can be used to view some mutually exclusive items. "
@@ -27,12 +28,23 @@ class Accordion(TeleContainer):
         "show up when this item was selected."
         )
 
-    abstract = False
+    # properties
     
-    onchange = descriptors.action()
-    onchange.tip = 'action when a different section was selected'
+    # events
+
+    # methods
+    @elementfactory
+    def section(self, label=None, **kwds):
+        kwds['label'] = label
+        from luban.ui.elements.SubElementFactory import createSubElement
+        return createSubElement(self, AccordionSection, **kwds)
+    
+
+    def identify(self, inspector):
+        return inspector.onAccordion(self)
 
 
+    # XXX: need more thoughts 
     # this helps establish the context in which derived element types
     # would be defined. see ..AttributeContainer.Meta for more details
     @classmethod
@@ -42,50 +54,27 @@ class Accordion(TeleContainer):
         return d
 
 
-    @elementfactory
-    def section(self, label=None, **kwds):
-        section = AccordionSection(label=label, **kwds)
-        self.append(section)
-        return section
 
+from luban.ui.elements.SimpleContainer import SimpleContainer
+class AccordionSection(RivetedSubElement, SimpleContainer, metaclass=Meta):
 
-    def identify(self, inspector):
-        return inspector.onAccordion(self)
-
-
-
-from .DocumentFactory import DocumentFactory
-from .ParagraphFactory import ParagraphFactory
-class AccordionSection(DocumentFactory, ParagraphFactory, TeleSection, metaclass=Meta):
-
+    # decorations
     simple_description = 'one of the panes that can expand or collapse in an accordion'
     full_description = ''
-    abstract = False
 
+    # 
+    parent_types = [Accordion]
+
+    # properties
     label = descriptors.str()
     label.tip = 'label of the accordion section'
 
+    # methods
     def identify(self, inspector):
         return inspector.onAccordionSection(self)
     
 
+Accordion.child_types = [AccordionSection]
 
-class AccordionActions:
-
-    def accordion(self, actionname, **kwds):
-        from .SimpleElementAction import SimpleElementAction
-        return SimpleElementAction(self, actionname, **kwds)
-
-
-#from ElementActionExtensions import extensions
-#extensions.append(AccordionActions)
-
-
-# only allow accordionsection to be children of accordions
-Accordion.allowed_element_types = [AccordionSection]
-
-
-# version
-__id__ = "$Id$"
 
 # End of file

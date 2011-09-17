@@ -1,0 +1,63 @@
+# -*- python -*-
+
+import merlin.rules, os
+from merlin.Context import create
+context = create()
+context.code.project = project = 'aokuang.timber'
+
+package = "cherrypy"
+
+
+def rsync(src, target):
+    cmd = "rsync -a --copy-unsafe-links %s/ %s/" % (src, target)
+
+    from merlin import osutils
+    rt, out, err = osutils.execute(cmd)
+
+    if rt:
+        raise OSError("%s failed" % cmd)
+    return
+
+
+def syncroot():
+    src = "."
+    target = os.path.join(context.export_tree.root, project, package)
+    
+    if not os.path.exists(target):
+        os.makedirs(target)
+        
+    rsync(src, target)
+    return
+
+
+def syncstatic():
+    target = os.path.join(context.export_tree.root, project, package, 'static')
+    
+    if not os.path.exists(target):
+        os.makedirs(target)
+    
+    # from luban core
+    luban_core_web = "../../../core/luban/weaver/web"
+    
+    src = os.path.join(luban_core_web, "javascripts")
+    rsync(src, target + '/javascripts')
+    
+    src = os.path.join(luban_core_web, "css")
+    rsync(src, target + '/css')
+
+    # from aokuang core
+    aokuang_core_web = "../../../core/aokuang/cherrypy"
+    
+    src = os.path.join(aokuang_core_web, "static/css")
+    rsync(src, target + '/css')
+    
+    # from timber
+    timber_web = "../../luban.timber/weaver/web"
+    
+    src = os.path.join(timber_web, "javascripts", "luban.timber")
+    rsync(src, target + '/javascripts/luban.timber')
+    return
+
+
+syncroot()
+syncstatic()

@@ -20,10 +20,14 @@ def registerElementProvider(provider):
 
 # elements
 elementtypes = [
-    # 'Accordion',
+    # necessary for aokuang.timber
+    'Accordion',
+    'Portlet',
+    # 'CodeViewer',
+
+    #
     # 'AppMenuBar',
     # 'CodeEditor',
-    # 'CodeViewer',
     # 'Credential',
     # 'Dialog',
     # 'Dock',
@@ -38,7 +42,6 @@ elementtypes = [
     # 'NewsTicker',
     # 'Paragraph',
     # 'Plot2D',
-    'Portlet',
     # 'ProgressBar',
     'Toolbar',
     # 'TreeView',

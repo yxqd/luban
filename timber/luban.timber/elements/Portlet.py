@@ -82,7 +82,5 @@ class PortletItem(RivetedSubElement, SimpleElement, metaclass=Meta):
 
 Portlet.child_types = [PortletItem]
 
-# version
-__id__ = "$Id$"
 
 # End of file 

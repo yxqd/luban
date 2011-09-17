@@ -43,29 +43,6 @@ This is a demo of widget "accordion".
     def basic_usages(self): pass
 
 
-    @example(
-        title='A basic accordion',
-        description = [
-          'It is easy to create a basic accordion: just create one',
-          'and add sections to it.',
-          ]
-        )
-    def basic_usage1(self, director):
-        acc = luban.content.accordion()
-    
-        sec1 = acc.section(label='section1')
-        sec1.paragraph(text=['paragraph in section1'])
-        
-        sec2 = acc.section(label='section2', selected=1)
-        doc2 = sec2.document(title='doc in section2')
-        doc2.paragraph(text=['section 2 test'])
-    
-        sec3 = acc.section(label='section3')
-        sec3.paragraph(text=['text text text'])
-    
-        return acc
-
-
     @quickpanel(
         title = 'Event notification',
         description =  [

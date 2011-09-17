@@ -141,7 +141,7 @@ luban.utils = {};
   };
   luban.utils.uid.prefix = 'luban-uid-';
   luban.utils.uid.count = 0;
-  // .. load 
+  // .. load
   luban.utils.loadJS = function(script, callback) {
       try{
 	  var selem = document.createElement("script");
@@ -228,7 +228,8 @@ luban.utils = {};
       var f = function () {
 	if (d.check) {
 	  if (d.check()) {
-	    var s = "luban-core: failed to load " + url;
+	    var s = "luban-core: sanity check for " + url + " failed. ";
+	    s += "possibly due to missing/invalid dependency.";
 	    throw s;
 	  }
 	}

@@ -111,16 +111,6 @@ plot2d = {
 codeeditor = {
     }
 
-codeviewer = {
-    'stylesheets':
-    (
-    'other/prettifier/prettify.css',
-    ),
-    'javascripts':
-    (
-    'other/prettifier/prettify.js',
-    ),
-    }
 
 matterbuilder = {
     'javascripts':

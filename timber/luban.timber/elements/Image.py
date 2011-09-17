@@ -13,8 +13,6 @@
 
 
 from luban.ui.elements.SimpleElement import SimpleElement as base
-
-
 class Image(base):
 
     # decorations
@@ -31,8 +29,5 @@ class Image(base):
     def identify(self, inspector):
         return inspector.onImage(self)
 
-
-# version
-__id__ = "$Id$"
 
 # End of file 

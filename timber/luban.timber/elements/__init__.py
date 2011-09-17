@@ -23,7 +23,7 @@ elementtypes = [
     # necessary for aokuang.timber
     'Accordion',
     'Portlet',
-    # 'CodeViewer',
+    'CodeViewer',
 
     #
     # 'AppMenuBar',

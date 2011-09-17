@@ -12,19 +12,25 @@
 #
 
 
-from .Element import Element
+from luban.ui.elements.SimpleElement import SimpleElement as base
+class CodeViewer(base):
 
-
-class CodeViewer(Element):
-
-    abstract = False
     experimental = True
 
+    # decorations
+    simple_description = 'code viewer'
+    full_description = (
+        ''
+        )
+
+    # properties
+    syntax = descriptors.str()
+    text = descriptors.str()
+    
+    # methods
     def identify(self, inspector):
         return inspector.onCodeViewer(self)
 
-    syntax = descriptors.str()
-    text = descriptors.str()
 
 
 # version

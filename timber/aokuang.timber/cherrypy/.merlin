@@ -54,8 +54,8 @@ def syncstatic():
     # from timber
     timber_web = "../../luban.timber/weaver/web"
     
-    src = os.path.join(timber_web, "javascripts", "luban.timber")
-    rsync(src, target + '/javascripts/luban.timber')
+    src = os.path.join(timber_web, "javascripts")
+    rsync(src, target + '/javascripts')
 
     src = os.path.join(timber_web, "css")
     rsync(src, target + '/css')

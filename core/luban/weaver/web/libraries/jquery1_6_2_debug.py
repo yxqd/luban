@@ -47,10 +47,10 @@ luban_core = [
 
 base = {
     'stylesheets': 
-    (
+    [
     'jquery-ui-1.8.16/ui-lightness/jquery-ui-1.8.16.custom.css',
     'luban.css',
-    ),
+    ],
     
     'javascripts':
         ['jquery/jquery-1.6.2.min.js',] \

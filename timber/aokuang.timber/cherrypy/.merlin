@@ -56,6 +56,10 @@ def syncstatic():
     
     src = os.path.join(timber_web, "javascripts", "luban.timber")
     rsync(src, target + '/javascripts/luban.timber')
+
+    src = os.path.join(timber_web, "css")
+    rsync(src, target + '/css')
+
     return
 
 

@@ -19,7 +19,9 @@ base['javascripts'] += [
     'luban.timber/elementactioncompiler.js',
     'luban.timber/widget-base.js',
     ]
-
+base['stylesheets'] +=  [
+    'luban.timber.css',
+    ]
 
 elements = [
     'portlet', 'portletitem',
@@ -45,6 +47,7 @@ accordion = {
         '%s/ui/%s' % (jui_dev, 'jquery.ui.accordion.js'),
         ),
     }
+
 
 __all__ = core + elements
 

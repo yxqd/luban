@@ -12,30 +12,7 @@
 #
 
 
-from luban.weaver.web.libraries.default import *
-
-base['javascripts'] += [
-    'luban.timber/elementactioncompiler.js',
-    'luban.timber/widget-base.js',
-    ]
-
-
-elements = [
-    'toolbar',
-    'portlet', 'portletitem',
-    'image',
-    'grid', 'gridrow', 'gridcell',
-    'uploader',
-    ]
-            
-for element in elements:
-    d = {'javascripts': ('luban.timber/widgets/%s.js' % element,)}
-    exec ("%s=d" % element)
-    continue
-
-
-
-del d, element, elements
+from .jquery1_6_2_debug import *
 
 
 # version

@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2009 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -20,7 +20,7 @@
 
   // declare helpers
   var createColumnDescriptors, descriptortype2tabletype;
-  
+
   // aliases
   var ef = luban.elementFactory;
   var widgets = luban.widgets;
@@ -33,7 +33,7 @@
 
   // actioncompiler handler
   var lap = luban.actioncompiler.prototype;
-  //  
+  //
   lap.ontablegetidentifiersforcheckedrows = function(action) {
     var table = this.dispatch(action.element);
     var colname = action.params.colname;
@@ -57,12 +57,12 @@
     var table = this.dispatch(action.element);
     var row = action.params.row;
     return table.appendrow(row);
-  };  
+  };
   lap.ontablemakecolsortable = function(action) {
     var table = this.dispatch(action.element);
     var colname = action.params.col;
     return table.makecolsortable(colname);
-  };  
+  };
   lap.ontabledeleterows = function(action) {
     var table = this.dispatch(action.element);
     var rows = luban.docmill.actioncompiler.compile(action.params.rows);
@@ -80,7 +80,7 @@
   // table
   //  factory
   ef.table = function(kwds, docmill, parent) {
-    // 
+    //
     Date.firstDayOfWeek = 7;
     Date.format = "mm/dd/yyyy";
 
@@ -99,7 +99,7 @@
     thetable.addClass( "tabulated" );
     var kls = kwds.Class;
     if (kls) {thetable.addClass(kls);}
-    
+
     // the columns that act as row identifier
     var row_identifiers = kwds.model.row_identifiers;
     if (row_identifiers != null) {
@@ -173,7 +173,7 @@
     // show all cols
     var tr = this._je.children().children('tr');
     tr.children('td').show();
-    
+
     // find cols to hide and hide them
     var column_descriptors = this.getColumnDescriptors();
     for (var i in column_descriptors) {
@@ -245,10 +245,10 @@
   // make a column sortable
   widgets.table.prototype.makecolsortable = function(colname) {
     var table = this._je;
-    
+
     table.sortable_column(colname);
   };
-  
+
   //
   // extensions to jquery needed for table
   //
@@ -257,7 +257,7 @@
     var table = $(this);
     cell = $(cell);
     var row = cell.parent();
-    
+
     var data = {};
     var row_identifying_cols = table.data('row-identifying-cols');
     for (var i in row_identifying_cols) {
@@ -292,7 +292,7 @@
     // view
     var view = table.view;
     var cols = view.columns;
-    
+
     // now create column descriptors
     var column_descriptors = {};
     for (var i in cols) {
@@ -305,7 +305,7 @@
       descriptor['name'] = name;
       descriptor['text'] = col.label;
       descriptor['editable'] = col.editable && view.editable;
-      descriptor['datatype'] = descriptortype2tabletype[measure.type];
+      descriptor['datatype'] = descriptortype2tabletype[measure.luban_type];
       descriptor['sortable'] = col.sortable && view.sortable;
       descriptor['hidden'] = col.hidden;
     }

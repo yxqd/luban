@@ -24,6 +24,9 @@ class Boolean(Type):
         # native type pass through unchanged
         if isinstance(value, bool):
             return value
+        # 
+        if isinstance(value, int):
+            return bool(value)
         # strings go through the translation map
         if isinstance(value, str):
             return cls._strmap[value.lower()]

@@ -69,6 +69,9 @@ class AccordionSection(RivetedSubElement, SimpleContainer, metaclass=Meta):
     label = descriptors.str()
     label.tip = 'label of the accordion section'
 
+    selected = descriptors.bool()
+    selected.tip = "whether this section is selected or not"
+
     # methods
     def identify(self, inspector):
         return inspector.onAccordionSection(self)

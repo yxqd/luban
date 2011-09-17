@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2009 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -26,12 +26,12 @@
   // documentmill handler
   var dmp = luban.documentmill.prototype;
   dmp.ontreeview = function(treeview) {
-      var type = treeview.type;
+      var type = treeview.luban_type;
       var factory = luban.elementFactory[type];
       var elem = factory(treeview, this);
       var parent = this._parent;
       if (parent != null) {parent.add(elem);}
-      // 
+      //
       // this is a hack to make sure every li has a reference to the tree container
       // jsTree 0.9.9 brutally remove all data and events associated with li so we have to
       // do this.
@@ -79,7 +79,7 @@
   lap.ontreeviewsetroot = function(action) {
     var treeview = action.treeview;
     treeview = this.dispatch(treeview);
-    
+
     var root = this.docmill.render(action.root);
     treeview.setRoot(root);
   };
@@ -87,50 +87,50 @@
   lap.ontreeviewaddbranch = function(action) {
     var treeview = action.treeview;
     treeview = this.dispatch(treeview);
-    
+
     var referencenode = this.dispatch(action.referencenode);
-    
+
     treeview.addNode(referencenode, action.newnode, action.position);
   };
-  
+
   lap.ontreeviewcloseall = function(action) {
     var treeview = this.dispatch(action.element);
-    
+
     treeview.closeAll();
   };
-  
+
   lap.ontreeviewopen = function(action) {
     var treeview = this.dispatch(action.element);
-    
+
     treeview.open(action.params.branch);
   };
-  
+
   lap.ontreeviewclose = function(action) {
     var treeview = this.dispatch(action.element);
-    
+
     treeview.close(action.params.branch);
   };
-  
+
   lap.ontreeviewselectnode = function(action) {
     var treeview = this.dispatch(action.treeview);
     var node = this.dispatch(action.node);
-    
+
     treeview.selectNode(node);
   };
-  
+
   lap.ontreeviewremovenode = function(action) {
     var treeview = action.treeview;
     treeview = this.dispatch(treeview);
-    
+
     var node = this.dispatch(action.node);
     treeview.removeNode(node);
   };
-  
+
   lap.ontreeviewgetselection = function(action) {
     var treeview = this.dispatch(action.element);
     return treeview.getSelection();
   };
-  
+
 
   // treeview
   //  factory
@@ -144,11 +144,11 @@
 //     var onclick = kwds.onclick;
 //     if (onclick) {
 //       div.click(function() {
-// 	  luban.docmill.compile(onclick); 
+// 	  luban.docmill.compile(onclick);
 // 	  return false;
 // 	});
 //     }
-    
+
     var ul = tag('ul');  div.append(ul);
     ul.addClass('luban-treeview-container');
 
@@ -161,8 +161,8 @@
 	  "position-type": type
 	};
 	div.data('nodemoving-data', data);
-	
-	docmill.compile(onnodemoving); 
+
+	docmill.compile(onnodemoving);
 
 	return false;
       };
@@ -204,13 +204,13 @@
     var div = this._je;
     var ul = div.find('.luban-treeview-container');
     var lis = ul.children('li');
-    if (lis.length>0) 
+    if (lis.length>0)
       {throw "there is already a root";}
     ul.append(root._je);
   };
   widgets.treeview.prototype.removeNode = function(node) {
     var ref = this._jstreeRef();
-    
+
     if (node) {
       ref.remove(node._je);
     } else {
@@ -224,7 +224,7 @@
     var selected = ref.selected;
     var ret = selected.lubanElement();
     return ret;
-  };    
+  };
   widgets.treeview.prototype.closeAll = function() {
     var je = this._je;
     var id = je.attr('id');
@@ -261,16 +261,16 @@
     var refnode = referencenode._je;
     ref.create(obj, refnode);
     ref.refresh();
-    
+
     var li = $('#'+newnode.id);
-    
+
     var onclick = newnode.onclick;
     if (onclick != null && onclick != '') {
       var key = li.attr('id')+'-onclick-callback';
       var f = function() {luban.docmill.compile(onclick); return true;};
       treeje.data(key, f);
     }
-    return li.lubanElement(newnode.type);
+    return li.lubanElement(newnode.luban_type);
   };
   // implementation
   widgets.treeview.prototype._jstreeRef = function() {
@@ -298,10 +298,10 @@
     }
     var a = tag("a", akwds); li.append(a);
     a.text(kwds.label);
-    
+
     var ul = tag('ul'); ul.addClass('luban-treeviewbranch-interior-container');
     li.append(ul);
-    
+
     var onclick = kwds.onclick;
     if (onclick != null && onclick != '') {
       var key = li.attr('id')+'-onclick-callback';

@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2009 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -22,7 +22,7 @@
   var widgets = luban.widgets;
   var tag = luban.utils.tag;
 
-  
+
   // documentmill handler
   var dmp = luban.documentmill.prototype;
   dmp.ondownloader = dmp._onElement;
@@ -36,15 +36,15 @@
     elem.text(kwds.label);
 
     var ret = elem.lubanElement('downloader');
-    
+
     elem.addClass(Class);
     elem.addClass('luban-downloader');
 
     var ondownload = kwds.ondownload;
-    if (ondownload.type != 'loading') {
+    if (ondownload.luban_type != 'loading') {
 	throw 'downloader.ondownload has to be a "load" action';
     }
-    var actor = ondownload.actor; var routine = ondownload.routine; 
+    var actor = ondownload.actor; var routine = ondownload.routine;
     var data = ondownload.params;
     var C = luban.Controller;
     var credArgs = C.getCredentialArgs();
@@ -69,7 +69,7 @@
     return false;
   };
   widgets.downloader.prototype = new widgets.base ();
-  
+
 })(luban, jQuery);
 
 

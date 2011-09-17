@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2009 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -27,32 +27,32 @@
   // documentmill handlers
   var dmp = luban.documentmill.prototype;
   dmp.onaccordion = function(accordion) {
-    var type = accordion.type;
+    var type = accordion.luban_type;
     var factory = luban.elementFactory[type];
     var elem = factory(accordion, this, this._parent, {plain_element: true});
-    
+
     var contents = accordion.contents;
     if (contents == null) {return elem;}
-    
+
     var selected_section = null;
     for (var i in contents) {
       var section = contents[i];
-      
+
       this._parent = elem;
       var subelem = this.dispatch(section);
-      
+
       var selected = section.selected;
-      if (selected_section!=null && selected) 
+      if (selected_section!=null && selected)
 	{throw "documentmill.onaccordion: multiple selected sections";}
-      
+
       //if (selected) selected_section = section.id;
       if (selected) {selected_section = parseInt(i, 10);}
-      
+
     }
-    
+
     var opts = $.extend( {}, factory.defaultopts, {active: selected_section});
     elem._je.accordion(opts);
-    
+
     // bind event handler
     var onchange = elem._je.data('onchange-func');
     if (onchange != null) {
@@ -64,10 +64,10 @@
   dmp.onaccordionsection = function(section) {
     var parent = this._parent;
     var sectionelem = parent.createSection(section, {plain_element: true});
-    
+
     var contents = section.contents;
     if (contents != null) {
-      
+
       for (var i in contents) {
 	this._parent = sectionelem;
 	var subdoc = contents[i];
@@ -77,7 +77,7 @@
 	  this.dispatch(subdoc);
 	}
       }
-      
+
     }
     return sectionelem;
   };
@@ -94,7 +94,7 @@
     accordion.removeSection(action.params.id);
   };
 
-  
+
   // accordion
   //  factory
   ef.accordion = function(kwds, docmill, parent, opts) {
@@ -102,14 +102,14 @@
     if (opts != null) {
       plain_element = opts.plain_element;
     }
-    
+
     var div = tag('div', {id: kwds.id} );
-    
+
     if (kwds.Class) {
       div.addClass(kwds.Class);
     }
-    
-    if (!plain_element) 
+
+    if (!plain_element)
       {div.accordion(ef.accordion.defaultopts);}
 
     var onchange = kwds.onchange;
@@ -126,7 +126,7 @@
 	  div.data('changed-data', {
 	      'oldsection': oldsection, 'newsection': newsection});
 
-	  docmill.compile(onchange); 
+	  docmill.compile(onchange);
 
 	  return false;
 
@@ -137,7 +137,7 @@
 
     var ret = div.lubanElement('accordion');
     if (parent) {parent.add(ret);}
-    
+
     return ret;
   };
   ef.accordion.defaultopts = {
@@ -150,23 +150,26 @@
     this.super1(elem);
   };
   widgets.accordion.prototype = new widgets.base ();
-  widgets.accordion.prototype.createSection = function(section, opts) { 
+  widgets.accordion.prototype.createSection = function(section, opts) {
     var plain_element = false;
     if (opts != null) {
       plain_element = opts.plain_element;
     }
-    
+
     var id = section.id;
+    if (!id) {
+      id = luban.utils.uid();
+    }
     var label = section.label;
-    
+
     var h3 = tag('h3', {'id': id+'label'});
     var a = tag('a'); h3.append(a);
     a.text(label);
     this._je.append(h3);
-    
+
     var div = tag('div', {'id': id});
     this._je.append(div);
-    
+
     // recreate the accordion
     if (!plain_element) {
       this._je.accordion('destroy');
@@ -188,7 +191,7 @@
     var div = $('#'+id);
     h3.remove();
     div.remove();
-    
+
     // recreate the accordion
     this._je.accordion(ef.accordion.defaultopts);
 
@@ -198,12 +201,12 @@
       // select the first section
       this._je.accordion('activate', headers[0]);
     }
-    
+
     //
     var onchange = div.data('onchange-func');
     if (onchange != null)
       { this._je.bind('accordionchange', onchange); }
-    
+
     return;
   };
   widgets.accordion.prototype.add = function (subelem) {
@@ -231,16 +234,16 @@
   widgets.accordionsection.prototype.destroy = function() {
     var div = this._je;
     var id = div.attr('id');
-    
+
     var labelh3 = $(id+'label');
     labelh3.remove();
-    
+
     var parent = div.parent();
     div.remove();
-    
+
     parent.accordion('destroy');
     parent.accordion(ef.accordion.defaultopts);
-    
+
     var onchange = div.data('onchange-func');
     if (onchange != null)
       { parent.bind('accordionchange', onchange); }

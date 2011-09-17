@@ -5,7 +5,7 @@ from merlin.Context import create
 context = create()
 context.code.project = project = 'aokuang.core'
 
-package = "web"
+package = "cherrypy"
 
 
 def rsync(src, target):
@@ -35,18 +35,17 @@ def syncstatic():
     
     if not os.path.exists(target):
         os.makedirs(target)
-
-    src = "../../../luban/core/luban/weaver/web/javascripts"
+        
+    luban_core_web = "../../luban/weaver/web"
+    
+    src = os.path.join(luban_core_web, "javascripts")
     rsync(src, target + '/javascripts')
-
-    src = "../../../luban/core/luban/weaver/web/css"
+    
+    src = os.path.join(luban_core_web, "css")
     rsync(src, target + '/css')
-
-    src = "../../../luban/timber/luban.timber/weaver/web/javascripts/luban.timber"
-    rsync(src, target + '/javascripts/luban.timber')
-
+    
     return
 
 
-# syncroot()
-# syncstatic()
+syncroot()
+syncstatic()

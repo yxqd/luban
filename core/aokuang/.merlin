@@ -1,1 +1,1 @@
-recurse_entries = ['aokuang'] # , 'cherrypy']
+recurse_entries = ['aokuang', 'cherrypy']

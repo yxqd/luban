@@ -116,12 +116,6 @@ def createCodeDoc(blocks):
     hdoc = luban.e.restructuredtextdocument(text=text)
     return hdoc
 
-    viewer = luban.e.codeviewer()
-    viewer.syntax = 'python'
-    viewer.text = '\n'.join(lines)
-    return viewer
-        
-        
 
 def getSourceLines(f):
     import inspect

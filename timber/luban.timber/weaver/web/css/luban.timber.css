@@ -44,7 +44,7 @@ a.luban-link:hover{
     -moz-border-radius:0.5em 0.5em 0 0;
     -webkit-border-top-right-radius:0.5em;
     -webkit-border-top-left-radius:0.5em;
-    border: 1px solid #ffcc85;
+    border: 1px solid #eeaa30;
     border-bottom: transparent;
     display:inline;
     margin:0;
@@ -53,7 +53,7 @@ a.luban-link:hover{
 
 .luban-portlet-body {
     background-color: white;
-    border-color: #ffcc85;
+    border-color: #eeaa30;
     border-width:1px;
     border-style:solid;
     border-collapse:collapse;
@@ -90,7 +90,7 @@ a.luban-link:hover{
 
 .luban-portletitem-content:hover{
     border-style: solid;
-    background-color: #ffcc85;
+    background-color: #eeaa30;
     cursor: pointer;
 }
 .ui-widget-content .luban-portletitem-content:hover a{
@@ -98,13 +98,17 @@ a.luban-link:hover{
 }
 
 .luban-portletitem-container.selected .luban-portletitem-content{
-    border-color: #ffcc85;
+    border-color: #eeaa30; 
+    background-color: #eeaa30;   
 }
 .luban-portletitem-container.selected .luban-portletitem-content:hover{
-    background-color: #eeeeee;
+    background-color: #eeaa30;
+}
+.luban-portletitem-container.selected .luban-portletitem-content a{
+    color: white;
 }
 .ui-widget-content .luban-portletitem-container.selected .luban-portletitem-content:hover a{
-    color: #1c94c4;
+    color: white;
 }
 
 .luban-portletitem-content a{

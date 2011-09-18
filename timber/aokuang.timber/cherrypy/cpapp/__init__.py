@@ -11,7 +11,7 @@ class Root(CherrypyController):
         super().__init__(
             url = '/',
             static_html_base = 'static',
-            actor_package = 'aokuang.timber.actors',
+            actor_packages = ['aokuang.timber.actors', 'aokuang.core.actors'],
             stylesheets = ['aokuang.core.css', 'aokuang.timber.css'],
             )
         return

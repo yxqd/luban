@@ -21,12 +21,12 @@ class WebAppController(ControllerBase):
     def __init__(
         self, url,
         static_html_base='static', 
-        actor_package=None,
+        actor_package=None, actor_packages = [],
         stylesheets = None, javascripts = None,
         web_weaver_library = None,
         ):
         # init bases
-        super().__init__(actor_package)
+        super().__init__(actor_package=actor_package, actor_packages=actor_packages)
         
         #
         self.url = url

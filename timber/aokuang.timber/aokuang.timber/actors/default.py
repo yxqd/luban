@@ -37,34 +37,61 @@ class Actor(base):
 
     def createMenu(self, **kwds):
         doc = luban.e.document()
-        choices = self._findChoices()
-        for choice in choices:
-            b = doc.button(label=choice)
-            newcontent = luban.a.load(
-                actor = self.name.replace('default', choice),
-                routine='createInterface',
-            )
-            b.onclick = luban.a.select(id="demo-container")\
-                .replaceContent(newcontent=newcontent)
+        accordion = doc.accordion()
+        for category, items in menu:
+            section = accordion.section(label=category)
+            portlet = section.portlet()
+            for item in items:
+                portletitem = portlet.item(label=item)
+                newcontent = luban.a.load(
+                    actor = self.name.replace('default', item),
+                    routine='createInterface',
+                    )
+                portletitem.onclick =  luban.a.select(id="demo-container")\
+                    .replaceContent(newcontent=newcontent)
+                continue
             continue
         return doc
     
 
-    def _findChoices(self):
-        f = __file__
-        import os
-        d = os.path.dirname(f)
-        entries = os.listdir(d)
-        choices = []
-        for entry in entries:
-            if entry.startswith('_'):
-                continue
-            path = os.path.join(d, entry)
-            if os.path.isdir(path):
-                choices.append(entry)
-                continue
-            continue
-        return choices
+# list of items in aokuang.core
+core = [
+    'loading',
+    ]
+
+
+menu = [
+    ('actions',
+     ['loading',
+      ]),
+    
+    ('basic widgets', 
+     ['document',
+      'paragraph',
+      'button',
+      'image',
+      ]),
+
+    ('menu-like',
+     ['portlet',
+      ]),
+    
+    ('organizers',
+     ['splitter',
+      'accordion',
+      'grid',
+      ]),
+    
+    ('documents',
+     ['htmldocument',
+      'restructuredtextdocument',
+      ]),
+    
+    ('misc',
+     ['codeviewer',
+      'uploader',
+      ]),
+    ]
 
 
 # End of file 

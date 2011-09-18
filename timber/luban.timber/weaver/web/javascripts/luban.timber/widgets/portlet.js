@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2009 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -31,7 +31,7 @@
   var dmp = luban.documentmill.prototype;
   dmp.onportlet = dmp._onContainer;
   dmp.onportletitem = dmp._onElement;
- 
+
 
   // actioncompiler handlers
   var lap=luban.actioncompiler.prototype;
@@ -44,22 +44,24 @@
   // portlet
   //  factory
   ef.portlet = function(kwds, docmill, parent) {
-    var vpaddiv = tag('div', {id: kwds.id});
+    var id = kwds.id;
+    if (!id) id = luban.utils.uid();
+    var vpaddiv = tag('div', {id: id});
     vpaddiv.addClass('luban-portlet-padding');
     var div = tag('div'); div.addClass('luban-portlet');
     vpaddiv.append(div);
-    
+
     var title = kwds.title;
     if (title != null && title != '') {
-      var h5 = tag('h5'); 
+      var h5 = tag('h5');
       h5.addClass('luban-portlet-title');
       h5.text(title);
-      div.append(h5); 
+      div.append(h5);
     }
-    
+
     var bodydiv = tag('div'); div.append(bodydiv);
     bodydiv.addClass('luban-portlet-body');
-    
+
     var ret= vpaddiv.lubanElement('portlet');
     if (parent) {parent.add(ret);}
     return ret;
@@ -83,14 +85,14 @@
   };
   widgets.portlet.prototype.setAttribute = function(attrs) {
     var je = this._je;
-    
+
     var titlediv = je.find('.luban-portlet-title');
     var title = attrs.title;
     if (title != null) {
       if (!title) {titlediv.remove();}
       else {
 	if (titlediv.length===0) {
-	  var h5 = tag('h5'); 
+	  var h5 = tag('h5');
 	  h5.addClass('luban-portlet-title');
 	  je.find('div.luban-portlet-body').before(h5);
 	  titlediv = h5;
@@ -107,7 +109,7 @@
     if (id==null) {
 	id = luban.utils.uid();
     }
-    var visualpadding = tag('div', {'id': id}); 
+    var visualpadding = tag('div', {'id': id});
     visualpadding.addClass('luban-portletitem-container');
 
     var containerdiv = tag('div'); visualpadding.append(containerdiv);
@@ -116,7 +118,7 @@
     var a = tag('a');
     a.addClass('luban-portletitem');
     containerdiv.append(a);
-    
+
     var tip = kwds.tip;
     if (tip) {
       a.attr('title', tip);
@@ -133,7 +135,7 @@
       img.addClass('luban-portletitem-icon');
       icondiv.append(img);
     }
-     
+
     // text
     span = tag('span');
     span.addClass('luban-portletitem-text');
@@ -143,13 +145,13 @@
     // callbacks
     // click
     var onclick = kwds.onclick;
-    a.click( function() { 
+    a.click( function() {
 	var item = $('#'+id).lubanElement();
 	item.select();
 	if (onclick)
 	  {docmill.compile(onclick); return false;}
       } );
-    var onselect = kwds.onselect; 
+    var onselect = kwds.onselect;
     if (onselect) {
       visualpadding.bind('luban-select', function() {
 	  docmill.compile(onselect); return false;
@@ -200,7 +202,7 @@
     var icon = attrs.icon;
     if (icon!=null) {
       if (img.length===0) {
-	img = _createIcon(icon); 
+	img = _createIcon(icon);
 	a.find('.luban-portletitem-icon-container').append(img);
       }
       else {img.attr('src', luban.iconpath(icon));}

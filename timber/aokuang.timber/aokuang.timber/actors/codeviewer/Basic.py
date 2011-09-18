@@ -16,7 +16,7 @@ import luban
 from ....DemoPanelActor import Actor as base
 class Actor(base):
 
-    title='An image of Lu Ban'
+    title='Basic usage'
     description = [
         ]
 

@@ -21,15 +21,16 @@
   // actioncompiler extension
   var actioncompiler_ext = {
 
-    'onreplacecontent': function(action) {
+    'onelementsetattribute': function(action) {
       var e = action.element;
       var element = this.dispatch(e);
-      element.empty();
 
-      var newdoc = action.newcontent;
-      this.docmill.render(newdoc, element);
+      var params = this._compileparams(action.attrs);
+      // set id
+      var id = params.id;
+      if (id!=null) {element.setID(id);}
 
-      element.jqueryelem.trigger('resize');
+      return element.setAttribute(params);
     },
 
     'oninsertbeforeelement': function(action) {
@@ -127,19 +128,6 @@
 	method = method.toLowerCase();
 	return eval('this.'+method+'(action);');
       }
-    },
-
-    'onsimpleelementaction_setAttribute': function(action) {
-
-      var element = action.element;
-      element = this.dispatch(element);
-
-      var params = this._compileparams(action.params);
-      // set id
-      var id = params.id;
-      if (id!=null) {element.setID(id);}
-
-      return element.setAttribute(params);
     }
 
   };

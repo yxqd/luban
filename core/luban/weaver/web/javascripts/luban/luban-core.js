@@ -18,11 +18,12 @@
 
 // namespace luban
 luban = {
-  'elementFactory': {},
-  'widgets': {},
-  'configuration': {
-    'images_base': '/images',
-    'icons_base': '/images/icons'
+  'elementFactory': {}
+  ,'widgets': {}
+  ,'configuration': {
+    'images_base': '/images'
+    ,'icons_base': '/images/icons'
+    ,debug: true // debug mode or not
   }
 };
 

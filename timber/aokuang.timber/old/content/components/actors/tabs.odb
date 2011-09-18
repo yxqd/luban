@@ -126,42 +126,6 @@ This is a demo of widget "tabs".
 
 
     @example(
-        title='Select a tab programmatically',
-        description = [
-          'Click the buttons to select tabs',
-          ]
-        )
-    def advanced3(self, director):
-        lc = luban.content
-        # container
-        container = lc.document()
-        #
-        p = container.paragraph()
-        # tabs
-        tabs = lc.tabs(); container.add(tabs)
-        #   tab 1
-        tab1 = tabs.tab(label='tab1')
-        tab1.onselect = select(element=p).setAttr(text='tab1 selected')
-        #   tab 2
-        tab2 = tabs.tab(label='tab2')
-        tab2.onselect = select(element=p).setAttr(text='tab2 selected')
-        # controls
-        #   button1
-        button1 = lc.button(
-            label='click to choose tab1',
-            onclick = select(element=tab1).tab('select')
-            )
-        container.add(button1)
-        #   button2
-        button2 = lc.button(
-            label='click to choose tab2',
-            onclick = select(element=tab2).tab('select')
-            )
-        container.add(button2)
-        return container
-
-
-    @example(
         title='Enable/disable a tab',
         description = [
           'Click the buttons to enable/disable tab 2',

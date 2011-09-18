@@ -35,10 +35,6 @@
   // document
   ef.document = function (kwds, docmill, parent) {
     var id = kwds.id;
-    if (!id) {
-      id = luban.utils.uid();
-    }
-
     // create the overall container
     var div = tag('div', {'id': id});
 

@@ -100,7 +100,7 @@ Tabs.child_types = [Tab]
 
 # to define a new element action, subclass ElementActionBase
 from ..actions.ElementActionBase import ElementActionBase
-class SelectTab(ElementActionBase):
+class TabSelectAction(ElementActionBase):
 
     "select the tab"
 
@@ -108,5 +108,9 @@ class SelectTab(ElementActionBase):
     element_type = Tab
     factory_method = "select"
 
+
+    # methods
+    def identify(self, visitor):
+        return visitor.onSelectTab(self)
 
 # End of file

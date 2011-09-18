@@ -31,7 +31,7 @@
 
   // actioncompiler handlers
   var lap=luban.actioncompiler.prototype;
-  lap.ontabselect = function(action) {
+  lap.ontabselectaction = function(action) {
     var tab = this.dispatch(action.element);
     tab.select();
   };
@@ -42,7 +42,6 @@
   ef.tabs = function(kwds, docmill, parent) {
 
     var id = kwds.id;
-    if (!id) id = luban.utils.uid();
     var div = tag('div', {id: id} );
 
     var Class = kwds.Class;
@@ -94,9 +93,6 @@
 	throw "tab label not defined";
     }
     var id = tab.id;
-    if (!id) {
-	id = luban.utils.uid();
-    }
     var url = '#'+id;
     this._je.tabs('add', url, label);
     var tabdiv = $(url);

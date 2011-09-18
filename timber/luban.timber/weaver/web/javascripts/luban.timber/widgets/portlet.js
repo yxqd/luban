@@ -45,7 +45,6 @@
   //  factory
   ef.portlet = function(kwds, docmill, parent) {
     var id = kwds.id;
-    if (!id) id = luban.utils.uid();
     var vpaddiv = tag('div', {id: id});
     vpaddiv.addClass('luban-portlet-padding');
     var div = tag('div'); div.addClass('luban-portlet');
@@ -106,9 +105,6 @@
   // portletitem
   ef.portletitem = function(kwds, docmill, parent) {
     var id = kwds.id;
-    if (id==null) {
-	id = luban.utils.uid();
-    }
     var visualpadding = tag('div', {'id': id});
     visualpadding.addClass('luban-portletitem-container');
 

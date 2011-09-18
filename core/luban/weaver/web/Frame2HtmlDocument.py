@@ -12,6 +12,9 @@
 #
 
 
+import luban
+
+
 # renders a ui document into a html document instance and a javascript document
 # instance
 
@@ -74,7 +77,11 @@ class Frame2HtmlDocument(object):
             'luban.configuration.icons_base = "%s/icons";' % self.imagesbase,
             'luban.Controller.parameter_prefix = "%s";' % self.controller_parameter_prefix,
             ]
-
+        if not luban.debug:
+            self.javascript_target.main.append(
+                'luban.configuration.debug = false;'
+                )
+            
         #
         for widget in librarian.iterWidgets():
             if not widget: continue

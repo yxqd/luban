@@ -156,9 +156,6 @@
     }
 
     var id = section.id;
-    if (!id) {
-      id = luban.utils.uid();
-    }
     var label = section.label;
 
     var h3 = tag('h3', {'id': id+'label'});

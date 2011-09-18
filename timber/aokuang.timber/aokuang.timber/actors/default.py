@@ -50,6 +50,9 @@ class Actor(base):
                 portletitem.onclick =  luban.a.select(id="demo-container")\
                     .replaceContent(newcontent=newcontent)
                 continue
+            
+            # section.onselect = 
+
             continue
         return doc
     

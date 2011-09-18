@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2009 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -23,7 +23,7 @@
   var widgets = luban.widgets;
   var tag = luban.utils.tag;
 
-  
+
   // documentmill handler
   var dmp = luban.documentmill.prototype;
   dmp.ongrid = dmp.ongridrow = dmp.ongridcell = dmp._onContainer;
@@ -33,7 +33,6 @@
   ef.grid = function (kwds, docmill, parent) {
     var Class = kwds.Class;
     var id = kwds.id;
-    if (id==null) {id=luban.utils.uid();}
     var ret = tag('div', {'id': id});
 
     ret.addClass(Class);
@@ -45,7 +44,7 @@
     }
     ret = ret.lubanElement('grid');
     if (parent) {parent.add(ret);}
-    
+
     ret.createSkeleton();
     return ret;
   };

@@ -59,6 +59,16 @@
 	parent._je.append(doc);
 	return doc;
       }
+      if (!doc.id) {
+	doc.id = luban.utils.uid();
+      }
+      if (luban.configuration.debug) {
+	var id = doc.id;
+	if ($('#'+id).length) {
+	  // duplicate id
+	  throw "id already exists: " + id;
+	}
+      }
       var type = doc.luban_type;
       var handler = 'on'+type;
 

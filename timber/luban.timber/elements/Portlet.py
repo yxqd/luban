@@ -86,13 +86,17 @@ Portlet.child_types = [PortletItem]
 # actions
 # to define a new element action, subclass ElementActionBase
 from luban.ui.actions.ElementActionBase import ElementActionBase
-class SelectPortletItem(ElementActionBase):
+class PortletItemSelectAction(ElementActionBase):
 
     "select a portlet item"
 
     # decorations
     element_type = PortletItem
     factory_method = "select"
+
+    # methods
+    def identify(self, visitor):
+        return visitor.onPortletItemSelectAction(self)
 
 
 # End of file 

@@ -35,7 +35,7 @@
 
   // actioncompiler handlers
   var lap=luban.actioncompiler.prototype;
-  lap.onportletitemselect = function(action) {
+  lap.onportletitemselectaction = function(action) {
     var item = this.dispatch(action.element);
     item.select();
   };

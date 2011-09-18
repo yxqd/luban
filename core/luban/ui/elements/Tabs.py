@@ -111,6 +111,6 @@ class TabSelectAction(ElementActionBase):
 
     # methods
     def identify(self, visitor):
-        return visitor.onSelectTab(self)
+        return visitor.onTabSelectAction(self)
 
 # End of file

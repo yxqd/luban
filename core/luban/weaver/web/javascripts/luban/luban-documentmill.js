@@ -66,13 +66,15 @@
 	var id = doc.id;
 	if ($('#'+id).length) {
 	  // duplicate id
-	  throw "id already exists: " + id;
+	  var msg = "id already exists: " + id + ".";
+	  msg += "error happened when trying to construct an element of type " + doc.luban_type;
+	  throw msg;
 	}
       }
       var type = doc.luban_type;
       var handler = 'on'+type;
 
-      code = 'this.'+handler+"(doc)";
+      var code = 'this.'+handler+"(doc)";
       var ret = eval(code);
 
       // know my parent

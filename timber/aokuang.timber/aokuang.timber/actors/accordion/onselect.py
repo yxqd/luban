@@ -16,25 +16,32 @@ import luban
 from ....DemoPanelActor import Actor as base
 class Actor(base):
 
-    title='A basic accordion'
+    title='"onselect" event'
     description = [
-        'It is easy to create a basic accordion: just create one',
-        'and add sections to it.',
         ]
     def createDemoPanel(self, **kwds):
         acc = luban.e.accordion()
     
-        sec1 = acc.section(label='section1')
+        sec1 = acc.section(label='section1', id='section1')
         sec1.paragraph(text='paragraph in section1')
         
-        sec2 = acc.section(label='section2', selected=1)
+        sec2 = acc.section(label='section2', id='section2', selected=1)
         doc2 = sec2.document(title='doc in section2')
         doc2.paragraph(text='section 2 test')
     
-        sec3 = acc.section(label='section3')
-        sec3.paragraph(text='text text text')
-    
+        show_change = luban.a.load(
+            actor=self.name, routine='onchange',
+            old = luban.event.oldsection,
+            new = luban.event.newsection,
+            )
+        sec1.onselect = sec2.onselect = show_change
+        
         return acc
+
+
+    def onchange(self, old=None, new=None, **kwds):
+        msg = "accordion switched from %r to %r" % (old, new)
+        return luban.a.alert(msg)
 
 
 # End of file 

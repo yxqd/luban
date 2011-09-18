@@ -88,17 +88,6 @@
     this.super1(elem);
   };
   widgets.tabs.prototype = new widgets.base ();
-  function createOnSelectCallback(onselect) {
-    var callback2 = function(event, extra) {
-      if (onselect) {
-	var docmill1 = new luban.documentmill();
-	docmill1.event = extra;
-	docmill1.compile(onselect);
-      }
-      return false;
-    };
-    return callback2;
-  }
   widgets.tabs.prototype.createTab = function(tab, docmill) {
     var label = tab.label;
     if (!label) {
@@ -127,7 +116,7 @@
 
     // select
     var onselect = tab.onselect;
-    var callback2 = createOnSelectCallback(onselect);
+    var callback2 = luban.compileCallback(onselect);
     tabdiv.bind('luban-tabselect', callback2);
 
     //

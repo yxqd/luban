@@ -70,7 +70,18 @@ class AccordionSection(RivetedSubElement, SimpleContainer, metaclass=Meta):
     label.tip = 'label of the accordion section'
 
     selected = descriptors.bool()
-    selected.tip = "whether this section is selected or not"
+    selected.tip = "whether this section is selected or not. among siblings. only one can be selected"
+
+    # events -- must have one-one correspondence with event handler
+    from luban.ui.Event import Event
+    class select(Event):
+        # decorations
+        simple_description = "event happens when this section is selected"
+        __unique_type_name__ = 'accordionselect'
+        # attributes
+        oldsection = descriptors.str()
+        newsection = descriptors.str()
+    del Event
 
     # methods
     def identify(self, inspector):

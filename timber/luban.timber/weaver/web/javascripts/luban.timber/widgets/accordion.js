@@ -55,9 +55,8 @@
 
     // bind event handler
     var onchange = elem._je.data('onchange-func');
-    if (onchange != null) {
-      elem._je.bind('accordionchange', onchange);
-    }
+    elem._je.bind('accordionchange', onchange);
+
     return elem;
   };
 
@@ -112,28 +111,28 @@
     if (!plain_element)
       {div.accordion(ef.accordion.defaultopts);}
 
-    var onchange = kwds.onchange;
-    if (onchange != null && onchange != '') {
-      div.data('onchange-func', function(evt, ui) {
-	  var postfixlen = 'label'.length;
+    div.data('onchange-func', function(evt, ui) {
+      var postfixlen = 'label'.length;
 
-	  var oldsection = ui.oldHeader.attr('id');
-	  oldsection = oldsection.substr(0,oldsection.length-postfixlen);
+      var oldsection = ui.oldHeader.attr('id');
+      oldsection = oldsection.substr(0,oldsection.length-postfixlen);
 
-	  var newsection = ui.newHeader.attr('id');
-	  newsection = newsection.substr(0,newsection.length-postfixlen);
+      var newsection = ui.newHeader.attr('id');
+      newsection = newsection.substr(0,newsection.length-postfixlen);
 
-	  div.data('changed-data', {
-	      'oldsection': oldsection, 'newsection': newsection});
+      if (oldsection!=newsection) {
+	var extra = {
+	  "oldsection": oldsection,
+	  "newsection": newsection
+	};
+	$('#'+newsection).trigger('luban-accordionselect', extra);
+      }
 
-	  docmill.compile(onchange);
+      return false;
 
-	  return false;
-
-	});
-      if (!plain_element)
-	{ div.bind('accordionchange', div.data('onchange-func')); }
-    }
+      });
+    if (!plain_element)
+      { div.bind('accordionchange', div.data('onchange-func')); }
 
     var ret = div.lubanElement('accordion');
     if (parent) {parent.add(ret);}
@@ -178,9 +177,14 @@
       // select the last section
       this._je.accordion('activate', $(h3));
 
-    var onchange = div.data('onchange-func');
-    if (onchange != null)
-      {this._je.bind('accordionchange', onchange);}
+      var onchange = div.data('onchange-func');
+      if (onchange != null)
+	{this._je.bind('accordionchange', onchange);}
+    }
+
+    if(section.onselect) {
+      var callback = luban.compileCallback(section.onselect);
+      div.bind('luban-accordionselect', callback);
     }
 
     return div.lubanElement('accordionsection');

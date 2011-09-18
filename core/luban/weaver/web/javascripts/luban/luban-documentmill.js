@@ -184,8 +184,26 @@
   }
   */
 
+  // default document mill instance
   luban.docmill = new luban.documentmill();
 
+  /*
+   * compile callback function
+   * event_handler: luban event handler specification
+   * the compiled callback has one extra argument "luban_event"
+   * that has data specific to luban
+   */
+  luban.compileCallback = function(event_handler) {
+    var callback = function(event, luban_event) {
+      if (event_handler) {
+	var docmill1 = new luban.documentmill();
+	docmill1.event = luban_event;
+	docmill1.compile(event_handler);
+      }
+      return false;
+    };
+    return callback;
+  };
 
  })(luban, jQuery);
 

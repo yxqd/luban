@@ -78,8 +78,9 @@ menu = [
     
     ('organizers',
      ['splitter',
-      'accordion',
       'grid',
+      'accordion',
+      'tabs',
       ]),
     
     ('documents',

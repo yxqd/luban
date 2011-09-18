@@ -41,7 +41,9 @@
   //  factory
   ef.tabs = function(kwds, docmill, parent) {
 
-    var div = tag('div', {id: kwds.id} );
+    var id = kwds.id;
+    if (!id) id = luban.utils.uid();
+    var div = tag('div', {id: id} );
 
     var Class = kwds.Class;
     if (Class) {div.addClass(Class);}

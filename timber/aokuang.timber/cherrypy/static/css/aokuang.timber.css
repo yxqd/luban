@@ -1,3 +1,9 @@
+/* portlet in the left menu */
+#menu-container .luban-portlet-body {
+    background-color: transparent;
+    border: none;
+}
+
 /* grid demo */
 #demo-container .luban-grid [luban-element-type='gridcell'] {
     border: 1px solid gray;

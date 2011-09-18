@@ -65,6 +65,9 @@ class Tab(RivetedSubElement, SimpleContainer, metaclass=Meta):
     label = descriptors.str(default='tab')
     label.tip = 'label of this tab'
 
+    selected = descriptors.bool()
+    selected.tip = "whether this tab is selected or not. among its siblings, only one can be selected"
+
     # events -- must have one-one correspondence with event handler
     from ..Event import Event
     class select(Event):

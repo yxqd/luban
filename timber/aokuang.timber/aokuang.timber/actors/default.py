@@ -41,18 +41,24 @@ class Actor(base):
         for category, items in menu:
             section = accordion.section(label=category)
             portlet = section.portlet()
-            for item in items:
+            for i, item in enumerate(items):
                 portletitem = portlet.item(label=item)
+                portletitem.id = id(portletitem)
                 newcontent = luban.a.load(
                     actor = self.name.replace('default', item),
                     routine='createInterface',
                     )
-                portletitem.onclick =  luban.a.select(id="demo-container")\
+                portletitem.onselect =  luban.a.select(id="demo-container")\
                     .replaceContent(newcontent=newcontent)
+
+                # when changing category, 
+                # select the first item
+                if i==0:
+                    section.onselect = luban.a.select(element=portletitem)\
+                        .select()
+                    
                 continue
             
-            # section.onselect = 
-
             continue
         return doc
     

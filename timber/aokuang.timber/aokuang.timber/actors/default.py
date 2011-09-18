@@ -83,6 +83,7 @@ menu = [
 
     ('menu-like',
      ['portlet',
+      'toolbar',
       ]),
     
     ('organizers',

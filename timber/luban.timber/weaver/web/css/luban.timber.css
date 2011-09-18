@@ -12,7 +12,7 @@
     background-color: transparent;
     border-style: none;
 }
-.luban-toolbar .luban-toolbarspacer {
+.luban-toolbar .spacer {
     width: 1em;
 }
 .luban-toolbar .luban-button span {

@@ -33,7 +33,8 @@ class Factory:
     
 
     def create(self):
-        container = luban.e.document()
+        title = self.object_type.__unique_type_name__
+        container = luban.e.document(title=title)
 
         object_type = self.object_type
         if hasattr(object_type, 'experimental') and object_type.experimental:

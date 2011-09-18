@@ -32,7 +32,8 @@ class Actor(base):
 
 
     def createInterface(self, **kwds):
-        doc = luban.e.document(title = self.title)
+        title = self.title or self.name
+        doc = luban.e.document(title = title)
         doc.append(self._createDemoAndCodeViewTabs())
         
         p = doc.restructuredtextdocument()

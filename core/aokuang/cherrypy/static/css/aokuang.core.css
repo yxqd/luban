@@ -2,6 +2,7 @@
 #menu-container {
     padding-top: 1em;
     vertical-align: top;
+    min-width: 20em;
     width: 20em;
 }
 #menu-container .luban-button-container {

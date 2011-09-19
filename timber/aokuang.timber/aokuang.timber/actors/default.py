@@ -31,7 +31,11 @@ class Actor(base):
         sp = frame.splitter(orientation='horizontal')
         left = sp.section(name='left', id='menu-container')
         right = sp.section(name='right', id='demo-container')
+        
         left.append(self.createMenu())
+        
+        doc = right.document(title = "Luban API demo")
+        doc.paragraph(text="Please choose an item from the left")
         return frame
 
 

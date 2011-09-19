@@ -40,10 +40,11 @@ base['stylesheets'] +=  [
     ]
 
 elements = [
+    #
     'portlet', 'portletitem',
     'accordion', 'accordionsection',
     'codeviewer',
-    
+    #
     'toolbar',
     'image',
     'grid', 'gridrow', 'gridcell',
@@ -80,6 +81,19 @@ codeviewer = {
         ),
     
     'dep': prettify,
+    }
+
+
+uploader = {
+    'javascripts':
+        (
+        'jquery.ext/uploadify/jquery.uploadify.v2.1.4.js',
+        'jquery.ext/uploadify/swfobject.js',
+        'luban.timber/widgets/uploader.js',
+        ),
+    'stylesheets':
+        (
+        ),
     }
 
 

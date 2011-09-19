@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2011 All Rights Reserved  
 //
 // {LicenseText}
 //
@@ -40,25 +40,38 @@
     div.addClass(Class);
     div.addClass('luban-uploader');
 
-    var uploaderdiv = tag('div'); div.append(uploaderdiv);
+    var input = tag('input', {'id': id+"-input", "type": "file"});
+    div.append(input);
 
     var onsubmit = kwds.onsubmit;
     // onsubmit must be a simple load action
     if (onsubmit.luban_type!='loading') {throw 'uploader.onsubmit must be a load action';}
+    // build the url of the handler on the server side
     var actor = onsubmit.actor; var routine = onsubmit.routine; var data = onsubmit.params;
     var C = luban.Controller;
-    var credArgs = C.getCredentialArgs();
-    data = C.prependActorStr(data);
+    var credArgs = {};
+    // var credArgs = C.getCredentialArgs();
+    // data = C.prependActorStr(data);
     var parameters = $.extend({}, {'actor':actor, 'routine':routine}, data, credArgs);
+    // 
     var name = kwds.name;
     var label = kwds.label;
+    // oncomplete 
     var oncomplete = kwds.oncomplete, oncomplete_callback;
     if (oncomplete) {
-      oncomplete_callback = function () {
-	docmill.compile(oncomplete);
-      };
+	oncomplete_callback = luban.compileCallback(oncomplete);
     }
-    uploaderdiv.uploader(label, name, C.url, parameters, oncomplete_callback);
+    var uploadify_loc = "/static/javascripts/jquery.ext/uploadify/";
+    $(input).uploadify({
+	"uploader": uploadify_loc + "uploadify.swf"
+	,"script": C.url
+	,"cancelImg": uploadify_loc + "cancel.png"
+	,"folder": "/uploads"
+	,"auto": true
+	,"onComplete": oncomplete_callback
+	});
+
+    // label, name, parameters
     
     return ret;
   };
@@ -71,7 +84,8 @@
   widgets.uploader.selfcheck = function() {
     var required;
     try {
-      required = AjaxUpload;
+      // required = $.fn.uploadify;
+	required = 1;
     } catch (e) {
       //throw;
       return true;
@@ -80,7 +94,9 @@
   };
   widgets.uploader.prototype = new widgets.base ();
 
-
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  // the following should be obsolete sooon
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   // jquery like syntax to make a div a uploader button
   //  name: name of the uploader
   //  action: the url of the controller that takes action on the uploaded stuff

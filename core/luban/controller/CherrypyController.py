@@ -24,14 +24,14 @@ class CherrypyController(WebAppController):
 
     
     @cherrypy.expose
-    @cherrypy.tools.json_out()
+    @cherrypy.tools.json_out(content_type="text/html")
     def upload(self, myfile):
         s = myfile.file.read()
-        return {
+        return [{
             "name": "name",
             "size": len(s),
             "type": "text",
-            }
+            }]
 
 
 # End of file 

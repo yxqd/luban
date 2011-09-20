@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>jQuery File Upload Example</title>
+</head>
+<body>
+<form id="fileupload" action="" method="POST" enctype="multipart/form-data">
+<input id="fileupload-input" type="file" name="myfile" multiple>
+</form>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
+<script src="../javascripts/jquery.ext/jquery.iframe-transport.js"></script>
+<script src="../javascripts/jquery.ext/blueimp-file-upload/jquery.fileupload.js"></script>
+<script src="../javascripts/jquery.ext/blueimp-file-upload/jquery.fileupload-ui.js"></script>
+<script>
+$(function () {
+    var form = $('#fileupload-input');
+    form.fileUpload({
+        dataType: 'json'
+        ,url: '/upload'
+        ,done: function (e, data) {
+        $.each(data.result, function (index, file) {
+            $('<p/>').text(file.name).appendTo('body');
+        })}
+    });
+});
+</script>
+</body> 
+</html>

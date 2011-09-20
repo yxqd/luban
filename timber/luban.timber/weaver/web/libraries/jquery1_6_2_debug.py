@@ -87,12 +87,14 @@ codeviewer = {
 uploader = {
     'javascripts':
         (
-        'jquery.ext/uploadify/jquery.uploadify.v2.1.4.js',
-        'jquery.ext/uploadify/swfobject.js',
+        'jquery.ext/jquery.iframe-transport.js',
+        'jquery.ext/blueimp-file-upload/jquery.fileupload.js',
+        'jquery.ext/blueimp-file-upload/jquery.fileupload-ui.js',
         'luban.timber/widgets/uploader.js',
         ),
     'stylesheets':
         (
+        'jquery.ext/blueimp-file-upload/jquery.fileupload-ui.css',
         ),
     }
 

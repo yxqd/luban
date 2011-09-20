@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2011 All Rights Reserved  
+//                       (C) 2008-2011 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -22,7 +22,7 @@
   var widgets = luban.widgets;
   var tag = luban.utils.tag;
 
-  
+
   // documentmill handler
   var dmp = luban.documentmill.prototype;
   dmp.onuploader = dmp._onElement;
@@ -36,7 +36,7 @@
 
     var ret = div.lubanElement('uploader');
     if (parent) {parent.add(ret);}
-    
+
     div.addClass(Class);
     div.addClass('luban-uploader');
 
@@ -53,26 +53,22 @@
     // var credArgs = C.getCredentialArgs();
     // data = C.prependActorStr(data);
     var parameters = $.extend({}, {'actor':actor, 'routine':routine}, data, credArgs);
-    // 
+    //
     var name = kwds.name;
     var label = kwds.label;
-    // oncomplete 
+    // oncomplete
     var oncomplete = kwds.oncomplete, oncomplete_callback;
     if (oncomplete) {
 	oncomplete_callback = luban.compileCallback(oncomplete);
     }
-    var uploadify_loc = "/static/javascripts/jquery.ext/uploadify/";
-    $(input).uploadify({
-	"uploader": uploadify_loc + "uploadify.swf"
-	,"script": C.url
-	,"cancelImg": uploadify_loc + "cancel.png"
-	,"folder": "/uploads"
-	,"auto": true
-	,"onComplete": oncomplete_callback
-	});
+    $(input).fileUpload({
+      dataType: 'json'
+      ,"url": C.url
+      ,"done": oncomplete_callback
+      });
 
     // label, name, parameters
-    
+
     return ret;
   };
 
@@ -102,7 +98,7 @@
   //  action: the url of the controller that takes action on the uploaded stuff
   //  parameters: parameters to controller
   $.fn.uploader = function(label, name, action, parameters, oncomplete) {
-    
+
     // "this" is the division for the button
     var div = $(this);
 
@@ -123,40 +119,40 @@
     tr.append(statustd);
     var status = tag('div');
     statustd.append(status);
-    
+
     button.text(label);
-    
+
     // the interval callback
     var interval;
-    
-    var ajaxupload = new Ajax_upload(button, 
-    {action: action, 
+
+    var ajaxupload = new Ajax_upload(button,
+    {action: action,
      data: parameters,
      name: name,
      onSubmit : function(file, ext){
-	// change button text, when user selects file			
+	// change button text, when user selects file
 	status.text('Uploading');
-	
+
 	// If you want to allow uploading only 1 file at time,
 	// you can disable upload button
 	this.disable();
-			
+
 	// Uploding -> Uploading. -> Uploading...
 	interval = window.setInterval(function(){
 	    var text = status.text();
 	    if (text.length < 13){
-	      status.text(text + '.');					
+	      status.text(text + '.');
 	    } else {
-	      status.text('Uploading');				
+	      status.text('Uploading');
 	    }
 	  }, 200);
       },
      onComplete: function(file, response){
 	window.clearInterval(interval);
-	
+
 	// enable upload button
 	this.enable();
-	
+
 	// show filename
 	status.text("'"+ file +"' uploaded");
 
@@ -167,8 +163,8 @@
     });
 
   };
-  
-  
+
+
 })(luban, jQuery);
 
 

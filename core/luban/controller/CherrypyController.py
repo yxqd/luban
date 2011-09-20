@@ -22,6 +22,17 @@ class CherrypyController(WebAppController):
     def index(self, actor=None, routine=None, **kwds):
         return self.run(actor=actor, routine=routine, **kwds)
 
+    
+    @cherrypy.expose
+    @cherrypy.tools.json_out()
+    def upload(self, myfile):
+        s = myfile.file.read()
+        return {
+            "name": "name",
+            "size": len(s),
+            "type": "text",
+            }
+
 
 # End of file 
 

@@ -15,12 +15,20 @@
 <script>
 $(function () {
     $('#fileupload').fileupload({
-        dataType: 'json',
-        url: '/upload',
-        done: function (e, data) {
+        dataType: 'json'
+        //,maxChunkSize: 4096
+        //,multipart: false
+        ,url: '/upload'
+        ,done: function (e, data) {
             $.each(data.result, function (index, file) {
                 $('<p/>').text(file.name).appendTo('body');
             });
+        }
+        ,fail: function (e, data) {
+            alert("failed!");
+        }
+        ,progress: function (e, data) {
+            console.log("progress");
         }
     });
 });

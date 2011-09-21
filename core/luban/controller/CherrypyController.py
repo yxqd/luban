@@ -23,14 +23,26 @@ class CherrypyController(WebAppController):
         return self.run(actor=actor, routine=routine, **kwds)
 
     
+    upload_limit = 1000*1024*1024 # 10M
+    upload_timeout = 60000 # 10 minutes
     @cherrypy.expose
     @cherrypy.tools.json_out(content_type="text/html")
     def upload(self, myfile):
-        s = myfile.file.read()
+        cherrypy.response.timeout = self.upload_timeout
+        size = 0
+        while True:
+            data = myfile.file.read(8192)
+            if not data:
+                break
+            size += len(data)
+            if size > self.upload_limit:
+                raise cherrypy.HTTPError(413)
+            continue
+                
         return [{
-            "name": "name",
-            "size": len(s),
-            "type": "text",
+            "name": myfile.filename,
+            "size": size,
+            "type": str(myfile.content_type),
             }]
 
 

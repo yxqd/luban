@@ -22,17 +22,21 @@ class Uploader(Element):
     
     # events
     from luban.ui.Event import Event
-    class submit(Event):
-        # decorations
-        simple_description = "event happens when the uploaded stuff is submitted" 
-        __unique_type_name__ = 'uploadersubmit'
-        # attributes
-        
+    # complete
     class complete(Event):
         # decorations
         simple_description = "event happens when upload is finished" 
-        __unique_type_name__ = 'uploaderfinish'
+        __unique_type_name__ = 'uploadercomplete'
         # attributes
+        filename = descriptors.str()
+        filename.tip = "filename of the uploaded file"
+    # fail
+    class fail(Event):
+        # decorations
+        simple_description = "event happens when upload is failed" 
+        __unique_type_name__ = 'uploaderfail'
+        # attributes
+        reason = descriptors.str()
     # ..
     del Event
     

@@ -30,42 +30,98 @@
 
   // uploader
   ef.uploader = function (kwds, docmill, parent) {
-    var Class = kwds.Class;
+    // create the elements
     var id = kwds.id;
+    // .. the div container
     var div = tag('div', {'id': id});
-
+    // .. luban wrapper
     var ret = div.lubanElement('uploader');
+    // .. add me to my parent
     if (parent) {parent.add(ret);}
-
+    // .. class
+    var Class = kwds.Class;
     div.addClass(Class);
     div.addClass('luban-uploader');
 
-    var input = tag('input', {'id': id+"-input", "type": "file"});
-    div.append(input);
+    // .. label
+    var labelelem = tag('div'); div.append(labelelem);
+    labelelem.addClass('label');
 
+    // .. form in the div
+    var form = tag('form'); div.append(form);
+    // .. input in the form
+    var input = tag('input', {'id': id+"-input", "type": "file", name:"myfile"}); // multiple?
+    form.append(input);
+
+    // .. status
+    var statusdiv = tag('div'); div.append(statusdiv);
+    statusdiv.addClass('status');
+
+    // .. progress bar
+    var pbar = tag('div'); div.append(pbar);
+    pbar.progressbar().hide();
+
+    // events
     var onsubmit = kwds.onsubmit;
     // onsubmit must be a simple load action
-    if (onsubmit.luban_type!='loading') {throw 'uploader.onsubmit must be a load action';}
+    // if (onsubmit.luban_type!='loading') {throw 'uploader.onsubmit must be a load action';}
     // build the url of the handler on the server side
-    var actor = onsubmit.actor; var routine = onsubmit.routine; var data = onsubmit.params;
-    var C = luban.Controller;
-    var credArgs = {};
+    // var actor = onsubmit.actor; var routine = onsubmit.routine; var data = onsubmit.params;
+    // var C = luban.Controller;
+    // var credArgs = {};
     // var credArgs = C.getCredentialArgs();
     // data = C.prependActorStr(data);
-    var parameters = $.extend({}, {'actor':actor, 'routine':routine}, data, credArgs);
+    // var parameters = $.extend({}, {'actor':actor, 'routine':routine}, data, credArgs);
     //
     var name = kwds.name;
     var label = kwds.label;
+    labelelem.text(label);
+
     // oncomplete
     var oncomplete = kwds.oncomplete, oncomplete_callback;
     if (oncomplete) {
-	oncomplete_callback = luban.compileCallback(oncomplete);
+      oncomplete_callback = luban.compileCallback(oncomplete);
+      $(div).bind('luban-uploadcomplete', oncomplete_callback);
     }
-    $(input).fileUpload({
+    // onfail
+    var onfail = kwds.onfail, onfail_callback;
+    if (onfail) {
+      onfail_callback = luban.compileCallback(onfail);
+      $(div).bind('luban-uploadfail', onfail_callback);
+    }
+
+    //
+    $(div).fileupload({
       dataType: 'json'
-      ,"url": C.url
-      ,"done": oncomplete_callback
-      });
+      // ,"url": C.url
+      ,"url": '/upload'
+      ,"done": function(e, data) {
+	$(this).children('.ui-progressbar').hide();
+	var file = data.result[data.result.length-1];
+	var status = file.name + " uploaded.";
+	$(this).children('.status').text(status);
+	var extra = {
+	  'filename': file.name
+	};
+	$(this).trigger("luban-uploadcomplete", extra);
+      }
+      ,"fail": function(e,data) {
+	var extra = {
+	  'reason': "unknown"
+	};
+	$(this).trigger("luban-uploadfail", extra);
+      }
+      ,"start": function (e,data) {
+	var form = $(this).children("form");
+	form.fadeOut();
+	$(this).children('.status').text('Uploading...');
+	$(this).children(".ui-progressbar").fadeIn();
+      }
+      ,"progress": function(e, data) {
+	var p = parseInt(data.loaded/data.total * 100, 10);
+	$(this).children('.ui-progressbar').progressbar('value', p);
+      }
+    });
 
     // label, name, parameters
 

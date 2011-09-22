@@ -23,11 +23,7 @@ class Actor(base):
     def createDemoPanel(self, **kwds):
         # create uploader
         uploader = luban.e.uploader(
-            name = 'uploaded',
             label='Upload',
-            onsubmit=luban.a.load(
-                actor=self.name,
-                routine='receive_file', id='uploadid-111')
             )
         return uploader
 

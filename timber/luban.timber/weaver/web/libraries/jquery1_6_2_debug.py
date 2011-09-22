@@ -62,8 +62,8 @@ for element in elements:
 accordion = {
     'javascripts':
         (
-        'luban.timber/widgets/accordion.js',
         '%s/ui/%s' % (jui_dev, 'jquery.ui.accordion.js'),
+        'luban.timber/widgets/accordion.js',
         ),
     }
 
@@ -89,7 +89,8 @@ uploader = {
         (
         'jquery.ext/jquery.iframe-transport.js',
         'jquery.ext/blueimp-file-upload/jquery.fileupload.js',
-        'jquery.ext/blueimp-file-upload/jquery.fileupload-ui.js',
+        # 'jquery.ext/blueimp-file-upload/jquery.fileupload-ui.js',
+        '%s/ui/%s' % (jui_dev, 'jquery.ui.progressbar.js'),
         'luban.timber/widgets/uploader.js',
         ),
     'stylesheets':

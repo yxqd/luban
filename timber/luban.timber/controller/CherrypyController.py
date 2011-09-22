@@ -12,11 +12,13 @@
 #
 
 
+import cherrypy
+
 from luban.controller.CherrypyController import CherrypyController as base
 class CherrypyController(base):
     
-    upload_limit = 1000*1024*1024 # 10M
-    upload_timeout = 60000 # 10 minutes
+    upload_limit = 20*1024*1024 # 20M
+    upload_timeout = 600 # 10 minutes
     @cherrypy.expose
     @cherrypy.tools.json_out(content_type="text/html")
     def upload(self, myfile):

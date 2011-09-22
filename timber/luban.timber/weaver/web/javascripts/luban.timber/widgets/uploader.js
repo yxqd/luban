@@ -50,7 +50,8 @@
     // .. form in the div
     var form = tag('form'); div.append(form);
     // .. input in the form
-    var input = tag('input', {'id': id+"-input", "type": "file", name:"myfile"}); // multiple?
+    var input_name = "luban_upload_file: " + id;
+    var input = tag('input', {'id': id+"-input", "type": "file", name:input_name}); // multiple?
     form.append(input);
 
     // .. status
@@ -95,6 +96,10 @@
       dataType: 'json'
       // ,"url": C.url
       ,"url": '/upload'
+      ,"formData": [
+	{name: 'uploadid', value: id}
+      ]
+      , maxChunkSize: 1000000
       ,"done": function(e, data) {
 	$(this).children('.ui-progressbar').hide();
 	var file = data.result[data.result.length-1];
@@ -104,34 +109,73 @@
 	  'filename': file.name
 	};
 	$(this).trigger("luban-uploadcomplete", extra);
+	$(this).data('progress_timer', 0);
       }
       ,"fail": function(e,data) {
 	var extra = {
-	  'reason': "unknown"
+	  'reason': data.failure_reason
 	};
 	$(this).trigger("luban-uploadfail", extra);
+	$(this).data('progress_timer', 0);
       }
-      ,"start": function (e,data) {
+      ,"send": function (e,data) {
+	if (data.files.length!=1) throw "not implemented yet";
+	var totalsize = data.files[0].size;
+	if (kwds.maxsize && totalsize>kwds.maxsize) {
+	  data.failure_reason = "file size exeeds limit: " + kwds.maxsize;
+	  return false;
+	}
+	$(this).data("totalsize", totalsize);
 	var form = $(this).children("form");
 	form.fadeOut();
 	$(this).children('.status').text('Uploading...');
 	$(this).children(".ui-progressbar").fadeIn();
+	// start timer
+	$(this).data('progress_timer', 1);
+	repeatGetUploadProgress($(this).attr('id'));
       }
+      /*
       ,"progress": function(e, data) {
 	var p = parseInt(data.loaded/data.total * 100, 10);
 	$(this).children('.ui-progressbar').progressbar('value', p);
-      }
+      }*/
+    });
+
+    div.bind('uploader_progress', function(e, data) {
+      if (!data.uploaded) return;
+      var totalsize = $(this).data('totalsize');
+      var p = parseInt(data.uploaded/totalsize * 100, 10);
+      $(this).children('.ui-progressbar').progressbar('value', p);
     });
 
     // label, name, parameters
 
     return ret;
   };
+  function repeatGetUploadProgress(uploadid) {
+    getUploadProgress(uploadid);
+    if ($('#'+uploadid).data('progress_timer')) {
+      var f = "luban.widgets.uploader.repeatGetUploadProgress('"+uploadid+"')";
+      setTimeout(f, 500);
+    }
+  }
+
+  function getUploadProgress(uploadid) {
+    var uploader = $('#'+uploadid);
+    if (!(uploader.data('progress_timer'))) return;
+    var callback = function (data) {
+      uploader.trigger('uploader_progress', data);
+    };
+    $.get('/upload_progress', {'id': uploadid}, callback, 'json');
+  }
 
   widgets.uploader = function(elem) {
     this.super1 = widgets.base;
     this.super1(elem);
   };
+  // this export method repeatGetUploadProgress to global namespace
+  // for setTimeout to work
+  widgets.uploader.repeatGetUploadProgress = repeatGetUploadProgress;
   // self check
   widgets.uploader.selfcheck = function() {
     var required;

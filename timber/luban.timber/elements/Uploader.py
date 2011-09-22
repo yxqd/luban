@@ -19,6 +19,7 @@ class Uploader(Element):
 
     # attributes
     label = descriptors.str()
+    maxsize = descriptors.int(default=20*1024*1024)
     
     # events
     from luban.ui.Event import Event

@@ -20,5 +20,9 @@ class UploadConfiguration:
     path = "/tmp/uploads" # temporary path to save upload files
 
 
+import os
+if not os.path.exists(UploadConfiguration.path):
+    os.makedirs(UploadConfiguration.path)
+
 # End of file 
 

@@ -57,10 +57,11 @@ class CherrypyController(base):
         f = _getUploadProgressFilePath(id)
         import  os
         if not os.path.exists(f):
-            value = 0
+            value = None
         else:
             value = open(f).read()
-        return {'uploaded': value}
+            value = eval(value)
+        return value
 
 
     @classmethod
@@ -141,7 +142,8 @@ def part_read_lines_to_boundary(self, fp_out=None):
         if uploadid:
             progress_file = _getUploadProgressFilePath(uploadid)
             pfs = open(progress_file, 'w')
-            pfs.write(str(read))
+            data = {'increment': len(line), 'uploaded': read}
+            pfs.write(str(data))
             pfs.flush()
             pfs.close()
         # ----------------------------------------

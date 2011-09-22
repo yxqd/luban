@@ -142,9 +142,14 @@
     });
 
     div.bind('uploader_progress', function(e, data) {
-      if (!data.uploaded) return;
+      if (data == null) return;
+      var last = $(this).data('uploaded-last') || 0;
+      var uploaded = last + (data.increment||0);
+      var uploaded2 = data.uploaded;
+      if (uploaded2>uploaded) uploaded = uploaded2;
       var totalsize = $(this).data('totalsize');
-      var p = parseInt(data.uploaded/totalsize * 100, 10);
+      var p = parseInt(uploaded/totalsize * 100, 10);
+      $(this).data('uploaded-last', uploaded);
       $(this).children('.ui-progressbar').progressbar('value', p);
     });
 
@@ -156,7 +161,7 @@
     getUploadProgress(uploadid);
     if ($('#'+uploadid).data('progress_timer')) {
       var f = "luban.widgets.uploader.repeatGetUploadProgress('"+uploadid+"')";
-      setTimeout(f, 500);
+      setTimeout(f, 1000);
     }
   }
 

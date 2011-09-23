@@ -16,10 +16,22 @@ class Uploader(Element):
     # decorations
     simple_description = 'A upload button'
     full_description = ""
+    experimental = True
 
     # attributes
     label = descriptors.str()
+    
     maxsize = descriptors.int(default=20*1024*1024)
+    maxsize.tip = (
+        "hint on the client side the max file size. "
+        "this is actually just a hint, since really only server can "
+        "dictate the upload size limit. "
+        )
+    # Note:
+    # this hint is implemented now for most browsers except IE.
+    # For IE client, we rely on the server side to limit the size
+    # of the upload. 
+    # This is now implemented in 
     
     # events
     from luban.ui.Event import Event

@@ -12,6 +12,19 @@
 #
 
 
+# in addition to the controller in luban core, the following are added
+#
+# 1. session
+#   this is not realy used yet. need to think more about this.
+#   do we really need it?
+# 2. upload
+#   this is done pretty ad hoc
+#   the blueimp file upload js lib is used
+#   the upload progress is done by server writing done the progress info
+#   in a little file, and then on the client side every second
+#   a request will be sent to update how much have been uploaded
+
+
 import cherrypy
 
 from .UploadConfiguration import UploadConfiguration
@@ -60,6 +73,8 @@ class CherrypyController(base):
             value = None
         else:
             value = open(f).read()
+            # see below in part_read_lines_to_boundary
+            # how this file is written
             value = eval(value)
         return value
 
@@ -89,6 +104,9 @@ def _getUploadProgressFilePath(id):
 
 # overload cherrpy default behavior so we can handle upload
 # more efficiently
+# the implementation here is really not good.
+# there should be a better way to do this to overload the cherrypy
+# behavior.
 from cherrypy._cpreqbody import Entity, SizedReader, ntob, Part
 saved_entity_process = Entity.process
 def overload_entity_process(self):
@@ -106,6 +124,9 @@ Entity.process = overload_entity_process
 
 def process_upload_file(self):
     # cherrypy.log("enter process_upload_file")
+    if self.length and self.length > UploadConfiguration.limit:
+        raise cherrypy.HTTPError(413, "file size too large")
+        
     saved_entity_process(self)
     return
 
@@ -120,11 +141,13 @@ def part_read_lines_to_boundary(self, fp_out=None):
     supports the 'write' method; all bytes read will be written to the fp,
     and that fp is returned.
     """
+    # ---  added code -----------------------
     try:
         uploadid = cherrypy.request.uploadid
     except:
         uploadid = None
     read = 0
+    # ----------------------------------------
     
     endmarker = self.boundary + ntob("--")
     delim = ntob("")
@@ -134,7 +157,7 @@ def part_read_lines_to_boundary(self, fp_out=None):
     while True:
         line = self.fp.readline(1<<16)
 
-        # ----------------------------------------
+        # ---  added code -----------------------
         read += len(line)
         if read > UploadConfiguration.limit:
             raise cherrypy.HTTPError(413)

@@ -72,6 +72,7 @@
 	pbar.progressbar('value', 100);
     }
 
+
     // events
     var onsubmit = kwds.onsubmit;
     // onsubmit must be a simple load action
@@ -101,14 +102,6 @@
       $(div).bind('luban-uploadfail', onfail_callback);
     }
 
-    if ($.browser.msie) {
-	var getFileSize = function(filepath) {
-	    var fso = newActiveXObject("Scrip[ting.FileSystemObject");
-	    var thefile = fso.getFile(filepath);
-	    return thefile.size;
-	}
-    }
-
     //
     $(div).fileupload({
       dataType: 'json'
@@ -130,16 +123,20 @@
 	$(this).data('progress_timer', 0);
       }
       ,"fail": function(e,data) {
-	var extra = {
-	  'reason': data.failure_reason
-	};
+	var reason = data.failure_reason;
+	if (reason == null) 
+	    reason = "Upload failed: your file could be too large";
+	var extra = {'reason': reason};
 	$(this).trigger("luban-uploadfail", extra);
 	$(this).data('progress_timer', 0);
+	$(this).children(".ui-progressbar").fadeOut();
+	$(this).children(".status").text('');
+	$(this).children("form").fadeIn();
       }
       ,"send": function (e,data) {
 	if (data.files.length!=1) throw "not implemented yet";
 	var totalsize;
-	if ($.browser.msie) totalsize = getFileSize($(this).find("input").val());
+	if ($.browser.msie) totalsize = 0;
 	else totalsize = data.files[0].size;
 	if (kwds.maxsize && totalsize>kwds.maxsize) {
 	  data.failure_reason = "file size exeeds limit: " + kwds.maxsize/mega + "MB";

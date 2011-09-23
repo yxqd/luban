@@ -68,7 +68,7 @@ accordion = {
     }
 
 
-from ..jsdb import prettify
+from .. import jsdb
 codeviewer = {
     'javascripts':
         (
@@ -80,7 +80,7 @@ codeviewer = {
         'other/prettify/prettify.css',
         ),
     
-    'dep': prettify,
+    'dep': jsdb.prettify,
     }
 
 
@@ -89,7 +89,6 @@ uploader = {
         (
         'jquery.ext/jquery.iframe-transport.js',
         'jquery.ext/blueimp-file-upload/jquery.fileupload.js',
-        # 'jquery.ext/blueimp-file-upload/jquery.fileupload-ui.js',
         '%s/ui/%s' % (jui_dev, 'jquery.ui.progressbar.js'),
         'luban.timber/widgets/uploader.js',
         ),
@@ -97,6 +96,7 @@ uploader = {
         (
         'jquery.ext/blueimp-file-upload/jquery.fileupload-ui.css',
         ),
+    'dep': jsdb.blueimp_fileupload,
     }
 
 

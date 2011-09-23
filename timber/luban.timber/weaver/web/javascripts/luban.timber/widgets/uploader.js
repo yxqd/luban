@@ -23,6 +23,11 @@
   var tag = luban.utils.tag;
 
 
+  // constants
+  var kilo = 1024;
+  var mega = kilo * kilo;  
+
+
   // documentmill handler
   var dmp = luban.documentmill.prototype;
   dmp.onuploader = dmp._onElement;
@@ -60,7 +65,12 @@
 
     // .. progress bar
     var pbar = tag('div'); div.append(pbar);
+    pbar.width(input.width());
     pbar.progressbar().hide();
+    if ($.browser.msie) {
+	pbar.addClass("msie");
+	pbar.progressbar('value', 100);
+    }
 
     // events
     var onsubmit = kwds.onsubmit;
@@ -91,6 +101,14 @@
       $(div).bind('luban-uploadfail', onfail_callback);
     }
 
+    if ($.browser.msie) {
+	var getFileSize = function(filepath) {
+	    var fso = newActiveXObject("Scrip[ting.FileSystemObject");
+	    var thefile = fso.getFile(filepath);
+	    return thefile.size;
+	}
+    }
+
     //
     $(div).fileupload({
       dataType: 'json'
@@ -99,7 +117,7 @@
       ,"formData": [
 	{name: 'uploadid', value: id}
       ]
-      , maxChunkSize: 1000000
+      // , maxChunkSize: 1000000
       ,"done": function(e, data) {
 	$(this).children('.ui-progressbar').hide();
 	var file = data.result[data.result.length-1];
@@ -120,9 +138,11 @@
       }
       ,"send": function (e,data) {
 	if (data.files.length!=1) throw "not implemented yet";
-	var totalsize = data.files[0].size;
+	var totalsize;
+	if ($.browser.msie) totalsize = getFileSize($(this).find("input").val());
+	else totalsize = data.files[0].size;
 	if (kwds.maxsize && totalsize>kwds.maxsize) {
-	  data.failure_reason = "file size exeeds limit: " + kwds.maxsize;
+	  data.failure_reason = "file size exeeds limit: " + kwds.maxsize/mega + "MB";
 	  return false;
 	}
 	$(this).data("totalsize", totalsize);
@@ -132,20 +152,24 @@
 	$(this).children(".ui-progressbar").fadeIn();
 	// start timer
 	$(this).data('progress_timer', 1);
+        if ($.browser.msie) return;
 	repeatGetUploadProgress($(this).attr('id'));
       }
       /*
       ,"progress": function(e, data) {
 	var p = parseInt(data.loaded/data.total * 100, 10);
 	$(this).children('.ui-progressbar').progressbar('value', p);
-      }*/
+      }
+      */
     });
 
     div.bind('uploader_progress', function(e, data) {
       if (data == null) return;
+      if ($.browser.msie) return; // IE not supported
       var last = $(this).data('uploaded-last') || 0;
       var uploaded = last + (data.increment||0);
       var uploaded2 = data.uploaded;
+      if (uploaded2 == null) return;
       if (uploaded2>uploaded) uploaded = uploaded2;
       var totalsize = $(this).data('totalsize');
       var p = parseInt(uploaded/totalsize * 100, 10);

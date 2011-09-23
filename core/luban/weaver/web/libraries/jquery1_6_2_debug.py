@@ -53,7 +53,7 @@ base = {
     ],
     
     'javascripts':
-        ['jquery/jquery-1.6.2.min.js',] \
+        ['jquery/jquery-1.6.2.js',] \
         + jui_deps \
         + jui_core \
         + luban_core

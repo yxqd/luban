@@ -368,3 +368,7 @@ opacity:0.7;
 }
 
 
+/* uploader */
+.luban-uploader .ui-progressbar.msie .ui-progressbar-value {
+    background-image: url(pbar-ani.gif);
+}

@@ -47,10 +47,11 @@
     navdiv.addClass('nav');
 
     elem._je.cycle({
-      'fx': 'fade'
+      'fx': 'scrollRight' // 'fade'
       ,'slideExpr': '.luban-slide'
       ,'pager': '#'+navdivid
       ,pause: 1
+      ,timeout: slides.timeout
       });
 
     // bind event handler

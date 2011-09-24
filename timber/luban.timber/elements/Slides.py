@@ -21,6 +21,8 @@ class Slides(RivetedContainer):
     experimental = True
     
     # properties
+    timeout = descriptors.int()
+    timeout.tip = "milliseconds between slide transitions"
 
     # methods
     @elementfactory

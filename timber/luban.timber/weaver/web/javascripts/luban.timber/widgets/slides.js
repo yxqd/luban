@@ -88,7 +88,10 @@
     var div = tag('div', {id:id});
     div.addClass('luban-slide'); div.addClass('slide');
 
-    var a = tag('a', {'href': slide.url, title: slide.caption});
+    // the image (enclosed by <a>)
+    var d = {title: slide.caption};
+    if (slide.url) d.href = slide.url;
+    var a = tag('a', d);
     div.append(a);
     var img = tag('img', {'src': luban.configuration.images_base + '/' + slide.image});
     a.append(img);

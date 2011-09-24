@@ -11,22 +11,20 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-# "database" of external js libraries 
+import luban
 
+from ....DemoPanelActor import Actor as base
+class Actor(base):
 
-modules = [
-    'blueimp_fileupload',
-    'jquery',
-    'prettify',
-    'slides',
-    ]
-
-def importAll():
-    for name in modules:
-        __import__(name, fromlist=['.'], globals=globals())
-        continue
-    return
-importAll()
+    title='A basic slideshow'
+    description = [
+        ]
+    def createDemoPanel(self, **kwds):
+        slides = luban.e.slides()
+        
+        slides.slide(caption='slide1')
+        slides.slide(caption='slide2')
+        return slides
 
 
 # End of file 

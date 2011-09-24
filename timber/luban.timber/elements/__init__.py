@@ -43,6 +43,7 @@ elementtypes = [
     # 'Paragraph',
     # 'Plot2D',
     # 'ProgressBar',
+    'Slides',
     'Toolbar',
     # 'TreeView',
     'Uploader',

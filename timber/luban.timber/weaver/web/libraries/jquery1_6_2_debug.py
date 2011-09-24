@@ -25,6 +25,14 @@
 #
 # in a "js file list", make sure to order them correctly:
 # if b.js depends on a.js, a.js should be in front of b.js
+#
+# To add an element
+# 1. add this name of the elemen to the list "elements"
+# 2. add a new dictionary for this element:
+#    <element_name> = {"javascripts": ..., "stylesheets": ...}
+#
+# For riveted elements, make sure to do the same for both
+# the container element and the sub element.
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
@@ -49,6 +57,7 @@ elements = [
     'image',
     'grid', 'gridrow', 'gridcell',
     'uploader',
+    'slides', 'slide',
     ]
             
 for element in elements:
@@ -63,6 +72,7 @@ accordion = {
     'javascripts':
         (
         '%s/ui/%s' % (jui_dev, 'jquery.ui.accordion.js'),
+        
         'luban.timber/widgets/accordion.js',
         ),
     }
@@ -73,6 +83,7 @@ codeviewer = {
     'javascripts':
         (
         'other/prettify/prettify.js',
+        
         'luban.timber/widgets/codeviewer.js',
         ),
     'stylesheets':
@@ -90,6 +101,7 @@ uploader = {
         'jquery.ext/jquery.iframe-transport.js',
         'jquery.ext/blueimp-file-upload/jquery.fileupload.js',
         '%s/ui/%s' % (jui_dev, 'jquery.ui.progressbar.js'),
+        
         'luban.timber/widgets/uploader.js',
         ),
     'stylesheets':
@@ -97,6 +109,20 @@ uploader = {
         'jquery.ext/blueimp-file-upload/jquery.fileupload-ui.css',
         ),
     'dep': jsdb.blueimp_fileupload,
+    }
+
+
+slides = {
+    'javascripts':
+        (
+        'jquery.ext/jquery.cycle.all.js',
+
+        'luban.timber/widgets/slides.js',
+        ),
+    'stylesheets':
+        (
+        ),
+    'dep': jsdb.slides,
     }
 
 

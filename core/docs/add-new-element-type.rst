@@ -24,6 +24,8 @@ Web weaver
 * add a javascript module for this new element type, and put it into
   the javascript library for the extension. see, for example, 
   luban.timber/weaver/web/javascripts/luban.timber/widgets/
+* for riveted elements, make sure there is one js module for the container
+  and another for the subelement.
 * make sure this new module and its dependencies are included in the 
   "default web weaver library". see luban.timber.weaver.web.libraries.default
   and make sure the paths specified in the "library" matches those

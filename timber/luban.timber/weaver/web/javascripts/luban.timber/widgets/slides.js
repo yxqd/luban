@@ -42,9 +42,16 @@
 
     }
 
+    var navdivid = slides.id + '-nav';
+    var navdiv = tag("div", {id: navdivid}); elem._je.append(navdiv);
+    navdiv.addClass('nav');
+
     elem._je.cycle({
       'fx': 'fade'
-    });
+      ,'slideExpr': '.luban-slide'
+      ,'pager': '#'+navdivid
+      ,pause: 1
+      });
 
     // bind event handler
 

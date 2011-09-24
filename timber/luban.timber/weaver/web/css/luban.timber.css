@@ -397,3 +397,19 @@ opacity:0.7;
     /* CSS3 standard */
     opacity: 0.5;
 }
+
+.luban-slides .nav a {
+    color: black;
+    margin-right: 0.5em;
+    text-decoration: none;
+    background-color: #ffeedd;
+    padding: 0.2em;
+}
+.luban-slides .nav {
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    z-index: 50;
+}
+.luban-slides .nav a.activeSlide {
+}

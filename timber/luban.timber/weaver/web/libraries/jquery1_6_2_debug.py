@@ -122,7 +122,7 @@ slides = {
     'stylesheets':
         (
         ),
-    'dep': jsdb.slides,
+    'dep': jsdb.jquery_cycle,
     }
 
 

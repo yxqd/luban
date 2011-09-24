@@ -83,7 +83,7 @@
 
     var a = tag('a', {'href': slide.url, title: slide.caption});
     div.append(a);
-    var img = tag('img', {'src': slide.image});
+    var img = tag('img', {'src': luban.configuration.images_base + '/' + slide.image});
     a.append(img);
 
     var caption = tag('div'); div.append(caption);
@@ -105,7 +105,7 @@
     var div = tag('div', {id: id});
     div.addClass('luban-slides');
     var ret= div.lubanElement('slides');
-    
+
     if (parent) {parent.add(ret);}
     return ret;
   };

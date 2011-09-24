@@ -18,7 +18,7 @@ modules = [
     'blueimp_fileupload',
     'jquery',
     'prettify',
-    'slides',
+    'jquery_cycle',
     ]
 
 def importAll():

@@ -22,8 +22,8 @@ class Actor(base):
     def createDemoPanel(self, **kwds):
         slides = luban.e.slides()
         
-        slides.slide(caption='slide1')
-        slides.slide(caption='slide2')
+        slides.slide(caption='slide1', image="slides/super_string_theory.jpg")
+        slides.slide(caption='slide2', image="slides/Calabi-Yau_art.jpg")
         return slides
 
 

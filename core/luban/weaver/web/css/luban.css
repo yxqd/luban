@@ -1,5 +1,10 @@
 /*  -*- CSS -*-  */
 
+#no-javascript-banner {
+    height: 70em;
+    min-height: 70em;
+}
+
 /* */
 body {
     font-family: "Lucida Grande",Verdana,Lucida,Helvetica,Arial,sans-serif;

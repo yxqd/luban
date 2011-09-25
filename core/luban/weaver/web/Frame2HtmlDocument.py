@@ -69,9 +69,13 @@ class Frame2HtmlDocument(object):
 
         # the body wrapper div
         html_target.body.tag('div', id='body-wrapper')
+        nojs_div = html_target.body.tag('div', id='no-javascript-banner')
+        nojs_div.contents = ["This site requires javascript to be enabled."]
 
         # image base
         self.javascript_target.main += [
+            "$('#no-javascript-banner').remove();",
+            
             'luban.configuration.javascripts_base = "%s";' % self.javascriptsbase,
             'luban.configuration.images_base = "%s";' % self.imagesbase,
             'luban.configuration.icons_base = "%s/icons";' % self.imagesbase,

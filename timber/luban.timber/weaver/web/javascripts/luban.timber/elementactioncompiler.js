@@ -50,6 +50,10 @@
     'onreplaceelement': function(action) {
       var e = action.element;
       var element = this.dispatch(e);
+
+      var next = element._je.next();
+      element.destroy();
+
       var newdoc = action.newelement;
 
       // if element is the root (frame), special treatment is needed
@@ -60,8 +64,7 @@
 
       var newelementrendered = this.docmill.render(newdoc, parent);
 
-      newelementrendered._je.insertBefore(element._je);
-      element.destroy();
+      next.before(newelementrendered._je);
     },
 
     'onremovecontent': function(action) {

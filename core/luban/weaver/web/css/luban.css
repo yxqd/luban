@@ -1,8 +1,10 @@
 /*  -*- CSS -*-  */
 
 #no-javascript-banner {
-    height: 70em;
-    min-height: 70em;
+    height: 15em;
+    min-height: 15em;
+    padding: 5em;
+    font-size: 2em;
 }
 
 /* */

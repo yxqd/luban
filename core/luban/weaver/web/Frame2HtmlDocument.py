@@ -20,6 +20,8 @@ import luban
 
 class Frame2HtmlDocument(object):
 
+    javascript_is_required = "This site requires javascript to be enabled."
+
 
     def __init__(
         self, 
@@ -70,7 +72,7 @@ class Frame2HtmlDocument(object):
         # the body wrapper div
         html_target.body.tag('div', id='body-wrapper')
         nojs_div = html_target.body.tag('div', id='no-javascript-banner')
-        nojs_div.contents = ["This site requires javascript to be enabled."]
+        nojs_div.contents = [self.javascript_is_required]
 
         # image base
         self.javascript_target.main += [

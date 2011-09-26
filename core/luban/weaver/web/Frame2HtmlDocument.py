@@ -65,6 +65,9 @@ for this site, and
             from .content.HtmlDocument import HtmlDocument
             html_target = HtmlDocument()
         self.html_target= html_target
+
+        # optional customization
+        self.customizeHtmlTarget(html_target)
         
         if javascript_target is None:
             from .content.JavaScriptDocument import JavaScriptDocument
@@ -116,6 +119,11 @@ for this site, and
         self.javascript_target.main.append(
             'luban.docmill.render(%s);' % injson)
         return html_target, javascript_target
+
+
+    def customizeHtmlTarget(self, html_target):
+        "optional hook to customize html target"
+        return
 
 
 from ._utils import jsonEncode

@@ -20,8 +20,16 @@ import luban
 
 class Frame2HtmlDocument(object):
 
-    javascript_is_required = "This site requires javascript to be enabled."
-
+    javascript_is_required = """
+<p>
+Please 
+<a target="_blank" href="http://www.activatejavascript.org/" >
+enable javascript
+</a>
+for this site, and
+<a href="Javascript: location.reload(true);">reload</a>.
+</p>
+"""
 
     def __init__(
         self, 

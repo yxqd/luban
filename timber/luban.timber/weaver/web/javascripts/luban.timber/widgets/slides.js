@@ -46,16 +46,9 @@
     var navdiv = tag("div", {id: navdivid}); elem._je.append(navdiv);
     navdiv.addClass('nav');
 
-    elem._je.cycle({
-      'fx': 'scrollRight' // 'fade'
-      ,'slideExpr': '.luban-slide'
-      ,'pager': '#'+navdivid
-      ,pause: 1
-      ,timeout: slides.timeout
-      });
+    if (!this.toinsert) elem.initWidget();
 
     // bind event handler
-
     return elem;
   };
   dmp.onslide = function(slide) {
@@ -101,6 +94,7 @@
     caption.addClass('caption');
     var captionp = tag('p'); caption.append(captionp);
     captionp.text(slide.caption);
+
     return div;
   }
   // create luban element from slide specification
@@ -117,6 +111,9 @@
     div.addClass('luban-slides');
     var ret= div.lubanElement('slides');
 
+    // save some data
+    div.data('timeout', kwds.timeout);
+
     if (parent) {parent.add(ret);}
     return ret;
   };
@@ -126,6 +123,17 @@
     this.super1(elem);
   };
   widgets.slides.prototype = new widgets.base ();
+
+  // turn a plain html element tree to a "slides" widget
+  widgets.slides.prototype.initWidget = function() {
+      this._je.cycle({
+	'fx': 'scrollRight' // 'fade'
+	,'slideExpr': '.luban-slide'
+	,'pager': this._je.children('.nav')
+	,pause: 1
+	,timeout: this._je.data('timeout')
+	});
+  };
 
   // slide
   ef.slide = function(kwds, docmill, parent) {

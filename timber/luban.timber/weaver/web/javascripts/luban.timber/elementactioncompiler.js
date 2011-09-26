@@ -51,6 +51,7 @@
       var e = action.element;
       var element = this.dispatch(e);
 
+      var parent = element.getParent();
       var next = element._je.next();
       element.destroy();
 
@@ -59,8 +60,6 @@
       // if element is the root (frame), special treatment is needed
       if (element.type() === 'frame')
 	return element.replaceBy(newdoc, this.docmill);
-
-      var parent = element.getParent();
 
       var newelementrendered = this.docmill.render(newdoc, parent);
 

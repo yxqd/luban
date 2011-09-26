@@ -15,6 +15,11 @@
 import luban
 
 
+# constants
+# enable_js_url = "http://www.activatejavascript.org/"
+enable_js_url = "http://www.google.com/support/bin/answer.py?answer=23852"
+
+
 # renders a ui document into a html document instance and a javascript document
 # instance
 
@@ -23,13 +28,13 @@ class Frame2HtmlDocument(object):
     javascript_is_required = """
 <p>
 Please 
-<a target="_blank" href="http://www.activatejavascript.org/" >
+<a target="_blank" href="%s" >
 enable javascript
 </a>
 for this site, and
 <a href="Javascript: location.reload(true);">reload</a>.
 </p>
-"""
+""" % enable_js_url
 
     def __init__(
         self, 

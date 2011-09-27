@@ -30,9 +30,9 @@
 # 1. add this name of the elemen to the list "elements"
 # 2. add a new dictionary for this element:
 #    <element_name> = {"javascripts": ..., "stylesheets": ...}
+# 3. For riveted elements, make sure to do the same for both
+#    the container element and the sub element.
 #
-# For riveted elements, make sure to do the same for both
-# the container element and the sub element.
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
@@ -58,6 +58,7 @@ elements = [
     'grid', 'gridrow', 'gridcell',
     'uploader',
     'slides', 'slide',
+    'bulletinboard', 'bulletinboardannouncement',
     ]
             
 for element in elements:
@@ -123,6 +124,17 @@ slides = {
         (
         ),
     'dep': jsdb.jquery_cycle,
+    }
+
+
+bulletinboard = {
+    'javascripts':
+        (
+        'luban.timber/widgets/bulletinboard.js',
+        ),
+    'stylesheets':
+        (
+        ),
     }
 
 

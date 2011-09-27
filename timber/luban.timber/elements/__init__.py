@@ -27,6 +27,7 @@ elementtypes = [
 
     #
     # 'AppMenuBar',
+    'BulletinBoard',
     # 'CodeEditor',
     # 'Credential',
     # 'Dialog',

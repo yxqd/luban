@@ -106,6 +106,7 @@ menu = [
      ['codeviewer',
       'uploader',
       'slides',
+      'bulletinboard',
       ]),
     ]
 

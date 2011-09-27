@@ -415,3 +415,17 @@ opacity:0.7;
 .luban-slides .nav a.activeSlide {
     color: red;
 }
+
+/* bulletinboard */
+.luban-bulletinboardannouncement {
+    margin-left: 1em;
+}
+.luban-bulletinboardannouncement div {
+    margin-left: 0.5em;
+}
+.luban-bulletinboardannouncement h5 {
+    margin: 0 0 0.5em;
+    font-size: 1em;
+    font-style: italic;
+    text-decoration: underline;
+}

@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2009 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -26,7 +26,7 @@
   var widgets = luban.widgets;
   var tag = luban.utils.tag;
 
-  
+
   // documentmill handler
   var dmp = luban.documentmill.prototype;
   dmp.ondocument = dmp._onContainer;
@@ -35,14 +35,14 @@
   // document
   ef.document = function (kwds, docmill, parent) {
     var id = kwds.id;
-    
+
     // create the overall container
     var div = tag('div', {'id': id});
 
     //
     var lubanelem = div.lubanElement('document');
     if (parent) { parent.add(lubanelem); }
-    
+
     return createSkeleton(kwds, docmill, parent, div);
   };
 
@@ -51,13 +51,13 @@
   // given the container div.
   createSkeleton = function(kwds, docmill, parent, div) {
     var ret = div.lubanElement('document');
-    
+
     var Class = kwds.Class;
 
     // keep the args that create this document. maybe should make this universal
     ret._setCtorArgs(kwds);
-    
-    // 
+
+    //
     div.addClass(Class);
     div.addClass('luban-document');
 
@@ -66,7 +66,7 @@
     if (kwds.dockable && !kwds.collapsable) {
       ret._makeMeFloat(parent);
     }
-    if (kwds.collapsable ||kwds.dockable || kwds.closable) 
+    if (kwds.collapsable ||kwds.dockable || kwds.closable)
       {div.addClass('panel');} // means the doc has a title bar and a border
 
     // now create me
@@ -80,7 +80,7 @@
 
     // events
     var onclick = kwds.onclick;
-    if (onclick) 
+    if (onclick)
       {ret.jqueryelem.click( function() { docmill.compile(onclick); return false; } );}
 
     div.click(function (evt){
@@ -90,7 +90,7 @@
 	return $(this).lubanElement()._emphasizeMeAmongPeers();
       });
 
-    
+
     var onexpand = kwds.onexpand;
     if (onexpand) {
       ret.jqueryelem.data('onexpand', onexpand);
@@ -103,7 +103,7 @@
     var collapsed = kwds.collapsed;
     if (collapsed) {ret._hideBody();}
     else {ret._showBody();}
-    
+
     //
     return ret;
   };
@@ -113,7 +113,7 @@
     this.super1(elem);
   };
   widgets.document.prototype = new widgets.base ();
-  widgets.document.prototype.title_class = 'luban-document-title';  
+  widgets.document.prototype.title_class = 'luban-document-title';
   widgets.document.prototype.title_text_class = 'luban-document-title-text';
   widgets.document.prototype.body_class = 'luban-document-body';
   widgets.document.prototype.getTitleText = function() {
@@ -128,7 +128,7 @@
     }
     var body = this._getBody();
     body.append(t);
-    
+
     if (this._isCollapsed()) { t.hide(); }
   };
   widgets.document.prototype.empty = function() {
@@ -138,8 +138,8 @@
   widgets.document.prototype.setAttribute = function(attrs) {
     var div = this._je;
     var ctorargs = this._getCtorArgs();
-    
-    // these properties change the way document behave, so 
+
+    // these properties change the way document behave, so
     // we need to deal with them first.
     var collapsable = attrs.collapsable;
     var dockable = attrs.dockable;
@@ -147,9 +147,9 @@
     if (collapsable!=null && collapsable!=ctorargs.collapsable ||
 	dockable!=null && dockable!=ctorargs.dockable ||
 	closable!=null && closable!=ctorargs.closable) {
-      
+
       if (dockable) {
-	// if dockable change from false to true, we need to remember where the 
+	// if dockable change from false to true, we need to remember where the
 	// document is from (its parent), so that later we can restore it to the
 	// right place
 	var info = luban.utils.getPositionalInfo(div);
@@ -164,7 +164,7 @@
       // clean up other aspects of the container div
       div.removeClass(); div.unbind();
       // create a new skeleton
-      if (collapsable!=null) 
+      if (collapsable!=null)
 	{ ctorargs.collapsable = collapsable; }
       if (dockable!=null)
 	{ ctorargs.dockable = dockable; }
@@ -267,7 +267,7 @@
     var h1 = tag('h1');
     var title = opts.title;
     if (title) {
-      h1.text(title);
+      h1.html(title);
     } else {
       h1.hide();
     }
@@ -286,9 +286,9 @@
       leftcontrolcell.addClass('luban-document-title-controls');
       leftcontrolcell.addClass('left');
       this._createLeftControls(leftcontrolcell, opts);
-      
+
       var titlecell = tag('td'); row.append(titlecell);
-      titlecell.append(h1); 
+      titlecell.append(h1);
 
       var rightcontrolcell = tag('td', {}); row.append(rightcontrolcell);
       rightcontrolcell.addClass('luban-document-title-controls');
@@ -329,7 +329,7 @@
   // put this document on top of other documents
   widgets.document.prototype._putmeontop = function () {
     var zindex = 1111;
-    
+
     // remove z-index of other dockables
     var dockables = $('.luban-document.dockable');
     for (var i=0; i<dockables.length; i++) {
@@ -377,7 +377,7 @@
       { return s.find('.'+this.title_text_class); }
     return s;
   };
-  // hide my body, no event fired 
+  // hide my body, no event fired
   widgets.document.prototype._hideBody = function () {
     this._je.css('height', 'auto');
     var body = this._getBody();
@@ -391,7 +391,7 @@
     var body = this._getBody();
     this._je.attr('collapsed', '');
     this._setCollapseCtrlStatus(0);
-    body.children().show('normal', callback); 
+    body.children().show('normal', callback);
   };
   // get my status: expand or collapse
   widgets.document.prototype._isCollapsed = function() {
@@ -441,7 +441,7 @@
     // make the document float
     this._makeMeFloat();
   };
-  // make this document float: 
+  // make this document float:
   //  1. attach me to a global document so I will not be destroyed by accident
   //  2. change my class
   //  3. make me draggable and resizable
@@ -459,7 +459,7 @@
       globaldoc.append(div);
       parent.find('#'+div.attr('id')).remove();
     }
-    
+
     //
     div.addClass('dockable');
     div.draggable('destroy');
@@ -484,7 +484,7 @@
       ctrl.click(function() {
 	  widget._changeToFloat();
 	});
-      ctrls.push(ctrl);      
+      ctrls.push(ctrl);
     } else if (opts.dockable) {
       // just dockable. we need a control to dock the float
       var ctrl2 = tag('a'); ctrl2.addClass('dock'); ctrl2.text('_');

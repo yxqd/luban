@@ -144,7 +144,7 @@
     var h1 = tag('h1');
     var title = opts.title;
     if (title) {
-      h1.text(title);
+      h1.html(title);
     } else {
       h1.hide();
     }

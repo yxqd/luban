@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>jQuery History Plugin Test</title>
+  <script type="text/javascript" src="../../javascripts/jquery/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="../../javascripts/jquery.ext/jquery.history.js"></script>    <script type="text/javascript" src="debugger.js"></script></head>
+<body>
+
+<!--
+    <form action="">
+    jQuery: <select name="jquery"><option value='../jquery/jquery-1.3.2.min.js'>../jquery/jquery-1.3.2.min.js</option>
+<option value='../jquery/jquery-1.4.2.min.js' selected="selected">../jquery/jquery-1.4.2.min.js</option></select>
+    IE Mode: <select name="ie_mode"><option value='quirk'>quirk</option>
+<option value='ie7'>ie7</option>
+<option value='xhtml' selected="selected">xhtml</option></select>
+    <input type="submit" value="change" />
+
+    </form>
+-->
+
+  <h1>jQuery History Plugin Debugger Sample</h1>
+
+  <div id="ie-info"></div>
+  <div id="type-info"></div>
+  <ul class="history-links">
+  <li><a href="#1">load 1</a></li>
+  <li><a href="#2">load 2</a></li>
+
+  <li><a href="#3">load 3</a></li>
+  <li><a href="#åäö">load åäö</a></li>
+  <li><a href="#+:/;,???abc=/xyz/&amp;def">load +:/;,???abc=/xyz/&amp;def</a></li>
+  <li><a href="#%2525">load %2525</a></li>
+  <li><input id="hash-input" size="20" /><input type="button" id="load-hash" value="load hash" /></li>
+  </ul>
+
+  <div id="load"></div>
+  <p><button onclick="history.back()">history.back()</button></p>
+  <textarea id="history-log" style="font-size: 12px; font-family: monospace; width: 800px; height: 100px;">log
+</textarea>
+  <hr />
+
+</body>
+</html>

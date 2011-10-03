@@ -11,13 +11,8 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-
-# in addition to the controller in luban core, the following are added
+# handle upload for cherrypy
 #
-# 1. session
-#   this is not realy used yet. need to think more about this.
-#   do we really need it?
-# 2. upload
 #   this is done pretty ad hoc
 #   the blueimp file upload js lib is used
 #   the upload progress is done by server writing done the progress info
@@ -29,13 +24,8 @@ import cherrypy
 
 from .UploadConfiguration import UploadConfiguration
 
-from luban.controller.CherrypyController import CherrypyController as base
-class CherrypyController(base):
-
-    @property
-    def session(self):
-        return cherrypy.session
-
+class Mixin:
+    
     @cherrypy.expose
     @cherrypy.tools.json_out(content_type="text/html")
     def upload(self, uploadid=None, luban_upload_file=None, **kwds):

@@ -30,12 +30,19 @@ luban = {
 
 luban.utils = {};
 
+luban.init = function () {
+
+  // remove the no-js banner. if this is executed it means we have js support
+  $('#no-javascript-banner').remove();
+
+};
 
 (function (luban, $) {
 
+
+  // XXX: need revisit here
   // this is necessary for avoiding problem in IE
   $.ajaxSetup({cache: false});
-
 
   function confirmBrowseAway()
   {

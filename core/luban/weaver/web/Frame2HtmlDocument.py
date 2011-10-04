@@ -90,13 +90,17 @@ for this site, and
         nojs_div = html_target.body.tag('div', id='no-javascript-banner')
         nojs_div.contents = [self.javascript_is_required]
 
-        # image base
+        # 
         self.javascript_target.main += [
-            "$('#no-javascript-banner').remove();",
+            # initialize luban
+            'luban.init();',
             
+            # url bases
             'luban.configuration.javascripts_base = "%s";' % self.javascriptsbase,
             'luban.configuration.images_base = "%s";' % self.imagesbase,
             'luban.configuration.icons_base = "%s/icons";' % self.imagesbase,
+
+            # 
             'luban.Controller.parameter_prefix = "%s";' % self.controller_parameter_prefix,
             ]
         if not luban.debug:

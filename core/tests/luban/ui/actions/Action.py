@@ -21,7 +21,7 @@ class TestCase(unittest.TestCase):
         return
      
     
-    def test3(self):
+    def _test3(self):
         #
         from luban.ui.actions.Action import Action
         a1 = Action()

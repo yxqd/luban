@@ -172,13 +172,14 @@
             $(window).bind('hashchange', self.check);
         },
         check: function() {
-	  if (!self.nocheck)
-            self.callback(locationWrapper.get());
+	  if (self.nocheck) {
+	    self.nocheck = 0; return;
+	  }
+          self.callback(locationWrapper.get());
         },
         load: function(hash) {
 	  self.nocheck = 1;
-            locationWrapper.put(hash);
-	  self.nocheck = 0;
+          locationWrapper.put(hash);
         }
     };
 

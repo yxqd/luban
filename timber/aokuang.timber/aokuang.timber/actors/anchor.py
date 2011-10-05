@@ -26,9 +26,9 @@ class Actor(base):
     
 
     def frame(self, **kwds):
-        frame = luban.e.frame(title="aokuang: anchor demo")
-        doc = frame.document(title="display", id='display')
-        b1 = frame.button(label='button1', id="b1")
+        frame = skeleton()
+        container = frame.find(id='container')
+        b1 = container.button(label='button1', id="b1")
         b1clicked = [
             luban.a.select(id='display').replaceContent(
                 newcontent = b1doc()
@@ -41,15 +41,16 @@ class Actor(base):
 
 
     def b1(self, **kwds):
-        frame = luban.e.frame(title="aokuang: anchor demo")
-        doc = frame.document(title="display", id='display')
-        doc.append(b1doc())
+        frame = skeleton()
+        display = frame.find(id='display')
+        display.append(b1doc())
         return luban.a.select(id='').replaceBy(newelement=frame)
 
 
 def skeleton():
     frame = luban.e.frame(title="aokuang: anchor demo")
-    doc = frame.document(title="display", id='display')
+    container = frame.document(Class='white-bg', id='container')
+    doc = container.document(title="display", id='display')
     return frame
 
 

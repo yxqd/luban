@@ -92,9 +92,6 @@ for this site, and
 
         # 
         self.javascript_target.main += [
-            # initialize luban
-            'luban.init();',
-            
             # url bases
             'luban.configuration.javascripts_base = "%s";' % self.javascriptsbase,
             'luban.configuration.images_base = "%s";' % self.imagesbase,
@@ -118,10 +115,14 @@ for this site, and
             self.javascript_target.main += ["luban.widgets.implementationRegistry.%s = %s;" % (widget, d) ]
             continue
 
-        injson = self.obj2json.render(uiobject)
         
-        self.javascript_target.main.append(
-            'luban.docmill.render(%s);' % injson)
+        # initialize luban
+        injson = self.obj2json.render(uiobject)
+        self.javascript_target.main += [
+            'luban.init.frame = %s;' % injson,
+            'luban.init();'
+            ]
+            
         return html_target, javascript_target
 
 

@@ -34,7 +34,7 @@ luban.utils = {};
 (function (luban, $) {
 
 
-  //
+  // initialization of luban
   luban.init = function () {
     var funcs = luban.init.funcs;
     for (var i=0; i<funcs.length; i++) {
@@ -45,6 +45,10 @@ luban.utils = {};
   luban.init.funcs.push(function () {
     // remove the no-js banner. if this is executed it means we have js support
     $('#no-javascript-banner').remove();
+
+    // render the frame
+    var frame = luban.init.frame;
+    if (frame) luban.docmill.render(frame);
   });
 
 

@@ -58,8 +58,42 @@ class ElementContainer(Element, metaclass=Meta):
         # append
         self.contents.append(item)
         self._registerChild(item)
+        
         return self
 
+
+    def remove(self, item):
+        # if it is a piece of text
+        if isinstance(item, str):
+            raise NotImplementedError("remove text from a container")
+        del self.contents[self.contents.index(item)]
+        self._unregisterChild(item)
+        return
+    
+    
+    def replaceChild(self, old, new):
+        if getattr(new, 'parent', None):
+            raise RuntimeError("%s already is a subelement of %s" %(
+                    new, new.parent))
+        # is new item a str?
+        isstr = isinstance(new, str)
+
+        # check item type
+        if not isstr:
+            self._checkSubElementType(new)
+            
+        # remember the position
+        position = self.contents.index(old)
+
+        # unregister the old one
+        self._unregisterChild(old)
+
+        # replace
+        self.contents[position] = new
+        if not isstr:
+            self._registerChild(new)
+        return
+        
 
     def getChildByName(self, name):
         """get one of my children by his name
@@ -157,6 +191,17 @@ class ElementContainer(Element, metaclass=Meta):
     def _registerChild(self, item):
         self.name2item[item.name] = item
         self.id2item[item.id] = item
+        
+        # keep in the child a weak reference to parent
+        import weakref
+        item.parent = weakref.ref(self)
+        return
+
+
+    def _unregisterChild(self, item):
+        del self.name2item[item.name]
+        del self.id2item[item.id]
+        del item.parent
         return
 
 

@@ -21,22 +21,56 @@
 
 (function(luban, $) {
 
-  // initializer extension
-  luban.init.funcs.push(function () {
+  // extension of luban.init
+  var hinit = function () {
 
     $.history.init(
-      function (hash) {
+      function (hash, init) {
 	if(hash) {
-	  $('.luban-frame').load(hash);
+	  var url = luban.Controller.url + hash.slice(1, hash.length);
+	  if (init) {
+	    luban.init.frame = null;
+	    var frame = {
+	      luban_type: "frame"
+	      ,lubanelement: true
+	      ,title: ''
+	    };
+	    luban.docmill.render(frame);
+	  }
+	  var args = {};
+	  var callback = function (data){
+	    luban.docmill.compile(data);
+	  };
+	  var restype = "json";
+	  var ret = $.get(url, args, callback, restype);
+	} else {
+	  if (!init) {
+	    var w = window;
+	    w.location = w.location.href;
+	  }
 	}
       }
+      /* , {
+	unescape: "/?&.="
+       }
+       */
     );
 
-  });
+  };
+  luban.init.funcs = [hinit].concat(luban.init.funcs);
 
   // actioncompiler extension
   var actioncompiler_ext = {
-
+    'onsetanchor': function (action) {
+      var args = {
+	actor: action.actor,
+	routine: action.routine
+      };
+      $.extend(args, action.params);
+      var key = luban.utils.argsStrInUrl(args);
+      key = '/?' + key;
+      $.history.load(key);
+    }
   };
   $.extend(luban.actioncompiler.prototype, actioncompiler_ext);
 

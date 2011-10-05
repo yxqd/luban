@@ -44,19 +44,19 @@ def removeCredential():
     return SimpleAction('credentialRemoval')
 
 
-
 # common element actions
 action_modules = [
     'element_common_actions',
+    'SetAnchor',
     ]
-def importAllElementActions():
+def importAllActions():
     modules = action_modules
     for name in modules:
         __import__(name, fromlist=['.'], globals=globals())
         continue
     return
-importAllElementActions()
-del importAllElementActions
+importAllActions()
+del importAllActions
 
 
 # version

@@ -1,21 +1,22 @@
 /*
  * jQuery history plugin
- * 
+ *
  * The MIT License
- * 
+ *
  * Copyright (c) 2006-2009 Taku Sano (Mikage Sawatari)
  * Copyright (c) 2010 Takayuki Miwa
- * 
+ * Modified by Jiao Lin to fit the needs of luban
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -28,7 +29,8 @@
 (function($) {
     var locationWrapper = {
         put: function(hash, win) {
-            (win || window).location.hash = this.encoder(hash);
+//            (win || window).location.hash = this.encoder(hash);
+	  (win || window).location.hash = hash;
         },
         get: function(win) {
             var hash = ((win || window).location.hash).replace(/^#/, '');
@@ -112,7 +114,7 @@
         _init: function() {
             var current_hash = locationWrapper.get();
             self._appState = current_hash;
-            self.callback(current_hash);
+	    self.callback(current_hash, 1);
             setInterval(self.check, 100);
         },
         check: function() {
@@ -126,7 +128,6 @@
             if(hash != self._appState) {
                 locationWrapper.put(hash);
                 self._appState = hash;
-                self.callback(hash);
             }
         }
     };
@@ -137,7 +138,7 @@
             var current_hash = locationWrapper.get();
             self._appState = current_hash;
             iframeWrapper.init().put(current_hash);
-            self.callback(current_hash);
+            self.callback(current_hash, 1);
             setInterval(self.check, 100);
         },
         check: function() {
@@ -148,9 +149,9 @@
                 if (location_hash == self._appState) {    // user used Back or Forward button
                     self._appState = iframe_hash;
                     locationWrapper.put(iframe_hash);
-                    self.callback(iframe_hash); 
+                    self.callback(iframe_hash);
                 } else {                              // user loaded new bookmark
-                    self._appState = location_hash;  
+                    self._appState = location_hash;
                     iframeWrapper.put(location_hash);
                     self.callback(location_hash);
                 }
@@ -161,21 +162,23 @@
                 locationWrapper.put(hash);
                 iframeWrapper.put(hash);
                 self._appState = hash;
-                self.callback(hash);
             }
         }
     };
 
     implementations.hashchangeEvent = {
         _init: function() {
-            self.callback(locationWrapper.get());
+	    self.callback(locationWrapper.get(), 1);
             $(window).bind('hashchange', self.check);
         },
         check: function() {
+	  if (!self.nocheck)
             self.callback(locationWrapper.get());
         },
         load: function(hash) {
+	  self.nocheck = 1;
             locationWrapper.put(hash);
+	  self.nocheck = 0;
         }
     };
 

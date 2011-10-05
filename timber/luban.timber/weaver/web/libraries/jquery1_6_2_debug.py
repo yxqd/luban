@@ -42,6 +42,9 @@ from luban.weaver.web.libraries.jquery1_6_2_debug import jui_dev, __all__ as cor
 base['javascripts'] += [
     'luban.timber/elementactioncompiler.js',
     'luban.timber/widget-base.js',
+    # history
+    'jquery.ext/jquery.history.js',
+    'luban.timber/history.js',
     ]
 base['stylesheets'] +=  [
     'luban.timber.css',

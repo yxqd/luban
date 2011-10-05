@@ -29,7 +29,6 @@
 (function($) {
     var locationWrapper = {
         put: function(hash, win) {
-//            (win || window).location.hash = this.encoder(hash);
 	  (win || window).location.hash = hash;
         },
         get: function(win) {
@@ -40,8 +39,7 @@
             catch (error) {
                 return hash;
             }
-        },
-        encoder: encodeURIComponent
+        }
     };
 
     var iframeWrapper = {
@@ -69,25 +67,6 @@
         options = $.extend({
                 unescape: false
             }, options || {});
-
-        locationWrapper.encoder = encoder(options.unescape);
-
-        function encoder(unescape_) {
-            if(unescape_ === true) {
-                return function(hash){ return hash; };
-            }
-            if(typeof unescape_ == "string" &&
-               (unescape_ = partialDecoder(unescape_.split("")))
-               || typeof unescape_ == "function") {
-                return function(hash) { return unescape_(encodeURIComponent(hash)); };
-            }
-            return encodeURIComponent;
-        }
-
-        function partialDecoder(chars) {
-            var re = new RegExp($.map(chars, encodeURIComponent).join("|"), "ig");
-            return function(enc) { return enc.replace(re, decodeURIComponent); };
-        }
     }
 
     var implementations = {};
@@ -178,6 +157,7 @@
           self.callback(locationWrapper.get());
         },
         load: function(hash) {
+	  if (hash == locationWrapper.get()) return;
 	  self.nocheck = 1;
           locationWrapper.put(hash);
         }

@@ -67,9 +67,9 @@
 	routine: action.routine
       };
       $.extend(args, action.params);
-      var key = luban.utils.argsStrInUrl(args);
-      key = '/?' + key;
-      $.history.load(key);
+      var hash = luban.utils.argsStrInUrl(args);
+      hash = '/?' + hash;
+      $.history.add(hash);
     }
   };
   $.extend(luban.actioncompiler.prototype, actioncompiler_ext);

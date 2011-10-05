@@ -5,7 +5,11 @@
  *
  * Copyright (c) 2006-2009 Taku Sano (Mikage Sawatari)
  * Copyright (c) 2010 Takayuki Miwa
+ *
  * Modified by Jiao Lin to fit the needs of luban
+ * - renamed "load" to "add", meaning adding the item to the history
+ * - Don't fire callback in "add". action to change UI is already taken
+ * - no encoding of the hash. care should be taken when creating the hash
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -76,7 +80,7 @@
         type: undefined,
 
         check: function() {},
-        load:  function(hash) {},
+        add:  function(hash) {},
         init:  function(callback, options) {
             initObjects(options);
             self.callback = callback;
@@ -103,7 +107,7 @@
                 self.callback(current_hash);
             }
         },
-        load: function(hash) {
+        add: function(hash) {
             if(hash != self._appState) {
                 locationWrapper.put(hash);
                 self._appState = hash;
@@ -136,7 +140,7 @@
                 }
             }
         },
-        load: function(hash) {
+        add: function(hash) {
             if(hash != self._appState) {
                 locationWrapper.put(hash);
                 iframeWrapper.put(hash);
@@ -156,7 +160,7 @@
 	  }
           self.callback(locationWrapper.get());
         },
-        load: function(hash) {
+        add: function(hash) {
 	  if (hash == locationWrapper.get()) return;
 	  self.nocheck = 1;
           locationWrapper.put(hash);

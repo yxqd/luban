@@ -50,16 +50,15 @@
     'onreplaceelement': function(action) {
       var e = action.element;
       var element = this.dispatch(e);
-
-      var parent = element.getParent();
-      var next = element._je.next();
-      element.destroy();
-
       var newdoc = action.newelement;
 
       // if element is the root (frame), special treatment is needed
       if (element.type() === 'frame')
 	return element.replaceBy(newdoc, this.docmill);
+
+      var parent = element.getParent();
+      var next = element._je.next();
+      element.destroy();
 
       var newelementrendered = this.docmill.render(newdoc, parent);
 

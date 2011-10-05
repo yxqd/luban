@@ -27,19 +27,33 @@ class EventHandler(Property):
             from ..actions.NoAction import NoAction
             value = NoAction()
 
+        # list/tuple
+        if isinstance(value, list) or isinstance(value, tuple):
+            for item in value:
+                self._checkAction(item)
+                continue
+            return super().__set__(instance, value)
+
         # value has to be an action
-        from ..actions.ActionBase import ActionBase
-        if not isinstance(value, ActionBase):
-            m = "%r is not an action" % value
+        self._checkAction(value)
+        return super().__set__(instance, value)
+
+
+    def _checkAction(self, action):
+        if not isinstance(action, ActionBase):
+            m = "%r is not an action" % action
             raise ValueError(m)
 
-        self._checkEvent(value)
-        
-        return super().__set__(instance, value)
+        self._checkEvent(action)
+        return
 
 
     def _checkEvent(self, action):
         return EventChecker(self.eventtype).check(action)
+
+
+from ..actions.ActionBase import ActionBase
+
 
 
 from ..InspectorBase import InspectorBase, AttributeContainer

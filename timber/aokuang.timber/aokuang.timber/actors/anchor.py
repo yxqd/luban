@@ -27,7 +27,7 @@ class Actor(base):
 
     def frame(self, **kwds):
         frame = skeleton()
-        container = frame.find(id='container')
+        container = frame.find(id='anchor-demo-container')
         b1 = container.button(label='button1', id="b1")
         # action when button is clicked
         # intentionally, we leave the button in the interface (did not destroy it)
@@ -74,7 +74,7 @@ class Actor(base):
 
 def skeleton():
     frame = luban.e.frame(title="aokuang: anchor demo")
-    container = frame.document(Class='white-bg', id='container')
+    container = frame.document(Class='white-bg', id='anchor-demo-container')
     doc = container.document(title="display", id='display')
     return frame
 

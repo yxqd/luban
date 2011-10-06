@@ -30,7 +30,7 @@ class Actor(base):
 
 
     def onchange(self, old=None, new=None, **kwds):
-        return luban.a.alert("value changed from %s to %s" % (old, new))
+        return luban.a.alert("value changed from %r to %r" % (old, new))
 
 
 # End of file 

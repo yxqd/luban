@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2009 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -47,7 +47,7 @@
   var formfield_setAttribute = widgets.formfield_setAttribute;
   var formfield_getAttribute = widgets.formfield_getAttribute;
   var prependActor = widgets.prependActor;
-  
+
 
   // formtextfield
   ef.formtextfield = function(kwds, docmill, parent) {
@@ -65,16 +65,31 @@
     };
 
     var input = tag('input', args); input_container.append(input);
-    
+
     if (kwds.tip) {
       var tip = kwds.tip;
       input.attr('title', tip);
       input.tooltip({showURL: false});
     }
 
+    //
+    input.data('oldvalue', input.val());
+
     var onchange = kwds.onchange;
     if (onchange) {
-      input.change( function() { docmill.compile(onchange); return false; } );
+      var callback = luban.compileCallback(kwds.onchange);
+      input.bind('luban-formfieldchange', callback);
+      input.change(
+	function (event) {
+	  var old = $(this).data('oldvalue'), newval = $(this).val();
+	  $(this).data('oldvalue', newval);
+	  var data = {
+	    'old': old,
+	    'new': newval
+	  };
+	  $(this).trigger('luban-formfieldchange', data);
+	}
+      );
     }
 
     var onfocus = kwds.onfocus;
@@ -105,7 +120,7 @@
   widgets.formtextfield.prototype.setAttribute = function (attrs) {
     var je = this._je;
     formfield_setAttribute(je, attrs);
-    
+
     var value = attrs.value;
     if (value != null) {
       var input = this.getInputWidget();
@@ -116,13 +131,13 @@
     var je = this._je;
     var ret = formfield_getAttribute(je, name);
     if (ret) {return ret;}
-    
+
     var input = this.getInputWidget();
     if (name=='value') {
       return input.val();
     }
   };
-  
+
 
  })(luban, jQuery);
 

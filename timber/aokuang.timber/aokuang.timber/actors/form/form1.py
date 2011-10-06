@@ -21,8 +21,16 @@ class Actor(base):
         ]
     def createDemoPanel(self, **kwds):
         form = luban.e.form(title='login')
-        form.text(label='username')
+        username = form.text(label='username')
+        username.onchange = luban.a.load(
+            actor=self.name, routine='onchange',
+            old = luban.event.old, new = luban.event.new
+            )
         return form
+
+
+    def onchange(self, old=None, new=None, **kwds):
+        return luban.a.alert("value changed from %s to %s" % (old, new))
 
 
 # End of file 

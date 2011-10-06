@@ -20,7 +20,8 @@ class WebAppController(ControllerBase):
 
     def __init__(
         self, url,
-        static_html_base='static', 
+        html_base='',  # base url of the site
+        static_html_base='static',  # html_base/static_html_base gives the url of the static html root
         actor_package=None, actor_packages = [],
         stylesheets = None, javascripts = None,
         web_weaver_library = None,
@@ -30,11 +31,13 @@ class WebAppController(ControllerBase):
         
         #
         self.url = url
+        self.html_base = html_base
         self.static_html_base = static_html_base
         
         # weaver
         from luban.weaver.web import create as createWeaver
         weaver = self.weaver = createWeaver(
+            htmlbase = html_base,
             controller_url = url,
             statichtmlbase=static_html_base)
         # in case a custom web weaver library is supplied

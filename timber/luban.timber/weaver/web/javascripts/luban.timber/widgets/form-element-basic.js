@@ -23,7 +23,7 @@
   var widgets = luban.widgets;
   var tag = luban.utils.tag;
   var lap = luban.actioncompiler.prototype;
-   
+
 
   // form-related action handlers
   lap.onformfieldshowerrormessage = function(action) {
@@ -116,6 +116,25 @@
       { div.click( function() { docmill.compile(onclick); return false; } ); }
 
     return div;
+  };
+  widgets.create_onchange_event_handler_for_input = function(onchange, input) {
+   // init 'oldvalue' data
+   input.data('oldvalue', input.val());
+   // luban onchange event
+   var callback = luban.compileCallback(onchange);
+   input.bind('luban-formfieldchange', callback);
+   // onchange handler will prepare data and trigger luban onchange handler
+   input.change(
+     function (event) {
+       var old = $(this).data('oldvalue'), newval = $(this).val();
+       $(this).data('oldvalue', newval);
+       var data = {
+	 'old': old,
+	 'new': newval
+       };
+       $(this).trigger('luban-formfieldchange', data);
+     }
+   );
   };
   widgets.formfield_setAttribute = function(formfield, attrs) {
     var id = attrs.id;

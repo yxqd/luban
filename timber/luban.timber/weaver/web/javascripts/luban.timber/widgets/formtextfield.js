@@ -77,19 +77,7 @@
 
     var onchange = kwds.onchange;
     if (onchange) {
-      var callback = luban.compileCallback(kwds.onchange);
-      input.bind('luban-formfieldchange', callback);
-      input.change(
-	function (event) {
-	  var old = $(this).data('oldvalue'), newval = $(this).val();
-	  $(this).data('oldvalue', newval);
-	  var data = {
-	    'old': old,
-	    'new': newval
-	  };
-	  $(this).trigger('luban-formfieldchange', data);
-	}
-      );
+      widgets.create_onchange_event_handler_for_input(onchange, input);
     }
 
     var onfocus = kwds.onfocus;

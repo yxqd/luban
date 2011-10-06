@@ -30,6 +30,7 @@ class Actor(base):
         form = doc.form(title='login')
         username = form.text(label='username')
         password = form.password(label='password')
+        comment = form.textarea(label='comment')
         log = doc.document(id=self.logid, Class='log', title='log')
         
         username.onchange = luban.a.load(
@@ -55,7 +56,19 @@ class Actor(base):
         password.onblur = luban.a.select(element=log).append(
             newelement=luban.e.paragraph(text="password blured")
             )
-        
+
+        comment.onchange = luban.a.load(
+            actor=self.name, routine='onchange',
+            old = luban.event.old, new = luban.event.new,
+            field = 'comment',
+            )
+        comment.onfocus = luban.a.select(element=log).append(
+            newelement=luban.e.paragraph(text="comment focused")
+            )
+        comment.onblur = luban.a.select(element=log).append(
+            newelement=luban.e.paragraph(text="comment blured")
+            )
+
         return doc
 
 

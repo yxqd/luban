@@ -237,7 +237,7 @@ select, input, textarea {
     border-style: solid;
     border-width: 1px;
     border-color: lightBlue;
-    height: 2em;
+    /* height: 2em; */
 }
 
 

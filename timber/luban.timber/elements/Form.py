@@ -91,6 +91,7 @@ class Form(SimpleContainer, metaclass=Meta):
 
 from .FormTextField import FormTextField
 from .FormPasswordField import FormPasswordField
+from .FormTextArea import FormTextArea
 
 
 # version

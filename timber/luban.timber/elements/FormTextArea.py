@@ -17,17 +17,15 @@ from .FormField import FormField as base
 
 class FormTextArea(base):
 
-
+    # decorations
     simple_description = 'Text area in a form'
     full_description = ''
+    
 
-
-    abstract = False
-
-
+    # attributes
     readonly = descriptors.bool()
-
-
+    
+    
     def identify(self, inspector):
         return inspector.onFormTextArea(self)
 

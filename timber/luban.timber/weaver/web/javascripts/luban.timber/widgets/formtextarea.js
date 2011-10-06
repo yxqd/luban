@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2009 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -42,7 +42,7 @@
   var formfield_setAttribute = widgets.formfield_setAttribute;
   var formfield_getAttribute = widgets.formfield_getAttribute;
   var prependActor = widgets.prependActor;
-  
+
 
   // formtextarea
   ef.formtextarea = function(kwds, docmill, parent) {
@@ -61,23 +61,11 @@
 
     var input = tag('textarea', args);  input_container.append(input);
     input.text(field.value);
-    
+
     if (kwds.tip) {ret.setTip(kwds.tip);}
 
-    var onchange = kwds.onchange;
-    if (onchange) {
-      input.change( function() { docmill.compile(onchange); return false; } );
-    }
-
-    var onfocus = kwds.onfocus;
-    if (onfocus) {
-      input.focus( function() { docmill.compile(onfocus); return false; } );
-    }
-
-    var onblur = kwds.onblur;
-    if (onblur) {
-      input.blur( function() { docmill.compile(onblur); return false; } );
-    }
+    // event handlers
+    widgets.create_event_handlers_for_input(kwds, input);
 
     if (parent) {parent.add(ret);}
     return ret;
@@ -103,7 +91,7 @@
   widgets.formtextarea.prototype.setAttribute = function (attrs) {
     var je = this._je;
     formfield_setAttribute(je, attrs);
-    
+
     var input = this.getInputWidget();
 
     var name = attrs.name;
@@ -125,16 +113,16 @@
     }
 
     var tip = attrs.tip;
-    if (tip != null) 
+    if (tip != null)
       { this.setTip(tip); }
   };
   widgets.formtextarea.prototype.getAttribute = function (name) {
     var je = this._je;
     var ret = formfield_getAttribute(je, name);
     if (ret) {return ret;}
-    
+
     var input = this.getInputWidget();
-    if (name=='readonly') 
+    if (name=='readonly')
       {return input.attr('readonly');}
     if (name=='value')
       {return input.val();}

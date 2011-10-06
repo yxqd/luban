@@ -21,8 +21,8 @@ class Actor(base):
         ]
 
     def createDemoPanel(self, **kwds):
-        import uuid
-        uploadid = str(uuid.uuid4())
+        from luban import uuid
+        uploadid = str(uuid.uuid())
         # create uploader
         oncomplete = luban.a.load(
             actor=self.name, routine='onUpload', 

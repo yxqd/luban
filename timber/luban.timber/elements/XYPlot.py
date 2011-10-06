@@ -11,16 +11,19 @@
 
 
 from .Element import Element
-class Plot2D(Element):
+class XYPlot(Element):
 
+    # decorations
     simple_description = 'Plot x-y curve(s)'
     full_description = (
-        "A Plot2D widget displays a plot of x-y curve(s)."
+        "A XYPlot widget displays a plot of x-y curve(s)."
         )
+    experimental = True
+    
     examples = [
         '''
-    import luban.ui.elements
-    plot = luban.ui.elements.plot2d()
+    import luban
+    plot = luban.e.xyplot()
     x = range(10)
     y1 = x; y2 = [xi*xi for xi in x]
     plot.curve(x=x, y=y1, label='curve1')
@@ -28,7 +31,9 @@ class Plot2D(Element):
         '''
         ]
 
-    # curves = descriptors.referenceSet()
+    # XXX
+    # should be a list of Curve objects
+    # need a way to validate this
     curves = descriptors.object()
     curves.tip = 'The x-y curves to display'
     
@@ -41,9 +46,8 @@ class Plot2D(Element):
     caption = descriptors.str()
     caption.tip = 'caption of the plot'
 
-    abstract = False
-    experimental = True
 
+    # methods
     def curve(self, **kwds):
         curve = Curve(**kwds)
         self.curves.append(curve)
@@ -51,7 +55,7 @@ class Plot2D(Element):
     
 
     def identify(self, visitor):
-        return visitor.onPlot2D(self)
+        return visitor.onXYPlot(self)
 
 
 class Curve(Element):
@@ -61,7 +65,7 @@ class Curve(Element):
     label = descriptors.str()
 
     def identify(self, visitor):
-        return visitor.onPlot2DCurve(self)
+        return visitor.onXYPlotCurve(self)
     
 
 # version

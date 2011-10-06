@@ -49,12 +49,12 @@ elementtypes = [
     'Image',
     # 'Link',
     # 'NewsTicker',
-    # 'Plot2D',
     # 'ProgressBar',
     'Slides',
     'Toolbar',
     # 'TreeView',
     'Uploader',
+    # 'XYPlot',
     ]
 def importAllElements():
     modules = elementtypes

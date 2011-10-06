@@ -164,6 +164,22 @@
      }
    );
   };
+  widgets.create_event_handlers_for_input = function(spec, input) {
+    var onchange = spec.onchange;
+    if (onchange) {
+      widgets.create_onchange_event_handler_for_input(onchange, input);
+    }
+
+    var onfocus = spec.onfocus;
+    if (onfocus) {
+      widgets.create_onfocus_event_handler_for_input(onfocus, input);
+    }
+
+    var onblur = spec.onblur;
+    if (onblur) {
+      widgets.create_onblur_event_handler_for_input(onblur, input);
+    }
+  };
   widgets.formfield_setAttribute = function(formfield, attrs) {
     var id = attrs.id;
     var label;

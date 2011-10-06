@@ -72,23 +72,8 @@
       input.tooltip({showURL: false});
     }
 
-    //
-    input.data('oldvalue', input.val());
-
-    var onchange = kwds.onchange;
-    if (onchange) {
-      widgets.create_onchange_event_handler_for_input(onchange, input);
-    }
-
-    var onfocus = kwds.onfocus;
-    if (onfocus) {
-      widgets.create_onfocus_event_handler_for_input(onfocus, input);
-    }
-
-    var onblur = kwds.onblur;
-    if (onblur) {
-      widgets.create_onblur_event_handler_for_input(onblur, input);
-    }
+    // event handlers
+    widgets.create_event_handlers_for_input(kwds, input);
 
     return ret;
   };

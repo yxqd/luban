@@ -63,4 +63,22 @@ class RemoveClass(base):
         return inspector.onRemoveClass(self)
 
 
+class Click(base):
+
+    'click'
+
+    __unique_type_name__ = 'clickaction'
+
+    # decorations    
+    # .. name of action factory method
+    factory_method = 'click'
+
+    # attributes
+
+    # for inspector
+    def identify(self, inspector):
+        return inspector.onClickAction(self)
+
+
+
 # End of file 

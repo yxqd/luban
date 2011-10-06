@@ -18,11 +18,14 @@ class Actor(base):
 
     title='A form with one text field'
     description = [
+        'The text field is attached with event hanlders for ',
+        '"change", "focus", and "blur" events',
         ]
     def createDemoPanel(self, **kwds):
-        form = luban.e.form(title='login')
+        doc = luban.e.document()
+        form = doc.form(title='login')
         username = form.text(label='username')
-        log = form.document(id='log', Class='log', title='log')
+        log = doc.document(id='log', Class='log', title='log')
         
         username.onchange = luban.a.load(
             actor=self.name, routine='onchange',
@@ -35,7 +38,7 @@ class Actor(base):
             newelement=luban.e.paragraph(text="blured")
             )
         
-        return form
+        return doc
 
 
     def onchange(self, old=None, new=None, **kwds):

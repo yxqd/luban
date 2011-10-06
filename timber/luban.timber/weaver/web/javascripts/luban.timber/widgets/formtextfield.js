@@ -82,7 +82,7 @@
 
     var onfocus = kwds.onfocus;
     if (onfocus) {
-      input.focus( function() { docmill.compile(onfocus); return false; } );
+      widgets.create_onfocus_event_handler_for_input(onfocus, input);
     }
 
     var onblur = kwds.onblur;

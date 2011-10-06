@@ -72,8 +72,8 @@
     },
 
     'onappendelement': function(action) {
-      var container = this.dispatch(action.container);
-      this.docmill.render(action.element, container);
+      var container = this.dispatch(action.element);
+      this.docmill.render(action.newelement, container);
     },
 
     'onsimpleaction': function(action) {

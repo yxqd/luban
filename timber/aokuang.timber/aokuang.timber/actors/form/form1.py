@@ -22,15 +22,23 @@ class Actor(base):
     def createDemoPanel(self, **kwds):
         form = luban.e.form(title='login')
         username = form.text(label='username')
+        log = form.document(id='log', title='log')
+        
         username.onchange = luban.a.load(
             actor=self.name, routine='onchange',
             old = luban.event.old, new = luban.event.new
             )
+        username.onfocus = luban.a.select(element=log).append(
+            newelement=luban.e.paragraph(text="focused")
+            )
+        
         return form
 
 
     def onchange(self, old=None, new=None, **kwds):
-        return luban.a.alert("value changed from %r to %r" % (old, new))
+        msg = "value changed from %r to %r" % (old, new)
+        newelement = luban.e.paragraph(text = msg)
+        return luban.a.select(id='log').append(newelement=newelement)
 
 
 # End of file 

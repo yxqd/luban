@@ -54,4 +54,20 @@ from luban.ui.actions.ElementActionFactory import ElementActionFactory
 ElementActionFactory.setAttr = setAttr
 
 
+
+class AppendElement(base):
+    
+    # decorations
+    # .. name of action factory method
+    factory_method = 'append'
+
+    # attributes
+    newelement = descriptors.element() 
+
+    def identify(self, inspector):
+        return inspector.onAppendElement(self)
+    
+    
+
+
 # End of file 

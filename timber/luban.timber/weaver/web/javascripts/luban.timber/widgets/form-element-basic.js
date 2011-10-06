@@ -136,6 +136,20 @@
      }
    );
   };
+  widgets.create_onfocus_event_handler_for_input = function(onfocus, input) {
+   // init 'oldvalue' data
+   input.data('oldvalue', input.val());
+   // luban onfocus event
+   var callback = luban.compileCallback(onfocus);
+   input.bind('luban-formfieldfocus', callback);
+   // onfocus handler will prepare data and trigger luban onfocus handler
+   input.focus(
+     function (event) {
+       var data = {};
+       $(this).trigger('luban-formfieldfocus', data);
+     }
+   );
+  };
   widgets.formfield_setAttribute = function(formfield, attrs) {
     var id = attrs.id;
     var label;

@@ -68,7 +68,7 @@ elements = [
     'uploader',
     'slides', 'slide',
     'bulletinboard', 'bulletinboardannouncement',
-    'form', 'formtextfield',
+    'form', 'formtextfield', 'formpasswordfield',
     ]
             
 for element in elements:

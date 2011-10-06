@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2009 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -42,7 +42,7 @@
   var formfield_setAttribute = widgets.formfield_setAttribute;
   var formfield_getAttribute = widgets.formfield_getAttribute;
   var prependActor = widgets.prependActor;
-  
+
 
   // formpasswordfield
   ef.formpasswordfield = function(kwds, docmill, parent) {
@@ -56,27 +56,15 @@
     };
 
     var input = tag('input', args); input_container.append(input);
-    
+
     if (kwds.tip) {
       var tip = kwds.tip;
       input.attr('title', tip);
       input.tooltip({showURL: false});
     }
 
-    var onchange = kwds.onchange;
-    if (onchange) {
-      input.change( function() { docmill.compile(onchange); return false; } );
-    }
-
-    var onfocus = kwds.onfocus;
-    if (onfocus) {
-      input.focus( function() { docmill.compile(onfocus); return false; } );
-    }
-
-    var onblur = kwds.onblur;
-    if (onblur) {
-      input.blur( function() { docmill.compile(onblur); return false; } );
-    }
+    // event handlers
+    widgets.create_event_handlers_for_input(kwds, input);
 
     var ret = div.lubanElement('formpasswordfield');
     if (parent) { parent.add(ret); }
@@ -98,7 +86,7 @@
   widgets.formpasswordfield.prototype.setAttribute = function (attrs) {
     var je = this._je;
     formfield_setAttribute(je, attrs);
-    
+
     var value = attrs.value;
     if (value != null) {
       input = this.getInputWidget();
@@ -109,7 +97,7 @@
     var je = this._je;
     var ret = formfield_getAttribute(je, name);
     if (ret) {return ret;}
-    
+
     var input = this.getInputWidget();
     if (name=='value') {
       return input.val();

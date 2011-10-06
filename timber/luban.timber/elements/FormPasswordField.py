@@ -17,7 +17,9 @@ from .FormField import FormField as base
 
 class FormPasswordField(base):
 
-    abstract = False
+    # decorations
+    simple_description = 'Password field in a form'
+    full_description = ''
 
     def identify(self, inspector):
         return inspector.onFormPasswordField(self)

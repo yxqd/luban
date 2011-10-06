@@ -44,7 +44,7 @@ elementtypes = [
     # 'Document',
     # 'Downloader',
     # 'File', 
-    # 'Form',
+    'Form',
     'Grid',
     'Image',
     # 'Link',

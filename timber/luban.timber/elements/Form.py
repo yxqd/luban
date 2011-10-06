@@ -12,13 +12,11 @@
 #
 
 
-from .DocumentFactory import DocumentFactory
-from .ParagraphFactory import ParagraphFactory
-from .SimpleContainer import SimpleContainer, Meta
 
+from luban.ui.elements.SimpleContainer import SimpleContainer, Meta
+class Form(SimpleContainer, metaclass=Meta):
 
-class Form(ParagraphFactory, DocumentFactory, SimpleContainer, metaclass=Meta):
-
+    # decorations
     simple_description = 'A container of form fields and a submit button'
     full_description = (
         'Form is a container of form fields and a submit button. '
@@ -27,66 +25,70 @@ class Form(ParagraphFactory, DocumentFactory, SimpleContainer, metaclass=Meta):
         'A form has a title which can be empty.'
         )
 
-    abstract = False
+    # properties
+    title = descriptors.str()
+    title.tip = 'Title of the form'
 
+    # events
+    # events -- must have one-one correspondence with event handler
+    from luban.ui.Event import Event
+    class submit(Event):
+        # decorations
+        simple_description = "form submission event"
+        __unique_type_name__ = 'submit'
+        # attributes
+        data = descriptors.dict()
+        data.tip = "form data"
+    del Event
+    
+
+    # methods
     def text(self, **kwds):
         from .FormTextField import FormTextField as factory
-        element = factory(**kwds)
-        self.append(element)
-        return element
-
-
+        from luban.ui.elements.SubElementFactory import createSubElement
+        return createSubElement(self, factory, **kwds)
+    
+    
     def password(self, **kwds):
         from .FormPasswordField import FormPasswordField as factory
-        element = factory(**kwds)
-        self.append(element)
-        return element
+        from luban.ui.elements.SubElementFactory import createSubElement
+        return createSubElement(self, factory, **kwds)
 
 
     def selector(self, **kwds):
         from .FormSelectorField import FormSelectorField as factory
-        element = factory(**kwds)
-        self.append(element)
-        return element
+        from luban.ui.elements.SubElementFactory import createSubElement
+        return createSubElement(self, factory, **kwds)
 
 
     def textarea(self, **kwds):
         from .FormTextArea import FormTextArea as factory
-        element = factory(**kwds)
-        self.append(element)
-        return element
+        from luban.ui.elements.SubElementFactory import createSubElement
+        return createSubElement(self, factory, **kwds)
 
 
     def radio(self, **kwds):
         from .FormRadioBox import FormRadioBox as factory
-        element = factory(**kwds)
-        self.append(element)
-        return element
+        from luban.ui.elements.SubElementFactory import createSubElement
+        return createSubElement(self, factory, **kwds)
 
 
     def checkbox(self, **kwds):
         from .FormCheckBox import FormCheckBox as factory
-        element = factory(**kwds)
-        self.append(element)
-        return element
+        from luban.ui.elements.SubElementFactory import createSubElement
+        return createSubElement(self, factory, **kwds)
 
 
     def submitbutton(self, **kwds):
         from .FormSubmitButton import FormSubmitButton as factory
-        element = factory(**kwds)
-        self.append(element)
-        return element
+        from luban.ui.elements.SubElementFactory import createSubElement
+        return createSubElement(self, factory, **kwds)
 
 
     def identify(self, inspector):
         return inspector.onForm(self)
 
 
-    title = descriptors.str()
-    title.tip = 'Title of the form'
-
-    onsubmit = descriptors.action()
-    onsubmit.tip = 'action when the form is submitted'
 
 
 # version

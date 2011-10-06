@@ -83,6 +83,7 @@ menu = [
       'paragraph',
       'button',
       'image',
+      'form',
       ]),
 
     ('menu-like',

@@ -28,8 +28,14 @@
 #
 # To add an element
 # 1. add this name of the elemen to the list "elements"
-# 2. add a new dictionary for this element:
+#    by default, an element needs at least one js file that implements the interface
+#    of this element, and this js file should be luban.timber/widgets/<element>.js
+# 2. add a new dictionary for this element, if additional js file(s) are necessary
+#    or the element js implementation is not in the default place.
 #    <element_name> = {"javascripts": ..., "stylesheets": ...}
+#    basically you need to tell luban the positions of the implementation
+#    javascript file and 
+#    all dependent js files and stylesheet files.
 # 3. For riveted elements, make sure to do the same for both
 #    the container element and the sub element.
 #
@@ -62,6 +68,7 @@ elements = [
     'uploader',
     'slides', 'slide',
     'bulletinboard', 'bulletinboardannouncement',
+    'form',
     ]
             
 for element in elements:

@@ -13,14 +13,12 @@
 
 
 """
-methods here create instances of action classes
+At this moment only a few actions are ported to 0.4. 
+see "action_modules" below.
 
-Each action class describe one type of action.
-Keep in mind that in luban.ui.actions we are using data objects to 
-hold information about actions, instead of actually
-performing actions.
-The desriptions here will later be translated by renderers
-to actual actions in different media.
+TODO: 
+* credential related actions
+* element actions in the modules in this subpackage
 """
 
 

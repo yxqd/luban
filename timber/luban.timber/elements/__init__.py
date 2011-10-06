@@ -12,6 +12,15 @@
 #
 
 
+"""
+timber elements.
+
+TODO:
+* There are still quite a few elements are not yet ported to 0.4:
+  they are commented out in the "elementtypes" list.
+"""
+
+
 def registerElementProvider(provider):
     from ._registry import element_providers as providers
     providers.append(provider)
@@ -36,12 +45,10 @@ elementtypes = [
     # 'Downloader',
     # 'File', 
     # 'Form',
-    # 'Frame',
     'Grid',
     'Image',
     # 'Link',
     # 'NewsTicker',
-    # 'Paragraph',
     # 'Plot2D',
     # 'ProgressBar',
     'Slides',

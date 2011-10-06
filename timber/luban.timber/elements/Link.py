@@ -12,11 +12,25 @@
 #
 
 
-from .SimpleElement import SimpleElement as base
+"""
+This needs more thought. link is very much like a button for this 
+current definition. It also triggers an action when clicked,
+and it has a label.
+
+Probably it is not necessary to have "link" this way.
+We can just use buttons, but with a "link" class, and use styling
+to make the button looks like a link in cases where users expect
+a link-like look and feel.
+
+Probably we should redefine link to "hyperlink" that really link 
+to a http url.
+"""
 
 
+from luban.ui.elements.SimpleElement import SimpleElement as base
 class Link(base):
 
+    # decorations
     simple_description = 'A clickable element'
     full_description = (
         'Link is clickable. When clicked, an action will be triggered. '

@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2009 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -28,7 +28,7 @@
   var dmp = luban.documentmill.prototype;
   dmp.onbutton = dmp._onElement;
 
-  
+
   // button
   //  factory
   ef.button = function(kwds, docmill, parent) {
@@ -74,6 +74,10 @@
     this.super1(elem);
   };
   widgets.button.prototype = new widgets.base ();
+  widgets.button.prototype.click = function() {
+    var je = this._je;
+    je.find('a').click();
+  };
   widgets.button.prototype.setAttribute = function(attrs) {
     var je = this._je;
 

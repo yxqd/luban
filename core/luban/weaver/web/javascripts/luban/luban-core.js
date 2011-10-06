@@ -106,6 +106,11 @@ luban.utils = {};
       return this.jqueryelem.hide(callback);
     },
 
+    'click': function() {
+      // trigger click event on me
+      this.jqueryelem.click();
+    },
+
     'setAttribute': function(args) {
       throw 'widgets.base.setAttribute:' + this.type() + ' notimplementederror';
     },

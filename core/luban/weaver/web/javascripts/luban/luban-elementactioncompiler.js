@@ -38,7 +38,7 @@
       var element = this.dispatch(e);
 
       element.addClass(action.cls);
-      
+
     }
 
     ,'onremoveclass': function(action) {
@@ -46,7 +46,11 @@
       var element = this.dispatch(e);
 
       element.removeClass(action.cls);
-      
+
+    }
+
+    ,'onclickaction': function(action) {
+      this.dispatch(action.element).click();
     }
 
   };

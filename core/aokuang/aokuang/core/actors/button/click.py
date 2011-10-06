@@ -18,7 +18,7 @@ class Actor(base):
 
     title='"click" action'
     description = [
-        'Programmically click a button',
+        'Programmatically click a button',
         ]
     def createDemoPanel(self, **kwds):
         doc = luban.e.document(id='container')
@@ -27,11 +27,14 @@ class Actor(base):
             label = 'a button', 
             onclick = luban.a.alert("button 1 clicked"),
             )
-        b2 = luban.e.button(
+        b2 = doc.button(
             label = 'click me',
-            onclick = luban.a.select(element=b1).click(),
+            onclick = [
+                luban.a.alert("button 2 clicked. it will trigger button 1 to click."),
+                luban.a.select(element=b1).click(),
+                ]
             )
-        return button
+        return doc
 
 
 # End of file 

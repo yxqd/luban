@@ -89,6 +89,7 @@ class Form(SimpleContainer, metaclass=Meta):
         return inspector.onForm(self)
 
 
+from .FormTextField import FormTextField
 
 
 # version

@@ -12,21 +12,42 @@
 #
 
 
-from .Element import Element
+from luban.ui.elements.SimpleElement import SimpleElement as base
 
 
-class FormField(Element):
+class FormField(base):
 
-    label = descriptors.str()
-    help = descriptors.str()
-    tip = descriptors.str()
-    error = descriptors.str()
-    value = descriptors.str()
+    label = descriptors.str(default='label')
+    help = descriptors.str(default='')
+    tip = descriptors.str(default='')
+    error = descriptors.str(default='')
+    value = descriptors.str(default='')
     required = descriptors.bool()
 
-    onchange = descriptors.action()
-    onfocus = descriptors.action()
-    onblur = descriptors.action()
+    # events
+    # events -- must have one-one correspondence with event handler
+    from luban.ui.Event import Event
+    # change
+    class change(Event):
+        # decorations
+        simple_description = "happens when field value changed"
+        __unique_type_name__ = 'formfieldchange'
+        # attributes
+        old = descriptors.str()
+        new = descriptors.str()
+    # focus
+    class focus(Event):
+        # decorations
+        simple_description = "happens when focusd"
+        __unique_type_name__ = 'formfieldfocus'
+        # attributes
+    # blur
+    class blur(Event):
+        # decorations
+        simple_description = "happens when lost focus"
+        __unique_type_name__ = 'formfieldblur'
+        # attributes
+    del Event
 
 # version
 __id__ = "$Id$"

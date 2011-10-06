@@ -17,14 +17,11 @@ from .FormField import FormField as base
 
 class FormTextField(base):
 
-
+    # decorations
     simple_description = 'Text field in a form'
     full_description = ''
     
-
-    abstract = False
-
-
+    # methods
     def identify(self, inspector):
         return inspector.onFormTextField(self)
 

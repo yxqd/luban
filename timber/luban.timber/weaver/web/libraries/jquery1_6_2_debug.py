@@ -68,7 +68,7 @@ elements = [
     'uploader',
     'slides', 'slide',
     'bulletinboard', 'bulletinboardannouncement',
-    'form',
+    'form', 'formtextfield',
     ]
             
 for element in elements:
@@ -77,6 +77,15 @@ for element in elements:
     continue
 
 # del d, element, elements
+
+
+form = {
+    'javascripts':
+        (
+        'luban.timber/widgets/form.js',
+        'luban.timber/widgets/form-element-basic.js',
+        ),
+    }
 
 
 accordion = {

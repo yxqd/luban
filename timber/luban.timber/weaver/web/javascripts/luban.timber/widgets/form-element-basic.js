@@ -150,6 +150,20 @@
      }
    );
   };
+  widgets.create_onblur_event_handler_for_input = function(onblur, input) {
+   // init 'oldvalue' data
+   input.data('oldvalue', input.val());
+   // luban onblur event
+   var callback = luban.compileCallback(onblur);
+   input.bind('luban-formfieldblur', callback);
+   // onblur handler will prepare data and trigger luban onblur handler
+   input.blur(
+     function (event) {
+       var data = {};
+       $(this).trigger('luban-formfieldblur', data);
+     }
+   );
+  };
   widgets.formfield_setAttribute = function(formfield, attrs) {
     var id = attrs.id;
     var label;

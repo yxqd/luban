@@ -22,7 +22,7 @@ class Actor(base):
     def createDemoPanel(self, **kwds):
         form = luban.e.form(title='login')
         username = form.text(label='username')
-        log = form.document(id='log', title='log')
+        log = form.document(id='log', Class='log', title='log')
         
         username.onchange = luban.a.load(
             actor=self.name, routine='onchange',
@@ -30,6 +30,9 @@ class Actor(base):
             )
         username.onfocus = luban.a.select(element=log).append(
             newelement=luban.e.paragraph(text="focused")
+            )
+        username.onblur = luban.a.select(element=log).append(
+            newelement=luban.e.paragraph(text="blured")
             )
         
         return form

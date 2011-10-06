@@ -87,7 +87,7 @@
 
     var onblur = kwds.onblur;
     if (onblur) {
-      input.blur( function() { docmill.compile(onblur); return false; } );
+      widgets.create_onblur_event_handler_for_input(onblur, input);
     }
 
     return ret;

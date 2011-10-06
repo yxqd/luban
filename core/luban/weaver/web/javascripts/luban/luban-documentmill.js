@@ -66,8 +66,9 @@
 	var id = doc.id;
 	if ($('#'+id).length) {
 	  // duplicate id
-	  var msg = "id already exists: " + id + ".";
-	  msg += "error happened when trying to construct an element of type " + doc.luban_type;
+	  var msg = "luban-documentmill: id already exists: \"" + id + "\".";
+	  msg += "error happened when trying to construct an element of type \"";
+	  msg += doc.luban_type + '"';
 	  throw msg;
 	}
       }

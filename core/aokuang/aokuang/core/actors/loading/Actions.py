@@ -27,7 +27,7 @@ class Actor(base):
         container = luban.e.document()
         doc = container.document(
             title = 'The document to change',
-            id = 'document-to-change',
+            id = 'loading-actions-document-to-change',
             )
         button = container.button(label = 'click me', id='load_actions_button')
         # click the button will load from routine onloadaction of this actor.
@@ -39,7 +39,8 @@ class Actor(base):
         # return two actions in a list
         # both actions will be performed
         return [
-            luban.a.select(id='document-to-change').addClass(cls='green-border'),
+            luban.a.select(id='loading-actions-document-to-change')\
+                .addClass(cls='green-border'),
             luban.a.alert("document class changed"),
             ]
 

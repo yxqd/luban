@@ -37,6 +37,8 @@ debug = True
 #
 from .ui import e, a, event
 
+#
+from . import decorators
 
 # End of file 
 

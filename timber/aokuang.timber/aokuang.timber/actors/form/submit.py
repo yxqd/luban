@@ -26,19 +26,19 @@ class Actor(base):
         container = luban.e.document()
         
         # form 1
-        form = container.form(title='login')
-        username = form.text(label='username')
-        submit = form.submitbutton(label="Submit")
+        form1 = container.form(title='login')
+        username = form1.text(label='username', name='username')
+        submit = form1.submitbutton(label="Submit")
         # "kwds" is a magic word, the data will be passed to handler method as **kwds
         # usually, we should use this convention.
-        form.onsubmit = luban.a.load(
+        form1.onsubmit = luban.a.load(
             actor = self.name, routine = 'onsubmit', 
             kwds = luban.event.data,
             )
         
         # form 2
         form2 = container.form(title='login')
-        username = form2.text(label='username')
+        username = form2.text(label='username', name='username')
         submit = form2.submitbutton(label="Submit")
         # if "kwds" is not used, raw string format json representation
         # of form data will be passed to the handler method.

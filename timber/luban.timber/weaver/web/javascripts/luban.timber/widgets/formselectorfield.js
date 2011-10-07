@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2009 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -50,12 +50,12 @@
   };
 
 
-  // 
+  //
   var formfield = widgets.formfield;
   var formfield_setAttribute = widgets.formfield_setAttribute;
   var formfield_getAttribute = widgets.formfield_getAttribute;
-  var prependActor = widgets.prependActor;
-  
+  var formatElementName = widgets.formatElementName;
+
 
   // formselectorfield
   ef.formselectorfield = function(kwds, docmill, parent) {
@@ -67,7 +67,7 @@
 
     var field = kwds;
     var args =  {
-      'name': prependActor(field.name)
+      'name': formatElementName(field.name)
     };
 
     var input = tag('select', args);  input_container.append(input);
@@ -77,9 +77,9 @@
       input.attr('title', tip);
       input.tooltip({showURL: false});
     }
-    
+
     ret.setAttribute({entries: field.entries});
-    
+
     var selection = field.selection;
     if (selection) {ret.setSelection(selection);}
     else
@@ -92,10 +92,10 @@
       input.change(function() {
 	  ret.saveCurrentValue();
 	  ret.setEventData('changed', {
-	      'oldvalue': ret.getOldValue(), 
+	      'oldvalue': ret.getOldValue(),
 		'value': ret.getAttribute('value')}
 	    );
-	  docmill.compile(onchange); return false; 
+	  docmill.compile(onchange); return false;
 	});
     }
 
@@ -139,12 +139,12 @@
   widgets.formselectorfield.prototype.setAttribute = function (attrs) {
     var je = this._je;
     formfield_setAttribute(je, attrs);
-    
+
     var select  = this.getInputWidget();
 
     var name = attrs.name;
     if (name!=null) {
-      select.attr('name', prependActor(name));
+      select.attr('name', formatElementName(name));
     }
 
     // entries
@@ -194,10 +194,10 @@
   };
   widgets.formselectorfield.prototype.setSelection = function (selection) {
     var input = this.getInputWidget();
-    
+
     // first check selection as option label
     var opt1 = input.find('option:contains('+selection+')'), found;
-    
+
     if (opt1.length>=1) {
       // have to go through them and find the one
       var f = function () {
@@ -205,14 +205,14 @@
       };
       opt1.each(f);
     }
-    
+
     if (!found) {
       // try selection as index
       var opt2 = input.children('option[value='+selection+']');
       if (opt2.length>1) {throw "should not happen";}
       if (opt2.length==1) {found = opt2;}
     }
-    
+
     if (found) {
       input.children(":selected").removeAttr('selected');
       found.attr('selected', 'selected');
@@ -229,7 +229,7 @@
     var args = {value:opt.value};
     var o = tag('option', args); select.append(o);
     o.text(opt.label);
-    
+
     if (opt.selected) {
       this.setAttribute({selection: opt.label});
     }

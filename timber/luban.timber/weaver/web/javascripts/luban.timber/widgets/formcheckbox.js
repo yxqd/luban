@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2009 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -28,27 +28,27 @@
   var dmp = luban.documentmill.prototype;
   dmp.onformcheckbox = dmp._onElement;
 
-  // 
+  //
   var formfield = widgets.formfield;
   var formfield_setAttribute = widgets.formfield_setAttribute;
   var formfield_getAttribute = widgets.formfield_getAttribute;
-  var prependActor = widgets.prependActor;
-  
+  var formatElementName = widgets.formatElementName;
+
 
   // formcheckbox
   ef.formcheckbox = function(kwds, docmill, parent) {
     var field = kwds;
     var div = tag('div', {'id': kwds.id});
     div.addClass('luban-formcheckbox');
-    
-    var label = tag('p'); label.addClass('label'); 
+
+    var label = tag('p'); label.addClass('label');
     div.append(label);
     if (kwds.label) {
       label.text(kwds.label);
     }
 
     var args =  {
-      'name': prependActor(field.name),
+      'name': formatElementName(field.name),
       'type': 'checkbox'
       //,'value': field.value
     };
@@ -67,7 +67,7 @@
     if (onchange) {
       input.change( function() { docmill.compile(onchange); return false; } );
     }
-    
+
     var onfocus = kwds.onfocus;
     if (onfocus) {
       input.focus( function() { docmill.compile(onfocus); return false; } );
@@ -102,7 +102,7 @@
 
     var name = attrs.name;
     if (name) {
-      input.attr('name', prependActor(name));
+      input.attr('name', formatElementName(name));
     }
     var checked = attrs.checked;
     if (checked!=null) {

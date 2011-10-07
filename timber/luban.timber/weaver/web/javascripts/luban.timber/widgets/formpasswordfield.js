@@ -41,7 +41,7 @@
   var formfield = widgets.formfield;
   var formfield_setAttribute = widgets.formfield_setAttribute;
   var formfield_getAttribute = widgets.formfield_getAttribute;
-  var prependActor = widgets.prependActor;
+  var formatElementName = widgets.formatElementName;
 
 
   // formpasswordfield
@@ -50,7 +50,7 @@
     div.addClass('luban-formpasswordfield');
     var field = kwds;
     var args =  {
-      'name': prependActor(field.name),
+      'name': formatElementName(field.name),
       'type': 'password',
       'value': field.value
     };

@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2009 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -28,12 +28,12 @@
   var dmp = luban.documentmill.prototype;
   dmp.onformradiobox = dmp._onElement;
 
-  // 
+  //
   var formfield = widgets.formfield;
   var formfield_setAttribute = widgets.formfield_setAttribute;
   var formfield_getAttribute = widgets.formfield_getAttribute;
-  var prependActor = widgets.prependActor;
-  
+  var formatElementName = widgets.formatElementName;
+
 
   // formradiobox
   ef.formradiobox = function(kwds, docmill, parent) {
@@ -48,12 +48,12 @@
 
     var field = kwds;
     var args =  {
-      'name': prependActor(field.name),
+      'name': formatElementName(field.name),
       'type': 'radio'
     };
 
     var selection = kwds.selection;
-    
+
     for (var i in field.entries) {
       var args1 = $.extend({}, args);
       var entry = field.entries[i];
@@ -93,7 +93,7 @@
   widgets.formradiobox.prototype.setAttribute = function (attrs) {
     var je = this._je;
     formfield_setAttribute(je, attrs);
-    
+
     var value = attrs.value;
     if (value != null) {
       var checked = this.getInputWidgets('checked');

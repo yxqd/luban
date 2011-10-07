@@ -191,7 +191,7 @@
     var name = attrs.name;
     if (name!=null) {
       var inputs = formfield.find('input');
-      inputs.attr('name', widgets.prependActor(name));
+      inputs.attr('name', widgets.formatElementName(name));
     }
 
     var Class = attrs.Class;
@@ -255,8 +255,9 @@
 
   // helpers
   // prepend 'actor.' to keys
-  widgets.prependActor = function (s) {
-    return 'actor.'+s;
+  widgets.formatElementName = function (s) {
+    return s;
+    // return 'actor.'+s;
   };
 
  })(luban, jQuery);

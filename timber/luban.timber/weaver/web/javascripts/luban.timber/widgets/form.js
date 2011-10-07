@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2009 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -48,7 +48,7 @@
     form.addClass('luban-form');
 
     var fieldset = tag('fieldset'); form.append(fieldset);
-    
+
     var title = kwds.title;
     var legend = tag('legend'); fieldset.append(legend);
     if (title) {
@@ -58,17 +58,44 @@
     }
     var onsubmit = kwds.onsubmit;
     if (onsubmit != null && onsubmit != '') {
-      form.submit(function () { docmill.compile(onsubmit); return false; });
+      create_onsubmit_handler(kwds, form);
     } else {
       form.submit(function () {return false;});
     }
-    
+
     var onclick = kwds.onclick;
     if (onclick) {
       form.click( function() { docmill.compile(onclick); return false; } );
     }
     return ret;
   };
+
+  var create_onsubmit_handler = function(spec, form) {
+   var callback = luban.compileCallback(spec.onsubmit);
+   form.bind('luban-formsubmit', callback);
+   form.submit(
+     function (event) {
+       var data = $(this).serializeArray();
+       // data is now an array of {name: , value:}
+       // convert to dict
+       data = _arr2dict(data);
+       data = JSON.stringify(data);
+       data = {'data': data};
+       $(this).trigger('luban-formsubmit', data);
+       return false;
+     }
+   );
+  };
+
+  var _arr2dict = function(arr) {
+    var d = {};
+    for (var i=0; i<arr.length; i++) {
+      var e = arr[i];
+      d[e.name] = e.value;
+    }
+    return d;
+  };
+
   widgets.form = function(elem) {
     this.super1 = widgets.base;
     this.super1(elem);
@@ -95,7 +122,7 @@
     if (title) {
       legend.text(title).show();
     } else {
-      if (title=='') 
+      if (title=='')
 	{ legend.text(title).hide(); }
     }
 

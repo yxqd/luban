@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2009 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -28,12 +28,12 @@
   var dmp = luban.documentmill.prototype;
   dmp.onformsubmitbutton = dmp._onElement;
 
-  // 
+  //
   var formfield = widgets.formfield;
   var formfield_setAttribute = widgets.formfield_setAttribute;
   var formfield_getAttribute = widgets.formfield_getAttribute;
-  var prependActor = widgets.prependActor;
-  
+  var formatElementName = widgets.formatElementName;
+
 
   // formsubmitbutton
   ef.formsubmitbutton = function(kwds, docmill, parent) {
@@ -45,25 +45,27 @@
 
     var field = kwds;
     var args =  {
-      'name': prependActor(kwds.name),
+      'name': formatElementName(kwds.name),
       'type': 'submit',
       'value': field.label
     };
 
     var input = tag('input', args);
     div.append(input);
-    
+
     if (kwds.tip) {
       var tip = kwds.tip;
       input.attr('title', tip);
       input.tooltip({showURL: false});
     }
 
+    /* do we need this?
     var onchange = kwds.onchange;
     if (onchange) {
       input.change( function() { docmill.compile(onchange); return false; } );
     }
-    
+    */
+
     var ret = div.lubanElement('formsubmitbutton');
     if (parent) {parent.add(ret);}
     return ret;
@@ -80,7 +82,7 @@
 
     var name = attrs.name;
     if (name) {
-      input.attr('name', prependActor(name));
+      input.attr('name', formatElementName(name));
     }
     var label = attrs.label;
     if (label) {
@@ -91,7 +93,7 @@
     var je = this._je;
     var ret = formfield_getAttribute(je, name);
     if (ret) {return ret;}
-    
+
     var input = je.children('input');
     if (name=='label') {
       return input.attr('value');

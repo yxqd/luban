@@ -41,7 +41,7 @@
   var formfield = widgets.formfield;
   var formfield_setAttribute = widgets.formfield_setAttribute;
   var formfield_getAttribute = widgets.formfield_getAttribute;
-  var prependActor = widgets.prependActor;
+  var formatElementName = widgets.formatElementName;
 
 
   // formtextarea
@@ -53,7 +53,7 @@
 
     var field = kwds;
     var args =  {
-      'name': prependActor(field.name)
+      'name': formatElementName(field.name)
     };
     if (field.readonly) {
       args['readonly'] = 'readonly';
@@ -96,7 +96,7 @@
 
     var name = attrs.name;
     if (name) {
-      input.attr('name', prependActor(name));
+      input.attr('name', formatElementName(name));
     }
     var readonly = attrs.readonly;
     if (readonly != null) {

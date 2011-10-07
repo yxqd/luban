@@ -12,18 +12,18 @@
 #
 
 
-from .Element import Element as base
+from luban.ui.elements.SimpleElement import SimpleElement as base
 
 
 class FormSubmitButton(base):
 
-    abstract = False
-
-
+    # attributes
     label = descriptors.str(default='Submit')
     help = descriptors.str()
-    tip = descriptors.str()
+    # XXX: not supported yet
+    # tip = descriptors.str()
 
+    # methods
     def identify(self, inspector):
         return inspector.onFormSubmitButton(self)
 

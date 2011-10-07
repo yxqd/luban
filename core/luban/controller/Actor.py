@@ -34,6 +34,19 @@ class Actor:
                 self.name, routine)
             raise self.RoutineNotFound(msg)
 
+        # special name "kwds"
+        if 'kwds' in kwds:
+            kwds2 = kwds['kwds']
+            if isinstance(kwds2, str):
+                from ..weaver.web._utils import jsonDecode
+                kwds2 = jsonDecode(kwds2)
+            for k in kwds2:
+                if k in kwds:
+                    raise RuntimeError("conflict key: %s" % k)
+                continue
+            kwds.update(kwds2)
+            del kwds['kwds']
+            
         return behavior(**kwds)
     
     pass # end of Actor

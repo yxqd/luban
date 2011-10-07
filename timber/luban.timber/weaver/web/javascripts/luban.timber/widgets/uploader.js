@@ -25,7 +25,7 @@
 
   // constants
   var kilo = 1024;
-  var mega = kilo * kilo;  
+  var mega = kilo * kilo;
 
 
   // documentmill handler
@@ -124,7 +124,7 @@
       }
       ,"fail": function(e,data) {
 	var reason = data.failure_reason;
-	if (reason == null) 
+	if (reason == null)
 	    reason = "Upload failed: your file could be too large";
 	var extra = {'reason': reason};
 	$(this).trigger("luban-uploadfail", extra);

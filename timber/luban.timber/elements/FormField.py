@@ -19,7 +19,8 @@ class FormField(base):
 
     label = descriptors.str(default='label')
     help = descriptors.str(default='')
-    tip = descriptors.str(default='')
+    # XXX: not supported yet
+    # tip = descriptors.str(default='')
     error = descriptors.str(default='')
     value = descriptors.str(default='')
     required = descriptors.bool()

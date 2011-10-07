@@ -89,9 +89,13 @@ class Form(SimpleContainer, metaclass=Meta):
         return inspector.onForm(self)
 
 
+
+
+# definition of fields
 from .FormTextField import FormTextField
 from .FormPasswordField import FormPasswordField
 from .FormTextArea import FormTextArea
+from .FormSubmitButton import FormSubmitButton
 
 
 # version

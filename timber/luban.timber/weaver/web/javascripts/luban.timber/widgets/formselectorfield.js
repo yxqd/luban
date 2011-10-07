@@ -85,29 +85,8 @@
     else
       if (field.value) {ret.setAttribute({value: field.value});}
 
-    // save the current value
-    ret.saveCurrentValue();
-    var onchange = kwds.onchange;
-    if (onchange) {
-      input.change(function() {
-	  ret.saveCurrentValue();
-	  ret.setEventData('changed', {
-	      'oldvalue': ret.getOldValue(),
-		'value': ret.getAttribute('value')}
-	    );
-	  docmill.compile(onchange); return false;
-	});
-    }
-
-    var onfocus = kwds.onfocus;
-    if (onfocus) {
-      input.focus( function() { docmill.compile(onfocus); return false; } );
-    }
-
-    var onblur = kwds.onblur;
-    if (onblur) {
-      input.blur( function() { docmill.compile(onblur); return false; } );
-    }
+    // event handlers
+    widgets.create_event_handlers_for_input(kwds, input);
 
     return ret;
   };

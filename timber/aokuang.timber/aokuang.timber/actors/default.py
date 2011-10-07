@@ -88,6 +88,7 @@ menu = [
     ('form and form fields',
      ['form',
       'formtextfield',
+      'formselectorfield',
       'formfield_common',
       ]),
 

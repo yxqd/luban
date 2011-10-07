@@ -71,6 +71,7 @@ elements = [
     
     'form', 
     'formtextfield', 'formpasswordfield', 'formtextarea',
+    'formselectorfield',
     'formsubmitbutton',
     ]
             

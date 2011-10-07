@@ -23,6 +23,8 @@ class Object2Dict:
     """renderer to convert an luban object to a dictionary.
     The dictionary rendered will consists of values of
     basic types such as str, integer, and boolean.
+    It can also have lists and dictionaries.
+    Basically the goal is the result dictionary is json-compatible.
     """
 
     def render(self, obj):
@@ -39,7 +41,10 @@ class Object2Dict:
         for t in basic_types:
             if isinstance(value, t): return value
             continue
-        
+
+        import collections
+        if isinstance(value, collections.OrderedDict):
+            return self._onordereddict(value)
         if isinstance(value, dict): return self._ondict(value)
         if isinstance(value, list) or isinstance(value, tuple): 
             return self._onlist(value)
@@ -76,6 +81,17 @@ class Object2Dict:
 
 
     # basic types
+    def _onordereddict(self, value):
+        # json does not have ordered dictionary, render
+        # it as a list of tuples
+        r = []
+        for k,v in value.items():
+            v = self.convert(v)
+            r.append((k,v))
+            continue
+        return r
+    
+    
     def _ondict(self, value):
         newvalue = {}
         for k, v in value.items():

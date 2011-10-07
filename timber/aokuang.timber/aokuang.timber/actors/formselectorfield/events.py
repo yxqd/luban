@@ -28,7 +28,7 @@ class Actor(base):
             ('male', 'Male'),
             ('female', 'Female'),
             ]
-        gender = form.selector(label='gender', entries = entries)
+        gender = form.selector(label='gender', entries = entries, selection='female')
         log = doc.document(id='log', Class='log', title='log')
         
         gender.onchange = luban.a.load(

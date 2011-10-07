@@ -17,16 +17,14 @@ from .FormField import FormField as base
 
 class FormSelectorField(base):
 
+    # attributes
+    entries = descriptors.ordered_dict()
+    selection = descriptors.str()
 
-    abstract = False
-
-
+    # methods
     def identify(self, inspector):
         return inspector.onFormSelectorField(self)
 
-    entries = descriptors.ordered_dict()
-    selection = descriptors.str()
-    
     
 
 # version

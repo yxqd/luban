@@ -16,9 +16,9 @@ import luban
 from ....DemoPanelActor import Actor as base
 class Actor(base):
 
-    title='A form with a few input fields, but without submit button'
+    title='input fields and event handlers'
     description = [
-        'The fields are attached with event hanlders for ',
+        'The input fields are attached with event handlers for ',
         '"change", "focus", and "blur" events',
         ]
 

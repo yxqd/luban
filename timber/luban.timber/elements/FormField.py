@@ -17,6 +17,9 @@ from luban.ui.elements.SimpleElement import SimpleElement as base
 
 class FormField(base):
 
+    simple_description = "base of form fields"
+    full_description = ""
+
     label = descriptors.str(default='label')
     help = descriptors.str(default='')
     # XXX: not supported yet

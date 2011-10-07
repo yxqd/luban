@@ -83,7 +83,12 @@ menu = [
       'paragraph',
       'button',
       'image',
-      'form',
+      ]),
+
+    ('form and form fields',
+     ['form',
+      'formtextfield',
+      'formfield_common',
       ]),
 
     ('menu-like',

@@ -90,6 +90,7 @@ menu = [
       'formtextfield',
       'formselectorfield',
       'formradiobox',
+      'formcheckbox',
       'formfield_common',
       ]),
 

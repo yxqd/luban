@@ -63,20 +63,8 @@
       input.tooltip({showURL: false});
     }
 
-    var onchange = kwds.onchange;
-    if (onchange) {
-      input.change( function() { docmill.compile(onchange); return false; } );
-    }
-
-    var onfocus = kwds.onfocus;
-    if (onfocus) {
-      input.focus( function() { docmill.compile(onfocus); return false; } );
-    }
-
-    var onblur = kwds.onblur;
-    if (onblur) {
-      input.blur( function() { docmill.compile(onblur); return false; } );
-    }
+    // event handlers
+    widgets.create_event_handlers_for_input(kwds, input);
 
     var ret= div.lubanElement('formcheckbox');
     if (parent) {parent.add(ret);}

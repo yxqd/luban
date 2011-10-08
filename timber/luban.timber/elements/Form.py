@@ -98,6 +98,7 @@ from .FormTextArea import FormTextArea
 from .FormSubmitButton import FormSubmitButton
 from .FormSelectorField import FormSelectorField
 from .FormRadioBox import FormRadioBox
+from .FormCheckBox import FormCheckBox
 
 
 # version

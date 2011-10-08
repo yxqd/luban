@@ -63,11 +63,13 @@
       input.tooltip({showURL: false});
     }
 
-    // event handlers
-    widgets.create_event_handlers_for_input(kwds, input);
-
+    // luban element
     var ret = div.lubanElement('formpasswordfield');
     if (parent) { parent.add(ret); }
+
+    // event handlers
+    widgets.create_event_handlers_for_input(kwds, input, ret);
+
     return ret;
   };
   widgets.formpasswordfield = function(elem) {

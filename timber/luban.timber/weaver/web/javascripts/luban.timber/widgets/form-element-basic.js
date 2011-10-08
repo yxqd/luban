@@ -160,10 +160,10 @@
      }
    );
   };
-  widgets.create_event_handlers_for_input = function(spec, input) {
+  widgets.create_event_handlers_for_input = function(spec, input, element) {
     var onchange = spec.onchange;
     if (onchange) {
-      widgets.create_onchange_event_handler_for_input(onchange, input);
+      widgets.create_onchange_event_handler_for_input(onchange, input, element);
     }
 
     var onfocus = spec.onfocus;

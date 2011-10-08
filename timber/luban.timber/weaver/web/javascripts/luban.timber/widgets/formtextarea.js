@@ -65,7 +65,7 @@
     if (kwds.tip) {ret.setTip(kwds.tip);}
 
     // event handlers
-    widgets.create_event_handlers_for_input(kwds, input);
+    widgets.create_event_handlers_for_input(kwds, input, ret);
 
     if (parent) {parent.add(ret);}
     return ret;

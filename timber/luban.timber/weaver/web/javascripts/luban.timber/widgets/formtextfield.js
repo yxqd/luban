@@ -73,7 +73,7 @@
     }
 
     // event handlers
-    widgets.create_event_handlers_for_input(kwds, input);
+    widgets.create_event_handlers_for_input(kwds, input, ret);
 
     return ret;
   };

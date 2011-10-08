@@ -97,6 +97,7 @@ from .FormPasswordField import FormPasswordField
 from .FormTextArea import FormTextArea
 from .FormSubmitButton import FormSubmitButton
 from .FormSelectorField import FormSelectorField
+from .FormRadioBox import FormRadioBox
 
 
 # version

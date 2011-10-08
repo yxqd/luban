@@ -117,17 +117,17 @@
 
     return div;
   };
-  widgets.create_onchange_event_handler_for_input = function(onchange, input) {
+  widgets.create_onchange_event_handler_for_input = function(onchange, input, element) {
    // init 'oldvalue' data
-   input.data('oldvalue', input.val());
+   element._je.data('oldvalue', element.getAttribute('value'));
    // luban onchange event
    var callback = luban.compileCallback(onchange);
    input.bind('luban-formfieldchange', callback);
    // onchange handler will prepare data and trigger luban onchange handler
    input.change(
      function (event) {
-       var old = $(this).data('oldvalue'), newval = $(this).val();
-       $(this).data('oldvalue', newval);
+       var old = element._je.data('oldvalue'), newval = element.getAttribute('value');
+       element._je.data('oldvalue', newval);
        var data = {
 	 'old': old,
 	 'new': newval
@@ -137,8 +137,6 @@
    );
   };
   widgets.create_onfocus_event_handler_for_input = function(onfocus, input) {
-   // init 'oldvalue' data
-   input.data('oldvalue', input.val());
    // luban onfocus event
    var callback = luban.compileCallback(onfocus);
    input.bind('luban-formfieldfocus', callback);
@@ -151,8 +149,6 @@
    );
   };
   widgets.create_onblur_event_handler_for_input = function(onblur, input) {
-   // init 'oldvalue' data
-   input.data('oldvalue', input.val());
    // luban onblur event
    var callback = luban.compileCallback(onblur);
    input.bind('luban-formfieldblur', callback);

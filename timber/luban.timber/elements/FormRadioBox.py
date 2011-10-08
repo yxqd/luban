@@ -17,13 +17,14 @@ from .FormField import FormField as base
 
 class FormRadioBox(base):
 
+    # decorations
+    entries = descriptors.ordered_dict()
+    selection = descriptors.str()
 
+    # methods
     def identify(self, inspector):
         return inspector.onFormRadioBox(self)
 
-    entries = descriptors.ordered_dict()
-    selection = descriptors.str()
-    
     
 
 # version

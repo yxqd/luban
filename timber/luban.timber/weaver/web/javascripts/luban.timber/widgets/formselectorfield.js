@@ -95,18 +95,6 @@
     this.super1(elem);
   };
   widgets.formselectorfield.prototype = new widgets.base ();
-  widgets.formselectorfield.prototype.saveCurrentValue = function () {
-    var w = this._je;
-    // save the current "current-value" as "old-value"
-    var v = w.data('current-value');
-    w.data('old-value', v);
-    // save the real current value as "current-value"
-    v = this.getAttribute('value');
-    w.data('current-value', v);
-  };
-  widgets.formselectorfield.prototype.getOldValue = function () {
-    return this._je.data('old-value');
-  };
   widgets.formselectorfield.prototype.getInputWidget = function () {
     return this._je.find('select');
   };

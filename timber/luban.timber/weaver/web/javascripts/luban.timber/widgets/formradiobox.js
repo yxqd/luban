@@ -37,6 +37,7 @@
 
   // formradiobox
   ef.formradiobox = function(kwds, docmill, parent) {
+    // create skeleton
     var div = formfield(kwds, docmill), input_container = div.find('.input-container');
     div.addClass('luban-formradiobox');
 
@@ -46,37 +47,27 @@
       div.tooltip({showURL: false});
     }
 
-    var field = kwds;
-    var args =  {
-      'name': formatElementName(field.name),
-      'type': 'radio'
-    };
+    // save. need it in setEntries
+    div.data('name', kwds.name);
 
-    var selection = kwds.selection;
-
-    for (var i in field.entries) {
-      var args1 = $.extend({}, args);
-      var entry = field.entries[i];
-      var value = entry.value, description;
-      if (value == null) {
-	value = entry[0]; description = entry[1];
-      } else {
-	description = entry.description;
-      }
-      if (selection != null && (selection == description|selection==value))
-	{ args1['checked'] = 'checked'; }
-      args1['value']=value;
-      var div1 = tag('div'); div1.addClass('luban-radiobutton-container');
-      input_container.append(div1);
-      var input = tag('input', args1);
-      var text = tag('label'); text.text(description);
-      div1.append(input);
-      div1.append(text);
-    }
-
-    // XXX: onchange?
+    // the luban element
     var ret = div.lubanElement('formradiobox');
     if (parent) {parent.add(ret);}
+
+    // create inputs
+    ret.setEntries(kwds.entries);
+
+    // set value
+    var selection = kwds.selection;
+    if (selection != null) ret.setAttribute({value: selection});
+
+    // event handlers
+    input = div.find('input');
+    var onchange = kwds.onchange;
+    if (onchange) {
+      widgets.create_onchange_event_handler_for_input(onchange, input, ret);
+    }
+
     return ret;
   };
 
@@ -85,6 +76,9 @@
     this.super1(elem);
   };
   widgets.formradiobox.prototype = new widgets.base ();
+  widgets.formradiobox.prototype.getInputContainer = function() {
+    return this._je.find('.input-container');
+  };
   widgets.formradiobox.prototype.getInputWidgets = function(checked) {
     if (checked)
       {return this._je.find('input:checked');}
@@ -94,14 +88,42 @@
     var je = this._je;
     formfield_setAttribute(je, attrs);
 
+    var entries = attrs.entries;
+    if (entries) this.setEntries(entries);
+
     var value = attrs.value;
     if (value != null) {
       var checked = this.getInputWidgets('checked');
-      if (Number(value)!=Number(checked.val())) {
+      if (value!=checked.val()) {
 	checked.removeAttr('checked');
 	je.find("input[value='"+value+"']").attr('checked', 'checked');
       }
     }
+
+  };
+  widgets.formradiobox.prototype.setEntries = function (entries, selection) {
+    var input_container = this.getInputContainer();
+    input_container.empty();
+
+    var name = this._je.data('name');
+    var args =  {
+      'name': formatElementName(name),
+      'type': 'radio'
+    };
+
+    for (var i in entries) {
+      var entry = entries[i];
+      var args1 = $.extend({}, args);
+      var value = entry[0], description = entry[1];
+      args1['value']=value;
+      var div1 = tag('div'); div1.addClass('luban-radiobutton-container');
+      input_container.append(div1);
+      var input = tag('input', args1);
+      var text = tag('label'); text.text(description);
+      div1.append(input);
+      div1.append(text);
+    }
+
   };
   widgets.formradiobox.prototype.getAttribute = function (name) {
     var je = this._je;
@@ -109,7 +131,7 @@
     if (ret) {return ret;}
     if (name=='value') {
       var checked = this.getInputWidgets('checked');
-      return Number(checked.val());
+      return checked.val();
     }
   };
 

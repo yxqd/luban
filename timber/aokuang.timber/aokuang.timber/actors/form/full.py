@@ -49,7 +49,7 @@ class Actor(base):
         sel = form.selector(
             label='selector', name='selectorvar',
             entries=entries,
-            selection='alpha')
+            selection='gamma')
 
         # .. text field
         textfield = form.text(label='textfield', name='textvar')
@@ -60,23 +60,24 @@ class Actor(base):
         # .. password field
         pwfield = form.password(label='password', name='password')
 
-        # fields with validators
-        floatfield = form.text(label='float variable', name='floatvar')
-        intfield = form.text(label='int variable', name='intvar')
-        
         # submit button
         submit = form.submitbutton(label='submit')
 
         # action when form is submitted
-        # Note: The routine "process" is already defined in
-        # base class FormProcessorInterface,
-        # here we just need to override "_postProcessing".
-        form.onsubmit = select(element=form).submit(
+        # since the event handler "onsubmit" is reponsible for the submssion
+        # event, "luban.event.data" refers to the form data.
+        form.onsubmit = luban.a.load(
             actor = self.name,
-            routine = 'process')
+            routine = 'process',
+            kwds = luban.event.data,
+            )
 
-        return document
+        return form
 
+    
+    def process(self, **kwds):
+        msg = "submitted: %s" % (kwds,)
+        return luban.a.alert(msg)
 
 
 # End of file 

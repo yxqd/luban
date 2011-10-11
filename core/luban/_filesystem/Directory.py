@@ -32,9 +32,14 @@ class Directory(Entry):
         self.entries = {}
         return
 
+    
+    def __getitem__(self, name):
+        if name.find('/') == -1:
+            return self.entries[name]
+        tokens = name.split('/')
+        top = tokens[0]
+        subdir = self[top]
+        return subdir['/'.join(tokens[1:])]
 
-
-# version
-__id__ = "$Id$"
 
 # End of file 

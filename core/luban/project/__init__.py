@@ -15,6 +15,31 @@
 __doc__ = """
 """
 
+
+def createProjectSkeleton(name, outdir, deployment=None):
+    from .Project import Project
+    project = Project(name=name)
+    
+    import os
+    if os.path.exists(outdir):
+        raise IOError(outdir + " already exists")
+    
+    from luban.project.CreateProjectInFS import Renderer
+    Renderer().render(project, outdir)
+
+    # reload project
+    conf = os.path.join(outdir, project.name, 'conf.py')
+    project = loadProject(conf)
+    
+    # create a deployment
+    deployment = deployment or 'cherrypy'
+    from luban.project.deployment import createDeployment
+    path = os.path.join(outdir, project.name, 'deployments')
+    createDeployment(deployment, project, path)
+    return    
+    
+    
+
 def loadProject(filename):
     from .ConfigurationLoader import ConfigurationLoader
     loader = ConfigurationLoader()

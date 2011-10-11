@@ -59,6 +59,9 @@ class Renderer:
         # it must at least has a sub package for luban actors
         tree = makePyTreeWithSubPkg(project.actors_pkg)
         root.addEntry(tree)
+
+        actors_dir = root[project.actors_pkg.replace('.', '/')]
+        actors_dir.addEntry(File.File('default.py', default_py))
         
         return root
     
@@ -93,7 +96,20 @@ def makePyTreeWithSubPkg(subpkg):
         parent = dir
         continue
     return root
+default_py = """
+import luban
+from luban.controller.Actor import Actor as base
 
+class Actor(base):
+
+    expose = 1
+
+    def default(self):
+        frame = luban.e.frame(title="hello world")
+        frame.document(title="hello world")
+        return frame
+
+"""
     
     
 def addFileToDir(path, content, dir, create_subdir=True):

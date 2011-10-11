@@ -14,6 +14,14 @@
 
 class ConfigurationLoader:
 
+    # these are relative paths in the configuration that needs to be converted
+    # to absolute paths
+    relpaths = [
+        'pytree_container',
+        'web_static',
+        ]
+
+
     def load(self, filename):
         import os, sys
         filename = os.path.abspath(filename)
@@ -21,13 +29,22 @@ class ConfigurationLoader:
         sys.path.insert(0, dir)
         import conf
         from .Project import Project
-        p = Project('p')
+        project = Project('p')
+        # get data from conf file
         for k in conf.__dict__:
             if k.startswith('_'):
                 continue
-            setattr(p, k, getattr(conf, k))
+            setattr(project, k, getattr(conf, k))
             continue
-        return p
+
+        # update relative paths to absolute paths
+        for p in self.relpaths:
+            v = getattr(project, p)
+            v = os.path.join(dir, v)
+            setattr(project, p, v)
+            continue
+        
+        return project
 
 
 # End of file 

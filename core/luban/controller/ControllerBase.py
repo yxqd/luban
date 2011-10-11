@@ -40,7 +40,9 @@ class ControllerBase:
             except:
                 pass
             continue
-        raise
+        msg = "unable to retrieve actor %s from %s. " % (actor, self.actor_packages)
+        msg += "forgot to export the actor?"
+        raise RuntimeError(msg)
 
 
     def _retrieveActor1(self, actor, package=None):

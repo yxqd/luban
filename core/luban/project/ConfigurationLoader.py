@@ -43,6 +43,8 @@ class ConfigurationLoader:
             v = os.path.join(dir, v)
             setattr(project, p, v)
             continue
+
+        project.root = dir
         
         return project
 

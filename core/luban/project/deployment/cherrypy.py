@@ -20,10 +20,9 @@ def createTree(project):
     root = Directory.Directory('cherrypy')
     
     root.addEntry(File.File('dev.conf', dev_conf))
-    root.addEntry(File.File('start_dev.sh', start_dev, executable=1))
-    
     root.addEntry(File.File('prod.conf', prod_conf))
-    root.addEntry(File.File('start_prod.sh', start_prod, executable=1))
+    
+    root.addEntry(File.File('start', start, executable=1))
 
     root.addEntry(createCpApp(project))
 
@@ -51,12 +50,6 @@ tools.staticdir.on: True
 tools.staticdir.dir: "static"
 
 """
-start_dev = """
-#!/usr/bin/env sh
-
-cherryd -i cpapp -c dev.conf
-
-"""
 
 prod_conf = """
 [global]
@@ -76,12 +69,21 @@ tools.staticdir.dir: "static"
 
 """
 
-start_prod = """
-#!/usr/bin/env sh
+start = """
+#!/usr/bin/env python
 
-cherryd -i cpapp -c prod.conf
+import sys, os
+
+if len(sys.argv) == 2 and sys.argv[1] == 'production':
+    conf = 'prod.conf'
+else:
+    conf = 'dev.conf'
+
+cmd = "cherryd -i cpapp -c %s" % conf
+os.system(cmd)
 
 """
+
 
 
 def createCpApp(project):

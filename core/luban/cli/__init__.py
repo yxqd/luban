@@ -32,15 +32,24 @@ def importActionHandler(action):
 def main():
     import sys
     if len(sys.argv) <= 1:
-        action = help
+        action = 'help'
     else:
         action = sys.argv[1]
+
+    if action in ['-h', '--help']:
+        action = 'help'
     
     mod = importActionHandler(action)
     args, kwds = mod.parse_cmdline()
     
     mod.run(*args, **kwds)
     return
+
+
+commands = [
+    'create',
+    'start',
+    ]
 
 
 # End of file 

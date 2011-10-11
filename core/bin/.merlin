@@ -1,0 +1,23 @@
+# -*- python -*-
+
+import os
+import merlin.rules
+
+#
+from merlin.Context import create
+context = create()
+context.code.project = 'luban'
+context.code.package = 'bin'
+
+#
+rules = []
+
+
+executables = [
+    'luban',
+    ]
+
+from merlin.builders.Executable import exportExe
+for e in executables:
+    exportExe(e, context)
+

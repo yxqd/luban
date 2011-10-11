@@ -1,2 +1,2 @@
 
-recurse_entries = ['luban', 'aokuang', 'tests']
+recurse_entries = ['luban', 'bin', 'aokuang', 'tests']

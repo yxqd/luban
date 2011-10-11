@@ -15,16 +15,16 @@
 }
 
 body {
-    background-color: #555;
+    background-color: #777;
     background: -moz-linear-gradient(
-	left top,
+	center top,
 	#333 25%,
 	#777 80%
     );
     background: -webkit-gradient(
 	linear,
 	left top,
-	right bottom,
+	left bottom,
 	color-stop(0.25, #333),
 	color-stop(0.83, #777)
     );

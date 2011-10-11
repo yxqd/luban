@@ -52,7 +52,4 @@ def execCmdsStr(cmdsstr):
     return
 
 
-# version
-__id__ = "$Id$"
-
 # End of file 

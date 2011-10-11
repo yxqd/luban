@@ -69,8 +69,7 @@ tools.staticdir.dir: "static"
 
 """
 
-start = """
-#!/usr/bin/env python
+start = """#!/usr/bin/env python
 
 import sys, os
 

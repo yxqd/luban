@@ -21,8 +21,21 @@ def run(path, **kwds):
     
     # XXX: should be more flexible
     deployment_path = os.path.join(project.root, 'deployments', 'cherrypy')
-    os.chdir(deployment_path)
-    os.system('python start')
+    # start server in a thread
+    import threading
+    class ServerThread(threading.Thread):
+
+        def run(self):
+            os.chdir(deployment_path)
+            os.system('python start')
+
+    ServerThread().start()
+
+    # XXX: need better implementation
+    # wait a second and start the browser
+    import time; time.sleep(1)
+    url = "http://localhost:8080"
+    import webbrowser; webbrowser.open(url)
     
     return
     

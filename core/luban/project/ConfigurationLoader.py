@@ -19,7 +19,6 @@ class ConfigurationLoader:
         filename = os.path.abspath(filename)
         dir = os.path.dirname(filename)
         sys.path.insert(0, dir)
-        print (sys.path)
         import conf
         from .Project import Project
         p = Project('p')

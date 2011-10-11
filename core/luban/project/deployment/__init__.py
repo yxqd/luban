@@ -13,13 +13,21 @@
 
 
 __doc__ = """
+scaffolding for deployment
 """
 
-def loadProject(filename):
-    from .ConfigurationLoader import ConfigurationLoader
-    loader = ConfigurationLoader()
-    return loader.load(filename)
 
+def createDeployment(name, project, path, overwrite=True):
+    code = 'from . import %s' % name
+    exec(code)
+    mod = locals()[name]
+    tree = mod.createTree(project)
+
+    from luban._filesystem.Writer import Writer
+    writer = Writer()
+    writer.render(tree, path, overwrite=overwrite)
+    
+    return
 
 # End of file 
 

@@ -68,7 +68,7 @@ class Renderer:
         tokens = web_static.split('/')
         name = tokens[0]
         root = Directory.Directory(name)
-        addFileToDir('/'.join(tokens[1:]) + '/index.html', '', root)
+        addFileToDir('/'.join(tokens[1:]) + '/css/%s.css' % project.name, '', root)
         return root
 
 

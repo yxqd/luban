@@ -37,7 +37,7 @@ def syncstatic():
         os.makedirs(target)
     
     # from luban core
-    luban_core_web = "../../../core/luban/weaver/web"
+    luban_core_web = "../../../../core/luban/weaver/web"
     
     src = os.path.join(luban_core_web, "javascripts")
     rsync(src, target + '/javascripts')
@@ -46,13 +46,13 @@ def syncstatic():
     rsync(src, target + '/css')
 
     # from aokuang core
-    aokuang_core_web = "../../../core/aokuang/cherrypy"
+    aokuang_core_web = "../../../../core/aokuang/cherrypy"
     
     src = os.path.join(aokuang_core_web, "static/css")
     rsync(src, target + '/css')
     
     # from timber
-    timber_web = "../../luban.timber/weaver/web"
+    timber_web = "../../../luban.timber/weaver/web"
     
     src = os.path.join(timber_web, "javascripts")
     rsync(src, target + '/javascripts')

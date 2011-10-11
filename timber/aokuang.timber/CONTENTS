@@ -1,2 +1,2 @@
 aokuang.timber: aokuang.timber python package
-cherrpy: cherrpy fixture to serve aokuang.timber
+web: deployment for web

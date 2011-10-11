@@ -51,6 +51,8 @@ class Element(ElementBase, metaclass=Meta):
 
     """base class of all element types except null element
     """
+
+    simple_description = "base class of luban ui elements"
     
     # indicate this is abstract and cannot be instantiated
     abstract = True

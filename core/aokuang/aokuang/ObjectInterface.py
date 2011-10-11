@@ -33,7 +33,9 @@ class Factory:
     
 
     def create(self):
-        title = self.object_type.__unique_type_name__
+        title = getattr(self, 'panel_title', None)
+        if not title:
+            title = self.object_type.__unique_type_name__
         container = luban.e.document(title=title)
 
         object_type = self.object_type
@@ -111,7 +113,9 @@ class Factory:
         object_type = self.object_type
         title = "%s: %s" % (object_type.__name__, object_type.simple_description)
         title = '%s\n%s\n' % (title, '-'*len(title))
-        description = object_type.full_description
+        description = getattr(self, 'full_description', None)
+        if not description:
+            description = object_type.full_description
         if not isinstance(description, str):
             raise ValueError("full_description of a luban type must be a str, not %r" % (description, ))
 

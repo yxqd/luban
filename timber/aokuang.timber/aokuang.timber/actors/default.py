@@ -68,10 +68,6 @@ class Actor(base):
     
 
 # list of items in aokuang.core
-core = [
-    'loading',
-    'alert',
-    ]
 
 
 menu = [
@@ -81,7 +77,8 @@ menu = [
       ]),
     
     ('basic widgets', 
-     ['document',
+     ['elementbase', 
+      'document',
       'paragraph',
       'button',
       'image',

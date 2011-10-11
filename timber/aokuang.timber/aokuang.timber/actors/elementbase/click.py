@@ -24,11 +24,11 @@ class Actor(base):
         doc = luban.e.document(id='container')
         b1 = doc.button(
             id = 'b1',
-            label = 'a button', 
+            label = 'this button when clicked will trigger an alert', 
             onclick = luban.a.alert("button 1 clicked"),
             )
         b2 = doc.button(
-            label = 'click me',
+            label = 'this button when clicked will trigger the previous button to "click"',
             onclick = [
                 luban.a.alert("button 2 clicked. it will trigger button 1 to click."),
                 luban.a.select(element=b1).click(),

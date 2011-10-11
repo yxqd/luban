@@ -33,6 +33,7 @@ class Project2FS(object):
         name = project.name
         root = Directory.Directory(name)
         root.addEntry(self._createPythonPackage(project))
+        root.addEntry(self._createWebDir(project))
         return root
 
 
@@ -45,6 +46,15 @@ class Project2FS(object):
         root.addEntry(actors)
 
         addFileToDir('__init__.py', '', actors)
+        
+        return root
+
+
+    def _createWebDir(self, project):
+        root = Directory.Directory('web')
+        
+        static = Directory.Directory('static')
+        root.addEntry(static)
         
         return root
 

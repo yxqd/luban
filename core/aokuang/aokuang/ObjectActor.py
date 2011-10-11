@@ -95,8 +95,12 @@ class Actor(base):
 
 
 def _sortPanels(panels):
-    k = lambda p: p.rank
-    panels.sort(key=k)
+    def key(p):
+        try:
+            return p.rank
+        except AttributeError:
+            raise RuntimeError("panel %s does not have a rank" % p.actor_name)
+    panels.sort(key=key)
     return panels
 
 

@@ -23,7 +23,7 @@ class Actor(base):
     rank = 10003
     
     def createDemoPanel(self, **kwds):
-        container = luban.e.document(id='container')
+        container = luban.e.document()
         
         doc = container.document(title = 'the document to replace', id=luban.uuid())
         newdoc = luban.e.document(title = 'new document')

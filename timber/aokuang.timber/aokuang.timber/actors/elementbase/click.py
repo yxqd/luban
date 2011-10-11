@@ -23,7 +23,7 @@ class Actor(base):
     rank = 10001
     
     def createDemoPanel(self, **kwds):
-        doc = luban.e.document(id='container')
+        doc = luban.e.document()
         b1 = doc.button(
             id = 'b1',
             label = 'this button when clicked will trigger an alert', 

@@ -16,23 +16,22 @@ import luban
 from ....DemoPanelActor import Actor as base
 class Actor(base):
 
-    title='append'
+    title='setAttr'
     description = [
-        'action to append a new element to a selected element'
+        'action to change attributes of an element',
         ]
     rank = 10004
     
     def createDemoPanel(self, **kwds):
         container = luban.e.document()
-        
-        doc = container.document(
-            title = 'the document to which a new element will be appended', 
-            id=luban.uuid())
-        
-        newelem = luban.e.paragraph(text = 'new element')
+
+        textfield = container.formtextfield(label='text', value='value', id=luban.uuid())
         
         button = container.button(label = 'click me')
-        button.onclick = luban.a.select(element = doc).append(newelement = newelem)
+        button.onclick = luban.a.select(element = textfield).setAttr(
+            label = 'new text',
+            value = 'new value',
+            )
         return container
     
 

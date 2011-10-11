@@ -51,6 +51,8 @@ base['javascripts'] += [
     # history
     'jquery.ext/jquery.history.js',
     'luban.timber/history.js',
+    # common utils for form elements
+    'luban.timber/widgets/form-element-basic.js',
     ]
 base['stylesheets'] +=  [
     'luban.timber.css',
@@ -87,7 +89,6 @@ form = {
     'javascripts':
         (
         'luban.timber/widgets/form.js',
-        'luban.timber/widgets/form-element-basic.js',
         ),
     }
 

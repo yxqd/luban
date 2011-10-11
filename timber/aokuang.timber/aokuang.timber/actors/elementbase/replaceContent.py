@@ -23,7 +23,7 @@ class Actor(base):
     rank = 10004
     
     def createDemoPanel(self, **kwds):
-        container = luban.e.document(id='container')
+        container = luban.e.document()
         
         doc = container.document(
             title = 'the document for which the interior with be replaced', 

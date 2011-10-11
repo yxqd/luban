@@ -16,7 +16,9 @@ A quick overview of luban philosophy is here.
 Getting Started
 ---------------
 
-* :ref:`Create your first luban user interface <helloworld>`
+* :ref:`Hello world <helloworld>`
+* :ref:`Adding widgets <widgets-tutorial>`
+* :ref:`Form <form-tutorial>`
 * :ref:`Make your web application dynamic`
 * :ref:`Styling your interface`
 * :ref:`Customize and extend luban widgets`

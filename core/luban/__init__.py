@@ -19,6 +19,7 @@ packages:
 
 * ui: type system; element and action representations
 * weaver: convert luban ui representation to implementations such as javascript
+* project: luban project
 * utils: miscellaneous tools
 
 """

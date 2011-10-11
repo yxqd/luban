@@ -77,11 +77,11 @@ menu = [
       ]),
     
     ('basic widgets', 
-     ['elementbase', 
-      'document',
+     ['document',
       'paragraph',
       'button',
       'image',
+      'elementbase', 
       ]),
 
     ('form and form fields',

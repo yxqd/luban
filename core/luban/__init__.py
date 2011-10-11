@@ -39,11 +39,10 @@ use_timber_extension = eval(use_timber_extension) \
 debug = True
 
 
-#
+# shortcuts
 from .ui import e, a, event
-
-#
 from . import decorators
+from .uuid import uuid
 
 #
 if use_timber_extension:

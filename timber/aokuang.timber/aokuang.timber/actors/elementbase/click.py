@@ -20,6 +20,8 @@ class Actor(base):
     description = [
         'Programmatically click a button',
         ]
+    rank = 10001
+    
     def createDemoPanel(self, **kwds):
         doc = luban.e.document(id='container')
         b1 = doc.button(

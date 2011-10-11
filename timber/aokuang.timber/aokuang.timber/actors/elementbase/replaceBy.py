@@ -16,16 +16,22 @@ import luban
 from ....DemoPanelActor import Actor as base
 class Actor(base):
 
-    title='"onclick" event'
+    title='replaceBy'
     description = [
-        '"onclick" event happens when an element is clicked.',
+        'action to replace a UI element (hierarchy) with a new one'
         ]
-    rank = 1
+    rank = 10003
     
     def createDemoPanel(self, **kwds):
-        b = luban.e.button(label='click me')
-        b.onclick = luban.a.alert("clicked!")
-        return b
+        container = luban.e.document(id='container')
+        
+        doc = container.document(title = 'the document to replace', id=luban.uuid())
+        newdoc = luban.e.document(title = 'new document')
+        
+        button = container.button(label = 'click me')
+        button.onclick = luban.a.select(element = doc).replaceBy(newelement = newdoc)
+        return container
+    
 
 
 # End of file 

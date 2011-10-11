@@ -81,8 +81,7 @@ class Actor(base):
         '''
         tabs = luban.e.tabs()
         demotab = tabs.tab(label='Demo')
-        from luban import uuid
-        demotab.id = uuid.uuid()
+        demotab.id = luban.uuid()
         demotab.Class = 'demo'
         funcname = func.__func__.__name__
         demotab.onselect = luban.a.select(element=demotab).replaceContent(

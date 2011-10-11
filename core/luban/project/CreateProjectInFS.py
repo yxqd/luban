@@ -22,7 +22,7 @@ renderer that create a directory tree in the file system for a luban project
 # units in the project.
 
 
-class Project2FS(object):
+class Renderer:
 
 
     def render(self, project, root='.', overwrite=False):

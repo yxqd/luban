@@ -17,9 +17,9 @@ import unittest
 class TestCase(unittest.TestCase):
      
     def test1(self):
-        """luban.project.Project2FS"""
+        """luban.project.CreateProjectInFS"""
 
-        outdir = 'out-Project2FS_TestCase-test1'
+        outdir = 'out-CreateProjectInFS_TestCase-test1'
         
         from luban.project.Project import Project
         project = Project(name='myproject')
@@ -29,8 +29,8 @@ class TestCase(unittest.TestCase):
             import shutil
             shutil.rmtree(outdir)
 
-        from luban.project.Project2FS import Project2FS
-        Project2FS().render(project, outdir)
+        from luban.project.CreateProjectInFS import Renderer
+        Renderer().render(project, outdir)
         
         return
      

@@ -26,7 +26,7 @@ class DynamicProperty(Property):
         # if value is an action, it is ok
         from ..actions.ActionBase import ActionBase
         if isinstance(value, ActionBase):
-            store = instance._properties
+            store = self._get_prop_store(instance)
             store[self.name] = value
             return value
         

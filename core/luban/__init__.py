@@ -47,7 +47,11 @@ from . import decorators
 
 #
 if use_timber_extension:
-    import luban.timber
+    try:
+        import luban.timber
+    except ImportError:
+        import warnings
+        warnings.warn("luban 'timber' extension does not exist. only luban core is present")
 
 # End of file 
 

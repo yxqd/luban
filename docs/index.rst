@@ -27,7 +27,7 @@ News
 ----
 
 * luban repository is now available at `launchpad <https://launchpad.net/luban>`_
-* `Imagin'Labs <http://imaginlabs.com>`_ uses luban for its web presentation.
+* `Imagin'Labs corporation <http://imaginlabs.com>`_ uses luban for its web presentation.
 * `Guido van Rossum <http://www.python.org/~guido>`_, the author of python,
   `started a thread about luban <https://plus.google.com/115212051037621986145/posts/ThMuTvwut9g>`_
 

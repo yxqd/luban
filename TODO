@@ -1,9 +1,10 @@
 
 core:
-* docs for luban core
+* action "establish interface"
+* tutorial docs
 * checking of event handler assigment probably should be configurable
-  to be omitted -- see luban.ui.descriptors.EventHandler
+  to be omitted -- see luban.ui.descriptors.EventHandler -- to speed up in production mode
 * client side cache (data store)
 
 timber:
-* migrate elements that are still in luban 0.2 form
+* migrate things that are in _pending_ directories

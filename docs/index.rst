@@ -1,5 +1,5 @@
-Luban: a generic "language" for creating user interface
-=======================================================
+Luban: a generic UI "language"
+==============================
 
 Luban is a python package for building user interface. 
 For example, with luban, one can quickly create 
@@ -8,20 +8,28 @@ interfaces using **pure python**: **no knowledge of html and javascript
 is required**; anyone knowing basic python can use luban to
 create their user interface applications accessible from web browsers.
 
-Luban is different from any existing web frameworks in philosophy:
-it provides a generic "language" for describing user interface
-(more details can be found in :ref:`concepts of luban <philosophy>`).
+Luban provides a generic "language" with simple, natural syntax
+for describing user interfaces. 
+A quick overview of luban philosophy is here.
 
-Luban is focused on providing a simple, easy-to-understand syntax to
-describe user interfaces, and hence allows users to focus more 
-on the business logic needed 
-behind user interfaces.
 
 Getting Started
 ---------------
 
-* :ref:`Language core <language-core>`
-* :ref:`core-implementation-python`
+* :ref:`First web user interface with luban <helloworld>`
+* :ref:`Make your web application dynamic`
+* :ref:`Styling your interface`
+* :ref:`Customize and extend luban widgets`
+* :ref:`Create my own luban extension`
+
+
+News
+----
+
+* luban repository is now available at `launchpad <https://launchpad.net/luban>`_
+* `Imagin'Labs <http://imaginlabs.com>`_ uses luban for its web presentation.
+* `Guido van Rossum <http://www.python.org/~guido>`_, the author of python,
+  `started a thread about luban <https://plus.google.com/115212051037621986145/posts/ThMuTvwut9g>`_
 
 
 Borrowed technologies

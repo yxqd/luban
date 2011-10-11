@@ -38,44 +38,6 @@ C = luban.Controller = {
 
 
 
-  // method to submit form (this) to the given actor and routine
-  // actor and routine are specified in kwds
-  // kwds:
-  //   actor: name of actor
-  //   routine: name of routine
-  //   callback: callback function when response from the server is obtained
-  //   responsetype: type of response obtained from server. default: json
-  //   data: additional data to send to the controller
-  $.fn.submitTo = function(kwds) {
-    var actor = kwds.actor;
-    var routine = kwds.routine;
-    if (!routine) {routine = 'default';}
-    var callback = kwds.callback;
-    var controller = C.url;
-
-    var responsetype = kwds.responsetype;
-    if (responsetype == null)
-      {responsetype ='json';}
-
-    var formdatastr = $(this).serialize();
-
-    var data = kwds.data, datastr;
-    if (data == null) {datastr = '';}
-    else {datastr = argsStr(data);}
-
-    var sentrystr = argsStr(C.getCredentialArgs());
-
-    var args = {'actor': actor,
-		'routine': routine};
-    var allargsstr = [argsStr(args), sentrystr, datastr, formdatastr].join('&');
-
-    // jquery ajax post
-    $.post(controller, allargsstr, callback, responsetype);
-
-    return $(this);
-  };
-
-
   // replace the content of "this" widget
   // data: a dict
   //   html: new html content
@@ -290,19 +252,6 @@ C = luban.Controller = {
     var data = kwds.data;
     kwds.data = prependParameterPrefix(data);
     C.call(kwds);
-  };
-
-
-  // submit form to server and get response and execute commands in the response
-  // form: the form to submit
-  // kwds: a dict
-  //   actor: the name of the actor
-  //   routine: the name of the routine
-  //   data: a dictionary of additional parameters to send to the server
-  C.submit = function(form, kwds, callback) {
-    kwds.callback = callback;
-    kwds.data = prependParameterPrefix(kwds.data);
-    form.submitTo(kwds);
   };
 
 

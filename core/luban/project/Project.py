@@ -27,6 +27,13 @@ class Project:
 
     def __init__(self, name):
         self.name = name
+        # XXX
+        # these names are differnt from those of class variables
+        # because the object variables could be changed in the future to
+        # absolute paths
+        self.pytree_container = self.python_in_project
+        self.actors_pkg = name + self.actors_in_python
+        self.web_static = self.web_static_in_project
         return
 
     def identify(self, inspector):

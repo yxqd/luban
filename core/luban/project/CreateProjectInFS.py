@@ -54,25 +54,21 @@ class Renderer:
     def _createPythonPackage(self, project):
         # the python package for the project 
         name = project.name
-        root = Directory.Directory(project.python_in_project)
+        root = Directory.Directory(project.pytree_container)
 
         # it must at least has a sub package for luban actors
-        actors_in_python = project.actors_in_python
-        subpkg = project.name + actors_in_python
-        tree = makePyTreeWithSubPkg(subpkg)
+        tree = makePyTreeWithSubPkg(project.actors_pkg)
         root.addEntry(tree)
         
         return root
     
     
     def _createWebDir(self, project):
-        # directory for web related stuff
-        root = Directory.Directory('web')
-        
-        # the static html files, images, javascript files, css files etc
-        static = Directory.Directory('static')
-        root.addEntry(static)
-        
+        web_static = project.web_static
+        tokens = web_static.split('/')
+        name = tokens[0]
+        root = Directory.Directory(name)
+        addFileToDir('/'.join(tokens[1:]) + '/index.html', '', root)
         return root
 
 

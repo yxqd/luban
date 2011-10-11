@@ -13,19 +13,22 @@
 
 
 template = """
+# name of the project
 name = %(name)r
+
+# the container directory of python tree
 python_tree_container_directory = %(pytree_container)r
+
+# the name of the python (sub)package containing actors
 actors_pkg = %(actors_pkg)r
-web_static_directory = %(web_static)r
+
+# path to the "static" directory for web presentation
+web_static = %(web_static)r
 
 """
 
 def create(project):
-    name = project.name
-    pytree_container = project.python_in_project
-    actors_pkg = name + project.actors_in_python
-    web_static = project.web_static_in_project
-    return template % locals()
+    return template % project.__dict__
 
 
 # End of file 

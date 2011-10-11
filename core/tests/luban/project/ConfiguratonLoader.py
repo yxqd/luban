@@ -18,7 +18,7 @@ class TestCase(unittest.TestCase):
      
     def test1(self):
         """luban.project.ConfigurationLoader"""
-        filename = "conf.py"
+        filename = "testproj/conf.py"
         from luban.project.ConfigurationLoader import ConfigurationLoader
         loader = ConfigurationLoader()
         project = loader.load(filename)

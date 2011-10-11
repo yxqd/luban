@@ -115,4 +115,38 @@ class Root(CherrypyController):
 
 """
 
+
+
+
+def populateWebStatic(root, project):
+    """populate the static directory in a cherrypy deployment with 
+    luban js and css files,
+    and also project static files.
+
+    root: path to the cherrypy deployment root
+    project: the luban project
+    """
+    import os
+    static = os.path.join(root, 'static')
+
+    import luban.weaver.web
+    copy_static_from_luban_web_weaver_pkg(luban.weaver.web, static)
+
+    import luban.timber.weaver.web
+    copy_static_from_luban_web_weaver_pkg(luban.timber.weaver.web, static)
+
+    copy_tree(project.web_static, static)
+    return
+
+
+from distutils.dir_util import copy_tree
+import os
+def copy_static_from_luban_web_weaver_pkg(pkg, dest):
+    dir = os.path.dirname(pkg.__file__)
+    copy_tree(os.path.join(dir, 'javascripts'), os.path.join(dest, 'javascripts'))
+    copy_tree(os.path.join(dir, 'css'), os.path.join(dest, 'css'))
+    return
+
+
+
 # End of file 

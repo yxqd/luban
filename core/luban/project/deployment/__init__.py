@@ -27,6 +27,9 @@ def createDeployment(name, project, path, overwrite=True):
     writer = Writer()
     writer.render(tree, path, overwrite=overwrite)
     
+    import os
+    deployment_root = os.path.join(path, tree.name)
+    mod.populateWebStatic(deployment_root, project)
     return
 
 # End of file 

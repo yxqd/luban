@@ -20,10 +20,10 @@ def createTree(project):
     root = Directory.Directory('cherrypy')
     
     root.addEntry(File.File('dev.conf', dev_conf))
-    root.addEntry(File.File('start_dev.sh', start_dev))
+    root.addEntry(File.File('start_dev.sh', start_dev, executable=1))
     
     root.addEntry(File.File('prod.conf', prod_conf))
-    root.addEntry(File.File('start_prod.sh', start_prod))
+    root.addEntry(File.File('start_prod.sh', start_prod, executable=1))
 
     root.addEntry(createCpApp(project))
 

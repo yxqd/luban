@@ -18,17 +18,28 @@ command line interface
 
 
 def run(action, *args, **opts):
+    mod = importActionHandler(action)
+    return mod.run(*args, **opts)
+
+
+def importActionHandler(action):
     code = 'from . import %s' % action
     exec(code)
     mod = locals()[action]
-    return mod.run(*args, **opts)
+    return mod
 
 
 def main():
     import sys
-    action = sys.argv[1]
-    name = sys.argv[2]
-    run(action, name)
+    if len(sys.argv) <= 1:
+        action = help
+    else:
+        action = sys.argv[1]
+    
+    mod = importActionHandler(action)
+    args, kwds = mod.parse_cmdline()
+    
+    mod.run(*args, **kwds)
     return
 
 

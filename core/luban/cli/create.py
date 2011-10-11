@@ -16,17 +16,30 @@ import os
 
 def run(name, outdir = None, **kwds):
     outdir = outdir or '.'
-    projdir = os.path.join(outdir, name)
-    
-    if os.path.exists(projdir):
-        import shutil
-        shutil.rmtree(projdir)
-
     from ..project import createProjectSkeleton
     createProjectSkeleton(name, outdir)
     return
     
 
+def parse_cmdline():
+    import optparse
+    usage = "usage: %prog [options] create project-name"
+    parser = optparse.OptionParser(usage, add_help_option=True)
+    
+    #
+    parser.add_option(
+        '-o', '--outdir', 
+        dest='outdir', 
+        help='output directory. default: .', 
+        default='.',
+        )
+
+    #
+    options, args = parser.parse_args()
+    if len(args) < 2:
+        parser.error("project name must be specified. for more help:\n\n  $ luban create -h\n\n")
+    args, kwds = args[1:], vars(options)
+    return args, kwds
 
 # End of file 
 

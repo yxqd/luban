@@ -12,7 +12,7 @@
 #
 
 
-from Inspector import Inspector
+from .Inspector import Inspector
 
 class Writer(Inspector):
 
@@ -31,11 +31,11 @@ class Writer(Inspector):
         
         if os.path.exists(path):
             if not self._overwrite:
-                raise RuntimeError, "%s already exists" % path
+                raise RuntimeError("%s already exists" % path)
         else:
             os.makedirs(path)
             
-        for entry in directory.entries.itervalues():
+        for entry in directory.entries.values():
             self._currentpath = path
             entry.identify(self)
             continue
@@ -48,7 +48,7 @@ class Writer(Inspector):
 
         if os.path.exists(path):
             if not self._overwrite:
-                raise RuntimeError, "%s already exists" % path
+                raise RuntimeError("%s already exists" % path)
 
         open(path, 'w').write(content)
 
@@ -61,7 +61,7 @@ class Writer(Inspector):
         path = os.path.join(self._currentpath, link.name)
         if os.path.exists(path):
             if not self._overwrite:
-                raise RuntimeError, "%s already exists" % path
+                raise RuntimeError("%s already exists" % path)
             os.remove(path)
 
         try:
@@ -70,7 +70,7 @@ class Writer(Inspector):
             import traceback; tb = traceback.format_exc()
             msg = 'Failed to make symlink %r to %r.  Original traceback:\n%s'
             msg = msg % (path, link.target, tb)
-            raise RuntimeError, msg
+            raise RuntimeError(msg)
         return
 
 

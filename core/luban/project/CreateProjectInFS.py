@@ -45,7 +45,7 @@ class Renderer:
 
 
     def _createConfFile(self, project):
-        fn = "proj.conf"
+        fn = "conf.py"
         from .templates import proj_conf
         content = proj_conf.create(project)
         return File.File(fn, content)

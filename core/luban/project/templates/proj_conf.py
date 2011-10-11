@@ -17,7 +17,7 @@ template = """
 name = %(name)r
 
 # the container directory of python tree
-python_tree_container_directory = %(pytree_container)r
+pytree_container = %(pytree_container)r
 
 # the name of the python (sub)package containing actors
 actors_pkg = %(actors_pkg)r

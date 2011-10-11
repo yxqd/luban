@@ -17,20 +17,11 @@ import unittest
 class TestCase(unittest.TestCase):
      
     def test1(self):
-        """luban.project.CreateProjectInFS"""
-
-        outdir = 'out-CreateProjectInFS_TestCase-test1'
-        
-        from luban.project.Project import Project
-        project = Project(name='myproject')
-
-        import os
-        if os.path.exists(outdir):
-            import shutil
-            shutil.rmtree(outdir)
-
-        from luban.project.CreateProjectInFS import Renderer
-        Renderer().render(project, outdir)
+        """luban.project.ConfigurationLoader"""
+        filename = "conf.py"
+        from luban.project.ConfigurationLoader import ConfigurationLoader
+        loader = ConfigurationLoader()
+        project = loader.load(filename)
         return
      
     

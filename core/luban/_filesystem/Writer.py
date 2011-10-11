@@ -76,7 +76,7 @@ class Writer(Inspector):
 
 import os
 
-import journal
+from .. import journal
 debug = journal.debug('luban._filesystem.Writer')
 
 # version

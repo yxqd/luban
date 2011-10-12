@@ -23,6 +23,8 @@ class Actor(base):
         'The loaded action is adding a class to a document.',
         ]
 
+    rank = 0
+    
     def createDemoPanel(self, **kwds):
         container = luban.e.document()
         doc = container.document(

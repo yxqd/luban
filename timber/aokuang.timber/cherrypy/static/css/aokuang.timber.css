@@ -29,6 +29,7 @@ body {
 	color-stop(0.83, #777)
     );
     min-height: 40em;
+    padding-bottom: 5em;
 }
 
 /* left */

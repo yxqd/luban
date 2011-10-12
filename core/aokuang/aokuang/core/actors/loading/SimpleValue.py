@@ -31,7 +31,7 @@ class Actor(base):
         'A simple value can be loaded from the controller and used to',
         'update the UI.',
         ]
-    
+    rank = 10
 
     def createDemoPanel(self, **kwds):
         container = luban.e.document(title="hey")

@@ -22,6 +22,7 @@ class Actor(base):
         'and the loaded actions are then executed.',
         'The loaded actions: adding a class to a document and an alert.',
         ]
+    rank = 1000
 
     def createDemoPanel(self, **kwds):
         container = luban.e.document()

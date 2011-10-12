@@ -16,9 +16,15 @@ import luban
 from ....DemoPanelActor import Actor as base
 class Actor(base):
 
-    title='An empty form'
+    title='A form'
     description = [
+        "This is a form with a few typical form controls.",
+        "You can change the values of these form controls, ",
+        "and then submit the form.",
         ]
+    rank = 0
+    
+
     def createDemoPanel(self, **kwds):
         # form
         form = luban.e.form(title='test form')

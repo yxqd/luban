@@ -82,10 +82,22 @@ class Actor(base):
             panel = ObjectInterfaceFactory.DemoPanel()
             panel.title = Actor.title
             panel.actor_name = '%s.%s' % (self.name, name)
+            if hasattr(Actor, 'rank'):
+                panel.rank = Actor.rank
+                
             panels.append(panel)
             candidates.append(name)
             continue
+        if panels:
+            if hasattr(panels[0], 'rank'):
+                panels = _sortPanels(panels)
         return panels
+
+
+def _sortPanels(panels):
+    k = lambda p: p.rank
+    panels.sort(key=k)
+    return panels
 
 
 # End of file 

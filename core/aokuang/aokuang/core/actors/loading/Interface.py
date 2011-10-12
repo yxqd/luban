@@ -21,7 +21,8 @@ class Actor(base):
         'A UI element can be loaded from the controller,',
         'to replace a part of the existing UI.',
         ]
-
+    
+    rank = 100
 
     def createDemoPanel(self, **kwds):
         container = luban.e.document(id='container')

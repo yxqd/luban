@@ -16,17 +16,19 @@ from .decorators import experimental
 
 class CommonElementActionFactory:
 
+    
     def find(self, name=None, type=None):
         '''find descendents by name and/or type and select them '''
         from .SimpleElementAction import SimpleElementAction
         return SimpleElementAction(element=self, actionname='find', name=name, type=type)
     
-
+    
     def empty(self):
         '''empty me (remove all my children) '''
         from .RemoveContent import RemoveContent
         return RemoveContent(element=self)
-
+    
+    
     @experimental
     def findDescendentIDs(self, type):
         '''find ids of my descendents given the type '''

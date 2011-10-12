@@ -18,9 +18,14 @@ class Actor(base):
 
     title='Two forms, each with a submit button'
     description = [
-        "Please pay special attention on how the form data is passed to the handler method",
+        'These two forms are almost identical except for the "onsubmit"',
+        'event handler.',
+        'Please read the code in the "Code" tab, '
+        "and pay special attention on how the form data",
+        "is passed to the handler method",
         ]
-
+    rank = 100
+    
 
     def createDemoPanel(self, **kwds):
         container = luban.e.document()

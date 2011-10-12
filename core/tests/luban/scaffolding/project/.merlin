@@ -1,0 +1,25 @@
+# -*- python -*-
+
+import merlin.rules, os
+from merlin.Context import create
+context = create()
+context.code.project = 'luban'
+
+
+tests = []
+import glob
+seq = open('.sequence').readlines()
+for f in seq:
+    f = f.strip()
+    tests += glob.glob(f)
+    continue
+
+
+rules = []
+rules.append(
+    merlin.rules.testSuite(name="luban.scaffolding.project", tests = tests)
+    )
+
+
+recurse_entries = [
+    ]

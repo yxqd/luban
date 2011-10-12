@@ -18,6 +18,8 @@ recurse_entries = []
 
 # export css and js files
 def rsync(src, target):
+    if not os.path.exists(target):
+        os.makedirs(target)
     cmd = "rsync -a --copy-unsafe-links %s/ %s/" % (src, target)
 
     from merlin import osutils

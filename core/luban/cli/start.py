@@ -18,13 +18,13 @@ def run(path, **kwds):
     if not os.path.exists(path):
         raise IOError("%r does not exist" % path)
     
-    from luban.project import loadProject
+    from luban.scaffolding.project import loadProject
     conf = os.path.join(path, 'conf.py')
     project = loadProject(conf)
     
     # create a deployment
     deployment = project.deployment or 'cherrypy'
-    from luban.project.deployment import createDeployment
+    from luban.scaffolding.project.deployment import createDeployment
     deployments_path = os.path.join(path, 'deployments')
     deployment_path = createDeployment(deployment, project, deployments_path)
 

@@ -16,7 +16,7 @@ import os
 
 def run(name, outdir = None, **kwds):
     outdir = outdir or '.'
-    from ..project import createProjectSkeleton
+    from ..scaffolding.project import createProjectSkeleton
     createProjectSkeleton(name, outdir)
     return
     

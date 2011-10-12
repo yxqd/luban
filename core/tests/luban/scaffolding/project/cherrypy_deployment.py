@@ -17,17 +17,22 @@ import unittest
 class TestCase(unittest.TestCase):
      
     def test1(self):
-        """luban.project.createProjectSkeleton"""
+        """luban.scaffolding.project.deployment.cherrypy"""
 
-        outdir = 'out-createProjectSkeleton'
+        outdir = 'deployments'
         
         import os
-        if os.path.exists(outdir):
-            import shutil
-            shutil.rmtree(outdir)
+        os.chdir('testproj')
+        
+        #
+        filename = "conf.py"
+        from luban.scaffolding.project import loadProject
+        project = loadProject(filename)
 
-        from luban.project import createProjectSkeleton
-        createProjectSkeleton('myproject', outdir)
+        #
+        from luban.scaffolding.project.deployment import createDeployment
+        createDeployment('cherrypy', project, outdir)
+        
         return
      
     

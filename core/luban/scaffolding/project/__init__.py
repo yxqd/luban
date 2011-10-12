@@ -25,7 +25,7 @@ def createProjectSkeleton(name, outdir, deployment=None):
     if os.path.exists(projdir):
         raise IOError(projdir + " already exists")
     
-    from luban.project.CreateProjectInFS import Renderer
+    from .CreateProjectInFS import Renderer
     Renderer().render(project, outdir)
     
     return

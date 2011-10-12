@@ -4,7 +4,7 @@
 #
 #                                   Jiao Lin
 #                      California Institute of Technology
-#                      (C) 2006-2011 All Rights Reserved 
+#                      (C) 2006-2009 All Rights Reserved 
 #
 # {LicenseText}
 #
@@ -17,22 +17,20 @@ import unittest
 class TestCase(unittest.TestCase):
      
     def test1(self):
-        """luban.project.deployment.cherrypy"""
+        """luban.scaffolding.project.CreateProjectInFS"""
 
-        outdir = 'deployments'
+        outdir = 'out-CreateProjectInFS_TestCase-test1'
         
+        from luban.scaffolding.project.Project import Project
+        project = Project(name='myproject')
+
         import os
-        os.chdir('testproj')
-        
-        #
-        filename = "conf.py"
-        from luban.project import loadProject
-        project = loadProject(filename)
+        if os.path.exists(outdir):
+            import shutil
+            shutil.rmtree(outdir)
 
-        #
-        from luban.project.deployment import createDeployment
-        createDeployment('cherrypy', project, outdir)
-        
+        from luban.scaffolding.project.CreateProjectInFS import Renderer
+        Renderer().render(project, outdir)
         return
      
     

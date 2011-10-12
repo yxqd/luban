@@ -6,7 +6,7 @@ Forms
 Create a luban project::
 
  $ cd /somewhere
- $ luban create form
+ $ luban create formdemo
 
 
 Before starting this new project, make sure you already shutdown other
@@ -15,14 +15,14 @@ the server trying to start up but fail because of conflict port.
 
 Then we start this new project::
 
- $ luban start form
+ $ luban start formdemo
 
 
 Add a form
 ==========
 Let us now make some modifications to the interface.
 
-Use your favorite editor to edit form/python/form/actors/default.py
+Use your favorite editor to edit formdemo/python/formdemo/actors/default.py
 and change it into::
 
  import luban
@@ -142,4 +142,4 @@ You will be prompted with an alert message box like this:
 
    Figure 2. form data submitted to "server side", and then an action
    is returned from the handling routine that asks for showing an
-   alert message box with submitted dta.
+   alert message box with submitted data.

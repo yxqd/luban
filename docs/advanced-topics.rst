@@ -3,6 +3,7 @@
 Advanced topics
 ===============
 
+* :ref:`Create a luban extension <create-ext-tutorial>`
 * :ref:`Customize and extend luban widgets <widget-improvement-tutorial>`
-* :ref:`Create my own luban extension <create-ext-tutorial>`
+* :ref:`Luban philosophy <philosophy>`
 

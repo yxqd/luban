@@ -6,7 +6,7 @@ Adding widgets to your interface
 Create a luban project::
 
  $ cd /somewhere
- $ luban create widgets
+ $ luban create widgetsdemo
 
 
 Before starting this new project, make sure you already shutdown other
@@ -15,14 +15,14 @@ the server trying to start up but fail because of conflict port.
 
 Then we start this new project::
 
- $ luban start widgets
+ $ luban start widgetsdemo
 
 
 Add an accordion
 ================
 Let us now make some modifications to the interface.
 
-Use your favorite editor to edit widgets/python/widgets/actors/default.py
+Use your favorite editor to edit widgetsdemo/python/widgetsdemo/actors/default.py
 and change it into::
 
  import luban

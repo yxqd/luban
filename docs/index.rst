@@ -8,26 +8,25 @@ interfaces using **pure python**: **no knowledge of html and javascript
 is required**; anyone knowing basic python can use luban to
 create their user interface applications accessible from web browsers.
 
-Luban provides a generic "language" with simple, natural syntax
-for describing user interfaces. 
-A quick overview of luban philosophy is here.
+Luban provides a "language" with simple, natural syntax
+for describing user interfaces in a generic way. 
 
 
 Getting Started
 ---------------
 
+* :ref:`Why use luban <why-luban>`
 * :ref:`Hello world <helloworld>`
 * :ref:`Adding widgets <widgets-tutorial>`
 * :ref:`Forms <form-tutorial>`
 * :ref:`Make your web application dynamic <dynamic-ui-tutorial>`
 * :ref:`Styling your interface <styling-tutorial>`
-* :ref:`Why use luban <why-luban>`
 
 
 Advanced topics
 ---------------
-* :ref:`Customize and extend luban widgets <widget-improvement-tutorial>`
-* :ref:`Create my own luban extension <create-ext-tutorial>`
+* :ref:`Create a luban extension <create-ext-tutorial>`
+* :ref:`more ... <advanced-topics>`
 
 
 News

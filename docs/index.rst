@@ -21,6 +21,11 @@ Getting Started
 * :ref:`Forms <form-tutorial>`
 * :ref:`Make your web application dynamic <dynamic-ui-tutorial>`
 * :ref:`Styling your interface <styling-tutorial>`
+* :ref:`Why use luban <why-luban>`
+
+
+Advanced topics
+---------------
 * :ref:`Customize and extend luban widgets <widget-improvement-tutorial>`
 * :ref:`Create my own luban extension <create-ext-tutorial>`
 
@@ -40,7 +45,7 @@ News
 Main dependencies
 -----------------
 
-* `python <http://python.org>`_
+* `python3 <http://python.org>`_: please note only python version 3.x is supported at this moment.
 * `cherrypy <http://cherrypy.org>`_
 * `jquery <http://jquery.com>`_
 * `jquery ui <http://jqueryui.com>`_

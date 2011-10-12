@@ -70,12 +70,14 @@ class Actor(base):
 # list of items in aokuang.core
 core = [
     'loading',
+    'alert',
     ]
 
 
 menu = [
     ('actions',
      ['loading',
+      'alert',
       ]),
     
     ('basic widgets', 

@@ -82,8 +82,8 @@ Examples::
   >>> alert("please input your password")
   
 '''
-    from .SimpleAction import SimpleAction
-    return SimpleAction(actionname='alert', message=message)
+    from .Alert import Alert
+    return Alert(message=message)
 
 
 # common element actions

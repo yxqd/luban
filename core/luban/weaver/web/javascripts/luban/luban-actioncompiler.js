@@ -117,9 +117,9 @@
     },
 
     //
-    'onalert': function(params) {
-      params = this._compileparams(params);
-      alert(params.message);
+    'onalert': function(action) {
+      action = this._compileparams(action);
+      alert(action.message);
     },
 
 

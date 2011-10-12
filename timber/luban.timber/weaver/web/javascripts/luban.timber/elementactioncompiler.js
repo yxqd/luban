@@ -76,6 +76,17 @@
       this.docmill.render(action.newelement, container);
     },
 
+    'onhideelement': function(action) {
+      var element = this.dispatch(action.element);
+      element.hide();
+    },
+
+    'onshowelement': function(action) {
+      var element = this.dispatch(action.element);
+      element.show();
+    },
+
+    // XXX: the following comes from 0.2 and needs migration
     'onsimpleaction': function(action) {
       var name = action.actionname;
       var method = 'on'+name.toLowerCase();
@@ -92,12 +103,6 @@
 
       case 'findDescendentIDs':
 	return element.findDescendentIDs(action.params);
-
-      case 'show':
-	return element.show();
-
-      case 'hide':
-	return element.hide();
 
       case 'disable':
 	return element.disable();

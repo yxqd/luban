@@ -55,6 +55,38 @@ ElementActionFactory.setAttr = setAttr
 
 
 
+class HideElement(base):
+
+    """this action hide an element
+    """
+
+    # decorations
+    # .. name of action factory method
+    factory_method = 'hide'
+
+    # attributes
+
+    def identify(self, inspector):
+        return inspector.onHideElement(self)
+
+
+
+class ShowElement(base):
+
+    """this action show an element
+    """
+
+    # decorations
+    # .. name of action factory method
+    factory_method = 'show'
+
+    # attributes
+
+    def identify(self, inspector):
+        return inspector.onShowElement(self)
+
+
+
 class AppendElement(base):
     
     # decorations

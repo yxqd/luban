@@ -28,7 +28,7 @@ def spawn(command, dry_run = 0, env = None):
     if type(command) == list:
         cmd = ' '.join(command)
     else:
-        assert(type(command) == types.StringType)
+        assert(type(command) == bytes)
         cmd = command
         pass
 
@@ -82,13 +82,13 @@ class OStrStream:
 
 
 def test_spawn( ):
-    print spawn( 'ls' )
+    print(spawn( 'ls' ))
     return
 
 
 def test_OStrStream():
     oss = OStrStream()
-    print >> oss, "hello"
+    print("hello", file=oss)
     assert oss.str() == 'hello\n'
     return
 

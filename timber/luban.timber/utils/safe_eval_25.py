@@ -10,7 +10,7 @@
 #----------------------------------------------------------------------
 
 import inspect, compiler.ast
-import thread, time
+import _thread, time
 
 #----------------------------------------------------------------------
 # Module globals.
@@ -29,7 +29,7 @@ import types
 if type(__builtins__) == types.ModuleType:
     iterbuiltins = inspect.getmembers(__builtins__)
 else:
-    iterbuiltins = __builtins__.iteritems()
+    iterbuiltins = iter(__builtins__.items())
 all_builtins = \
     [name for (name, obj) in iterbuiltins
      if inspect.isbuiltin(obj) or (inspect.isclass(obj) and \
@@ -255,10 +255,10 @@ class SafeEvalVisitor(object):
 
     def trace(self, node):
         "Debugging utility for tracing the validation of AST nodes."
-        print classname(node)
+        print(classname(node))
         for attr in dir(node):
             if attr[:2] != '__':
-                print ' ' * 4, "%-15.15s" % attr, getattr(node, attr)
+                print(' ' * 4, "%-15.15s" % attr, getattr(node, attr))
 
 #----------------------------------------------------------------------
 # Safe 'eval' replacement.
@@ -322,16 +322,16 @@ def exec_timed(code, context, timeout_secs):
     
     def alarm(secs):
         def wait(secs):
-            for n in xrange(timeout_secs):
+            for n in range(timeout_secs):
                 time.sleep(1)
                 if signal_finished: break
             else:
-                thread.interrupt_main()
-        thread.start_new_thread(wait, (secs,))
+                _thread.interrupt_main()
+        _thread.start_new_thread(wait, (secs,))
 
     try:
         alarm(timeout_secs)
-        exec code in context
+        exec(code, context)
         signal_finished = True
     except KeyboardInterrupt:
         raise SafeEvalTimeoutException(timeout_secs)
@@ -359,7 +359,7 @@ def safe_eval(code, context = {}, timeout_secs = 5, check_only=False):
         SafeEvalTimeoutException
     """   
     ctx_errkeys, ctx_errors = [], []
-    for (key, obj) in context.items():
+    for (key, obj) in list(context.items()):
         if inspect.isbuiltin(obj):
             ctx_errkeys.append(key)
             ctx_errors.append("key '%s' : unallowed builtin %s" % (key, obj))

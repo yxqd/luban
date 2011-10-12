@@ -12,16 +12,16 @@
 #
 
 
-from spawn import spawn
+from .spawn import spawn
 import os
 
 def execCmd(cmd):
     'execute a command'
-    print ' * executing %s' % cmd
+    print(' * executing %s' % cmd)
     ret, out, err =spawn(cmd)
     if ret:
-        raise RuntimeError, "failed to execute %r.\noutput:\n%s\nerror:\n%s\n" % (cmd, out, err)
-    print out
+        raise RuntimeError("failed to execute %r.\noutput:\n%s\nerror:\n%s\n" % (cmd, out, err))
+    print(out)
     return
 
 
@@ -32,12 +32,12 @@ def execCmds(cmds):
     which means that it will cd into the path, and then execute the command.
     '''
     for cmd in cmds:
-        if isinstance(cmd, basestring):
+        if isinstance(cmd, str):
             execCmd(cmd)
         else:
             where, cmd = cmd
             pwd = os.path.abspath(os.curdir)
-            print ' * cd into %s' % where
+            print(' * cd into %s' % where)
             os.chdir(where)
             execCmd(cmd)
             os.chdir(pwd)
@@ -47,7 +47,7 @@ def execCmds(cmds):
 def execCmdsStr(cmdsstr):
     'execute a multi-line str. each line is a command'
     cmds = cmdsstr.splitlines()
-    cmds = filter(lambda c: c.strip(), cmds)
+    cmds = [c for c in cmds if c.strip()]
     execCmds(cmds)
     return
 

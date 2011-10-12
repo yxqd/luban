@@ -49,7 +49,7 @@ def run(path, **kwds):
 
 def parse_cmdline():
     import optparse
-    usage = "usage: %prog [options] start <project-path>"
+    usage = "usage: %prog start [options] <project-path>"
     parser = optparse.OptionParser(usage, add_help_option=True)
     
     #

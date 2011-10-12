@@ -49,6 +49,7 @@ def main():
 commands = [
     'create',
     'start',
+    'creatext',
     ]
 
 

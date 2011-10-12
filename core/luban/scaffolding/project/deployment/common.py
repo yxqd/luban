@@ -36,7 +36,10 @@ def populateWebStatic(root, project):
     extensions = project.extensions
     for ext in extensions:
         mod = '%s.luban_ext' % ext
-        mod = __import__(mod, fromlist=[''])
+        try:
+            mod = __import__(mod, fromlist=[''])
+        except ImportError:
+            raise ImportError("failed to import %r" % mod)
 
         if hasattr(mod, 'static_dir'):
             # if "static_dir" is defined, use that

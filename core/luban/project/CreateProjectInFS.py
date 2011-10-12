@@ -25,13 +25,13 @@ renderer that create a directory tree in the file system for a luban project
 class Renderer:
 
 
-    def render(self, project, root='.', overwrite=False):
+    def render(self, project, root='.', onconflict='skip'):
         """
         """
         tree = self.onProject(project)
         from luban._filesystem.Writer import Writer
         writer = Writer()
-        writer.render(tree, root, overwrite=overwrite)
+        writer.render(tree, root, onconflict=onconflict)
         return
     
     

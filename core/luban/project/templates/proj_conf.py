@@ -25,6 +25,12 @@ actors_pkg = %(actors_pkg)r
 # path to the "static" directory for web presentation
 web_static = %(web_static)r
 
+# deployment
+deployment = %(deployment)r
+
+# luban extensions to use
+extensions = %(extensions)s
+
 """
 
 def create(project):

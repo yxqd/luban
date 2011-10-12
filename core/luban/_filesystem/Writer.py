@@ -17,9 +17,17 @@ from .Inspector import Inspector
 class Writer(Inspector):
 
 
-    def render(self, entry, rootpath='.', overwrite=False):
+    def render(self, entry, rootpath='.', onconflict='overwrite'):
+        """write the given directory tree data model and render it
+
+        onconflict: onconflict strategy. overwrite, skip, error
+        - overwrite: overwrite existing files/directories
+        - skip: skip existing files
+        - error: raise error
+        """
         self._currentpath = rootpath
-        self._overwrite = overwrite
+        assert onconflict in ['overwrite', 'skip', 'error']
+        self._onconflict = onconflict
         return entry.identify(self)
 
 
@@ -30,7 +38,8 @@ class Writer(Inspector):
         debug.log('onDirectory: path=%s' % path)
         
         if os.path.exists(path):
-            if not self._overwrite:
+            if self._onconflict == 'skip': return
+            if self._onconflict == 'error':
                 raise RuntimeError("%s already exists" % path)
         else:
             os.makedirs(path)
@@ -40,14 +49,15 @@ class Writer(Inspector):
             entry.identify(self)
             continue
         return
-
-
+    
+    
     def onFile(self, file):
         content = file.content or ''
         path = os.path.join(self._currentpath, file.name)
 
         if os.path.exists(path):
-            if not self._overwrite:
+            if self._onconflict == 'skip': return
+            if self._onconflict == 'error':
                 raise RuntimeError("%s already exists" % path)
 
         open(path, 'w').write(content)
@@ -60,9 +70,11 @@ class Writer(Inspector):
     def onSymLink(self, link):
         path = os.path.join(self._currentpath, link.name)
         if os.path.exists(path):
-            if not self._overwrite:
+            if self._onconflict == 'skip': return
+            if self._onconflict == 'error':
                 raise RuntimeError("%s already exists" % path)
-            os.remove(path)
+            else: # overwrite
+                os.remove(path)
 
         try:
             os.symlink(link.target, path)

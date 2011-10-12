@@ -93,16 +93,22 @@ def createCpApp(project):
 
 cpapp_init = """# -*- python -*-
 
+# make sure project python package is in path
 project_pytree_container = %(pytree_container)r
 import sys
 if project_pytree_container not in sys.path:
     sys.path.insert(0, project_pytree_container)
 
+# make sure to load all luban extenssions
+import luban
+luban.load_extensions(%(extensions)s)
+
+# this is to let cherrypy where the application is
 import os.path
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
-# luban.timber
-from luban.timber.controller.CherrypyController import CherrypyController
+# controller
+from luban.controller.CherrypyController import CherrypyController
 class Root(CherrypyController):
 
     def __init__(self):
@@ -118,36 +124,7 @@ class Root(CherrypyController):
 
 
 
-
-def populateWebStatic(root, project):
-    """populate the static directory in a cherrypy deployment with 
-    luban js and css files,
-    and also project static files.
-
-    root: path to the cherrypy deployment root
-    project: the luban project
-    """
-    import os
-    static = os.path.join(root, 'static')
-
-    import luban.weaver.web
-    copy_static_from_luban_web_weaver_pkg(luban.weaver.web, static)
-
-    import luban.timber.weaver.web
-    copy_static_from_luban_web_weaver_pkg(luban.timber.weaver.web, static)
-
-    copy_tree(project.web_static, static)
-    return
-
-
-from distutils.dir_util import copy_tree
-import os
-def copy_static_from_luban_web_weaver_pkg(pkg, dest):
-    dir = os.path.dirname(pkg.__file__)
-    copy_tree(os.path.join(dir, 'javascripts'), os.path.join(dest, 'javascripts'))
-    copy_tree(os.path.join(dir, 'css'), os.path.join(dest, 'css'))
-    return
-
+from .common import populateWebStatic
 
 
 # End of file 

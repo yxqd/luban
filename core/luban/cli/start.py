@@ -15,12 +15,19 @@
 import os
 
 def run(path, **kwds):
+    if not os.path.exists(path):
+        raise IOError("%r does not exist" % path)
+    
     from luban.project import loadProject
     conf = os.path.join(path, 'conf.py')
     project = loadProject(conf)
     
-    # XXX: should be more flexible
-    deployment_path = os.path.join(project.root, 'deployments', 'cherrypy')
+    # create a deployment
+    deployment = project.deployment or 'cherrypy'
+    from luban.project.deployment import createDeployment
+    deployments_path = os.path.join(path, 'deployments')
+    deployment_path = createDeployment(deployment, project, deployments_path)
+
     # start server in a thread
     import threading
     class ServerThread(threading.Thread):

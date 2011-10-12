@@ -1,3 +1,4 @@
+
 # -*- Python -*-
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -12,7 +13,15 @@
 #
 
 
-from . import CherrypyController
+static_css = "weaver/web/css"
+static_javascripts = "weaver/web/javascripts"
+
+
+# .. set default weaver web library
+from luban.weaver.web import set_default_library_for_weaver
+from .weaver.web.libraries import default
+set_default_library_for_weaver(default)
+del default, set_default_library_for_weaver
 
 
 # End of file 

@@ -23,17 +23,30 @@ class Project:
     python_in_project = 'python' # path of python src tree container dir relative to root
     
     actors_in_python = '.actors' # name of the actors python subpackage in the project python namespace
+
+    deployment = 'cherrypy' # deployment method
+    extensions = ['luban.timber'] # luban extensions used
     
 
-    def __init__(self, name):
+    def __init__(
+        self, name,
+        pytree_container = None,
+        actors_pkg = None,
+        web_static = None,
+        deployment = None,
+        extensions = None,
+        ):
         self.name = name
         # XXX
         # these names are differnt from those of class variables
         # because the object variables could be changed in the future to
         # absolute paths
-        self.pytree_container = self.python_in_project
-        self.actors_pkg = name + self.actors_in_python
-        self.web_static = self.web_static_in_project
+        self.pytree_container = pytree_container or self.python_in_project
+        self.actors_pkg = actors_pkg or name + self.actors_in_python
+        self.web_static = web_static or self.web_static_in_project
+        # 
+        self.deployment = deployment or self.deployment
+        self.extensions = extensions or self.extensions
         return
 
     def identify(self, inspector):

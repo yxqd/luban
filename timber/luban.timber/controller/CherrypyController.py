@@ -37,5 +37,10 @@ class CherrypyController(UploadMixin, base):
         return cherrypy.session
 
 
+# overload the luban core controller
+import luban.controller.CherrypyController as core_CherrypyController_module
+core_CherrypyController_module.CherrypyController = CherrypyController
+
+
 # End of file 
 

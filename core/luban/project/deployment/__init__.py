@@ -17,7 +17,14 @@ scaffolding for deployment
 """
 
 
-def createDeployment(name, project, path, overwrite=True):
+def createDeployment(name, project, path, onconflict = 'skip'):
+    """create deployment directory
+    
+    name: name of the deployment
+    project: luban project this is about
+    path: directory in which the deployment directory will be established
+    onconflict: strategy when there is conflict when trying to create directories, files, etc
+    """
     code = 'from . import %s' % name
     exec(code)
     mod = locals()[name]
@@ -25,12 +32,13 @@ def createDeployment(name, project, path, overwrite=True):
 
     from luban._filesystem.Writer import Writer
     writer = Writer()
-    writer.render(tree, path, overwrite=overwrite)
+    writer.render(tree, path, onconflict=onconflict)
     
     import os
     deployment_root = os.path.join(path, tree.name)
     mod.populateWebStatic(deployment_root, project)
-    return
+    return deployment_root
+
 
 # End of file 
 

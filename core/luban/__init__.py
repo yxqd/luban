@@ -31,11 +31,6 @@ has_pyre = os.environ.get('LUBAN_HAS_PYRE') or os.environ.get('HAS_PYRE')
 # .. allow extension to override element/action definitions without
 # .. throwing exceptions
 extension_allow_override = False
-# .. use default extension "timber"
-use_timber_extension = os.environ.get('LUBAN_USE_TIMBER')
-use_timber_extension = eval(use_timber_extension) \
-    if use_timber_extension is not None \
-    else True
 # .. debug on/off
 debug = True
 
@@ -45,13 +40,22 @@ from .ui import e, a, event
 from . import decorators
 from .uuid import uuid
 
+
 #
-if use_timber_extension:
-    try:
-        import luban.timber
-    except ImportError:
-        import warnings
-        warnings.warn("luban 'timber' extension does not exist. only luban core is present")
+def load_extensions(extensions):
+    from .weaver.web.libraries.default import base
+    for ext in extensions:
+        module = '%s.luban_ext' % ext
+        module = __import__(module, fromlist = [''])
+        
+        # 
+        if hasattr(module, 'jsfiles_toload_onstart'):
+            base['javascripts'] += module.jsfiles_toload_onstart
+            pass
+        
+        continue
+    return
+
 
 # End of file 
 

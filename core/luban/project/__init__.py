@@ -27,17 +27,8 @@ def createProjectSkeleton(name, outdir, deployment=None):
     
     from luban.project.CreateProjectInFS import Renderer
     Renderer().render(project, outdir)
-
-    # reload project
-    conf = os.path.join(outdir, project.name, 'conf.py')
-    project = loadProject(conf)
     
-    # create a deployment
-    deployment = deployment or 'cherrypy'
-    from luban.project.deployment import createDeployment
-    path = os.path.join(outdir, project.name, 'deployments')
-    createDeployment(deployment, project, path)
-    return    
+    return
     
     
 

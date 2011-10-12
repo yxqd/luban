@@ -1,5 +1,5 @@
 .. _create-ext-tutorial:
 
-How to create my own UI framework
----------------------------------
+How to create a luban extension
+-------------------------------
 

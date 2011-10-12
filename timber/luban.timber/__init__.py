@@ -22,11 +22,7 @@ luban.__doc__ += """* timber: default extension of luban core
 
 # activate extensions
 from . import elements, actions
-# .. set default weaver web library
-from luban.weaver.web import set_default_library_for_weaver
-from .weaver.web.libraries import default
-set_default_library_for_weaver(default)
-del default, set_default_library_for_weaver
-
+from . import luban_ext
+from . import controller # replace the core controllers with timber controllers. see eg .controllers.CherrypyController
 
 # End of file 

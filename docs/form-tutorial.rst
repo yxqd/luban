@@ -139,6 +139,6 @@ submit the form. You will be prompted with an alert message box like this:
 .. figure:: images/form-data-submit-alert.png
    :scale: 100%
 
-   Figure 1. form data submitted to "server side", and then an action
+   Figure 2. form data submitted to "server side", and then an action
    is returned from the handling routine that asks for showing an
    alert message box with submitted dta.

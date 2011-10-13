@@ -1,0 +1,101 @@
+.. _dynamic-ui-tutorial:
+
+Dynamic User Interface
+----------------------
+
+Dynamic user interface in luban is easy.
+The trick is to assign action(s) to an event handler.
+
+Create a luban project::
+
+ $ cd /somewhere
+ $ luban create dynamic
+
+
+Before starting this new project, make sure you already shutdown other
+projects that might be using the same port, otherwise we will see 
+the server trying to start up but fail because of conflict port.
+
+Then we start this new project::
+
+ $ luban start dynamic
+
+
+Portlet and actions
+===================
+
+Use your favorite editor to edit dynamic/python/dynamic/actors/default.py
+and change it into::
+
+ import luban
+ from luban.controller.Actor import Actor as base
+ 
+ class Actor(base):
+ 
+     expose = 1
+ 
+     def default(self):
+         frame = luban.e.frame(title="luban dynamic UI")
+         doc = frame.document(title="dynamic")
+  
+	 # split space to left and right
+         sp = doc.splitter()
+	 left = sp.section(id='left', Class='align-top')
+         right = sp.section(id='right', Class='align-top')
+	 
+	 # portlet on the left
+         portlet = left.portlet(title='portlet')
+	 
+	 # display on the right
+	 display = right.document(title='display', id='display')
+ 
+         # item 1
+         item1 = portlet.item(label='item1')
+         item1.onselect = luban.a.select(element=display).append(
+	     newelement = luban.e.paragraph(text='item1 selected'))
+ 
+         # item 2
+         item2 = portlet.item(label='item2')
+         item2.onselect = luban.a.select(element=display).append(
+	     newelement = luban.e.paragraph(text='item2 selected'))
+ 	     
+ 	 	 
+         return luban.a.establishInterface(frame)
+
+
+Refresh and click on the portlet items will show sth like this:
+
+.. figure:: images/portlet.png
+   :scale: 80%
+
+   Figure 1. Dynamic behavior with a portlet.
+
+
+A few concepts
+==============
+
+Each ui element has some events.
+
+Each event has an event handler that can be assigned to an action.
+
+An action could be 
+
+* select a ui element and then call an action on this selected element.
+  for example::
+
+  >>> luban.a.select(element=display).append(newelement = ...)
+
+* a simple action like "alert" that shows an alert message box
+
+  >>> luban.a.alert("hey")
+
+* an action to talk to the controller and to ask a method of
+  an actor in the controller to do some complex things. 
+  At the end of the call, the method should return an action
+  that could be either of the three types of actions 
+  listed here.
+
+  >>> luban.a.load(actor=..., routine=..., **kwds)
+
+See http://lubanui.org/aokuang for more examples on especially
+on how the last type of actions is used.

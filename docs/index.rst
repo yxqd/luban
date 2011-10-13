@@ -18,11 +18,11 @@ Getting Started
 
 * :ref:`Hello world <helloworld>`
 * :ref:`Adding widgets <widgets-tutorial>`
-* :ref:`Form <form-tutorial>`
-* :ref:`Make your web application dynamic`
-* :ref:`Styling your interface`
-* :ref:`Customize and extend luban widgets`
-* :ref:`Create my own luban extension`
+* :ref:`Forms <form-tutorial>`
+* :ref:`Make your web application dynamic <dynamic-ui-tutorial>`
+* :ref:`Styling your interface <styling-tutorial>`
+* :ref:`Customize and extend luban widgets <widget-improvement-tutorial>`
+* :ref:`Create my own luban extension <create-ext-tutorial>`
 
 
 News

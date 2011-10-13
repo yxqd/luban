@@ -86,7 +86,7 @@ Refresh your browser should bring you to sth similar to this:
 .. figure:: images/tabs.png
    :scale: 70%
 
-   Figure 1. Tabs widget
+   Figure 2. Tabs widget
 
 
 More widgets

@@ -15,12 +15,12 @@
 import os
 
 def run(*args, **kwds):
-    from . import commands
+    from . import public_commands
     print( 'luban - a UI "language"')
     print( 'http://lubanui.org')
     print()
     print('Basic commands:')
-    for cmd in commands:
+    for cmd in public_commands:
         print('  luban %s' % cmd)
         continue
     return

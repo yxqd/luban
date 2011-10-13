@@ -51,7 +51,7 @@ def main():
     return
 
 
-commands = [
+public_commands = [
     'help',
     'create',
     'start',
@@ -59,6 +59,12 @@ commands = [
     'creatext',
     ]
 
+hidden_commands = [
+    'tail',
+    ]
+
+
+commands = public_commands + hidden_commands
 
 # End of file 
 

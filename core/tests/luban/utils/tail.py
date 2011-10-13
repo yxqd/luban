@@ -26,7 +26,7 @@ class TestCase(unittest.TestCase):
         class write(threading.Thread):
             def run(self):
                 f = open(logfile,'w')
-                for i in range(5):
+                for i in range(3):
                     f.write('new line\n')
                     f.flush()
                     time.sleep(1)
@@ -36,7 +36,7 @@ class TestCase(unittest.TestCase):
         time.sleep(1)
 
         from luban.utils.tail import tail
-        tail(logfile, duration=5)
+        tail(logfile, duration=3)
         return
      
     

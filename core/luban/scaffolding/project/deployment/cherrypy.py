@@ -89,7 +89,7 @@ if os.path.exists(pidfile):
 cmd = "cherryd -i cpapp -d -p %(pidfile)s -c %(conf)s" % locals()
 print("starting cherryd server ...")
 os.system(cmd)
-
+print('done.\n\n')
 """
 
 stop = """#!/usr/bin/env python

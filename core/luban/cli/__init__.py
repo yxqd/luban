@@ -38,6 +38,11 @@ def main():
 
     if action in ['-h', '--help']:
         action = 'help'
+
+    if action not in commands:
+        print ()
+        print ("Invalid command: %s" % action)
+        action = 'help'
     
     mod = importActionHandler(action)
     args, kwds = mod.parse_cmdline()
@@ -47,6 +52,7 @@ def main():
 
 
 commands = [
+    'help',
     'create',
     'start',
     'creatext',

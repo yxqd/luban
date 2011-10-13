@@ -22,7 +22,8 @@ class Actor(base):
 
     
     def default(self):
-        return self.frame()
+        frame = self.frame()
+        return luban.a.establishInterface(frame)
     
 
     def frame(self, **kwds):

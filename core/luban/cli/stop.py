@@ -19,34 +19,25 @@ def run(path, **kwds):
     if not os.path.exists(path):
         raise IOError("%r does not exist" % path)
     
+    # load project info
     from luban.scaffolding.project import loadProject
     conf = os.path.join(path, 'conf.py')
     project = loadProject(conf)
     
-    # create a deployment
+    # deployment
     deployment = project.deployment or 'cherrypy'
-    from luban.scaffolding.project.deployment import createDeployment
-    deployments_path = os.path.join(path, 'deployments')
-    deployment_path = createDeployment(deployment, project, deployments_path)
-    # wait a bit
-    time.sleep(1)
+    deployment_path = os.path.join(path, 'deployments', deployment)
     
-    # start server
+    # stop server
     os.chdir(deployment_path)
-    os.system('python start')
+    os.system('python stop')
 
-    # XXX: need better implementation
-    # wait a second and start the browser
-    url = "http://localhost:8080"
-    time.sleep(2)
-    import webbrowser; webbrowser.open(url)
-    
     return
     
 
 def parse_cmdline():
     import optparse
-    usage = "usage: %prog start [options] <project-path>"
+    usage = "usage: %prog stop [options] <project-path>"
     parser = optparse.OptionParser(usage, add_help_option=True)
     
     #

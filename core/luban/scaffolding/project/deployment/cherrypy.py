@@ -23,6 +23,7 @@ def createTree(project):
     root.addEntry(File.File('prod.conf', prod_conf))
     
     root.addEntry(File.File('start', start, executable=1))
+    root.addEntry(File.File('stop', stop, executable=1))
 
     root.addEntry(createCpApp(project))
 
@@ -78,12 +79,31 @@ if len(sys.argv) == 2 and sys.argv[1] == 'production':
 else:
     conf = 'dev.conf'
 
-cmd = "cherryd -i cpapp -c %s" % conf
+pidfile = os.path.abspath('cherryd.PID')
+if os.path.exists(pidfile):
+    pid = open(pidfile).read()
+    t = "There seems already a cherryd process running. pid=%s. \\n" + \\
+        "If you are sure it is not running. please remove file %r"
+    msg = t % (pid, pidfile)
+    raise RuntimeError(msg)
+cmd = "cherryd -i cpapp -d -p %(pidfile)s -c %(conf)s" % locals()
+print("starting cherryd server ...")
 os.system(cmd)
 
 """
 
+stop = """#!/usr/bin/env python
 
+import os, signal
+pidfile = os.path.abspath('cherryd.PID')
+if not os.path.exists(pidfile):
+    msg = "pid file %s does not exist. process may already stopped" % pidfile
+    raise RuntimeError(msg)
+pid = int(open(pidfile).read())
+print("stopping cherryd server ...")
+os.kill(pid, signal.SIGKILL)
+os.remove(pidfile)
+"""
 
 def createCpApp(project):
     root = Directory.Directory('cpapp')

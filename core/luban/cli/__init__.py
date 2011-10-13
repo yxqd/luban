@@ -55,6 +55,7 @@ commands = [
     'help',
     'create',
     'start',
+    'stop',
     'creatext',
     ]
 

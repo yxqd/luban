@@ -57,6 +57,7 @@ div.body {
     background-color: #fffff0;
     color: #000000;
     padding: 0 20px 30px 20px;
+    min-height: 30em;
 }
 div.bodywrapper {
     margin: 0 230px 0 0;

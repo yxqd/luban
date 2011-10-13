@@ -41,20 +41,8 @@ News
    For older versions of luban, see `luban 0.2 <http://luban.danse.us>`_
 
 
-Main dependencies
------------------
+More
+----
 
-* `python3 <http://python.org>`_: please note only python version 3.x is supported at this moment.
-* `cherrypy <http://cherrypy.org>`_
-* `jquery <http://jquery.com>`_
-* `jquery ui <http://jqueryui.com>`_
-
-
-
-Contributors
-------------
-
-* `Jiao Lin <http://www.caltech.edu/~linjiao>`_
-* Michael Aivazis
-* Alta Fang
-
+* :ref:`Dependencies <deps>`
+* :ref:`Team <team>`

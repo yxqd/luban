@@ -4,19 +4,6 @@ Luban User Interface Language Core
 ==================================
 
 
-Assumptions
------------
-
-A user interface consists of a bunch of separable parts
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-The interactions among constituents of a UI may be
-extremely complex, but we assume that it is possible
-to separate a UI into non-entangled parts where each
-part has a clean API.
-
-
-
 Principles
 ----------
 
@@ -27,25 +14,20 @@ sufficient to describe a sophisticated, dynamic, and mordern
 user interface.
 
 
-Implementation agnostic
-"""""""""""""""""""""""
-The "language" has to be independent of technologies 
-for building user interface.
-
-
 We are only concern with the user interface logic
 """""""""""""""""""""""""""""""""""""""""""""""""
 Visual appeals (eye candies) can be separated from UI logic.
 Visual appeals are certainly very very important.
 Actually with the success of Apple, we all understand visual
 appeal is very important for user experiences.
-In luban, we notice that visual appeal can be evolved
+In luban, we notice that visual appeal could be evolved
 without changing the UI logic.
 And luban is a "language" for describing the UI logic,
 not the visual appeal.
-An argument of that was presented in one of my responses
-in the thread started by Guido regarding luban, and
-I quote it here::
+An argument of that was presented in one of Jiao's responses in
+`the thread started by Guido regarding luban <https://plus.google.com/115212051037621986145/posts/ThMuTvwut9g>`_,
+and
+quoted here::
 
 
  ...... Regarding fine-tuning
@@ -86,7 +68,7 @@ Type system
 -----------
 Luban has a very limited type system. 
 
-* primitive types: bool, str, int, float
+* primitive types: bool, str, int, float 
 * containers
  * list: a list of instances of luban types
  * dictionary: key value pairs. key: str type. value: instance of any luban type
@@ -95,12 +77,12 @@ Luban has a very limited type system.
  * action: actions to update UI or to communicate with controller
  * event: events triggered by user interactions with the UI
 
-Instances of luban object types can be regarded as specialized dictionaries that has a fixed set of keys, and the corresponding values may be limited to be of one specific luban type. Luban object type does not have methods, but only has attributes.
+Instances of luban object types could be regarded as specialized dictionaries that has a fixed set of keys, and the corresponding values may be limited to be of one specific luban type. Luban object type does not have methods, but only has attributes.
 
 
 Basic concepts and structure
 ----------------------------
-A *user interface* is described using a hierarchy structure
+A *user interface* is described using a hierarchical structure
 consisting of ui *elements*.
 
 A *controller* is responsible for constructing and returning

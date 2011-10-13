@@ -1,11 +1,14 @@
 
 core:
-* tutorial docs
 * create a tarball of "extension-tutorial"
 * http://lubanui.org/aokuang
+* tutorial docs
 * checking of event handler assigment probably should be configurable
   to be omitted -- see luban.ui.descriptors.EventHandler -- to speed up in production mode
 * client side cache (data store)
+
+aokuang:
+* show information about dependent js libraries
 
 timber:
 * migrate things that are in _pending_ directories

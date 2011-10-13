@@ -1,0 +1,25 @@
+<VirtualHost *:80>
+  ServerName lubanui.org
+  ServerAdmin webmaster@localhost
+
+  SetEnv PYTHONPATH /home/linjiao/releasers/luban-1.0-dev/EXPORT/packages
+  SetEnv LD_LIBRARY_PATH /home/linjiao/releasers/luban-1.0-dev/EXPORT/lib
+
+  DocumentRoot /home/linjiao/lubanui.org/
+  <Directory "/home/linjiao/lubanui.org">
+    Options Indexes FollowSymLinks MultiViews
+    Order allow,deny
+    allow from all
+  </Directory>
+
+  WSGIScriptAlias /index.cgi /home/linjiao/lubanui.org/aokuang.timber/index.cgi
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+
+  # Possible values include: debug, info, notice, warn, error, crit,
+  # alert, emerg.
+  LogLevel warn
+
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost>

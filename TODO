@@ -1,6 +1,8 @@
 
 core:
-* create a tarball of "extension-tutorial". problem: weird error of "sys.modules changed" spit out by cherrypy, even though it does seem to affect the web application
+* check windows
+* check fedora
+* create a tarball of "extension-tutorial". 
 * docs: supported platforms
 * tutorial docs
 * checking of event handler assigment probably should be configurable

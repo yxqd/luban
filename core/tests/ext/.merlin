@@ -16,6 +16,9 @@ examples = [
     ]
 
 
+
+# create tarballs and zip files and export them
+# XXX: need to remove all pyc files 
 from merlin.builders._utils import createExportShareDir
 export_share = createExportShareDir(context)
 luban_share = os.path.join(export_share, 'luban')

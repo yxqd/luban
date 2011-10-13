@@ -56,10 +56,14 @@ class HtmlRenderer:
         timestampLine = "Generated automatically by {!s}"
 
         
-    def render(self, frame):
+    def render(self, action):
+        from luban.ui.actions.EstablishInterface import EstablishInterface
+        if not isinstance(action, EstablishInterface):
+            e = "%s is not right type of action. need EstablishInterface" % action
+            raise RuntimeError(e)
         self._rep = []
         self.begin()
-        self.renderBody(frame)
+        self.renderBody(action.frame)
         self.end()
         return self._output()
 

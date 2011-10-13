@@ -86,6 +86,11 @@ Examples::
     return Alert(message=message)
 
 
+def establishInterface(frame):
+    from .EstablishInterface import EstablishInterface
+    return EstablishInterface(frame)
+
+
 # common element actions
 action_modules = [
     'element_common_actions',
@@ -104,6 +109,7 @@ __all__ = [
     'load',
     'select',
     'alert',
+    'establishInterface',
     ]
 
 

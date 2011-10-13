@@ -61,8 +61,8 @@ class Weaver:
     def weave(self, specification):
         """create output from the given UI specification
         """
-        from luban.ui.elements.Frame import Frame
-        if isinstance(specification, Frame):
+        from luban.ui.actions.EstablishInterface import EstablishInterface
+        if isinstance(specification, EstablishInterface):
             return self.obj2html.render(specification)
         return self.obj2json.render(specification)
 

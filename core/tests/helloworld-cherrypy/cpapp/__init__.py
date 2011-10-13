@@ -17,11 +17,13 @@ class Root:
     @cherrypy.expose
     def welcome(self):
         # the overall frame
-        frame = luban.frame(title='my application')
+        frame = luban.e.frame(title='my application')
         # a document in the frame
         doc = frame.document(title='Hello world!', name='doc1')
+        # establish interface
+        action = luban.a.establishInterface(frame)
         # weave to produce html
-        return self.weaver.weave(frame)
+        return self.weaver.weave(action)
 
     @cherrypy.expose
     def index(self):

@@ -71,23 +71,13 @@ tools.staticdir.dir: "static"
 """
 
 start = """#!/usr/bin/env python3
-import luban
-print (luban)
 from luban.cli.start.cherrypy import main
 main()
 """
 
-stop = """#!/usr/bin/env python
-
-import os, signal
-pidfile = os.path.abspath('cherryd.PID')
-if not os.path.exists(pidfile):
-    msg = "pid file %s does not exist. process may already stopped" % pidfile
-    raise RuntimeError(msg)
-pid = int(open(pidfile).read())
-print("stopping cherryd server ...")
-os.kill(pid, signal.SIGKILL)
-os.remove(pidfile)
+stop = """#!/usr/bin/env python3
+from luban.cli.stop.cherrypy import main
+main()
 """
 
 def createCpApp(project):

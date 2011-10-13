@@ -33,12 +33,24 @@ News
 * `Guido van Rossum <http://www.python.org/~guido>`_, the author of python,
   `started a thread about luban <https://plus.google.com/115212051037621986145/posts/ThMuTvwut9g>`_
 
+.. note::
+   For older versions of luban, see `luban 0.2 <http://luban.danse.us>`_
 
-Borrowed technologies
----------------------
 
-* python
-* cherrypy
-* jquery
-* jquery ui
+Main dependencies
+-----------------
+
+* `python <http://python.org>`_
+* `cherrypy <http://cherrypy.org>`_
+* `jquery <http://jquery.com>`_
+* `jquery ui <http://jqueryui.com>`_
+
+
+
+Contributors
+------------
+
+* `Jiao Lin <http://www.caltech.edu/~linjiao>`_
+* Michael Aivazis
+* Alta Fang
 

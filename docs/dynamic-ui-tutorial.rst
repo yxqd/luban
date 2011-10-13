@@ -97,5 +97,60 @@ An action could be
 
   >>> luban.a.load(actor=..., routine=..., **kwds)
 
+
+"Load" action
+=============
+Here we explain a little more about the "load" action.
+This action calls a method of an actor in the controller,
+and takes the result of that call and work on that.
+
+.. note::
+   Result of a "load" action must be a value of luban type.
+
+.. note::
+   luban types:
+   
+   * simple types like str, number
+   * container types like list and dictionary
+   * luban ui elements
+   * luban ui actions
+
+
+It is most typical that a "load" action returns another action.
+Let us create another actor to show how this works.
+Create dynamic/python/dynamic/actors/load.py with the following content::
+
+ import luban
+ from luban.controller.Actor import Actor as base 
+ 
+ class Actor(base):
+ 
+     expose = 1
+ 
+     def default(self):
+         frame = luban.e.frame(title="load") 
+         display = frame.document(title="display", id="display")
+         button = frame.button(label="click me", name='b1')
+         button.onclick=luban.a.load(actor=self.name, routine="onb1click")
+         return luban.a.establishInterface(frame)
+
+     def onb1click(self, **kwds):
+         p = luban.e.paragraph(text="b1 clicked")
+         return luban.a.select(id="display").append(newelement=p)
+
+
+and then point your browser to http://localhost:8080?actor=load
+
+Click on the button a couple of times, 
+you should see sth like this:
+
+.. figure:: images/load-tutorial-button.png
+   :scale: 80%
+
+   Figure 2. load action that returns another action.
+
+
+More
+====
 See http://lubanui.org/aokuang for more examples on especially
 on how the last type of actions is used.

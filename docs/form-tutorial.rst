@@ -133,8 +133,9 @@ The default.py will look like::
          msg = "submitted: %s" % (kwds,)
          return luban.a.alert(msg)
 
-You can try to change the values of the form controls, and then
-submit the form. You will be prompted with an alert message box like this:
+After refresh your browser, you can try to change the values of the form controls, 
+and then submit the form. 
+You will be prompted with an alert message box like this:
 
 .. figure:: images/form-data-submit-alert.png
    :scale: 100%

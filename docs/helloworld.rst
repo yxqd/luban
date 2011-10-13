@@ -5,8 +5,10 @@ Hello world!
 
 Install::
 
- $ easy_install luban
+ $ easy_install3 luban
 
+For more details about installation, please 
+:ref:`click here <installation>`.
 
 Create a luban project::
 
@@ -19,7 +21,13 @@ Start this new project::
  $ luban start helloworld
 
 A server will be running to serve your web application,
-and a browser will be started to show the webpage.
+and a browser will be started to show the webpage:
+
+.. figure:: images/helloworld.png
+   :scale: 80%
+
+   Figure 1. Hello world application
+
 
 Congratulations!!! You have created your first luban user interface!
 

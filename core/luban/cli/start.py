@@ -12,7 +12,7 @@
 #
 
 
-import os, time
+import os, time, threading
 
 
 def run(path, **kwds):
@@ -34,9 +34,12 @@ def run(path, **kwds):
     time.sleep(1)
     
     # start server
-    os.chdir(deployment_path)
-    os.system('python start')
-
+    class StartServer(threading.Thread):
+        def run(self):
+            os.chdir(deployment_path)
+            os.system('python start')
+    StartServer().start()
+    
     # XXX: need better implementation
     # wait a second and start the browser
     url = "http://localhost:8080"

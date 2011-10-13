@@ -1,6 +1,5 @@
 
 core:
-* action "establish interface"
 * tutorial docs
 * checking of event handler assigment probably should be configurable
   to be omitted -- see luban.ui.descriptors.EventHandler -- to speed up in production mode

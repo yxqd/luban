@@ -21,6 +21,8 @@ Start this new project::
 A server will be running to serve your web application,
 and a browser will be started to show the webpage.
 
+Congratulations!!! You have created your first luban user interface!
+
 
 Modify the interface
 ====================
@@ -58,12 +60,77 @@ Let us change it to::
 
 You will see in the terminal where you start the luban project
 the server is reloading to incoporate your changes.
-Now you can refresh the browser that was opend automatically earlier
+Now you can refresh the browser 
 and see the changes.
 
 
 A few concepts
 ==============
 
+An actor lives in the "server side" and responds to client requests.
 
+The entry point of a luban application is 
+by default the "default" method of the "default" actor.
+It should return an "establishInterface" action that establish
+the user interface from a "frame" instance.
+
+A user interface is represented by a hierarchical structure of 
+UI elements.
+
+The root of this hierarchical structure is a "frame".
+
+To create a frame, use the luban.e.frame factory method::
+
+ >>> frame = luban.e.frame(title="hello world")
+
+.. note::
+   luban.e is a proxy to factory methods for creating luban elements.
+   while luban.a is a proxy to factory methods for creating luban actions.
+
+Now the interface hierarchy is::
+
+ - frame(title="hello world")
+
+To create sub elements in a frame, call the element factory 
+on the frame instance::
+
+ >>> doc = frame.document(title="hello world")
+
+And now the interface hierarchy is::
+
+ + frame(title="hello world")
+   - document(title ="hello world")
+
+To create a sub element in the first sub element of the frame,
+similarly, you call the element factory on the subelement, "doc"::
+
+ >>> doc.paragraph(text = "This is my first luban user interface")
+
+And now the interface hierarchy is::
+
+ + frame(title="hello world")
+   + document(title ="hello world")
+     - paragraph(text = "...")
+
+
+.. note::
+   Any element container can create a subelement by calling
+   the factory method whose name is the subelement type::
+
+     >>> <container>.<elementtype>
+
+   For example::
+
+     >>> frame.document(...)
+     >>> frame.paragraph(...)
+     >>> doc.paragraph(...)
+     >>> doc.document(...)
+
+
+Shutting down the server
+========================
+
+After finish playing with this "helloworld" example, you could shut
+down the server.
+Just hit Ctrl-C in the terminal where you start the luban application.
 

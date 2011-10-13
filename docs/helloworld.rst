@@ -150,6 +150,7 @@ Shutting down the server
 ========================
 
 After finish playing with this "helloworld" example, you could shut
-down the server.
-Just hit Ctrl-C in the terminal where you start the luban application.
+down the server::
+ 
+ $ luban stop /path/to/helloworld
 

@@ -92,4 +92,4 @@ Refresh your browser should bring you to sth similar to this:
 More widgets
 ============
 
-To see more widgets, go to http://lubabui.org/aokuang
+To see more widgets, go to http://lubanui.org/aokuang

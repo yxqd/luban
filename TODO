@@ -1,6 +1,6 @@
 
 core:
-* create a tarball of "extension-tutorial"
+* create a tarball of "extension-tutorial". problem: weird error of "sys.modules changed" spit out by cherrypy, even though it does seem to affect the web application
 * http://lubanui.org/aokuang
 * docs: supported platforms
 * tutorial docs

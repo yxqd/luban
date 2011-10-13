@@ -11,8 +11,6 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-import os
-os.environ['LUBAN_USE_TIMBER'] = False
 import luban
 try:
     luban.e.form

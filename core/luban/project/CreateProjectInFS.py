@@ -107,7 +107,7 @@ class Actor(base):
     def default(self):
         frame = luban.e.frame(title="hello world")
         frame.document(title="hello world")
-        return frame
+        return luban.a.establishInterface(frame)
 
 """
     

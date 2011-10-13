@@ -39,7 +39,7 @@ It reads::
      def default(self):
          frame = luban.e.frame(title="hello world")
          frame.document(title="hello world")
-         return frame
+         return luban.a.establishInterface(frame)
 
 Let us change it to::
 
@@ -54,7 +54,7 @@ Let us change it to::
          frame = luban.e.frame(title="hello world")
          doc = frame.document(title="hello world")
          doc.paragraph(text = "This is my first luban user interface")
-         return frame
+         return luban.a.establishInterface(frame)
 
 You will see in the terminal where you start the luban project
 the server is reloading to incoporate your changes.

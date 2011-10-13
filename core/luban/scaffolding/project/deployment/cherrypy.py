@@ -70,31 +70,11 @@ tools.staticdir.dir: "static"
 
 """
 
-start = """#!/usr/bin/env python
-
-import sys, os
-
-if len(sys.argv) == 2 and sys.argv[1] == 'production':
-    conf = 'prod.conf'
-else:
-    conf = 'dev.conf'
-
-pidfile = os.path.abspath('cherryd.PID')
-if os.path.exists(pidfile):
-    pid = open(pidfile).read()
-    t = "There seems already a cherryd process running. pid=%s. \\n" + \\
-        "If you are sure it is not running. please remove file %r"
-    msg = t % (pid, pidfile)
-    raise RuntimeError(msg)
-cmd = "cherryd -i cpapp -d -p %(pidfile)s -c %(conf)s" % locals()
-print("starting cherryd server ...")
-os.system(cmd)
-print('done.\\n\\n')
-
-log = os.path.abspath('site.log')
-print('** Now start watching %s. ctrl-C to exit' % log)
-cmd = "luban tail %s" % log
-os.system(cmd)
+start = """#!/usr/bin/env python3
+import luban
+print (luban)
+from luban.cli.start.cherrypy import main
+main()
 """
 
 stop = """#!/usr/bin/env python

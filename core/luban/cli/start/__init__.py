@@ -37,7 +37,7 @@ def run(path, **kwds):
     class StartServer(threading.Thread):
         def run(self):
             os.chdir(deployment_path)
-            os.system('python start')
+            os.system('python3 start')
     StartServer().start()
     
     # XXX: need better implementation

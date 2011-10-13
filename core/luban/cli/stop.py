@@ -32,7 +32,7 @@ def run(path, **kwds):
     
     # stop server
     os.chdir(deployment_path)
-    os.system('python stop')
+    os.system('python3 stop')
 
     return
     

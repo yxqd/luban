@@ -1,0 +1,48 @@
+# -*- Python -*-
+
+# context
+import merlin.rules, os
+from merlin.Context import create
+context = create()
+context.code.project = 'luban'
+
+# no recursion
+recurse_entries = []
+
+
+# create a tar ball and a zip file for each example
+examples = [
+    'actions',
+    ]
+
+
+from merlin.builders._utils import createExportShareDir
+export_share = createExportShareDir(context)
+luban_share = os.path.join(export_share, 'luban')
+
+import os
+if not os.path.exists(luban_share):
+    os.makedirs(luban_share)
+    
+from merlin.utils import archive
+
+for example in examples:
+    name = 'ext-tutorial-%s' % example
+    
+    tarball = os.path.join(luban_share, '%s.tar.gz' % name)
+    archive.createTar(
+        target = tarball,
+        srcdir = example,
+        newname = name,
+        compress = 'gz',
+        )
+
+    zip = os.path.join(luban_share, '%s.zip' % name)
+    archive.createZip(
+        target = zip,
+        srcdir = example,
+        newname = name,
+        )
+    
+    print ("created %s and %s" % (tarball, zip))
+    continue

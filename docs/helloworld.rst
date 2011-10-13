@@ -3,12 +3,23 @@
 Hello world!
 ------------
 
-Install::
+Install luban
+=============
+luban can be installed by either easy_install (for python3) ::
 
- $ easy_install3 luban
+ $ easy_install luban
 
-For more details about installation, please 
+or pip (for python3) ::
+
+ $ pip install luban
+
+For more details about installing easy_install/pip, please 
 :ref:`click here <installation>`.
+
+
+
+Create helloworld
+=================
 
 Create a luban project::
 

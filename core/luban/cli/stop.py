@@ -22,6 +22,8 @@ def run(path, **kwds):
     # load project info
     from luban.scaffolding.project import loadProject
     conf = os.path.join(path, 'conf.py')
+    if not os.path.exists(conf):
+        raise IOError("luban project configuration file %s does not exist" % conf)
     project = loadProject(conf)
     
     # deployment

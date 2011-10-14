@@ -13,9 +13,12 @@ luban can be installed by *either* easy_install (for python3) ::
 
  $ pip install luban
 
-For more details about installing easy_install/pip, please 
-:ref:`click here <installation>`.
+.. note::
+   luban 1.0 for now only support python 3, and does NOT support python 2.
 
+.. note::
+   For more details about installing easy_install/pip, please 
+   :ref:`click here <installation>`.
 
 
 Create helloworld

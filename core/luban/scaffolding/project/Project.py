@@ -26,6 +26,9 @@ class Project:
 
     deployment = 'cherrypy' # deployment method
     extensions = ['luban.timber'] # luban extensions used
+
+    # server
+    port = 8080 # port number
     
 
     def __init__(
@@ -35,6 +38,7 @@ class Project:
         web_static = None,
         deployment = None,
         extensions = None,
+        port = None,
         ):
         self.name = name
         # XXX
@@ -47,10 +51,20 @@ class Project:
         # 
         self.deployment = deployment or self.deployment
         self.extensions = extensions or self.extensions
+        self.port = port or self.port
         return
+    
 
     def identify(self, inspector):
         return inspector.onProject(self)
+
+
+
+# these are relative paths in the configuration 
+relpaths = [
+    'pytree_container',
+    'web_static',
+    ]
 
 
 # End of file 

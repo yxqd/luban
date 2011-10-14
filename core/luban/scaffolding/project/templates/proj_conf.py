@@ -31,6 +31,9 @@ deployment = %(deployment)r
 # luban extensions to use
 extensions = %(extensions)s
 
+# web server configuration (may not apply for all deployment types)
+port = %(port)s
+
 """
 
 def create(project):

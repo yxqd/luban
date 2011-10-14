@@ -32,8 +32,7 @@ def main():
     #
     options, args = parser.parse_args()
     
-    conf = options.config
-    
+    # make sure cherryd is not yet started
     pidfile = os.path.abspath('cherryd.PID')
     if os.path.exists(pidfile):
         pid = open(pidfile).read()
@@ -41,6 +40,15 @@ def main():
             "If you are sure it is not running. please remove file %r"
         msg = t % (pid, pidfile)
         raise RuntimeError(msg)
+
+    # the configuration file
+    conf = options.config
+
+    # fix port
+    port = options.port
+    modifyConfigration(conf, port=port)
+    
+    # start 
     cmd = "cherryd -i cpapp -d -p %(pidfile)s -c %(conf)s" % locals()
     print("starting cherryd server ...")
     os.system(cmd)
@@ -51,6 +59,32 @@ def main():
     cmd = "luban tail %s" % log
     os.system(cmd)
     return
+
+
+def modifyConfigration(conf, **kwds):
+    newconf = createNewConfig(conf, **kwds)
+    import os
+    os.remove(conf)
+    os.rename(newconf, conf)
+    return
+
+
+def createNewConfig(conf, port=None):
+    # parser
+    from configparser import ConfigParser
+    cp = ConfigParser()
+
+    # read 
+    read = cp.read(conf)
+    assert conf in read
+
+    # port
+    if port:
+        cp.set('global', 'server.socket_port', port)
+
+    newconf = conf + '.new'
+    cp.write(open(newconf, 'w'))
+    return newconf
 
 
 # End of file 

@@ -1,5 +1,6 @@
 
 core:
+* port number -> conf.py
 * a documentation about starting luban project at a differnt port
 * create a tarball of "extension-tutorial". 
 * check windows

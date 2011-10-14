@@ -12,16 +12,17 @@
 #
 
 
+"""
+see also .ConfigurationWriter
+"""
+
+
 class ConfigurationLoader:
 
-    # these are relative paths in the configuration that needs to be converted
-    # to absolute paths
-    relpaths = [
-        'pytree_container',
-        'web_static',
-        ]
 
-
+    from .Project import relpaths
+    
+    
     def load(self, filename):
         import os, sys
         filename = os.path.abspath(filename)

@@ -2,7 +2,6 @@
 core:
 * put luban extension example tar ball to danse download page to use the counter
 * check windows
-* check fedora
 * docs: supported platforms
 * .merlin rule for extension tutorial needs to be combined with the documentation .merlin rule so we don't need to, for example, create symbolic link of "tutorials" by hand
 * tutorial docs

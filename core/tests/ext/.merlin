@@ -18,7 +18,26 @@ examples = [
 
 
 # create tarballs and zip files and export them
-# XXX: need to remove all pyc files 
+# XXX: need to remove all pyc files and deployments directories
+# XXX: this is a hack
+import shutil
+for dirpath, dirnames, filenames in os.walk('.'):
+    for f in filenames:
+        fn, ext = os.path.splitext(f)
+        if ext not in ['.pyc', '.pyo'] and not f.endswith('~'):
+            continue
+        p = os.path.join(dirpath, f)
+        if os.path.exists(p):
+            os.remove(p)
+        continue
+    for d in dirnames:
+        if d != 'deployments': continue
+        p = os.path.join(dirpath, d)
+        if os.path.exists(p):
+            shutil.rmtree(p)
+        continue
+
+
 from merlin.builders._utils import createExportShareDir
 export_share = createExportShareDir(context)
 luban_share = os.path.join(export_share, 'luban')

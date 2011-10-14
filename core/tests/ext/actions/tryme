@@ -2,3 +2,7 @@
 
 export PYTHONPATH=$PWD:$PYTHONPATH
 luban start test_hideshow
+echo
+echo
+luban stop test_hideshow
+echo

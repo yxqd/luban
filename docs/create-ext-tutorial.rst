@@ -161,4 +161,7 @@ and do the following:
   into the the "extensions" list
 * use the new action in your code.
 
-To see the result of this tutorial, please visit here.
+This example is available for download. Choose from one of the following formats:
+
+* `<tutorials/ext-tutorial-actions.tar.gz>`_
+* `<tutorials/ext-tutorial-actions.zip>`_.

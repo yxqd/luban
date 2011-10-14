@@ -1,7 +1,7 @@
 
 core:
-* a documentation about starting luban project at a differnt port
 * create a tarball of "extension-tutorial". 
+* luban extension doc: what it is?
 * check windows
 * check fedora
 * docs: supported platforms

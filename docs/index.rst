@@ -44,6 +44,6 @@ News
 More
 ----
 
-* :ref:`Frequently asked questions <faqs>`
+.. * :ref:`Frequently asked questions <faqs>`
 * :ref:`Dependencies <deps>`
 * :ref:`Team <team>`

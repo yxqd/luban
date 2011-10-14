@@ -153,6 +153,10 @@ div.body p, div.body dd, div.body li {
     line-height: 130%;
 }
 
+div.body dd {
+    font-family: arial;
+}
+
 div.body h1,
 div.body h2,
 div.body h3,

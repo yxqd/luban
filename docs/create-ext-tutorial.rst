@@ -3,6 +3,25 @@
 How to create a luban extension
 ===============================
 
+A luban extension is an extension of luban.
+You can create one such extension as a standalone python package,
+or just as a part of your python package.
+It just needs to have an entry point for luban to understand 
+what it provides.
+
+Users can easily put your extension into use, as explained in
+the following.
+
+A luban extension provides/overloads one or more new type(s) of 
+UI elements/actions/events.
+For example, you have a nice jquery widget that you want to share
+with other luban users, you can easily wrap your widget using
+luban (similar to the idea of wrapping a piece of c++ code with
+python-c extension code).
+
+
+Requirement of a luban extension
+--------------------------------
 A luban extension is a python package (or subpackage).
 
 It contains 

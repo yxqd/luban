@@ -14,15 +14,16 @@ sufficient to describe a sophisticated, dynamic, and mordern
 user interface.
 
 
-We are only concern with the user interface logic
-"""""""""""""""""""""""""""""""""""""""""""""""""
-Visual appeals (eye candies) can be separated from UI logic.
-Visual appeals are certainly very very important.
-Actually with the success of Apple, we all understand visual
-appeal is very important for user experiences.
+We encourage separation of UI logic and visual effects
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Visual appeals (eye candies) could be separated from UI logic.
+Many have realized that visual appeals are certainly very very important
+for  user experiences,
+especially after the success of Apple.
 In luban, we notice that visual appeal could be evolved
 without changing the UI logic.
-And luban is a "language" for describing the UI logic,
+And luban is a "language" mainly 
+for the purpose of describing the UI logic,
 not the visual appeal.
 An argument of that was presented in one of Jiao's responses in
 `the thread started by Guido regarding luban <https://plus.google.com/115212051037621986145/posts/ThMuTvwut9g>`_,

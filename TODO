@@ -1,10 +1,10 @@
 
 core:
-* create a tarball of "extension-tutorial". 
 * luban extension doc: what it is?
 * check windows
 * check fedora
 * docs: supported platforms
+* .merlin rule for extension tutorial needs to be combined with the documentation .merlin rule so we don't need to, for example, create symbolic link of "tutorials" by hand
 * tutorial docs
 * checking of event handler assigment probably should be configurable
   to be omitted -- see luban.ui.descriptors.EventHandler -- to speed up in production mode

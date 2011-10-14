@@ -52,6 +52,9 @@ def run(path, **kwds):
 
     # update project if necessary
     updateProjectConfiguration(project, **kwds)
+
+    # check if the port is avilable
+    checkPort(project.port)
     
     # create a deployment
     deployment = project.deployment or 'cherrypy'
@@ -67,7 +70,7 @@ def run(path, **kwds):
             os.chdir(deployment_path)
             optstr = ' '.join('--%s=%s' % (k, getattr(project, k)) for k in server_options)
             os.system('python3 start %s' % optstr)
-            print ("\nYour interface should still be running. use\n\n  $ luban stop <project>\n\nif you need to stop it")
+            print ("\nYour interface could be running. use\n\n  $ luban stop <project>\n\nif you need to stop it")
             return
     StartServer().start()
     
@@ -79,6 +82,32 @@ def run(path, **kwds):
     import webbrowser; webbrowser.open(url)
     
     return
+
+
+def checkPort(port):
+    # this implementation miss two things
+    # 1. what if something happen just after this check and before the server
+    #    really start? this is not too bad because the server has its own check.
+    # 2. not all deployments are web deployments. for native deployments, 
+    #    we don't need this check. we will fix that when it comes.
+    import socket
+
+    host = '127.0.0.1'
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    try:
+        s.connect((host, port))
+        s.shutdown(2)
+    except:
+        # port not open, we are good
+        return
+
+    msg = "port %s is already in use\n" % port
+    msg += 'If port %s is occupied by another luban project, you could stop that project by\n' % port
+    msg += '\n  $ luban stop <project>\n\n'
+    msg += 'or you can start this project using a different port number:\n\n'
+    msg += '  $ luban start <project> -p <port>\n\n'
+    raise RuntimeError(msg)
 
 
 def updateProjectConfiguration(project, **kwds):

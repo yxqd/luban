@@ -34,6 +34,7 @@ News
 
 * luban repository is now available at `launchpad <https://launchpad.net/luban>`_
 * `Imagin'Labs corporation <http://imaginlabs.com>`_ uses luban for its web presentation.
+* Jiao `talked about luban <http://www.cacr.caltech.edu/main/?p=987>`_ in a `CACR <http://www.cacr.caltech.edu>`_ seminar.
 * `Guido van Rossum <http://www.python.org/~guido>`_, the author of python,
   `started a thread about luban <https://plus.google.com/115212051037621986145/posts/ThMuTvwut9g>`_
 

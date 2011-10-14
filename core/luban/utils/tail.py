@@ -26,7 +26,7 @@ def tail(filename, duration=None):
     st_results = os.stat(filename)
     st_size = st_results[6]
     file.seek(st_size)
-
+    
     start = time.time()
     while 1:
         where = file.tell()

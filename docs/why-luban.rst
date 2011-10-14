@@ -16,6 +16,7 @@ As UI technology evolves, you will not need to change your
 UI code, since all you have are generic specifications of your UI
 instead of specific (sometimes nasty) details of UI implementations,
 which are taken care of by luban.
+
 .. As an example, while we are all migrating to html5, it would be
 .. much easier for a UI application with luban specification to do so.
 

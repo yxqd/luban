@@ -1,0 +1,3 @@
+
+* hideshow: an example luban extension that overloads the "hide" and "show" actions
+* test_hideshow: an example luban project that uses hideshow luban extension

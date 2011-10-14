@@ -12,9 +12,10 @@ Create a luban project::
  $ luban create dynamic
 
 
-Before starting this new project, make sure you already shutdown other
-projects that might be using the same port, otherwise we will see 
-the server trying to start up but fail because of conflict port.
+.. note::
+   Before starting this new project, make sure you already shutdown other
+   projects that might be using the same port, otherwise you will get
+   an error message suggesting using a different port.
 
 Then we start this new project::
 

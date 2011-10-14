@@ -168,7 +168,7 @@ The code is self-explanatory.
 Use the extension
 -----------------
 
-Create a new luban project or use one of your earlier sandbox luban project, 
+Create a new luban project or reuse one of your earlier sandbox luban project, 
 and do the following:
 
 * make sure the new package you  created, "hideshow", is in python path, so that::

@@ -47,5 +47,5 @@ More
 
 * :ref:`Frequently asked questions <faq>`
 * :ref:`Dependencies <deps>`
-* :ref:`Supports <supports>`
+* :ref:`Support <support>`
 * :ref:`Team <team>`

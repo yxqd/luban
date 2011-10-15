@@ -1,7 +1,7 @@
-.. _supports:
+.. _support:
 
-Supports
---------
+Support
+-------
 
 * `National Science Fundation <http://www.nsf.gov>`_:
   luban is supported by the NSF through the 

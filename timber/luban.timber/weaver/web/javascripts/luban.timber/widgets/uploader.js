@@ -111,6 +111,7 @@
     //
     $(div).fileupload({
       dataType: 'json'
+      ,singleFileUploads: false
       // ,"url": C.url
       ,"url": '/upload'
       ,"formData": [

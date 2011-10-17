@@ -32,8 +32,19 @@ class Property(Descriptor):
         store = self._get_prop_store(instance)
         
         if self.name in store:
-            return store[self.name]
-        return self.default
+            v = store[self.name]
+        else:
+            v = self.default
+        # this might look weird. we should only validate the value
+        # in __set__, but not here. 
+        # the case of concern is if the default value is None
+        # but actually the validator does not allow None as a valid value
+        # this seems to be the only place to check for that
+        # probably need to revisit this soon
+        if hasattr(self, 'validator'):
+            self.validator(v)
+
+        return v
 
     
     def __set__(self, instance, value):
@@ -44,7 +55,7 @@ class Property(Descriptor):
             value = self.type.__cast__(value)
             
         if hasattr(self, 'validator'):
-            value = self.validator(value)
+            self.validator(value)
             
         store = self._get_prop_store(instance)
         

@@ -29,6 +29,9 @@ class ID(base):
     
     
     def __set__(self, instance, value):
+        # we don't automatically asign a unique id
+        # we only check if the id is valid
+        # it could be None, or a good string
         old = self.__get__(instance, instance.__class__)
         if old is not None:
             m = "id for element %s is already set to %s" % (

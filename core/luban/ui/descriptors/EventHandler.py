@@ -18,10 +18,25 @@ class EventHandler(Property):
     special property that handles assignment of event handler
     """
 
-    eventtype = None # 
+    eventtype = None # type event this handler is about
+    notnull = False # meaning this handler must be assigned to an action
     
     
+    def __get__(self, instance, cls):
+        v = super().__get__(instance, cls)
+        if self.notnull:
+            from ..actions.NoAction import NoAction
+            if isinstance(v, NoAction):
+                msg = "Handler for %r event must be assigned with a valid action" % (
+                    self.eventtype)
+                raise ValueError(msg)
+        return v
+
+
     def __set__(self, instance, value):
+        if self.notnull and value is None:
+            raise ValueError
+        
         # None -> NoAction
         if value is None:
             from ..actions.NoAction import NoAction

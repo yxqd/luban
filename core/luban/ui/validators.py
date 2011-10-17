@@ -11,10 +11,17 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
+"""
+validators are used to decorate descriptors. for example::
+
+ >>> descriptor.validator = validators.choice([1,2])
+ >>> descriptor.validator = validators.notnull
+
+"""
 
 def choice(items):
     def _(v):
-        if v in items: return v
+        if v in items: return
         m = "%s not in %s" % (v, items)
         raise ValueError(m)
     return _

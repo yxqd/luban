@@ -116,6 +116,7 @@ menu = [
       'uploader',
       'slides',
       'bulletinboard',
+      'progressbar',
       ]),
     ]
 

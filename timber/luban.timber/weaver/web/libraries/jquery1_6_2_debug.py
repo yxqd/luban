@@ -75,6 +75,8 @@ elements = [
     'formtextfield', 'formpasswordfield', 'formtextarea',
     'formselectorfield', 'formradiobox', 'formcheckbox',
     'formsubmitbutton',
+
+    'progressbar',
     ]
             
 for element in elements:
@@ -158,6 +160,16 @@ bulletinboard = {
         ),
     'stylesheets':
         (
+        ),
+    }
+
+
+progressbar = {
+    'javascripts':
+        (
+        '%s/ui/%s' % (jui_dev, 'jquery.ui.progressbar.js'),
+        
+        'luban.timber/widgets/progressbar.js',
         ),
     }
 

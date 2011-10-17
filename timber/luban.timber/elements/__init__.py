@@ -49,7 +49,7 @@ elementtypes = [
     'Image',
     # 'Link',
     # 'NewsTicker',
-    # 'ProgressBar',
+    'ProgressBar',
     'Slides',
     'Toolbar',
     # 'TreeView',

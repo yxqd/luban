@@ -11,6 +11,11 @@ core:
 * faq: how to load interface piece by piece to make it look faster
 * docs: FAQs: why another python web framework.
 * docs: tune up philosophy summary. mention vocabulary, words, ...
+* automatically transform actor routines to check the return type when luban
+  see an action of loading. for example
+    luban.a.select(id='a').replaceBy(newelement=luban.a.load(...))
+  here we should convert the actor/method combo mentioned in the "load" action
+  to check the return type
 * decorators to decorate function parameters so that we can convert
   parameters to a required type ?
 * put luban extension example tar ball to danse download page to use the counter

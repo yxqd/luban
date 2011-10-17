@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2009 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -30,12 +30,12 @@
 
 
   // actioncompiler handler
-  luban.actioncompiler.prototype.onprogressbarcancel = function(action) {
+  luban.actioncompiler.prototype.onprogressbarcancelaction = function(action) {
     var element = this.dispatch(action.element);
     element.cancel();
   };
 
-  
+
   // progressbar
   //  factory
   ef.progressbar = function(kwds, docmill, parent) {
@@ -49,9 +49,9 @@
     var onchecking = kwds.onchecking;
     if (!onchecking) {throw "need to define onchecking handler";}
 
-    var onfinished = kwds.onfinished;
-    if (!onfinished) {throw 'need to define onfinished handler';}
-    div.data('onfinished-callback', function() {docmill.compile(onfinished);});
+    var onfinish = kwds.onfinish;
+    if (!onfinish) {throw 'need to define onfinish handler';}
+    div.data('onfinish-callback', function() {docmill.compile(onfinish);});
 
     var oncanceled = kwds.oncanceled;
     if (oncanceled) {
@@ -76,7 +76,7 @@
     if (parent) {parent.add(ret);}
     return ret;
   };
-  
+
   function setCheckingTimer(onchecking, skip) {
     var check = function () {luban.docmill.compile(onchecking);};
     return window.setInterval(check, skip);
@@ -91,20 +91,20 @@
   widgets.progressbar.prototype.setAttribute = function(attrs) {
     var je = this.jqueryelem;
     if (attrs.status) {
-      var statusdiv = je.children('.status'); 
+      var statusdiv = je.children('.status');
       statusdiv.text(attrs.status);
     }
     if (attrs.percentage) {
-      var pbardiv = je.children('.pbar'); 
+      var pbardiv = je.children('.pbar');
       pbardiv.progressbar('value', attrs.percentage);
-      
+
       if (attrs.percentage>=100) {
 	var interval = je.data('checking-interval');
 	if (interval) {
 	  clearInterval(interval); je.data('checking-interval', null);
 	  var id = je.attr('id');
 	  var f = function () {
-	    var callback = je.data('onfinished-callback');
+	    var callback = je.data('onfinish-callback');
 	    callback();
 	  };
 	  var skip = je.data('skip');
@@ -116,7 +116,7 @@
   widgets.progressbar.prototype.cancel = function(attrs) {
     var je = this.jqueryelem;
     clearInterval(je.data('checking-interval')); je.data('checking-interval', null);
-    
+
     var f = je.data('oncanceled-callback');
     if (f) {f();}
   };

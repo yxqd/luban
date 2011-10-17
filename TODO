@@ -1,5 +1,14 @@
 
 core:
+* core:Element.Meta: should think of a better way to generate ctor documentation
+  right now if a subclass of Element (an element type) does not define ctor itself
+  but just inherits it from its parent, the ctor documentation will be 
+  also inherited. We could either
+  - in debug mode, alert deverlopers every new types need a ctor
+  - find a way to dynamically show different ctor documentation depending on class type
+    does python3 support __doc__ as a function rather than just string?
+  test case see tests/luban/ui/elements/Splitter.py
+* faq: how to load interface piece by piece to make it look faster
 * docs: FAQs: why another python web framework.
 * docs: tune up philosophy summary. mention vocabulary, words, ...
 * decorators to decorate function parameters so that we can convert

@@ -21,32 +21,18 @@ class Actor(base):
         ]
 
 
-    def __init__(self, *args, **kwds):
-        super().__init__(*args, **kwds)
-        self.value = 0
-        return
-    
-    
     def createDemoPanel(self, **kwds):
+        self.setProgress(0)
         pb = luban.e.progressbar(id='pbar')
         pb.onchecking = luban.a.load(actor=self.name, routine='check')
         pb.onfinish = luban.a.load(actor=self.name, routine='done')
         return pb
 
 
-    # this is only a demo implementation
-    filename = 'testprogressbar.dat'
-    def setProgress(self, value):
-        open(self.filename, 'w').write(str(value))
-        return
-    def getProgress(self):
-        filename = self.filename
-        import os
-        if not os.path.exists(filename): return 0
-        return int(open(filename).read())
-
-
     def check(self, **kwds):
+        # this is only a demo implementation.
+        # for a real useful progressbar, it should be watching
+        # progress of a task running on the server side.
         status = 'working...'
         p = self.getProgress()
         p += 10
@@ -60,6 +46,17 @@ class Actor(base):
 
     def done(self, **kwds):
         return luban.a.alert('done')
+
+
+    filename = 'testprogressbar.dat'
+    def setProgress(self, value):
+        open(self.filename, 'w').write(str(value))
+        return
+    def getProgress(self):
+        filename = self.filename
+        import os
+        if not os.path.exists(filename): return 0
+        return int(open(filename).read())
 
 
 # End of file 

@@ -39,6 +39,8 @@ debug = True
 
 # shortcuts
 from .ui import e, a, event
+elements = e
+actions = a
 from . import decorators
 from .uuid import uuid
 

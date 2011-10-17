@@ -44,6 +44,7 @@ and expand it and run::
  $ sudo python3 setup.py install
 
 
+.. _platform-specific-install:
 
 Platform specific instructions
 ------------------------------

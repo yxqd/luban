@@ -200,6 +200,7 @@ An example::
      - submitbutton(label='Submit')
 
 
+.. _philosophy-actions:
 
 Actions
 """""""
@@ -245,6 +246,12 @@ Element actions
 Actions that update a UI element. Examples:
 
 * ReplaceContent(element=<element selector>, newcontent=<luban element hierarchy>): replace the content of the given element with the new content
+
+
+Action to establish a user interface
+************************************
+
+* EstablishInterface(frame): establish a user interface from a frame
 
 
 Action to talk to the controller

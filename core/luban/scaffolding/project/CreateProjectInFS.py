@@ -105,9 +105,9 @@ class Actor(base):
     expose = 1
 
     def default(self):
-        frame = luban.e.frame(title="hello world")
+        frame = luban.elements.frame(title="hello world")
         frame.document(title="hello world")
-        return luban.a.establishInterface(frame)
+        return luban.actions.establishInterface(frame)
 
 """
     

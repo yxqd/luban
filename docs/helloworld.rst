@@ -14,11 +14,12 @@ luban can be installed by *either* easy_install (for python3) ::
  $ pip install luban
 
 .. note::
-   luban 1.0 for now only support python 3, and does NOT support python 2.
-
-.. note::
-   For more details about installing easy_install/pip, please 
-   :ref:`click here <installation>`.
+   luban 1.0 for now only supports python 3, and does NOT support python 2.
+   Installation/usage of easy_install/pip for python 3 could be tricky;
+   please take a look at the 
+   :ref:`installation instructions <installation>` for more details.
+   Also, :ref:`platform specific instructions <platform-specific-install>`
+   may be helpful.
 
 
 Create helloworld
@@ -61,9 +62,9 @@ It reads::
      expose = 1
  
      def default(self):
-         frame = luban.e.frame(title="hello world")
+         frame = luban.elements.frame(title="hello world")
          frame.document(title="hello world")
-         return luban.a.establishInterface(frame)
+         return luban.actions.establishInterface(frame)
 
 Let us change it to::
 
@@ -75,10 +76,10 @@ Let us change it to::
      expose = 1
  
      def default(self):
-         frame = luban.e.frame(title="hello world")
+         frame = luban.elements.frame(title="hello world")
          doc = frame.document(title="hello world")
          doc.paragraph(text = "This is my first luban user interface")
-         return luban.a.establishInterface(frame)
+         return luban.actions.establishInterface(frame)
 
 You will see in the terminal where you start the luban project
 the server is reloading to incoporate your changes.
@@ -89,32 +90,47 @@ and see the changes.
 A few concepts
 ==============
 
-An actor lives in the "server side" and responds to client requests.
+An *actor* lives in the "server side" and responds to client requests.
 
 The entry point of a luban application is 
-by default the "default" method of the "default" actor.
+by default the "default" method of the "default" *actor*.
 It should return an "establishInterface" action that establish
-the user interface from a "frame" instance.
+the user interface from a *frame* instance.
 
 A user interface is represented by a hierarchical structure of 
 UI elements.
 
-The root of this hierarchical structure is a "frame".
+The root of this hierarchical structure is a *frame*.
 
-To create a frame, use the luban.e.frame factory method::
 
- >>> frame = luban.e.frame(title="hello world")
+element factory and element hierarchy
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+To create a *frame*, use the luban.elements.frame factory method::
+
+ >>> frame = luban.elements.frame(title="hello world")
 
 .. note::
-   luban.e is a proxy to factory methods for creating luban elements.
-   while luban.a is a proxy to factory methods for creating luban actions.
+   *luban.elements* is a proxy to factory methods for creating luban elements.
+   For example, *luban.elements.frame* is a factory method to build a 
+   *frame* luban element.
+   An alias is also provided for convenience::
+   
+    luban.e = luban.elements
+
+   so that, for example, instead of ::
+   
+    >>> luban.elements.frame(...)
+    
+   you can do ::
+
+    >>> luban.e.frame(...)
 
 Now the interface hierarchy is::
 
  - frame(title="hello world")
 
-To create sub elements in a frame, call the element factory 
-on the frame instance::
+To create sub elements in a *frame*, call the element factory 
+on the *frame* instance::
 
  >>> doc = frame.document(title="hello world")
 
@@ -123,7 +139,7 @@ And now the interface hierarchy is::
  + frame(title="hello world")
    - document(title ="hello world")
 
-To create a sub element in the first sub element of the frame,
+To create a sub element in the first sub element of the *frame*,
 similarly, you call the element factory on the subelement, "doc"::
 
  >>> doc.paragraph(text = "This is my first luban user interface")
@@ -147,6 +163,36 @@ And now the interface hierarchy is::
      >>> frame.paragraph(...)
      >>> doc.paragraph(...)
      >>> doc.document(...)
+
+
+action
+~~~~~~
+Now we look at the last statement in the "default" method::
+
+ >>> return luban.actions.establishInterface(frame)
+
+When luban is interpreting that action, it will try
+to establish a user interface from the given *frame*.
+
+There are relatively few types of actions in luban, but their combinations
+make luban very powerful.
+:ref:`click here for more explanations of actions <philosophy-actions>`,
+and `click here for examples of luban actions <http://lubanui.org/aokuang>`_.
+
+.. note::
+   Similar to *luban.elements*, 
+   *luban.actions* is a proxy to factory methods for creating luban actions.
+   And an alias of *luban.actions* is also provided for convenience::
+
+    luban.a = luban.actions
+
+   so that, for example, instead of ::
+
+    >>> luban.actions.establishInterface(...)
+    
+   you can do ::
+
+    >>> luban.a.establishInterface(...)
 
 
 Shutting down the server

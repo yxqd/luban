@@ -1,6 +1,5 @@
 
 core:
-* make a an alias of actions, e an alias of elements
 * docs: FAQs: why another python web framework.
 * docs: tune up philosophy summary. mention vocabulary, words, ...
 * decorators to decorate function parameters so that we can convert

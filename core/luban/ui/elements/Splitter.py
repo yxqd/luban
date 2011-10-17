@@ -42,7 +42,7 @@ class Splitter(RivetedContainer):
     
     # properties
     orientation = descriptors.str(default='horizontal')
-    orientation.validators = [validators.choice(['vertical', 'horizontal'])]
+    orientation.validator = validators.choice(['vertical', 'horizontal'])
     orientation.tip = 'Orientation of the splitter'
     
     

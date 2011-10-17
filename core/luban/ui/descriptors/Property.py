@@ -43,6 +43,9 @@ class Property(Descriptor):
         else:
             value = self.type.__cast__(value)
             
+        if hasattr(self, 'validator'):
+            value = self.validator(value)
+            
         store = self._get_prop_store(instance)
         
         store[self.name] = value

@@ -23,6 +23,15 @@ class TestCase(unittest.TestCase):
         print (luban.e.splitter.__init__.__doc__)
         print (luban.e.document.__init__.__doc__)
         return
+
+    
+    def test1(self):
+        "orientation.validator"
+        sp = luban.e.splitter()
+        self.assertRaises(ValueError, setattr, sp, 'orientation', 'a')
+        sp.orientation = 'vertical'
+        sp.orientation = 'horizontal'
+        return
     
      
 if __name__ == "__main__": unittest.main()

@@ -83,8 +83,15 @@ class Element(ElementBase, metaclass=Meta):
         simple_description = "event happens when a ui element is clicked"
         __unique_type_name__ = 'click'
         # no attributes
-    del Event
     
+    class create(Event):
+
+        # decorations
+        simple_description = "event happens when a ui element is created"
+        __unique_type_name__ = 'create'
+        # no attributes
+
+    del Event
     # ************************************************************
     # event handlers
     # event handlers will be automatically defined using event types

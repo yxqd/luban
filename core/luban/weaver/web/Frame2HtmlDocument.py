@@ -66,6 +66,9 @@ for this site, and
             html_target = HtmlDocument()
         self.html_target= html_target
 
+        # for ajax crawler
+        html_target.head.tag('meta', name='fragment', content='!')
+
         # optional customization
         self.customizeHtmlTarget(html_target)
         

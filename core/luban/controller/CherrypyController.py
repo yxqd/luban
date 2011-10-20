@@ -28,12 +28,20 @@ class CherrypyController(WebAppController):
         return self.run(actor, routine, *args, **kwds)
     default = index
 
-
+    
+    snapshot_controller_url = None
     def _snapshot(self, fragment, actor, routine, *args, **kwds):
         
-        url = self.url
-        if not url.startswith('http:'):
-            url = cherrypy.url(self.url)
+        # if a specific url for snaphsot controller is provided
+        # use that
+        url = self.snapshot_controller_url 
+        if url is None:
+            # otherwise, use the url for this controller
+            url = self.url
+            if not url.startswith('http:'):
+                # if the url is not a full url
+                # ask cherrypy for help
+                url = cherrypy.url(self.url)
             
         # args = (actor or 'default', routine or 'default') + args
         # argstr = '/'.join(args)

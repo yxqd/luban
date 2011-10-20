@@ -19,8 +19,11 @@ from .WebAppController import WebAppController
 class CherrypyController(WebAppController):
     
     @cherrypy.expose
-    def index(self, actor=None, routine=None, **kwds):
-        return self.run(actor=actor, routine=routine, **kwds)
+    def index(self, actor=None, routine=None, *args, **kwds):
+        return self.run(actor, routine, *args, **kwds)
+
+    
+    default = index
 
     
 # End of file 

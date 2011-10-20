@@ -118,18 +118,30 @@
 
     //
     'onalert': function(action) {
-      action = this._compileparams(action);
+      action = this._compilekwdargs(action);
       alert(action.message);
     },
 
 
     // helpers
-    '_compileparams': function(params) {
+    '_compilekwdargs': function(params) {
       var ret = {};
       for (var key in params) {
 	var value = params[key];
 	value = this.compile1(value);
 	if (value!=null) {ret[key] = value;}
+      }
+      return ret;
+    },
+    '_compileargs': function(args) {
+      var ret = [];
+      for (var i=0; i<args.length; i++) {
+	var value = args[i];
+	value = this.compile1(value);
+	if (value!=null)
+	  ret.push(value);
+	else
+	  ret.push(args[i]);
       }
       return ret;
     }

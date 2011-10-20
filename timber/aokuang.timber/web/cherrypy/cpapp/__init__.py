@@ -10,7 +10,7 @@ class Root(CherrypyController):
     def __init__(self):
         super().__init__(
             url = '/',
-            static_html_base = 'static',
+            static_html_base = '/static',
             actor_packages = ['aokuang.timber.actors', 'aokuang.core.actors'],
             stylesheets = ['aokuang.core.css', 'aokuang.timber.css'],
             )

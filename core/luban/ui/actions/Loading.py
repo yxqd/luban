@@ -31,17 +31,20 @@ class Loading(base):
     routine = descriptors.str()
     routine.tip = 'The routine of the actor that will be called to handle this load action'
 
+    args = descriptors.list()
+    args.tip = "The arguments for the routine"
+
     params = descriptors.dict()
     params.tip = 'Addtional parameters as a dictionary'
     
 
-    def __init__(self, actor=None, routine=None, **params):
+    def __init__(self, actor=None, routine=None, *args, **params):
         '''load(actor, routine, **kwds) -> load from controller.
         
 The given routine of the given actor will be called with additional parameters
 specified in the keyword arguments.
 '''
-        super(Loading, self).__init__(actor=actor, routine=routine, params=params)
+        super(Loading, self).__init__(actor=actor, routine=routine, args=args, params=params)
         return
     
     

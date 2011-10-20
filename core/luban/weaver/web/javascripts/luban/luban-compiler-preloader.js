@@ -165,30 +165,20 @@
       var kwds = {
 	'actor': action.actor,
 	'routine': action.routine,
-	'data': this._compileparams(action.params)
+	'args': this._compileargs(action.args),
+	'kwds': this._compilekwdargs(action.params)
       };
 
       var C = luban.Controller;
       C.load(kwds, callback);
     },
 
-    'onsubmission': function(action, callback) {
-      var form = action.form;
-      form = this.actioncompiler.dispatch(form);
-
-      var kwds = {
-	'actor': action.actor,
-	'routine': action.routine,
-	'data': this._compileparams(action.params)
-      };
-
-      form.clearErrors();
-
-      var C = luban.Controller; C.submit(form._je, kwds, callback);
+    '_compilekwdargs': function(kwds) {
+      return this.actioncompiler._compilekwdargs(kwds);
     },
 
-    '_compileparams': function(args) {
-      return this.actioncompiler._compileparams(args);
+    '_compileargs': function(kwds) {
+      return this.actioncompiler._compileargs(kwds);
     }
 
   };

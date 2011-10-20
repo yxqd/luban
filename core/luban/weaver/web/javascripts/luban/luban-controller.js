@@ -78,42 +78,47 @@ C = luban.Controller = {
   // controller methods
 
   // call controller
-  // kwds
+  // specs
   //   actor: the name of the actor
   //   routine: the name of the routine
   //   callback: the call back function when the response of the server is received
   //   responsetype: the expected response type. default: json
-  //   data: the additional data to send to the server
-  C.call = function (kwds) {
-    var actor = kwds.actor;
-    var routine = kwds.routine;
+  //   args: arguments for the routine
+  //   kwds: the additional data to send to the server
+  C.call = function (specs) {
+    var actor = specs.actor;
+    var routine = specs.routine;
     if (!routine) {routine='default';}
-    var callback = kwds.callback;
+    var callback = specs.callback;
     var url = C.url;
 
-    var responsetype = kwds.responsetype;
+    var responsetype = specs.responsetype;
     if (responsetype==null)
       {responsetype = 'json';}
 
     // call
-    var args = {'actor': actor,
-		'routine': routine};
+//    var args = {'actor': actor,
+//		'routine': routine};
+    var args = [actor, routine];
+    args.concat(specs.args);
+    url += args.join('/');
 
-    // data
-    var data = kwds.data;
-    if (data == null) {data = {};}
+    // kwd args
+    var kwds = specs.kwds;
+    if (kwds == null) {kwds = {};}
 
     // credential
     var credArgs = C.getCredentialArgs();
 
     // all
-    var allargs = $.extend({}, args, data, credArgs);
+    var allkwdargs = $.extend({}, kwds, credArgs);
 
     var f = function(callback) {
-      $.get(url, allargs, callback, responsetype);
+      $.get(url, allkwdargs, callback, responsetype);
     };
+
     // for debug
-    f.url = url; f.allargs = allargs;
+    f.url = url; f.allkwdargs = allkwdargs;
 
     C.runWithLoadingAlert(f, callback);
 
@@ -242,16 +247,17 @@ C = luban.Controller = {
     return luban.docmill.render(data);
   };
 
-  // load from server and execute commands in the response
-  // kwds: a dict
+  // load from controller and execute actions in the response
+  // specs: the specification of the call
   //   actor: the name of the actor
   //   routine: the name of the routine
-  //   data: a dictionary of additional parameters to send to the server
-  C.load = function(kwds, callback) {
-    kwds.callback = callback;
-    var data = kwds.data;
-    kwds.data = prependParameterPrefix(data);
-    C.call(kwds);
+  //   args: the arguments for the routine
+  //   kwds: a dictionary of additional parameters to send to the server
+  C.load = function(specs, callback) {
+    specs.callback = callback;
+    var kwds = specs.kwds;
+    specs.kwds = prependParameterPrefix(kwds);
+    C.call(specs);
   };
 
 

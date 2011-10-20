@@ -97,8 +97,6 @@ C = luban.Controller = {
       {responsetype = 'json';}
 
     // call
-//    var args = {'actor': actor,
-//		'routine': routine};
     var args = [actor, routine];
     args.concat(specs.args);
     url += args.join('/');

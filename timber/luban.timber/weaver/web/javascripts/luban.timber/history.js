@@ -28,6 +28,12 @@
       function (hash, init) {
 	if(hash) {
 	  var url = luban.Controller.url + hash.slice(1, hash.length);
+
+	  // to tell the handler to return an action to replace frame
+	  if (url.indexOf('?') == -1) url += '?';
+	  else url += '&';
+	  url += 'returntype=replaceframe';
+
 	  if (init) {
 	    luban.init.frame = null;
 	    var frame = {
@@ -62,13 +68,15 @@
   // actioncompiler extension
   var actioncompiler_ext = {
     'onsetanchor': function (action) {
-      var args = {
-	actor: action.actor,
-	routine: action.routine
-      };
-      $.extend(args, action.params);
-      var hash = luban.utils.argsStrInUrl(args);
-      hash = '/?' + hash;
+      var args = [action.actor, action.routine];
+      args.concat(action.args);
+
+      var hash = '!' + args.join('/');
+
+      var kwdargs = action.params;
+      var kargstr = luban.utils.argsStrInUrl(kwdargs);
+      if (kargstr) hash += '?' + kargstr;
+
       $.history.add(hash);
     }
   };

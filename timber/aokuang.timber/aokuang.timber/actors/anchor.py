@@ -13,6 +13,7 @@
 
 
 import luban
+from luban.timber.controller import anchor
 
 
 from luban.controller.Actor import Actor as base
@@ -22,7 +23,8 @@ class Actor(base):
 
     
     def default(self, **kwds):
-        return self.frame()
+        frame = self.frame()
+        return luban.a.establishInterface(frame)
     
 
     def frame(self, **kwds):
@@ -57,19 +59,20 @@ class Actor(base):
 
         return frame
 
-
+    @anchor.anchorHandler
     def b1(self, **kwds):
         frame = skeleton()
         display = frame.find(id='display')
         display.append(b1doc())
-        return luban.a.select(id='').replaceBy(newelement=frame)
+        return frame
 
 
+    @anchor.anchorHandler
     def b2(self, **kwds):
         frame = skeleton()
         display = frame.find(id='display')
         display.append(b2doc())
-        return luban.a.select(id='').replaceBy(newelement=frame)
+        return frame
 
 
 def skeleton():

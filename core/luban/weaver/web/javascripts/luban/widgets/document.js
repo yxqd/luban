@@ -115,7 +115,7 @@
       if (title) {
 	titlecontainer.text(title).show();
       } else {
-	titlecontainer.text(title).hide();
+	titlecontainer.text('a').hide(); // if empty, weird thing happen in for snapshots
       }
       // make sure saved ctor args is up to date
       this._getCtorArgs().title = title;
@@ -146,7 +146,7 @@
     if (title) {
       h1.html(title);
     } else {
-      h1.hide();
+      h1.text('a').hide();
     }
     h1.addClass(this.title_text_class);
 

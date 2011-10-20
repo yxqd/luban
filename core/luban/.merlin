@@ -33,3 +33,7 @@ target = os.path.join(export_pytree, 'luban', 'weaver', 'web')
 import os
 rsync('weaver/web/css', os.path.join(target, 'css'))
 rsync('weaver/web/javascripts', os.path.join(target, 'javascripts'))
+
+# hsnapshot.jar
+import shutil
+shutil.copyfile('controller/hsnapshot.jar', os.path.join(export_pytree, 'luban', 'controller', 'hsnapshot.jar'))

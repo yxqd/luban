@@ -33,25 +33,34 @@ class Mixin:
         # cherrypy.log('upload started id: %s, kwds:%s' % (uploadid, kwds) )
         cherrypy.response.timeout = UploadConfiguration.timeout
         
-        # where to save the file
-        fpath = _getUploadFilePath(luban_upload_file.filename, uploadid)
+        if not isinstance(luban_upload_file, list):
+            luban_upload_files = [luban_upload_file]
+        else:
+            luban_upload_files = luban_upload_file
+            
+        for luban_upload_file in luban_upload_files:
+            # where to save the file
+            fpath = _getUploadFilePath(luban_upload_file.filename, uploadid)
         
-        # open output stream
-        ostream = open(fpath, 'wb')
+            # open output stream
+            ostream = open(fpath, 'wb')
         
-        # read uploaded data 
-        data = luban_upload_file.file.read()
-        size = len(data)
+            # read uploaded data 
+            data = luban_upload_file.file.read()
+            size = len(data)
 
-        # write it out
-        ostream.write(data)
-        ostream.close()
+            # write it out
+            ostream.write(data)
+            ostream.close()
         
-        return [{
-            "name": luban_upload_file.filename,
-            "size": size,
-            "type": str(luban_upload_file.content_type),
-            }]
+        return [
+            {
+                "name": luban_upload_file.filename,
+                "size": size,
+                "type": str(luban_upload_file.content_type),
+            }
+            for luban_upload_file in luban_upload_files
+            ]
 
 
     @cherrypy.expose
@@ -76,12 +85,18 @@ class Mixin:
 
 def _getUploadFilePath(filename, id):
     import os
+    dir = _getUploadFileContainerDir(id)
+    return os.path.join(dir, filename)
+
+
+def _getUploadFileContainerDir(id):
+    import os
     dir = os.path.join(
         UploadConfiguration.path,
         id)
     if not os.path.exists(dir):
         os.makedirs(dir)
-    return os.path.join(dir, filename)
+    return dir
 
 
 def _getUploadProgressFilePath(id):

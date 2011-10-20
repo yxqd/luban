@@ -1,7 +1,10 @@
 
 core:
-* support for luban?
+* make a an alias of actions, e an alias of elements
+* docs: FAQs: why another python web framework.
 * docs: tune up philosophy summary. mention vocabulary, words, ...
+* decorators to decorate function parameters so that we can convert
+  parameters to a required type ?
 * put luban extension example tar ball to danse download page to use the counter
 * check windows
 * docs: supported platforms

@@ -33,6 +33,9 @@ class Uploader(Element):
     # of the upload. 
     # This is now implemented in 
     
+    multiple = descriptors.bool()
+    multiple.tip = "allow multiple uploads"
+
     # events
     from luban.ui.Event import Event
     # complete
@@ -43,6 +46,9 @@ class Uploader(Element):
         # attributes
         filename = descriptors.str()
         filename.tip = "filename of the uploaded file"
+        
+        filenames = descriptors.str()
+        filenames.tip = "filenames of the uploaded files. useful if upload is multiple"
     # fail
     class fail(Event):
         # decorations

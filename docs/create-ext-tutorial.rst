@@ -183,4 +183,4 @@ and do the following:
 This example is available for download. Choose from one of the following formats:
 
 * `<tutorials/ext-tutorial-actions.tar.gz>`_
-* `<tutorials/ext-tutorial-actions.zip>`_.
+* `<tutorials/ext-tutorial-actions.zip>`_

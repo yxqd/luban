@@ -56,7 +56,13 @@
     var form = tag('form'); div.append(form);
     // .. input in the form
     var input_name = "luban_upload_file: " + id;
-    var input = tag('input', {'id': id+"-input", "type": "file", name:input_name}); // multiple?
+    var input_attrs = {
+      'id': id+"-input",
+      "type": "file",
+      name:input_name,
+    };
+    if (kwds.multiple) input_attrs['multiple'] = 'multiple';
+    var input = tag('input', input_attrs);
     form.append(input);
 
     // .. status
@@ -113,11 +119,15 @@
       // , maxChunkSize: 1000000
       ,"done": function(e, data) {
 	$(this).children('.ui-progressbar').hide();
-	var file = data.result[data.result.length-1];
-	var status = file.name + " uploaded.";
+	var files = [];
+	for (var i=0; i<data.result.length; i++)
+	  files.push(data.result[i].name);
+	var status = files.join(', ');
+	status += " uploaded.";
 	$(this).children('.status').text(status);
 	var extra = {
-	  'filename': file.name
+	  'filename': files[0],
+	  'filenames': files.join(',')
 	};
 	$(this).trigger("luban-uploadcomplete", extra);
 	$(this).data('progress_timer', 0);
@@ -134,10 +144,11 @@
 	$(this).children("form").fadeIn();
       }
       ,"send": function (e,data) {
-	if (data.files.length!=1) throw "not implemented yet";
-	var totalsize;
-	if ($.browser.msie) totalsize = 0;
-	else totalsize = data.files[0].size;
+	var totalsize = 0;
+	if (!$.browser.msie) {
+	  for (var i = 0; i<data.files.length; i++)
+	    totalsize += data.files[i].size;
+	}
 	if (kwds.maxsize && totalsize>kwds.maxsize) {
 	  data.failure_reason = "file size exeeds limit: " + kwds.maxsize/mega + "MB";
 	  return false;

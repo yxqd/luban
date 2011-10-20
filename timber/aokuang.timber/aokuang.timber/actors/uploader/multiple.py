@@ -16,7 +16,7 @@ import luban
 from ....DemoPanelActor import Actor as base
 class Actor(base):
 
-    title='"oncomplete" and "onfail" event'
+    title='multiple uploads'
     description = [
         ]
 
@@ -25,7 +25,7 @@ class Actor(base):
         # create uploader
         oncomplete = luban.a.load(
             actor=self.name, routine='onUpload', 
-            filename=luban.event.filename,
+            filenames=luban.event.filenames,
             uploadid = uploadid,
             )
         onfail = luban.a.alert(luban.event.reason)
@@ -34,21 +34,25 @@ class Actor(base):
             id = uploadid,
             oncomplete = oncomplete,
             onfail = onfail,
+            multiple = True,
             )
         return uploader
 
 
-    def onUpload(self, filename=None, uploadid=None, **kwds):
-        fpath = self.controller._getUploadFilePath(filename, uploadid)
+    def onUpload(self, filenames=None, uploadid=None, **kwds):
+        filenames = filenames.split(',')
         import os
-        assert os.path.exists(fpath)
+        doc = luban.e.document()
         # now we could move the uploaded file to some long term
         # storage 
         # but we will skip that
-        import os
-        size = os.path.getsize(fpath)
-        title="uploaded file: filename=%s, size=%s" % (filename, size)
-        doc = luban.e.document(title = title)
+        for filename in filenames:
+            fpath = self.controller._getUploadFilePath(filename, uploadid)
+            assert os.path.exists(fpath), "%s does not exist" % fpath
+            size = os.path.getsize(fpath)
+            text="uploaded file: filename=%s, size=%s" % (filename, size)
+            doc.paragraph(text=text)
+            continue
         return luban.a.select(id=uploadid).replaceBy(newelement=doc)
 
 

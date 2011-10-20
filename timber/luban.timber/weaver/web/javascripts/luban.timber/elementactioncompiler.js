@@ -25,7 +25,7 @@
       var e = action.element;
       var element = this.dispatch(e);
 
-      var params = this._compileparams(action.attrs);
+      var params = this._compilekwdargs(action.attrs);
       // set id
       var id = params.id;
       if (id!=null) {element.setID(id);}

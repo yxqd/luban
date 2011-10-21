@@ -20,10 +20,12 @@ script dealing with sitemap
 import os, time
 
 
-def run(project=None, **kwds):
+def run(project=None, urlbase=None):
     path = project or '.'
     if not os.path.exists(path):
         raise IOError("%r does not exist" % path)
+
+    urlbase = urlbase or 'http://example.com'
 
     # load project
     from luban.scaffolding.project import loadProject
@@ -32,7 +34,22 @@ def run(project=None, **kwds):
         raise IOError("luban project configuration file %s does not exist" % conf)
     project = loadProject(conf)
 
-    print (project)
+    # add project pytree to python path
+    pytree_container = os.path.join(path, project.pytree_container)
+    import sys
+    if pytree_container not in sys.path:
+        sys.path.insert(0, pytree_container)
+    
+    # get sitemap
+    name = project.name
+    mod = __import__("%s.sitemap"%name, fromlist=[''])
+    
+    # create sitemap.xml
+    urls = mod.urls
+    xmlout = os.path.join(path, project.web_static, 'sitemap.xml')
+    from luban.utils.sitemap import create
+    create(urlbase, urls, xmlout)
+    print ("created sitemap at %s" % xmlout)
     return
 
 
@@ -46,6 +63,10 @@ def parse_cmdline():
     parser.add_option(
         '-p', '--project', 
         dest='project', default=None, help='path to the luban project')
+
+    parser.add_option(
+        '-b', '--urlbase',
+        dest = 'urlbase', default=None, help='url base of the web app')
 
     #
     options, args = parser.parse_args()

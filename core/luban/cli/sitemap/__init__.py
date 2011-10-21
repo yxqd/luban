@@ -17,8 +17,7 @@ script dealing with sitemap
 """
 
 
-def run(action, *args, **opts):
-    mod = importActionHandler(action)
+def run(mod, *args, **opts):
     return mod.run(*args, **opts)
 
 
@@ -46,7 +45,7 @@ def parse_cmdline():
     
     mod = importActionHandler(action)
     args, kwds = mod.parse_cmdline()
-    return args, kwds
+    return [mod]+args, kwds
 
 
 public_commands = [

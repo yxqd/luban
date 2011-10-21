@@ -69,7 +69,7 @@
   var actioncompiler_ext = {
     'onsetanchor': function (action) {
       var args = [action.actor, action.routine];
-      args.concat(action.args);
+      args = args.concat(action.args);
 
       var hash = '!' + args.join('/');
 

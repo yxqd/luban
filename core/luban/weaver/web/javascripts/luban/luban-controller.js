@@ -98,7 +98,7 @@ C = luban.Controller = {
 
     // call
     var args = [actor, routine];
-    args.concat(specs.args);
+    args = args.concat(specs.args);
     url += args.join('/');
 
     // kwd args

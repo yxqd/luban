@@ -61,6 +61,8 @@ class Renderer:
 
 
 def create(base, urls, output):
+    """create("http://example.com", ["home", "about", "consulting"], 'sitemap.xml')
+    """
     r = Renderer()
     text = r.render(base, urls)
     open(output, 'w').write(text)

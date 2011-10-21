@@ -55,8 +55,8 @@ class WebAppController(ControllerBase):
         return
     
 
-    def run(self, actor=None, routine=None, **kwds):
-        obj = self.call(actor=actor, routine=routine, **kwds)
+    def run(self, actor=None, routine=None, *args, **kwds):
+        obj = self.call(actor, routine, *args, **kwds)
         return self.weaver.weave(obj)
 
 

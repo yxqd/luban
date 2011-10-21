@@ -22,7 +22,7 @@ class Actor:
     from .exceptions import RoutineNotFound
 
     # methods
-    def perform(self, routine=None, **kwds):
+    def perform(self, routine=None, *args, **kwds):
 
         if routine is None:
             routine = "default"
@@ -47,7 +47,7 @@ class Actor:
             kwds.update(kwds2)
             del kwds['kwds']
             
-        return behavior(**kwds)
+        return behavior(*args, **kwds)
     
     pass # end of Actor
 

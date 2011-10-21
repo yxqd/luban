@@ -26,10 +26,10 @@ class ControllerBase:
         return
     
 
-    def call(self, actor=None, routine=None, **kwds):
+    def call(self, actor=None, routine=None, *args, **kwds):
         actor = actor or 'default'
         actor = self._retrieveActor(actor)
-        obj = actor.perform(routine=routine, **kwds)
+        obj = actor.perform(routine, *args, **kwds)
         return obj
 
 

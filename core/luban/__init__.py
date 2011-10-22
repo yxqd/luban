@@ -18,8 +18,10 @@ luban: generic user interface specification
 packages:
 
 * ui: type system; element and action representations
+* controller: controller of UI
 * weaver: convert luban ui representation to implementations such as javascript
-* project: luban project
+* scaffolding: helpers to create luban projects, extensions, etc
+* cli: command line interface "luban"
 * utils: miscellaneous tools
 
 """

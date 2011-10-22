@@ -44,17 +44,34 @@ from .uuid import uuid
 
 
 #
-def load_extensions(extensions):
+def load_extension(ext):
+    """load a luban extension
+    
+    Be careful with the sequence of loading extensions.
+    Extension loaded later coule override the earlier one
+    if extension_allow_override is True.
+    """
     from .weaver.web.libraries.default import base
+    
+    module = '%s.luban_ext' % ext
+    module = __import__(module, fromlist = [''])
+    # 
+    if hasattr(module, 'jsfiles_toload_onstart'):
+        base['javascripts'] += module.jsfiles_toload_onstart
+        pass
+
+    return
+
+
+def load_extensions(extensions):
+    """load a list of extensions
+
+    Be careful with the sequence of loading extensions.
+    Extension loaded later coule override the earlier one
+    if extension_allow_override is True.
+    """
     for ext in extensions:
-        module = '%s.luban_ext' % ext
-        module = __import__(module, fromlist = [''])
-        
-        # 
-        if hasattr(module, 'jsfiles_toload_onstart'):
-            base['javascripts'] += module.jsfiles_toload_onstart
-            pass
-        
+        load_extension(ext)
         continue
     return
 

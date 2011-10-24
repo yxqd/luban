@@ -3,6 +3,7 @@ core:
 * make a an alias of actions, e an alias of elements
 * docs: FAQs: why another python web framework.
 * docs: tune up philosophy summary. mention vocabulary, words, ...
+* add a method to extend element base class with common element event types
 * decorators to decorate function parameters so that we can convert
   parameters to a required type ?
 * put luban extension example tar ball to danse download page to use the counter

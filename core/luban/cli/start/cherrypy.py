@@ -49,15 +49,15 @@ def main():
     modifyConfigration(conf, port=port)
     
     # start 
-    cmd = "cherryd -i cpapp -d -p %(pidfile)s -c %(conf)s" % locals()
+    cmd = "cherryd -i cpapp -p %(pidfile)s -c %(conf)s" % locals()
     print("starting cherryd server ...")
     os.system(cmd)
     print('done.\n\n')
 
-    log = os.path.abspath('site.log')
-    print('*** Now start watching %s. ctrl-C to exit ***\n' % log)
-    cmd = "luban tail %s" % log
-    os.system(cmd)
+    # log = os.path.abspath('site.log')
+    # print('*** Now start watching %s. ctrl-C to exit ***\n' % log)
+    # cmd = "luban tail %s" % log
+    # os.system(cmd)
     return
 
 

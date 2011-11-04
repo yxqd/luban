@@ -199,7 +199,7 @@ Shutting down the server
 ========================
 
 After finish playing with this "helloworld" example, you could shut
-down the server::
+down the server by hitting control-C. You could also stop it by ::
  
  $ luban stop /path/to/helloworld
 

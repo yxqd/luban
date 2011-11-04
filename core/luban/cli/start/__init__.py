@@ -70,7 +70,7 @@ def run(path, **kwds):
             os.chdir(deployment_path)
             optstr = ' '.join('--%s=%s' % (k, getattr(project, k)) for k in server_options)
             os.system('python3 start %s' % optstr)
-            print ("\nYour interface could be running. use\n\n  $ luban stop <project>\n\nif you need to stop it")
+            # print ("\nYour interface could be running. use\n\n  $ luban stop <project>\n\nif you need to stop it")
             return
     StartServer().start()
     

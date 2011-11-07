@@ -46,7 +46,11 @@ class CherrypyController(WebAppController):
         import subprocess
         p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         out, err = p.communicate()
-        if p.wait(): raise RuntimeError("failed to create snapshot: %s" % err)
+        if p.wait(): 
+            raise RuntimeError(
+                "failed to create snapshot for %s:\n%s" % (
+                    url, err)
+                )
         
         return out
 

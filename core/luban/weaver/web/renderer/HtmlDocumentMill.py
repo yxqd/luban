@@ -43,9 +43,33 @@ class HtmlDocumentMill:
     def outdent(self): self.indent_level-=1
 
 
+    def onTagWithoutContent(self, tag):
+        kwds = tag.kwds
+        for k,v in kwds.items():
+            if k.lower() != k:
+                kwds[k.lower()] = v
+                del kwds[k]
+            
+        type = tag.type
+        try:
+            assignments = kwdsstr(**kwds)
+        except:
+            raise RuntimeError('failed to convert %s to a string for tag %s' % (
+                kwds, tag))
+
+        text = '<'+type+' '+assignments + '/>'
+        
+        self.write(text)
+        return
+
+
     def onTag(self, tag):
         if tag.type in self.special_types:
             self.handle(tag)
+            return
+        
+        if not tag.contents:
+            self.onTagWithoutContent(tag)
             return
         
         self.write(self.beginTag(tag))
@@ -67,6 +91,7 @@ class HtmlDocumentMill:
 
     special_types = [
         'textarea',
+        'meta',
         ]
 
 
@@ -75,18 +100,6 @@ class HtmlDocumentMill:
         handler = 'on'+type
         handler = getattr(self, handler)
         return handler(tag)
-
-
-    def ontextarea(self, tag):
-        begin = self.beginTag(tag)
-
-        contents = tag.contents
-        text = '\n'.join(contents)
-        
-        end = self.endTag(tag)
-
-        self.write(begin+text+end)
-        return
 
 
     def beginTag(self, tag):
@@ -122,6 +135,23 @@ class HtmlDocumentMill:
         text = '</' + type + '>'
 
         return text
+
+
+    def ontextarea(self, tag):
+        begin = self.beginTag(tag)
+
+        contents = tag.contents
+        text = '\n'.join(contents)
+        
+        end = self.endTag(tag)
+
+        self.write(begin+text+end)
+        return
+
+
+    def onmeta(self, tag):
+        self.write(self.beginTag(tag))
+        return
 
 
 def kwdsstr(**kwds):

@@ -150,6 +150,7 @@ class HtmlDocumentMill:
 
 
     def onmeta(self, tag):
+        # it seems meta tag does not need /> at the end
         self.write(self.beginTag(tag))
         return
 

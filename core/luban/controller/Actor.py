@@ -30,7 +30,7 @@ class Actor:
         try:
             behavior = self.__getattribute__(routine)
         except AttributeError:
-            msg = "actor %s: routine '%s' is not yet implemented" % (
+            msg = "actor %r: routine %r is not yet implemented" % (
                 self.name, routine)
             raise self.RoutineNotFound(msg)
 

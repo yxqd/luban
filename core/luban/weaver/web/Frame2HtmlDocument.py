@@ -20,10 +20,17 @@ import luban
 enable_js_url = "http://www.google.com/support/bin/answer.py?answer=23852"
 
 
-# renders a ui document into a html document instance and a javascript document
-# instance
 
 class Frame2HtmlDocument(object):
+
+    """
+    renders a ui document into a html document instance and a javascript document
+    instance
+
+    DEVELOPERS:
+      subclass could override customizeHtmlTarget to add a few things to 
+      the html target
+    """
 
     javascript_is_required = """
 <p>
@@ -40,6 +47,7 @@ for this site, and
         self, 
         librarian=None, 
         javascriptsbase = 'javascripts', imagesbase='images',
+        favicon = '/static/images/favicon.ico',
         controller_parameter_prefix = '',  # 'actor.' if use pyre like component structure
         obj2json = None,
         ):
@@ -48,6 +56,7 @@ for this site, and
 
         self.javascriptsbase = javascriptsbase
         self.imagesbase = imagesbase
+        self.favicon = favicon
 
         self.controller_parameter_prefix = controller_parameter_prefix
 
@@ -68,6 +77,14 @@ for this site, and
 
         # for ajax crawler
         html_target.head.tag('meta', name='fragment', content='!')
+
+        # favicon.ico
+        favicon = self.favicon
+        if favicon != 'favicon.ico':
+            html_target.head.tag(
+                'link', 
+                rel="shortcut icon",
+                href=favicon)
 
         # optional customization
         self.customizeHtmlTarget(html_target)

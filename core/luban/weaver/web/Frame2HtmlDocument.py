@@ -86,9 +86,6 @@ for this site, and
                 rel="shortcut icon",
                 href=favicon)
 
-        # optional customization
-        self.customizeHtmlTarget(html_target)
-        
         if javascript_target is None:
             from .content.JavaScriptDocument import JavaScriptDocument
             javascript_target = JavaScriptDocument()
@@ -143,6 +140,9 @@ for this site, and
             'luban.init();'
             ]
             
+        # optional customization
+        self.customizeHtmlTarget(html_target)
+        
         return html_target, javascript_target
 
 

@@ -103,7 +103,7 @@ for this site, and
                 javascript_target.include(script=jslib)
 
         # the body wrapper div
-        html_target.body.tag('div', id='body-wrapper')
+        html_target.body.tag('div', id='body-wrapper').contents.append('')
         nojs_div = html_target.body.tag('div', id='no-javascript-banner')
         nojs_div.contents = [self.javascript_is_required]
 

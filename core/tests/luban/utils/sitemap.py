@@ -12,31 +12,18 @@
 #
 
 
-import unittest, threading, time
+import unittest
 
 class TestCase(unittest.TestCase):
      
     def test1(self):
-        """luban.utils.tail"""
-        
-        #
-        logfile = 'out-testtail.log'
-        
-        # thread to write file
-        class write(threading.Thread):
-            def run(self):
-                f = open(logfile,'w')
-                for i in range(3):
-                    f.write('new line\n')
-                    f.flush()
-                    time.sleep(1)
-                    continue
-                return
-        write().start()
-        time.sleep(1)
-
-        from luban.utils.tail import tail
-        tail(logfile, duration=1)
+        """luban.utils.sitemap"""
+        from luban.utils.sitemap import create, Url
+        create(
+            "http://example.com", 
+            [Url(location="home"), Url(location="about")],
+            'sitemap.xml'
+            )
         return
      
     

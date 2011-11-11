@@ -57,12 +57,15 @@ class Renderer:
         root = Directory.Directory(project.pytree_container)
 
         # it must at least has a sub package for luban actors
+        # python three
         tree = makePyTreeWithSubPkg(project.actors_pkg)
         root.addEntry(tree)
-
+        # actors subpkg
         actors_dir = root[project.actors_pkg.replace('.', '/')]
         actors_dir.addEntry(File.File('default.py', default_py))
         
+        # sitemap
+        tree.addEntry(File.File('sitemap.py', sitemap_py))
         return root
     
     
@@ -110,7 +113,13 @@ class Actor(base):
         return luban.actions.establishInterface(frame)
 
 """
-    
+sitemap_py = """
+from luban.utils.sitemap import Url
+urls = [
+  Url(location="", lastmod="2011-11-11", changefreq="monthly", priority=0.8),
+  ]
+"""
+
     
 def addFileToDir(path, content, dir, create_subdir=True):
     if not path: raise RuntimeError

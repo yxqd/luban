@@ -1,5 +1,6 @@
 
 core:
+* make "sitemap" configurable. right now its fixed to <proj>.sitemap
 * core:Element.Meta: should think of a better way to generate ctor documentation
   right now if a subclass of Element (an element type) does not define ctor itself
   but just inherits it from its parent, the ctor documentation will be 

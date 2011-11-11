@@ -21,6 +21,7 @@ class Url:
         ]
 
     def __init__(self, **kwds):
+        self.base = None
         for k, v in kwds.items():
             setattr(self, k, v)
         return
@@ -28,17 +29,21 @@ class Url:
 
     def __iter__(self):
         base = self.base
-        if base is None:
-            raise RuntimeError("base not set")
-        
         for k in self.properties:
             v = getattr(self, k, None)
             if k == 'location':
-                v = base + '/' + v
+                if base:
+                    v = base + '/' + v
                 k = 'loc'
             yield k,v
             continue
         return 
+
+
+    def __str__(self):
+        return 'Url(' + ','.join('%s=%r' % (k,v) for k,v in self) + ')'
+
+    __repr__ = __str__
 
 
 class Renderer:

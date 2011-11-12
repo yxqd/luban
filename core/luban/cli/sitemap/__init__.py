@@ -12,8 +12,8 @@
 #
 
 
-__doc__ = """
-command line interface
+"""
+script dealing with sitemap
 """
 
 
@@ -29,12 +29,12 @@ def importActionHandler(action):
     return mod
 
 
-def main():
+def parse_cmdline():
     import sys
-    if len(sys.argv) <= 1:
+    if len(sys.argv) == 2:
         action = 'help'
     else:
-        action = sys.argv[1]
+        action = sys.argv[2]
 
     if action in ['-h', '--help']:
         action = 'help'
@@ -46,26 +46,21 @@ def main():
     
     mod = importActionHandler(action)
     args, kwds = mod.parse_cmdline()
-    
-    mod.run(*args, **kwds)
-    return
+    return args, kwds
 
 
 public_commands = [
     'help',
-    'create',
-    'start',
-    'stop',
-    'creatext',
-    'sitemap',
+    'xml',
+    'snapshots',
     ]
 
 hidden_commands = [
-    'tail',
     ]
 
 
 commands = public_commands + hidden_commands
+
 
 # End of file 
 

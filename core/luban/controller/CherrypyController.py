@@ -29,48 +29,17 @@ class CherrypyController(WebAppController):
     default = index
 
     
-    snapshot_controller_url = None
+    snapshot_dir = None
     def _snapshot(self, fragment, actor, routine, *args, **kwds):
-        
-        # if a specific url for snaphsot controller is provided
-        # use that
-        url = self.snapshot_controller_url 
-        if url is None:
-            # otherwise, use the url for this controller
-            url = self.url
-            if not url.startswith('http:'):
-                # if the url is not a full url
-                # ask cherrypy for help
-                url = cherrypy.url(self.url)
-            
-        # args = (actor or 'default', routine or 'default') + args
-        # argstr = '/'.join(args)
-        # kargstr = '&'.join('%s=%s' % (k,v) for k,v in kwds.items())
-        # url += argstr + '?' + kargstr
-        url += fragment
-        
-        jar = getHSnapshotJar()
-        cmd = 'java -jar %s %s' % (jar, url)
-        import subprocess
-        p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        out, err = p.communicate()
-
-        import luban
-        if luban.debug and p.wait(): 
-            raise RuntimeError(
-                "failed to create snapshot for %s:\n%s" % (
-                    url, err)
-                )
-        
-        return out
-
-
-def getHSnapshotJar():
-    f = __file__
-    import os
-    dir = os.path.dirname(f)
-    return os.path.join(dir, 'hsnapshot.jar')
-
+        snapshot_dir = self.snapshot_dir or "static/snapshots"
+        import os
+        from luban.utils.sitemap import hash
+        f = os.path.join(snapshot_dir, hash(fragment))
+        if not os.path.exists(f):
+            return "missing %s" % f
+        return open(f).read()
     
+    
+
 # End of file 
 

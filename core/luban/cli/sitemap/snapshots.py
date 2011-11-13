@@ -47,17 +47,28 @@ def run(project=None, urlbase=None):
     # create snapshots
     from luban.controller.utils import getSnapshot
     urls = mod.urls
+    # .. data store
     outdir = os.path.join(path, project.web_static, 'snapshots')
+    
     if not os.path.exists(outdir): os.makedirs(outdir)
     for url in urls:
+        
         html = getSnapshot(urlbase+'/'+url.location)
         html = html.decode()
-        out = os.path.join(outdir, url.location or 'index'+'.html')
+        
+        out = os.path.join(outdir, url.getFragmentHash())
+        
         open(out, 'w').write(html)
+        
         print ("created %s" % out)
         continue
     
     return
+
+
+def hashurl(url):
+    import hashlib
+    return hashlib.md5(url.encode()).hexdigest()
 
 
 def parse_cmdline():

@@ -25,7 +25,22 @@ class Url:
         for k, v in kwds.items():
             setattr(self, k, v)
         return
+
     
+    def getFragment(self):
+        """for luban, we really only care about the fragment for, for example,
+        building the static snapshots for crawlers"""
+        location = self.location
+        if not location: return ''
+        index = location.find('#!')
+        if index == -1:
+            raise RuntimeError("Don't know how to get fragment from %r" % location)
+        return location[index+2:]
+
+
+    def getFragmentHash(self):
+        return hash(self.getFragment())
+
 
     def __iter__(self):
         base = self.base
@@ -37,13 +52,19 @@ class Url:
                 k = 'loc'
             yield k,v
             continue
-        return 
+        return
 
 
     def __str__(self):
         return 'Url(' + ','.join('%s=%r' % (k,v) for k,v in self) + ')'
 
     __repr__ = __str__
+
+
+
+def hash(s):
+    import hashlib
+    return hashlib.md5(s.encode()).hexdigest()
 
 
 class Renderer:

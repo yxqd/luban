@@ -71,8 +71,9 @@ def modifyConfigration(conf, **kwds):
 
 def createNewConfig(conf, port=None):
     # parser
-    from configparser import ConfigParser
+    from configparser import SafeConfigParser as ConfigParser
     cp = ConfigParser()
+    cp.optionxform = str
 
     # read 
     read = cp.read(conf)

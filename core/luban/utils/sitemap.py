@@ -64,7 +64,7 @@ class Url:
 
 def hash(s):
     import hashlib
-    return hashlib.md5(s.encode()).hexdigest()
+    return hashlib.md5(s.encode('utf-8')).hexdigest()
 
 
 class Renderer:

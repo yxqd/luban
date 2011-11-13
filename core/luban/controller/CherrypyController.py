@@ -33,11 +33,15 @@ class CherrypyController(WebAppController):
     def _snapshot(self, fragment, actor, routine, *args, **kwds):
         snapshot_dir = self.snapshot_dir or "static/snapshots"
         import os
+        snapshot_dir = os.path.abspath(snapshot_dir)
+        
         from luban.utils.sitemap import hash
         f = os.path.join(snapshot_dir, hash(fragment))
         if not os.path.exists(f):
-            return "missing %s" % f
-        return open(f).read()
+            return "missing %s" % (f, )
+        stream =  open(f, 'rb')
+        s = stream.read()
+        return s
     
     
 

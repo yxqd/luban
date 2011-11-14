@@ -28,7 +28,7 @@ class Mixin:
     
     @cherrypy.expose
     @cherrypy.tools.json_out(content_type="text/html")
-    def upload(self, uploadid=None, luban_upload_file=None, **kwds):
+    def _luban_upload(self, uploadid=None, luban_upload_file=None, **kwds):
         
         # cherrypy.log('upload started id: %s, kwds:%s' % (uploadid, kwds) )
         cherrypy.response.timeout = UploadConfiguration.timeout
@@ -65,7 +65,7 @@ class Mixin:
 
     @cherrypy.expose
     @cherrypy.tools.json_out(content_type="text/html")
-    def upload_progress(self, id, **kwds):
+    def _luban_upload_progress(self, id, **kwds):
         f = _getUploadProgressFilePath(id)
         import  os
         if not os.path.exists(f):

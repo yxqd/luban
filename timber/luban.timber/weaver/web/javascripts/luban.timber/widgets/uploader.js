@@ -113,7 +113,7 @@
       dataType: 'json'
       ,singleFileUploads: false
       // ,"url": C.url
-      ,"url": '/upload'
+      ,"url": '/_luban_upload'
       ,"formData": [
 	{name: 'uploadid', value: id}
       ]
@@ -204,7 +204,7 @@
     var callback = function (data) {
       uploader.trigger('uploader_progress', data);
     };
-    $.get('/upload_progress', {'id': uploadid}, callback, 'json');
+    $.get('/_luban_upload_progress', {'id': uploadid}, callback, 'json');
   }
 
   widgets.uploader = function(elem) {

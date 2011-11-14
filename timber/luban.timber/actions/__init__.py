@@ -45,7 +45,7 @@ def removeCredential():
 # common element actions
 action_modules = [
     'element_common_actions',
-    'SetAnchor',
+    'SetRecoverer',
     ]
 def importAllActions():
     modules = action_modules

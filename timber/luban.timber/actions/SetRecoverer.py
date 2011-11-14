@@ -14,17 +14,17 @@
 
 from luban.ui.actions.Loading import Loading as base
 
-class SetAnchor(base):
+class SetRecoverer(base):
 
     # decorations
-    simple_description = 'anchor of a UI'
+    simple_description = 'the parameters here can be used to reconstruct the state of the UI app using a loading action'
     full_description = (
         )
 
     # attributes
     
     def identify(self, inspector):
-        return inspector.onSetAnchor(self)
+        return inspector.onSetRecoverer(self)
 
 
 # version

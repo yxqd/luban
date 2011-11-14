@@ -13,7 +13,7 @@
 
 
 import luban
-from luban.timber.controller import anchor
+from luban.timber.controller import state
 
 
 from luban.controller.Actor import Actor as base
@@ -29,7 +29,7 @@ class Actor(base):
 
     def frame(self, **kwds):
         frame = skeleton()
-        container = frame.find(id='anchor-demo-container')
+        container = frame.find(id='recover-state-demo-container')
         b1 = container.button(label='button1', id="b1")
         # action when button is clicked
         # intentionally, we leave the button in the interface (did not destroy it)
@@ -44,7 +44,7 @@ class Actor(base):
             luban.a.select(id='display').replaceContent(
                 newcontent = b1doc()
                 ),
-            luban.a.setanchor(actor=self.name, routine='b1',)
+            luban.a.setrecoverer(actor=self.name, routine='b1',)
             ]
         b1.onclick = b1clicked
 
@@ -53,13 +53,13 @@ class Actor(base):
             luban.a.select(id='display').replaceContent(
                 newcontent = b2doc()
                 ),
-            luban.a.setanchor(actor=self.name, routine='b2',)
+            luban.a.setrecoverer(actor=self.name, routine='b2',)
             ]
         b2.onclick = b2clicked
 
         return frame
 
-    @anchor.anchorHandler
+    @state.stateHandler
     def b1(self, **kwds):
         frame = skeleton()
         display = frame.find(id='display')
@@ -67,7 +67,7 @@ class Actor(base):
         return frame
 
 
-    @anchor.anchorHandler
+    @state.stateHandler
     def b2(self, **kwds):
         frame = skeleton()
         display = frame.find(id='display')
@@ -76,8 +76,8 @@ class Actor(base):
 
 
 def skeleton():
-    frame = luban.e.frame(title="aokuang: anchor demo")
-    container = frame.document(Class='white-bg', id='anchor-demo-container')
+    frame = luban.e.frame(title="aokuang: state recover demo")
+    container = frame.document(Class='white-bg', id='recover-state-demo-container')
     doc = container.document(title="display", id='display')
     return frame
 

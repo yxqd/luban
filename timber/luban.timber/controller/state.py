@@ -12,13 +12,18 @@
 #
 
 
-def anchorHandler(m):
-    """use this decorator on a routine that handles "setanchor" action
+def stateHandler(m):
+    """use this decorator on a routine that handles actions related
+    to application "state"
 
-    such routine must return a "frame" instance
-
+    "m" must return a "frame" instance
+    
     this decorator change the routine to either return
+    a replacement action that replace current frame with the new frame
+    or a frame establishment action,
+    or the frame itself.
     """
+    
     import luban
     def _(self, *args, **kwds):
         # returntype
@@ -34,8 +39,10 @@ def anchorHandler(m):
         # depend on return type, return appropriate action
         if rtype == 'replaceframe':
             return luban.a.select(id='').replaceBy(newelement=frame)
+        
         elif rtype == 'establishinterface':
             return luban.a.establishInterface(frame)
+        
         return frame
     
     return _

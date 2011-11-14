@@ -67,7 +67,7 @@
 
   // actioncompiler extension
   var actioncompiler_ext = {
-    'onsetanchor': function (action) {
+    'onsetrecoverer': function (action) {
       var args = [action.actor, action.routine];
       args = args.concat(action.args);
 

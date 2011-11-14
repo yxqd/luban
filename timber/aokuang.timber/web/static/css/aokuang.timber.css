@@ -76,11 +76,11 @@ body {
 
 
 
-/* anchor demo */
+/* state recovery demo */
 .white-bg {
     background-color: white;
 }
 
-#anchor-demo-container {
+#recover-state-demo-container {
     padding: 2em;
 }

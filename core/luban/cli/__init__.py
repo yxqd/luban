@@ -54,6 +54,7 @@ def main():
 public_commands = [
     'help',
     'create',
+    'deploy',
     'start',
     'stop',
     'creatext',

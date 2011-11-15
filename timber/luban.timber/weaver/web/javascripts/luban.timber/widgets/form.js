@@ -34,6 +34,10 @@
     var form = this.dispatch(action.element);
     return form.clearErrors();
   };
+  lap.onformsubmission = function(action) {
+    var form = this.dispatch(action.element);
+    return form._je.submit();
+  };
 
   // form
   ef.form = function (kwds, docmill, parent) {

@@ -101,6 +101,23 @@ from .FormRadioBox import FormRadioBox
 from .FormCheckBox import FormCheckBox
 
 
+
+# actions
+# to define a new element action, subclass ElementActionBase
+from luban.ui.actions.ElementActionBase import ElementActionBase
+class FormSubmission(ElementActionBase):
+
+    "submit a form"
+
+    # decorations
+    element_type = Form
+    factory_method = "submit"
+    
+    # methods
+    def identify(self, visitor):
+        return visitor.onFormSubmission(self)
+
+
 # version
 __id__ = "$Id$"
 

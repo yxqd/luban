@@ -141,21 +141,6 @@ a.luban-link:hover{
     color: white;    
 }
 
-/* special panels */
-#luban-----loadingdiv {
-    background-color:transparent;
-    position:fixed;
-    z-index:1000000;
-    background-image:url('luban/spinning-wait-icons/wait30trans.gif');
-    background-repeat:no-repeat;
-    width:30px;
-    height:30px;
-/* 
-   font-size:125%; 
-   -moz-border-radius:9px;
-*/
-}
-
 /* form */
 fieldset {
     border-style: solid;

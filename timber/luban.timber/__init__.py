@@ -25,4 +25,8 @@ from . import elements, actions
 from . import luban_ext
 from . import controller # replace the core controllers with timber controllers. see eg .controllers.CherrypyController
 
+
+from .controller import setUploadPath
+
+
 # End of file 

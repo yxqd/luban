@@ -89,22 +89,26 @@ def _getUploadFilePath(filename, id):
     return os.path.join(dir, filename)
 
 
+def _getUploadRoot():
+    import os
+    dir = UploadConfiguration.path
+    if not os.path.exists(dir):
+        os.makedirs(dir)
+    return dir
+
+
 def _getUploadFileContainerDir(id):
     import os
-    dir = os.path.join(
-        UploadConfiguration.path,
-        id)
+    dir = os.path.join(_getUploadRoot(), id)
     if not os.path.exists(dir):
         os.makedirs(dir)
     return dir
 
 
 def _getUploadProgressFilePath(id):
+    dir = _getUploadRoot()
     import os
-    return os.path.join(
-        UploadConfiguration.path,
-        '%s-progress' % id,
-        )
+    return os.path.join(dir, '%s-progress' % id,)
 
 
 # overload cherrpy default behavior so we can handle upload

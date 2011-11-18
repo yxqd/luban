@@ -14,5 +14,10 @@
 
 from . import CherrypyController
 
+def setUploadPath(path):
+    from .UploadConfiguration import UploadConfiguration
+    UploadConfiguration.path = path
+    return
+
 
 # End of file 

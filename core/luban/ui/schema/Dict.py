@@ -23,7 +23,7 @@ class Dict(Type):
     @classmethod
     def __cast__(cls, value, **kwds):
         """
-        Convert {value} into a list of strings
+        Convert {value} into a dict
         """
         # split the string
         if isinstance(value, str):

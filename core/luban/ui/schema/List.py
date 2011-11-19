@@ -32,6 +32,7 @@ class List(Type):
             value = list(value.split())
         # if {value} is an iterable, convert it to a list and return it
         if  isinstance(value, collections.Iterable):
+            return list(value)
             return list(str(v) for v in value)
         # otherwise flag it as bad input
         raise cls.CastingError(value=value, description="unknown type: value={!r}".format(value))

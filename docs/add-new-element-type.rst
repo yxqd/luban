@@ -48,3 +48,17 @@ Make sure this new subpackage will be included? or auto-included?
 use "category" decoration?
 
 Then in the new subpackage, implement one demo using one module.
+
+
+
+JS lib details
+--------------
+
+
+  // actioncompiler handlers
+  var lap=luban.actioncompiler.prototype;
+  lap.ontabselectaction = function(action) {
+    var tab = this.dispatch(action.element);
+    tab.select();
+  };
+

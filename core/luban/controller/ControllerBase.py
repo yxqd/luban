@@ -34,14 +34,19 @@ class ControllerBase:
 
 
     def _retrieveActor(self, actor):
+        exceptions = []
         for package in self.actor_packages:
             try:
                 return self._retrieveActor1(actor, package)
-            except:
+            except Exception as e:
+                exceptions.append(e)
                 pass
             continue
         msg = "unable to retrieve actor %s from %s. " % (actor, self.actor_packages)
-        msg += "forgot to export the actor?"
+        msg += "forgot to export the actor?\n"
+        msg += "\nExceptions:\n"
+        for e in exceptions:
+            msg += str(e) + "\n"
         raise RuntimeError(msg)
 
 

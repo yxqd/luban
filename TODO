@@ -1,5 +1,6 @@
 
 core:
+* doc: decorator for handler functions
 * go through all ctors and check "super" calls
 * in scaffolding, make "sitemap" configurable. right now its fixed to <proj>.sitemap
 * core:Element.Meta: should think of a better way to generate ctor documentation
@@ -10,6 +11,7 @@ core:
   - find a way to dynamically show different ctor documentation depending on class type
     does python3 support __doc__ as a function rather than just string?
   test case see tests/luban/ui/elements/Splitter.py
+* think of change splitter implementation to use .left and .right
 * faq: how to load interface piece by piece to make it look faster
 * docs: FAQs: why another python web framework.
 * docs: tune up philosophy summary. mention vocabulary, words, ...

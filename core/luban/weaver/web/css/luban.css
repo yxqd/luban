@@ -109,6 +109,12 @@ li {
 .align-top {
     vertical-align: top;
 }
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
 
 
 /* version */

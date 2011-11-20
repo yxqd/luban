@@ -47,6 +47,20 @@
       element.jqueryelem.trigger('resize');
     },
 
+    'oninsertafterelement': function(action) {
+      var e = action.element;
+      var element = this.dispatch(e);
+
+      var parent = element.getParent();
+
+      var newdoc = action.newelement;
+      var newelementrendered = this.docmill.render(newdoc, parent);
+
+      newelementrendered._je.insertAfter(element._je);
+
+      element._je.trigger('resize');
+    },
+
     'onreplaceelement': function(action) {
       var e = action.element;
       var element = this.dispatch(e);

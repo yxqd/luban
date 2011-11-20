@@ -101,5 +101,18 @@ class AppendElement(base):
     
     
 
+class InsertAfterElement(base):
+    
+    # decorations
+    # .. name of action factory method
+    factory_method = 'after'
+
+    # attributes
+    newelement = descriptors.element()
+
+    def identify(self, inspector):
+        return inspector.onInsertAfterElement(self)
+    
+    
 
 # End of file 

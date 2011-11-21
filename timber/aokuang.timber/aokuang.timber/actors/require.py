@@ -24,7 +24,7 @@ def emailform():
         actor='require', routine='onemailsubmission', 
         kwds=luban.event.data)
     return frame
-email_requirement = luban.decorators.Requirement
+email_requirement = luban.decorators.Requirement()
 
 def check_email():
     email = luban.session.get('email')

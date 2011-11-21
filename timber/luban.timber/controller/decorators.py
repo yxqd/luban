@@ -40,12 +40,13 @@ def require(requirement, actorname=None, onsuccess=None):
             # "actor" should be the name of the actor
             # "routine" should be the name of this routine
             # "replaceinterface" is required to replace the requirement solicitation inteface with the actual interface
-            onsuccess = onsuccess_action or luban.a.load(
-                actor = actorname or getactorname(
-                    inspect.getmodule(f).__name__, self.controller.actor_packages),
-                routine= f.__name__,
-                replaceinterface=1
-                )
+            actor = actorname or getactorname(
+                inspect.getmodule(f).__name__, self.controller.actor_packages)
+            routine= f.__name__
+            args = (actor, routine) + args
+            kwds = dict(kwds)
+            kwds['replaceinterface'] = 1
+            onsuccess = onsuccess_action or luban.a.load(*args, **kwds)
             luban.session['onsuccess'] = onsuccess
             frame = requirement.fullfill_requirement()
             return luban.a.establishInterface(frame)

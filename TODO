@@ -1,6 +1,8 @@
 
 core:
 * doc: decorator for handler functions
+* doc: decorator for requirement
+* doc: session
 * go through all ctors and check "super" calls
 * in scaffolding, make "sitemap" configurable. right now its fixed to <proj>.sitemap
 * core:Element.Meta: should think of a better way to generate ctor documentation

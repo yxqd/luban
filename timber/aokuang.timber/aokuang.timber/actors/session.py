@@ -35,14 +35,14 @@ class Actor(base):
         frame = luban.e.frame(title='set session data')
         doc = frame.document()
         for k, v in kwds.items():
-            self.controller.session[k] = v
+            luban.session[k] = v
             doc.paragraph(text='%s=%s' % (k,v))
             continue
         return luban.a.establishInterface(frame)
 
 
     def get(self, key, **kwds):
-        val = self.controller.session[key]
+        val = luban.session[key]
         frame = luban.e.frame(title='get session data')
         doc = frame.document()
         doc.paragraph(text = '%s=%s' % (key, val))

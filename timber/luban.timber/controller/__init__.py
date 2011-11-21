@@ -12,7 +12,7 @@
 #
 
 
-from . import CherrypyController
+from . import CherrypyController, decorators
 
 def setUploadPath(path):
     from .UploadConfiguration import UploadConfiguration

@@ -31,10 +31,29 @@ from luban.controller.CherrypyController import CherrypyController as base
 from .CherrypyUploadHandler_Mixin import Mixin as UploadMixin
 class CherrypyController(UploadMixin, base):
 
-    @property
-    def session(self):
+    pass
+
+
+# borrow cherrypy session as luban session
+class SessionProxy:
+
+    def _luban_session_handle(self):
         import cherrypy
         return cherrypy.session
+    
+    def __getattr__(self, key):
+        h = self._luban_session_handle()
+        return getattr(h, key)
+
+    def __setitem__(self, k, v):
+        h = self._luban_session_handle()
+        return h.__setitem__(k,v)
+
+    def __getitem__(self, k):
+        h = self._luban_session_handle()
+        return h[k]
+import luban
+luban.session = SessionProxy()
 
 
 # overload the luban core controller

@@ -53,6 +53,24 @@ class FormField(base):
         # attributes
     del Event
 
+
+# to define a new element action, subclass ElementActionBase
+from luban.ui.actions.ElementActionBase import ElementActionBase
+class FormFieldShowError(ElementActionBase):
+
+    "show error message for a form field"
+
+    # decorations
+    element_type = FormField
+    factory_method = "showError"
+
+    # properties
+    message = descriptors.str()
+    
+    # methods
+    def identify(self, visitor):
+        return visitor.onFormFieldShowError(self)
+
 # version
 __id__ = "$Id$"
 

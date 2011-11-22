@@ -26,12 +26,8 @@
 
 
   // form-related action handlers
-  lap.onformfieldshowerrormessage = function(action) {
-    return this.onformfieldshowerror(action);
-  };
   lap.onformfieldshowerror = function(action) {
-    var params = action.params;
-    var message = params.message;
+    var message = action.message;
     element = this.dispatch(action.element);
     element._je.find('.error').text(message);
     element._je.find('.error-sign').show();

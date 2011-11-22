@@ -12,6 +12,8 @@
 #
 
 
+# this was obsolete
+
 
 from .TeleContainer import TeleContainer, Meta, TeleSection
 from .ElementContainer import elementfactory

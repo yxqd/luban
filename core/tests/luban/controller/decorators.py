@@ -17,7 +17,7 @@ class TestCase(unittest.TestCase):
      
     def test1(self):
         from luban.controller import decorators
-        @decorators.typeconversion
+        @decorators.typeconversion()
         def f(b: decorators.bool=None, i: decorators.int=None):
             print (b,i)
             return
@@ -28,7 +28,7 @@ class TestCase(unittest.TestCase):
     def test2(self):
         from luban.controller import decorators
         class A:
-            @decorators.typeconversion
+            @decorators.typeconversion()
             def f(self, b: decorators.bool=None, i: decorators.int=None):
                 print (self, b,i)
                 return
@@ -39,7 +39,7 @@ class TestCase(unittest.TestCase):
     def test3(self):
         from luban.controller import decorators
         class A:
-            @decorators.typeconversion
+            @decorators.typeconversion()
             def f(self, b: decorators.bool=None, i: decorators.int=None, **kwds):
                 print (self, b,i, kwds)
                 return

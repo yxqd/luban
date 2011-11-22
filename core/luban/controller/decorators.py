@@ -17,7 +17,18 @@ def public(f):
     return f
 
 
-def typeconversion(func):
+def typeconversion(onerror=None):
+    return lambda func: _typeconversion(func, onerror)
+
+
+class ArgumentConversionError(Exception): pass
+def _typeconversion(func, onerror=None):
+    """decorator to convert a function to convert arguments
+    to appropriate types.
+
+    func: the function to decorate
+    onerror: error handler in case argument conversion fail
+    """
     
     if not hasattr(func,'__annotations__'): return method
     
@@ -33,14 +44,22 @@ def typeconversion(func):
             raise TypeError( "%s() takes exactly %s positional argument (%s given)"
                            %(func.__name__,len(argspec.args),len(args)) )
 
-        newargs = []
+        newargs = []; errors = []
         for argname,t in zip(argspec.args, args):
             if argname in func.__annotations__:
                 T = func.__annotations__[argname]
-                t = T(t)
+                try:
+                    t = T(t)
+                except TypeError as e:
+                    errors.append((argname, e)); continue
+                except ValueError as e:
+                    errors.append((argname, e)); continue
+                continue
             newargs.append(t)
             continue
-
+        if errors:
+            raise ArgumentConversionError(*errors)
+        
         r = func(*newargs, **kwds)
         
         if 'return' in func.__annotations__:
@@ -49,16 +68,27 @@ def typeconversion(func):
             
         return r
 
+    if onerror:
+        def wrapper2(*args, **kwds):
+            try: return wrapper(*args, **kwds)
+            except ArgumentConversionError as e: return onerror(e.args)
+        return wrapper2
+
     return wrapper
 
 
+# type conversion handlers
 def bool(s):
     if s.lower() in ['0', 'false', 'off']: return False
     return True
 
 def int(s):
     import builtins
-    return builtins.int(s)
+    try:
+        return builtins.int(s)
+    except ValueError:
+        raise ValueError("%r is not an integer" % s)
+    raise RuntimeError("should not reach here")
 
 
 # End of file 

@@ -33,6 +33,14 @@
       return element.setAttribute(params);
     },
 
+    'onelementgetattribute': function(action) {
+      var e = action.element;
+      var element = this.dispatch(e);
+      var name = action.name;
+
+      return element.getAttribute(name);
+    },
+
     'oninsertbeforeelement': function(action) {
       var e = action.element;
       var element = this.dispatch(e);
@@ -135,12 +143,6 @@
 
       case 'removeClass':
 	return element.removeClass(action.params.Class);
-
-      case 'setAttribute':
-	return this.onsimpleelementaction_setAttribute(action);
-
-      case 'getAttribute':
-	return element.getAttribute(action.params.name);
 
       default:
 	var etype = element.type();

@@ -13,6 +13,7 @@
 
 
 from luban.ui.actions.ElementActionBase import ElementActionBase as base
+from luban.ui.actions.ElementActionFactory import ElementActionFactory
 
 
 class ReplaceElement(base):
@@ -50,8 +51,29 @@ class ElementSetAttribute(base):
 # need a special factory method to simplify the syntax
 def setAttr(self, **kwds):
     return ElementSetAttribute(element=self, attrs = kwds)
-from luban.ui.actions.ElementActionFactory import ElementActionFactory
 ElementActionFactory.setAttr = setAttr
+
+
+
+class ElementGetAttribute(base):
+
+    """this action get the value of an attribute of the selected element
+    """
+
+    # decorations
+    # .. name of action factory method
+    factory_method = 'getAttr'
+
+    # attributes
+    name = descriptors.str()
+
+    def identify(self, inspector):
+        return inspector.onElementGetAttribute(self)
+
+# need a special factory method to simplify the syntax
+def getAttr(self, name):
+    return ElementGetAttribute(element=self, name=name)
+ElementActionFactory.getAttr = getAttr
 
 
 

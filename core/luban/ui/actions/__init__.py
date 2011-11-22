@@ -66,7 +66,7 @@ an action to destroy a document
         type=element.__class__.__unique_type_name__
 
     if id is None:
-        m = "id cannot be None" 
+        m = "For an element to be selected by id, its id cannot be None" 
         raise RuntimeError(m)
 
     from .SelectByIDandType import SelectByIDandType

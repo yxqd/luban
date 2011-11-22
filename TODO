@@ -3,6 +3,8 @@ core:
 * doc: decorator for handler functions
 * doc: decorator for requirement
 * doc: session
+* doc: select(element=..., type=...).<method>. tell the difference of common actions and more specific actions. specific actions need specific type. type is string. type can be very specific, but could also be a base class like formfield.
+* doc: select(element=...).getAttr(name) what are the allowed names? label/value
 * go through all ctors and check "super" calls
 * in scaffolding, make "sitemap" configurable. right now its fixed to <proj>.sitemap
 * core:Element.Meta: should think of a better way to generate ctor documentation

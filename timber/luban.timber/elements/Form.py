@@ -118,6 +118,19 @@ class FormSubmission(ElementActionBase):
         return visitor.onFormSubmission(self)
 
 
+class FormClearErrors(ElementActionBase):
+
+    "clear error messages in the form"
+
+    # decorations
+    element_type = Form
+    factory_method = "clearErrors"
+    
+    # methods
+    def identify(self, visitor):
+        return visitor.onFormClearErrors(self)
+
+
 # version
 __id__ = "$Id$"
 

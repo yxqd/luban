@@ -25,9 +25,11 @@ class ArgumentConversionError(Exception): pass
 def _typeconversion(func, onerror=None):
     """decorator to convert a function to convert arguments
     to appropriate types.
-
+    
     func: the function to decorate
     onerror: error handler in case argument conversion fail
+
+    convention: when a function is called, all arguments with annotations should be called as keyword arguments
     """
     
     if not hasattr(func,'__annotations__'): return method
@@ -39,28 +41,22 @@ def _typeconversion(func, onerror=None):
         return T(t)
         
     def wrapper(*args, **kwds):
-        
-        if len(argspec.args) != len(args):
-            raise TypeError( "%s() takes exactly %s positional argument (%s given)"
-                           %(func.__name__,len(argspec.args),len(args)) )
-
-        newargs = []; errors = []
-        for argname,t in zip(argspec.args, args):
-            if argname in func.__annotations__:
-                T = func.__annotations__[argname]
-                try:
-                    t = T(t)
-                except TypeError as e:
-                    errors.append((argname, e)); continue
-                except ValueError as e:
-                    errors.append((argname, e)); continue
-                continue
-            newargs.append(t)
+        newkargs = []; errors = []
+        for argname,T in func.__annotations__.items():
+            t = kwds.get(argname)
+            if t is None: continue
+            try:
+                t = T(t)
+            except TypeError as e:
+                errors.append((argname, e)); continue
+            except ValueError as e:
+                errors.append((argname, e)); continue
+            kwds[argname] = t
             continue
         if errors:
             raise ArgumentConversionError(*errors)
         
-        r = func(*newargs, **kwds)
+        r = func(*args, **kwds)
         
         if 'return' in func.__annotations__:
             T = func.__annotations__['return']
@@ -72,9 +68,14 @@ def _typeconversion(func, onerror=None):
         def wrapper2(*args, **kwds):
             try: return wrapper(*args, **kwds)
             except ArgumentConversionError as e: return onerror(e.args)
-        return wrapper2
+        rt = wrapper2
+    else:
+        rt = wrapper
 
-    return wrapper
+    # keep a reference the original non-decorated function, so we can get its
+    # source, for example
+    rt.not_decorated = func
+    return rt
 
 
 # type conversion handlers

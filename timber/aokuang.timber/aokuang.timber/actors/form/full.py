@@ -27,7 +27,7 @@ class Actor(base):
 
     def createDemoPanel(self, **kwds):
         # form
-        form = luban.e.form(title='test form')
+        form = luban.e.form(title='test form', id='test-form')
 
         # fields
         # .. check boxes
@@ -60,6 +60,9 @@ class Actor(base):
         # .. text field
         textfield = form.text(label='textfield', name='textvar')
         
+        # .. text field for an integer
+        intfield = form.text(label='input an integer', name='integervar', value="abc")
+        
         # .. text area
         textarea = form.textarea(label='textarea', name='textareavar')
         
@@ -81,9 +84,19 @@ class Actor(base):
         return form
 
     
-    def process(self, **kwds):
+    @luban.decorators.typeconversion(luban.decorators.generateforminputerror('test-form', 'integervar'))
+    def process(self, integervar: luban.decorators.int=None, **kwds):
+        kwds['integervar'] = integervar
         msg = "submitted: %s" % (kwds,)
-        return luban.a.alert(msg)
+        alert = luban.a.alert(msg)
+        
+        doc = luban.e.document(title="submitted values")
+        for k,v in kwds.items():
+            doc.paragraph(text='* %s=%s' % (k,v))
+            continue
+        refresh = luban.a.select(id='test-form').replaceBy(newelement=doc)
+        
+        return [alert, refresh]
 
 
 # End of file 

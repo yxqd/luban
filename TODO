@@ -1,5 +1,6 @@
 
 core:
+* aokuang.timber: example of showing form input error
 * doc: decorator for handler functions
 * doc: decorator for requirement
 * doc: session

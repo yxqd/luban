@@ -125,13 +125,19 @@ def getSourceLines(f):
     if not len(lines): raise RuntimeError("no source?")
 
     if lines[0].strip()[0] == '@':
-        # there is a decorator
+        # there is a decorator to skip
         for i, l in enumerate(lines[1:]):
             if l.strip().startswith('def'):
                 index = i + 1
                 break
             continue
         lines = lines[index:]
+        
+    # if the decorator is important, we need to get the source
+    # code including the decorator
+    of = _get_not_decorated_function(f)
+    if of != f:
+        lines, lineno = inspect.getsourcelines(of)
 
     # 
     r = []
@@ -142,6 +148,14 @@ def getSourceLines(f):
         continue
 
     return r
+
+
+# this assumes that the not_decorated function is kept
+# as f.not_decorated
+def _get_not_decorated_function(f):
+    if hasattr(f, 'not_decorated'):
+        return _get_not_decorated_function(f.not_decorated)
+    return f
 
 
 # End of file 

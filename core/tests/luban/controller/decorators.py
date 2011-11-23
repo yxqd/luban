@@ -21,7 +21,7 @@ class TestCase(unittest.TestCase):
         def f(b: decorators.bool=None, i: decorators.int=None):
             print (b,i)
             return
-        f('false', '10')
+        f(b='false', i='10')
         return
      
     
@@ -32,7 +32,7 @@ class TestCase(unittest.TestCase):
             def f(self, b: decorators.bool=None, i: decorators.int=None):
                 print (self, b,i)
                 return
-        A().f('false', '10')
+        A().f(b='false', i='10')
         return
      
     
@@ -43,7 +43,7 @@ class TestCase(unittest.TestCase):
             def f(self, b: decorators.bool=None, i: decorators.int=None, **kwds):
                 print (self, b,i, kwds)
                 return
-        A().f('false', '10', t=3)
+        A().f(b='false', i='10', t=3)
         return
      
     

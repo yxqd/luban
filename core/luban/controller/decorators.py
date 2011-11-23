@@ -92,5 +92,14 @@ def int(s):
     raise RuntimeError("should not reach here")
 
 
+def positive(c):
+    if c <= 0:
+        raise ValueError("should be positive")
+    return c
+
+
+positiveInteger = lambda x: positive(int(x))
+
+
 # End of file 
 

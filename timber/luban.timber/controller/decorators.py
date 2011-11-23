@@ -71,12 +71,18 @@ def generateforminputerror(formid, *input_names):
     formid: id of the form
     input_names: a list of input names
     """
+    
     import luban
-    def handle_error(conversion_errors):
+    def handle_error(conversion_errors, _func_=None):
+        
+        # by default, assume each arg annotated in the handler function
+        # is about one form input.
+        input_name_list = input_names or _func_.__annotations__.keys()
+            
         actions = [luban.a.select(id=formid, type='form').clearErrors()]
         for name, error in conversion_errors:
             # if it is not an input error, we should raise it
-            if name not in input_names:
+            if name not in input_name_list:
                 raise error
             # otherwise need new action
             action = luban.a.select(id=formid)\
@@ -88,11 +94,18 @@ def generateforminputerror(formid, *input_names):
     return handle_error
 
 
+# shortcut
+def formprocesser(formid, *input_names):
+    from luban.decorators import typeconversion
+    return typeconversion(generateforminputerror(formid, *input_names))
 
+
+__all__ = [
+    'Requirement', 'require', 
+    'generateforminputerror', 'formprocesser',
+    ]
 from luban import decorators
-decorators.Requirement = Requirement
-decorators.require = require
-decorators.generateforminputerror = generateforminputerror
+for name in __all__: setattr(decorators, name, eval(name))
 
 # End of file 
 

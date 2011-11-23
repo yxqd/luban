@@ -84,8 +84,14 @@ class Actor(base):
         return form
 
     
-    @luban.decorators.typeconversion(luban.decorators.generateforminputerror('test-form', 'integervar'))
+    @luban.decorators.formprocesser('test-form')
     def process(self, integervar: luban.decorators.int=None, **kwds):
+        """
+        This event handler process the form inputs.
+        See how the input error is handled by the combination of 
+        input validator in function annotation and 
+        input-error-action generation in function decorator.
+        """
         kwds['integervar'] = integervar
         msg = "submitted: %s" % (kwds,)
         alert = luban.a.alert(msg)

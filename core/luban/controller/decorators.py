@@ -34,8 +34,8 @@ def _typeconversion(func, onerror=None):
     
     if not hasattr(func,'__annotations__'): return method
     
-    import inspect
-    argspec = inspect.getfullargspec(func)
+    # import inspect
+    # argspec = inspect.getfullargspec(func)
     
     def convert( t, T ):
         return T(t)
@@ -67,7 +67,7 @@ def _typeconversion(func, onerror=None):
     if onerror:
         def wrapper2(*args, **kwds):
             try: return wrapper(*args, **kwds)
-            except ArgumentConversionError as e: return onerror(e.args)
+            except ArgumentConversionError as e: return onerror(e.args, _func_=func)
         rt = wrapper2
     else:
         rt = wrapper

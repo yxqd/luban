@@ -66,12 +66,11 @@ def getactorname(modulename, packages):
 
 # default error handler for form
 # this is used in combination with luban.controller.decorators.typeconversion
-def generateforminputerror(formid, *input_names, name2id=None):
+def generateforminputerror(formid, *input_names):
     """
+    formid: id of the form
     input_names: a list of input names
-    name2id: function to convert input name to input id
     """
-    name2id = name2id or (lambda name: name)
     import luban
     def handle_error(conversion_errors):
         actions = [luban.a.select(id=formid, type='form').clearErrors()]
@@ -80,7 +79,8 @@ def generateforminputerror(formid, *input_names, name2id=None):
             if name not in input_names:
                 raise error
             # otherwise need new action
-            action = luban.a.select(id=name2id(name), type="formfield")\
+            action = luban.a.select(id=formid)\
+                .find(name=name, type="formfield")\
                 .showError(message = str(error))
             actions.append(action)
             continue
@@ -92,6 +92,7 @@ def generateforminputerror(formid, *input_names, name2id=None):
 from luban import decorators
 decorators.Requirement = Requirement
 decorators.require = require
+decorators.generateforminputerror = generateforminputerror
 
 # End of file 
 

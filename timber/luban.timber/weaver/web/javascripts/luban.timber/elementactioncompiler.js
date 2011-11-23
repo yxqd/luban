@@ -108,6 +108,11 @@
       element.show();
     },
 
+    'onfindsubelement': function(action) {
+      var element = this.dispatch(action.element);
+      return element.find(action.name, action.type);
+    },
+
     // XXX: the following comes from 0.2 and needs migration
     'onsimpleaction': function(action) {
       var name = action.actionname;
@@ -119,9 +124,6 @@
       var element = action.element;
       element = this.dispatch(element);
       switch(action.actionname) {
-
-      case 'find':
-	return element.find(action.params.name, action.params.type);
 
       case 'findDescendentIDs':
 	return element.findDescendentIDs(action.params);

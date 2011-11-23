@@ -12,27 +12,11 @@
 #
 
 
-from luban.ui.actions.ElementActionBase import ElementActionBase as base
+from luban.ui.actions.ElementActionBase import ElementActionBase as base, Meta
 from luban.ui.actions.ElementActionFactory import ElementActionFactory
 
-
-class ReplaceElement(base):
-
-    """this action replace the selected element with a new element
-    """
-
-    # decorations
-    # .. name of action factory method
-    factory_method = 'replaceBy'
-
-    # attributes
-    newelement = descriptors.object()
-
-    def identify(self, inspector):
-        return inspector.onReplaceElement(self)
-    
-
-
+# attribute access
+# .. setAttr
 class ElementSetAttribute(base):
 
     """this action set attribute of the selected element to a new value
@@ -53,8 +37,7 @@ def setAttr(self, **kwds):
     return ElementSetAttribute(element=self, attrs = kwds)
 ElementActionFactory.setAttr = setAttr
 
-
-
+# .. getAttr
 class ElementGetAttribute(base):
 
     """this action get the value of an attribute of the selected element
@@ -76,7 +59,8 @@ def getAttr(self, name):
 ElementActionFactory.getAttr = getAttr
 
 
-
+# effects
+# .. hide
 class HideElement(base):
 
     """this action hide an element
@@ -92,7 +76,7 @@ class HideElement(base):
         return inspector.onHideElement(self)
 
 
-
+# .. show
 class ShowElement(base):
 
     """this action show an element
@@ -108,7 +92,25 @@ class ShowElement(base):
         return inspector.onShowElement(self)
 
 
+# manipulations
+# .. replaceBy
+class ReplaceElement(base):
 
+    """this action replace the selected element with a new element
+    """
+
+    # decorations
+    # .. name of action factory method
+    factory_method = 'replaceBy'
+
+    # attributes
+    newelement = descriptors.object()
+
+    def identify(self, inspector):
+        return inspector.onReplaceElement(self)
+    
+
+# .. append
 class AppendElement(base):
     
     # decorations
@@ -122,7 +124,7 @@ class AppendElement(base):
         return inspector.onAppendElement(self)
     
     
-
+# .. after
 class InsertAfterElement(base):
     
     # decorations
@@ -134,6 +136,30 @@ class InsertAfterElement(base):
 
     def identify(self, inspector):
         return inspector.onInsertAfterElement(self)
+    
+ 
+# traversing   
+# .. find
+#    this action need to have action factories, 
+#    so we need ElementActionFactory as a base as well
+class FindSubElement(ElementActionFactory, base, metaclass=Meta):
+    
+    """find a sub element by its name
+    """
+    
+    # decorations
+    # .. name of action factory method
+    factory_method = 'find'
+
+    # attributes
+    name = descriptors.str() 
+    name.tip = "name of the sub element. it is assuemd that its name is unique among all descendents."
+    
+    type = descriptors.str() 
+    type.tip = "type of the sub element. this should be given if you need to call a type-specific (not generic) action on this found element."
+
+    def identify(self, inspector):
+        return inspector.onFindSubElement(self)
     
     
 

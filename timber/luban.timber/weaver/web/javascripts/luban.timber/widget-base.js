@@ -29,7 +29,8 @@
     'find': function (name, type) {
       var rt = this.jqueryelem;
       if (name) rt = rt.find('[luban-element-name='+name+']');
-      if (type) rt = rt.find('[luban-element-type='+type+']');
+      // type is not used at this moment
+      else throw "missing name of the element to find";
       rt = rt.lubanElement();
       return rt;
     },

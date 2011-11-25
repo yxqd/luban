@@ -63,11 +63,25 @@ class ElementContainer(Element, metaclass=Meta):
 
 
     def __setitem__(self, key, val):
-        old = self.getChildByName(key)
-        self.replaceChild(old, val)
+        if key.startswith('#'):
+            id = key[1:]
+            old = self.getDescendentByID(id)
+            parent = old.parent()
+        else:
+            old = self.getChildByName(key)
+            parent = self
+            
+        parent.replaceChild(old, val)
         return val
-        
 
+
+    def __getitem__(self, key):
+        if key.startswith('#'):
+            id = key[1:]
+            return self.getDescendentByID(id)
+        return self.getChildByName(key)
+
+    
     def remove(self, item):
         # if it is a piece of text
         if isinstance(item, str):

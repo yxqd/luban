@@ -48,6 +48,24 @@ class TestCase(unittest.TestCase):
         return
 
     
+    def test3(self):
+        "ElementContainer.__setitem__"
+        frame = luban.e.frame(name='frame', title="title")
+        doc1 = frame.document()
+        self.assertEqual(len(frame.contents), 1)
+        self.assertEqual(frame.contents[0], doc1)
+        
+        doc2 = frame.document(name='body', id='doc2')
+        
+        doc3 = luban.e.document(name='body', id='doc3')
+        frame['body'] = doc3
+
+        self.assertEqual(len(frame.contents), 2)
+        self.assertEqual(frame.contents[0], doc1)
+        self.assertEqual(frame.contents[1], doc3)
+        return
+
+    
 if __name__ == "__main__": unittest.main()
 
     

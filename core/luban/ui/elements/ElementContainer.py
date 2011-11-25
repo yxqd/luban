@@ -62,6 +62,12 @@ class ElementContainer(Element, metaclass=Meta):
         return self
 
 
+    def __setitem__(self, key, val):
+        old = self.getChildByName(key)
+        self.replaceChild(old, val)
+        return val
+        
+
     def remove(self, item):
         # if it is a piece of text
         if isinstance(item, str):
@@ -93,7 +99,7 @@ class ElementContainer(Element, metaclass=Meta):
         if not isstr:
             self._registerChild(new)
         return
-        
+
 
     def getChildByName(self, name):
         """get one of my children by his name

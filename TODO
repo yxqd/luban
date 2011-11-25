@@ -1,6 +1,7 @@
 
 core:
 * aokuang.timber: example of showing form input error
+* doc: container[name] = newelement
 * doc: decorator for handler functions
 * doc: decorator for requirement
 * doc: session

@@ -56,6 +56,9 @@ import luban
 luban.session = SessionProxy()
 
 
+# borrow thread specific data container from cherrypy
+luban.thread_data = cherrypy.thread_data
+
 # overload the luban core controller
 import luban.controller.CherrypyController as core_CherrypyController_module
 core_CherrypyController_module.CherrypyController = CherrypyController

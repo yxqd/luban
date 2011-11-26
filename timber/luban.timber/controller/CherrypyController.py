@@ -57,6 +57,7 @@ luban.session = SessionProxy()
 
 
 # borrow thread specific data container from cherrypy
+import cherrypy
 luban.thread_data = cherrypy.thread_data
 
 # overload the luban core controller

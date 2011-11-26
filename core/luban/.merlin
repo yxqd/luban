@@ -36,4 +36,7 @@ rsync('weaver/web/javascripts', os.path.join(target, 'javascripts'))
 
 # hsnapshot.jar
 import shutil
+targetdir = os.path.join(export_pytree, 'luban', 'controller')
+if not os.path.exists(targetdir): os.makedirs(targetdir)
 shutil.copyfile('controller/hsnapshot.jar', os.path.join(export_pytree, 'luban', 'controller', 'hsnapshot.jar'))
+

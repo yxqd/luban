@@ -93,6 +93,11 @@
       element.empty();
     },
 
+    'ondestroyelement': function(action) {
+      var element = this.dispatch(action.element);
+      element.destroy();
+    },
+
     'onappendelement': function(action) {
       var container = this.dispatch(action.element);
       this.docmill.render(action.newelement, container);
@@ -133,9 +138,6 @@
 
       case 'enable':
 	return element.enable();
-
-      case 'destroy':
-	return element.destroy();
 
       case 'focus':
 	return element.focus();

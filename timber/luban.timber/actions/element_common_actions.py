@@ -122,6 +122,17 @@ class AppendElement(base):
 
     def identify(self, inspector):
         return inspector.onAppendElement(self)
+
+
+# .. destroy
+class DestroyElement(base):
+    
+    # decorations
+    # .. name of action factory method
+    factory_method = 'destroy'
+    
+    def identify(self, inspector):
+        return inspector.onDestroyElement(self)
     
     
 # .. after

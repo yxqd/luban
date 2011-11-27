@@ -39,7 +39,7 @@ elementtypes = [
     'BulletinBoard',
     # 'CodeEditor',
     # 'Credential',
-    # 'Dialog',
+    'Dialog',
     # 'Dock',
     # 'Document',
     # 'Downloader',

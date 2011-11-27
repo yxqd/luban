@@ -77,6 +77,9 @@ elements = [
     'formsubmitbutton',
 
     'progressbar',
+    
+    'dialog',
+    
     ]
             
 for element in elements:
@@ -170,6 +173,16 @@ progressbar = {
         '%s/ui/%s' % (jui_dev, 'jquery.ui.progressbar.js'),
         
         'luban.timber/widgets/progressbar.js',
+        ),
+    }
+
+
+dialog = {
+    'javascripts':
+        (
+        '%s/ui/%s' % (jui_dev, 'jquery.ui.dialog.js'),
+        
+        'luban.timber/widgets/dialog.js',
         ),
     }
 

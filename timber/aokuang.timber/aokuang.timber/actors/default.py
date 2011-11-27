@@ -117,6 +117,7 @@ menu = [
       'slides',
       'bulletinboard',
       'progressbar',
+      'dialog',
       ]),
     ]
 

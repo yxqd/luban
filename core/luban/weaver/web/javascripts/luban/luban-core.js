@@ -137,6 +137,11 @@ luban.utils = {};
     // broadcast event to all my descendents
     'broadcastEvent': function(event) {
       this._je.find('[luban-element-type]').trigger(event);
+      // dialog are required to be children of frame. but jquery put them
+      // in <body> and not inside luban frame div. we have to deal with that
+      // here
+      if (this._je.attr('luban-element-type')=='frame')
+	$('[luban-element-type="dialog"]').trigger(event);
     },
 
     'getParent': function() {

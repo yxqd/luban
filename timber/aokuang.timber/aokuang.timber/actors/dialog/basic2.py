@@ -16,37 +16,36 @@ import luban
 from ....DemoPanelActor import Actor as base
 class Actor(base):
 
-    title='A dialog'
+    title='A trivial dialog'
     description = [
+        "Please note that dialog should be only added into the frame. ",
         ]
-    rank = 100
+    rank = 102
     
 
     def createDemoPanel(self):
-        document = luban.e.document(id='container')
-        
         # create dialog
-        dialog = document.dialog(
+        dialog = luban.e.dialog(
             title='title of dialog', 
             autoopen=True, 
-            id='dialog-basic',
+            id='dialog-basic2',
             )
-        # add a paragraph
+        # .. add a paragraph
         dialog.paragraph(text='content of dialog')
-
-        # add a button
+        # .. add a button
         okbutton = dialog.button(
             label='OK',
-            onclick=luban.a.select(element=dialog).destroy()
+            onclick=luban.a.select(id='dialog-basic2', type='dialog').destroy()
             )
         
-        # add a button to open the dialog
-        button = document.button(
-            label='click me to open a dialog',
-            onclick=luban.a.select(element=document).append(newelement=dialog),
+        # add a button that when clicked, add the dialog to the frame
+        # select(id='') selects the frame
+        button = luban.e.button(
+            label='click me to open the dialog',
+            onclick=luban.a.select(id='').append(newelement=dialog),
             )
         
-        return document
+        return button
 
 
 # End of file 

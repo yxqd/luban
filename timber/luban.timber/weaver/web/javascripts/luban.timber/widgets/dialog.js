@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2009 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -23,7 +23,7 @@
   var widgets = luban.widgets;
   var tag = luban.utils.tag;
 
-  
+
   // documentmill handler
   var dmp = luban.documentmill.prototype;
   dmp.ondialog = dmp._onContainer;
@@ -48,7 +48,7 @@
     var ret = tag('div', {'id': id});
     ret.addClass('luban-dialog');
     ret.addClass(Class);
-    
+
     var le = ret.lubanElement('dialog');
     if (parent) { parent.add(le); }
     var width = ret.width();
@@ -66,10 +66,18 @@
 	  autoOpen: kwds.autoopen,
 	  modal: true,
 	  'width': width,
-	  position: 'top',
-	  close: function() {$(this).lubanElement().destroy();}
+	  position: 'top' //,
+      //close: function() {$(this).lubanElement().destroy();}
 	//height: ???
       });
+    /* was trying to get dialog destroyed correctly, but actually jquery ui always put dialogs in <body>. so we should just make a note in dialog saying it is really sth does not belong to the UI tree
+     *
+     */
+    var ondestroy = function (e) {
+      $(this).dialog('destroy');
+    };
+    ret.bind('destroy', ondestroy);
+
     return le;
   };
 

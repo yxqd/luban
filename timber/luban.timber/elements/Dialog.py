@@ -44,9 +44,9 @@ class Dialog(SimpleContainer, metaclass=Meta):
 # to define a new element action, subclass ElementActionBase
 from luban.ui.actions.ElementActionBase import ElementActionBase
 class DialogOpen(ElementActionBase):
-
+    
     "open a dialog"
-
+    
     # decorations
     element_type = Dialog
     factory_method = "open"
@@ -58,7 +58,7 @@ class DialogOpen(ElementActionBase):
 class DialogClose(ElementActionBase):
 
     "close a dialog"
-
+      
     # decorations
     element_type = Dialog
     factory_method = "close"

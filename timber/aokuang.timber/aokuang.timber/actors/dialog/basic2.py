@@ -23,7 +23,7 @@ class Actor(base):
     rank = 102
     
 
-    def createDemoPanel(self):
+    def createDemoPanel(self, **kwds):
         # create dialog
         dialog = luban.e.dialog(
             title='title of dialog', 

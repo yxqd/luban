@@ -27,6 +27,9 @@ class Dialog(SimpleContainer, metaclass=Meta):
         "A dialog usually has a title, and you should usually add an 'OK' "
         "or 'Close' button to close it."
         )
+    # dialogs can only be children of frame
+    from luban.ui.elements.Frame import Frame
+    parent_types = [Frame]
 
     # properties
     autoopen = descriptors.bool()

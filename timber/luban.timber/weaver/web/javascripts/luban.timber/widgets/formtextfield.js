@@ -58,10 +58,11 @@
     if (parent) {parent.add(ret);}
 
     var field = kwds;
+    var value = field.value; if (value == undefined) value = '';
     var args =  {
       'name': formatElementName(field.name),
       'type': 'text',
-      'value': field.value
+      'value': value
     };
 
     var input = tag('input', args); input_container.append(input);

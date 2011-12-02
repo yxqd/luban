@@ -35,13 +35,11 @@ def require(requirement, **kwds):
     if isinstance(requirement, PortalRequirement):
         return require_portal(requirement, **kwds)
 
-    def dummy(*args, **kwds): return "access denied"
-    
     def convert(f):
         def newhandler(self, *args, **kwds):
-            if not requirement.check_requirement():
-                return dummy
-            return f
+            if requirement.check_requirement():
+                return "access denied"
+            return f(self, *args, **kwds)
         return newhandler
     return convert    
 
@@ -62,7 +60,8 @@ def require_portal(requirement, actorname=None, onsuccess=None):
                 else:
                     return luban.a.establishInterface(frame)
             
-            # this is the action to load the real functionality.
+            # this is to build the action to load the real functionality.
+            # we need it after user successfully fullfill the requirement
             # it always need to be a load action.
             # "actor" should be the name of the actor
             # "routine" should be the name of this routine

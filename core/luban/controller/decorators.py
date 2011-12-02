@@ -79,17 +79,23 @@ def _typeconversion(func, onerror=None):
 
 
 # type conversion handlers
+import builtins
 def bool(s):
     if s.lower() in ['0', 'false', 'off']: return False
     return True
 
 def int(s):
-    import builtins
     try:
         return builtins.int(s)
     except ValueError:
         raise ValueError("%r is not an integer" % s)
     raise RuntimeError("should not reach here")
+
+
+def str(s):
+    if not isinstance(s, builtins.str):
+        raise TypeError("needs a string")
+    return s
 
 
 def positive(c):
@@ -99,7 +105,7 @@ def positive(c):
 
 
 def notemptystr(s):
-    if not isinstance(s, str): raise TypeError("%s is not a string" % s)
+    if not isinstance(s, builtins.str): raise TypeError("%s is not a string" % s)
     if not s: raise ValueError("empty string")
     return s
 

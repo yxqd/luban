@@ -31,7 +31,7 @@ def check_email():
     email = luban.session.get('email')
     return not email
 
-email_requirement = luban.decorators.Requirement()
+email_requirement = luban.decorators.PortalRequirement()
 email_requirement.check_requirement = check_email
 email_requirement.fullfill_requirement = emailform
 

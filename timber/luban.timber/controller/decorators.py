@@ -16,10 +16,37 @@ import luban
 
 class Requirement:
     
+    # simple requirement that only checking is done
+    # if check fails, simple no more action will be perform, or error thrown
+    
+    check_requirement = None # function to check whether a requirement is satisfied. return True if requirement is not fullfilled.
+
+class PortalRequirement(Requirement):
+    
+    # requirement of a portal
+    # if check of reqiuriement failed, an interface will show up
+    # to challenge the user to fullfill the requirement
+    
     check_requirement = None # function to check whether a requirement is satisfied. return True if requirement is not fullfilled.
     fullfill_requirement = None # factory method to return a UI frame that solicit answers from user to fullfill the requirement
 
-def require(requirement, actorname=None, onsuccess=None):
+
+def require(requirement, **kwds):
+    if isinstance(requirement, PortalRequirement):
+        return require_portal(requirement, **kwds)
+
+    def dummy(*args, **kwds): return "access denied"
+    
+    def convert(f):
+        def newhandler(self, *args, **kwds):
+            if not requirement.check_requirement():
+                return dummy
+            return f
+        return newhandler
+    return convert    
+
+
+def require_portal(requirement, actorname=None, onsuccess=None):
     """
     requirement: Requirement instance
     onsuccess: if requirement was succesfully fullfilled, take this action
@@ -101,7 +128,7 @@ def formprocesser(formid, *input_names):
 
 
 __all__ = [
-    'Requirement', 'require', 
+    'Requirement', 'PortalRequirement', 'require', 
     'generateforminputerror', 'formprocesser',
     ]
 from luban import decorators

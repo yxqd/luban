@@ -99,6 +99,7 @@ C = luban.Controller = {
     // call
     var args = [actor, routine];
     args = args.concat(specs.args);
+    args = $.map(args, encodeURI); // encodeuri
     url += args.join('/');
 
     // kwd args

@@ -98,6 +98,20 @@ def positive(c):
     return c
 
 
+def notemptystr(s):
+    if not isinstance(s, str): raise TypeError("%s is not a string" % s)
+    if not s: raise ValueError("empty string")
+    return s
+
+
+def email(s):
+    if not email_pattern.match(s):
+        raise ValueError("invalid email address")
+    return s
+import re
+email_pattern = re.compile('[a-zA-Z0-9+_\-\.]+@[0-9a-zA-Z][.-0-9a-zA-Z]*.[a-zA-Z]+')
+
+
 positiveInteger = lambda x: positive(int(x))
 
 

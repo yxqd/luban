@@ -5,7 +5,7 @@ core:
 * aokuang.timber: example of showing form input error
 * doc: container[name] = newelement; container['#'+id] = newelement
 * doc: decorator for handler functions
-* doc: decorator for requirement
+* doc: decorator for requirement. kwd "replaceinterface"
 * doc: session
 * doc: select(element=..., type=...).<method>. tell the difference of common actions and more specific actions. specific actions need specific type. type is string. type can be very specific, but could also be a base class like formfield.
 * doc: select(element=...).getAttr(name) what are the allowed names? label/value

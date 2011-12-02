@@ -32,7 +32,7 @@
 	  // to tell the handler to return an action to replace frame
 	  if (url.indexOf('?') == -1) url += '?';
 	  else url += '&';
-	  url += 'returntype=replaceframe';
+	  url += 'returntype=replaceinterface';
 
 	  if (init) {
 	    luban.init.frame = null;

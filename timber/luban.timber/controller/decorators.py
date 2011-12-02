@@ -14,6 +14,68 @@
 
 import luban
 
+
+def require(requirement, **kwds):
+    """decorator to decorate a handler (routine of an actor)
+    to make sure user meets some requirement before really
+    executing the handler
+    """
+    if isinstance(requirement, PortalRequirement):
+        return require_portal(requirement, **kwds)
+
+    def convert(f):
+        def newhandler(self, *args, **kwds):
+            if requirement.check_requirement():
+                return "access denied"
+            return f(self, *args, **kwds)
+        return newhandler
+    return convert 
+
+
+
+def frameHandler(m):
+    """convert a function that returns "frame" to a function
+    that can return different things, depending the choice
+    of "returntype"
+
+    m(*args, **kwds) must return a frame
+
+    returntype:
+    * establishinterface: establishinterface action
+    * replaceinterface: replace existing frame with this frame
+    * frame: the frame itself
+    """
+    
+    import luban
+    def _(self, *args, **kwds):
+        # returntype
+        # .. default to establishinterface
+        if 'returntype' not in kwds:
+            kwds['returntype'] = 'establishinterface'
+        rtype = kwds['returntype']
+        # clear it from kwd args
+        del kwds['returntype']
+        
+        # call the method to wrap
+        frame = m(self, *args, **kwds)
+        
+        # depend on return type, return appropriate action
+        if rtype == 'replaceinterface':
+            return luban.a.select(id='').replaceBy(newelement=frame)
+        
+        elif rtype == 'establishinterface':
+            return luban.a.establishInterface(frame)
+        
+        elif rtype == 'frame':
+            return frame
+        
+        else:
+            raise NotImplementedError("return type %s" % rtype)
+    
+    return _
+
+
+
 class Requirement:
     
     # simple requirement that only checking is done
@@ -31,22 +93,24 @@ class PortalRequirement(Requirement):
     fullfill_requirement = None # factory method to return a UI frame that solicit answers from user to fullfill the requirement
 
 
-def require(requirement, **kwds):
-    if isinstance(requirement, PortalRequirement):
-        return require_portal(requirement, **kwds)
-
-    def convert(f):
-        def newhandler(self, *args, **kwds):
-            if requirement.check_requirement():
-                return "access denied"
-            return f(self, *args, **kwds)
-        return newhandler
-    return convert    
-
-
-def require_portal(requirement, actorname=None, onsuccess=None):
+def require_portal(*args, **kwds):
+    """implementation of "require" that handles PortalRequirement
     """
-    requirement: Requirement instance
+    def convert(f):
+        t = require_portal_frame(*args, **kwds)
+        return frameHandler(t(f))
+    return convert
+
+
+def require_portal_frame(requirement, actorname=None, onsuccess=None):
+    """
+    handles PortalRequirement. 
+    the decorated function's behavior:
+      when requirement is not met,
+      return the frame to ask user to fullfill the requirement,
+      otherwise return the original frame.
+    
+    requirement: PortalRequirement instance
     onsuccess: if requirement was succesfully fullfilled, take this action
     """
     onsuccess_action = onsuccess
@@ -67,16 +131,11 @@ def require_portal(requirement, actorname=None, onsuccess=None):
                 routine= f.__name__
                 args = (actor, routine) + args
                 kwds = dict(kwds)
-                kwds['replaceinterface'] = 1
+                kwds['returntype'] = 'replaceinterface'
                 onsuccess = onsuccess_action or luban.a.load(*args, **kwds)
                 luban.session['onsuccess'] = onsuccess
                 frame = requirement.fullfill_requirement()
-            
-            if 'replaceinterface' in kwds and kwds['replaceinterface']:
-                return luban.a.select(id='').replaceBy(newelement=frame)
-            else:
-                return luban.a.establishInterface(frame)
-
+            return frame
         return newhandler
     return convert
 

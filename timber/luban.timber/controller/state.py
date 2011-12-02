@@ -23,29 +23,8 @@ def stateHandler(m):
     or a frame establishment action,
     or the frame itself.
     """
-    
-    import luban
-    def _(self, *args, **kwds):
-        # returntype
-        if 'returntype' not in kwds:
-            kwds['returntype'] = 'establishinterface'
-        rtype = kwds['returntype']
-        # clear it from kwd args
-        del kwds['returntype']
-
-        # call the method to wrap
-        frame = m(self, *args, **kwds)
-        
-        # depend on return type, return appropriate action
-        if rtype == 'replaceframe':
-            return luban.a.select(id='').replaceBy(newelement=frame)
-        
-        elif rtype == 'establishinterface':
-            return luban.a.establishInterface(frame)
-        
-        return frame
-    
-    return _
+    from .decorators import frameHandler
+    return frameHandler(m)
 
 
 # End of file 

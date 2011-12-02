@@ -55,27 +55,28 @@ def require_portal(requirement, actorname=None, onsuccess=None):
         def newhandler(self, *args, **kwds):
             if not requirement.check_requirement():
                 frame = f(self, *args, **kwds)
-                if 'replaceinterface' in kwds and kwds['replaceinterface']:
-                    return luban.a.select(id='').replaceBy(newelement=frame)
-                else:
-                    return luban.a.establishInterface(frame)
+            else:
+                # this is to build the action to load the real functionality.
+                # we need it after user successfully fullfill the requirement
+                # it always need to be a load action.
+                # "actor" should be the name of the actor
+                # "routine" should be the name of this routine
+                # "replaceinterface" is required to replace the requirement solicitation inteface with the actual interface
+                actor = actorname or getactorname(
+                    inspect.getmodule(f).__name__, self.controller.actor_packages)
+                routine= f.__name__
+                args = (actor, routine) + args
+                kwds = dict(kwds)
+                kwds['replaceinterface'] = 1
+                onsuccess = onsuccess_action or luban.a.load(*args, **kwds)
+                luban.session['onsuccess'] = onsuccess
+                frame = requirement.fullfill_requirement()
             
-            # this is to build the action to load the real functionality.
-            # we need it after user successfully fullfill the requirement
-            # it always need to be a load action.
-            # "actor" should be the name of the actor
-            # "routine" should be the name of this routine
-            # "replaceinterface" is required to replace the requirement solicitation inteface with the actual interface
-            actor = actorname or getactorname(
-                inspect.getmodule(f).__name__, self.controller.actor_packages)
-            routine= f.__name__
-            args = (actor, routine) + args
-            kwds = dict(kwds)
-            kwds['replaceinterface'] = 1
-            onsuccess = onsuccess_action or luban.a.load(*args, **kwds)
-            luban.session['onsuccess'] = onsuccess
-            frame = requirement.fullfill_requirement()
-            return luban.a.establishInterface(frame)
+            if 'replaceinterface' in kwds and kwds['replaceinterface']:
+                return luban.a.select(id='').replaceBy(newelement=frame)
+            else:
+                return luban.a.establishInterface(frame)
+
         return newhandler
     return convert
 

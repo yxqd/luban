@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2009 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -25,18 +25,18 @@
   var widgets = luban.widgets;
   var tag = luban.utils.tag;
 
-  
+
   // documentmill handler
   var dmp = luban.documentmill.prototype;
   dmp.onsplitter = dmp.onsplitsection = dmp._onContainer;
-  
-  
+
+
   // splitter
   //  factory
   ef.splitter = function(kwds, docmill, parent) {
     var orientation = format_orientation(kwds.orientation);
     var id = kwds.id;
-    
+
     var container = tag('div', {"id": id});
     var kls = kwds.Class;
     if (kls) {container.addClass(kls);}
@@ -97,11 +97,11 @@
 
     var orientation = this._je.data('orientation');
     var section_container = this._createSectionContainer(id, orientation);
-    
+
     var div = tag('div');
     div.addClass(widgets.splitsection.prototype.interior_container_class);
     section_container.append(div);
-    
+
     if (kls) { section_container.addClass(kls); }
 
     if (onclick) {
@@ -147,11 +147,11 @@
   // depends on the orientation of the splitter.
   widgets.splitter.prototype._createSectionContainer = function(id, orientation) {
     var tagname, sec, sections_container=this._getSectionsContainer(orientation);
-    
+
     if (orientation == 'vertical') {tagname = 'div';}
     else {tagname = 'td';}
     sec = tag(tagname, {'id': id});
-    
+
     sections_container.append(sec);
     return sec;
   };
@@ -171,7 +171,7 @@
   // the implementation of splitsection is that it always has an "interior-container" div
   // so we need to make sure we are doing the right thing when adding or removing content
   widgets.splitsection.prototype.empty = function() {
-    this.broadcastEvent('destroy');
+    this.broadcastEvent('luban-destroy');
     var c = this.jqueryelem.children('div.'+this.interior_container_class);
     c.empty();
   };

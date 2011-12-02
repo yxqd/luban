@@ -3,7 +3,7 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
 //                      California Institute of Technology
-//                       (C) 2008-2009 All Rights Reserved  
+//                       (C) 2008-2009 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -27,26 +27,26 @@
 
   // take a list of atoms and generate a "div" that has the scene
   function createScene(lattice, atoms) {
-	  
+
     // the viewer is called below through initClient()...just make sure the library is available
-    
+
     function createViewContainer() {
       var table = tag('table'); table.addClass('o3d-scence-container');
       table.width(400); table.height(400);
-      
-      var tr = tag('tr'); 
+
+      var tr = tag('tr');
       table.append(tr);
 
-      var td = tag('td'); 
+      var td = tag('td');
       tr.append(td);
       td.css('height', '100%');
-      
-      var div = tag('div', {id:'o3d'}); 
+
+      var div = tag('div', {id:'o3d'});
       td.append(div);
       div.css('width', '100%');
       div.css('height', '100%');
 
-      var loading = tag('div', {id:'loading'}); 
+      var loading = tag('div', {id:'loading'});
       td.append(loading);
       loading.css('color', 'red');
       return table;
@@ -82,10 +82,10 @@
     var atoms = kwds.atoms;
     var scene = createScene(lattice, atoms);
     ret.jqueryelem.append(scene);
-    ret.jqueryelem.bind('destroy', uninit);
-    
+    ret.jqueryelem.bind('luban-destroy', uninit);
+
     //ret.jqueryelem.data('atoms', atoms);
-    
+
     scene.trigger('append');
 
     return ret;

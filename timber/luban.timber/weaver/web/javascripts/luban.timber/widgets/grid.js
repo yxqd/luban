@@ -71,7 +71,7 @@
     skeleton.append(child.jqueryelem);
   };
   widgets.grid.prototype.empty = function() {
-    this.broadcastEvent('destroy');
+    this.broadcastEvent('luban-destroy');
     var skeleton = this.getSkeleton();
     skeleton.emtpy();
   };

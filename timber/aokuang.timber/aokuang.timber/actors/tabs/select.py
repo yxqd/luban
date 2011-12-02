@@ -24,7 +24,7 @@ class Actor(base):
         # container
         container = luban.e.document()
         #
-        p = container.paragraph(id="message")
+        p = container.paragraph(id="select-message")
         # tabs
         tabs = container.tabs()
         #   tab 1

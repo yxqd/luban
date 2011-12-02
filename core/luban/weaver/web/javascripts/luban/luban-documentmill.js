@@ -109,6 +109,10 @@
 	ret.jqueryelem.trigger('luban-create');
 	//this.compile(doc.oncreate);
       }
+      // default destroy event handler: don't propagate
+      if (doc.lubanelement)
+	ret.jqueryelem.bind('luban-destroy', function() {return false;});
+
       // shadow?
       // this has to be here because jquery.shadow can not
       // draw shadow correctly without everything already in place
@@ -211,7 +215,11 @@
       if (event_handler) {
 	var docmill1 = new luban.documentmill();
 	docmill1.event = luban_event;
-	docmill1.compile(event_handler);
+	try {
+	  docmill1.compile(event_handler);
+	} catch (e) {
+	  console.log(e);
+	}
       }
       return false;
     };

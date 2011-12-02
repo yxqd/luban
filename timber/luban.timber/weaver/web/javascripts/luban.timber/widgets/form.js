@@ -106,7 +106,7 @@
   };
   widgets.form.prototype = new widgets.base ();
   widgets.form.prototype.empty = function() {
-    this.broadcastEvent('destroy');
+    this.broadcastEvent('luban-destroy');
     this._je.find('fieldset').empty();
   };
   widgets.form.prototype.add = function (subelem) {

@@ -67,8 +67,8 @@
       this.jqueryelem.find('textarea').removeAttr('disabled');
     },
     'destroy': function() {
-      this.broadcastEvent('destroy');
-      this.jqueryelem.trigger('destroy');
+      this.broadcastEvent('luban-destroy');
+      this.jqueryelem.trigger('luban-destroy');
       this.jqueryelem.remove();
     },
     'focus': function() {

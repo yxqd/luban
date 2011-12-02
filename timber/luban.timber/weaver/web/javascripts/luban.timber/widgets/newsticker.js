@@ -4,7 +4,7 @@
 //
 //                                   Jiao Lin
 //                      California Institute of Technology
-//                       (C) 2008-2010 All Rights Reserved  
+//                       (C) 2008-2010 All Rights Reserved
 //
 // {LicenseText}
 //
@@ -38,7 +38,7 @@
     return le;
   };
   dmp.onnewstickeritem = dmp._onElement;
- 
+
 
   // actioncompiler handlers
   var lap=luban.actioncompiler.prototype;
@@ -48,22 +48,22 @@
   ef.newsticker = function(kwds, docmill, parent) {
     var containerdiv = tag('div', {id: kwds.id});
     containerdiv.addClass('luban-newsticker');
-    
+
     var table = tag('table'); containerdiv.append(table);
     var tr = tag('tr'); table.append(tr);
     var titletd = tag('td'); tr.append(titletd);
     var newstd = tag('td'); tr.append(newstd);
-    
+
     var p = tag('p'); titletd.append(p);
     p.addClass('title');
     var title = kwds.title;
     if (title) {p.text(title);}
     else {p.hide();}
-    
+
     // needs an unordered list
     var ul = tag("ul"); newstd.append(ul);
     ul.addClass('newsticker');
-    
+
     var ret= containerdiv.lubanElement('newsticker');
     if (parent) {parent.add(ret);}
 
@@ -82,13 +82,13 @@
       var interval = setInterval(f1, t);
       containerdiv.data("refresh-interval", interval);
 
-      containerdiv.bind('destroy', function() {
+      containerdiv.bind('luban-destroy', function() {
 	  var interval = $(this).data('refresh-interval');
 	  clearInterval(interval);
 	  return false;
 	});
     }
-    
+
     return ret;
   };
   //  object

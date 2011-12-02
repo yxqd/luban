@@ -63,20 +63,20 @@
     // jquery dialog factory
     ret.dialog({
       bgiframe:true,
-	  autoOpen: kwds.autoopen,
-	  modal: true,
-	  'width': width,
-	  position: 'top' //,
-      //close: function() {$(this).lubanElement().destroy();}
-	//height: ???
+	  autoOpen: kwds.autoopen
+	  ,modal: true
+	  ,'width': width
+	  // ,position: 'top',
+	  //,height: ???
       });
     /* was trying to get dialog destroyed correctly, but actually jquery ui always put dialogs in <body>. so we should just make a note in dialog saying it is really sth does not belong to the UI tree
      *
      */
     var ondestroy = function (e) {
       $(this).dialog('destroy');
+      return false;
     };
-    ret.bind('destroy', ondestroy);
+    ret.bind('luban-destroy', ondestroy);
 
     return le;
   };

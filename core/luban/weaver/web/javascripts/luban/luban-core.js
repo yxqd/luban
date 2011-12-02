@@ -129,7 +129,7 @@ luban.utils = {};
 
     // empty my content
     'empty': function (event) {
-      this.broadcastEvent('destroy');
+      this.broadcastEvent('luban-destroy');
       this._je.empty();
       //throw 'widgets.base.empty:' + this.type() +' notimplementederror';
     },

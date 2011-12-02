@@ -101,7 +101,7 @@
 
   };
   widgets.document.prototype.empty = function() {
-    this.broadcastEvent('destroy');
+    this.broadcastEvent('luban-destroy');
     this._getBody().empty();
   };
   widgets.document.prototype.setAttribute = function(attrs) {

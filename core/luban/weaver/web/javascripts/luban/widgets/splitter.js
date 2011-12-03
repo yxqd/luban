@@ -177,7 +177,8 @@
   };
   widgets.splitsection.prototype.add = function(elem) {
     var c = this.jqueryelem.children('div.'+this.interior_container_class);
-    c.append(elem.jqueryelem);
+    if (typeof(elem)!='string') elem = elem._je;
+    c.append(elem);
   };
   widgets.splitsection.prototype.addClass = function(Class) {
     var c = this.jqueryelem.children('div'+this.interior_container_class);

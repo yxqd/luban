@@ -159,7 +159,7 @@
 	  this._parent = elem;
 	  var subdoc = contents[i];
 	  if (typeof(subdoc) == 'string') {
-	    elem._je.append(subdoc);
+	    elem.add(subdoc);
 	  } else {
 	    subelem = this.dispatch(subdoc);
 	  }

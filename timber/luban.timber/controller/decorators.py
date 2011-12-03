@@ -187,7 +187,9 @@ def formprocesser(formid, *input_names):
 
 
 __all__ = [
-    'Requirement', 'PortalRequirement', 'require', 
+    'Requirement', 'PortalRequirement', 
+    'require', 
+    'frameHandler',
     'generateforminputerror', 'formprocesser',
     ]
 from luban import decorators

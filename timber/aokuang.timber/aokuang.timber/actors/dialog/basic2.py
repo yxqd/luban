@@ -30,12 +30,20 @@ class Actor(base):
             autoopen=True, 
             id='dialog-basic2',
             )
+        selectdialog = luban.a.select(element=dialog)
+        # very important: in this arrangement, every time 
+        # a new dialog will be created and added to the interface
+        # but having the same id, so we need to make sure to 
+        # detroy the dialog when the [X] at the top-right corner 
+        # is clicked.
+        dialog.onclose = selectdialog.destroy()
+        
         # .. add a paragraph
         dialog.paragraph(text='content of dialog')
         # .. add a button
         okbutton = dialog.button(
             label='OK',
-            onclick=luban.a.select(id='dialog-basic2', type='dialog').destroy()
+            onclick=selectdialog.destroy()
             )
         
         # add a button that when clicked, add the dialog to the frame

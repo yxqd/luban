@@ -66,12 +66,21 @@
 	  autoOpen: kwds.autoopen
 	  ,modal: true
 	  ,'width': width
-	  // ,position: 'top',
+	  ,position: 'center'
 	  //,height: ???
       });
-    /* was trying to get dialog destroyed correctly, but actually jquery ui always put dialogs in <body>. so we should just make a note in dialog saying it is really sth does not belong to the UI tree
-     *
-     */
+
+    // onclose event handler
+    var onclose = kwds.onclose, onclose_callback;
+    if (onclose != null && onclose != '') {
+      onclose_callback = luban.compileCallback(onclose);
+    } else {
+      onclose_callback = function () {return false;};
+    }
+    ret.bind('dialogclose', onclose_callback);
+
+    // this is required otherwise luban actions like select_frame.replaceBy
+    // won't work correctly -- dialog won't be destroyed
     var ondestroy = function (e) {
       $(this).dialog('destroy');
       return false;

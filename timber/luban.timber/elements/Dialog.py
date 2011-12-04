@@ -31,6 +31,14 @@ class Dialog(SimpleContainer, metaclass=Meta):
     from luban.ui.elements.Frame import Frame
     parent_types = [Frame]
 
+    # events
+    from luban.ui.Event import Event
+    class close(Event):
+        # decorations
+        simple_description = "event on which the dialog is closed (for example by the [X] button on the top-right corner"
+        __unique_type_name__ = 'dialogclose'
+    del Event
+
     # properties
     autoopen = descriptors.bool()
     autoopen.tip = 'If true, the dialog is opened when created'
@@ -46,7 +54,7 @@ class Dialog(SimpleContainer, metaclass=Meta):
 # actions
 # to define a new element action, subclass ElementActionBase
 from luban.ui.actions.ElementActionBase import ElementActionBase
-class DialogOpen(ElementActionBase):
+class DialogOpenAction(ElementActionBase):
     
     "open a dialog"
     
@@ -58,7 +66,7 @@ class DialogOpen(ElementActionBase):
     def identify(self, visitor):
         return visitor.onDialogOpen(self)
 
-class DialogClose(ElementActionBase):
+class DialogCloseAction(ElementActionBase):
 
     "close a dialog"
       

@@ -30,13 +30,18 @@ class Actor(base):
             autoopen=True, 
             id='dialog-replacecontent',
             )
+        selectdialog = luban.a.select(element=dialog)
+        destroydialog = selectdialog.destroy()
+        # very important
+        dialog.onclose = destroydialog
+        
         # .. add a paragraph
         dialog.paragraph(text='content of dialog')
         
         # .. the close button. this is only added when the next button click
         okbutton = luban.e.button(
             label='Close',
-            onclick=luban.a.select(element=dialog).destroy()
+            onclick=destroydialog
             )
         
         # .. add a button when click replace the content of the dialog

@@ -98,6 +98,25 @@ class EventChecker(InspectorBase):
             raise EventAttributeError(m)
 
 
+    def _onObject(self, obj):
+        descriptors = obj.iterDescriptors()
+        for descriptor in descriptors:
+            iseventhandler = isinstance(descriptor, EventHandler)
+            type = descriptor.type
+            name = descriptor.name
+            value = descriptor.__get__(obj, obj.__class__)
+            
+            # make sure the eventtype is for the eventhandler that is the closest
+            if iseventhandler:
+                saved_eventtype = self.eventtype
+                self.eventtype = descriptor.eventtype
+            self.inspect(value)
+            if iseventhandler:
+                self.eventtype = saved_eventtype
+            continue
+        return
+
+
 class EventAttributeError(Exception): pass
 
 

@@ -105,7 +105,7 @@ class Element(ElementBase, metaclass=Meta):
     
     def addClass(self, kls):
         "add a classifier for this element"
-        classes = self.Class
+        classes = self.Class or []
         if kls not in classes: 
             classes.append(kls)
         return self

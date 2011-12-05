@@ -13,7 +13,7 @@
 
 def uuid():
     import uuid
-    return uuid.uuid4()
+    return str(uuid.uuid4())
 
 
 # End of file 

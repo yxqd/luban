@@ -94,6 +94,7 @@ class ElementContainer(Element, metaclass=Meta):
 
     @classmethod
     def elementfactories(cls):
+        # static factories
         d = cls.__dict__
         factories = [
             k
@@ -101,10 +102,14 @@ class ElementContainer(Element, metaclass=Meta):
             if hasattr(v, 'iselementfactory') and v.iselementfactory
             ]
         
+        # dynamic ones
+        instance = cls() # need an instance to check whether a factory is valid
         types = cls._subElementTypes()
         for t in types:
             name = t.__unique_type_name__
             if name not in factories:
+                try: getattr(instance, name)
+                except AttributeError: continue
                 factories.append(name)
             continue
         return factories
@@ -276,6 +281,10 @@ class ElementContainer(Element, metaclass=Meta):
 
 def isContainer(candidate):
     return isinstance(candidate, ElementContainer)
+
+
+def isContainerType(candidate):
+    return issubclass(candidate, ElementContainer)
 
 
 # decorator

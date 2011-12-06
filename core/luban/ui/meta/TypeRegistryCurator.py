@@ -41,10 +41,14 @@ class Registry:
         return self._store.keys()
 
 
+    def types(self):
+        return self._store.values()
+
+
     def get(self, name):
         return self._store.get(name)
 
-
+    
     def __iter__(self):
         return iter(self._store)
 

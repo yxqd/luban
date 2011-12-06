@@ -76,7 +76,19 @@ class TestCase(unittest.TestCase):
     def test5(self):
         "ElementContainer.elementfactories"
         from luban.ui.elements.Frame import Frame
-        print (Frame.elementfactories())
+        self.assertTrue('document' in Frame.elementfactories())
+        self.assertTrue('tabs' in Frame.elementfactories())
+
+        from luban.ui.elements.Tabs import Tabs
+        self.assertEqual(['tab'], Tabs.elementfactories())
+
+        tabs = luban.e.tabs()
+        tab = tabs.tab()
+        self.assertTrue('document' in tab.elementfactories())
+        self.assertTrue('paragraph' in tab.elementfactories())
+        self.assertTrue('tab' not in tab.elementfactories())
+        self.assertTrue('tabs' in tab.elementfactories())
+        
         return
 
     

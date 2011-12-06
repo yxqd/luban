@@ -15,32 +15,35 @@
 class SubElementFactory:
 
     def __getattr__(self, key):
+        # key is the factory name of the subelement
         from ._registry import element_types
-        cls = element_types.getElementClass(key)
+        subelemtype = element_types.getElementClass(key)
         
-        if cls is not None \
-                and self.__class__._isAllowedSubElement(cls):
+        if subelemtype is not None \
+                and self.__class__._isAContainerOf(subelemtype):
             
-            _ = createMethod(self, cls)
+            _ = createMethod(self, subelemtype)
             _.__name__ = key
             return _
         
         raise AttributeError(key)
 
 
-def createMethod(container, cls):
+def createMethod(container, subelem):
     """create a factory method that builds a subelement of the given type
     and add it to the container
     """
+    from .ElementContainer import elementfactory
+    @elementfactory
     def _(**kwds):
-        return createSubElement(container, cls, **kwds)
+        return createSubElement(container, subelem, **kwds)
     return _
 
         
-def createSubElement(container, cls, **kwds):
+def createSubElement(container, subelem, **kwds):
     """create a sub elment of given type, and add it to the container
     """
-    e = cls(**kwds)
+    e = subelem(**kwds)
     # give it a name if necessary
     if not e.name:
         e.name = "e{!s}".format(len(container.contents))

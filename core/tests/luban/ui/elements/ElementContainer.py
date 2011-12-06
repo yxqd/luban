@@ -65,6 +65,20 @@ class TestCase(unittest.TestCase):
         self.assertEqual(frame.contents[1], doc3)
         return
 
+
+    def test4(self):
+        "ElementContainer._subElementTypes"
+        frame = luban.e.frame()
+        print (list(frame._subElementTypes()))
+        return
+
+
+    def test5(self):
+        "ElementContainer.elementfactories"
+        from luban.ui.elements.Frame import Frame
+        print (Frame.elementfactories())
+        return
+
     
 if __name__ == "__main__": unittest.main()
 

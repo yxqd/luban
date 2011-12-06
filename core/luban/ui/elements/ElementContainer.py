@@ -48,8 +48,10 @@ class ElementContainer(Element, metaclass=Meta):
         
         # check item name
         if item.name in self.name2item:
-            e = 'item of same name has been added, please consider change the name. name=%r, item=%s' \
-                % (item.name, item)
+            e = (
+                "item of same name has been added, "
+                "please consider change the name. name=%r, item=%s"
+                )  % (item.name, item)
             raise RuntimeError(e)
 
         # check item type
@@ -63,6 +65,10 @@ class ElementContainer(Element, metaclass=Meta):
 
 
     def __setitem__(self, key, val):
+        """
+        container['<child-name>'] = new_child
+        container['#<id>'] = new_descendent
+        """
         if key.startswith('#'):
             id = key[1:]
             old = self.getDescendentByID(id)
@@ -76,13 +82,39 @@ class ElementContainer(Element, metaclass=Meta):
 
 
     def __getitem__(self, key):
+        """
+        container['<child-name>'] -> child element
+        container['#<id>'] -> descendent element
+        """
         if key.startswith('#'):
             id = key[1:]
             return self.getDescendentByID(id)
         return self.getChildByName(key)
 
+
+    @classmethod
+    def elementfactories(cls):
+        d = cls.__dict__
+        factories = [
+            k
+            for k,v in d.items() 
+            if hasattr(v, 'iselementfactory') and v.iselementfactory
+            ]
+        
+        types = cls._subElementTypes()
+        for t in types:
+            name = t.__unique_type_name__
+            if name not in factories:
+                factories.append(name)
+            continue
+        return factories
+
+    
+    # XXX: think of implementing __delitem__
     
     def remove(self, item):
+        """remove the given child
+        """
         # if it is a piece of text
         if isinstance(item, str):
             raise NotImplementedError("remove text from a container")
@@ -92,6 +124,8 @@ class ElementContainer(Element, metaclass=Meta):
     
     
     def replaceChild(self, old, new):
+        """replace a child
+        """
         if getattr(new, 'parent', None):
             raise RuntimeError("%s already is a subelement of %s" %(
                     new, new.parent))
@@ -136,6 +170,8 @@ class ElementContainer(Element, metaclass=Meta):
 
 
     def find(self, id=None):
+        """find a descendent
+        """
         if id:
             return self.getDescendentByID(id)
         raise NotImplementedError
@@ -151,7 +187,19 @@ class ElementContainer(Element, metaclass=Meta):
 
     # implementation details
     @classmethod
-    def _isAllowedSubElement(cls, type):
+    def _subElementTypes(cls):
+        """find all element types that could be my children
+        """
+        from ._registry import element_types as type_registry
+        types = type_registry.types()
+        for t in types:
+            if cls._isAContainerOf(t):
+                yield t 
+        return
+    
+    
+    @classmethod
+    def _isAContainerOf(cls, type):
         """check whether the given element type 
         can be a subelement of this element type.
         """
@@ -179,7 +227,7 @@ class ElementContainer(Element, metaclass=Meta):
         #
         cls = self.__class__
         
-        if self.__class__._isAllowedSubElement(subelem.__class__):
+        if self.__class__._isAContainerOf(subelem.__class__):
             return
 
 
@@ -235,8 +283,5 @@ def elementfactory(method):
     method.iselementfactory = True
     return method
 
-
-# version
-__id__ = "$Id$"
 
 # End of file 

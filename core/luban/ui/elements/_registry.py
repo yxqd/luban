@@ -36,6 +36,15 @@ class ElementTypes:
             return
         return k
 
+    
+    def types(self):
+        all_types = self.registry.types()
+        from .Element import Element
+        for t in all_types:
+            if issubclass(t, Element):
+                yield t
+        return
+
 
 element_types = ElementTypes()
 

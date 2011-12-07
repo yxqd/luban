@@ -43,52 +43,24 @@ class Form(SimpleContainer, metaclass=Meta):
     
 
     # methods
-    def text(self, **kwds):
-        from .FormTextField import FormTextField as factory
-        from luban.ui.elements.SubElementFactory import createSubElement
-        return createSubElement(self, factory, **kwds)
-    
-    
-    def password(self, **kwds):
-        from .FormPasswordField import FormPasswordField as factory
-        from luban.ui.elements.SubElementFactory import createSubElement
-        return createSubElement(self, factory, **kwds)
-
-
-    def selector(self, **kwds):
-        from .FormSelectorField import FormSelectorField as factory
-        from luban.ui.elements.SubElementFactory import createSubElement
-        return createSubElement(self, factory, **kwds)
-
-
-    def textarea(self, **kwds):
-        from .FormTextArea import FormTextArea as factory
-        from luban.ui.elements.SubElementFactory import createSubElement
-        return createSubElement(self, factory, **kwds)
-
-
-    def radio(self, **kwds):
-        from .FormRadioBox import FormRadioBox as factory
-        from luban.ui.elements.SubElementFactory import createSubElement
-        return createSubElement(self, factory, **kwds)
-
-
-    def checkbox(self, **kwds):
-        from .FormCheckBox import FormCheckBox as factory
-        from luban.ui.elements.SubElementFactory import createSubElement
-        return createSubElement(self, factory, **kwds)
-
-
-    def submitbutton(self, **kwds):
-        from .FormSubmitButton import FormSubmitButton as factory
-        from luban.ui.elements.SubElementFactory import createSubElement
-        return createSubElement(self, factory, **kwds)
-
-
+    # .. for inspector
     def identify(self, inspector):
         return inspector.onForm(self)
 
+    # overload _isAContainerOf to provide custom behavior
+    @classmethod
+    def _isAContainerOf(cls, type):
+        if type is Form:
+            return False
+        return super()._isAContainerOf(type)
 
+
+    # overload elementfactories to provide custom behavior
+    @classmethod
+    def elementfactories(cls):
+        factories = super().elementfactories()
+        # omit the factories that are already defined below
+        return [name for name in factories if not name.startswith('form')]
 
 
 # definition of fields
@@ -100,6 +72,16 @@ from .FormSelectorField import FormSelectorField
 from .FormRadioBox import FormRadioBox
 from .FormCheckBox import FormCheckBox
 
+
+# subelement factories
+from luban.ui.elements.ElementContainer import buildSubElementFactory
+buildSubElementFactory('text', FormTextField, Form)
+buildSubElementFactory('password', FormPasswordField, Form)
+buildSubElementFactory('selector', FormSelectorField, Form)
+buildSubElementFactory('textarea', FormTextArea, Form)
+buildSubElementFactory('radio', FormRadioBox, Form)
+buildSubElementFactory('checkbox', FormCheckBox, Form)
+buildSubElementFactory('submitbutton', FormSubmitButton, Form)
 
 
 # actions

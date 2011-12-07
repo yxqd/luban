@@ -28,6 +28,7 @@ class ProgressBar(base):
         "Before a progressbar is 'finished', it can be canceled and, "
         "when canceled, a 'canceled' event will trigger. "
         )
+    experimental = True
 
     # properties
     skip = descriptors.int()

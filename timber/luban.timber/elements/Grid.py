@@ -13,7 +13,7 @@
 
 
 from luban.ui.elements.Riveted import RivetedContainer, Meta, RivetedSubElement
-from luban.ui.elements.ElementContainer import elementfactory
+from luban.ui.elements.ElementContainer import buildSubElementFactory
 
 
 class Grid(RivetedContainer):
@@ -43,13 +43,7 @@ class Grid(RivetedContainer):
         
 
     # methods
-    @elementfactory
-    def row(self, **kwds):
-        r = GridRow(**kwds)
-        self.append(r)
-        return r
-
-
+    # .. for inspector
     def identify(self, visitor):
         return visitor.onGrid(self)
     
@@ -57,10 +51,7 @@ class Grid(RivetedContainer):
 
 class GridRow(RivetedContainer):
 
-    def cell(self, **kwds):
-        c = GridCell(**kwds)
-        self.append(c)
-        return c
+    parent_types = [Grid]
 
     def identify(self, visitor):
         return visitor.onGridRow(self)
@@ -82,6 +73,11 @@ Grid.child_types = [GridRow]
 
 # only allow GridCell to be children of GridRow
 GridRow.child_types = [GridCell]
+
+
+# subelement factories
+buildSubElementFactory('row', GridRow, Grid)
+buildSubElementFactory('cell', GridCell, GridRow)
 
 
 # version

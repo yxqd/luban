@@ -13,7 +13,7 @@
 
 
 from luban.ui.elements.Riveted import RivetedContainer, Meta, RivetedSubElement
-from luban.ui.elements.ElementContainer import elementfactory
+from luban.ui.elements.ElementContainer import buildSubElementFactory
 
 
 class Portlet(RivetedContainer):
@@ -32,12 +32,7 @@ class Portlet(RivetedContainer):
     title.tip = 'Title of the portlet'
 
     # methods
-    @elementfactory
-    def item(self, **kwds):
-        from luban.ui.elements.SubElementFactory import createSubElement
-        return createSubElement(self, PortletItem, **kwds)
-    
-    
+    # .. for inspector
     def identify(self, inspector):
         return inspector.onPortlet(self)
 
@@ -81,6 +76,10 @@ class PortletItem(RivetedSubElement, SimpleElement, metaclass=Meta):
 
 
 Portlet.child_types = [PortletItem]
+
+
+# subelement factory
+buildSubElementFactory('item', PortletItem, Portlet)
 
 
 # actions

@@ -14,7 +14,7 @@
 
 
 from luban.ui.elements.Riveted import RivetedContainer, Meta, RivetedSubElement
-from luban.ui.elements.ElementContainer import elementfactory
+from luban.ui.elements.ElementContainer import buildSubElementFactory
 
 
 class Accordion(RivetedContainer):
@@ -33,13 +33,7 @@ class Accordion(RivetedContainer):
     # events
 
     # methods
-    @elementfactory
-    def section(self, label=None, **kwds):
-        kwds['label'] = label
-        from luban.ui.elements.SubElementFactory import createSubElement
-        return createSubElement(self, AccordionSection, **kwds)
-    
-
+    # .. for inspector
     def identify(self, inspector):
         return inspector.onAccordion(self)
 
@@ -89,6 +83,10 @@ class AccordionSection(RivetedSubElement, SimpleContainer, metaclass=Meta):
     
 
 Accordion.child_types = [AccordionSection]
+
+
+# subelement factory
+buildSubElementFactory('section', AccordionSection, Accordion)
 
 
 # End of file

@@ -13,7 +13,7 @@
 
 
 from luban.ui.elements.Riveted import RivetedContainer, Meta, RivetedSubElement
-from luban.ui.elements.ElementContainer import elementfactory
+from luban.ui.elements.ElementContainer import buildSubElementFactory
 
 
 class BulletinBoard(RivetedContainer):
@@ -26,12 +26,7 @@ class BulletinBoard(RivetedContainer):
     title = descriptors.str()
 
     # methods
-    @elementfactory
-    def announcement(self, **kwds):
-        from luban.ui.elements.SubElementFactory import createSubElement
-        return createSubElement(self, Announcement, **kwds)
-    
-    
+    # .. inspector
     def identify(self, inspector):
         return inspector.onBulletinBoard(self)
 
@@ -70,6 +65,10 @@ class Announcement(RivetedSubElement, SimpleElement, metaclass=Meta):
 
 
 BulletinBoard.child_types = [Announcement]
+
+
+# subelement factory
+buildSubElementFactory('announcement', Announcement, BulletinBoard)
 
 
 # End of file 

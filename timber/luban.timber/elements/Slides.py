@@ -10,7 +10,7 @@
 #
 
 from luban.ui.elements.Riveted import RivetedContainer, Meta, RivetedSubElement
-from luban.ui.elements.ElementContainer import elementfactory
+from luban.ui.elements.ElementContainer import buildSubElementFactory
 
 
 class Slides(RivetedContainer):
@@ -25,12 +25,7 @@ class Slides(RivetedContainer):
     timeout.tip = "milliseconds between slide transitions"
 
     # methods
-    @elementfactory
-    def slide(self, **kwds):
-        from luban.ui.elements.SubElementFactory import createSubElement
-        return createSubElement(self, Slide, **kwds)
-    
-    
+    # .. for inspector
     def identify(self, inspector):
         return inspector.onSlides(self)
 
@@ -59,6 +54,10 @@ class Slide(RivetedSubElement, SimpleContainer, metaclass=Meta):
 
 
 Slides.child_types = [Slide]
+
+
+# subelement factory
+buildSubElementFactory('slide', Slide, Slides)
 
 
 # End of file 

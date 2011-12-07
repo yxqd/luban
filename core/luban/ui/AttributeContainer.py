@@ -127,7 +127,15 @@ class AttributeContainer(AbstractAttributeContainer, metaclass=Meta):
             l.append('%s=%r' % (name, value))
             continue
         ctor_name = ctor_name or cls.__name__
-        return '%s(%s)' % (ctor_name, ', '.join(l))
+        
+        indent = '  '
+        s = [ctor_name + '(']
+        for i in range(0, len(l), 3):
+            t = indent + ', '.join(l[i: i+3]) + ','
+            s.append(t)
+            continue
+        s.append(indent + ')')
+        return '\n'.join(s)
     
 
     def __repr__(self):

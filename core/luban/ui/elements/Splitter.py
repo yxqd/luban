@@ -47,12 +47,6 @@ class Splitter(RivetedContainer):
     
     
     # methods
-    @elementfactory
-    def section(self, **kwds):
-        section = SplitSection(**kwds)
-        self.append(section)
-        return section
-
     # .. for inspector
     def identify(self, inspector):
         return inspector.onSplitter(self)
@@ -77,7 +71,13 @@ class SplitSection(RivetedSubElement, SimpleContainer, metaclass=Meta):
     
 
 Splitter.child_types = [SplitSection]
-    
+
+
+def section(self, **kwds):
+    from .SubElementFactory import createSubElement
+    return createSubElement(self, SplitSection, **kwds)
+section.__doc__ = SplitSection.getCtorDocStr(ctor_name = 'section')
+Splitter.section = elementfactory(section)
 
 # version
 __id__ = "$Id$"

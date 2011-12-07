@@ -85,7 +85,6 @@ class Element(ElementBase, metaclass=Meta):
         # no attributes
     
     class create(Event):
-
         # decorations
         simple_description = "event happens when a ui element is created"
         __unique_type_name__ = 'create'

@@ -24,7 +24,11 @@ class SubElementFactory:
             
             _ = createMethod(self, subelemtype)
             _.__name__ = key
-            return _
+            # ctor_name = self.__class__.__unique_type_name__ + '.' + key
+            ctor_name = key
+            _.__doc__ = subelemtype.getCtorDocStr(ctor_name = ctor_name)
+            from .ElementContainer import elementfactory
+            return elementfactory(_)
         
         raise AttributeError(key)
 
@@ -33,8 +37,6 @@ def createMethod(container, subelem):
     """create a factory method that builds a subelement of the given type
     and add it to the container
     """
-    from .ElementContainer import elementfactory
-    @elementfactory
     def _(**kwds):
         return createSubElement(container, subelem, **kwds)
     return _

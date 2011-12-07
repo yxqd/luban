@@ -289,6 +289,8 @@ def isContainerType(candidate):
 
 # decorator
 def elementfactory(method):
+    if not method.__doc__:
+        raise NotImplementedError("should add docstr to %s" % method)
     method.iselementfactory = True
     return method
 

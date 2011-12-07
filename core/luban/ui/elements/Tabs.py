@@ -38,12 +38,7 @@ tabs.tab('tab2').document(title='tab2')
     
 
     # methods
-    @elementfactory
-    def tab(self, label=None, **kwds):
-        from .SubElementFactory import createSubElement
-        return createSubElement(self, Tab, label=label, **kwds)
-
-
+    # .. for inspector
     def identify(self, inspector):
         return inspector.onTabs(self)
 
@@ -98,6 +93,13 @@ class Tab(RivetedSubElement, SimpleContainer, metaclass=Meta):
 Tabs.child_types = [Tab]
 
 
+def tab(self, label=None, **kwds):
+    from .SubElementFactory import createSubElement
+    return createSubElement(self, Tab, label=label, **kwds)
+tab.__doc__ = Tab.getCtorDocStr(ctor_name = 'tab')
+Tabs.tab = elementfactory(tab)
+
+
 # to define a new element action, subclass ElementActionBase
 from ..actions.ElementActionBase import ElementActionBase
 class TabSelectAction(ElementActionBase):
@@ -112,5 +114,8 @@ class TabSelectAction(ElementActionBase):
     # methods
     def identify(self, visitor):
         return visitor.onTabSelectAction(self)
+
+
+
 
 # End of file

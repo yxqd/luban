@@ -28,6 +28,7 @@ class Actor(base):
     frame_title = None # title of the frame
     interface_factory = None # interface factory
     
+    
     def default(self):
         # frame
         title = self.frame_title
@@ -37,7 +38,7 @@ class Actor(base):
         d = self.createInterface()
         
         f.append(d)
-        return f
+        return luban.a.establishInterface(f)
 
 
     def createInterface(self, **kwds):

@@ -14,7 +14,7 @@
 
 
 from luban.ui.elements.Riveted import RivetedContainer, Meta, RivetedSubElement
-from luban.ui.elements.ElementContainer import elementfactory
+from luban.ui.elements.ElementContainer import buildSubElementFactory
 
 
 class Splitter(RivetedContainer):
@@ -73,13 +73,7 @@ class SplitSection(RivetedSubElement, SimpleContainer, metaclass=Meta):
 Splitter.child_types = [SplitSection]
 
 
-def section(self, **kwds):
-    from .SubElementFactory import createSubElement
-    return createSubElement(self, SplitSection, **kwds)
-section.__doc__ = SplitSection.getCtorDocStr(ctor_name = 'section')
-Splitter.section = elementfactory(section)
-
-# version
-__id__ = "$Id$"
+# subelement factory
+buildSubElementFactory('section', SplitSection, Splitter)
 
 # End of file

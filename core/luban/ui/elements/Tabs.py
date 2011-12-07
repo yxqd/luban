@@ -14,7 +14,7 @@
 
 
 from .Riveted import RivetedContainer, Meta, RivetedSubElement
-from .ElementContainer import elementfactory
+from .ElementContainer import subelementfactory
 
 
 class Tabs(RivetedContainer):
@@ -93,11 +93,12 @@ class Tab(RivetedSubElement, SimpleContainer, metaclass=Meta):
 Tabs.child_types = [Tab]
 
 
+# this factory method has a special signature for convenience
+# so we cannot use buildSubElementFactory.
+@subelementfactory(Tab, Tabs)
 def tab(self, label=None, **kwds):
     from .SubElementFactory import createSubElement
     return createSubElement(self, Tab, label=label, **kwds)
-tab.__doc__ = Tab.getCtorDocStr(ctor_name = 'tab')
-Tabs.tab = elementfactory(tab)
 
 
 # to define a new element action, subclass ElementActionBase

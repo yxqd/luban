@@ -101,6 +101,15 @@ border-color:#88B0BC;
     -webkit-border-radius: 3px;
 }
 
+/* link */
+.luban-button-container.link {
+    display: inline;
+}
+.luban-button-container.link .luban-button {
+    border: none;
+    background: transparent;
+}
+
 
 /* misc */
 li {

@@ -67,7 +67,8 @@ quoted here::
 
 Type system
 -----------
-Luban has a very limited type system. 
+Luban chooses to have only a very limited type system, 
+consistent with its minimalist philosophy.
 
 * primitive types: bool, str, int, float 
 * containers

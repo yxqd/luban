@@ -6,7 +6,8 @@ Why luban is useful for you
 Users who have better things to do than learning html/js
 --------------------------------------------------------
 
-For users who have better things to do than learning html/javascript,
+For users who want to create a web interface but
+have better things to do than learning html/javascript,
 luban is a natural choice.
 You will only need to learn a bit of python to use luban, 
 and the syntax is simple and natural.

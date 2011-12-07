@@ -94,3 +94,14 @@ More widgets
 ============
 
 To see more widgets, go to http://lubanui.org/aokuang
+
+
+More
+====
+Continue to :ref:`next tutorial "Forms" <form-tutorial>`
+
+or back to 
+:ref:`"Tutorials" <user-tutorials>`
+
+or back to
+:ref:`"User Guide" <user-guide>`

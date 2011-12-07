@@ -144,3 +144,14 @@ You will be prompted with an alert message box like this:
    Figure 2. form data submitted to "server side", and then an action
    is returned from the handling routine that asks for showing an
    alert message box with submitted data.
+
+
+More
+====
+Continue to :ref:`next tutorial "Make your web application dynamic" <dynamic-ui-tutorial>`
+
+or back to 
+:ref:`"Tutorials" <user-tutorials>`
+
+or back to
+:ref:`"User Guide" <user-guide>`

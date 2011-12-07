@@ -208,3 +208,14 @@ You could also stop it by ::
  
  $ luban stop /path/to/helloworld
 
+
+More
+====
+
+Continue to :ref:`next tutorial "Adding widgets" <widgets-tutorial>`
+
+or back to 
+:ref:`"Tutorials" <user-tutorials>`
+
+or back to
+:ref:`"User Guide" <user-guide>`

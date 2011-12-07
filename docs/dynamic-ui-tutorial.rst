@@ -155,3 +155,14 @@ More
 ====
 See http://lubanui.org/aokuang for more examples on especially
 on how the last type of actions is used.
+
+
+More
+====
+Continue to :ref:`next tutorial "Styling your interface" <styling-tutorial>`
+
+or back to 
+:ref:`"Tutorials" <user-tutorials>`
+
+or back to
+:ref:`"User Guide" <user-guide>`

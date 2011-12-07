@@ -24,7 +24,7 @@ class Actor(base):
     def default(self):
         frame = self.frame()
         return luban.a.establishInterface(frame)
-    
+
 
     def frame(self, **kwds):
         import luban
@@ -40,7 +40,7 @@ class Actor(base):
         doc = luban.e.document(title="select an item from the following")
         choices = self._findChoices()
         for choice in choices:
-            b = doc.button(label=choice)
+            b = doc.button(label=choice, id=choice)
             newcontent = luban.a.load(
                 actor = self.name.replace('default', choice),
                 routine='createInterface',

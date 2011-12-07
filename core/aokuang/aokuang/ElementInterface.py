@@ -31,7 +31,49 @@ class Factory(base):
     actor = None # name of the actor for this interface
     demo_panels = None # a list of demo panels, each an instance of DemoPanel
     skip_descriptors = ['lubanelement']
-    api_categories = ['properties', 'events', 'actions']
+    api_categories = ['properties', 'subelements', 'events', 'actions']
+
+
+    def _createSubelementsDocument(self, subelements):
+        # sort factories
+        def get0(t): return t[0]
+        subelements.sort(key=get0)
+        
+        # 
+        container = luban.e.document()
+
+        # 
+        descriptions = [
+            'The following are factory methods to create sub-elements. ',
+            'A factory method to create a subelement usually has a signature ',
+            "identical to that of the subelement's constructor. ",
+            'Click on an factory method for its signature. ',
+            ]
+        descriptions = '\n'.join(descriptions)
+        descdoc = container.restructuredtextdocument()
+        descdoc.Class = 'demo-description'
+        descdoc.text = descriptions
+        
+        instance = self.object_type() # instance to help create documentation
+        
+        # loop over sub element factories
+        counter = 0; n = 4
+        for name, type in subelements:
+            b = container.button(label=name)
+            b.Class = 'link'
+            docstr = getattr(instance, name).__doc__
+            helpdoc = luban.e.htmldocument(text = '<pre>'+docstr + '</pre>')
+            b.onclick = luban.a.select(id='subelement-factory-help')\
+                .replaceContent(newcontent = helpdoc)
+
+            if counter == n-1: container.paragraph(); counter = 0
+            else: counter+=1
+            continue
+        
+        #
+        container.document(id='subelement-factory-help').paragraph()
+        
+        return container
     
 
     def _createActionsDocument(self, actions):
@@ -74,12 +116,27 @@ class Factory(base):
         return container
 
 
+    def _createSubelementsDescriptor(self):
+        factories = self.object_type.elementfactories()
+        # build a list of (name, type) tuples
+        ret = []
+        for name in factories:
+            type = getattr(self.object_type(), name)().__class__
+            ret.append( (name, type) )
+            continue
+        return ret
+
+
     def _categorizeDescriptors(self, descriptors):
         'put descriptors into different categories such as properties, eventhandlers'
         r = super()._categorizeDescriptors(descriptors)
 
         # actions are not really descriptors
         r['actions'] = findActions(self.object_type)
+        
+        from luban.ui.elements.ElementContainer import isContainerType
+        if isContainerType(self.object_type):
+            r['subelements'] = self._createSubelementsDescriptor()
         return r
 
 

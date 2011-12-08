@@ -30,7 +30,4 @@ class ElementBase(AttributeContainer, metaclass=Meta):
     lubanelement = descriptors.bool(default=True)
     
 
-# version
-__id__ = "$Id$"
-
 # End of file 

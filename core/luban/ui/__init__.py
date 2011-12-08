@@ -37,15 +37,27 @@ TODO = """
 class ElementClassProxy:
 
 
+    def __dir__(self):
+        ret = []
+
+        from .elements._registry import element_types
+        for t in element_types.names:
+            if t not in ret: ret.append(t)
+            continue
+        return ret
+
+
     def __getattr__(self, name):
         from .elements._registry import element_types
         e = element_types.getElementClass(name)
         if e is None:
             raise AttributeError(name)
-        return self._createElementFactory(name, e)
+        return self.__class__._createElementFactory(name, e)
 
 
-    def _createElementFactory(self, name, cls):
+    @classmethod
+    def _createElementFactory(thiscls, name=None, cls=None):
+        if not name: name = cls.__unique_type_name__
         def _(*args, **kwds):
             return cls(*args, **kwds)
         _.__doc__ = cls.__doc__ or cls.getCtorDocStr()
@@ -54,6 +66,7 @@ class ElementClassProxy:
         from .elements.decorators import elementfactory
         return elementfactory(_)
 
+    
 e = ElementClassProxy()
 del ElementClassProxy
 
@@ -61,7 +74,21 @@ del ElementClassProxy
 # proxy to actions
 class ActionClassProxy:
 
-    from .actions import __all__ as static_names 
+    from .actions import __all__ as static_names
+
+    def __dir__(self):
+        ret = []
+
+        for t in self.static_names:
+            if t not in ret: ret.append(t)
+            continue
+        
+        from .actions._registry import action_types
+        for t in action_types.names:
+            if t not in ret: ret.append(t)
+            continue
+        return ret
+    
 
     def __getattr__(self, name):
         if name in self.static_names:

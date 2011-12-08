@@ -91,6 +91,14 @@ def establishInterface(frame):
     return EstablishInterface(frame)
 
 
+__all__ = [
+    'load',
+    'select',
+    'alert',
+    'establishInterface',
+    ]
+
+
 # common element actions
 action_modules = [
     'element_common_actions',
@@ -103,14 +111,6 @@ def importAllElementActions():
     return
 importAllElementActions()
 del importAllElementActions
-
-
-__all__ = [
-    'load',
-    'select',
-    'alert',
-    'establishInterface',
-    ]
 
 
 # version

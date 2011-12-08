@@ -26,6 +26,10 @@ classes provided here.
 
 """
 
+#
+from . import _registry
+
+
 # elements
 elementtypes = [
     'Frame',

@@ -12,6 +12,10 @@
 #
 
 
+from .ActionBase import ActionBase
+from ..meta.TypeRegistryCurator import registry
+
+
 # public interface
 action_types = None
 
@@ -22,8 +26,8 @@ class ActionTypes:
 
 
     def __init__(self):
-        from ..meta.TypeRegistryCurator import registry
         self.registry = registry
+        self.names = [] # a list of type names
         return
 
 
@@ -31,16 +35,19 @@ class ActionTypes:
         k = self.registry.get(name)
         if k is None:
             return
-        from .ActionBase import ActionBase
         if not issubclass(k, ActionBase):
             return
         return k
 
 
+    def onRegistration(self, cls):
+        if issubclass(cls, ActionBase):
+            self.names.append(cls.__unique_type_name__)
+        return
+    
+
 action_types = ActionTypes()
+registry.observers.append(action_types)
 
-
-# version
-__id__ = "$Id$"
 
 # End of file 

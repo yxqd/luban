@@ -34,6 +34,7 @@ class Registry:
     def __init__(self):
         self._store = {}
         self._cls2name = {}
+        self.observers = []
         return
 
 
@@ -63,8 +64,18 @@ class Registry:
             
         name = self._getUniqueName(cls)
         self._register(name, cls)
+
+        for observer in self.observers:
+            self.notify(observer, cls)
+            continue
         return
 
+
+    def notify(self, observer, cls):
+        "notify an observer that a cls was just registered"
+        observer.onRegistration(cls)
+        return
+    
 
     def _register(self, name, cls):
         #

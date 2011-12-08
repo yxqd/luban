@@ -12,6 +12,11 @@
 #
 
 
+from ..meta.TypeRegistryCurator import registry
+from .ElementBase import ElementBase
+from .Element import Element
+
+
 # public interface
 element_types = None
 
@@ -22,8 +27,9 @@ class ElementTypes:
 
 
     def __init__(self):
-        from ..meta.TypeRegistryCurator import registry
+        global registry
         self.registry = registry
+        self.names = [] # names of element types
         return
 
 
@@ -31,7 +37,6 @@ class ElementTypes:
         k = self.registry.get(name)
         if k is None:
             return
-        from .ElementBase import ElementBase
         if not issubclass(k, ElementBase):
             return
         return k
@@ -39,17 +44,21 @@ class ElementTypes:
     
     def types(self):
         all_types = self.registry.types()
-        from .Element import Element
         for t in all_types:
             if issubclass(t, Element):
                 yield t
         return
 
 
+    def onRegistration(self, cls):
+        from .. import e
+        if issubclass(cls, ElementBase):
+            self.names.append(cls.__unique_type_name__)
+        return
+
+
 element_types = ElementTypes()
+registry.observers.append(element_types)
 
-
-# version
-__id__ = "$Id$"
 
 # End of file 

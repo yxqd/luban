@@ -1,4 +1,4 @@
-# -*- Python -*-
+# -*- python -*-
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
@@ -10,7 +10,6 @@
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
-
 
 __doc__ = """
 luban: generic user interface specification
@@ -78,5 +77,12 @@ def load_extensions(extensions):
     return
 
 
+# if in interactive mode, load "timber" by default
+if not os.environ.get("LUBAN_WITHOUT_TIMBER"):
+    import __main__ as m
+    if not hasattr(m, '__file__'):
+        from . import timber
+        
+        
 # End of file 
 

@@ -148,8 +148,27 @@ Two things to note:
     >>> p = luban.elements.paragraph(...)
     >>> container.append(p)
 
-Example usages and API of luban ui elements can be found at
-`aokuang <http://lubanui.org/aokuang>`_
+.. note::
+   Example usages and API of luban most ui elements can be found at
+   `aokuang <http://lubanui.org/aokuang>`_
+
+.. note::
+   One way to find out all element factories::
+
+   >>> import luban
+   >>> dir(luban.elements)
+
+
+.. note::
+   One way to find out all sub-element factories for a container element::
+
+   >>> <container>.elementfactories()
+
+   For example::
+
+   >>> import luban
+   >>> doc = luban.elements.document()
+   >>> doc.elementfactories()
 
 
 Assign actions to event handlers
@@ -202,13 +221,25 @@ Actions communicating with controller
 * load(actor, routine, *args, **kwds): load a luban object from the controller
 
 
-You can find demos and APIs of "alert" action and "load" action 
-at the "actions" section of menus on the left side of
-`aokuang <http://lubanui.org/aokuang>`_
+.. note::
+   You can find demos and APIs of "alert" action and "load" action 
+   at the "actions" section of menus on the left side of
+   `aokuang <http://lubanui.org/aokuang>`_
+
+Other non-element-actions
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* establishInterface(frame): establish a user interface
+
+.. note::
+   One way to list all non-element-actions is::
+   
+   >>> import luban
+   >>> dir(luban.actions)
 
 
-Actions on UI elements
-~~~~~~~~~~~~~~~~~~~~~~
+Element-actions: Actions on UI elements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To construct an action on a UI element, a general form is::
 
@@ -249,8 +280,8 @@ argument. For example::
  >>> luban.actions.select(id="authentication-form", type="form")
 
 
-Actions
-^^^^^^^
+Action on seletected element
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Just selecting a UI element won't change the UI.
 To apply an action to a UI element, 

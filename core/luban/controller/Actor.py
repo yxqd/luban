@@ -26,6 +26,9 @@ class Actor:
 
         if routine is None:
             routine = "default"
+
+        if routine.startswith('_'):
+            raise RuntimeError("%s is private" % routine)
             
         try:
             behavior = self.__getattribute__(routine)

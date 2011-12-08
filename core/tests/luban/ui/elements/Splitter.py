@@ -19,9 +19,9 @@ import unittest
 class TestCase(unittest.TestCase):
 
     def test0a(self):
-        print (luban.e.splitter.getCtorDocStr())
-        print (luban.e.splitter.__init__.__doc__)
-        print (luban.e.document.__init__.__doc__)
+        print (luban.e.splitter().__class__.getCtorDocStr())
+        print (luban.e.splitter().__init__.__doc__)
+        print (luban.e.document().__init__.__doc__)
         return
 
     

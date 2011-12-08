@@ -18,7 +18,7 @@ import unittest
 class TestCase(unittest.TestCase):
 
     def test0(self):
-        examples = luban.e.tabs.examples
+        examples = luban.e.tabs().examples
         code = '\n'.join(examples)
         exec(code)
         return

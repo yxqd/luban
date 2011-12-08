@@ -19,7 +19,7 @@ class TestCase(unittest.TestCase):
      
     def test0(self):
         "luban.ui.e"
-        self.assertEqual(e.document, lue.Document.Document)
+        self.assertEqual(type(e.document()), lue.Document.Document)
         return
      
 

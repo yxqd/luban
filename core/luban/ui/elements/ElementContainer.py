@@ -288,23 +288,7 @@ def isContainerType(candidate):
 
 
 # decorators
-def elementfactory(method):
-    if not method.__doc__:
-        raise NotImplementedError("should add docstr to %s" % method)
-    method.iselementfactory = True
-    return method
-
-def subelementfactory(subelem, container):
-    """create a decorator that transforms a method to a subelement factory method
-    of the container class
-    """
-    def decorate(method):
-        factory = method.__name__
-        method.__doc__ = subelem.getCtorDocStr(ctor_name = factory)
-        decorated = elementfactory(method)
-        setattr(container, factory, decorated)
-        return decorated
-    return decorate
+from .decorators import subelementfactory
 
 # convenient method 
 def buildSubElementFactory(name, subelem, container):

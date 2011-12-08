@@ -1,17 +1,22 @@
 
 core:
-* explain "destroy" action of luban element. explain we usually need to bind onclose event to destory action.
-* how to use luban.threaded_data? explain.
+* remove "contents" from docstr genreated from getCtorDocStr
+* "append" action should be specific to ElementContainer
+* check _method raises error
 * intricate behavior of direct factory method on container type: 
   - create subelement
   - give it a default name
   - add it to the container
+* explain "destroy" action of luban dialog. explain we usually need to
+  bind onclose event to destory action.
+* explain "luban-destroy" event in js lib
+* how to use luban.threaded_data? explain.
 * aokuang.timber: example of showing form input error
 * doc: container[name] = newelement; container['#'+id] = newelement
 * doc: decorator for handler functions
 * doc: decorator for requirement. kwd "replaceinterface"
 * doc: session
-* doc: select(element=..., type=...).<method>. tell the difference of common actions and more specific actions. specific actions need specific type. type is string. type can be very specific, but could also be a base class like formfield.
+* doc: select(element=..., type=...).<method>. type is string. type can be very specific, but could also be a base class like formfield.
 * doc: select(element=...).getAttr(name) what are the allowed names? label/value
 * go through all ctors and check "super" calls
 * in scaffolding, make "sitemap" configurable. right now its fixed to <proj>.sitemap

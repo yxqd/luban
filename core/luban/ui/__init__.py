@@ -42,8 +42,17 @@ class ElementClassProxy:
         e = element_types.getElementClass(name)
         if e is None:
             raise AttributeError(name)
-        return e
+        return self._createElementFactory(name, e)
 
+
+    def _createElementFactory(self, name, cls):
+        def _(*args, **kwds):
+            return cls(*args, **kwds)
+        _.__doc__ = cls.__doc__ or cls.getCtorDocStr()
+        _.__name__ = name
+        _.type = cls
+        from .elements.decorators import elementfactory
+        return elementfactory(_)
 
 e = ElementClassProxy()
 del ElementClassProxy
@@ -79,5 +88,7 @@ del Event
 # import all element types and action types
 from . import elements, actions
 
+
+__all__ = ['e', 'a', 'event']
 
 # End of file 

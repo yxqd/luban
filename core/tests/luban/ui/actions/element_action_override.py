@@ -36,12 +36,12 @@ class TestCase(unittest.TestCase):
         class B(ElementActionBase): 
             abstract = False
             factory_method = "b"
-            element_type = lue.document
+            element_type = lue.document.type
         def t():
             class B(ElementActionBase): 
                 abstract = False
                 factory_method = "b2"
-                element_type = lue.document
+                element_type = lue.document.type
             return
         self.assertRaises(B.TypeConflict, t)
         return
@@ -64,12 +64,12 @@ class TestCase(unittest.TestCase):
         class D(ElementActionBase): 
             abstract = False
             factory_method = "d"
-            element_type = lue.document
+            element_type = lue.document.type
         def t():
             class D2(ElementActionBase): 
                 abstract = False
                 factory_method = "d"
-                element_type = lue.document
+                element_type = lue.document.type
             return
         self.assertRaises(D.ActionFactoryMethodConflict, t)
         return

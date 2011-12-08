@@ -27,7 +27,7 @@ class SubElementFactory:
             # ctor_name = self.__class__.__unique_type_name__ + '.' + key
             ctor_name = key
             _.__doc__ = subelemtype.getCtorDocStr(ctor_name = ctor_name)
-            from .ElementContainer import elementfactory
+            from .decorators import elementfactory
             return elementfactory(_)
         
         raise AttributeError(key)

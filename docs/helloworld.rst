@@ -5,7 +5,7 @@ Hello world!
 
 Install luban
 =============
-luban can be installed by *either* easy_install (for python3) ::
+luban can be installed by *either* easy_install (for **python3**) ::
 
  $ easy_install luban
 

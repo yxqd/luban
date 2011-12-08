@@ -1,0 +1,35 @@
+# -*- python -*-
+
+import merlin.rules, os
+from merlin.Context import create
+context = create()
+context.code.project = project = 'aokuang.core'
+
+package = "deployments"
+
+
+def rsync(src, target):
+    cmd = "rsync -a %s/ %s/" % (src, target)
+
+    from merlin import osutils
+    rt, out, err = osutils.execute(cmd)
+
+    if rt:
+        raise OSError("%s failed" % cmd)
+    return
+
+
+def syncroot():
+    src = "."
+    target = os.path.join(context.export_tree.root, project, package)
+    
+    if not os.path.exists(target):
+        os.makedirs(target)
+        
+    rsync(src, target)
+    return
+
+
+syncroot()
+
+recurse_entries = []

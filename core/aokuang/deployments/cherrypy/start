@@ -1,0 +1,4 @@
+#!/usr/bin/env python3
+# start web server
+from luban.cli.start.cherrypy import main
+main()

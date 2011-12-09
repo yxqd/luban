@@ -1,2 +1,3 @@
 aokuang.timber: aokuang.timber python package
-web: deployment for web
+deployments: deployments
+web: static web files

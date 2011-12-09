@@ -1,2 +1,3 @@
 aokuang: aokuang python package
-cherrypy: cherrypy fixture to serve aokuang.core
+deployments: deployments
+web: static web files

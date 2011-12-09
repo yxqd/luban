@@ -81,7 +81,11 @@ def load_extensions(extensions):
 if not os.environ.get("LUBAN_WITHOUT_TIMBER"):
     import __main__ as m
     if not hasattr(m, '__file__'):
-        from . import timber
+        try:
+            from . import timber
+        except ImportError:
+            import warnings
+            warnings.warn("failed to import luban.timber")
         
         
 # End of file 

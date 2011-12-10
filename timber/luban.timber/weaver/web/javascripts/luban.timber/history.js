@@ -78,6 +78,15 @@
       if (kargstr) hash += '?' + kargstr;
 
       $.history.add(hash);
+
+      var url = luban.Controller.url + hash;
+      // google analytics
+      if (window._gaq!=undefined) _gaq.push(['_trackPageview', url]);
+      // statcounter
+      if (window.sc_tracking_url!=undefined) {
+        url = sc_tracking_url + "&u=" + escape(url);
+        var img = new Image(0,0); img.src = url;
+      }
     }
   };
   $.extend(luban.actioncompiler.prototype, actioncompiler_ext);

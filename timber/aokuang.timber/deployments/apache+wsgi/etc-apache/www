@@ -1,0 +1,24 @@
+<VirtualHost *:80>
+  # ServerName 127.0.0.1
+  ServerName aokuang.lubanui.org
+  ServerAdmin webmaster@localhost
+
+  WSGIDaemonProcess aokuang.lubanui.org user=linjiao group=linjiao home=/home/linjiao/sites/aokuang.timber python-path=.:/home/linjiao/sites/aokuang.timber/lib-py
+  WSGIProcessGroup aokuang.lubanui.org
+  WSGIScriptAlias / /home/linjiao/sites/aokuang.timber/index.cgi
+
+  Alias /static/ /home/linjiao/sites/aokuang.timber/web/static/
+  <Directory "/home/linjiao/sites/aokuang.timber/web/">
+    Order deny,allow
+    allow from all
+  </Directory>
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+
+  # Possible values include: debug, info, notice, warn, error, crit,
+  # alert, emerg.
+  LogLevel warn
+
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost>

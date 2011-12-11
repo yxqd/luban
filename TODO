@@ -1,5 +1,6 @@
 
 core:
+* aokuang.timber: example of showing form input error
 * docs: explain how to work with statcounter and google analytics
 * "append" action should be specific to ElementContainer
 * intricate behavior of direct factory method on container type: 
@@ -10,8 +11,6 @@ core:
   bind onclose event to destory action.
 * explain "luban-destroy" event in js lib
 * how to use luban.threaded_data? explain.
-* aokuang.timber: example of showing form input error
-* doc: container[name] = newelement; container['#'+id] = newelement
 * doc: decorator for handler functions
 * doc: decorator for requirement. kwd "replaceinterface"
 * doc: session
@@ -57,5 +56,6 @@ timber:
 
 Done, but watch
 ---------------
+* doc: container[name] = newelement; container['#'+id] = newelement
 * remove "contents" from docstr genreated from getCtorDocStr
 * check _method raises error

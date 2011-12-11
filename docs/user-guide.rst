@@ -293,3 +293,52 @@ with appropriate arguments. For example::
 
 You can find demos and APIs of actions for UI element types at 
 `aokuang <http://lubanui.org/aokuang>`_. 
+
+
+Advanced topics
+---------------
+
+User interface hierarchy construction
+"""""""""""""""""""""""""""""""""""""
+
+Skeleton
+~~~~~~~~
+You can create a skeleton of user interface, and use it wisely.
+
+For example, the following code creates a skeleton::
+
+ def skeleton():
+     frame = luban.elements.frame(title="my interface")
+     header = frame.document(id='header'); header.paragraph(text='header')
+     body = frame.document(id='body')
+     footer = frame.document(id='footer'); footer.paragraph(text='footer')
+     return frame
+
+The skeleton consists of a header, a body, and a footer.
+
+Then we can use the skeleton and change the body to sth interesting
+when needed::
+
+ def login():
+     frame = skeleton()
+     body = frame['#body']
+     form = body.form(title="login")
+     ...
+     return frame
+
+.. note::
+   You can retrieve a descendent element in the element hierarchy
+   by ::
+
+    >>> container['#<id>']  # <id> is the id of the descendent element.
+
+   A less powerful form that can only retrieve direct child element is also provide ::
+
+    >>> container['<name>'] # <name> must be the name of a child element of the container
+    
+.. note::
+   Replace a descendent element or a child element is also possible::
+   
+    >>> container['#<id>'] = <new-element>
+    >>> container['<name>'] = <new-element>
+

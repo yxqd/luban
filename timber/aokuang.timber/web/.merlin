@@ -9,8 +9,8 @@ package = "web"
 
 
 def rsync(src, target):
-    # cmd = "rsync -a --copy-unsafe-links %s/ %s/" % (src, target)
-    cmd = "rsync -a %s/ %s/" % (src, target)
+    cmd = "rsync -a --copy-unsafe-links %s/ %s/" % (src, target)
+    # cmd = "rsync -a %s/ %s/" % (src, target)
     
     from merlin import osutils
     rt, out, err = osutils.execute(cmd)

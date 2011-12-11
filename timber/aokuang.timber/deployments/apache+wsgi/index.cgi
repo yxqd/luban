@@ -25,9 +25,9 @@ class Root(CherrypyController):
 
     def __init__(self):
         super().__init__(
-            url = 'http://lubanui.org/aokuang.timber/',
+            url = 'http://aokuang.lubanui.org/',
             # url = 'http://127.0.0.1/',
-            html_base = 'http://lubanui.org/aokuang.timber/',
+            html_base = 'http://aokuang.lubanui.org/',
             # html_base = 'http://127.0.0.1/',
             static_html_base = 'static',
             actor_packages = actor_packages,

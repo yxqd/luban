@@ -17,21 +17,30 @@ helloworld: trivial test
 
 example urls:
 
-* http://localhost:8080/?actor=helloworld
-* http://localhost:8080/?actor=helloworld&routine=str
-* http://localhost:8080/?actor=helloworld&routine=frame
+* http://localhost:22345/?actor=helloworld
+* http://localhost:22345/helloworld
+* http://localhost:22345/?actor=helloworld&routine=str: return a string
+* http://localhost:22345/?actor=helloworld&routine=frame: return a json object
+* http://localhost:22345/?actor=helloworld&routine=_private -- this should NOT work
 """
+
+import luban
 
 
 from luban.controller.Actor import Actor as base
-
 class Actor(base):
 
     expose = 1
 
     
     def default(self):
-        return self.frame()
+        return luban.a.establishInterface(self.frame())
+
+
+    def _private(self):
+        frame = luban.e.frame()
+        frame.paragraph(text = "should fail!. this is a private method")
+        return luban.a.establishInterface(frame)
     
 
     def str(self):
@@ -39,7 +48,6 @@ class Actor(base):
 
 
     def frame(self):
-        import luban
         frame = luban.e.frame(title="hello world")
         frame.document(title="hello world")
         return frame

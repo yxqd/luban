@@ -1,9 +1,7 @@
 
 core:
 * docs: explain how to work with statcounter and google analytics
-* remove "contents" from docstr genreated from getCtorDocStr
 * "append" action should be specific to ElementContainer
-* check _method raises error
 * intricate behavior of direct factory method on container type: 
   - create subelement
   - give it a default name
@@ -55,3 +53,9 @@ aokuang:
 
 timber:
 * migrate things that are in _pending_ directories
+
+
+Done, but watch
+---------------
+* remove "contents" from docstr genreated from getCtorDocStr
+* check _method raises error

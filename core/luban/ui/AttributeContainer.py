@@ -115,27 +115,20 @@ class AttributeContainer(AbstractAttributeContainer, metaclass=Meta):
     
     # helper methods
     @classmethod
-    def getCtorDocStr(cls, ctor_name=None, descriptors=None):
-        if not descriptors:
-            descriptors = cls.iterDescriptors()
-        l = []
-        for descriptor in descriptors:
-            name = descriptor.name
-            if name.startswith('luban'):
-                continue
-            value = descriptor.default
-            l.append('%s=%r' % (name, value))
-            continue
-        ctor_name = ctor_name or cls.__name__
+    def getCtorDocStr(
+        cls,
+        ctor_name=None,
+        skip = None
+        ):
+        """produce a docstr for the ctor
+
+        This method loop over all descriptors and create
+        the ctor docstr by extracting metadata from the descriptors
         
-        indent = '  '
-        s = [ctor_name + '(']
-        for i in range(0, len(l), 3):
-            t = indent + ', '.join(l[i: i+3]) + ','
-            s.append(t)
-            continue
-        s.append(indent + ')')
-        return '\n'.join(s)
+        ctor_name: name of the constructor. could be name of a factory method too
+        skip: skip(descriptor) -> True means to skip a descriptor
+        """
+        return generateCtorDocStr(cls, ctor_name=ctor_name, skip=skip)
     
 
     def __repr__(self):
@@ -152,7 +145,47 @@ from luban import journal
 debug = journal.debug('luban.ui.AttributeContainer')
 
 
-# version
-__id__ = "$Id$"
+
+
+def generateCtorDocStr(
+    cls,
+    ctor_name=None,
+    skip = None
+    ):
+    """produce a docstr for the ctor
+
+    This method loop over all descriptors and create
+    the ctor docstr by extracting metadata from the descriptors
+
+    ctor_name: name of the constructor. could be name of a factory method too
+    skip: skip(descriptor) -> True means to skip a descriptor
+    """
+    descriptors = cls.iterDescriptors()
+    l = []
+    for descriptor in descriptors:
+        # skip ?
+        if skip and skip(descriptor): continue
+
+        # anything startswith "luban" is "system-related".
+        # don't make it public
+        name = descriptor.name
+        if name.startswith('luban'):
+            continue
+
+        value = descriptor.default
+
+        l.append('%s=%r' % (name, value))
+        continue
+    ctor_name = ctor_name or cls.__name__
+
+    indent = '  '
+    s = [ctor_name + '(']
+    for i in range(0, len(l), 3):
+        t = indent + ', '.join(l[i: i+3]) + ','
+        s.append(t)
+        continue
+    s.append(indent + ')')
+    return '\n'.join(s)
+    
 
 # End of file 

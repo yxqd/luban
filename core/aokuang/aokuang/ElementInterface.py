@@ -141,23 +141,7 @@ class Factory(base):
 
 
 def getActionFactorySignature(action):
-    from luban.ui.descriptors.EventHandler import EventHandler
-    descriptors = []
-    skip = 'lubanaction', 'element'
-    for descriptor in action.iterDescriptors():
-        # XXXXXXXXXXXXXXXXXXXX
-        # skip event handlers for now
-        if isinstance(descriptor, EventHandler):
-            continue
-        if descriptor.name in skip:
-            continue
-        descriptors.append(descriptor)
-        continue
-    return action.getCtorDocStr(
-        ctor_name = action.factory_method,
-        descriptors = descriptors,
-        )
-
+    return action.getCtorDocStr(ctor_name=action.factory_method)
 
 
 def findActions(type):

@@ -25,8 +25,20 @@ class ActionBase(AttributeContainer):
     # don't override this
     lubanaction = descriptors.bool(default=True)
 
-
-# version
-__id__ = "$Id$"
+    
+    @classmethod
+    def getCtorDocStr(
+        cls,
+        ctor_name=None,
+        ):
+        names = 'lubanaction', 'element'
+        
+        from luban.ui.descriptors.EventHandler import EventHandler
+        skip = lambda descriptor: isinstance(descriptor, EventHandler) \
+               or descriptor.name in names
+        
+        from ..AttributeContainer import generateCtorDocStr        
+        return generateCtorDocStr(cls, ctor_name=ctor_name, skip=skip)
+    
 
 # End of file 

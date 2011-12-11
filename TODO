@@ -1,5 +1,6 @@
 
 core:
+* docs: explain how to work with statcounter and google analytics
 * remove "contents" from docstr genreated from getCtorDocStr
 * "append" action should be specific to ElementContainer
 * check _method raises error

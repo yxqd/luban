@@ -189,6 +189,16 @@ class ElementContainer(Element, metaclass=Meta):
         self.contents = []
         return
 
+    @classmethod
+    def getCtorDocStr(
+        cls,
+        ctor_name=None,
+        ):
+        names = 'contents',
+        skip = lambda descriptor: descriptor.name in names
+        from ..AttributeContainer import generateCtorDocStr
+        return generateCtorDocStr(cls, ctor_name=ctor_name, skip=skip)
+
 
     # implementation details
     @classmethod

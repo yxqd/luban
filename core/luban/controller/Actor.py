@@ -31,7 +31,7 @@ class Actor:
             raise RuntimeError("%s is private" % routine)
             
         try:
-            behavior = self.__getattribute__(routine)
+            behavior = getattr(self, routine)
         except AttributeError:
             msg = "actor %r: routine %r is not yet implemented" % (
                 self.name, routine)

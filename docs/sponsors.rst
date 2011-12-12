@@ -1,6 +1,6 @@
-.. _support:
+.. _sponsors:
 
-Support
+Sponsors
 -------
 
 * `National Science Fundation <http://www.nsf.gov>`_:

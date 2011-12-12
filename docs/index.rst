@@ -16,6 +16,7 @@ Getting Started
 ---------------
 
 * :ref:`Why use luban <why-luban>`
+* :ref:`Installation <installation>`
 * :ref:`Hello world <helloworld>`
 * :ref:`Adding widgets <widgets-tutorial>`
 * :ref:`Forms <form-tutorial>`
@@ -48,5 +49,5 @@ More
 
 * :ref:`Frequently asked questions <faq>`
 * :ref:`Dependencies <deps>`
-* :ref:`Support <support>`
 * :ref:`Team <team>`
+* :ref:`Sponsors <sponsors>`

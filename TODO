@@ -1,5 +1,6 @@
 
 core:
+* change installation documentation to just use distribute and pip
 * aokuang.timber: example of showing form input error
 * docs: explain how to work with statcounter and google analytics
 * "append" action should be specific to ElementContainer
@@ -14,7 +15,6 @@ core:
 * doc: decorator for handler functions
 * doc: decorator for requirement. kwd "replaceinterface"
 * doc: session
-* doc: select(element=..., type=...).<method>. type is string. type can be very specific, but could also be a base class like formfield.
 * doc: select(element=...).getAttr(name) what are the allowed names? label/value
 * go through all ctors and check "super" calls
 * in scaffolding, make "sitemap" configurable. right now its fixed to <proj>.sitemap
@@ -45,7 +45,8 @@ core:
 * tutorial docs
 * checking of event handler assigment probably should be configurable
   to be omitted -- see luban.ui.descriptors.EventHandler -- to speed up in production mode
-* client side cache (data store)
+* client side cache (data store) -- is it really necessary. the server
+   side session seems to be good enough for now
 
 aokuang:
 * show information about dependent js libraries
@@ -56,6 +57,7 @@ timber:
 
 Done, but watch
 ---------------
+* doc: select(element=..., type=...).<method>. type is string. type can be very specific, but could also be a base class like formfield.
 * doc: container[name] = newelement; container['#'+id] = newelement
 * remove "contents" from docstr genreated from getCtorDocStr
 * check _method raises error

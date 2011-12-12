@@ -342,3 +342,97 @@ when needed::
     >>> container['#<id>'] = <new-element>
     >>> container['<name>'] = <new-element>
 
+
+Working with forms
+~~~~~~~~~~~~~~~~~~
+
+Creating a form is done by first creating
+a form element, adding input controls
+into the form, and assign an action to the
+"onsubmit" event handler for the form::
+
+ def login_form():
+     form = luban.elements.form(title='login', id='login-form')
+     username = form.text(name='username')
+     password = form.password(name='password')
+     form.submitbutton(label='submit')
+     form.onsubmit = load(
+	actor='login', routine='onsubmit', 
+	kwds=luban.event.data)
+     return form
+
+Please note that "onsubmit" event handler normally
+should be assigned a "load" action.
+Here in the example, ::
+
+     form.onsubmit = load(
+	actor='login', routine='onsubmit', 
+	kwds=luban.event.data)
+
+means that when the form is submitted, the form
+data (wrapped inside "luban.event.data") will
+be sent to actor "login" and method "onsubmit" as keyword
+arguments. 
+
+We should then implement an actor "login" with method "onsubmit"
+::
+
+ import luban
+ 
+ from luban.controller.Actor import Actor as base
+ class Actor(base):
+
+     ...
+
+     def onsubmit(self, username=None, password=None, **kwds):
+     	 # username and password are user inputs of 
+	 # the "username" and "password" form fields
+	 ...
+
+
+Input error detection and handling
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This can be done with the help of a luban decorator.
+Change the onsubmit method into::
+
+     @luban.decorators.formprocessor('login-form')
+     def onsubmit(
+         self, 
+	 username: luban.decorators.notemptystr=None, 
+	 password: luban.decorators.notemptystr=None,
+	 **kwds):
+	 ...
+	 
+Here ::
+
+     @luban.decorators.formprocessor('login-form')
+
+indicates the function-to-decorate is a handler 
+of form submission event. 
+The argument 'login-form' is the id of the form.
+
+
+The function argument annotation ::
+
+	 username: luban.decorators.notemptystr=None, 
+
+is used by luban to validate the input. Here a
+pre-defined validator "notemptystr" was used, to
+make sure the input is not an empty string.
+
+You can implement you own validator to suit your need.
+The requirements for the validator function are
+
+* it takes one parameter, a str value of user input
+* it throws a TypeError or a ValueError exception if 
+  the input is invalid
+* it returns a good value if no error is detected.
+
+Example::
+
+ def integer(s):
+     try: i = int(s)
+     except ValueError:
+        raise ValueError("%r is not an integer" % s)
+     return i

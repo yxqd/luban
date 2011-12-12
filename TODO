@@ -1,5 +1,6 @@
 
 core:
+* change installation documentation to just use distribute and pip
 * aokuang.timber: example of showing form input error
 * docs: explain how to work with statcounter and google analytics
 * "append" action should be specific to ElementContainer

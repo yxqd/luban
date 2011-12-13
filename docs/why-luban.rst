@@ -22,17 +22,26 @@ which are taken care of by luban.
 .. much easier for a UI application with luban specification to do so.
 
 
-html/javascript experts
------------------------
+Developers who are tired of messy UI logic
+------------------------------------------
+
+Luban has a intentionally limited, but clean and easy-to-use syntax,
+that is dedicated for specification of user interface.
+The design of luban encourages UI developers to write
+organized code.
+Please read :ref:`luban user guide <user-guide>` for more details.
+
+
+Web experts
+-----------
 You can create a UI framework (for your own or for your clients) on top of luban.
 
 See :ref:`advanced topics <advanced-topics>` for more details.
 
 
-Developers who are tired of messy UI logic
-------------------------------------------
 
-Luban has a clean and easy syntax dedicated for specification
-of user interface.
-
-See :ref:`luban concepts <philosophy>` for more details.
+User experience professionals
+-----------------------------
+Luban has a goal to provide a generic "language" for specifying
+user interface without the need to go into details in implementations.
+Please read :ref:`luban philosophy <philosophy>` for more details.

@@ -52,8 +52,7 @@ of the helloworld example you got when you ran the
 :ref:`helloworld tutorial <helloworld>`.
 
 Now point your browser to http://localhost:8080/test,
-You should see a new browser window showing up with a title "my user interface"
-and an empty page.
+You should see a new browser window showing up with a title "my user interface".
 
 If you change the url to http://localhost:8080/test/default
 you will see the same page.

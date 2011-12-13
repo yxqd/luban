@@ -62,8 +62,9 @@ Here you can see how the actor name and method name maps into the url::
 
  http://<site-url>/<actor-name>/<method-name>
 
-The "actor-name" and "method-name" both defaults to "default", if they are not
-specified.
+The "actor-name" is by default "start", 
+and "method-name" is by default "default", 
+if they are not specified.
 
 If there are additional parameters to a method in the actor, it will be also added
 to the url. 
@@ -144,7 +145,7 @@ Two things to note:
     >>> container.append(p)
 
 .. note::
-   Example usages and API of luban most ui elements can be found at
+   Example usages and API of most of luban ui elements can be found at
    `aokuang <http://lubanui.org/aokuang>`_
 
 .. note::
@@ -327,7 +328,7 @@ when needed::
 
     >>> container['#<id>']  # <id> is the id of the descendent element.
 
-   A less powerful form that can only retrieve direct child element is also provide ::
+   A less powerful form that can only retrieve direct child element is also provided ::
 
     >>> container['<name>'] # <name> must be the name of a child element of the container
     

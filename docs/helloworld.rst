@@ -78,7 +78,7 @@ A few concepts
 An *actor* lives in the "server side" and responds to client requests.
 
 The entry point of a luban application is 
-by default the "default" method of the "default" *actor*.
+by default the "default" method of the "start" *actor*.
 It should return an "establishInterface" action that establish
 the user interface from a *frame* instance.
 

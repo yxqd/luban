@@ -32,8 +32,8 @@ organized code.
 Please read :ref:`luban user guide <user-guide>` for more details.
 
 
-Web experts
------------
+Web app experts
+---------------
 You can create a UI framework (for your own or for your clients) on top of luban.
 
 See :ref:`advanced topics <advanced-topics>` for more details.

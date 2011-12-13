@@ -19,14 +19,13 @@ from .WebAppController import WebAppController
 class CherrypyController(WebAppController):
     
     @cherrypy.expose
-    def index(self, actor=None, routine=None, *args, **kwds):
+    def default(self, actor=None, routine=None, *args, **kwds):
         sig = '_escaped_fragment_'
         if sig in kwds:
             fragment = kwds[sig]
             del kwds[sig]
             return self._snapshot(fragment, actor, routine, *args, **kwds)
         return self.run(actor, routine, *args, **kwds)
-    default = index
 
     
     snapshot_dir = None

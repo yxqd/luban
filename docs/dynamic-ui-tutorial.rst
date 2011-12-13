@@ -25,7 +25,7 @@ Then we start this new project::
 Portlet and actions
 ===================
 
-Use your favorite editor to edit dynamic/python/dynamic/actors/default.py
+Use your favorite editor to edit dynamic/python/dynamic/actors/start.py
 and change it into::
 
  import luban

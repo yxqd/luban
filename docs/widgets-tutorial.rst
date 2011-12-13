@@ -23,7 +23,7 @@ Add an accordion
 ================
 Let us now make some modifications to the interface.
 
-Use your favorite editor to edit widgetsdemo/python/widgetsdemo/actors/default.py
+Use your favorite editor to edit widgetsdemo/python/widgetsdemo/actors/start.py
 and change it into::
 
  import luban

@@ -36,7 +36,7 @@ Modify the interface
 ====================
 Let us now make some minor modifications to the interface.
 
-Use your favorite editor to open helloworld/python/helloworld/actors/default.py.
+Use your favorite editor to open helloworld/python/helloworld/actors/start.py.
 It reads::
  
  import luban

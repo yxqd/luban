@@ -50,7 +50,7 @@ class Actor(base):
                 portletitem = portlet.item(label=item)
                 portletitem.id = id(portletitem)
                 newcontent = luban.a.load(
-                    actor = self.name.replace('default', item),
+                    actor = self.name.replace('start', item),
                     routine='createInterface',
                     )
                 portletitem.onselect =  luban.a.select(id="demo-container")\

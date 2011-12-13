@@ -42,7 +42,7 @@ class Actor(base):
         for choice in choices:
             b = doc.button(label=choice, id=choice)
             newcontent = luban.a.load(
-                actor = self.name.replace('default', choice),
+                actor = self.name.replace('start', choice),
                 routine='createInterface',
             )
             b.onclick = luban.a.select(id="demo-container")\

@@ -23,7 +23,7 @@ Add a form
 ==========
 Let us now make some modifications to the interface.
 
-Use your favorite editor to edit formdemo/python/formdemo/actors/default.py
+Use your favorite editor to edit formdemo/python/formdemo/actors/start.py
 and change it into::
 
  import luban

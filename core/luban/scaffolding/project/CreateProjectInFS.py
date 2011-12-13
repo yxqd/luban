@@ -62,7 +62,7 @@ class Renderer:
         root.addEntry(tree)
         # actors subpkg
         actors_dir = root[project.actors_pkg.replace('.', '/')]
-        actors_dir.addEntry(File.File('default.py', default_py))
+        actors_dir.addEntry(File.File('start.py', start_py))
         
         # sitemap
         tree.addEntry(File.File('sitemap.py', sitemap_py))
@@ -99,7 +99,7 @@ def makePyTreeWithSubPkg(subpkg):
         parent = dir
         continue
     return root
-default_py = """
+start_py = """
 import luban
 from luban.controller.Actor import Actor as base
 

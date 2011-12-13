@@ -15,7 +15,12 @@
 class ControllerBase:
 
 
-    def __init__(self, actor_package=None, actor_packages=[]):
+    def __init__(
+        self,
+        actor_package=None, actor_packages=[],
+        default_actor="start",
+        ):
+        
         if not actor_package and not actor_packages:
             raise ValueError("must provide actor package name")
         if actor_package and actor_packages:
@@ -23,11 +28,13 @@ class ControllerBase:
         if actor_package:
             actor_packages = [actor_package]
         self.actor_packages = actor_packages
+
+        self.default_actor = default_actor
         return
     
 
     def call(self, actor=None, routine=None, *args, **kwds):
-        actor = actor or 'default'
+        actor = actor or self.default_actor
         actor = self._retrieveActor(actor)
         obj = actor.perform(routine, *args, **kwds)
         return obj

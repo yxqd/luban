@@ -84,13 +84,13 @@ to ::
              kwds = luban.event.data,
              )
 
-and add the following method to the default actor::
+and add the following method to the start actor::
  
      def process(self, **kwds):
          msg = "submitted: %s" % (kwds,)
          return luban.a.alert(msg)
 
-The default.py will look like::
+The start.py will look like::
 
  import luban
  from luban.controller.Actor import Actor as base
@@ -145,6 +145,8 @@ You will be prompted with an alert message box like this:
    is returned from the handling routine that asks for showing an
    alert message box with submitted data.
 
+For in-depth discussion about using forms, 
+please go to :ref:`Working with form <user-guide-working-with-form>`.
 
 More
 ====

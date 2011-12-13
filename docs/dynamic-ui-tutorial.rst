@@ -140,7 +140,7 @@ Create dynamic/python/dynamic/actors/load.py with the following content::
          return luban.a.select(id="display").append(newelement=p)
 
 
-and then point your browser to http://localhost:8080?actor=load
+and then point your browser to http://localhost:8080/load
 
 Click on the button a couple of times, 
 you should see sth like this:
@@ -153,8 +153,9 @@ you should see sth like this:
 
 More
 ====
-See http://lubanui.org/aokuang for more examples on especially
-on how the last type of actions is used.
+See http://lubanui.org/aokuang for more examples.
+Please pay special attention 
+to how the "load" action is used.
 
 
 More

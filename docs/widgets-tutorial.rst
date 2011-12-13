@@ -62,7 +62,7 @@ You can click on the accordion to see its behavior.
 
 "tabs"
 ======
-Now let us try the widget "tabs". Replace default.py with the following content::
+Now let us try the widget "tabs". Replace start.py with the following content::
 
  import luban
  from luban.controller.Actor import Actor as base

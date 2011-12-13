@@ -44,23 +44,18 @@ A simple actor looks like this::
  
      def default(self):
          frame = luban.elements.frame(title="my user interface")
+	 frame.paragraph(text="from test actor")
          return luban.actions.establishInterface(frame)
 
 Save it as "test.py" under directory "helloworld/python/helloworld/actors"
 of the helloworld example you got when you ran the
 :ref:`helloworld tutorial <helloworld>`.
 
-Now point your browser to ::
-
- http://localhost:8080/test
-
+Now point your browser to http://localhost:8080/test,
 You should see a new browser window showing up with a title "my user interface"
 and an empty page.
 
-If you change the url to ::
-
- http://localhost:8080/test/default
-
+If you change the url to http://localhost:8080/test/default
 you will see the same page.
 
 Here you can see how the actor name and method name maps into the url::
@@ -342,6 +337,8 @@ when needed::
     >>> container['#<id>'] = <new-element>
     >>> container['<name>'] = <new-element>
 
+
+.. _user-guide-working-with-form:
 
 Working with forms
 ~~~~~~~~~~~~~~~~~~

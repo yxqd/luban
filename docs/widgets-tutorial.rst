@@ -10,9 +10,9 @@ Create a luban project::
 
 
 .. note::
-   Before starting this new project, make sure you already shutdown other
-   projects that might be using the same port, otherwise you will get
-   an error message suggesting using a different port.
+   Before starting this new project, make sure you have already shut down other
+   projects that might be using the same port; otherwise you will get
+   an error message suggesting you use a different port.
 
 Then we start this new project::
 
@@ -50,7 +50,7 @@ and change it into::
     
          return luban.a.establishInterface(frame)
 
-Refresh your browser should bring you to sth similar to this:
+Refresh your browser and it should bring you to something similar to this:
 
 .. figure:: images/accordion.png
    :scale: 70%
@@ -82,7 +82,7 @@ Now let us try the widget "tabs". Replace start.py with the following content::
 	 
          return luban.a.establishInterface(frame)
 
-Refresh your browser should bring you to sth similar to this:
+Refresh your browser and it should bring you to something similar to this:
 
 .. figure:: images/tabs.png
    :scale: 70%

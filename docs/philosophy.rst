@@ -9,23 +9,23 @@ Principles
 
 Minimalist approach
 """""""""""""""""""
-We look for the most compact conceptual structure
-sufficient to describe a sophisticated, dynamic, and mordern
+We seek the most compact conceptual structure
+sufficient for describing a sophisticated, dynamic, and modern
 user interface.
 
 
-We encourage separation of UI logic and visual effects
-""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Visual appeals (eye candies) could be separated from UI logic.
-Many have realized that visual appeals are certainly very very important
-for  user experiences,
+We encourage the separation of UI logic and visual effects
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Visual appeal (eye candy) can be separated from UI logic.
+Many people have realized that visual appeal is certainly very very important
+for user experiences,
 especially after the success of Apple.
-In luban, we notice that visual appeal could be evolved
+In luban, we notice that visual appeal can be evolved
 without changing the UI logic.
-And luban is a "language" mainly 
+Furthermore, luban is a "language" mainly 
 for the purpose of describing the UI logic,
 not the visual appeal.
-An argument of that was presented in one of Jiao's responses in
+An argument for that was presented in one of Jiao's responses in
 `the thread started by Guido regarding luban <https://plus.google.com/115212051037621986145/posts/ThMuTvwut9g>`_,
 and
 quoted here::
@@ -67,7 +67,7 @@ quoted here::
 
 Type system
 -----------
-Luban chooses to have only a very limited type system, 
+Luban chooses to have only a very limited type system, which is 
 consistent with its minimalist philosophy.
 
 * primitive types: bool, str, int, float 
@@ -76,10 +76,10 @@ consistent with its minimalist philosophy.
  * dictionary: key value pairs. key: str type. value: instance of any luban type
 * object: generic luban object that defines attributes (name: str, value: instance of any luban type). The following are specialized types derived from this generic object type.
  * element: UI elements (widgets)
- * action: actions to update UI or to communicate with controller
+ * action: actions to update the UI or to communicate with the controller
  * event: events triggered by user interactions with the UI
 
-Instances of luban object types could be regarded as specialized dictionaries that has a fixed set of keys, and the corresponding values may be limited to be of one specific luban type. Luban object type does not have methods, but only has attributes.
+Instances of luban object types can be regarded as specialized dictionaries that have a fixed set of keys, and the corresponding values may be limited to be of one specific luban type. A luban object type does not have methods but only has attributes.
 
 
 Basic concepts and structure
@@ -90,26 +90,26 @@ consisting of ui *elements*.
 A *controller* is responsible for constructing and returning
 instances of luban types upon *request*. 
 
-A *request* is identified by its parameters (e.g. "actor", "routine", ...)
+A *request* is identified by its parameters (e.g. "actor", "routine", etc...)
 
-There is no real reason that there could not be more than 1
-controller. But here we assume only one controller exists, 
-for simplicity of this discussion.
+There is no real reason that there can not be more than 1
+controller. But here we assume only one controller exists 
+for simplicity in this discussion.
 
-A *user interface* starts by a *request* to the UI *controller*
+A *user interface* starts by giving a *request* to the UI *controller*
 whose response is an action to establish a UI from a
-hierarchy of UI element nodes with a root node being of the "Frame" type.
+hierarchy of UI element nodes with a root node of the "Frame" type.
 "Frame" is a special UI element type.
 
-User interactions with the UI results in *events*.
+User interactions with the UI result in *events*.
 
 An *event* will trigger an associated *action*.
 The association of an *action* with an *event* is done by assigning the
 *action* to the *event handler* (an attribute) of an *element*.
 
-An *action* could be changing visual representation of
+An *action* could be changing the visual representation of
 a UI *element*, or loading some data from the *controller*
-to update a UI *element*, or loading another *action* from
+to update a UI *element*, or loading another *action* from the
 *controller* to execute.
 
 .. figure:: images/architecture.png
@@ -121,7 +121,7 @@ to update a UI *element*, or loading another *action* from
 Controller
 """"""""""
 When receiving a request, the controller must
-prepare a response according to the request,
+prepare a response according to the request
 and send the response back to the UI.
 
 A response always is an instance of a luban type.
@@ -134,18 +134,18 @@ the controller:
   * actor: name of the actor
   * routine: name of the routine of the actor
 * A controller handles a set of "actors"
-* Whenever requested, it delegates
-  to the specified actor to perform the specified routine
+* Whenever requested, the controller delegates
+  to the specified actor the task of performing the specified routine
   with additional parameters.
 * This routine will produce a response depending
-  on whatever extra parameters given to it.
+  on whatever extra parameters are given to it.
 
 
 Elements
 """"""""
-A visual element in the user interface.
+An element is a visual element in the user interface.
 
-A ui element has the following attributes:
+A UI element has the following attributes:
 
 * properties
 * event handlers
@@ -156,17 +156,17 @@ Property
 Examples of properties:
 
 * paragraph.text: the text string for a paragraph element
-* <element>.class: similar to the idea of css class. A class of an element can be used by fine tune the styling.
+* <element>.class: similar to the idea of CSS class. A class of an element can be used by fine-tuning the styling.
 * document.title: the title of a document element
 
 
 Event handler
 *************
 An event handler corresponds to one type of event.
-For example, "onclick" event handler will be fired when
+For example, the "onclick" event handler will be fired when
 an element is clicked.
 
-A event handler has to be assigned a null value (in case of python, None),
+An event handler has to be assigned a null value (in the case of python, None)
 or an action.
 
 
@@ -183,7 +183,7 @@ It can also have another document as a sub element.
 Frame
 *****
 
-Frame is a special type of UI element.
+A frame is a special type of UI element.
 A frame element can only be the root of a UI element hierarchy,
 and it cannot be a sub element.
 
@@ -205,13 +205,13 @@ An example::
 
 Actions
 """""""
-"Action" is a category of luban object types that describe
-actions that update the UI, or actions to load something
+"Action" is a category of luban object types that describes
+actions that update the UI or actions to load something
 from the controller (which may in the end update the UI as well).
 
-It is worth to reiterate that the action types in luban
-are very limited: it is either directly changing the UI,
-or ask the controller for information that will lead to 
+It is worth reiterating that the action types in luban
+are very limited: it is either directly changing the UI
+or asking the controller for information that will lead to 
 actions that change the UI. No way is included in luban
 to describe complex logic, for example. 
 This approach keeps luban a very simple "language" --
@@ -220,14 +220,14 @@ redefinable) of nouns (UI elements) and verbs (UI actions),
 and there is no way of doing complex language constructs
 like "if ... else ...".
 It is assumed that any complex behavior is either 
-absorbed into the implementations of the UI elements (widgets), or
+absorbed into the implementations of the UI elements (widgets) or
 is performed by an actor of the controller using more powerful
-languages (could be on client side or server side).
+languages (this could be on the client side or the server side).
 
 An action is an instance of a luban action type, and
-it has properties that defines the behavior of the action.
+it has properties that define the behavior of the action.
 
-Following are more details of the types of actions
+Below are more details on the types of actions.
 
 
 Simple naive actions
@@ -244,7 +244,7 @@ Element selector
 
 Element actions
 ***************
-Actions that update a UI element. Examples:
+Element actions areactions that update a UI element. Examples:
 
 * ReplaceContent(element=<element selector>, newcontent=<luban element hierarchy>): replace the content of the given element with the new content
 
@@ -261,7 +261,7 @@ Action to talk to the controller
 * Load(actor=<actor name>, routine=<routine name>, ..extra parameters..)
 
 This action asks the controller to run the given routine of the
-given actor with all the extra parameters, and obtain the returned value.
+given actor with all of the extra parameters and obtain the returned value.
 
 If the returned value is another action, that action will then be performed.
 For example, if the returned value is the action::
@@ -269,9 +269,9 @@ For example, if the returned value is the action::
  Alert(message="hello")
 
 this action will be performed and an alert window will pop up.
-Usually what happen will be that the controller will carry out some
-computations and depending on the computation result, return an appropriate
-action to perform on the user interface side.
+Usually what happens is that the controller will carry out some
+computations and depending on the computation result, it will return an 
+appropriate action to perform on the user interface side.
 
 The returned value could be an instance of luban types other than an action.
 For example, in pseudo code::
@@ -285,16 +285,16 @@ For example, in pseudo code::
            )
      )
 
-Apparantly the returned value from actor "helper", routine "getMessage"
+Apparantly the returned value from actor "helper" and routine "getMessage"
 will be a luban UI element hierarchy.
 That UI element hierarchy will replace the original content of the
-existing UI element that can be identified by its id "help-message-window".
+existing UI element that can be identified by its id, "help-message-window".
 
 
 Events
 """"""
-"Event" is a category of luban object types that describe
-events happen to the user interface.
+An "Event" is a category of luban object types that describe
+events happening to the user interface.
 
 Event data are captured as properties of an event object.
 
@@ -302,7 +302,7 @@ For example::
 
  TabSelect(oldtab=<old tab id>, newtab=<new tab id>)
 
-is a type of event happens when a tab is selected.
+is a type of event that happens when a tab is selected.
 
 
 Summary
@@ -312,7 +312,7 @@ of the luban specification "language".
 You can see that the core of luban only consists of
 luban types to describe UI elements, actions,
 and events, and their connections through attributes and also
-controller.
+a controller.
 
 .. In the next section, we will discuss to how to 
 .. program luban with python. 

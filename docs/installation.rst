@@ -7,7 +7,7 @@ luban can be installed by pip for **python3**::
 
  $ pip install luban
 
-You may need super-user privilege to do that.
+You may need super-user privileges to do that.
 
 .. note::
    luban 1.0 for now only supports python 3, and does NOT support python 2.

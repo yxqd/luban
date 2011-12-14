@@ -3,7 +3,7 @@
 Dynamic User Interface
 ----------------------
 
-Dynamic user interface in luban is easy.
+Making dynamic user interfaces in luban is easy.
 The trick is to assign action(s) to an event handler.
 
 Create a luban project::
@@ -13,11 +13,11 @@ Create a luban project::
 
 
 .. note::
-   Before starting this new project, make sure you already shutdown other
-   projects that might be using the same port, otherwise you will get
-   an error message suggesting using a different port.
+   Before starting this new project, make sure you have already shut down other
+   projects that might be using the same port; otherwise you will get
+   an error message suggesting you use a different port.
 
-Then we start this new project::
+Then start this new project::
 
  $ luban start dynamic
 
@@ -64,7 +64,7 @@ and change it into::
          return luban.a.establishInterface(frame)
 
 
-Refresh and click on the portlet items will show sth like this:
+Refresh and click on the portlet items, which will show something like this:
 
 .. figure:: images/portlet.png
    :scale: 80%
@@ -81,7 +81,7 @@ Each event has an event handler that can be assigned to an action.
 
 An action could be 
 
-* select a ui element and then call an action on this selected element.
+* selecting a UI element and then calling an action on this selected element.
   for example::
 
   >>> luban.a.select(element=display).append(newelement = ...)
@@ -93,7 +93,7 @@ An action could be
 * an action to talk to the controller and to ask a method of
   an actor in the controller to do some complex things. 
   At the end of the call, the method should return an action
-  that could be either of the three types of actions 
+  that can be any of the three types of actions 
   listed here.
 
   >>> luban.a.load(actor=..., routine=..., **kwds)
@@ -101,12 +101,12 @@ An action could be
 
 "Load" action
 =============
-Here we explain a little more about the "load" action.
-This action calls a method of an actor in the controller,
-and takes the result of that call and work on that.
+Here we explain the "load" action further.
+This action calls a method of an actor in the controller
+and takes the result of that call and works on it.
 
 .. note::
-   Result of a "load" action must be a value of luban type.
+   The result of a "load" action must be a value of luban type.
 
 .. note::
    luban types:
@@ -143,7 +143,7 @@ Create dynamic/python/dynamic/actors/load.py with the following content::
 and then point your browser to http://localhost:8080/load
 
 Click on the button a couple of times, 
-you should see sth like this:
+you should see something like this:
 
 .. figure:: images/load-tutorial-button.png
    :scale: 80%
@@ -153,9 +153,8 @@ you should see sth like this:
 
 More
 ====
-See http://lubanui.org/aokuang for more examples.
-Please pay special attention 
-to how the "load" action is used.
+See http://lubanui.org/aokuang for more examples, especially
+on how the "load" action is used.
 
 
 More

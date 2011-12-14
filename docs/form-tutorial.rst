@@ -10,11 +10,11 @@ Create a luban project::
 
 
 .. note::
-   Before starting this new project, make sure you already shutdown other
-   projects that might be using the same port, otherwise you will get
-   an error message suggesting using a different port.
+   Before starting this new project, make sure you have already shut down other
+   projects that might be using the same port; otherwise you will get
+   an error message suggesting you use a different port.
 
-Then we start this new project::
+Then start this new project::
 
  $ luban start formdemo
 
@@ -59,7 +59,7 @@ and change it into::
 	 	 
          return luban.a.establishInterface(frame)
 
-Refresh your browser should bring you to sth similar to this:
+Refresh your browser and it should bring you to something similar to this:
 
 .. figure:: images/form.png
    :scale: 70%
@@ -67,10 +67,10 @@ Refresh your browser should bring you to sth similar to this:
    Figure 1. A form
 
 
-If you click the submit button, an alert box will pop up with message
+If you click the submit button, an alert box will pop up with the message
 "submitted".
 
-But this really does not send any form data to the "server side".
+However, this does not really send any form data to the "server side".
 We need to modify the "onsubmit" event handler a bit to make that happen.
 Change::
  
@@ -134,16 +134,16 @@ The start.py will look like::
          msg = "submitted: %s" % (kwds,)
          return luban.a.alert(msg)
 
-After refresh your browser, you can try to change the values of the form controls, 
+After you refresh your browser, you can try to change the values of the form controls 
 and then submit the form. 
 You will be prompted with an alert message box like this:
 
 .. figure:: images/form-data-submit-alert.png
    :scale: 100%
 
-   Figure 2. form data submitted to "server side", and then an action
-   is returned from the handling routine that asks for showing an
-   alert message box with submitted data.
+   Figure 2. form data is submitted to the "server side", and then an action
+   is returned from the handling routine that asks to show an
+   alert message box with the submitted data.
 
 For in-depth discussion about using forms, 
 please go to :ref:`Working with form <user-guide-working-with-form>`.

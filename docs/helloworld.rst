@@ -67,7 +67,7 @@ Let us change it to::
          return luban.actions.establishInterface(frame)
 
 You will see in the terminal where you start the luban project
-the server is reloading to incoporate your changes.
+that the server is reloading to incoporate your changes.
 Now you can refresh the browser 
 and see the changes.
 
@@ -79,7 +79,7 @@ An *actor* lives in the "server side" and responds to client requests.
 
 The entry point of a luban application is 
 by default the "default" method of the "start" *actor*.
-It should return an "establishInterface" action that establish
+It should return an "establishInterface" action that establishes
 the user interface from a *frame* instance.
 
 A user interface is represented by a hierarchical structure of 
@@ -124,8 +124,8 @@ And now the interface hierarchy is::
  + frame(title="hello world")
    - document(title ="hello world")
 
-To create a sub element in the first sub element of the *frame*,
-similarly, you call the element factory on the subelement, "doc"::
+Similarly, to create a sub element in the first sub element of the *frame*,
+you call the element factory on the subelement "doc"::
 
  >>> doc.paragraph(text = "This is my first luban user interface")
 
@@ -165,9 +165,9 @@ make luban very powerful.
 and `click here for examples of luban actions <http://lubanui.org/aokuang>`_.
 
 .. note::
-   Similar to *luban.elements*, 
+   Similarly to *luban.elements*, 
    *luban.actions* is a proxy to factory methods for creating luban actions.
-   And an alias of *luban.actions* is also provided for convenience::
+   Furthermore, an alias of *luban.actions* is also provided for convenience::
 
     luban.a = luban.actions
 
@@ -189,7 +189,7 @@ down the server by hitting **control-C**.
 .. note::
    The stopping process may take a bit of time; please be patient :)
 
-You could also stop it by ::
+You can also stop it by ::
  
  $ luban stop /path/to/helloworld
 

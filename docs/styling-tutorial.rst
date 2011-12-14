@@ -3,8 +3,8 @@
 Styling
 -------
 
-Use "Class" attribute of luban ui elements and use css to fine-tune styling
-of your interface.
+Use the "Class" attribute of luban UI elements and use CSS to fine-tune the 
+styling of your interface.
 
 More
 ====

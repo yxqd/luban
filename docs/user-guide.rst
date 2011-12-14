@@ -4,7 +4,7 @@ Luban User Guide
 ================
 
 Luban strives to provide a simple, natural way of creating 
-user interface that can be sophisticated and provide
+user interfaces that can be sophisticated as well as provide
 good user experiences.
 
 Please start by trying out 
@@ -26,12 +26,12 @@ A special luban action is dedicated to establishing a user interface::
 The first statement creates a frame, which is a UI element.
 
 The second statement creates an action that, when executed,
-establish a user interface that has a frame with a title "my user interface".
+establishes a user interface that has a frame with a title "my user interface".
 
 
 Actor and url
 """""""""""""
-To really have the interface showing up in the browser,
+To really have the interface show up in the browser,
 you will need an actor.
 A simple actor looks like this::
 
@@ -47,17 +47,17 @@ A simple actor looks like this::
 	 frame.paragraph(text="from test actor")
          return luban.actions.establishInterface(frame)
 
-Save it as "test.py" under directory "helloworld/python/helloworld/actors"
+Save the above as "test.py" under directory "helloworld/python/helloworld/actors"
 of the helloworld example you got when you ran the
 :ref:`helloworld tutorial <helloworld>`.
 
 Now point your browser to http://localhost:8080/test,
-You should see a new browser window showing up with a title "my user interface".
+You should see a new browser window show up with a title "my user interface".
 
 If you change the url to http://localhost:8080/test/default
 you will see the same page.
 
-Here you can see how the actor name and method name maps into the url::
+Here you can see how the actor name and method name maps onto the url::
 
  http://<site-url>/<actor-name>/<method-name>
 
@@ -78,7 +78,7 @@ to the url.
     http://<site-url>/<actor-name>/<method-name>/?key1=val1&key2=val2&...
 
 * for a mix of non-keyword and keyword arguments,
-  non-keyword arguments are in front of keyword arguments in the url ::
+  non-keyword arguments come before keyword arguments in the url ::
 
     http://<site-url>/<actor-name>/<method-name>/<arg1>/<arg2>/.../?key1=val1&key2=val2&...
 
@@ -175,7 +175,7 @@ Here is an example::
 
  >>> button.onclick = luban.actions.alert("clicked")
 
-which basically says that if the button got clicked,
+This basically says that if the button got clicked,
 an alert dialog will show up with the message "clicked".
 
 The general form of this assignment is
@@ -189,7 +189,7 @@ For example, "click" is a common event for every element type.
 "submit" is a special event for "form" element.
 
 At `aokuang <http://lubanui.org/aokuang>`_, you can
-find demo and API of these events.
+find a demo and API of these events.
 
 
 Actions
@@ -217,8 +217,8 @@ Actions communicating with controller
 
 
 .. note::
-   You can find demos and APIs of "alert" action and "load" action 
-   at the "actions" section of menus on the left side of
+   You can find demos and APIs of the "alert" action and "load" action 
+   at the "actions" section of the menus on the left side of
    `aokuang <http://lubanui.org/aokuang>`_
 
 Other non-element-actions
@@ -236,7 +236,7 @@ Other non-element-actions
 Element-actions: Actions on UI elements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To construct an action on a UI element, a general form is::
+To construct an action on a UI element, the general form is::
 
  >>> <selector>.<action>(...)
 
@@ -265,7 +265,7 @@ we can use the "element" keyword argument. For example::
 
 You need to make sure the UI element has an unique id when constructed.
 
-The "type" argument is optional, if the action to take 
+The "type" argument is optional if the action to be taken 
 is a generic action that applies to all UI elements.
 If the action to be taken is only valid for a specific type of UI element,
 you have to specify the type of the element using the "type" keyword
@@ -298,7 +298,7 @@ User interface hierarchy construction
 
 Skeleton
 ~~~~~~~~
-You can create a skeleton of user interface, and use it wisely.
+You can create a skeleton of a user interface and use it wisely.
 
 For example, the following code creates a skeleton::
 
@@ -311,8 +311,8 @@ For example, the following code creates a skeleton::
 
 The skeleton consists of a header, a body, and a footer.
 
-Then we can use the skeleton and change the body to sth interesting
-when needed::
+Then we can use the skeleton and change the body to something interesting
+when it is needed::
 
  def login():
      frame = skeleton()
@@ -322,17 +322,17 @@ when needed::
      return frame
 
 .. note::
-   You can retrieve a descendent element in the element hierarchy
+   You can retrieve a descendant element in the element hierarchy
    by ::
 
-    >>> container['#<id>']  # <id> is the id of the descendent element.
+    >>> container['#<id>']  # <id> is the id of the descendant element.
 
-   A less powerful form that can only retrieve direct child element is also provided ::
+   A less powerful form that can only retrieve the direct child element is also provided ::
 
     >>> container['<name>'] # <name> must be the name of a child element of the container
     
 .. note::
-   Replace a descendent element or a child element is also possible::
+   Replace a descendant element or a child element is also possible::
    
     >>> container['#<id>'] = <new-element>
     >>> container['<name>'] = <new-element>
@@ -345,7 +345,7 @@ Working with forms
 
 Creating a form is done by first creating
 a form element, adding input controls
-into the form, and assign an action to the
+into the form, and assigning an action to the
 "onsubmit" event handler for the form::
 
  def login_form():
@@ -358,7 +358,7 @@ into the form, and assign an action to the
 	kwds=luban.event.data)
      return form
 
-Please note that "onsubmit" event handler normally
+Please note that the "onsubmit" event handler normally
 should be assigned a "load" action.
 Here in the example, ::
 
@@ -406,7 +406,7 @@ Here ::
      @luban.decorators.formprocessor('login-form')
 
 indicates the function-to-decorate is a handler 
-of form submission event. 
+of a form submission event. 
 The argument 'login-form' is the id of the form.
 
 
@@ -415,10 +415,10 @@ The function argument annotation ::
 	 username: luban.decorators.notemptystr=None, 
 
 is used by luban to validate the input. Here a
-pre-defined validator "notemptystr" was used, to
+pre-defined validator "notemptystr" was used in order to
 make sure the input is not an empty string.
 
-You can implement you own validator to suit your need.
+You can implement your own validator to suit your needs.
 The requirements for the validator function are
 
 * it takes one parameter, a str value of user input

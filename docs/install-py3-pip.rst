@@ -24,8 +24,8 @@ python 3
 
 luban 1.0 depends on python 3.1+. Please install python 3.1 or 3.2.
 
-More instructions at http://python.org. (Goto download page of python 3 and 
-select the installer for your operating system and run it.)
+More instructions are at http://python.org. (Go to the download page of python 3 
+and select the installer for your operating system and run it.)
 
 
 

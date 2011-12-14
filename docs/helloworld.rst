@@ -66,7 +66,7 @@ Let us change it to::
          doc.paragraph(text = "This is my first luban user interface")
          return luban.actions.establishInterface(frame)
 
-You will see in the terminal where you start the luban project
+You will see in the terminal where you started the luban project
 that the server is reloading to incoporate your changes.
 Now you can refresh the browser 
 and see the changes.
@@ -75,7 +75,7 @@ and see the changes.
 A few concepts
 ==============
 
-An *actor* lives in the "server side" and responds to client requests.
+An *actor* lives on the "server side" and responds to client requests.
 
 The entry point of a luban application is 
 by default the "default" method of the "start" *actor*.
@@ -183,7 +183,7 @@ and `click here for examples of luban actions <http://lubanui.org/aokuang>`_.
 Shutting down the server
 ========================
 
-After finish playing with this "helloworld" example, you could shut
+After you finish playing with this "helloworld" example, you can shut
 down the server by hitting **control-C**. 
 
 .. note::

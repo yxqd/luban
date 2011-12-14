@@ -26,7 +26,7 @@ A special luban action is dedicated to establishing a user interface::
 The first statement creates a frame, which is a UI element.
 
 The second statement creates an action that, when executed,
-establishes a user interface that has a frame with a title "my user interface".
+establishes a user interface that has a frame with the title "my user interface".
 
 
 Actor and url
@@ -51,8 +51,8 @@ Save the above as "test.py" under directory "helloworld/python/helloworld/actors
 of the helloworld example you got when you ran the
 :ref:`helloworld tutorial <helloworld>`.
 
-Now point your browser to http://localhost:8080/test,
-You should see a new browser window show up with a title "my user interface".
+Now point your browser to http://localhost:8080/test, and
+you should see a new browser window show up with the title "my user interface".
 
 If you change the url to http://localhost:8080/test/default
 you will see the same page.
@@ -186,7 +186,7 @@ Each UI element type has its own set of event types,
 while there are common events for all element types.
 
 For example, "click" is a common event for every element type.
-"submit" is a special event for "form" element.
+"submit" is a special event for the "form" element.
 
 At `aokuang <http://lubanui.org/aokuang>`_, you can
 find a demo and API of these events.
@@ -360,7 +360,7 @@ into the form, and assigning an action to the
 
 Please note that the "onsubmit" event handler normally
 should be assigned a "load" action.
-Here in the example, ::
+Here, the example ::
 
      form.onsubmit = load(
 	actor='login', routine='onsubmit', 
@@ -391,7 +391,7 @@ Input error detection and handling
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This can be done with the help of a luban decorator.
-Change the onsubmit method into::
+Change the onsubmit method to::
 
      @luban.decorators.formprocessor('login-form')
      def onsubmit(
@@ -426,7 +426,7 @@ The requirements for the validator function are
   the input is invalid
 * it returns a good value if no error is detected.
 
-Example::
+For example::
 
  def integer(s):
      try: i = int(s)

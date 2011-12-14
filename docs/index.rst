@@ -1,12 +1,12 @@
 Luban: a generic UI "language"
 ==============================
 
-Luban is a python package for building user interface. 
+Luban is a python package for building user interfaces. 
 For example, with luban, one can quickly create 
 dynamic, ajax-based web
 interfaces using **pure python**: **no knowledge of html and javascript
 is required**; anyone knowing basic python can use luban to
-create their user interface applications accessible from web browsers.
+create user interface applications that are accessible from web browsers.
 
 Luban provides 
 :ref:`a minimalist "language" <philosophy>`

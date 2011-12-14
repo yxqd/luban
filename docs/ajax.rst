@@ -3,7 +3,7 @@
 Techniques related to ajax
 ==========================
 
-For web app, Luban uses ajax.
+For web apps, Luban uses ajax.
 
 Ajax and search engine
 ----------------------

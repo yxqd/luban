@@ -14,17 +14,17 @@ Create a luban project::
    projects that might be using the same port; otherwise you will get
    an error message suggesting you use a different port.
 
-Then we start this new project::
+Then start this new project::
 
  $ luban start widgetsdemo
 
 
 Add an accordion
 ================
-Let us now make some modifications to the interface.
+Now let's make some modifications to the interface.
 
 Use your favorite editor to edit widgetsdemo/python/widgetsdemo/actors/start.py
-and change it into::
+and change it to::
 
  import luban
  from luban.controller.Actor import Actor as base
@@ -50,7 +50,7 @@ and change it into::
     
          return luban.a.establishInterface(frame)
 
-Refresh your browser and it should bring you to something similar to this:
+Refresh your browser and it should bring you to something like this:
 
 .. figure:: images/accordion.png
    :scale: 70%
@@ -82,7 +82,7 @@ Now let us try the widget "tabs". Replace start.py with the following content::
 	 
          return luban.a.establishInterface(frame)
 
-Refresh your browser and it should bring you to something similar to this:
+Refresh your browser and it should bring you to something like this:
 
 .. figure:: images/tabs.png
    :scale: 70%

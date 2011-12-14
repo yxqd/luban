@@ -12,23 +12,23 @@ Dec, 2011
 This is the first stable release of luban.
 
 This release presents a luban kernel rewritten in python 3.
-Taking advantage of superior meta-programming capability of
-python 3, the new kernel makes it much easy to extend 
-the "vocabulary" of luban "language".
+By taking advantage of the superior meta-programming capability of
+python 3, the new kernel makes it much easier to extend 
+the "vocabulary" of the luban "language".
 
 This stable release 
 keeps and improves most of the "language features" in earlier
-prototype versions such as easy access to element factories,
+prototype versions such as easy access to element factories and
 assignments of actions to event handlers.
 
 The scaffolding for luban projects and extensions were improved
 a lot over earlier prototype versions. It is now much
-easy to create, start and stop luban projects.
+easier to create, start and stop luban projects.
 
-The layout of luban project is much simpler, 
-therefor easier to understand and and work with.
+The layout of a luban project is much simpler and 
+therefore easier to understand and work with.
 
-Gongshuzi prototype is not included in this release.
+The Gongshuzi prototype is not included in this release.
 This release focuses on the "language" core.
 
 .. .. _changes-0.2b3:

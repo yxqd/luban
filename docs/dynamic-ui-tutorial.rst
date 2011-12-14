@@ -1,7 +1,7 @@
 .. _dynamic-ui-tutorial:
 
-Dynamic User Interface
-----------------------
+Dynamic User Interfaces
+-----------------------
 
 Making dynamic user interfaces in luban is easy.
 The trick is to assign action(s) to an event handler.
@@ -22,8 +22,8 @@ Then start this new project::
  $ luban start dynamic
 
 
-Portlet and actions
-===================
+Making a Portlet with Actions
+=============================
 
 Use your favorite editor to edit dynamic/python/dynamic/actors/start.py
 and change it into::
@@ -72,17 +72,17 @@ Refresh and click on the portlet items, which will show something like this:
    Figure 1. Dynamic behavior with a portlet.
 
 
-A few concepts
+A Few Concepts
 ==============
 
-Each ui element has some events.
+Each UI element has some events.
 
 Each event has an event handler that can be assigned to an action.
 
 An action could be 
 
 * selecting a UI element and then calling an action on this selected element.
-  for example::
+  For example::
 
   >>> luban.a.select(element=display).append(newelement = ...)
 
@@ -99,8 +99,8 @@ An action could be
   >>> luban.a.load(actor=..., routine=..., **kwds)
 
 
-"Load" action
-=============
+The "Load" action
+=================
 Here we explain the "load" action further.
 This action calls a method of an actor in the controller
 and takes the result of that call and works on it.
@@ -117,7 +117,7 @@ and takes the result of that call and works on it.
    * luban ui actions
 
 
-It is most typical that a "load" action returns another action.
+Typically, a "load" action returns another action.
 Let us create another actor to show how this works.
 Create dynamic/python/dynamic/actors/load.py with the following content::
 
@@ -142,7 +142,7 @@ Create dynamic/python/dynamic/actors/load.py with the following content::
 
 and then point your browser to http://localhost:8080/load
 
-Click on the button a couple of times, 
+Click on the button a couple of times, and
 you should see something like this:
 
 .. figure:: images/load-tutorial-button.png
@@ -151,15 +151,15 @@ you should see something like this:
    Figure 2. load action that returns another action.
 
 
-More
-====
+More Examples
+=============
 See http://lubanui.org/aokuang for more examples, especially
 on how the "load" action is used.
 
 
 More
 ====
-Continue to :ref:`next tutorial "Styling your interface" <styling-tutorial>`
+Continue to the :ref:`next tutorial "Styling your interface" <styling-tutorial>`
 
 or back to 
 :ref:`"Tutorials" <user-tutorials>`

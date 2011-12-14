@@ -249,14 +249,14 @@ Element actions areactions that update a UI element. Examples:
 * ReplaceContent(element=<element selector>, newcontent=<luban element hierarchy>): replace the content of the given element with the new content
 
 
-Action to establish a user interface
-************************************
+Actions to establish a user interface
+*************************************
 
 * EstablishInterface(frame): establish a user interface from a frame
 
 
-Action to talk to the controller
-********************************
+Actions to talk to the controller
+*********************************
 
 * Load(actor=<actor name>, routine=<routine name>, ..extra parameters..)
 
@@ -273,7 +273,7 @@ Usually what happens is that the controller will carry out some
 computations and depending on the computation result, it will return an 
 appropriate action to perform on the user interface side.
 
-The returned value could be an instance of luban types other than an action.
+The returned value could be an instance of a luban type other than an action.
 For example, in pseudo code::
 
  button.onclick = \

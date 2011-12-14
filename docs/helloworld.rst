@@ -32,8 +32,8 @@ and a browser will be started to show the webpage:
 Congratulations!!! You have created your first luban user interface!
 
 
-Modify the interface
-====================
+Modifying the Interface
+=======================
 Let us now make some minor modifications to the interface.
 
 Use your favorite editor to open helloworld/python/helloworld/actors/start.py.
@@ -72,7 +72,7 @@ Now you can refresh the browser
 and see the changes.
 
 
-A few concepts
+A Few Concepts
 ==============
 
 An *actor* lives on the "server side" and responds to client requests.
@@ -180,7 +180,7 @@ and `click here for examples of luban actions <http://lubanui.org/aokuang>`_.
     >>> luban.a.establishInterface(...)
 
 
-Shutting down the server
+Shutting Down the Server
 ========================
 
 After you finish playing with this "helloworld" example, you can shut
@@ -197,7 +197,7 @@ You can also stop it by ::
 More
 ====
 
-Continue to :ref:`next tutorial "Adding widgets" <widgets-tutorial>`
+Continue to the :ref:`next tutorial "Adding widgets" <widgets-tutorial>`
 
 or back to 
 :ref:`"Tutorials" <user-tutorials>`

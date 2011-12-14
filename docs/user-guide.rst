@@ -12,11 +12,11 @@ Please start by trying out
 * :ref:`Tutorials <user-tutorials>`
 
 
-Basic user interface construction
+Basic User Interface Construction
 ---------------------------------
 
-Establish a user interface
-""""""""""""""""""""""""""
+Establishing a User Interface
+"""""""""""""""""""""""""""""
 
 A special luban action is dedicated to establishing a user interface::
 
@@ -29,8 +29,8 @@ The second statement creates an action that, when executed,
 establishes a user interface that has a frame with the title "my user interface".
 
 
-Actor and url
-"""""""""""""
+Actors and urls
+"""""""""""""""
 To really have the interface show up in the browser,
 you will need an actor.
 A simple actor looks like this::
@@ -100,8 +100,8 @@ Examples:
     actors/test.py:Actor().validate("registration", username="abc", email="a@b.com")
 
 
-Create a user interface hierarchy
-"""""""""""""""""""""""""""""""""
+Creating a User Interface Hierarchy
+"""""""""""""""""""""""""""""""""""
 
 A luban UI is a hierarchy of UI elements. 
 To create this hierarchy, usually one can create the root node first,
@@ -128,12 +128,12 @@ creates the following hierarchy::
 
 Two things to note:
 
-* any UI element can be created using factory methods in luban.elements.
+* Any UI element can be created using factory methods in luban.elements.
 
     >>> luban.elements.document(...)
     >>> luban.elements.paragraph(...)
 
-* to create a sub element in a container, one can either use directly
+* To create a sub element in a container, one can either use directly
   the factory method on the container::
 
     >>> container.paragraph(...)
@@ -144,18 +144,18 @@ Two things to note:
     >>> container.append(p)
 
 .. note::
-   Example usages and API of most of luban ui elements can be found at
+   Examples of usage and API of most luban UI elements can be found at
    `aokuang <http://lubanui.org/aokuang>`_
 
 .. note::
-   One way to find out all element factories::
+   One way to find out all element factories is::
 
    >>> import luban
    >>> dir(luban.elements)
 
 
 .. note::
-   One way to find out all sub-element factories for a container element::
+   One way to find out all sub-element factories for a container element is::
 
    >>> <container>.elementfactories()
 
@@ -166,8 +166,8 @@ Two things to note:
    >>> doc.elementfactories()
 
 
-Assign actions to event handlers
-""""""""""""""""""""""""""""""""
+Assigning Actions to Event Handlers
+"""""""""""""""""""""""""""""""""""
 
 To give your user interface dynamic behaviors, you need to 
 assign event handlers of UI elements to actions.
@@ -203,15 +203,15 @@ under "luban.actions". For example::
  >>> luban.actions.select(...)...
 
 
-Simple actions
+Simple Actions
 ~~~~~~~~~~~~~~
 
 * alert(message): shows a dialog with one message
 
 
 
-Actions communicating with controller
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Actions Communicating with the Controller
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * load(actor, routine, *args, **kwds): load a luban object from the controller
 
@@ -275,12 +275,12 @@ argument. For example::
  >>> luban.actions.select(id="authentication-form", type="form")
 
 
-Action on seletected element
+Actions on Selected Elements
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Just selecting a UI element won't change the UI.
 To apply an action to a UI element, 
-first select the element, and then call the action factory
+first select the element and then call the action factory
 with appropriate arguments. For example::
 
  >>> luban.actions.select(element=paragraph).destroy()
@@ -290,10 +290,10 @@ You can find demos and APIs of actions for UI element types at
 `aokuang <http://lubanui.org/aokuang>`_. 
 
 
-Advanced topics
+Advanced Topics
 ---------------
 
-User interface hierarchy construction
+User Interface Hierarchy Construction
 """""""""""""""""""""""""""""""""""""
 
 Skeleton
@@ -332,7 +332,7 @@ when it is needed::
     >>> container['<name>'] # <name> must be the name of a child element of the container
     
 .. note::
-   Replace a descendant element or a child element is also possible::
+   Replacing a descendant element or a child element is also possible::
    
     >>> container['#<id>'] = <new-element>
     >>> container['<name>'] = <new-element>
@@ -344,9 +344,9 @@ Working with forms
 ~~~~~~~~~~~~~~~~~~
 
 Creating a form is done by first creating
-a form element, adding input controls
-into the form, and assigning an action to the
-"onsubmit" event handler for the form::
+a form element, then adding input controls
+into the form, and then assigning an action to the
+"onsubmit" event handler of the form::
 
  def login_form():
      form = luban.elements.form(title='login', id='login-form')
@@ -387,7 +387,7 @@ We should then implement an actor "login" with method "onsubmit"
 	 ...
 
 
-Input error detection and handling
+Input Error Detection and Handling
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This can be done with the help of a luban decorator.

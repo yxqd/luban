@@ -1,6 +1,6 @@
 .. _widgets-tutorial:
 
-Adding widgets to your interface
+Adding Widgets to Your Interface
 --------------------------------
 
 Create a luban project::
@@ -19,8 +19,8 @@ Then start this new project::
  $ luban start widgetsdemo
 
 
-Add an accordion
-================
+Adding an Accordion
+===================
 Now let's make some modifications to the interface.
 
 Use your favorite editor to edit widgetsdemo/python/widgetsdemo/actors/start.py
@@ -90,7 +90,7 @@ Refresh your browser and it should bring you to something like this:
    Figure 2. Tabs widget
 
 
-More widgets
+More Widgets
 ============
 
 To see more widgets, go to http://lubanui.org/aokuang
@@ -98,7 +98,7 @@ To see more widgets, go to http://lubanui.org/aokuang
 
 More
 ====
-Continue to :ref:`next tutorial "Forms" <form-tutorial>`
+Continue to the :ref:`next tutorial "Forms" <form-tutorial>`
 
 or back to 
 :ref:`"Tutorials" <user-tutorials>`

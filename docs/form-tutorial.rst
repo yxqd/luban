@@ -59,7 +59,7 @@ and change it into::
 	 	 
          return luban.a.establishInterface(frame)
 
-Refresh your browser and it should bring you to something similar to this:
+Refresh your browser and it should bring you to something like this:
 
 .. figure:: images/form.png
    :scale: 70%
@@ -90,7 +90,7 @@ and add the following method to the start actor::
          msg = "submitted: %s" % (kwds,)
          return luban.a.alert(msg)
 
-The start.py will look like::
+Now start.py will look like::
 
  import luban
  from luban.controller.Actor import Actor as base
@@ -145,12 +145,12 @@ You will be prompted with an alert message box like this:
    is returned from the handling routine that asks to show an
    alert message box with the submitted data.
 
-For in-depth discussion about using forms, 
-please go to :ref:`Working with form <user-guide-working-with-form>`.
+For an in-depth discussion about using forms, 
+please go to :ref:`Working with forms <user-guide-working-with-form>`.
 
 More
 ====
-Continue to :ref:`next tutorial "Make your web application dynamic" <dynamic-ui-tutorial>`
+Continue to the :ref:`next tutorial "Make your web application dynamic" <dynamic-ui-tutorial>`
 
 or back to 
 :ref:`"Tutorials" <user-tutorials>`

@@ -25,7 +25,7 @@ are taken care of by luban.
 Developers who are tired of messy UI logic
 ------------------------------------------
 
-Luban has a intentionally limited, but clean and easy-to-use syntax,
+Luban has an intentionally limited but clean and easy-to-use syntax
 that is dedicated to the specification of user interfaces.
 The design of luban encourages UI developers to write
 well-organized code.
@@ -42,6 +42,6 @@ See :ref:`advanced topics <advanced-topics>` for more details.
 
 User experience professionals
 -----------------------------
-Luban has a goal to provide a generic "language" for specifying
-user interface without the need to go into details in implementations.
+Luban has a goal of providing a generic "language" for specifying
+user interfaces without the need to go into the details of implementations.
 Please read :ref:`luban philosophy <philosophy>` for more details.

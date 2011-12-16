@@ -338,7 +338,7 @@ when it is needed::
     >>> container['<name>'] = <new-element>
 
 
-.. _user-guide-working-with-form:
+.. _user-guide-working-with-forms:
 
 Working with forms
 ~~~~~~~~~~~~~~~~~~

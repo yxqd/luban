@@ -146,7 +146,7 @@ You will be prompted with an alert message box like this:
    alert message box with the submitted data.
 
 For an in-depth discussion about using forms, 
-please go to :ref:`Working with forms <user-guide-working-with-form>`.
+please go to :ref:`Working with forms <user-guide-working-with-forms>`.
 
 More
 ====

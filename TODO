@@ -1,8 +1,7 @@
 
 core:
-* add LICENSE.py (dynamically created from license.txt using .merlin)
-  import it from __init__.py
-* change installation documentation to just use distribute and pip
+* FAQ: subelement missing name
+* luban.elements.ipagelink(label, actor, routine, *args, **kwds)
 * aokuang.timber: example of showing form input error
 * docs: explain how to work with statcounter and google analytics
 * "append" action should be specific to ElementContainer
@@ -15,40 +14,28 @@ core:
 * explain "luban-destroy" event in js lib
 * how to use luban.threaded_data? explain.
 * doc: decorator for handler functions
-* doc: decorator for requirement. kwd "replaceinterface"
+* doc: decorator for requirement. kwd "returntype"
 * doc: session
 * doc: select(element=...).getAttr(name) what are the allowed names? label/value
 * go through all ctors and check "super" calls
-* in scaffolding, make "sitemap" configurable. right now its fixed to <proj>.sitemap
-* core:Element.Meta: should think of a better way to generate ctor documentation
-  right now if a subclass of Element (an element type) does not define ctor itself
-  but just inherits it from its parent, the ctor documentation will be 
-  also inherited. We could either
-  - in debug mode, alert deverlopers every new types need a ctor
-  - find a way to dynamically show different ctor documentation depending on class type
-    does python3 support __doc__ as a function rather than just string?
-  test case see tests/luban/ui/elements/Splitter.py
-* think of change splitter implementation to use .left and .right
 * faq: how to load interface piece by piece to make it look faster
 * docs: FAQs: why another python web framework.
 * docs: tune up philosophy summary. mention vocabulary, words, ...
-* automatically transform actor routines to check the return type when luban
-  see an action of loading. for example
-    luban.a.select(id='a').replaceBy(newelement=luban.a.load(...))
-  here we should convert the actor/method combo mentioned in the "load" action
-  to check the return type
-* add a method to extend element base class with common element event types
 * decorators to decorate function parameters so that we can convert
   parameters to a required type ?
 * put luban extension example tar ball to danse download page to use the counter
-* check windows
 * docs: supported platforms
 * .merlin rule for extension tutorial needs to be combined with the documentation .merlin rule so we don't need to, for example, create symbolic link of "tutorials" by hand
 * tutorial docs
 * checking of event handler assigment probably should be configurable
   to be omitted -- see luban.ui.descriptors.EventHandler -- to speed up in production mode
-* client side cache (data store) -- is it really necessary. the server
-   side session seems to be good enough for now
+* in scaffolding, make "sitemap" configurable. right now its fixed to <proj>.sitemap
+
+luban extension:
+* add a method to extend element base class with common element event types
+
+release:
+* check windows
 
 aokuang:
 * show information about dependent js libraries
@@ -57,9 +44,38 @@ timber:
 * migrate things that are in _pending_ directories
 
 
+
 Done, but watch
 ---------------
+* add LICENSE.py (dynamically created from license.txt using .merlin)
+  import it from __init__.py
 * doc: select(element=..., type=...).<method>. type is string. type can be very specific, but could also be a base class like formfield.
 * doc: container[name] = newelement; container['#'+id] = newelement
 * remove "contents" from docstr genreated from getCtorDocStr
 * check _method raises error
+
+
+Think about it
+--------------
+
+* automatically transform actor routines to check the return type when luban
+  see an action of loading. for example
+    luban.a.select(id='a').replaceBy(newelement=luban.a.load(...))
+  here we should convert the actor/method combo mentioned in the "load" action
+  to check the return type
+
+* client side cache (data store) -- is it really necessary. the server
+   side session seems to be good enough for now
+
+* think of change splitter implementation to use .left and .right
+
+This one is not urgent because the public interface is luban.elements.<type>,
+so users should not bother with element __init__ method
+* core:Element.Meta: should think of a better way to generate ctor documentation
+  right now if a subclass of Element (an element type) does not define ctor itself
+  but just inherits it from its parent, the ctor documentation will be 
+  also inherited. We could either
+  - in debug mode, alert deverlopers every new types need a ctor
+  - find a way to dynamically show different ctor documentation depending on class type
+    does python3 support __doc__ as a function rather than just string?
+  test case see tests/luban/ui/elements/Splitter.py

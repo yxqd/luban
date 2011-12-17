@@ -100,7 +100,9 @@ class AttributeContainer(AbstractAttributeContainer, metaclass=Meta):
         
         attributes has higher priority over kwds
         """
-        super().__init__()
+        # AbstractAttributeContainer is abstract, we really don't
+        # need its ctor to have any effects
+        # super().__init__() 
 
         attributes = attributes or {}
         kwds.update(attributes)

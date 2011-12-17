@@ -12,6 +12,9 @@
 #
 
 
+# is this really in use?
+
+
 """
 this could be used to describe simple element actions
 in a more arbitrary way, when combined with ArbitraryElementActionFactory.
@@ -30,6 +33,7 @@ class SimpleElementAction(base):
     params = descriptors.dict() # parameters of the action
     
     
+    # overload ctor to provide better interface
     def __init__(self, element=None, actionname=None, **params):
         super().__init__(element=element, actionname=actionname, params=params)
         return

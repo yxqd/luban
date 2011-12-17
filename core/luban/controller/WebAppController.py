@@ -22,12 +22,17 @@ class WebAppController(ControllerBase):
         self, url,
         html_base='',  # base url of the site
         static_html_base='static',  # html_base/static_html_base gives the url of the static html root
-        actor_package=None, actor_packages = [],
         stylesheets = None, javascripts = None,
         web_weaver_library = None,
+        #
+        actor_package=None, actor_packages=None,
+        **kwds
         ):
         # init bases
-        super().__init__(actor_package=actor_package, actor_packages=actor_packages)
+        super().__init__(
+            actor_package=actor_package,
+            actor_packages=actor_packages,
+            **kwds)
         
         #
         self.url = url

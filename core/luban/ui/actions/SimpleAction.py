@@ -12,6 +12,9 @@
 #
 
 
+# is this really in use?
+
+
 from .Action import Action as base
 
 class SimpleAction(base):
@@ -32,8 +35,9 @@ class SimpleAction(base):
         return inspector.onSimpleAction(self)
 
 
+    # overload ctor to provide better interface
     def __init__(self, actionname, **params):
-        super(SimpleAction, self).__init__(actionname=actionname, params=params)
+        super().__init__(actionname=actionname, params=params)
         return
 
 

@@ -17,7 +17,7 @@ class ControllerBase:
 
     def __init__(
         self,
-        actor_package=None, actor_packages=[],
+        actor_package=None, actor_packages=None,
         default_actor="start",
         ):
         

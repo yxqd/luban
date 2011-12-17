@@ -4,6 +4,7 @@ import os
 
 commands = [
   'rm -rf hello && luban create hello',
+  'luban start hello',
   'rm -rf myext && luban creatext myext',
   ]
 

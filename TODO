@@ -1,44 +1,44 @@
 
 core:
-* FAQ: subelement missing name
 * luban.elements.ipagelink(label, actor, routine, *args, **kwds)
-* aokuang.timber: example of showing form input error
-* docs: explain how to work with statcounter and google analytics
 * "append" action should be specific to ElementContainer
+* go through all ctors and check "super" calls
+* .merlin rule for extension tutorial needs to be combined with the documentation .merlin rule so we don't need to, for example, create symbolic link of "tutorials" by hand
+* checking of event handler assigment probably should be configurable
+  to be omitted -- see luban.ui.descriptors.EventHandler -- to speed up in production mode
+* in scaffolding, make "sitemap" configurable. right now its fixed to <proj>.sitemap
+
+doc:
+* FAQ: subelement missing name
+* docs: explain how to work with statcounter and google analytics
 * intricate behavior of direct factory method on container type: 
   - create subelement
   - give it a default name
   - add it to the container
 * explain "destroy" action of luban dialog. explain we usually need to
   bind onclose event to destory action.
-* explain "luban-destroy" event in js lib
 * how to use luban.threaded_data? explain.
-* doc: decorator for handler functions
+* doc: decorator for handler functions and function parameters
 * doc: decorator for requirement. kwd "returntype"
 * doc: session
 * doc: select(element=...).getAttr(name) what are the allowed names? label/value
-* go through all ctors and check "super" calls
 * faq: how to load interface piece by piece to make it look faster
 * docs: FAQs: why another python web framework.
 * docs: tune up philosophy summary. mention vocabulary, words, ...
-* decorators to decorate function parameters so that we can convert
-  parameters to a required type ?
-* put luban extension example tar ball to danse download page to use the counter
 * docs: supported platforms
-* .merlin rule for extension tutorial needs to be combined with the documentation .merlin rule so we don't need to, for example, create symbolic link of "tutorials" by hand
 * tutorial docs
-* checking of event handler assigment probably should be configurable
-  to be omitted -- see luban.ui.descriptors.EventHandler -- to speed up in production mode
-* in scaffolding, make "sitemap" configurable. right now its fixed to <proj>.sitemap
 
 luban extension:
 * add a method to extend element base class with common element event types
+* explain "luban-destroy" event in js lib
+* put luban extension example tar ball to danse download page to use the counter
 
 release:
 * check windows
 
 aokuang:
 * show information about dependent js libraries
+* aokuang.timber: example of showing form input error
 
 timber:
 * migrate things that are in _pending_ directories

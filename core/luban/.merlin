@@ -1,5 +1,17 @@
 # -*- python -*-
 
+
+# create license.py if not exists
+def create_license_py():
+    target = 'license.py'
+    src = '../../LICENSE'
+    content = open(src).read()
+    content = 'text = """%s"""' % content
+    open(target, 'wt').write(content)
+    return
+create_license_py()
+
+
 import merlin.rules, os
 from merlin.Context import create
 context = create()

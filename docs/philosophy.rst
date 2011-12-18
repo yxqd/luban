@@ -314,8 +314,16 @@ luban types to describe UI elements, actions,
 and events, and their connections through attributes and also
 a controller.
 
-.. In the next section, we will discuss to how to 
-.. program luban with python. 
-.. next: :ref:`core-implementation-python`
+We could implement luban using xml or other languages,
+but we chose python 3 as its first and currently
+only implementation language because python 3 has great
+meta-programming support and because python is quite popular 
+among data scientists/researchers, 
+the original (and still the most important) target
+users of luban applications.
+
+In the next section, we will discuss how 
+luban is implemented using python:
+:ref:`core-python-impl`
 
 

@@ -9,6 +9,64 @@
 #}
 {% extends "basic/layout.html" %}
 
+{# overload sidebar to add "share" section #}
+{%- macro mysidebar() %}
+      {%- if render_sidebar %}
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+          {%- block sidebarlogo %}
+          {%- if logo %}
+            <p class="logo"><a href="{{ pathto(master_doc) }}">
+              <img class="logo" src="{{ pathto('_static/' + logo, 1) }}" alt="Logo"/>
+            </a></p>
+          {%- endif %}
+          {%- endblock %}
+          {%- if sidebars != None %}
+            {#- new style sidebar: explicitly include/exclude templates #}
+            {%- for sidebartemplate in sidebars %}
+            {%- include sidebartemplate %}
+            {%- endfor %}
+          {%- else %}
+            {#- old style sidebars: using blocks -- should be deprecated #}
+            {%- block sidebartoc %}
+            {%- include "localtoc.html" %}
+            {%- endblock %}
+            {%- block sidebarrel %}
+            {%- include "relations.html" %}
+            {%- endblock %}
+            {%- block sidebarsourcelink %}
+            {%- include "sourcelink.html" %}
+            {%- endblock %}
+            {%- if customsidebar %}
+            {%- include customsidebar %}
+            {%- endif %}
+            {%- block sidebarsearch %}
+            {%- include "searchbox.html" %}
+            {%- endblock %}
+          {%- endif %}
+
+	<div class="share">
+	  <h3>Share</h3>
+	  <div>
+	    <g:plusone size="medium" annotation="inline"></g:plusone>
+	  </div>
+	  <div class="fb-like" data-href="http://lubanui.org" data-send="false" data-width="450" data-layout="button_count" data-show-faces="false" data-colorscheme="light" data-font="lucida grande"></div>
+	</div>
+
+        </div>
+
+      </div>
+      {%- endif %}
+{%- endmacro %}
+
+{%- block sidebar2 %}
+{{ mysidebar() }}
+{% endblock %}
+
+
+{# 
+   add javascripts
+#}
 {% set metatags = '''<!-- Start of StatCounter Code for Default Guide -->
 <script type="text/javascript">
 var sc_project=7494637; 
@@ -25,8 +83,27 @@ src="http://www.statcounter.com/counter/counter.js"></script>
 </script>
 <!-- google analytics -->
 
+<!-- google plus one -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement("script"); po.type = "text/javascript"; po.async = true;
+    po.src = "https://apis.google.com/js/plusone.js";
+    var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, "script", "facebook-jssdk"));</script>
+
 ''' %}
 
 {% if theme_collapsiblesidebar|tobool %}
 {% set script_files = script_files + ['_static/sidebar.js'] %}
 {% endif %}
+

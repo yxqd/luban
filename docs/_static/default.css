@@ -137,6 +137,23 @@ div.sphinxsidebar input {
     font-size: 1em;
 }
 
+div.sphinxsidebar div.share {
+    -moz-border-radius: 0.3em;
+    -webkit-border-radius: 0.3em;
+    border-radius: 0.3em;
+
+    padding: 0.5em;
+    margin: 4em 0.5em 0 0;
+    background-color: #d5d5e0;
+    border: 2px solid white;
+}
+div.sphinxsidebar div.share h3{
+    color: black;
+}
+div.sphinxsidebar div.share div{
+    margin: 0.5em;
+}
+
 /* -- body styles ----------------------------------------------------------- */
 
 a {

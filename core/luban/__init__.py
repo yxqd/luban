@@ -52,24 +52,8 @@ def load_extension(ext):
     Extension loaded later coule override the earlier one
     if extension_allow_override is True.
     """
-    from .weaver.web.libraries.default import bundle as lib_bundle
-    from .weaver.web.Library import Library
-    
-    module = '%s.luban_ext' % ext
-    module = __import__(module, fromlist = [''])
-    # 
-    if hasattr(module, 'weaver_web_lib_extensions'):
-        for name, exts in module.weaver_web_lib_extensions:
-            Library.get(name).extends(**exts)
-            continue
-        pass
-    
-    # obsolete
-    if hasattr(module, "jsfiles_toload_onstart"):
-        import warnings
-        warnings.warn("jsfiles_toload_onstart is obsolete. use weaver_web_lib_extensions")
-
-    return
+    from .extension import loader
+    return loader.load1(ext)
 
 
 def load_extensions(extensions):
@@ -79,10 +63,8 @@ def load_extensions(extensions):
     Extension loaded later coule override the earlier one
     if extension_allow_override is True.
     """
-    for ext in extensions:
-        load_extension(ext)
-        continue
-    return
+    from .extension import loader
+    return loader.load(extensions)
 
 
 # if in interactive mode, load "timber" by default

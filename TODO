@@ -41,6 +41,7 @@ aokuang:
 * aokuang.timber: example of showing form input error
 
 timber:
+* plotter
 * migrate things that are in _pending_ directories
 
 

@@ -58,6 +58,14 @@ class Library:
         self.dependencies = dependencies or []
         self.website = website
         return
+
+
+    def extends(self, css=None, javascripts=None, dependencies=None):
+        "extend this library to add new stylesheets, javascript modules, or dependencies"
+        if css: self.css += css
+        if javascripts: self.javascripts += javascripts
+        if dependencies: self.dependencies += dependencies
+        return
     
     
     def __repr__(self):

@@ -23,8 +23,8 @@ renderer that create a directory tree in the file system for a luban extension
 
 
 class Renderer:
-
-
+    
+    
     def render(self, project, root='.', onconflict='skip'):
         """
         """
@@ -74,9 +74,27 @@ luban_ext_py = """
 # all files in that directory will be copied into "static" directory of the deployment
 static_dir = 'static' 
 
-# should list all js files that needs to be loaded at the start
-jsfiles_toload_onstart = [
+# extension of luban weaver web libs
+# it should be a sequence of 2-tuples.
+# each 2-tuple represent an extension of a library.
+# each 2-tuple is in the form of
+#
+#   (name, extensions)
+#
+# where name is the name of the library to extend,
+# and extensions is a dictionary describing the extension:
+#
+#   {'css': ...css files... ,
+#    'javascripts': ...javascript modules... ,
+#    'dependencies': ...dependent libraries... ,
+#   }
+#
+weaver_web_lib_extensions = [
+    # (<name of library>, <dictionary of extensions>)
+    # for example
+    # ('luban.core', {'css': ..., 'javascripts': ..., 'dependencies': ...})
     ]
+
 """
 
 

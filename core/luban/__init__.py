@@ -52,14 +52,22 @@ def load_extension(ext):
     Extension loaded later coule override the earlier one
     if extension_allow_override is True.
     """
-    from .weaver.web.libraries.default import base
+    from .weaver.web.libraries.default import bundle as lib_bundle
+    from .weaver.web.Library import Library
     
     module = '%s.luban_ext' % ext
     module = __import__(module, fromlist = [''])
     # 
-    if hasattr(module, 'jsfiles_toload_onstart'):
-        base['javascripts'] += module.jsfiles_toload_onstart
+    if hasattr(module, 'weaver_web_lib_extensions'):
+        for name, exts in module.weaver_web_lib_extensions:
+            Library.get(name).extends(**exts)
+            continue
         pass
+    
+    # obsolete
+    if hasattr(module, "jsfiles_toload_onstart"):
+        import warnings
+        warnings.warn("jsfiles_toload_onstart is obsolete. use weaver_web_lib_extensions")
 
     return
 

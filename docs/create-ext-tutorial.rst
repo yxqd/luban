@@ -67,15 +67,15 @@ Furthermore, this luban_ext.py must define a few variables to let luban know
 the details of this extension:
 
 * static_dir: the relative path to the directory with all the static web files (js/css/images). By default, this is set to "static", and there is already a "static" subdirectory in the new extension created by "luban creatext" command
-* jsfiles_toload_onstart: a list of javascript files under <static_dir>/javascripts that must be loaded at the start of serving a luban application
+* weaver_web_lib_extensions: a sequence of extensions of luban web weaver libraries
   
 
 For this tutorial, we will modify luban_ext.py to look like::
 
  static_dir = 'static' 
 
- jsfiles_toload_onstart = [
-     'lubanext.hideshow.js',
+ weaver_web_lib_extensions = [
+     ('luban.core', {'javascripts': ['lubanext.hideshow.js']})
      ]
  
  

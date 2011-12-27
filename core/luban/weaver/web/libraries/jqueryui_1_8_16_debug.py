@@ -33,7 +33,8 @@ core = Library(
     javascripts = core,
     dependencies = [
     'qunit', 'jquery.metadata', 'jquery.cookie', 'jquery.bgiframe',
-    ]
+    ],
+    website = 'http://jqueryui.com',
     )
 
 

@@ -12,26 +12,16 @@
 #
 
 
-root = 'jquery/jquery-ui-1.8.16'
-dev = '%s/development-bundle' % root
+css = 'luban.css'
+js = 'luban/luban-core-mini.js'
 
 from ..Library import Library
-
-widgets = [
-    'tabs',
-    'accordion',
-    'dialog',
-    'progressbar',
-    ]
-
-for widget in widgets:
-    js = '%s/ui/%s' % (dev, 'jquery.ui.%s.js' % widget)
-    lib = Library(
-        'jqueryui.%s' % widget,
-        javascripts = [js],
-        dependencies = ['jqueryui.core'],
-        )
-    continue
+Library(
+    'luban.core',
+    css = [css],
+    javascripts = [js],
+    dependencies = ['jqueryui.core'],
+    )
 
 
 # End of file 

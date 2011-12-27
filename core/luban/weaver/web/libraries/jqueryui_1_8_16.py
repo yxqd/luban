@@ -12,12 +12,13 @@
 #
 
 
-import luban
-if luban.debug:
-    from .debug_bundle import bundle
-    
-else:
-    from .production_bundle import bundle
-
+from ..Library import Library
+Library(
+    name = 'jqueryui.core',
+    css = ['jquery-ui-1.8.16/ui-lightness/jquery-ui-1.8.16.custom.css'],
+    javascripts = ['jquery/jquery-ui-1.8.16/js/jquery-ui-1.8.16.custom.min.js'],
+    dependencies = ['jquery'],
+    website = 'http://jqueryui.com',
+    )
 
 # End of file 

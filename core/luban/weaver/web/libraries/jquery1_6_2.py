@@ -12,26 +12,11 @@
 #
 
 
-base = {
-    'stylesheets': 
-    (
-    'jquery-ui-1.8.16/ui-lightness/jquery-ui-1.8.16.custom.css',
-    'luban.css',
-    ),
-    
-    'javascripts':
-    (
-    'jquery/jquery-1.6.2.min.js',
-    'jquery/jquery-ui-1.8.16/js/jquery-ui-1.8.16.custom.min.js',
-    'luban/luban-core-mini.js',
+from ..Library import Library
+Library(
+    name = 'jquery',
+    javascripts = ['jquery/jquery-1.6.2.min.js'],
+    website = 'http://jquery.com',
     )
-    }
-
-
-application = {
-    }
-
-__all__ = ['base', 'application']
-
 
 # End of file 

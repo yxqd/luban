@@ -12,12 +12,13 @@
 #
 
 
-import luban
-if luban.debug:
-    from .debug_bundle import bundle
+from ..Bundle import Bundle
+
+from . import jquery1_6_2, jqueryui_1_8_16
+from . import jquery_ext
+from . import luban_core
+bundle = Bundle(
+    base = ['luban.core'],
+    )
     
-else:
-    from .production_bundle import bundle
-
-
 # End of file 

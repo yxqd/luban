@@ -52,14 +52,16 @@ luban.utils = {};
   });
 
 
-  // XXX: need revisit here
+  // XXX: need revisit this
   // this is necessary for avoiding problem in IE
   $.ajaxSetup({cache: false});
 
+  /* obsolete
   function confirmBrowseAway()
   {
     return "!!! Please note that this site does not support browser's \"Back\" button !!!";
   }
+  */
   // window.onbeforeunload = confirmBrowseAway;
 
 

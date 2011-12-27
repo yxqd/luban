@@ -137,11 +137,6 @@ for this site, and
                 librarian.iterJavaScriptLibs(
                 widget, exclude_libs=exclude_libs)
                 )
-            exclude_libs += list(
-                l.name 
-                for l in librarian.iterLibraries(
-                widget, exclude_libs=exclude_libs)
-                )
             d = {'javascripts': jslibs, 'stylesheets': stylesheets}
             d = jsonEncode(d)
             self.javascript_target.main += ["luban.widgets.implementationRegistry.%s = %s;" % (widget, d) ]

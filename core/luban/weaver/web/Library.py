@@ -32,7 +32,12 @@ class Library:
         return
     
     
-    def __init__(self, name, css=None, javascripts=None, dependencies=None, replace=False):
+    def __init__(
+        self, name,
+        css=None, javascripts=None, dependencies=None,
+        website = None,
+        replace=False):
+        
         if name in self.registry and not replace:
             old = self.get(name)
             raise RuntimeError("attempt to register library %r(css=%r, javascripts=%r, deps=%r) failed. already registered as %s." % (
@@ -51,6 +56,7 @@ class Library:
         self.css = css or []
         self.javascripts = javascripts or []
         self.dependencies = dependencies or []
+        self.website = website
         return
     
     

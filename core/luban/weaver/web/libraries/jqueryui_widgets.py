@@ -27,14 +27,22 @@ core = [
 
 
 from ..Library import Library
-core = Library(
-    'jqueryui.core',
-    css = ['jquery-ui-1.8.16/ui-lightness/jquery-ui-1.8.16.custom.css'],
-    javascripts = core,
-    dependencies = [
-    'qunit', 'jquery.metadata', 'jquery.cookie', 'jquery.bgiframe',
+
+widgets = [
+    'tabs',
+    'accordion',
+    'dialog',
+    'progressbar',
     ]
-    )
+
+for widget in widgets:
+    js = '%s/ui/%s' % (dev, 'jquery.ui.%s.js' % widget)
+    lib = Library(
+        'jqueryui.%s' % widget,
+        javascripts = [js],
+        dependencies = ['jqueryui.core'],
+        )
+    continue
 
 
 # End of file 

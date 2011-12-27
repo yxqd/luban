@@ -55,6 +55,8 @@ output = 'weaver/web/javascripts/luban/luban-core-mini.js'
 cmd = 'yui-compressor -o %s %s' % (output, merged)
 if os.system(cmd):
     raise RuntimeError("%r failed" % cmd)
+# clean up
+os.remove(merged)
 
 
 # export css and js files

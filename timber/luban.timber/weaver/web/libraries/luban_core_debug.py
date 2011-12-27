@@ -15,17 +15,14 @@
 from luban.weaver.web.Library import Library
 from luban.weaver.web.libraries import luban_core_debug
 
+from .luban_timber_core_js_modules import modules as js_mods
+
 lib = Library.get('luban.core')
 lib.css += [
     'luban.timber.css',
     ]
-lib.javascripts += [
-    'luban.timber/elementactioncompiler.js',
-    'luban.timber/widget-base.js',
-    'luban.timber/history.js',
-    # common utils for form elements
-    'luban.timber/widgets/form-element-basic.js',
-    ]
+lib.javascripts += ['luban.timber/%s' % m for m in js_mods]
+
 lib.dependencies += [
     # history
     'jquery.history',

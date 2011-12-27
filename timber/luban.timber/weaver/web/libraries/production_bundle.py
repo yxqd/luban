@@ -12,15 +12,15 @@
 #
 
 
-from luban.weaver.web.libraries import jquery1_6_2_debug, jqueryui_1_8_16_debug
+from luban.weaver.web.libraries import jquery1_6_2, jqueryui_1_8_16
 from . import jquery_ext
 from . import blueimp_fileupload, jquery_cycle, prettify
-from . import luban_core_debug, luban_widgets_debug
+from . import luban_core
 
 
-from luban.weaver.web.libraries.debug_bundle import bundle
+from luban.weaver.web.libraries.production_bundle import bundle
 
-from .luban_widgets_debug import elements
+from .luban_widgets import elements
 kwds = {}
 for e in elements:
     setattr(bundle, e, ['luban.widgets.%s' % e])

@@ -12,11 +12,20 @@
 #
 
 
-import luban
-if luban.debug:
-    from .debug_bundle import bundle
-    
-else:
-    from .production_bundle import bundle
+from luban.weaver.web.Library import Library
+from luban.weaver.web.libraries import luban_core
+
+lib = Library.get('luban.core')
+lib.css += [
+    'luban.timber.css',
+    ]
+lib.javascripts += [
+    'luban.timber/luban.timber-core-mini.js',
+    ]
+lib.dependencies += [
+    # history
+    'jquery.history',
+    ]
+
 
 # End of file 

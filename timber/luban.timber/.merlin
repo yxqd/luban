@@ -15,6 +15,36 @@ rules.append(
 recurse_entries = []
 
 
+# create minified js files for luban
+def get_luban_timber_core_js_modules():
+    f = 'weaver/web/libraries/luban_timber_core_js_modules.py'
+    s = open(f).read()
+    d = {}
+    exec(s, d)
+    return  d['modules']
+def merge_luban_timber_core_js_modules(modules):
+    dir  = 'weaver/web/javascripts/luban.timber'
+    all = []
+    for mod in modules:
+        f = os.path.join(dir, mod)
+        s = open(f).read()
+        all.append(s)
+        continue
+
+    all = '\n'.join(all)
+    return all
+modules = get_luban_timber_core_js_modules()
+merged = merge_luban_timber_core_js_modules(modules)
+output = 'weaver/web/javascripts/luban.timber/luban.timber-core-merged.js'
+open(output,'w').write(merged)
+# minify
+merged = output
+output = 'weaver/web/javascripts/luban.timber/luban.timber-core-mini.js'
+cmd = 'yui-compressor -o %s %s' % (output, merged)
+if os.system(cmd):
+    raise RuntimeError("%r failed" % cmd)
+# clean up
+os.remove(merged)
 
 # export css and js files
 def rsync(src, target):

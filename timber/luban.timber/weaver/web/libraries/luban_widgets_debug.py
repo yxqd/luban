@@ -54,9 +54,13 @@ for element in elements:
     continue
 
 
+Library.get('luban.widgets.accordion').dependencies = ['jqueryui.accordion']
 Library.get('luban.widgets.codeviewer').dependencies = ['prettify']
-Library.get('luban.widgets.uploader').dependencies = ['blueimp-fileupload']
+Library.get('luban.widgets.uploader').dependencies = [
+    'blueimp-fileupload', 'jqueryui.progressbar']
 Library.get('luban.widgets.slides').dependencies = ['jquery.cycle']
+Library.get('luban.widgets.progressbar').dependencies = ['jqueryui.progressbar']
+Library.get('luban.widgets.dialog').dependencies = ['jqueryui.dialog']
 
 
 # End of file 

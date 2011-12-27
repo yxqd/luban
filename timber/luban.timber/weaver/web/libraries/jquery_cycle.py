@@ -11,8 +11,11 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-
-from .debug_bundle import bundle
-
+from luban.weaver.web.Library import Library
+lib = Library(
+    name = 'jquery.cycle',
+    javascripts = ['jquery.ext/jquery.cycle.all.js'],
+    )
 
 # End of file 
+

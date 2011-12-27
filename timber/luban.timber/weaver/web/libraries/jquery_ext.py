@@ -11,22 +11,23 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-# "database" of external js libraries 
 
+from luban.weaver.web.libraries import jquery_ext
 
-modules = [
-    'blueimp_fileupload',
-    'jquery',
-    'prettify',
-    'jquery_cycle',
-    ]
+from luban.weaver.web.Library import Library
 
-def importAll():
-    for name in modules:
-        __import__(name, fromlist=['.'], globals=globals())
-        continue
-    return
-importAll()
+root = 'jquery.ext'
+jsp = lambda j: '%s/%s' % (root, j)
+
+Library(
+    name='jquery.history',
+    javascripts = [jsp('jquery.history.js')],
+    )
+
+Library(
+    name='jquery.iframe-transport',
+    javascripts = [jsp('jquery.iframe-transport.js')],
+    )
 
 
 # End of file 

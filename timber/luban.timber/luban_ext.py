@@ -18,10 +18,10 @@ static_javascripts = "weaver/web/javascripts"
 
 
 # .. set default weaver web library
-from luban.weaver.web import set_default_library_for_weaver
+from luban.weaver.web import set_default_library_bundle_for_weaver
 from .weaver.web.libraries import default
-set_default_library_for_weaver(default)
-del default, set_default_library_for_weaver
+set_default_library_bundle_for_weaver(default.bundle)
+del default, set_default_library_bundle_for_weaver
 
 
 # End of file 

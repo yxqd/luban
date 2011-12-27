@@ -12,7 +12,14 @@
 #
 
 
-from .debug_bundle import bundle
-
+from luban.weaver.web.Library import Library
+lib = Library(
+    name = 'prettify',
+    css = ['other/prettify/prettify.css'],
+    javascripts = ['other/prettify/prettify.js'],
+    website = "http://code.google.com/p/google-code-prettify/",
+    )
 
 # End of file 
+
+

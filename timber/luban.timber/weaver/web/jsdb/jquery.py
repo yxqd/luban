@@ -1,1 +1,0 @@
-website = "http://jquery.com"

@@ -12,7 +12,16 @@
 #
 
 
-from .jquery1_6_2_debug import *
-
+# XXXX
+# luban core js lib knows about default position of luban widget js libs
+# so "javascripts" is an empty list.
+# is this really a good strategy?
+# XXXX
+from ..Library import Library
+Library(
+    "luban.widgets.tabs",
+    javascripts = [],
+    dependencies = ['jqueryui.tabs'],
+    )
 
 # End of file 

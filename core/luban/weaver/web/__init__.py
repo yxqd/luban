@@ -15,7 +15,7 @@
 def create(htmlbase='', controller_url='/controller/main.cgi',
            statichtmlbase='', cssbase='css', jsbase='javascripts', imagesbase='images',
            cookie_path='', use_cookie=False,
-           library = None,
+           library_bundle = None,
            output_as_lines = False
            ):
     '''create a weaver that weaves html or json output out of luban UI specifications
@@ -28,7 +28,7 @@ def create(htmlbase='', controller_url='/controller/main.cgi',
 * imagesbase: the path of the root of the images relative to statichtmlbase
 * cookie_path: the path for cookie
 * use_cookie: if True, cookie will be used
-* library: the javascript/css plugin library to render luban widgets and actions. if not specified, a default library will be used
+* library_bundle: the javascript/css plugin library bundle to render luban widgets and actions. if not specified, a default library bundle will be used
 * output_as_lines: if true, output will ba a list of lines
     '''
     #
@@ -57,16 +57,16 @@ def create(htmlbase='', controller_url='/controller/main.cgi',
     weaver.obj2html.librarian = Librarian(cssbase=cssbase, jsbase=jsbase)
     
     # load the library
-    weaver.use_library(library)
+    weaver.use_library_bundle(library_bundle)
 
     #
     return weaver
 
 
-def set_default_library_for_weaver(library):
+def set_default_library_bundle_for_weaver(bundle):
     from .Weaver import Weaver
-    Weaver.default_library = library
-    return library
+    Weaver.default_bundle = bundle
+    return bundle
 
 
 # End of file 

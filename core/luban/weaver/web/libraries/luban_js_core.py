@@ -4,7 +4,7 @@
 #
 #                                   Jiao Lin
 #                      California Institute of Technology
-#                      (C) 2006-2011  All Rights Reserved
+#                      (C) 2006-2010  All Rights Reserved
 #
 # {LicenseText}
 #
@@ -12,7 +12,16 @@
 #
 
 
-from .jquery1_6_2_debug import *
+modules = [
+    'luban-core.js',
+    'luban-controller.js',
+    'luban-credential.js',
+    'luban-compiler-preloader.js',
+    'luban-actioncompiler.js',
+    'luban-documentmill.js',
+    'luban-widget-core.js',
+    'luban-elementactioncompiler.js',
+    ]
 
 
 # End of file 

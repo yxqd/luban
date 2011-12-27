@@ -23,7 +23,7 @@ class WebAppController(ControllerBase):
         html_base='',  # base url of the site
         static_html_base='static',  # html_base/static_html_base gives the url of the static html root
         stylesheets = None, javascripts = None,
-        web_weaver_library = None,
+        web_weaver_library_bundle = None,
         #
         actor_package=None, actor_packages=None,
         **kwds
@@ -45,10 +45,10 @@ class WebAppController(ControllerBase):
             htmlbase = html_base,
             controller_url = url,
             statichtmlbase=static_html_base)
-        # in case a custom web weaver library is supplied
+        # in case a custom web weaver library bundle is supplied
         # use it
-        if web_weaver_library:
-            weaver.use_library(web_weaver_library)
+        if web_weaver_library_bundle:
+            weaver.use_library_bundle(web_weaver_library_bundle)
 
         #
         stylesheets = stylesheets or self.stylesheets or []

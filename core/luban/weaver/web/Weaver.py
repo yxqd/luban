@@ -67,7 +67,7 @@ class Weaver:
         return self.obj2json.render(specification)
 
     
-    def use_library(self, library):
+    def use_library_bundle(self, bundle):
         '''make use of the given library 
         a library contains information regarding javascript module
         and css module for luban base, widgets, and the application
@@ -76,38 +76,24 @@ class Weaver:
           to be a dictionary 
           of {'stylesheets': <list>, 'javascripts': <list>}
         '''
-        library = library or self.default_library
-        for k in dir(library):
-            # skip private props
-            if k.startswith('_'): continue
-            # 
-            v = getattr(library, k)
-            try:
-                v.get
-            except AttributeError:
-                m = "%s=%r" % (k,v)
-                m += "is not a valid entry in a luban web weaver library."
-                m += "it must be dict-like."
-                m += "The problematic library is %r" % (library,)
-                raise RuntimeError(m)
-            #
-            stylesheets = v.get('stylesheets') or []
-            javascripts = v.get('javascripts') or []
-            #
-            self.obj2html.librarian.register(k, stylesheets, javascripts)
+        bundle = bundle or self.default_bundle
+        for name in dir(bundle):
+            if name.startswith('_'): continue
+            libs = getattr(bundle, name)
+            self.obj2html.librarian.register(name, libs)
             continue
         return
-    from .libraries import default as default_library
+    from .libraries.default import bundle as default_bundle
 
 
     def customize_application(self, stylesheets=None, javascripts=None):
         """tell the weaver where to find the css modules
         specific for the current application
         """
-        self.obj2html.librarian.register(
-            'application',
-            stylesheets, javascripts,
-            )
+        from .Library import Library
+        Library('app', css=stylesheets, javascripts=javascripts, replace=True)
+        self.obj2html.librarian.register('application', ['app'])
+        return
 
 
 # End of file 

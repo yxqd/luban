@@ -25,35 +25,17 @@ class TestCase(unittest.TestCase):
         frame = luban.e.frame(title='test frame', name='frame')
         document = frame.document(name='document')
         p = document.paragraph(name='p')
+        action = luban.a.establishInterface(frame)
         
         # frame->htmldoc renderer
-        from luban.weaver.web.Librarian import Librarian
-        librarian = Librarian()
-
-        from luban.weaver.web.Library import Library
-        base = Library('base', ['myproject.css'], ['luban-base.js'])
-        librarian.register('base', ['base'])
-        
-        from luban.weaver.web.JsonReprRenderer import JsonReprRenderer
-        obj2json = JsonReprRenderer()
-        from luban.weaver.web.Frame2HtmlDocument import Frame2HtmlDocument
-        mill = Frame2HtmlDocument(librarian=librarian, obj2json=obj2json)
-        
-        # htmldoc
-        from luban.weaver.web.content.HtmlDocument import HtmlDocument
-        htmldoc = HtmlDocument()
-        
-        # frame->htmldoc
-        body, jsdoc = mill.render(frame, html_target=htmldoc)
-        
-        # htmldoc -> text
-        from luban.weaver.web.renderer import render
-        texts = render(htmldoc, javascriptdoc = jsdoc)
+        from luban.weaver.web import create
+        weaver = create()
+        text = weaver.weave(action)
         
         #
-        filename = 'out-HtmlRenderer-breakdown-test.html'
+        filename = 'out-t2.html'
         out = open(filename, 'w')
-        print('\n'.join(texts), file=out)
+        print(text, file=out)
         
         return
      

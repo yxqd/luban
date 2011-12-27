@@ -96,10 +96,10 @@ for this site, and
         htmlroot = html_target.root
             
         librarian = self.librarian
-        for category in ['base', 'application']:
-            for stylesheet in librarian.getStyleSheets(widget=category):
+        for category in librarian.reserved:
+            for stylesheet in librarian.iterStyleSheets(category):
                 htmlroot.stylesheet(url=stylesheet)
-            for jslib in librarian.getJavaScriptLibs(widget=category):
+            for jslib in librarian.iterJavaScriptLibs(category):
                 javascript_target.include(script=jslib)
 
         # the body wrapper div
@@ -123,10 +123,25 @@ for this site, and
                 )
             
         #
+        getliblist = lambda f: list(l.name for l in librarian.iterLibraries(f))
+        exclude_libs = []
+        for r in librarian.reserved: exclude_libs += getliblist(r)
+        
         for widget in librarian.iterWidgets():
             if not widget: continue
-            stylesheets = librarian.getStyleSheets(widget=widget)
-            jslibs = librarian.getJavaScriptLibs(widget=widget)
+            stylesheets = list(
+                librarian.iterStyleSheets(
+                widget, exclude_libs=exclude_libs)
+                )
+            jslibs = list(
+                librarian.iterJavaScriptLibs(
+                widget, exclude_libs=exclude_libs)
+                )
+            exclude_libs += list(
+                l.name 
+                for l in librarian.iterLibraries(
+                widget, exclude_libs=exclude_libs)
+                )
             d = {'javascripts': jslibs, 'stylesheets': stylesheets}
             d = jsonEncode(d)
             self.javascript_target.main += ["luban.widgets.implementationRegistry.%s = %s;" % (widget, d) ]

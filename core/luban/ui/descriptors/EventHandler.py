@@ -11,6 +11,8 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
+from luban import py_major_ver
+
 
 from .Property import Property
 class EventHandler(Property):
@@ -23,7 +25,11 @@ class EventHandler(Property):
     
     
     def __get__(self, instance, cls):
-        v = super().__get__(instance, cls)
+        if py_major_ver == 2:
+            v = super(EventHandler, self).__get__(instance, cls)
+        elif py_major_ver == 3:
+            v = super().__get__(instance, cls)
+            
         if self.notnull:
             from ..actions.NoAction import NoAction
             if isinstance(v, NoAction):
@@ -42,16 +48,21 @@ class EventHandler(Property):
             from ..actions.NoAction import NoAction
             value = NoAction()
 
+        if py_major_ver == 2:
+            superme = super(EventHandler, self)
+        elif py_major_ver == 3:
+            superme = super()
+            
         # list/tuple
         if isinstance(value, list) or isinstance(value, tuple):
             for item in value:
                 self._checkAction(item)
                 continue
-            return super().__set__(instance, value)
+            return superme.__set__(instance, value)
 
         # value has to be an action
         self._checkAction(value)
-        return super().__set__(instance, value)
+        return superme.__set__(instance, value)
 
 
     def _checkAction(self, action):

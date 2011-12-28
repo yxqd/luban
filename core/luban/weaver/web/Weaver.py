@@ -22,6 +22,7 @@ weaver.weave(luban_obj)
 """
 
 
+
 impl = """
 
 "use" relations
@@ -35,7 +36,10 @@ weaver
 """
 
 
-class Weaver:
+from luban import py_major_ver
+
+
+class Weaver(object):
 
 
     def __init__(self):
@@ -49,14 +53,13 @@ class Weaver:
         return
 
 
-    @property
-    def obj2json(self): return self._obj2json
-    @obj2json.setter
-    def obj2json(self, obj2json):
+    def set_obj2json(self, obj2json):
         self._obj2json = obj2json
         self.obj2html.obj2json = obj2json
         return obj2json
-    
+    def get_obj2json(self): return self._obj2json
+    obj2json = property(get_obj2json, set_obj2json)
+        
 
     def weave(self, specification):
         """create output from the given UI specification

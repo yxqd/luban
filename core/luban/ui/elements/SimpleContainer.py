@@ -14,13 +14,10 @@
 
 from .SubElementFactory import SubElementFactory
 from .ElementContainer import ElementContainer, Meta
-class SimpleContainer(SubElementFactory, ElementContainer, metaclass=Meta):
-
-    abstract = True
-    
-    pass
-
-# version
-__id__ = "$Id$"
+SimpleContainer = Meta(
+    "SimpleContainer",
+    (SubElementFactory, ElementContainer),
+    {'abstract': True}
+    )
 
 # End of file 

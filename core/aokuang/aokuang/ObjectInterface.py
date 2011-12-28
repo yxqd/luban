@@ -23,7 +23,7 @@ decorations to inspect:
 import luban
 
 
-class Factory:
+class Factory(object):
 
 
     object_type = None # target object type this factory will build interface for

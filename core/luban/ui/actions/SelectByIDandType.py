@@ -12,9 +12,19 @@
 #
 
 
+from luban import py_major_ver
+if py_major_ver == 2:
+    from luban.ui import descriptors
+
+
 from .ElementActionFactory import ElementActionFactory
 from .SelectingActionBase import SelectingActionBase as base, Meta
-class SelectByIDandType(ElementActionFactory, base, metaclass=Meta):
+_selectbyidandtype = Meta(
+    '_selectbyidandtype',
+    (ElementActionFactory, base),
+    {'abstract': 1}
+    )
+class SelectByIDandType(_selectbyidandtype):
 
     # decorations
     simple_description = 'select an element by its ID and optionally its type'
@@ -23,7 +33,6 @@ class SelectByIDandType(ElementActionFactory, base, metaclass=Meta):
         "The constructed selector can be used to perform further "
         "actions on the selected element. Eg. selector.destory(). "
         )
-    
 
     # attributes
     id = descriptors.str()

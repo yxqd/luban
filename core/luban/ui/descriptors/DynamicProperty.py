@@ -11,6 +11,8 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
+from luban import py_major_ver
+
 
 from .Property import Property
 class DynamicProperty(Property):
@@ -29,8 +31,11 @@ class DynamicProperty(Property):
             store = self._get_prop_store(instance)
             store[self.name] = value
             return value
-        
-        return super().__set__(instance, value)
+
+        if py_major_ver == 2:
+            return super(DynamicProperty, self).__set__(instance, value)
+        else:
+            return super().__set__(instance, value)
 
 
 # End of file 

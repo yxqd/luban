@@ -21,7 +21,7 @@ class Dict2Object:
 
 
     def __init__(self):
-        from ..ui.meta.TypeRegistryCurator import registry
+        from ..ui.meta.TypeRegistry import registry
         self.typename2type = registry
         return
 

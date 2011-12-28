@@ -12,7 +12,7 @@
 #
 
 
-from ..meta.TypeRegistryCurator import registry
+from ..meta.TypeRegistry import registry
 from .ElementBase import ElementBase
 from .Element import Element
 

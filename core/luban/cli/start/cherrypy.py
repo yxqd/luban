@@ -71,7 +71,12 @@ def modifyConfigration(conf, **kwds):
 
 def createNewConfig(conf, port=None):
     # parser
-    from configparser import SafeConfigParser as ConfigParser
+    from luban import py_major_ver
+    if py_major_ver == 2:
+        from ConfigParser import SafeConfigParser as ConfigParser
+    elif py_major_ver == 3:
+        from configparser import SafeConfigParser as ConfigParser
+        
     cp = ConfigParser()
     cp.optionxform = str
 

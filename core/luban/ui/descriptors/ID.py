@@ -12,6 +12,9 @@
 #
 
 
+from luban import py_major_ver
+
+
 from .DynamicProperty import DynamicProperty as base
 class ID(base):
     """
@@ -22,7 +25,11 @@ class ID(base):
     """
 
     def __init__(self, **kwds):
-        super().__init__(**kwds)
+        if py_major_ver == 2:
+            super(ID, self).__init__(**kwds)
+        elif py_major_ver == 3:
+            super().__init__(**kwds)
+            
         from .. import schema
         self.type = schema.str
         return
@@ -38,8 +45,13 @@ class ID(base):
                 instance, old)
             raise ValueError(m)
         
+        if py_major_ver == 2:
+            superme = super(ID, self)
+        elif py_major_ver == 3:
+            superme = super()
+
         if value is None:
-            return super().__set__(instance, value)
+            return superme.__set__(instance, value)
             
         if not isinstance(value, str):
             value = str(value)
@@ -47,7 +59,7 @@ class ID(base):
         if bad_id(value):
             raise ValueError("not a valid id: %s" % value)
         
-        return super().__set__(instance, value)
+        return superme.__set__(instance, value)
 
 
 

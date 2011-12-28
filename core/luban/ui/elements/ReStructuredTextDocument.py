@@ -12,9 +12,13 @@
 #
 
 
+from luban import py_major_ver
+if py_major_ver == 2:
+    from luban.ui import descriptors
+
+
+
 from luban.ui.elements.SimpleElement import SimpleElement
-
-
 class ReStructuredTextDocument(SimpleElement):
     
     # decorations

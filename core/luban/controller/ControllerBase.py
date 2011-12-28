@@ -12,7 +12,7 @@
 #
 
 
-class ControllerBase:
+class ControllerBase(object):
 
 
     def __init__(

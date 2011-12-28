@@ -10,7 +10,7 @@ from ..schema.Object import Object
 
 
 # declaration
-class Descriptor:
+class Descriptor(object):
     """
     The base class for typed descriptors
 

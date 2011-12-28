@@ -16,6 +16,11 @@
 generic action of obtaining attribute of an object
 """
 
+from luban import py_major_ver
+if py_major_ver == 2:
+    from luban.ui import descriptors
+
+
 from .ActionBase import ActionBase
 class GetAttr(ActionBase):
 

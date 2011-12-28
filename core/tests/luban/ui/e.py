@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
@@ -31,7 +31,4 @@ def main():
 
 if __name__ == "__main__": main()
     
-# version
-__id__ = "$Id$"
-
 # End of file 

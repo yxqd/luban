@@ -33,7 +33,7 @@ class Actor(base):
 
 
     def onchangetab(self, old=None, new=None, **kwds):
-        msg = "tab switched from %r to %r" % (old, new)
+        msg = 'tab switched from "%s" to "%s"' % (old, new)
         return luban.a.alert(msg)
 
 

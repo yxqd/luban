@@ -11,9 +11,13 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
+# only necessary if using python2
+from luban import py_major_ver, setup_context
+if py_major_ver == 2: setup_context(locals())
 
-from luban.ui.elements.SimpleContainer import SimpleContainer, Meta
-class Form(SimpleContainer, metaclass=Meta):
+
+from luban.ui.elements.SimpleContainer import SimpleContainer
+class Form(SimpleContainer):
 
     # decorations
     simple_description = 'A container of form fields and a submit button'

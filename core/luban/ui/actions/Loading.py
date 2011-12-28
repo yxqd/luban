@@ -12,6 +12,11 @@
 #
 
 
+from luban import py_major_ver
+if py_major_ver == 2:
+    from luban.ui import descriptors
+
+
 from .Action import Action as base
 
 class Loading(base):

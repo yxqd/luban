@@ -12,8 +12,13 @@
 #
 
 
+from luban import py_major_ver
+if py_major_ver == 2:
+    from luban.ui import descriptors
+
+
 from .Element import Element, Meta
-class ElementContainer(Element, metaclass=Meta):
+class ElementContainer(Element):
 
     """base class of element container types
 
@@ -183,7 +188,10 @@ class ElementContainer(Element, metaclass=Meta):
 
 
     def __init__(self, **kwds):
-        super().__init__(**kwds)
+        if py_major_ver == 2:
+            super(ElementContainer, self).__init__(**kwds)
+        elif py_major_ver == 3:
+            super().__init__(**kwds)
         self.name2item = {}
         self.id2item = {}
         self.contents = []

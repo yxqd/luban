@@ -18,8 +18,12 @@ An example of simple UI element.
 """
 
 
-from .SimpleElement import SimpleElement as base
+from luban import py_major_ver
+if py_major_ver == 2:
+    from luban.ui import descriptors
 
+
+from .SimpleElement import SimpleElement as base
 class Paragraph(base):
 
     simple_description = 'a paragraph of text'

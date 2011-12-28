@@ -19,9 +19,14 @@ An example of a simple container UI element.
 """
 
 
+from luban import py_major_ver
+if py_major_ver == 2:
+    from luban.ui import descriptors
+
+
 from .SimpleContainer import SimpleContainer, Meta
 
-class Document(SimpleContainer, metaclass=Meta):
+class Document(SimpleContainer):
 
     simple_description = 'A simple element container with a title'
     full_description = (

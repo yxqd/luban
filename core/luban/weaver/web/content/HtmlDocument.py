@@ -12,6 +12,9 @@
 #
 
 
+from luban import py_major_ver
+
+
 class Tag(object):
 
     def script(self, src=None, contents=None, **kwds):
@@ -61,7 +64,8 @@ class Tag(object):
 class HtmlDocument(Tag):
 
     def __init__(self, **kwds):
-        super().__init__('html', **kwds)
+
+        Tag.__init__(self, 'html', **kwds)
         
         self.head = Head(); self.head.root = self
         self.body = Body(); self.body.root = self
@@ -91,7 +95,7 @@ class HtmlDocument(Tag):
 class PartialHtmlDocument(Tag):
 
     def __init__(self):
-        super().__init__('div')
+        Tag.__init__(self, 'div')
         return
     
 
@@ -106,13 +110,13 @@ class Head(Tag):
         return t
 
     def __init__(self):
-        super().__init__('head')
+        Tag.__init__(self, 'head')
         return
 
 
 class Body(Tag):
     def __init__(self):
-        super().__init__('body')
+        Tag.__init__(self, 'body')
         return
     
 

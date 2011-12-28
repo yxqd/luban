@@ -28,9 +28,9 @@ class Integer(Type):
         try:
             return int(value)
         except TypeError as error:
-            raise cls.CastingError(value=value, description=str(error)) from error
+            raise cls.CastingError(value=value, description=str(error)) 
         except ValueError as error:
-            raise cls.CastingError(value=value, description=str(error)) from error
+            raise cls.CastingError(value=value, description=str(error)) 
 
 
 # end of file 

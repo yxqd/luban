@@ -24,7 +24,7 @@ class String(Type):
         try:
             return str(value)
         except Exception as error:
-            raise cls.CastingError(value=value, description=str(error)) from error
+            raise cls.CastingError(value=value, description=str(error))
 
 
 # end of file 

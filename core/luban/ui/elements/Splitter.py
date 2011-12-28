@@ -13,6 +13,12 @@
 
 
 
+from luban import py_major_ver
+if py_major_ver == 2:
+    from luban.ui import descriptors, validators
+
+
+
 from luban.ui.elements.Riveted import RivetedContainer, Meta, RivetedSubElement
 from luban.ui.elements.ElementContainer import buildSubElementFactory
 
@@ -53,7 +59,12 @@ class Splitter(RivetedContainer):
 
 
 from luban.ui.elements.SimpleContainer import SimpleContainer
-class SplitSection(RivetedSubElement, SimpleContainer, metaclass=Meta):
+_splitsectionbase = Meta(
+    '_splitsectionbase',
+    (RivetedSubElement, SimpleContainer),
+    {'abstract': True}
+    )
+class SplitSection(_splitsectionbase):
 
     # decorators
     simple_description = 'A section in a splitter'

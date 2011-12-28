@@ -12,6 +12,9 @@
 #
 
 
+from luban import py_major_ver
+
+
 def public(f):
     f.public = True
     return f
@@ -79,7 +82,11 @@ def _typeconversion(func, onerror=None):
 
 
 # type conversion handlers
-import builtins
+if py_major_ver == 2:
+    import __builtin__ as builtins
+elif py_major_ver == 3:
+    import builtins
+    
 def bool(s):
     if s.lower() in ['0', 'false', 'off']: return False
     return True

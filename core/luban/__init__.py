@@ -25,6 +25,11 @@ packages:
 
 """
 
+#
+import sys
+py_major_ver = sys.version_info.major
+
+
 # settings
 import os
 # .. whether pyre is available
@@ -76,7 +81,20 @@ if not os.environ.get("LUBAN_WITHOUT_TIMBER"):
         except ImportError:
             import warnings
             warnings.warn("failed to import luban.timber")
-        
+
+
+#
+if py_major_ver == 2:
+    
+    def setup_context(locals):
+        from luban.ui import descriptors, validators
+        locals['descriptors'] = locals['d'] = descriptors
+        locals['validators'] = locals['v'] = validators
+        return
+
+else:
+
+    def setup_context(locals): pass
         
 # End of file 
 

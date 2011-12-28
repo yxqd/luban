@@ -13,7 +13,7 @@
 
 
 from .ActionBase import ActionBase
-from ..meta.TypeRegistryCurator import registry
+from ..meta.TypeRegistry import registry
 
 
 # public interface

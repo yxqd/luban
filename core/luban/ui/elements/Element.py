@@ -12,6 +12,11 @@
 #
 
 
+from luban import py_major_ver
+if py_major_ver == 2:
+    from luban.ui import descriptors
+
+
 from luban import journal
 debug = journal.debug('luban.ui.elements.Element')
 
@@ -38,16 +43,20 @@ class Meta(MetaBase):
             continue
 
         # the created class
-        created = super().__new__(cls, name, bases, attributes, **kwds)
+        if py_major_ver == 2:
+            created = MetaBase.__new__(cls, name, bases, attributes, **kwds)
+        elif py_major_ver == 3:
+            created = super().__new__(cls, name, bases, attributes, **kwds)
 
         # doc for constructor
-        if '__init__' in created.__dict__ and not created.__init__.__doc__:
+        if py_major_ver == 3 and '__init__' in created.__dict__ and not created.__init__.__doc__:
             created.__init__.__doc__ = created.getCtorDocStr()
 
         return created
 
 
-class Element(ElementBase, metaclass=Meta):
+_base = Meta('_elementbase', (ElementBase,), {'abstract': 1})
+class Element(_base):
 
     """base class of all element types except null element
     """
@@ -113,7 +122,10 @@ class Element(ElementBase, metaclass=Meta):
     def __init__(self, name=None, id=None, **kwds):
         if name is None and id is not None:
             name = id
-        super().__init__(name=name, id=id, **kwds)
+        if py_major_ver == 2:
+            super(Element, self).__init__(name=name, id=id, **kwds)
+        elif py_major_ver == 3:
+            super().__init__(name=name, id=id, **kwds)
         return
     
     

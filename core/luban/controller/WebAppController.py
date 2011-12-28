@@ -29,7 +29,12 @@ class WebAppController(ControllerBase):
         **kwds
         ):
         # init bases
-        super().__init__(
+        from luban import py_major_ver
+        if py_major_ver == 2:
+            superme = super(WebAppController, self)
+        elif py_major_ver == 3:
+            superme = super()
+        superme.__init__(
             actor_package=actor_package,
             actor_packages=actor_packages,
             **kwds)

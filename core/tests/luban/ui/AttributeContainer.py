@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
@@ -11,6 +11,12 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
+from luban import py_major_ver
+if py_major_ver == 2:
+    from luban.ui import descriptors, validators
+    d = descriptors
+    v = validators
+    
 
 import unittest
 class TestCase(unittest.TestCase):
@@ -45,10 +51,11 @@ class TestCase(unittest.TestCase):
             pass
         
         # make sure order is preserved
-        self.assertEqual(
-            list(d.name for d in A.iterDescriptors()),
-            ['s1', 'a2', 'a1']
-            )
+        if py_major_ver == 3:
+            self.assertEqual(
+                list(d.name for d in A.iterDescriptors()),
+                ['s1', 'a2', 'a1']
+                )
         
         return
      

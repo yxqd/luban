@@ -129,7 +129,11 @@ class Factory(base):
 
     def _categorizeDescriptors(self, descriptors):
         'put descriptors into different categories such as properties, eventhandlers'
-        r = super()._categorizeDescriptors(descriptors)
+        from luban import py_major_ver
+        if py_major_ver == 2:
+            r = super(Factory, self)._categorizeDescriptors(descriptors)
+        elif py_major_ver == 3:
+            r = super()._categorizeDescriptors(descriptors)
 
         # actions are not really descriptors
         r['actions'] = findActions(self.object_type)

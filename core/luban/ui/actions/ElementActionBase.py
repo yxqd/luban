@@ -12,15 +12,21 @@
 #
 
 
+from luban import py_major_ver
+if py_major_ver == 2:
+    from luban.ui import descriptors
+
+
 from .Action import Action as base, Meta as metabase
-
-
 class Meta(metabase):
 
     
     def __new__(cls, name, *args, **kwds):
         # call super class to construct the class
-        target = super().__new__(cls, name, *args, **kwds)
+        if py_major_ver == 2:
+            target = metabase.__new__(cls, name, *args, **kwds)
+        elif py_major_ver == 3:
+            target = super().__new__(cls, name, *args, **kwds)
         
         from .exceptions import ElementActionMissingFactoryMethod
         target.ElementActionMissingFactoryMethod = ElementActionMissingFactoryMethod
@@ -37,8 +43,9 @@ class Meta(metabase):
         return target
         
 
-
-class ElementActionBase(base, metaclass=Meta):
+# this works for both python 2 and 3
+b = Meta('ElementActionBaseBase', (base,), {'abstract': True})
+class ElementActionBase(b):
     
     """base class of all actions working on an element
     """
@@ -75,7 +82,10 @@ class ElementActionBase(base, metaclass=Meta):
 
     def __init__(self, element=None, **kwds):
         self.element = self._elementSelector(element)
-        super().__init__(**kwds)
+        if py_major_ver == 2:
+            super(ElementActionBase, self).__init__(**kwds)
+        elif py_major_ver == 3:
+            super().__init__(**kwds)
         return
 
 

@@ -15,6 +15,7 @@
 STORE_NAME = "descriptors_store"
 
 
+from luban import py_major_ver
 import collections
 
 
@@ -44,7 +45,10 @@ class DescriptorCollector(type):
             continue
 
         # the created class
-        created = super().__new__(cls, name, bases, dict(attributes), **kwds)
+        if py_major_ver == 2:
+            created = type.__new__(cls, name, bases, dict(attributes), **kwds)
+        elif py_major_ver == 3:
+            created = super().__new__(cls, name, bases, dict(attributes), **kwds)
 
         #
         setattr(created, STORE_NAME, d)

@@ -21,8 +21,17 @@ TOTHINK:
 
 from .meta import Meta
 from .AbstractAttributeContainer import AbstractAttributeContainer
-class AttributeContainer(AbstractAttributeContainer, metaclass=Meta):
 
+
+from luban import py_major_ver
+
+AttributeContainerBase = Meta(
+    'AttributeContainerBase', (AbstractAttributeContainer,), {}
+    )
+
+
+class AttributeContainer(AttributeContainerBase):
+    
     """base class of all luban types
     """
 
@@ -87,7 +96,7 @@ class AttributeContainer(AbstractAttributeContainer, metaclass=Meta):
             yield name, value
             continue
         return
-
+    
     
     # default ctor implementation
     def __init__(self, attributes=None, **kwds):

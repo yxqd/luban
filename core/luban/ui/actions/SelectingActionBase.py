@@ -13,7 +13,7 @@
 
 
 from .Action import Action as base, Meta
-class SelectingActionBase(base, metaclass=Meta):
+class SelectingActionBase(base):
 
     """base class for actions that select an element
     """

@@ -13,6 +13,12 @@
 
 
 
+from luban import py_major_ver
+if py_major_ver == 2:
+    from luban.ui import descriptors
+
+
+
 from .Riveted import RivetedContainer, Meta, RivetedSubElement
 from .ElementContainer import subelementfactory
 
@@ -46,8 +52,12 @@ tabs.tab('tab2').document(title='tab2')
 
 
 from .SimpleContainer import SimpleContainer
-class Tab(RivetedSubElement, SimpleContainer, metaclass=Meta):
-
+_tabbase = Meta(
+    '_tabbase',
+    (RivetedSubElement, SimpleContainer),
+    {'abstract': True}
+    )
+class Tab(_tabbase):
     
     # decorations
     simple_description = 'A tab in a "tabs" container'

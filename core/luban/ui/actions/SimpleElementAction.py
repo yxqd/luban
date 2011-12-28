@@ -22,6 +22,11 @@ This class is not in use at this moment.
 """
 
 
+from luban import py_major_ver
+if py_major_ver == 2:
+    from luban.ui import descriptors
+
+
 from .ElementActionBase import ElementActionBase as base
 class SimpleElementAction(base):
 

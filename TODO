@@ -9,6 +9,7 @@ core:
 * in scaffolding, make "sitemap" configurable. right now its fixed to <proj>.sitemap
 
 doc:
+* explain debug=1 and debug=0. fewer js files.
 * FAQ: subelement missing name
 * docs: explain how to work with statcounter and google analytics
 * intricate behavior of direct factory method on container type: 

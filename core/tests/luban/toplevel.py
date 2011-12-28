@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
@@ -13,6 +13,7 @@
 
 
 import luban
+print(luban.py_major_ver)
 
 import unittest
 class TestCase(unittest.TestCase):

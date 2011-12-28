@@ -70,12 +70,12 @@ tools.staticdir.dir: "static"
 
 """
 
-start = """#!/usr/bin/env python3
+start = """#!/usr/bin/env python
 from luban.cli.start.cherrypy import main
 main()
 """
 
-stop = """#!/usr/bin/env python3
+stop = """#!/usr/bin/env python
 from luban.cli.stop.cherrypy import main
 main()
 """

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
@@ -28,7 +28,7 @@ class TestCase(unittest.TestCase):
         
         filename = 'out-Frame-test1.html'
         out = open(filename, 'w')
-        print(text, file=out)
+        out.write(text)
         return
      
     

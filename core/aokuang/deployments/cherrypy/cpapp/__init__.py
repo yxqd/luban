@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 import os.path
 current_dir = os.path.dirname(os.path.abspath(__file__))

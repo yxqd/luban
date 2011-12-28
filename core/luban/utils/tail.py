@@ -30,12 +30,12 @@ def tail(filename, duration=None):
     start = time.time()
     while 1:
         where = file.tell()
-        line = file.readline()
+        line = file.readline().rstrip()
         if not line:
             time.sleep(1)
             file.seek(where)
         else:
-            print(line, end='')
+            print(line)
 
         if duration:
             if time.time() > start+duration:

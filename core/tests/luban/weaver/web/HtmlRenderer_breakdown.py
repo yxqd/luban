@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
@@ -53,7 +53,7 @@ class TestCase(unittest.TestCase):
         #
         filename = 'out-HtmlRenderer-breakdown-test.html'
         out = open(filename, 'w')
-        print('\n'.join(texts), file=out)
+        out.write('\n'.join(texts))
         
         return
      

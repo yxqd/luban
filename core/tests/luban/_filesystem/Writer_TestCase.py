@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
@@ -38,7 +38,7 @@ class TestCase(unittest.TestCase):
         from luban._filesystem.Writer import Writer
         writer = Writer()
         writer.render(root)
-        writer.render(root, overwrite=True)
+        writer.render(root, onconflict = 'overwrite')
         return
      
     

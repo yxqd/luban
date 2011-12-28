@@ -64,7 +64,7 @@ from luban._filesystem import Directory, File, SymLink
 init_py = """
 import luban
 
-# This extension may have conflict with other extensions. 
+# This extension may conflict with other extensions. 
 # If so, you may need to set the following option before using this extension.
 # luban.extension_allow_override = True
 """
@@ -76,7 +76,7 @@ static_dir = 'static'
 
 # extension of luban weaver web libs
 # it should be a sequence of 2-tuples.
-# each 2-tuple represent an extension of a library.
+# each 2-tuple represents an extension of a library.
 # each 2-tuple is in the form of
 #
 #   (name, extensions)
@@ -93,6 +93,24 @@ weaver_web_lib_extensions = [
     # (<name of library>, <dictionary of extensions>)
     # for example
     # ('luban.core', {'css': ..., 'javascripts': ..., 'dependencies': ...})
+    ]
+
+
+
+# extension of luban widgets
+# it should be a sequence of 2-tuples.
+# each 2-tuple represents one widget.
+# each 2-tuple is in the form of
+#
+#   (name, libs)
+#
+# where "name" is the name of the widget,
+# "libs" is a list of libraries that implements this widget.
+#
+weaver_web_widgets_extensions = [
+    # (<widget name> , <widget library names>)
+    # for example
+    # ('imageuploader', ['luban.widgets.imageuploader']),
     ]
 
 """

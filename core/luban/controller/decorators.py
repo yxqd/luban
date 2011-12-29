@@ -81,6 +81,15 @@ def _typeconversion(func, onerror=None):
     return rt
 
 
+# mimic python 3 function annotation in python 2
+if py_major_ver == 2:
+    def annotate(**kwds):
+        def _(f):
+            f.__annotations__ = kwds
+            return f
+        return _
+
+
 # type conversion handlers
 if py_major_ver == 2:
     import __builtin__ as builtins

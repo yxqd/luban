@@ -1,5 +1,7 @@
 
 core:
+* action.onfinish?
+* element action: type in selector -- should think of working with inheritance
 * luban.elements.ipagelink(label, actor, routine, *args, **kwds)
 * "append" action should be specific to ElementContainer
 * go through all ctors and check "super" calls
@@ -9,9 +11,17 @@ core:
 * in scaffolding, make "sitemap" configurable. right now its fixed to <proj>.sitemap
 
 doc:
-* explain debug=1 and debug=0. fewer js files.
-* FAQ: subelement missing name
+* docs: FAQs: why another python web framework.
+* docs: supported platforms
+* doc: decorator for handler functions and function parameters
+* python2 function annotation for form handling
+* doc: decorator for requirement. kwd "returntype"
+* doc: session
+* doc: select(element=...).getAttr(name) what are the allowed names? label/value
+* faq: how to load interface piece by piece to make it look faster
 * docs: explain how to work with statcounter and google analytics
+* explain debug=1 and debug=0. fewer js files.
+* FAQ: subelement missing name could cause trouble
 * intricate behavior of direct factory method on container type: 
   - create subelement
   - give it a default name
@@ -19,16 +29,8 @@ doc:
 * explain "destroy" action of luban dialog. explain we usually need to
   bind onclose event to destory action.
 * how to use luban.threaded_data? explain.
-* doc: decorator for handler functions and function parameters
-* doc: decorator for requirement. kwd "returntype"
-* doc: session
-* doc: select(element=...).getAttr(name) what are the allowed names? label/value
-* faq: how to load interface piece by piece to make it look faster
-* docs: FAQs: why another python web framework.
 * docs: tune up philosophy summary. mention vocabulary, words, ...
-* docs: supported platforms
 * tutorial docs
-* python2 function annotation for form handling
 
 luban extension:
 * add a method to extend element base class with common element event types

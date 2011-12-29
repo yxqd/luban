@@ -31,7 +31,7 @@ server_options = [
 options = server_options
 
 
-import os, time, threading
+import os, sys, time, threading
 
 
 def run(path, **kwds):
@@ -69,7 +69,7 @@ def run(path, **kwds):
         def run(self):
             os.chdir(deployment_path)
             optstr = ' '.join('--%s=%s' % (k, getattr(project, k)) for k in server_options)
-            os.system('python3 start %s' % optstr)
+            os.system('%s start %s' % (sys.executable, optstr))
             # print ("\nYour interface could be running. use\n\n  $ luban stop <project>\n\nif you need to stop it")
             return
     StartServer().start()

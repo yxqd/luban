@@ -12,7 +12,7 @@
 #
 
 
-import os, time
+import os, sys, time
 
 
 def run(path, **kwds):
@@ -32,7 +32,7 @@ def run(path, **kwds):
     
     # stop server
     os.chdir(deployment_path)
-    os.system('python3 stop')
+    os.system('%s stop' % sys.executable)
 
     return
     

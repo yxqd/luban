@@ -12,7 +12,7 @@
 #
 
 
-class Actor:
+class Actor(object):
 
     # properties
     name = None # name of the actor

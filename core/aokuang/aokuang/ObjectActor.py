@@ -17,6 +17,9 @@ actor base class for luban ui objects
 """
 
 
+from luban import py_major_ver
+
+
 import luban
 from .DemoPanelActor import Actor as DemoPanelActor
 from .ObjectInterface import Factory as ObjectInterfaceFactory
@@ -66,6 +69,13 @@ class Actor(base):
         for entry in entries:
             if entry.startswith('_'):
                 continue
+            
+            # some modules only work for a specific python version
+            if entry.startswith('pyv'):
+                sig = 'pyv%s' % py_major_ver
+                if not entry.startswith(sig):
+                    continue
+                
             for ext in exts:
                 if entry.endswith(ext): break
                 continue

@@ -55,13 +55,21 @@ class Form(SimpleContainer):
     def _isAContainerOf(cls, type):
         if type is Form:
             return False
-        return super()._isAContainerOf(type)
+        if py_major_ver == 2:
+            superme = super(Form, cls)
+        elif py_major_ver == 3:
+            superme = super()
+        return superme._isAContainerOf(type)
 
 
     # overload elementfactories to provide custom behavior
     @classmethod
     def elementfactories(cls):
-        factories = super().elementfactories()
+        if py_major_ver == 2:
+            superme = super(Form, cls)
+        elif py_major_ver == 3:
+            superme = super()
+        factories = superme.elementfactories()
         # omit the factories that are already defined below
         return [name for name in factories if not name.startswith('form')]
 

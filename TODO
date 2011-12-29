@@ -28,6 +28,7 @@ doc:
 * docs: tune up philosophy summary. mention vocabulary, words, ...
 * docs: supported platforms
 * tutorial docs
+* python2 function annotation for form handling
 
 luban extension:
 * add a method to extend element base class with common element event types
@@ -40,6 +41,7 @@ release:
 aokuang:
 * show information about dependent js libraries
 * aokuang.timber: example of showing form input error
+* pyv<#>: convention to specify python version for a demo case
 
 timber:
 * plotter

@@ -12,6 +12,10 @@
 #
 
 
+from luban import py_major_ver, setup_context
+if py_major_ver == 2: setup_context(locals())
+
+
 from luban.ui.elements.SimpleContainer import SimpleContainer
 
 

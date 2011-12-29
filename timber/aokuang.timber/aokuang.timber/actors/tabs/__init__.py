@@ -32,12 +32,17 @@ class Actor(base):
     py_pkg_name = __name__
     py_pkg_path = __file__
     def _findDemoPanels(self):
-        panels = super()._findDemoPanels()
+        if luban.py_major_ver == 2:
+            superme = super(Actor, self)
+        elif luban.py_major_ver == 3:
+            superme = super()
+            
+        panels = superme._findDemoPanels()
 
         from aokuang.core.actors import tabs
         self.py_pkg_name = tabs.__name__
         self.py_pkg_path = tabs.__file__
-        panels += super()._findDemoPanels()
+        panels += superme._findDemoPanels()
         return panels
     
     pass # Actor

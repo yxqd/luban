@@ -12,6 +12,10 @@
 #
 
 
+from luban import py_major_ver, setup_context
+if py_major_ver == 2: setup_context(locals())
+
+
 from luban.ui.elements.Riveted import RivetedContainer, Meta, RivetedSubElement
 from luban.ui.elements.ElementContainer import buildSubElementFactory
 
@@ -38,7 +42,12 @@ class Portlet(RivetedContainer):
 
 
 from luban.ui.elements.SimpleElement import SimpleElement
-class PortletItem(RivetedSubElement, SimpleElement, metaclass=Meta):
+_portletitembase = Meta(
+    '_portletitembase',
+    (RivetedSubElement, SimpleElement),
+    {'abstract': 1}
+    )
+class PortletItem(_portletitembase):
     
     # decorations
     simple_description = 'An item in a portlet'

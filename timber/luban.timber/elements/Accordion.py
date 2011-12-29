@@ -12,6 +12,9 @@
 #
 
 
+from luban import py_major_ver, setup_context
+if py_major_ver == 2: setup_context(locals())
+
 
 from luban.ui.elements.Riveted import RivetedContainer, Meta, RivetedSubElement
 from luban.ui.elements.ElementContainer import buildSubElementFactory
@@ -50,7 +53,12 @@ class Accordion(RivetedContainer):
 
 
 from luban.ui.elements.SimpleContainer import SimpleContainer
-class AccordionSection(RivetedSubElement, SimpleContainer, metaclass=Meta):
+_accordionsectionbase = Meta(
+    '_accordionsectionbase',
+    (RivetedSubElement, SimpleContainer),
+    {'abstract': 1}
+    )
+class AccordionSection(_accordionsectionbase):
 
     # decorations
     simple_description = 'one of the panes that can expand or collapse in an accordion'

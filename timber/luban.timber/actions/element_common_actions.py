@@ -12,6 +12,10 @@
 #
 
 
+from luban import py_major_ver, setup_context
+if py_major_ver == 2: setup_context(locals())
+
+
 from luban.ui.actions.ElementActionBase import ElementActionBase as base, Meta
 from luban.ui.actions.ElementActionFactory import ElementActionFactory
 
@@ -153,7 +157,12 @@ class InsertAfterElement(base):
 # .. find
 #    this action need to have action factories, 
 #    so we need ElementActionFactory as a base as well
-class FindSubElement(ElementActionFactory, base, metaclass=Meta):
+_findsubelementbase = Meta(
+    '_findsubelementbase',
+    (ElementActionFactory, base),
+    {'abstract': 1}
+    )
+class FindSubElement(_findsubelementbase):
     
     """find a sub element by its name
     """

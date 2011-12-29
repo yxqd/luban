@@ -12,6 +12,10 @@
 #
 
 
+from luban import py_major_ver, setup_context
+if py_major_ver == 2: setup_context(locals())
+
+
 from luban.ui.elements.Riveted import RivetedContainer, Meta, RivetedSubElement
 from luban.ui.elements.ElementContainer import buildSubElementFactory
 
@@ -32,7 +36,12 @@ class BulletinBoard(RivetedContainer):
 
 
 from luban.ui.elements.SimpleElement import SimpleElement
-class Announcement(RivetedSubElement, SimpleElement, metaclass=Meta):
+_announcementbase = Meta(
+    "_announcementbase",
+    (RivetedSubElement, SimpleElement),
+    {'abstract': 1}
+    )
+class Announcement(_announcementbase):
     
     # decorations
     simple_description = 'An event announcement'

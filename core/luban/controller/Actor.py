@@ -40,7 +40,7 @@ class Actor(object):
         # special name "kwds"
         if 'kwds' in kwds:
             kwds2 = kwds['kwds']
-            if isinstance(kwds2, str):
+            if isinstance(kwds2, strbase):
                 from ..weaver.web._utils import jsonDecode
                 kwds2 = jsonDecode(kwds2)
             for k in kwds2:
@@ -54,6 +54,12 @@ class Actor(object):
     
     pass # end of Actor
 
+
+from luban import py_major_ver
+if py_major_ver == 2:
+    strbase = basestring
+elif py_major_ver == 3:
+    strbase = str
 
 # End of file 
 

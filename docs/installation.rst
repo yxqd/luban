@@ -27,5 +27,5 @@ Python 2
 Support of python 2 is still experimental. 
 Extensive tests have been done only on ubuntu 11.10 with python 2.7.
 
-To install luban 1.0 with python 2, one can use
-`pip <http://pypi.python.org/pypi/pip>`_ .
+To install luban 1.0 with python 2, please use
+`pip <http://pypi.python.org/pypi/pip>`_.

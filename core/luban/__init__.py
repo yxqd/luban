@@ -14,6 +14,8 @@
 __doc__ = """
 luban: generic user interface specification
 
+documentation: http://lubanui.org
+
 packages:
 
 * ui: type system; element and action representations

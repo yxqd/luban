@@ -74,17 +74,6 @@ def load_extensions(extensions):
     return loader.load(extensions)
 
 
-# if in interactive mode, load "timber" by default
-if not os.environ.get("LUBAN_WITHOUT_TIMBER"):
-    import __main__ as m
-    if not hasattr(m, '__file__'):
-        try:
-            from . import timber
-        except ImportError:
-            import warnings
-            warnings.warn("failed to import luban.timber")
-
-
 #
 if py_major_ver == 2:
     
@@ -97,6 +86,18 @@ if py_major_ver == 2:
 else:
 
     def setup_context(locals): pass
-        
+
+
+# if in interactive mode, load "timber" by default
+if not os.environ.get("LUBAN_WITHOUT_TIMBER"):
+    import __main__ as m
+    if not hasattr(m, '__file__'):
+        try:
+            from . import timber
+        except ImportError:
+            import warnings
+            warnings.warn("failed to import luban.timber")
+
+
 # End of file 
 

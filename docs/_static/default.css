@@ -137,21 +137,25 @@ div.sphinxsidebar input {
     font-size: 1em;
 }
 
-div.sphinxsidebar div.share {
+div.sphinxsidebar div.panel {
     -moz-border-radius: 0.3em;
     -webkit-border-radius: 0.3em;
     border-radius: 0.3em;
 
     padding: 0.5em;
-    margin: 4em 0.5em 0 0;
+    margin: 2.5em 0.5em 0 0;
     background-color: #d5d5e0;
     border: 2px solid white;
 }
-div.sphinxsidebar div.share h3{
+div.sphinxsidebar div.panel h3{
     color: black;
 }
-div.sphinxsidebar div.share div{
+div.sphinxsidebar div.panel div{
     margin: 0.5em;
+}
+div.sphinxsidebar div.panel a {
+    color: #355FAC;
+    text-decoration: none;
 }
 
 /* -- body styles ----------------------------------------------------------- */

@@ -43,7 +43,7 @@ News
   `started a thread about luban <https://plus.google.com/115212051037621986145/posts/ThMuTvwut9g>`_
 
 .. note::
-   For older versions of luban, see `luban 0.2 <http://luban.danse.us>`_
+   For older versions of luban, see `luban 0.2 <http://lubanui.org/0.2>`_
 
 
 More

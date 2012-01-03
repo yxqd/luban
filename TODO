@@ -12,6 +12,8 @@ Places of version number is needed:
 
 
 core:
+* add tracking of traffic to aokuang at lubanui.org
+* make docutils an optional dependency. only raise error when it is used?
 * action.onfinish?
 * element action: type in selector -- should think of working with inheritance
 * luban.elements.ipagelink(label, actor, routine, *args, **kwds)

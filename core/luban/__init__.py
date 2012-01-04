@@ -29,7 +29,10 @@ packages:
 
 #
 import sys
-py_major_ver = sys.version_info.major
+try:
+    py_major_ver = sys.version_info.major
+except AttributeError:
+    py_major_ver = sys.version_info[0]
 
 
 # settings

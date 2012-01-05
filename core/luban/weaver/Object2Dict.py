@@ -42,7 +42,7 @@ class Object2Dict:
             if isinstance(value, t): return value
             continue
 
-        import collections
+        from luban import _collections as collections
         if isinstance(value, collections.OrderedDict):
             return self._onordereddict(value)
         if isinstance(value, dict): return self._ondict(value)

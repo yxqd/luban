@@ -48,7 +48,7 @@ def createSubElement(container, subelem, **kwds):
     e = subelem(**kwds)
     # give it a name if necessary
     if not e.name:
-        e.name = "e{!s}".format(len(container.contents))
+        e.name = "e{0!s}".format(len(container.contents))
             
     container.append(e)
     return e

@@ -12,6 +12,9 @@
 #
 
 
+from __future__ import print_function
+
+
 import journal
 info = journal.info( 'spawn' )
 

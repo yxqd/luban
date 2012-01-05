@@ -16,7 +16,7 @@ STORE_NAME = "descriptors_store"
 
 
 from luban import py_major_ver
-import collections
+from luban import _collections as collections
 
 
 class DescriptorCollector(type):
@@ -24,8 +24,8 @@ class DescriptorCollector(type):
     @classmethod
     def __prepare__(cls, name, bases, **kwds):
         return collections.OrderedDict()
-
-
+    
+    
     def __new__(cls, name, bases, attributes, **kwds):
         d = collections.OrderedDict()
         

@@ -1,13 +1,23 @@
-.. _History:
+.. _history:
 
 History
 =======
 
-.. _changes-1.0:
+.. _changes-1.0.1:
 
-Luban 1.0
----------
-Dec, 2011
+Luban 1.0.1
+-----------
+expected: Jan 15, 2012
+
+* experimental python 2.6 support
+* ... to be determined by surveys etc ...
+
+
+.. _changes-1.0.0:
+
+Luban 1.0.0
+-----------
+Dec 29, 2011
 
 This is the first stable release of luban.
 
@@ -22,14 +32,37 @@ prototype versions such as easy access to element factories and
 assignments of actions to event handlers.
 
 The scaffolding for luban projects and extensions were improved
-a lot over earlier prototype versions. It is now much
+a lot over earlier prototypical versions. It is now much
 easier to create, start and stop luban projects.
 
 The layout of a luban project is much simpler and 
 therefore easier to understand and work with.
 
+Aokuang is included in this version as a documentation tool
+and also a test for luban.
+Aokuang shows that good, consistent programming practices (done in luban)
+can really lead to much simplified and easy-to-maintain code.
+
 The Gongshuzi prototype is not included in this release.
-This release focuses on the "language" core.
+This release focuses on the "language" core as well as
+core infrastructure for luban.
+
+At the end of December 2011, it was decided  that the luban
+team will try to back-port luban to support python 2.
+It was quickly done and tested with python 2.7 and
+there were relatively few changes need to be made for this to
+happen due to good design and implementation of the python-3-only luban :)
+As a result the 1.0.0 version was shipped with experimental
+python 2.7 support. 
+However, the super() method of python 2 is much less super than
+that of python 3,
+so that the luban support for both python 3 and 2 could be 
+difficult if the better super of python 3 were not back-ported
+to python 2.7 in the future.
+Another thing is that
+because of the syntax difference of metaclass in python 2 and 
+python 3, some relatively ugly code were added to luban to 
+allow luban work for both 2 and 3 :(
 
 .. .. _changes-0.2b3:
 .. Luban 0.2b3

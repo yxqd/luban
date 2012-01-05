@@ -14,6 +14,7 @@
 __doc__ = """
 luban: generic user interface specification
 
+version: 1.0dev
 documentation: http://lubanui.org
 
 packages:

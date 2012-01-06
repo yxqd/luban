@@ -44,6 +44,8 @@ News
 
 .. note::
    For older versions of luban, see `luban 0.2 <http://lubanui.org/0.2>`_
+.. note::
+   For development version of luban see `luban development <http://lubanui.org/dev>`_
 
 
 More

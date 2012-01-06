@@ -55,5 +55,5 @@ More
 * :ref:`Dependencies <deps>`
 * :ref:`Team <team>`
 * :ref:`Sponsors <sponsors>`
-* `License <http://lubanui.org/license.txt>`_
 * :ref:`History <history>`
+* `License <http://lubanui.org/license.txt>`_

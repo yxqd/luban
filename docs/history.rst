@@ -63,7 +63,8 @@ Another thing is that
 because of the syntax difference of metaclass in python 2 and 
 python 3, some relatively ugly code had to be added 
 into placees where both multiple inheritance
-and metaclass are involved is necessary in order for
+and metaclass are involved,
+in order for
 luban to work for both 2 and 3 :(
 
 .. .. _changes-0.2b3:

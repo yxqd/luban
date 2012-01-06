@@ -40,7 +40,7 @@ for dirpath, dirnames, filenames in os.walk('.'):
 
 from merlin.builders._utils import createExportShareDir
 export_share = createExportShareDir(context)
-luban_share = os.path.join(export_share, 'luban')
+luban_share = os.path.join(export_share, 'luban', 'docs', 'tutorials')
 
 import os
 if not os.path.exists(luban_share):

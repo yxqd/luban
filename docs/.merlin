@@ -1,5 +1,24 @@
 # -*- python -*-
 
+# context
+import merlin.rules, os
+from merlin.Context import create
+context = create()
+context.code.project = 'luban'
+
+# no recursion
+recurse_entries = []
+
+
 import os
 os.system("make clean")
 os.system("make html")
+
+
+
+# copy output to {export}/share/luban/docs
+from merlin.builders._utils import createExportShareDir
+export_share = createExportShareDir(context)
+luban_docs = os.path.join(export_share, 'luban', 'docs')
+cmd = 'rsync -a _build/html/ %s/' % luban_docs
+os.system(cmd)

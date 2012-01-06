@@ -13,6 +13,11 @@ You may need super-user privileges to do this.
    luban 1.0 for now mainly supports python 3, 
    and its support of python 2 is still experimental.
 
+.. note::
+   To install the **development** version of luban, do::
+   
+   $ pip install luban==1.0dev
+
 
 Python 3.1+
 -----------

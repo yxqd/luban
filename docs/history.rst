@@ -56,13 +56,15 @@ As a result the 1.0.0 version was shipped with experimental
 python 2.7 support. 
 However, the super() method of python 2 is much less super than
 that of python 3,
-so that the luban support for both python 3 and 2 could be 
+so that the luban support for both python 3 and 2 in the long run could be 
 difficult if the better super of python 3 were not back-ported
 to python 2.7 in the future.
 Another thing is that
 because of the syntax difference of metaclass in python 2 and 
-python 3, some relatively ugly code were added to luban to 
-allow luban work for both 2 and 3 :(
+python 3, some relatively ugly code had to be added 
+into placees where both multiple inheritance
+and metaclass are involved is necessary in order for
+luban to work for both 2 and 3 :(
 
 .. .. _changes-0.2b3:
 .. Luban 0.2b3

@@ -1,0 +1,3 @@
+# -*- python -*-
+
+recurse_entries = ['luban.workflows', 'aokuang.workflows', 'tests']

@@ -15,7 +15,7 @@
 import luban
 
 
-def createActor(hashfunc=None, db=None, User=None):
+def createActor(hashfunc=None, User=None):
 
     if hashfunc is None:
         import hashlib
@@ -24,18 +24,19 @@ def createActor(hashfunc=None, db=None, User=None):
     from luban.controller.Actor import Actor as base
     class Actor(base):
 
-        @luban.decorators.formprocesser('login')
+        @luban.decorators.formprocesser('login-form')
         def onsubmit(
             self,
             username:luban.decorators.notemptystr=None,
             password:luban.decorators.notemptystr=None,
             context:luban.decorators.notemptystr=None,
+            **kwds
             ):
-
+            db = self.controller.db
             q = db.query(User).filter_by(username=username)
             if q.count() == 0:
-                actions = [luban.a.select(id='login').clearErrors()]
-                showerror = luban.a.select(id='login')\
+                actions = [luban.a.select(id='login-form').clearErrors()]
+                showerror = luban.a.select(id='login-form')\
                             .find(name='username', type='formfield')\
                             .showError(message='username does not exist')
                 actions.append(showerror)
@@ -45,9 +46,15 @@ def createActor(hashfunc=None, db=None, User=None):
             
             hashed = hashfunc(password)
 
-            if user.password == hashed
-            
-            return luban.session[context]['onsuccess']
+            if user.password == hashed:
+                return luban.session[context]['onsuccess']
+
+            actions = [luban.a.select(id='login-form').clearErrors()]
+            showerror = luban.a.select(id='login-form')\
+                        .find(name='password', type='formfield')\
+                        .showError(message='incorrect password')
+            actions.append(showerror)
+            return actions
 
         pass
 
@@ -59,12 +66,12 @@ class Factory:
 
     # customization done by overiding the following
     hashfunc = None
-    db = None
     User = None
 
     
     def __call__(self):
-        return createActor(hashfunc=self.hashfunc, db=self.db, User=self.User)
+        return createActor(hashfunc=self.hashfunc, User=self.User)
 
+factory = Factory()
 
 # End of file 

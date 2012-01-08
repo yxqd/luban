@@ -22,7 +22,7 @@ def createVisual(
     if not context:
         raise ValueError("must provide context id")
     
-    form = form or luban.e.form(title='login')
+    form = form or luban.e.form(title='login', id='login-form')
     username = form.text(name='username', label='Username')
     password = form.password(name='password', label='Password')
     submit = form.submitbutton(label='login')
@@ -37,14 +37,16 @@ def createVisual(
 class Factory:
 
     form = None
-    actor = 'login',
+    actor = 'login'
     routine = 'onsubmit'
 
     def __call__(self, context):
         return createVisual(
-            form = form,
-            actor = actor, routine = routine,
+            form = self.form,
+            actor = self.actor, routine = self.routine,
             context = context)
+
+factory = Factory()
 
 
 # End of file 

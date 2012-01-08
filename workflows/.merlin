@@ -1,0 +1,34 @@
+# -*- python -*-
+
+import merlin.rules, os
+from merlin.Context import create
+context = create()
+context.code.project = 'luban'
+
+
+rules = []
+rules.append(
+    merlin.rules.pythonPackage(package = 'luban.workflows')
+    )
+
+
+recurse_entries = []
+
+
+# export css and js files
+# def rsync(src, target):
+#    if not os.path.exists(target):
+#        os.makedirs(target)
+#    cmd = "rsync -a --copy-unsafe-links %s/ %s/" % (src, target)
+#
+#    from merlin import osutils
+#    rt, out, err = osutils.execute(cmd)
+#
+#    if rt:
+#        raise OSError("%s failed" % cmd)
+#    return
+# from merlin.builders._utils import getExportPythonTree
+# export_pytree = getExportPythonTree(context)
+# target = os.path.join(export_pytree, 'luban', 'timber', 'weaver', 'web')
+# import os
+# rsync('weaver/web/css', os.path.join(target, 'css'))

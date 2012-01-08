@@ -18,11 +18,14 @@ class Workflow:
     from .models import factory as models_factory
     from .actor import factory as actor_factory
     from .form import factory as form_factory
-
+    
     def __init__(self):
-        self.models = self.models_factory()
-        
-        self.actor_factory.User = self.models.User
+        # create models
+        self.models_factory()
+
+        #
+        from ..models import model_registry as reg
+        self.actor_factory.User = reg.User
         self.actor = self.actor_factory()
         
         return

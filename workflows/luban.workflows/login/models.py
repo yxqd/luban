@@ -47,8 +47,14 @@ class Factory:
     Base = None
 
     def __call__(self):
-        user = createUser(self.Base)
-        return reg
+        from ..models import model_registry as reg
+
+        try:
+            reg.User
+        except KeyError:
+            createUser(self.Base)
+            
+        return
     
 factory = Factory()
 

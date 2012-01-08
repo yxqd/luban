@@ -34,9 +34,10 @@ def createActor(hashfunc=None, User=None):
             ):
             db = self.controller.db
             q = db.query(User).filter_by(username=username)
+            select_form = luban.a.select(id='login-form', type='form')
             if q.count() == 0:
-                actions = [luban.a.select(id='login-form').clearErrors()]
-                showerror = luban.a.select(id='login-form')\
+                actions = [select_form.clearErrors()]
+                showerror = select_form\
                             .find(name='username', type='formfield')\
                             .showError(message='username does not exist')
                 actions.append(showerror)
@@ -49,8 +50,8 @@ def createActor(hashfunc=None, User=None):
             if user.password == hashed:
                 return luban.session[context]['onsuccess']
 
-            actions = [luban.a.select(id='login-form').clearErrors()]
-            showerror = luban.a.select(id='login-form')\
+            actions = [select_form.clearErrors()]
+            showerror = select_form\
                         .find(name='password', type='formfield')\
                         .showError(message='incorrect password')
             actions.append(showerror)

@@ -25,7 +25,7 @@ class Actor(base):
     def default(self):
         frame = luban.e.frame(title='test')
         
-        context = 'main-login'
+        context = 'main-gate'
         luban.session['context'] = {
             'onsuccess': luban.a.alert("login succeed")
             }

@@ -12,23 +12,17 @@
 #
 
 
+
 # login workflow
-class Workflow:
+from ..Workflow import Workflow as base
+class Workflow(base):
 
     from .models import factory as models_factory
     from .actor import factory as actor_factory
-    from .form import factory as form_factory
-    
-    def __init__(self):
-        # create models
-        self.models_factory()
+    from .visuals import factory as visual_factory
 
-        #
-        from ..models import model_registry as reg
-        self.actor_factory.User = reg.User
-        self.actor = self.actor_factory()
-        
-        return
+    def _configureActorFactory(self): return
+    def _configureVisualFactory(self): return
 
 
 # End of file 

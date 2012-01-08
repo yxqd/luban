@@ -15,12 +15,17 @@
 import luban
 
 
-def createActor(hashfunc=None, User=None):
+def createActor(hashfunc=None):
 
     if hashfunc is None:
         import hashlib
         hashfunc = lambda p: hashlib.md5(p.encode()).hexdigest()
-        
+
+    # get models
+    from ..models import model_registry
+    User = model_registry.User
+
+    # actor class
     from luban.controller.Actor import Actor as base
     class Actor(base):
 
@@ -67,11 +72,10 @@ class Factory:
 
     # customization done by overiding the following
     hashfunc = None
-    User = None
 
     
     def __call__(self):
-        return createActor(hashfunc=self.hashfunc, User=self.User)
+        return createActor(hashfunc=self.hashfunc)
 
 factory = Factory()
 

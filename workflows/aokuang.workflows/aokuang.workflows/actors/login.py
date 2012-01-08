@@ -15,9 +15,7 @@
 import luban
 
 from ..workflows.login import workflow
-
-base = workflow.actor
-class Actor(base):
+class Actor(workflow.Actor):
 
     expose = 1
 
@@ -29,7 +27,7 @@ class Actor(base):
         luban.session['context'] = {
             'onsuccess': luban.a.alert("login succeed")
             }
-        form = workflow.form_factory(context)
+        form = workflow.visuals.form(context=context)
         
         frame.append(form)
         return frame

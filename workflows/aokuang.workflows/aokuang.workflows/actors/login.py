@@ -24,13 +24,20 @@ class Actor(workflow.Actor):
         frame = luban.e.frame(title='test')
         
         context = 'main-gate'
+        
+        onsuccess = luban.a.load(actor = self.name, routine = 'onsuccess')
         luban.session[context] = {
-            'onsuccess': luban.a.alert("login succeed")
+            'onsuccess': onsuccess,
             }
         form = workflow.visuals.form(context=context)
         
         frame.append(form)
         return frame
+
+
+    def onsuccess(self, **kwds):
+        welcome = luban.e.document(title='Welcome')
+        return luban.a.select(id='').replaceContent(newcontent=welcome)
 
     pass
 

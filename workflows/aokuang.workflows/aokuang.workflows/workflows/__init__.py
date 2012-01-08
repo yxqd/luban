@@ -19,10 +19,13 @@ from luban.workflows.models import model_registry as models
 from ..db import Base as ModelBase
 
 #
-def importAll():
-    mods = ['login']
-    for mod in mods:
-        __import__(mod, globals=globals())
+workflows = [
+    'login',
+    ]
+def importModels():
+    for mod in workflows:
+        module = __import__(mod, globals=globals())
+        module.Workflow.createModels()
         continue
     return
 

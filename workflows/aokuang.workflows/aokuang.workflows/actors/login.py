@@ -24,7 +24,7 @@ class Actor(workflow.Actor):
         frame = luban.e.frame(title='test')
         
         context = 'main-gate'
-        luban.session['context'] = {
+        luban.session[context] = {
             'onsuccess': luban.a.alert("login succeed")
             }
         form = workflow.visuals.form(context=context)

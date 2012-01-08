@@ -42,7 +42,7 @@ def createSession(create_metadata=True, engine=None):
 
 def createEngine():
     from sqlalchemy import create_engine
-    from .. import dburi
+    from aokuang_workflows_config import dburi
     engine = create_engine(dburi)
     return engine
 
@@ -50,7 +50,9 @@ def createEngine():
 from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
-__all__ = ['createSession']
+from ..workflows import models
+
+__all__ = ['createSession', 'models']
 
 
 # End of file 

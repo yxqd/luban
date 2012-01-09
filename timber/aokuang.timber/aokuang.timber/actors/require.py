@@ -28,7 +28,7 @@ def emailform(context=None):
         )
     return frame
 
-def check_email():
+def check_email(*args, **kwds):
     "a simple test that check if user email is available"
     email = luban.session.get('email')
     return not email

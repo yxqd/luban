@@ -53,7 +53,12 @@ def createActor(hashfunc=None):
             hashed = hashfunc(password)
 
             if user.password == hashed:
-                return luban.session[context]['onsuccess']
+                token = luban.session['token'] = luban.uuid()
+                action = luban.session[context]['onsuccess']
+                from luban.ui.actions.Loading import Loading
+                if isinstance(action, Loading):
+                    action.params['token'] = token
+                return action
 
             actions = [select_form.clearErrors()]
             showerror = select_form\

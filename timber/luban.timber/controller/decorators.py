@@ -25,7 +25,7 @@ def require(requirement, **kwds):
 
     def convert(f):
         def newhandler(self, *args, **kwds):
-            if requirement.check_requirement():
+            if requirement.check_requirement(self, *args, **kwds):
                 return "access denied"
             return f(self, *args, **kwds)
         return newhandler
@@ -118,7 +118,7 @@ def require_portal_frame(requirement, actorname=None, onsuccess=None):
     def convert(f):
         def newhandler(self, *args, **kwds):
             
-            if not requirement.check_requirement():
+            if not requirement.check_requirement(self, *args, **kwds):
                 frame = f(self, *args, **kwds)
             else:
                 # create a unique context
@@ -135,6 +135,8 @@ def require_portal_frame(requirement, actorname=None, onsuccess=None):
                 args = (actor, routine) + args
                 kwds = dict(kwds)
                 kwds['returntype'] = 'replaceinterface'
+                # token is necessary for accessing protected area of the app
+                # see also luban.workflows.login.authentication_portal
                 onsuccess = onsuccess_action or luban.a.load(*args, **kwds)
 
                 # create a 

@@ -1,0 +1,7 @@
+dburi = "sqlite:///aokuang.workflows.sqlite"
+
+class gmail_account:
+    username = "u@gmail.com"
+    password = "p"
+
+feedback_recipient = gmail_account.username

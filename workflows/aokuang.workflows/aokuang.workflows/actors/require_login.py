@@ -15,6 +15,8 @@
 """
 This is better and simpler than the "login" example.
 It uses the "require" decorator.
+
+http://localhost:22347/require_login
 """
 
 import luban

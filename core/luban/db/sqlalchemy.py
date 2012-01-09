@@ -55,18 +55,18 @@ Base = declarative_base()
 import luban
 luban.app_config.register(
     "db",
+    
     """db configuration dictionary.
 
     uri: uri of db
     echo: boolean
     convert_unicode: boolean
     """,
-    """
+    
     {'uri': "sqlite:///mydb.sqlite",
      'echo': False,
      'convert_unicode': True,
      }
-    """
     )
 
 

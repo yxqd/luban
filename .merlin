@@ -3,6 +3,7 @@
 recurse_entries = [
     'core', 
     'timber',
+    'workflows',
     'docs',
     ]
 

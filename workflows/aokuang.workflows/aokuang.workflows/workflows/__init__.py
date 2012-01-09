@@ -16,7 +16,7 @@
 from luban.workflows.models import model_registry as models
 
 # model base
-from ..db import Base as ModelBase
+from luban.db.sqlalchemy import Base as ModelBase
 
 #
 workflows = [

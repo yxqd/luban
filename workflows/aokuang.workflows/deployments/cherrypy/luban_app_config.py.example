@@ -1,0 +1,14 @@
+# -*- python -*-
+
+db  = {
+    'uri': "sqlite:///aokuang.workflows.sqlite",
+    'echo': False,
+    'convert_unicode': True,
+    }
+
+gmail_account = {
+    'username': "u@gmail.com",
+    'password': "p",
+    }
+
+feedback_recipient = gmail_account['username']

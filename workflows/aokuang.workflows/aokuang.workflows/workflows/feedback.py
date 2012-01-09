@@ -12,9 +12,20 @@
 #
 
 from luban.workflows.feedback import Workflow
-from aokuang_workflows_config import gmail_account, feedback_recipient
+import luban
+luban.app_config.register(
+    'gmail_account',
+    "gmail account info",
+    "{'username': '...', 'password': '...'}",
+    )
+luban.app_config.register(
+    'feedback_recipient',
+    'feedback recipient email address',
+    'feedback@mysite.com',
+    )
+
 workflow = Workflow()
-workflow.actor_factory.feedback_recipient = feedback_recipient
-workflow.actor_factory.gmail_account = gmail_account
+workflow.actor_factory.feedback_recipient = luban.app_config.feedback_recipient
+workflow.actor_factory.gmail_account = luban.app_config.gmail_account
 
 # End of file 

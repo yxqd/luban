@@ -12,6 +12,4 @@
 #
 
 
-from . import db
-
 # End of file 

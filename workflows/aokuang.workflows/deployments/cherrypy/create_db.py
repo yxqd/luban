@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 from sqlalchemy import create_engine
-from aokuang_workflows_config import dburi
-engine = create_engine(dburi)
+import luban.db.sqlalchemy, luban
+engine = create_engine(luban.app_config.db.uri)
 
 # import all workflows
 from aokuang.workflows.workflows import importModels

@@ -14,5 +14,6 @@
 
 # example workflows
 
+import luban.timber # default implementation of luban workflows depend on timber
 
 # End of file 

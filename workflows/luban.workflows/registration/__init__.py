@@ -11,22 +11,18 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-import luban
-
-# namespace for requirements
-class requirements:
-
-    from .login import authentication_portal
-    
-    pass
 
 
-def check_email(*args, **kwds):
-    "a simple test that check if user email is available"
-    email = luban.session.get('email')
-    return not email
-requirements.email = luban.decorators.Requirement()
-requirements.email.check_requirement = check_email
+# login workflow
+from ..Workflow import Workflow as base
+class Workflow(base):
+
+    from .models import factory as models_factory
+    from .actor import factory as actor_factory
+    from .visuals import factory as visual_factory
+
+    def _configureActorFactory(self): return
+    def _configureVisualFactory(self): return
 
 
 # End of file 

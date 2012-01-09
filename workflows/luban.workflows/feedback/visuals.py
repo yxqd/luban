@@ -17,7 +17,14 @@ import luban
 
 class Factory:
     
-    
+
+    def button(self, context=None):
+        dialog = self.dialog(context=context)
+        adddialog = luban.a.select(id='').append(newelement=dialog)
+        button = luban.e.button(label='feedback', onclick=adddialog)
+        return button
+        
+
     def dialog(self, context=None):
         dialog = luban.e.dialog(
             title="Send feedback", id='feedback-dialog', autoopen=True)

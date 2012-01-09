@@ -8,10 +8,10 @@ engine = create_engine(luban.app_config.db.uri)
 from aokuang.workflows.workflows import importModels
 importModels()
 
-from aokuang.workflows.db import Base
+from luban.db.sqlalchemy import Base
 Base.metadata.create_all(engine)
 
-from aokuang.workflows.db import models, createSession
+from luban.db.sqlalchemy import models, createSession
 session = createSession()
 
 User = models.User

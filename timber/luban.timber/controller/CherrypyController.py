@@ -15,15 +15,16 @@
 # in addition to the controller in luban core, the following are added
 #
 # 1. session
-#   this is not realy used yet. need to think more about this.
-#   do we really need it?
+#   server side data cache
 # 2. upload
 #   this is done pretty ad hoc
 #   the blueimp file upload js lib is used
 #   the upload progress is done by server writing done the progress info
 #   in a little file, and then on the client side every second
 #   a request will be sent to update how much have been uploaded
-
+# 3. thread_data
+#   not used yet
+#
 
 
 

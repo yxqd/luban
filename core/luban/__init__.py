@@ -103,5 +103,11 @@ if not os.environ.get("LUBAN_WITHOUT_TIMBER"):
             warnings.warn("failed to import luban.timber")
 
 
+#
+from .AppConfig import AppConfig
+app_config = AppConfig()
+del AppConfig
+
+
 # End of file 
 

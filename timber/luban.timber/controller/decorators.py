@@ -117,9 +117,12 @@ def require_portal_frame(requirement, actorname=None, onsuccess=None):
     import inspect
     def convert(f):
         def newhandler(self, *args, **kwds):
+            
             if not requirement.check_requirement():
                 frame = f(self, *args, **kwds)
             else:
+                # create a unique context
+                context_id = luban.uuid()
                 # this is to build the action to load the real functionality.
                 # we need it after user successfully fullfill the requirement
                 # it always need to be a load action.
@@ -133,8 +136,10 @@ def require_portal_frame(requirement, actorname=None, onsuccess=None):
                 kwds = dict(kwds)
                 kwds['returntype'] = 'replaceinterface'
                 onsuccess = onsuccess_action or luban.a.load(*args, **kwds)
-                luban.session['onsuccess'] = onsuccess
-                frame = requirement.fullfill_requirement()
+
+                # create a 
+                luban.session[context_id] = {'onsuccess': onsuccess}
+                frame = requirement.fullfill_requirement(context=context_id)
             return frame
         return newhandler
     return convert

@@ -15,7 +15,7 @@
 import luban
 
 
-def emailform():
+def emailform(context=None):
     "frame to solicit from user his email"
     frame = luban.e.frame(title='input email')
     form = frame.form(title='email')
@@ -23,7 +23,9 @@ def emailform():
     form.submitbutton(label='submit')
     form.onsubmit = luban.a.load(
         actor='require', routine='onemailsubmission', 
-        kwds=luban.event.data)
+        kwds=luban.event.data,
+        context = context,
+        )
     return frame
 
 def check_email():
@@ -41,18 +43,15 @@ class Actor(base):
 
     expose = 1
 
-    def onemailsubmission(self, email=None, **kwds):
+    def onemailsubmission(self, email=None, context=None, **kwds):
         """handle email submission and establish "credential"
         in this simple case, that is just the email
         """
         luban.session['email'] = email
-        # this is actually established by the "requirement" decorator
-        # this will have problem if the user have multiple browser
-        # window(tab)s open and "authenticate" using the same
-        # requirement to different ports of the application.
-        # but that should be rare, and in fact it does not really
-        # matter -- it will look like to user just swapping the tabs
-        onsuccess = luban.session['onsuccess']
+        # context was set by the "require" decorator
+        # below on the "showinfo" method
+        context = luban.session.pop(context)
+        onsuccess = context['onsuccess']
         return onsuccess
     
 

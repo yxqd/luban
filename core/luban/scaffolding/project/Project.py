@@ -25,7 +25,7 @@ class Project:
     actors_in_python = '.actors' # name of the actors python subpackage in the project python namespace
 
     deployment = 'cherrypy' # deployment method
-    extensions = ['luban.timber'] # luban extensions used
+    extensions = ['luban.timber', 'luban.workflows'] # luban extensions used
 
     # server
     port = 8080 # port number

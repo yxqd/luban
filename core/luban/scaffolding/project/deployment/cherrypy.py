@@ -18,6 +18,8 @@ def createTree(project):
     """create a directory tree for cherrypy deployment for a luban project
     """
     root = Directory.Directory('cherrypy')
+
+    root.addEntry(createAppConfigPy(project))
     
     root.addEntry(File.File('dev.conf', dev_conf))
     root.addEntry(File.File('prod.conf', prod_conf))
@@ -30,6 +32,19 @@ def createTree(project):
     root.addEntry(Directory.Directory('static'))
     
     return root
+
+
+def createAppConfigPy(project):
+    import luban
+    luban.load_extensions(project.extensions)
+    options = luban.app_config.options
+    s = ''
+    for opt in options.values():
+        s += '# %s\n' % opt.name
+        s += '\n'.join( '# '+l for l in opt.doc.splitlines())
+        s += '\n%s = %s\n' % (opt.name, opt.example)
+        continue
+    return File.File('luban_app_config.py', s)
 
 
 dev_conf = """
@@ -94,7 +109,7 @@ import sys
 if project_pytree_container not in sys.path:
     sys.path.insert(0, project_pytree_container)
 
-# make sure to load all luban extenssions
+# make sure to load all luban extensions
 import luban
 luban.load_extensions(%(extensions)s)
 

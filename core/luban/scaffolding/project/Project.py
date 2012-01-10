@@ -62,8 +62,12 @@ class Project:
         return os.path.join(self.root, 'deployments', self.deployment)
 
 
+    def getPyTreeRoot(self):
+        return os.path.join(self.root, self.pytree_container)
+
+
     def setPythonPath(self):
-        mypytreeroot = os.path.join(self.root, self.pytree_container)
+        mypytreeroot = self.getPyTreeRoot()
         import sys
         if mypytreeroot not in sys.path:
             sys.path.insert(0, mypytreeroot)

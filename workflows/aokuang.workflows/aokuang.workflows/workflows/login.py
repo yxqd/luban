@@ -18,4 +18,8 @@ Workflow.models_factory.Base = ModelBase
 
 workflow = Workflow()
 
+# overload decorators
+from luban.workflows.login import authentication_portal
+authentication_portal.fullfill_requirement.form_factory = workflow.visuals.form
+
 # End of file 

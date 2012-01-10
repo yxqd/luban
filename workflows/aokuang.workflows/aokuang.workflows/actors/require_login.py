@@ -20,7 +20,7 @@ http://localhost:22347/require_login
 """
 
 import luban
-from ..decorators import authentication_portal
+from luban.workflows.login import authentication_portal
 
 
 from ..workflows.login import workflow

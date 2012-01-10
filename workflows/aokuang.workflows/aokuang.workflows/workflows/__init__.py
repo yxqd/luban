@@ -13,21 +13,9 @@
 
 
 # model registry
-from luban.workflows.models import model_registry as models
+from luban.db.models import model_registry as models
 
 # model base
 from luban.db.sqlalchemy import Base as ModelBase
-
-#
-workflows = [
-    'login',
-    ]
-def importModels():
-    for mod in workflows:
-        module = __import__(mod, globals=globals())
-        module.Workflow.createModels()
-        continue
-    return
-
 
 # End of file 

@@ -27,7 +27,6 @@ def run(workflow, project=None):
         __import__(mod, locals=locals(), globals=globals())
     except ImportError:
         print ("***workflow %r does not exist.\n" % workflow)
-        print ("available workflows: ")
         print_available_workflows()
         return
     
@@ -80,7 +79,9 @@ def parse_cmdline():
     #
     options, args = parser.parse_args()
     if len(args) != 3:
-        parser.error("incorrect number of arguments")
+        msg = "incorrect number of arguments.\n\n"
+        msg += available_workflows_str()
+        parser.error(msg)
 
     args, kwds = args[2:], vars(options)
     return args, kwds
@@ -88,11 +89,16 @@ def parse_cmdline():
 
 
 def print_available_workflows():
+    print(available_workflows_str())
+
+
+def available_workflows_str():
+    s = ["available workflows: "]
     workflows = collect_workflows()
     for wf in workflows:
-        print (" - %s: %s" % (wf.name, wf.__doc__.strip()))
+        s.append(" - %s: %s" % (wf.name, wf.__doc__.strip()))
         continue
-    return
+    return '\n'.join(s)
 
 
 def collect_workflows():

@@ -60,6 +60,10 @@ tree.cpapp: cherrypy.Application(cpapp.Root())
 
 [/]
 tools.staticdir.root: cpapp.current_dir + "/.."
+tools.sessions.on: True
+# tools.sessions.storage_type: "file"
+# tools.sessions.storage_path: "data/sessions"
+tools.sessions.timeout: 60
 
 [/static]
 tools.staticdir.on: True

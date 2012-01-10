@@ -22,6 +22,9 @@ pytree_container = %(pytree_container)r
 # the name of the python (sub)package containing actors
 actors_pkg = %(actors_pkg)r
 
+# the name of the python (sub)package containing workflows
+workflows_pkg = %(workflows_pkg)r
+
 # path to the "static" directory for web presentation
 web_static = %(web_static)r
 

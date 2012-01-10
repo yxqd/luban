@@ -12,10 +12,13 @@
 #
 
 
-
-# login workflow
+# registration workflow
 from ..Workflow import Workflow as base
 class Workflow(base):
+
+    """
+    user registration workflow 
+    """
 
     from .models import factory as models_factory
     from .actor import factory as actor_factory

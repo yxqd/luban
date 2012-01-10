@@ -17,10 +17,20 @@ add a workflow
 """
 
 
-import os, time, shutil
+import os, sys, time, shutil
 
 
 def run(workflow, project=None):
+    # check if the workflow exists
+    mod = 'luban.workflows.%s' % workflow
+    try:
+        __import__(mod, locals=locals(), globals=globals())
+    except ImportError:
+        print ("***workflow %r does not exist.\n" % workflow)
+        print ("available workflows: ")
+        print_available_workflows()
+        return
+    
     project = project or '.'
     project = os.path.abspath(project)
     print ("adding workflow %r to luban project %r" % (workflow, project))
@@ -39,26 +49,19 @@ def run(workflow, project=None):
         return
     
     # actor
-    mod = "aokuang.workflows.actors.%s" % (workflow,)
-    try:
-        mod = __import__(mod, fromlist = [''])
-    except ImportError:
-        print("Cannot import workflow template from %s" % mod)
+    import aokuang.workflows as awpkg
+    awpkgpath = os.path.dirname(awpkg.__file__)
+    actorsrc = os.path.join(awpkgpath, 'actors', workflow+'.py')
+    workflowsrc = os.path.join(awpkgpath, 'workflows', workflow+'.py')
+    if not os.path.exists(actorsrc) or not os.path.exists(workflowsrc):
+        print ("workflow template was not installed correctly.")
+        print ("missing %s or %s" % (actorsrc, workflowsrc))
         return
-    else:
-        shutil.copy(mod.__file__, actor_file)
-        print ("created %s" % actor_file)
-    
-    # workflow
-    mod = "aokuang.workflows.workflows.%s" % (workflow,)
-    try:
-        mod = __import__(mod, fromlist = [''])
-    except ImportError:
-        print("Cannot import workflow template from %s" % mod)
-        return
-    else:
-        shutil.copy(mod.__file__, workflow_file)
-        print ("created %s" % workflow_file)
+        
+    shutil.copy(actorsrc, actor_file)
+    print ("created %s" % actor_file)
+    shutil.copy(workflowsrc, workflow_file)
+    print ("created %s" % workflow_file)
     
     return
 
@@ -82,6 +85,41 @@ def parse_cmdline():
     args, kwds = args[2:], vars(options)
     return args, kwds
 
+
+
+def print_available_workflows():
+    workflows = collect_workflows()
+    for wf in workflows:
+        print (" - %s: %s" % (wf.name, wf.__doc__.strip()))
+        continue
+    return
+
+
+def collect_workflows():
+    prefix = 'luban.workflows.'
+    import luban.workflows as pkg
+    workflows = []
+    import pkgutil
+    for mod_loader, name, ispkg in pkgutil.iter_modules(pkg.__path__):
+        # skip over "private" stuff
+        if name.startswith('_'): continue
+        # and modules
+        if not ispkg: continue
+        #
+        pkgname = prefix + name
+        # get workflow class
+        __import__(pkgname, globals=globals(), locals=locals(), level=-1)
+        workflow_mod = sys.modules[pkgname]
+        try:
+            wf = workflow_mod.Workflow
+        except AttributeError:
+            msg = "module %r does not define Workflow class" % (workflow_mod,)
+            raise NotImplementedError(msg)
+        # 
+        wf.name = name
+        workflows.append(wf)
+        continue
+    return workflows
 
 # End of file 
 

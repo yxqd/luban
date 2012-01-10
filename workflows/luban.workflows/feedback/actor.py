@@ -22,7 +22,7 @@ def createActor(feedback_recipient="feedback@example.com", gmail_account=None):
         raise RuntimeError("must provide gmail_account")
 
     #
-    from ..utils import email
+    from .._utils import email
     email.gmail_account = gmail_account
     
     from luban.controller.Actor import Actor as base
@@ -68,7 +68,7 @@ def createActor(feedback_recipient="feedback@example.com", gmail_account=None):
             recipients = [feedback_recipient]
 
             #
-            from ..utils.email import send
+            from .._utils.email import send
             send(subject, recipients, content, sender)
 
             # actions after user click ok button

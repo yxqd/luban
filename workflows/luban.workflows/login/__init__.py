@@ -17,6 +17,10 @@
 from ..Workflow import Workflow as base
 class Workflow(base):
 
+    """
+    user login workflow
+    """
+
     from .models import factory as models_factory
     from .actor import factory as actor_factory
     from .visuals import factory as visual_factory

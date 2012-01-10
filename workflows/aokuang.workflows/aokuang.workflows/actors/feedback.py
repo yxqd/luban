@@ -13,7 +13,7 @@
 
 
 """
-http://localhost:22347/feedback?email=a@b.com
+http://example.com/feedback?email=a@b.com
 """
 
 
@@ -27,8 +27,11 @@ class Actor(workflow.Actor):
     @luban.decorators.frameHandler
     def default(self, email, **kwds):
 
-        # this is a hack. for real app, this should be
-        # set somewhere else after user login, for example.
+        # Store user email in session. Later it will be used
+        # in constructing the feedback email.
+        # The implementation here is a hack for demo purpose.
+        # For a real app, this should not come from arguments;
+        # it should be obtained from database, for example.
         luban.session['email'] = email
         
         # give this context a name
@@ -36,14 +39,12 @@ class Actor(workflow.Actor):
         # build the action in case of successful sending the feedback
         onsuccess = luban.a.load(actor = self.name, routine = 'onsuccess')
         # and save the context in the session
-        luban.session[context] = {
-            'onsuccess': onsuccess,
-            }
+        luban.session[context] = {'onsuccess': onsuccess}
 
-        #
+        # create the feedback button
         button = workflow.visuals.button(context=context)
         
-        #
+        # test frame
         frame = luban.e.frame(title='test')
         frame.append(button)
         return frame

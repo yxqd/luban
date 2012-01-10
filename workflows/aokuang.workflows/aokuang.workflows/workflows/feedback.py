@@ -15,13 +15,13 @@ from luban.workflows.feedback import Workflow
 import luban
 luban.app_config.register(
     'gmail_account',
-    "gmail account info",
-    "{'username': '...', 'password': '...'}",
+    doc = "gmail account info",
+    example = {'username': '...', 'password': '...'},
     )
 luban.app_config.register(
     'feedback_recipient',
-    'feedback recipient email address',
-    'feedback@mysite.com',
+    doc = 'feedback recipient email address',
+    example = 'feedback@mysite.com',
     )
 
 workflow = Workflow()

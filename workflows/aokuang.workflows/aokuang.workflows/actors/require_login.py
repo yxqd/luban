@@ -16,7 +16,7 @@
 This is better and simpler than the "login" example.
 It uses the "require" decorator.
 
-http://localhost:22347/require_login
+http://example.com/require_login
 """
 
 import luban
@@ -28,6 +28,8 @@ class Actor(workflow.Actor):
 
     expose = 1
 
+    # the decorator make sure user needs to be authenticated
+    # before coming into this area.
     @luban.decorators.require(authentication_portal)
     def default(self, **kwds):
         frame = luban.e.frame(title='Welcome')

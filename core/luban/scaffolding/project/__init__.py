@@ -30,9 +30,16 @@ def createProjectSkeleton(name, outdir, deployment=None):
     
     return
     
-    
 
-def loadProject(filename):
+def loadProject(path=None):
+    if path is None: path = '.'
+    import os
+    if os.path.isdir(path):
+        path = os.path.join(path, 'conf.py')
+    return loadProject_fromConfPy(path)
+        
+
+def loadProject_fromConfPy(filename):
     from .ConfigurationLoader import ConfigurationLoader
     loader = ConfigurationLoader()
     return loader.load(filename)

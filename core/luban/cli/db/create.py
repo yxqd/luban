@@ -22,6 +22,41 @@ import os, sys, time, shutil
 
 def run(project=None):
     print ("creating db...")
+    
+    # load the project
+    path = project or '.'
+    from luban.scaffolding.project import loadProject
+    project = loadProject(path)
+
+    # change into deployment directory
+    dep_path = project.getDeploymentPath()
+    os.chdir(dep_path)
+
+    # pythonpath
+    project.setPythonPath()
+
+    #
+    loadModelsForWorkflows(project)
+
+    # XXX: this is fixed to sqlalchemy for now
+    from luban.db.sqlalchemy import createSession
+    session = createSession()
+    session.commit()
+    import luban
+    dburi = luban.app_config.db.uri
+    print ("create db at %s. cwd: %s" % (dburi, os.path.abspath('.')))
+    return
+
+
+def loadModelsForWorkflows(project):
+    # the project workflows subpkg
+    pkgname = '%s.workflows' % project.name
+    __import__(pkgname)
+    pkg = sys.modules[pkgname]
+
+    #
+    from luban.workflows.models import loadModels
+    loadModels(pkg)
     return
 
 

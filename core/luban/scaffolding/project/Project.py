@@ -56,6 +56,20 @@ class Project:
         self.extensions = extensions or self.extensions
         self.port = port or self.port
         return
+
+
+    def getDeploymentPath(self):
+        return os.path.join(self.root, 'deployments', self.deployment)
+
+
+    def setPythonPath(self):
+        mypytreeroot = os.path.join(self.root, self.pytree_container)
+        import sys
+        if mypytreeroot not in sys.path:
+            sys.path.insert(0, mypytreeroot)
+        if '.' not in sys.path:
+            sys.path.insert(0, '.')
+        return
     
 
     def identify(self, inspector):
@@ -69,6 +83,8 @@ relpaths = [
     'web_static',
     ]
 
+
+import os
 
 # End of file 
 

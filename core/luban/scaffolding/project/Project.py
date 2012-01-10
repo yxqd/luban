@@ -23,6 +23,7 @@ class Project:
     python_in_project = 'python' # path of python src tree container dir relative to root
     
     actors_in_python = '.actors' # name of the actors python subpackage in the project python namespace
+    workflows_in_python = '.workflows' # name of the workflows python subpackage in the project python namespace
 
     deployment = 'cherrypy' # deployment method
     extensions = ['luban.timber', 'luban.workflows'] # luban extensions used
@@ -35,6 +36,7 @@ class Project:
         self, name,
         pytree_container = None,
         actors_pkg = None,
+        workflows_pkg = None,
         web_static = None,
         deployment = None,
         extensions = None,
@@ -47,6 +49,7 @@ class Project:
         # absolute paths
         self.pytree_container = pytree_container or self.python_in_project
         self.actors_pkg = actors_pkg or name + self.actors_in_python
+        self.workflows_pkg = workflows_pkg or name + self.workflows_in_python
         self.web_static = web_static or self.web_static_in_project
         # 
         self.deployment = deployment or self.deployment

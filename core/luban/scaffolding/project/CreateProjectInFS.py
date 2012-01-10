@@ -63,6 +63,11 @@ class Renderer:
         # actors subpkg
         actors_dir = root[project.actors_pkg.replace('.', '/')]
         actors_dir.addEntry(File.File('start.py', start_py))
+
+        # workflows
+        workflows = Directory.Directory('workflows')
+        tree.addEntry(workflows)
+        workflows.addEntry(File.File('__init__.py', workflows_init_py))
         
         # sitemap
         tree.addEntry(File.File('sitemap.py', sitemap_py))
@@ -112,6 +117,13 @@ class Actor(base):
         frame.document(title="hello world")
         return luban.actions.establishInterface(frame)
 
+"""
+workflows_init_py = """
+# model registry
+from luban.db.models import model_registry as models
+
+# model base
+from luban.db.sqlalchemy import Base as ModelBase
 """
 sitemap_py = """
 from luban.utils.sitemap import Url

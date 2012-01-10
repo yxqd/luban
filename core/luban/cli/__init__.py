@@ -59,7 +59,7 @@ public_commands = [
     'stop',
     'creatext',
     'sitemap',
-    'workflows',
+    'workflow',
     ]
 
 hidden_commands = [

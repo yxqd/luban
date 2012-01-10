@@ -65,7 +65,7 @@ def run(workflow, project=None):
 
 def parse_cmdline():
     import optparse
-    usage = "usage: %prog workflows add <workflow> [options]"
+    usage = "usage: %prog workflow add <workflow> [options]"
     parser = optparse.OptionParser(usage, add_help_option=True)
     
     # NOTE:

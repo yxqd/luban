@@ -16,12 +16,12 @@ import os
 
 def run(*args, **kwds):
     from . import public_commands
-    print( 'luban workflows -- workflow management commands')
+    print( 'luban workflow -- workflow management commands')
     print( 'http://lubanui.org')
     print()
     print('Commands:')
     for cmd in public_commands:
-        print('  luban workflows %s' % cmd)
+        print('  luban workflow %s' % cmd)
         continue
     return
     

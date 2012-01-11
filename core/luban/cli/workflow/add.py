@@ -26,7 +26,7 @@ def run(workflow, project=None):
     try:
         __import__(mod, locals=locals(), globals=globals())
     except ImportError:
-        print ("***workflow %r does not exist.\n" % workflow)
+        print ("*** workflow %r does not exist.\n" % workflow)
         print_available_workflows()
         return
     
@@ -39,12 +39,16 @@ def run(workflow, project=None):
     path = project
     conf = os.path.join(path, 'conf.py')
     project = loadProject(conf)
+
+    # update conf.py if necessary
+    if 'luban.workflows' not in project.extensions:
+        open(conf, 'a').write("\nextensions.append('luban.workflows')\n")
     
     # see if files already exist
     actor_file = os.path.join(path, project.pytree_container, project.actors_pkg.replace('.', '/'), workflow+'.py')
     workflow_file = os.path.join(path, project.pytree_container, project.workflows_pkg.replace('.', '/'), workflow+'.py')
     if os.path.exists(actor_file) or os.path.exists(workflow_file):
-        print("Cannot create workflow template because %s and/or %s already exist" % (actor_file, workflow_file))
+        print("*** Cannot create workflow template because %s and/or %s already exist" % (actor_file, workflow_file))
         return
     
     # actor
@@ -53,12 +57,18 @@ def run(workflow, project=None):
     actorsrc = os.path.join(awpkgpath, 'actors', workflow+'.py')
     workflowsrc = os.path.join(awpkgpath, 'workflows', workflow+'.py')
     if not os.path.exists(actorsrc) or not os.path.exists(workflowsrc):
-        print ("workflow template was not installed correctly.")
-        print ("missing %s or %s" % (actorsrc, workflowsrc))
+        print ("*** workflow template was not installed correctly.")
+        print ("*** missing %s or %s" % (actorsrc, workflowsrc))
         return
-        
+
+    # patch the project directory. new version of luban may need
+    # more files in the project directory.
+    from luban.scaffolding.project.CreateProjectInFS import Renderer
+    Renderer().render(project, project.root, onconflict='skip')
+
     shutil.copy(actorsrc, actor_file)
     print ("created %s" % actor_file)
+
     shutil.copy(workflowsrc, workflow_file)
     print ("created %s" % workflow_file)
 

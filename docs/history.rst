@@ -10,7 +10,7 @@ Luban 1.0.1
 expected: Jan 15, 2012
 
 * experimental python 2.6 support
-* ... to be determined by surveys etc ...
+* experimental support of "workflows"
 
 
 .. _changes-1.0.0:
@@ -40,7 +40,7 @@ therefore easier to understand and work with.
 
 Aokuang is included in this version as a documentation tool
 and also a test for luban.
-Aokuang shows that good, consistent programming practices (done in luban)
+Aokuang shows that good, consistent programming practices
 can really lead to much simplified and easy-to-maintain code.
 
 The Gongshuzi prototype is not included in this release.
@@ -62,7 +62,7 @@ to python 2.7 in the future.
 Another thing is that
 because of the syntax difference of metaclass in python 2 and 
 python 3, some relatively ugly code had to be added 
-into placees where both multiple inheritance
+into places where both multiple inheritance
 and metaclass are involved,
 in order for
 luban to work for both 2 and 3 :(

@@ -24,7 +24,7 @@ Getting Started
 * :ref:`Forms <form-tutorial>`
 * :ref:`Make your web application dynamic <dynamic-ui-tutorial>`
 * :ref:`Styling your interface <styling-tutorial>`
-* :ref:`(experimental) Workflows <workflow-tutorial>`
+* :ref:`Workflows <workflow-tutorial>` (experimental)
 * :ref:`more ... <user-guide>`
 
 

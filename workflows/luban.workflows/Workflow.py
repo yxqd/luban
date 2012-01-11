@@ -22,29 +22,37 @@ class Workflow:
     for a workflow to work.
 
     first, a workflow is built upon a bunch of data object models.
-    These models are the foundatioin, the things to be manipulated
-    in the workflow.
-    For example, a login workflow at the least needs a "users" table.
+    These models are to be manipulated in the workflow.
+    For example, a login workflow at the least needs a "users" table
+    or sth alike.
+    Therefore, we require each workflow to provide a factory method
+    to create models necessary for the workflow to function well.
+    This factory method, however, must detect whether this required
+    model already was defined (by looking up the model registry),
+    and only define those models if it cannot find existing implementations.
 
-    then, a workflow consists of an actor (should we consider multiple
-    actors. let us keep it simple for now), and a visual factory that
+    then, a workflow consists of an actor (**should we consider multiple
+    actors? let us keep it simple for now**), and a visual factory that
     knows how to create visuals related to this workflow.
 
-    Once created, a work
-    self.actor is the actor class for this workflow
+    Once created, a workflow class can be  customized and used by
+    a luban app.
 
-    typically
-    1. create a customized workflow in a module
-      >>> from somewhere import Workflow
-      >>> workflow = Workflow(...)
+    See the implementation in .login for an example of a workflow.
+    
+    typical usage of a workflow
+    1. create a customized workflow factory in a module
+      from somewhere import Workflow
+      @Workflow.factory
+      def workflow(): return Workflow(...)
 
     2. in the actor module:
-      >>> from workflow_module import workflow
-      >>> class Actor(workflow.Actor): ...
+      from workflow_module import workflow
+      class Actor(workflow().Actor): ...
 
     3. when creating a visual:
-      >>> from workflow_module import workflow
-      >>> form = workflow.visuals.form(...)
+      from workflow_module import workflow
+      form = workflow().visuals.form(...)
     """
 
     # factory of models. this should probably not really be used
@@ -85,12 +93,12 @@ class Workflow:
         return
 
 
-    # lazy creation of property "actor"
+    # lazy creation of property "Actor"
     @property
     def Actor(self):
         # see also: _configureActorFactory
         try: return self._Actor
-        except:
+        except AttributeError:
             a = self._Actor = self.actor_factory()
             return a
 
@@ -100,13 +108,15 @@ class Workflow:
         """convert a factory method to a factory that creates
         only one instance
         """
-        # XXX: should we consider keeping a week reference to the
-        # XXX: instance in the Workflow class?
         def _():
+            # XXX: should we consider keeping a week reference to the
+            # XXX: instance in the Workflow class?
             if not hasattr(f, 'instance'):
                 f.instance = f()
             return f.instance
         return _
+    # an alias
+    factory = singleton_factory
 
 
     def _configureActorFactory(self):
@@ -115,7 +125,7 @@ class Workflow:
         the factory can instantiate an actor class without any
         arguments:
 
-          Actor = self.createActor()
+          Actor = self.actor_factory()
           
         """
         raise NotImplementedError

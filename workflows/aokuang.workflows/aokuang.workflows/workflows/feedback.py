@@ -24,7 +24,7 @@ luban.app_config.register(
     example = 'feedback@mysite.com',
     )
 
-@Workflow.singleton_factory
+@Workflow.factory
 def workflow():
     workflow = Workflow()
     workflow.actor_factory.feedback_recipient = luban.app_config.feedback_recipient

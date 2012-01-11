@@ -16,7 +16,7 @@ from . import ModelBase
 from luban.workflows.login import Workflow
 Workflow.models_factory.Base = ModelBase
 
-@Workflow.singleton_factory
+@Workflow.factory
 def workflow():
     workflow = Workflow()
     # overload decorators

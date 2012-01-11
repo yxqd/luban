@@ -12,11 +12,9 @@
 #
 
 
-def send(subject, recipients, body, sender=None):
+def send(subject, recipients, body, sender=None, smtp=None):
     """
-    parameter "sender" may not work. depends on the smtp.
-    if login is required for the smtp, the sender could be
-    fixed to the user account for the smtp.
+    In this implementation, parameter "sender" may not work
     """
     if isinstance(recipients, str):
         recipients = [recipients]
@@ -33,9 +31,9 @@ def send(subject, recipients, body, sender=None):
 
     # Send the message via our own SMTP server, but don't include the
     # envelope header.
-    s = defaultsmtp()    
-    s.sendmail(sender, recipients, msg.as_string())
-    s.quit()
+    smtp = smtp or defaultsmtp()
+    smtp.sendmail(sender, recipients, msg.as_string())
+    # smtp.quit()
     
     return
 

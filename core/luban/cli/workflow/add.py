@@ -85,7 +85,7 @@ def update_app_config(workflow, project):
     __import__(pkgname)
 
     #
-    s = []
+    s = ['']
     for name, opt in luban.app_config.options.items():
         if hasattr(luban_app_config, name):
             continue

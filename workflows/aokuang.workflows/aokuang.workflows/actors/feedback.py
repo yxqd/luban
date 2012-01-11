@@ -29,9 +29,11 @@ class Actor(workflow.Actor):
 
         # Store user email in session. Later it will be used
         # in constructing the feedback email.
+        # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
         # The implementation here is a hack for demo purpose.
         # For a real app, this should not come from arguments;
         # it should be obtained from database, for example.
+        # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
         luban.session['email'] = email
         
         # give this context a name

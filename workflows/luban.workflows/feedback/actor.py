@@ -11,12 +11,31 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
+"""
+feedback workflow actor.
+
+In this implementation, the user actually waits for the email
+to be sent. But there could be many different ways of doing this
+
+* Put the email sending part in a background process
+* Save the feedback in a database table, instead of sending it
+  to an email address.
+"""
+
 
 import luban
 from ..decorators import requirements
 
 
-def createActor(feedback_recipient="feedback@example.com", gmail_account=None):
+def createActor(
+    feedback_recipient="feedback@example.com",
+    gmail_account=None,
+    smtp=None,
+    ):
+
+    """
+    if smtp is specified, gmail_account is not needed.
+    """
 
     if not gmail_account:
         raise RuntimeError("must provide gmail_account")
@@ -41,10 +60,11 @@ def createActor(feedback_recipient="feedback@example.com", gmail_account=None):
             if not email:
                 raise RuntimeError("should not reach here")
 
+            # dialog indicating we are working on sending the email.
             dialog = luban.e.dialog(id='in-processing-dialog', autoopen=True)
             dialog.onclose = luban.a.select(element=dialog).destroy()
             dialog.paragraph(text="Sending ... Thank you for your patience.")
-
+            
             subject = 'user feedback for application'
             content = message
             dialog.oncreate = luban.a.load(
@@ -69,7 +89,7 @@ def createActor(feedback_recipient="feedback@example.com", gmail_account=None):
 
             #
             from .._utils.email import send
-            send(subject, recipients, content, sender)
+            send(subject, recipients, content, sender, smtp=smtp)
 
             # actions after user click ok button
             destroydialog = luban.a.select(id='in-processing-dialog').destroy()
@@ -98,7 +118,8 @@ class Factory:
 
     # customization done by overiding the following
     feedback_recipient = None
-    gmail_account = None
+    gmail_account = None # use gmail smtp with a username and password
+    smtp = None # use your own smtp. see .._utils.email for an example
     
     def __call__(self):
         return createActor(

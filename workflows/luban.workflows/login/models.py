@@ -11,6 +11,7 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
+# shows an example implementation of User model
 
 from sqlalchemy import Table, Column, Integer, String, DateTime
 import datetime

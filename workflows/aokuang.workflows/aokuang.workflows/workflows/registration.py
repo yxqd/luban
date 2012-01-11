@@ -17,7 +17,7 @@ from luban.workflows.registration import Workflow
 Workflow.models_factory.Base = ModelBase
 
 
-@Workflow.singleton_factory
+@Workflow.factory
 def workflow():
     return Workflow()
 

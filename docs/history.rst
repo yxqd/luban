@@ -9,8 +9,6 @@ Luban 1.0.1
 -----------
 expected: Jan 15, 2012
 
-Official support of python 2.7.
-
 Experimental:
 
 * python 2.6 support

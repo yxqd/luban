@@ -5,7 +5,7 @@ Installation
 
 luban can be installed by pip::
 
- $ pip install luban
+ $ pip install --upgrade luban
 
 You may need super-user privileges to do this.
 

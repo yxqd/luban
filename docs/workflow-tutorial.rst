@@ -3,15 +3,17 @@
 Adding a workflow to Your Interface
 -----------------------------------
 
-Suppose you have a luban project "helloworld", do ::
+Create a new luban project::
 
- $ cd /path/to/helloworld
+ $ cd /somewhere
+ $ luban create workflowdemo
  $ luban start
 
-The app will start in a browser
 
 Add a "registration" workflow
 =============================
+
+Now back in a terminal.
 
 This workflow needs database support. 
 The default db engine for luban is sqlalchemy.
@@ -26,10 +28,9 @@ Please install sqlalchemy by::
 
    $ sudo pip-3.2 install sqlalchemy
 
-Back in a terminal,
-::
+Install "registration" workflow::
 
- $ cd /path/to/helloworld
+ $ cd /path/to/workflowdemo
  $ luban workflow add registration
 
 Since the registration needs database support, do:: 

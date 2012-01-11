@@ -12,8 +12,9 @@ expected: Jan 15, 2012
 Official support of python 2.7.
 
 Experimental:
+
 * python 2.6 support
-* "workflows"
+* :ref:`"workflows" <workflow-tutorial>`
 * "luban db" command
 * "luban paths" command 
 

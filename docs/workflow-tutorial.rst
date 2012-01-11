@@ -7,7 +7,7 @@ Create a new luban project::
 
  $ cd /somewhere
  $ luban create workflowdemo
- $ luban start
+ $ luban start workflowdemo
 
 
 Add a "registration" workflow

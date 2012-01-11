@@ -14,6 +14,13 @@ with simple, natural syntax
 for describing user interfaces in a generic way. 
 
 
+What's new in 1.0.1
+-------------------
+
+* :ref:`"workflow" <workflow-tutorial>` was introduced
+* :ref:`more details <changes-1.0.1>`
+
+
 Getting Started
 ---------------
 
@@ -37,6 +44,8 @@ Advanced topics
 News
 ----
 
+* `luban 1.0.1 <http://lubanui.org/1.0.1>`_ was out Jan, 2012
+* `luban 1.0.0 <http://lubanui.org/1.0.0>`_ was out Dec, 2011
 * luban repository is now available at `launchpad <https://launchpad.net/luban>`_
 * `Imagin'Labs corporation <http://imaginlabs.com>`_ uses luban for its web presentation.
 * Jiao and Michael `talked about luban <http://www.cacr.caltech.edu/main/?p=987>`_ in a `CACR <http://www.cacr.caltech.edu>`_ seminar.

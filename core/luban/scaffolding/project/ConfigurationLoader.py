@@ -30,7 +30,7 @@ class ConfigurationLoader:
         sys.path.insert(0, dir)
         import conf
         from .Project import Project
-        project = Project('p')
+        project = Project(conf.name)
         # get data from conf file
         for k in conf.__dict__:
             if k.startswith('_'):

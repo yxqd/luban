@@ -28,7 +28,8 @@ def loadModels(subpkg):
         if not found:
             print ("%s not found" % module_name)
         else:
-            found.load_module(module_name)
+            mod = found.load_module(module_name)
+            mod.workflow()
         continue
     return
 

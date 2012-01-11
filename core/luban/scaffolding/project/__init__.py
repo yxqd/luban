@@ -36,7 +36,11 @@ def loadProject(path=None):
     import os
     if os.path.isdir(path):
         path = os.path.join(path, 'conf.py')
-    return loadProject_fromConfPy(path)
+    try:
+        return loadProject_fromConfPy(path)
+    except:
+        msg = "Failed to load project from %r" % (path,)
+        raise RuntimeError(msg)
         
 
 def loadProject_fromConfPy(filename):

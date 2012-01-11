@@ -20,5 +20,8 @@ os.system("make html")
 from merlin.builders._utils import createExportShareDir
 export_share = createExportShareDir(context)
 luban_docs = os.path.join(export_share, 'luban', 'docs')
+if not os.path.exists(luban_docs):
+    os.makedirs(luban_docs)
 cmd = 'rsync -a _build/html/ %s/' % luban_docs
+print(cmd)
 os.system(cmd)

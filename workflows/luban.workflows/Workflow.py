@@ -95,6 +95,20 @@ class Workflow:
             return a
 
 
+    @classmethod
+    def singleton_factory(cls, f):
+        """convert a factory method to a factory that creates
+        only one instance
+        """
+        # XXX: should we consider keeping a week reference to the
+        # XXX: instance in the Workflow class?
+        def _():
+            if not hasattr(f, 'instance'):
+                f.instance = f()
+            return f.instance
+        return _
+
+
     def _configureActorFactory(self):
         """This method should be overloaded by the subclass.
         And it should configure the actor factory so that

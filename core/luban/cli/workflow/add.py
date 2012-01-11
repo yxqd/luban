@@ -61,6 +61,40 @@ def run(workflow, project=None):
     print ("created %s" % actor_file)
     shutil.copy(workflowsrc, workflow_file)
     print ("created %s" % workflow_file)
+
+    update_app_config(workflow, project)
+    return
+
+
+def update_app_config(workflow, project):
+    # now the luban_app_config.py
+    # we need to import  <project>.workflows.<workflow>,
+    # which will build up the option registry with extra options.
+    # then we update the config
+
+    f = project.getAppConfigPy()
+    print ("updating %s..." % f)
+    import luban, os
+    
+    os.chdir(project.getDeploymentPath())
+    project.setPythonPath()
+    import luban_app_config
+    
+    # 
+    pkgname = '%s.workflows.%s' % (project.name, workflow)
+    __import__(pkgname)
+
+    #
+    s = []
+    for name, opt in luban.app_config.options.items():
+        if hasattr(luban_app_config, name):
+            continue
+        s.append(opt.example_code())
+        continue
+    s = '\n'.join(s)
+    
+    #
+    open(f, 'a').write(s)
     
     return
 

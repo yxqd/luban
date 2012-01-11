@@ -62,6 +62,11 @@ class Project:
         return os.path.join(self.root, 'deployments', self.deployment)
 
 
+    def getAppConfigPy(self):
+        dep = self.getDeploymentPath()
+        return os.path.join(dep, 'luban_app_config.py')
+
+
     def getPyTreeRoot(self):
         return os.path.join(self.root, self.pytree_container)
 

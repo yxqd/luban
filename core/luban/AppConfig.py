@@ -19,7 +19,13 @@ class Option:
         self.example = example
         self.value = None
         return
-    
+
+
+    def example_code(self):
+        s = '# %s\n' % self.name
+        s += '\n'.join( '# '+l for l in self.doc.splitlines())
+        s += '\n%s = %r\n' % (self.name, self.example)
+        return s
 
 
 class AppConfig:

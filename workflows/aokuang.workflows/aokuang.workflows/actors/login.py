@@ -12,9 +12,16 @@
 #
 
 
-import luban
+"""
+http://example.com/login
+http://example.com/login/use_require
+"""
 
-from ..workflows.login import workflow
+
+import luban
+from luban.workflows.login import authentication_portal
+
+from ..workflows.login import workflow; workflow = workflow()
 class Actor(workflow.Actor):
 
     expose = 1
@@ -41,6 +48,17 @@ class Actor(workflow.Actor):
     def onsuccess(self, **kwds):
         welcome = luban.e.document(title='Welcome')
         return luban.a.select(id='').replaceContent(newcontent=welcome)
+    
+
+    # the decorator make sure user needs to be authenticated
+    # before coming into this area.
+    # this one method achieve the work of both "default" and "onsuccess"
+    # methods.
+    @luban.decorators.require(authentication_portal)
+    def use_require(self, **kwds):
+        frame = luban.e.frame(title='Welcome')
+        frame.document(title='Welcome')
+        return frame
     
     pass
 

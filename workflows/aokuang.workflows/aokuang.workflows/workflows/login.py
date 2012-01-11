@@ -16,10 +16,13 @@ from . import ModelBase
 from luban.workflows.login import Workflow
 Workflow.models_factory.Base = ModelBase
 
-workflow = Workflow()
+@Workflow.singleton_factory
+def workflow():
+    workflow = Workflow()
+    # overload decorators
+    from luban.workflows.login import authentication_portal
+    authentication_portal.fullfill_requirement.form_factory = workflow.visuals.form
+    return workflow
 
-# overload decorators
-from luban.workflows.login import authentication_portal
-authentication_portal.fullfill_requirement.form_factory = workflow.visuals.form
 
 # End of file 

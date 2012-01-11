@@ -14,7 +14,7 @@
 
 import luban
 
-from ..workflows.registration import workflow
+from ..workflows.registration import workflow; workflow = workflow()
 class Actor(workflow.Actor):
 
     expose = 1

@@ -40,9 +40,7 @@ def createAppConfigPy(project):
     options = luban.app_config.options
     s = ''
     for opt in options.values():
-        s += '# %s\n' % opt.name
-        s += '\n'.join( '# '+l for l in opt.doc.splitlines())
-        s += '\n%s = %s\n' % (opt.name, opt.example)
+        s += opt.example_code()
         continue
     return File.File('luban_app_config.py', s)
 

@@ -24,8 +24,12 @@ luban.app_config.register(
     example = 'feedback@mysite.com',
     )
 
-workflow = Workflow()
-workflow.actor_factory.feedback_recipient = luban.app_config.feedback_recipient
-workflow.actor_factory.gmail_account = luban.app_config.gmail_account
+@Workflow.singleton_factory
+def workflow():
+    workflow = Workflow()
+    workflow.actor_factory.feedback_recipient = luban.app_config.feedback_recipient
+    workflow.actor_factory.gmail_account = luban.app_config.gmail_account
+    return workflow
+
 
 # End of file 

@@ -19,7 +19,7 @@ http://example.com/feedback?email=a@b.com
 
 import luban
 
-from ..workflows.feedback import workflow
+from ..workflows.feedback import workflow; workflow=workflow()
 class Actor(workflow.Actor):
 
     expose = 1

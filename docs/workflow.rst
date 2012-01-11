@@ -14,3 +14,5 @@ To add, for example, the registration workflow::
 
  $ luban workflow add registration
 
+
+Next we explain each workflow.

@@ -38,8 +38,8 @@ class Writer(Inspector):
         debug.log('onDirectory: path=%s' % path)
         
         if os.path.exists(path):
-            if self._onconflict == 'skip': return
-            if self._onconflict == 'error':
+            if self._onconflict == 'skip': pass
+            elif self._onconflict == 'error':
                 raise RuntimeError("%s already exists" % path)
         else:
             os.makedirs(path)

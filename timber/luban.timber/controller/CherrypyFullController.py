@@ -21,7 +21,14 @@ from .CherrypyController import CherrypyController as base
 class Base(base):
 
     def __init__(self, **kwds):
-        super().__init__(**kwds)
+        
+        from luban import py_major_ver
+        if py_major_ver == 2:
+            superme = super(Base, self)
+        elif py_major_ver == 3:
+            superme = super()
+
+        superme.__init__(**kwds)
         self._initdb()
         return
 
@@ -39,6 +46,15 @@ class UseSqlalchemy:
     def _initdb(self):
         
         import cherrypy, luban
+
+        try:
+            import sqlalchemy
+        except ImportError:
+            import traceback; tb = traceback.format_exc()
+            import warnings
+            warnings.warn("sqlalchemy not available: %s" % tb)
+            return
+        
         from luban.db import sqlalchemy
         cherrypy.config.update({
             'tools.SATransaction.on': True,

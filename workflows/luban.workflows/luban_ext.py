@@ -4,5 +4,3 @@ from luban.controller import CherrypyController as core_CherrypyController_modul
 from luban.timber.controller.CherrypyFullController import CherrypyFullController
 core_CherrypyController_module.CherrypyController = CherrypyFullController
 
-# by default we use sqlalchemy
-import luban.db.sqlalchemy

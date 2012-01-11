@@ -12,6 +12,9 @@
 #
 
 
+import luban.db.sqlalchemy
+
+
 from sqlalchemy import Table, Column, Integer, String, DateTime
 import datetime
 from ..models import model_registry as reg

@@ -13,6 +13,19 @@ The app will start in a browser
 Add a "registration" workflow
 =============================
 
+This workflow needs database support. 
+The default db engine for luban is sqlalchemy.
+Please install sqlalchemy by::
+
+ $ sudo pip install sqlalchemy
+
+.. note::
+   Please make sure to use pip for particular python version
+   you are using with luban. 
+   For example, to work with python 3.2, you may need::
+
+   $ sudo pip-3.2 install sqlalchemy
+
 Back in a terminal,
 ::
 

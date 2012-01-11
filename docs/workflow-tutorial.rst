@@ -18,6 +18,10 @@ Back in a terminal,
 
  $ cd /path/to/helloworld
  $ luban workflow add registration
+
+Since the registration needs database support, do:: 
+
+ $ luban db create
  
 Now open http://localhost:8080/registration in your browser,
 you will see a registration form. Try it out!

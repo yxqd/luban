@@ -9,9 +9,13 @@ Luban 1.0.1
 -----------
 expected: Jan 15, 2012
 
-* experimental python 2.6 support
-* experimental support of "workflows"
+Official support of python 2.7.
 
+Experimental:
+* python 2.6 support
+* "workflows"
+* "luban db" command
+* "luban paths" command 
 
 .. _changes-1.0.0:
 

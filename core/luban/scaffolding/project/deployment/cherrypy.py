@@ -105,15 +105,19 @@ def createCpApp(project):
 
 cpapp_init = """# -*- python -*-
 
+# load project info
+from luban.scaffolding.project import loadProject
+project = loadProject('../..') # assume the cwd is <deployment> directory
+
 # make sure project python package is in path
-project_pytree_container = %(pytree_container)r
+project_pytree_container = project.pytree_container
 import sys
 if project_pytree_container not in sys.path:
     sys.path.insert(0, project_pytree_container)
 
 # make sure to load all luban extensions
 import luban
-luban.load_extensions(%(extensions)s)
+luban.load_extensions(project.extensions)
 
 # this is to let cherrypy where the application is
 import os.path
@@ -132,7 +136,7 @@ class Root(CherrypyController):
         superme.__init__(
             url = '/',
             static_html_base = '/static',
-            actor_packages = [%(actors_pkg)r],
+            actor_packages = [project.actors_pkg],
             stylesheets = ['%(name)s.css'],
             )
         return

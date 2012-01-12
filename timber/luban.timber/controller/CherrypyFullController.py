@@ -54,8 +54,16 @@ class UseSqlalchemy:
             import warnings
             warnings.warn("sqlalchemy not available: %s" % tb)
             return
-        
+
         from luban.db import sqlalchemy
+        try:
+            luban.app_config.db
+        except:
+            import traceback; tb = traceback.format_exc()
+            import warnings
+            warnings.warn("db not configured: %s" % tb)
+            return
+        
         cherrypy.config.update({
             'tools.SATransaction.on': True,
             'tools.SATransaction.dburi': luban.app_config.db.uri,

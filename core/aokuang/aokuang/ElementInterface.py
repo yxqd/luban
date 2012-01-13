@@ -34,6 +34,40 @@ class Factory(base):
     api_categories = ['properties', 'subelements', 'events', 'actions']
 
 
+    def create(self):
+        from luban import py_major_ver
+        if py_major_ver == 2:
+            superme = super(Root, self)
+        elif py_major_ver == 3:
+            superme = super()
+        container = superme.create()
+
+        impldoc = self._createImplDocument()
+        impldoc.Class = 'section-container'
+        container.append(impldoc)
+        return container
+        
+        
+    def _createImplDocument(self):
+        from luban.weaver.web.Library import Library
+        name = self.object_type.__unique_type_name__
+        try:
+            lib = Library.get('luban.widgets.%s' % name)
+        except KeyError:
+            return luban.e.document()
+        deps = lib.dependencies
+        if not deps: return luban.e.document()
+
+        impl = luban.e.document(title='Javascript widget library dependencies:')
+        for dep in deps:
+            dep = Library.get(dep)
+            text = '<a class="ext" href="%s" target="_blank">%s</a>' % (
+                dep.website, dep.name)
+            impl.htmldocument(text=text)
+            continue
+        return impl
+    
+        
     def _createSubelementsDocument(self, subelements):
         # sort factories
         def get0(t): return t[0]

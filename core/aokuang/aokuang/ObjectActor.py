@@ -36,11 +36,12 @@ class Actor(base):
         # frame
         title = self.frame_title
         f = luban.e.frame(title = title)
+        container = f.document(id='demo-container')
         
         # interior
         d = self.createInterface()
         
-        f.append(d)
+        container.append(d)
         return luban.a.establishInterface(f)
 
 

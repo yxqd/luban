@@ -42,8 +42,11 @@ body {
     background-color: transparent;
     color: white;
     border: none;
+    padding: 1em;
 }
-
+#demo-container .section-container a.ext{
+    color: yellow;
+}
 
 /* logging */
 .log .luban-document-body {

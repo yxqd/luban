@@ -15,6 +15,7 @@ from luban.weaver.web.Library import Library
 lib = Library(
     name = 'jquery.cycle',
     javascripts = ['jquery.ext/jquery.cycle.all.js'],
+    website = "http://jquery.malsup.com/cycle/",
     )
 
 # End of file 

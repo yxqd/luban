@@ -30,6 +30,7 @@ for widget in widgets:
         'jqueryui.%s' % widget,
         javascripts = [js],
         dependencies = ['jqueryui.core'],
+        website = "http://jqueryui.com/demos/%s" % widget,
         )
     continue
 

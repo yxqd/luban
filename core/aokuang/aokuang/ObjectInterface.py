@@ -45,14 +45,15 @@ class Factory(object):
         # the demo document
         doc = self._createDemoDocument()
         doc.title = 'Demos'
-        doc.Class = 'demo-document'
+        doc.Class = 'section-container'
         container.append(doc)
 
         # the api document
         doc = self._createAPIDocument()
         doc.title = 'API'
-        doc.Class = 'api-document'
+        doc.Class = 'section-container'
         container.append(doc)
+        
         return container
 
 

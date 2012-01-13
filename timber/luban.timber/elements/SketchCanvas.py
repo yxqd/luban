@@ -21,12 +21,14 @@ class SketchCanvas(base):
     # decorations
     simple_description = 'A canvas for a sketch'
     full_description = ('')
+    experimental = True
 
     # properties
     auto_save = descriptors.int(default=0)
     auto_save.tip = 'if not zero, automatically save the sketch every <auto_save> seconds'
 
-    # width, height?
+    width = descriptors.int(default=600)
+    height = descriptors.int(default=300)
     
     # events
     from luban.ui.Event import Event

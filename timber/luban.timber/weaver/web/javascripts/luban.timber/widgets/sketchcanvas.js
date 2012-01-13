@@ -39,20 +39,25 @@
     var tools = tag('div'); div.append(tools);
     tools.addClass("tools");
 
+    tools.append('<a href="#'+id+'-canvas'+ '" data-download="png" style="float: right; width: 100px;">Download</a>');
+
     // add some tools
     $.each(
-	['#f00', '#ff0', '#0f0', '#0ff', '#00f', '#f0f', '#000', '#fff'], 
-	function() {
-	    tools.append("<a href='#" + id + "-canvas' data-color='" + this + "' style='width: 10px; background: " + this + ";'></a> ");
-	});
+      ['#f00', '#ff0', '#0f0', '#0ff', '#00f', '#f0f', '#000', '#fff'], 
+      function() {
+	tools.append("<a href='#" + id + "-canvas' data-color='" + this + "' style='width: 10px; background: " + this + ";'></a> ");
+      });
+
     $.each(
-	[3, 5, 10, 15],
-	function() {
-	    tools.append("<a href='#" + id + "-canvas' data-size='" + this + "' style='background: #ccc'>" + this + "</a> ");
-	});
+      [3, 5, 10, 15],
+      function() {
+	tools.append("<a href='#" + id + "-canvas' data-size='" + this + "' style='background: #ccc'>" + this + "</a> ");
+      });
+
 
     // canvas
-    var canvas = tag("canvas", {"id": id+'-canvas'}); div.append(canvas);
+    var opts = {"id": id+'-canvas', "width": kwds.width, "height": kwds.height};
+    var canvas = tag("canvas", opts); div.append(canvas);
 
     //
     canvas.sketch();

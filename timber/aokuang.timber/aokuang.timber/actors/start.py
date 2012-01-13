@@ -118,6 +118,7 @@ menu = [
       'bulletinboard',
       'progressbar',
       'dialog',
+      'sketchcanvas',
       ]),
     ]
 

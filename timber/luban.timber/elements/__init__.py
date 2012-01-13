@@ -55,6 +55,7 @@ elementtypes = [
     # 'TreeView',
     'Uploader',
     # 'XYPlot',
+    'SketchCanvas',
     ]
 def importAllElements():
     modules = elementtypes

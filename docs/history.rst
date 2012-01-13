@@ -3,11 +3,22 @@
 History
 =======
 
+.. _changes-1.0.2:
+
+Luban 1.0.2
+-----------
+Feb 15, 2012
+
+* aokuang: pages for individual widget -- http://aokuang.lubanui.org/<widget>
+  For example, http://aokuang.lubanui.org/document.
+  It also shows the js widget library it depends on.
+
+
 .. _changes-1.0.1:
 
 Luban 1.0.1
 -----------
-expected: Jan 15, 2012
+Jan 15, 2012
 
 Experimental:
 

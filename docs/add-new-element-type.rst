@@ -49,6 +49,7 @@ use "category" decoration?
 
 Then in the new subpackage, implement one demo using one module.
 
+In aokuang.timber.actors.start, add the new element to a category
 
 
 JS lib details

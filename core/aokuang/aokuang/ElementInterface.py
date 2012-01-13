@@ -37,7 +37,7 @@ class Factory(base):
     def create(self):
         from luban import py_major_ver
         if py_major_ver == 2:
-            superme = super(Root, self)
+            superme = super(Factory, self)
         elif py_major_ver == 3:
             superme = super()
         container = superme.create()

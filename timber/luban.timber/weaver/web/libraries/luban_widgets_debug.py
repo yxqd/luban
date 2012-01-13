@@ -41,6 +41,8 @@ elements = [
     'progressbar',
     
     'dialog',
+
+    'sketchcanvas',
     
     ]
 
@@ -61,6 +63,7 @@ Library.get('luban.widgets.uploader').dependencies = [
 Library.get('luban.widgets.slides').dependencies = ['jquery.cycle']
 Library.get('luban.widgets.progressbar').dependencies = ['jqueryui.progressbar']
 Library.get('luban.widgets.dialog').dependencies = ['jqueryui.dialog']
+Library.get('luban.widgets.sketchcanvas').dependencies = ['jquery.sketch']
 
 
 # End of file 

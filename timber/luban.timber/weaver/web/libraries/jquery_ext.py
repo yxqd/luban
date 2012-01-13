@@ -29,5 +29,11 @@ Library(
     javascripts = [jsp('jquery.iframe-transport.js')],
     )
 
+Library(
+    name='jquery.sketch',
+    javascripts = [jsp('sketch.js')],
+    website = 'http://intridea.github.com/sketch.js/',
+    )
+
 
 # End of file 

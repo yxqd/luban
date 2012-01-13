@@ -32,6 +32,7 @@ Getting Started
 * :ref:`Make your web application dynamic <dynamic-ui-tutorial>`
 * :ref:`Styling your interface <styling-tutorial>`
 * :ref:`Workflows <workflow-tutorial>` (experimental)
+* `API for widgets/actions/events <http://lubanui.org/aokuang>`_
 * :ref:`more ... <user-guide>`
 
 

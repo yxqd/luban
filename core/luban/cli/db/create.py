@@ -36,7 +36,7 @@ def run(project=None):
     project.setPythonPath()
 
     #
-    loadModelsForWorkflows(project)
+    loadModels(project)
 
     # XXX: this is fixed to sqlalchemy for now
     from luban.db.sqlalchemy import createSession
@@ -45,6 +45,25 @@ def run(project=None):
     import luban
     dburi = luban.app_config.db.uri
     print ("create db at %s. cwd: %s" % (dburi, os.path.abspath('.')))
+    return
+
+
+def loadModels(project):
+    loadDirectModels(project)
+    loadModelsForWorkflows(project)
+    return
+
+
+def loadDirectModels(project):
+    # XXX assumes that the application has its models under
+    # XXX the "models" subpkg
+    pkgname = '%s.models' % project.name
+    __import__(pkgname)
+    pkg = sys.modules[pkgname]
+
+    #
+    from luban.db.models import loadModels
+    loadModels(pkg)
     return
 
 

@@ -44,4 +44,22 @@ class ModelRegistry:
 model_registry = ModelRegistry()
 
 
+# method to load all db models in a python sub-package
+def loadModels(subpkg):
+    # the implementation just import all sub modules in the sub-pkg
+    # recursively
+    path = subpkg.__path__
+    import os
+    import pkgutil
+    prefix = subpkg.__name__ + '.'
+    for loader, module_name, is_pkg in pkgutil.walk_packages(path, prefix):
+        found = loader.find_module(module_name)
+        if not found:
+            print ("%s not found" % module_name)
+        else:
+            mod = found.load_module(module_name)
+        continue
+    return
+
+
 # End of file 

@@ -29,7 +29,6 @@ class Actor(base):
 
 
     def onSave(self, data=None, **kwds):
-        # import pdb; pdb.set_trace()
         from luban.timber.elements.SketchCanvas import todata
         data = todata(data)
 

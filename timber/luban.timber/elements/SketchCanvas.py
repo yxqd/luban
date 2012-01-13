@@ -57,7 +57,9 @@ import re, base64
 dataUrlPattern = re.compile('data:image/(png|jpeg);base64,(.*)$')
 def todata(s):
     imgb64 = dataUrlPattern.match(s).group(2)
-    imgb64 = imgb64.encode('ascii')
+    # 
+    if py_major_ver == 3:
+        imgb64 = imgb64.encode('ascii')
     return base64.b64decode(imgb64)
 
 

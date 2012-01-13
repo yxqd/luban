@@ -46,4 +46,19 @@ class SketchCanvas(base):
         return inspector.onSketchCanvas(self)
 
 
+
+# convert data sent from widget to raw binary data
+# the input str is created from js canvas.toDataURL
+# this implementation breaks the generality of luban widget.
+# it should instead send the raw data. or we should try
+# to in web controller decode the data before sending
+# it to the actor function.
+import re, base64
+dataUrlPattern = re.compile('data:image/(png|jpeg);base64,(.*)$')
+def todata(s):
+    imgb64 = dataUrlPattern.match(s).group(2)
+    imgb64 = imgb64.encode('ascii')
+    return base64.b64decode(imgb64)
+
+
 # End of file 

@@ -21,7 +21,26 @@ class Actor(base):
         ]
 
     def createDemoPanel(self, **kwds):
-        return luban.e.sketchcanvas()
+        onsave = luban.a.load(
+            actor=self.name, routine='onSave',
+            data = luban.event.data,
+            )
+        return luban.e.sketchcanvas(onsave = onsave)
+
+
+    def onSave(self, data=None, **kwds):
+        # import pdb; pdb.set_trace()
+        from luban.timber.elements.SketchCanvas import todata
+        data = todata(data)
+
+        import os
+        tmpdir = 'tmp'
+        if not os.path.exists(tmpdir): os.makedirs(tmpdir)
+
+        f = os.path.join(tmpdir, 'saved-sketch.png')
+        open(f, 'wb').write(data)
+        return
+
 
 
 # End of file 

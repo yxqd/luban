@@ -39,6 +39,15 @@
     var tools = tag('div'); div.append(tools);
     tools.addClass("tools");
 
+    if (kwds.onsave) {
+      var callback = luban.compileCallback(kwds.onsave);
+      div.bind('luban-sketchcanvassave', callback);
+    
+      var savebtn = $('<a style="float: right; width: 100px;">Save</a>');
+      savebtn.click(createSaveFn(id, kwds.onsave));
+      tools.append(savebtn);
+    }
+
     tools.append('<a href="#'+id+'-canvas'+ '" data-download="png" style="float: right; width: 100px;">Download</a>');
 
     // add some tools
@@ -79,6 +88,22 @@
   widgets.sketchcanvas.prototype = new widgets.base ();
   widgets.sketchcanvas.prototype.setAttribute = function(attrs) {
     var div = this._je;
+  };
+
+  function createSaveFn(id, onsave) {
+    var f = function(event) {
+      var canvas = $('#'+id+' canvas');
+      /*
+      var ctx = canvas[0].getContext('2d');
+      var data = ctx.getImageData(0,0, canvas.attr('width'), canvas.attr('height'));
+      data = {'data': data.data};
+      */
+      var data = {'data': canvas[0].toDataURL('image/png')}; // or image/jpeg
+      $('#'+id).trigger('luban-sketchcanvassave', data);
+      return false;
+    }
+    
+    return f;
   };
 
  })(luban, jQuery);

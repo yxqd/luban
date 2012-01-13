@@ -44,7 +44,7 @@ body {
     border: none;
     padding: 1em;
 }
-#demo-container .section-container a.ext{
+a.ext{
     color: yellow;
 }
 

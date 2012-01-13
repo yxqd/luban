@@ -37,6 +37,10 @@ class Actor(base):
         title = self.frame_title
         f = luban.e.frame(title = title)
         container = f.document(id='demo-container')
+
+        # link to root demo
+        text = '<a class="ext" href="/"><< aokuang</a>'
+        container.htmldocument(text = text)
         
         # interior
         d = self.createInterface()

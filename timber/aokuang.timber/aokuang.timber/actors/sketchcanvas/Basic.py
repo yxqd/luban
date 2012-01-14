@@ -25,10 +25,14 @@ class Actor(base):
             actor=self.name, routine='onSave',
             data = luban.event.data,
             )
-        return luban.e.sketchcanvas(onsave = onsave)
+        return luban.e.sketchcanvas(
+            onsave = onsave,
+            # autosave=30 # comment this out for auto-saving every half min
+            )
 
 
     def onSave(self, data=None, **kwds):
+        print ("saving")
         from luban.timber.elements.SketchCanvas import todata
         data = todata(data)
 

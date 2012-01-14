@@ -24,8 +24,8 @@ class SketchCanvas(base):
     experimental = True
 
     # properties
-    auto_save = descriptors.int(default=0)
-    auto_save.tip = 'if not zero, automatically save the sketch every <auto_save> seconds'
+    autosave = descriptors.int(default=0)
+    autosave.tip = 'if not zero, automatically save the sketch every <auto_save> seconds'
 
     width = descriptors.int(default=600)
     height = descriptors.int(default=300)

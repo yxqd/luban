@@ -39,15 +39,6 @@
     var tools = tag('div'); div.append(tools);
     tools.addClass("tools");
 
-    if (kwds.onsave) {
-      var callback = luban.compileCallback(kwds.onsave);
-      div.bind('luban-sketchcanvassave', callback);
-    
-      var savebtn = $('<a style="float: right; width: 100px;">Save</a>');
-      savebtn.click(createSaveFn(id, kwds.onsave));
-      tools.append(savebtn);
-    }
-
     tools.append('<a href="#'+id+'-canvas'+ '" data-download="png" style="float: right; width: 100px;">Download</a>');
 
     // add some tools
@@ -73,6 +64,26 @@
     //
     canvas.sketch();
 
+    // 
+    var savefn = createSaveFn(id, kwds.onsave);
+
+    if (kwds.onsave) {
+      var callback = luban.compileCallback(kwds.onsave);
+      div.bind('luban-sketchcanvassave', callback);
+    
+      var savebtn = $('<a style="float: right; width: 100px;">Save</a>');
+      savebtn.click(savefn);
+      tools.append(savebtn);
+    }
+
+    // 
+    var autosave = kwds.autosave;
+    if (autosave>0) {
+      if (autosave<5) autosave = 5; // don't make it too short
+      var repeatsave = createRepeatSaveFn(id, savefn, autosave);
+      setTimeout(repeatsave, autosave*1000);
+    }
+
     var onclick = kwds.onclick;
     if (onclick != null && onclick != '') {
       div.click( function() { docmill.compile(onclick); return false; } );
@@ -90,6 +101,20 @@
   widgets.sketchcanvas.prototype = new widgets.base ();
   widgets.sketchcanvas.prototype.setAttribute = function(attrs) {
     var div = this._je;
+  };
+
+  function createRepeatSaveFn(id, savefn, interval) {
+    function f() {
+      var div = $('#'+id);
+      if (!div) return;
+      savefn();
+      div.data('interval-handle', setTimeout(f, interval*1000));
+    }
+    $('#'+id).bind('luban-destroy', function(){
+      var h = $(this).data('interval-handle');
+      clearTimeout(h);
+    });
+    return f;
   };
 
   function createSaveFn(id, onsave) {

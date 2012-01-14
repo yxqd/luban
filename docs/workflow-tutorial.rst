@@ -37,6 +37,8 @@ Since the registration needs database support, do::
 
  $ luban db create
  
+You may need to restart the application for the workflow to take effect.
+
 Now open http://localhost:8080/registration in your browser,
 you will see a registration form. Try it out!
 

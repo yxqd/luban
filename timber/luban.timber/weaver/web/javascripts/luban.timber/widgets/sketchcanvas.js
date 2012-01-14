@@ -57,6 +57,8 @@
 	tools.append("<a href='#" + id + "-canvas' data-color='" + this + "' style='width: 10px; background: " + this + ";'></a> ");
       });
 
+    tools.append("<span>&nbsp&nbsp&nbsp&nbsp&nbsp</span>");
+
     $.each(
       [3, 5, 10, 15],
       function() {

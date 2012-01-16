@@ -9,9 +9,10 @@ context.code.project = 'luban'
 tests = []
 import glob
 seq = open('.sequence').readlines()
+isexe = lambda f: os.path.exists(f) and os.access(f, os.X_OK)
 for f in seq:
     f = f.strip()
-    tests += glob.glob(f)
+    tests += [t for t in glob.glob(f) if isexe(t)]
     continue
 
 

@@ -13,7 +13,7 @@
 
 
 import luban
-if luban.debug:
+if luban.app_config.debug:
     from .debug_bundle import bundle
     
 else:

@@ -29,6 +29,20 @@ packages:
 """
 
 #
+from .AppConfig import AppConfig
+app_config = AppConfig()
+del AppConfig
+
+
+# .. debug on/off
+app_config.register(
+    'debug',
+    """if true, run in debug mode""",
+    True,
+    )
+
+
+#
 import sys
 try:
     py_major_ver = sys.version_info.major
@@ -43,8 +57,6 @@ has_pyre = os.environ.get('LUBAN_HAS_PYRE') or os.environ.get('HAS_PYRE')
 # .. allow extension to override element/action definitions without
 # .. throwing exceptions
 extension_allow_override = False
-# .. debug on/off
-debug = True
 
 
 # shortcuts
@@ -101,12 +113,6 @@ if not os.environ.get("LUBAN_WITHOUT_TIMBER"):
         except ImportError:
             import warnings
             warnings.warn("failed to import luban.timber")
-
-
-#
-from .AppConfig import AppConfig
-app_config = AppConfig()
-del AppConfig
 
 
 # End of file 

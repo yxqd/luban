@@ -117,7 +117,7 @@ for this site, and
             # 
             'luban.Controller.parameter_prefix = "%s";' % self.controller_parameter_prefix,
             ]
-        if not luban.debug:
+        if not luban.app_config.debug:
             self.javascript_target.main.append(
                 'luban.configuration.debug = false;'
                 )

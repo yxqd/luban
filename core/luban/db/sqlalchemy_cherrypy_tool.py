@@ -38,6 +38,7 @@ When you are at the interpreter you can do:
 '''
 
 
+from __future__ import absolute_import
 from sqlalchemy import MetaData, create_engine, __version__ as sa_version
 from sqlalchemy.orm import scoped_session, sessionmaker
 
